@@ -6,6 +6,16 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 
 ### Global dependencies
 * yarn - package manager for all backend and frontend dependencies
+* VS Code User Setting to enable commits in e.g. .eslintrc
+
+### Frontend
+* Run `yarn install` to install all frontend dependencies
+
+## Packages overview
+
+### Frontend
+* eslint - To verify linting rules defined in .eslintrc
+The verifcation can be checked with the cli e.g. `yarn run eslint example/target.js`
 
 
 ## Best Practices:
