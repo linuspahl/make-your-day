@@ -1,0 +1,19 @@
+# Global editor cofnig with rules for the frontend and backend
+
+# The root prop will tell the editor that there are no more editor configs in parent directories
+root = true
+
+# General settings for whole project
+[*]
+
+# Unix-style newlines with a newline ending every file
+end_of_line = lf
+insert_final_newline = true
+
+# Indentation
+indent_style = space
+indent_size = 2
+
+# Other
+charset = utf-8
+trim_trailing_whitespace = true
