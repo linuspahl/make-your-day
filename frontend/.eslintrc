@@ -3,5 +3,23 @@
     "es6": true,
     "browser": true,
     "node": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "extends": [
+    "prettier",
+    "prettier/react"
+  ],
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "tabWidth": 2,
+        "semi": false,
+        "singleQuote": true
+      }
+    ]
   }
 }

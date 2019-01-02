@@ -14,9 +14,12 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 ## Packages overview
 
 ### Frontend
-* eslint - To verify linting rules defined in .eslintrc
-The verifcation can be checked with the cli e.g. `yarn run eslint example/target.js`
-
+Dev packages
+* eslint - Analyses the code for stylistic and coding errors, based on the .eslintrc.
+Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
+* prettier - Code formatter, can be combined with eslint, by using eslint-plugin-prettier and eslint-config-prettier. https://prettier.io/docs/en/eslint.html
+* eslint-plugin-prettier - Runs Prettier as an ESLint rule and reports differences as individual ESLint issues.
+* eslint-config-prettier - Turns off all rules that are unnecessary or might conflict with Prettier.
 
 ## Best Practices:
 * We are trying to avaid global dependencies.
