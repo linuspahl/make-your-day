@@ -5,5 +5,8 @@
   "repository": "https://github.com/linuspahl/make-your-day",
   "author": "Linus Pahl",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "eslint": "^5.11.1"
+  }
 }
