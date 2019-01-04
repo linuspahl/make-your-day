@@ -1,0 +1,9 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "description": "Backend part (Node)",
+  "repository": "https://github.com/linuspahl/make-your-day",
+  "author": "Linus Pahl",
+  "license": "MIT",
+  "private": false
+}
