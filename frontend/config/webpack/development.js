@@ -19,7 +19,7 @@ module.exports = merge(common, {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/env'],
+            presets: ['@babel/env', '@babel/react'],
             plugins: ['babel-plugin-styled-components'],
           },
         },

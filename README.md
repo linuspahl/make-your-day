@@ -28,14 +28,19 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * babel-loader
 * @babel/core - will create browser friendly javascript
 * @babel/preset-env - preset that allows us to use the latest JavaScript without needing to manage which syntax transforms are needed by your target environment.
+* @babel/preset-react - preset needed to transform the react code.
 * babel-plugin-styled-components - will create readable names for the styled components
 * babel-eslint - allows us to lint all valid Babel code
 * uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code
+
 ## Best Practices:
+
 * We are trying to avaid global dependencies.
 The package manager should be the only global dependency.
 This will make the setup easier and reduce potential errors.
 It will affect e.g. the setup of the VS Code node debugging.
-
-* All vcs commits should start with the affected project parts (FE or BE).
+* All vcs commits should start with the affected project parts (FE or BE, or both).
 E.g: FE: Setup yarn package.json
+* React components naming convention:
+Use `Component/Component.js` instead of `Component/index.js`. It looks redundant at first, but will a lot when switching between components, during the development.
+* Imports should be grouped by e.g. Components, Libraries, Store related actions, etc. Have a look at the `App.js` for a real example.
