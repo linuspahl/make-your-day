@@ -5,11 +5,19 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 ## Setup the project
 
 ### Global dependencies
-* yarn - package manager for all backend and frontend dependencies
-* VS Code User Setting to enable commits in e.g. .eslintrc
+* yarn - package manager for all backend and frontend dependencies.
+* VS Code User Setting to enable commits in e.g. .eslintrc.
 
 ### Frontend
 * Run `yarn install` to install all frontend dependencies
+* Run `yarn start` to start the webpack dev server. The browser will automatically open the frontend.
+
+## Testing
+We are using Jest for unit and snapshot tests. You can run all tests with `yarn test`.
+Before each comment, you should check the code coverage with `yarn test --coverage`
+You'll find the test suit setup in `config/test`.
+A common component test case is to check if the component renders correctly.
+You should use `react-test-render/shallow` for this.
 
 ## Packages overview
 
@@ -25,16 +33,18 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * webpack-dev-server - Only needed for development, will watch for changes and automatically create a new bundle
 * webpack-merge - Allows us to split the webpack config in multiple files
 * html-webpack-plgin - The plugin will generate an HTML5 file for you that includes all your webpack bundles in the body using script tags.
-* babel-loader
 * @babel/core - will create browser friendly javascript
+* babel-loader - allows transpliling JavaScript files using Babel and webpack
 * @babel/preset-env - preset that allows us to use the latest JavaScript without needing to manage which syntax transforms are needed by your target environment.
 * @babel/preset-react - preset needed to transform the react code.
-* babel-plugin-styled-components - will create readable names for the styled components
-* babel-eslint - allows us to lint all valid Babel code
-* uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code
+* babel-plugin-styled-components - will create readable names for the styled components.
+* babel-eslint - allows us to lint all valid Babel code.
+* uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code.
+* jest - to test the js code.
+* babel-jest - to transform our code inside of the test environment.
+* react-test-renderer - Needed for the components tests. A faster alternative to ReactDOM.
 
 ## Best Practices:
-
 * We are trying to avaid global dependencies.
 The package manager should be the only global dependency.
 This will make the setup easier and reduce potential errors.

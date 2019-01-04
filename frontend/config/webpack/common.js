@@ -1,5 +1,4 @@
 const webpack = require('webpack')
-const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 // Webpack base config
@@ -8,6 +7,6 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 module.exports = {
   plugins: [new HtmlWebPackPlugin({ template: './src/index.html' })],
   resolve: {
-    modules: [path.resolve('./src'), path.resolve('./node_modules')],
+    modules: ['./src', './node_modules'],
   },
 }
