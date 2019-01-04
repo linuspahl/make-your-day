@@ -6,15 +6,16 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 
 ### Global dependencies
 * yarn - package manager for all backend and frontend dependencies.
-* VS Code User Setting to enable commits in e.g. .eslintrc.
 
 ### Frontend
 * Run `yarn install` to install all frontend dependencies
 * Run `yarn start` to start the webpack dev server. The browser will automatically open the frontend.
 
 ## Testing
+
+### Frontend
 We are using Jest for unit and snapshot tests. You can run all tests with `yarn test`.
-Before each comment, you should check the code coverage with `yarn test --coverage`
+Before each commit, you should check the code coverage with `yarn test --coverage`
 You'll find the test suit setup in `config/test`.
 A common component test case is to check if the component renders correctly.
 You should use `react-test-render/shallow` for this.
@@ -52,7 +53,7 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 
 
 ## Best Practices:
-* We are trying to avaid global dependencies.
+* We are trying to avoid global dependencies.
 The package manager should be the only global dependency.
 This will make the setup easier and reduce potential errors.
 It will affect e.g. the setup of the VS Code node debugging.
