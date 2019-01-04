@@ -8,8 +8,25 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 * yarn - package manager for all backend and frontend dependencies.
 
 ### Frontend
+* Enter frontend directory with the cli
 * Run `yarn install` to install all frontend dependencies
-* Run `yarn start` to start the webpack dev server. The browser will automatically open the frontend.
+
+### Backend
+* Enter backend directory with the cli
+* Run `yarn install` to install all frontend dependencies
+* Run `cp ./config/.env.sample ./config/.env` add the required attributes in the created file
+
+## Run the project
+
+### Frontend
+* Enter the frontend directory with the cli
+* For development run `yarn start` to start the webpack dev server. The browser will automatically open the frontend.
+* For production run `yarn build` to create an optimized version of the app in the `dist` directory.
+
+### Frontend
+* Enter the backend directory with the cli
+* For development run `yarn start` to start nodemon / babel-node.
+* For production run `yarn startProd` to run babel-node directly. The node instance will not restart on changes.
 
 ## Testing
 
@@ -50,6 +67,8 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 ## Backend
 * @babel/node - CLI that works exactly the same as the Node.js CLI, with the added benefit of compiling with Babel presets and plugins before running it.
 * nodemon - will restart babel-node on code changes
+* dotenv - allows us to store sensetive or envoronment specific data in an env file. The file is included in the gitignore.
+* express - Node.js web application framework that provides a set of features for web and mobile applications.
 
 
 ## Best Practices:
