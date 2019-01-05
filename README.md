@@ -14,7 +14,9 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 ### Backend
 * Enter backend directory with the cli
 * Run `yarn install` to install all frontend dependencies
+* Create a postgres database manually (not yet part of the provisioning)
 * Run `cp ./config/.env.sample ./config/.env` add the required attributes in the created file
+* Run `yarn createDatabase` to initially create the database tables.
 
 ## Run the project
 
@@ -70,6 +72,7 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * dotenv - allows us to store sensetive or envoronment specific data in an env file. The file is included in the gitignore.
 * express - Node.js web application framework that provides a set of features for web and mobile applications.
 * cors - for express server cors settings
+* pg - needed for the postgres database connection
 
 
 ## Best Practices:
