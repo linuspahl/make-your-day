@@ -69,6 +69,7 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * nodemon - will restart babel-node on code changes
 * dotenv - allows us to store sensetive or envoronment specific data in an env file. The file is included in the gitignore.
 * express - Node.js web application framework that provides a set of features for web and mobile applications.
+* cors - for express server cors settings
 
 
 ## Best Practices:
