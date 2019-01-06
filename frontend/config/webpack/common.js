@@ -1,11 +1,15 @@
+// Webpack base config
+
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
-// Webpack base config
-//
 // * plugins - HtmlWebpackPlugin - needed to create the index.html with a script tag for the created JS bundle
 module.exports = {
-  plugins: [new HtmlWebPackPlugin({ template: './src/index.html' })],
+  plugins: [
+    new HtmlWebPackPlugin({ template: './src/index.html' }),
+    new Dotenv({ path: './config/.env' }),
+  ],
   resolve: {
     modules: ['./src', './node_modules'],
   },

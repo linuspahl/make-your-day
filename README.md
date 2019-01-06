@@ -75,6 +75,10 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * jest - to test the js code.
 * babel-jest - to transform our code inside of the test environment.
 * react-test-renderer - Needed for the components tests. A faster alternative to ReactDOM.
+* graphql - JavaScript reference implementation for GraphQL
+* apollo-provider - provides query and mutation components for react
+* apollo-boost - provides usefull tools when working with apollo
+* cross-fetch - needed to test apollo client with yarn
 
 ## Backend
 * @babel/node - CLI that works exactly the same as the Node.js CLI, with the added benefit of compiling with Babel presets and plugins before running it.
@@ -88,6 +92,8 @@ Needed for the database setup
 * pg - needed for the postgres database connection
 * crypto - crypto lib, used to create the user auth token
 * bcrypt-nodejs - needed to compare the users password input with the password hash
+* graphql - JavaScript reference implementation for GraphQL
+* apollo-server - GraphQL Server
 
 
 ## Best Practices:
