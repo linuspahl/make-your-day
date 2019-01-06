@@ -1,12 +1,11 @@
 // Models index file
 // Will setup all existing models
 // The models provide all definitons needed for the database setup
-import UserModel from './user'
+import UserModel from './user/user'
+import sequelize from '../core/sequelize'
 
-export default sequelize => {
-  let models = {}
+const models = {}
 
-  models.User = UserModel(sequelize)
+models.User = UserModel(sequelize)
 
-  return models
-}
+export default models

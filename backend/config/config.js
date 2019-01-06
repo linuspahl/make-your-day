@@ -1,14 +1,26 @@
 // Import .env file
 require('dotenv').config({ path: './config/.env' })
 
+const {
+  env: {
+    API_HOST,
+    API_PORT,
+    CURRENT_ENV,
+    DB_HOST,
+    DB_NAME,
+    DB_USER,
+    DB_PASSWORD,
+  },
+} = process
+
 export default {
-  apiHost: process.env.API_HOST,
-  apiPort: process.env.API_PORT,
-  isDevEnv: process.env.CURRENT_ENV === 'development',
+  apiHost: API_HOST,
+  apiPort: API_PORT,
+  isDevEnv: CURRENT_ENV === 'development',
   db: {
-    host: process.env.DB_HOST,
-    name: process.env.DB_NAME,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
+    host: DB_HOST,
+    name: DB_NAME,
+    user: DB_USER,
+    password: DB_PASSWORD,
   },
 }

@@ -17,6 +17,12 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 * Create a postgres database manually (not yet part of the provisioning)
 * Run `cp ./config/.env.sample ./config/.env` add the required attributes in the created file
 * Run `yarn createDatabase` to initially create the database tables.
+* Run `yarn seed`. This will create an initial user with the credentials:
+```
+  username: Admin
+  password: admin
+```
+
 
 ## Run the project
 
@@ -25,19 +31,23 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 * For development run `yarn start` to start the webpack dev server. The browser will automatically open the frontend.
 * For production run `yarn build` to create an optimized version of the app in the `dist` directory.
 
-### Frontend
-* Enter the backend directory with the cli
-* For development run `yarn start` to start nodemon / babel-node.
-* For production run `yarn startProd` to run babel-node directly. The node instance will not restart on changes.
-
-## Testing
-
-### Frontend
+#### Testing
 We are using Jest for unit and snapshot tests. You can run all tests with `yarn test`.
 Before each commit, you should check the code coverage with `yarn test --coverage`
 You'll find the test suit setup in `config/test`.
 A common component test case is to check if the component renders correctly.
 You should use `react-test-render/shallow` for this.
+
+#### Creating seeds
+Sometimes it makes sense to insert some seed data, e.g. to have an initial user.
+Like mentioned in the setup part, you can insert all existing seeds with `yarn seed`.
+To create a new seed run  `sequelize model:generate --name migration-name`
+
+### Backend
+* Enter the backend directory with the cli
+* For development run `yarn start` to start nodemon / babel-node.
+* For production run `yarn startProd` to run babel-node directly. The node instance will not restart on changes.
+
 
 ## Packages overview
 
@@ -73,7 +83,11 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * express - Node.js web application framework that provides a set of features for web and mobile applications.
 * cors - for express server cors settings
 * sequelize - database orm for postgres db
+* sequelize-cli - To run sequelize from the cli.
+Needed for the database setup
 * pg - needed for the postgres database connection
+* crypto - crypto lib, used to create the user auth token
+* bcrypt-nodejs - needed to compare the users password input with the password hash
 
 
 ## Best Practices:

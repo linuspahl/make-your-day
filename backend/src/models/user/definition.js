@@ -1,10 +1,11 @@
 import Sequelize from 'sequelize'
 
-export default sequelize => {
-  return sequelize.define('user', {
+export default sequelize =>
+  sequelize.define('user', {
     id: {
       type: Sequelize.INTEGER,
       primaryKey: true,
+      autoIncrement: true,
     },
     username: {
       type: Sequelize.STRING,
@@ -19,4 +20,3 @@ export default sequelize => {
       validate: { isIn: [['admin', 'user']] },
     },
   })
-}

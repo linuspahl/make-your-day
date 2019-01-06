@@ -9,8 +9,8 @@ import config from '../../config/config'
 export default new ApolloServer({
   typeDefs,
   resolvers,
-  context: () => {
-    models
+  context: req => {
+    return { models }
   },
   playground: {
     endpoint: config.apiEndpoint,
