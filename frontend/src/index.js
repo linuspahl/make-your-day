@@ -6,7 +6,7 @@ import React from 'react'
 import { render } from 'react-dom'
 
 // components
-import App from 'App/App'
+import App from 'AppRoot/AppRoot'
 
 // Initially we will render the app component to the DOM
 render(<App />, document.getElementById('root'))

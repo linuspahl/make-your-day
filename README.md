@@ -52,7 +52,6 @@ To create a new seed run  `sequelize model:generate --name migration-name`
 ## Packages overview
 
 ### Frontend & Backend
-Dev packages
 * eslint - Analyses the code for stylistic and coding errors, based on the .eslintrc.
 Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * prettier - Code formatter, can be combined with eslint, by using eslint-plugin-prettier and eslint-config-prettier. https://prettier.io/docs/en/eslint.html
@@ -79,6 +78,7 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * apollo-provider - provides query and mutation components for react
 * apollo-boost - provides usefull tools when working with apollo
 * cross-fetch - needed to test apollo client with yarn
+* react-router-dom - DOM bindings for React Router.
 
 ## Backend
 * @babel/node - CLI that works exactly the same as the Node.js CLI, with the added benefit of compiling with Babel presets and plugins before running it.
@@ -94,7 +94,6 @@ Needed for the database setup
 * bcrypt-nodejs - needed to compare the users password input with the password hash
 * graphql - JavaScript reference implementation for GraphQL
 * apollo-server - GraphQL Server
-
 
 ## Best Practices:
 * We are trying to avoid global dependencies.

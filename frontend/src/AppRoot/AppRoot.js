@@ -1,18 +1,25 @@
+// App root file
+// Containes everything the base app needs,
+// like the theme and apollo provider and the routes
+
 // libraries
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from 'react-apollo'
-import apolloClient from './apolloClient'
+import apolloClient from './ApolloClient'
 
 // theme
 import colorTheme from '../../config/theme'
 
-export default class App extends React.Component {
+// components
+import Routes from './Routes/Routes'
+
+export default class AppRoot extends React.Component {
   render() {
     return (
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={colorTheme}>
-          <div>Hello world!</div>
+          <Routes />
         </ThemeProvider>
       </ApolloProvider>
     )

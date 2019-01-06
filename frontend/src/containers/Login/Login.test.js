@@ -1,11 +1,11 @@
 // libraries
 import React from 'react'
-import App from './App'
 import ShallowRenderer from 'react-test-renderer/shallow'
+// components
+import Login from './Login'
 
-describe('App should', () => {
-  const renderer = new ShallowRenderer()
+describe('Login should', () => {
   test('render without crashing', () => {
-    renderer.render(<App />)
+    new ShallowRenderer().render(<Login>Page content</Login>)
   })
 })

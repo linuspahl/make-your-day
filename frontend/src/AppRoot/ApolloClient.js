@@ -1,6 +1,10 @@
+// Apollo client setup
+
+// We need to define a fetch polyfill to test the apollo client correctly
+import 'cross-fetch/polyfill'
+
 import ApolloClient from 'apollo-boost'
 import config from '../../config/config'
-import 'cross-fetch/polyfill'
 
 export default new ApolloClient({
   uri: `${config.apiHost}:${config.apiPort}/graphql`,
