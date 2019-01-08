@@ -1,0 +1,6 @@
+# webpack bundle folder. Should not be a part of the project,
+# because the bundle will be different for every environment
+dist
+
+# jest coverage report
+coverage

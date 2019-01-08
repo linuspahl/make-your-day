@@ -1,3 +1,8 @@
-node_modules
-dist
+# gitignore rules relevant for frontend and backend
+
+# Dotenv env file, needed for environment specific variables
+# Should not be a part of the project, because it contains sensitiv and env specific data
 .env
+
+# Node modules needs to be fresh installed for every machine
+node_modules
