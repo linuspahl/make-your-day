@@ -10,13 +10,14 @@ import apolloServer from './apolloServer'
 const app = express()
 
 // configure cors settings
-app.use(
-  cors({
-    origin: `${config.frontendHost}:${config.frontendPort}`,
-    // some legacy browsers (IE11) choke on 204
-    optionsSuccessStatus: 200,
-  })
-)
+const corsSettings = { optionsSuccessStatus: 200 }
+// During the development we want to send the Header `Access-Control-Allow-Origin: *`
+// This will allow every local machine to access the backend
+// For production, we wnat to limit the allowed origin to our related frontend
+if (!config.isDevEnv) {
+  corsSettings.origin = `${config.host}:${config.port}`
+}
+app.use(cors(corsSettings))
 
 // Connect with apollo server
 apolloServer.applyMiddleware({
