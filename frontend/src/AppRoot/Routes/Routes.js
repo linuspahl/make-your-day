@@ -8,17 +8,23 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 // components
 import PublicRoute from '../PublicRoute/PublicRoute'
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import Login from 'containers/Login/Login'
+import Dashboard from 'containers/Dashboard/Dashboard'
 
 export default props => (
   <Router>
     <Switch>
       <PublicRoute
         path="/login"
-        exact
         component={Login}
         isUserLoggedIn={props.isUserLoggedIn}
         updateLocalStorage={props.updateLocalStorage}
+      />
+      <PrivateRoute
+        path="/"
+        component={Dashboard}
+        isUserLoggedIn={props.isUserLoggedIn}
       />
     </Switch>
   </Router>
