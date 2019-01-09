@@ -8,5 +8,8 @@ import { render } from 'react-dom'
 // components
 import App from 'AppRoot/AppRoot'
 
+// Import global styles
+import './globalStyles/reset.css'
+
 // Initially we will render the app component to the DOM
 render(<App />, document.getElementById('root'))

@@ -80,6 +80,8 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * apollo-boost - provides usefull tools when working with apollo
 * cross-fetch - needed to test apollo client with yarn
 * react-router-dom - DOM bindings for React Router.
+* style-loader - allows import of stylesheets
+* css-loader - interprets @import and url() like import/require() and will resolve them.
 
 ## Backend
 * @babel/node - CLI that works exactly the same as the Node.js CLI, with the added benefit of compiling with Babel presets and plugins before running it.
