@@ -8,4 +8,12 @@ import config from '../../config/config'
 
 export default new ApolloClient({
   uri: `${config.apiHost}:${config.apiPort}/graphql`,
+  request: async operation => {
+    const token = localStorage.getItem('authToken') || null
+    operation.setContext({
+      headers: {
+        authorization: token,
+      },
+    })
+  },
 })

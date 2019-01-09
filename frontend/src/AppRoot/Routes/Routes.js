@@ -10,10 +10,16 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import PublicRoute from '../PublicRoute/PublicRoute'
 import Login from 'containers/Login/Login'
 
-export default () => (
+export default props => (
   <Router>
     <Switch>
-      <PublicRoute path="/login" exact component={Login} />
+      <PublicRoute
+        path="/login"
+        exact
+        component={Login}
+        isUserLoggedIn={props.isUserLoggedIn}
+        updateLocalStorage={props.updateLocalStorage}
+      />
     </Switch>
   </Router>
 )

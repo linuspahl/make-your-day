@@ -70,6 +70,7 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * babel-loader - allows transpliling JavaScript files using Babel and webpack
 * @babel/preset-react - preset needed to transform the react code.
 * babel-plugin-styled-components - will create readable names for the styled components.
+* @babel/polyfill - This will emulate a full ES2015+ environment. This means you can use new built-ins like Promise.
 * uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code.
 * jest - to test the js code.
 * babel-jest - to transform our code inside of the test environment.

@@ -34,6 +34,7 @@
     "webpack-merge": "^4.1.5"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.2.5",
     "apollo-boost": "^0.1.23",
     "cross-fetch": "^3.0.0",
     "dotenv-webpack": "^1.6.0",
