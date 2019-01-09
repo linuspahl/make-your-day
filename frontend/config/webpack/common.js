@@ -22,7 +22,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(graphql|gql)$/,
+        test: /\.gql$/,
         exclude: /node_modules/,
         loader: 'graphql-tag/loader',
       },
