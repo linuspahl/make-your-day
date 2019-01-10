@@ -7,6 +7,7 @@ const moduleResolvers = require('../moduleResolvers')
 module.exports = {
   transform: {
     '^.+\\.js?$': './babel-jest.js',
+    '^.+\\.gql?$': 'jest-transform-graphql',
   },
   collectCoverageFrom: ['../../src/**.{js}'],
   roots: ['../../'],

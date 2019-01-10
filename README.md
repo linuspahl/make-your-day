@@ -74,6 +74,7 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code.
 * jest - to test the js code.
 * babel-jest - to transform our code inside of the test environment.
+* jest-transform-graphql - Needed to combine graphql-tag loader with Jest
 * react-test-renderer - Needed for the components tests. A faster alternative to ReactDOM.
 * graphql - JavaScript reference implementation for GraphQL
 * apollo-provider - provides query and mutation components for react
