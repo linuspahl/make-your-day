@@ -30,7 +30,6 @@ export default (User, { username, password }) => {
       return updateToken(User, user.id, token)
     })
     .then(() => {
-      console.log('token', token)
       // Return UserLogin type
       return {
         token,
