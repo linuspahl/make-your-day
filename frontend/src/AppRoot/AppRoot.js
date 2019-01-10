@@ -25,16 +25,17 @@ export default class AppRoot extends React.Component {
     super(props)
 
     this.state = {
-      nightMode: getLocalBoolean('nightMode'),
       authToken: getLocalString('authToken'),
-      leftHandMode: getLocalBoolean('leftHandMode'),
-      showAppBgImage: getLocalBoolean('showAppBgImage'),
       userId: getLocalNumber('userId'),
-      userRole: getLocalString('userRole'),
     }
 
     this.updateLocalStorage = newStore => {
       updateLocalStorage(newStore, this.setState.bind(this))
+    }
+
+    this.clearLocalStorage = () => {
+      localStorage.clear()
+      this.setState({ authToken: null, userId: null })
     }
   }
   render() {
@@ -45,6 +46,7 @@ export default class AppRoot extends React.Component {
           <Routes
             isUserLoggedIn={userId && authToken}
             updateLocalStorage={this.updateLocalStorage}
+            clearLocalStorage={this.clearLocalStorage}
           />
         </ThemeProvider>
       </ApolloProvider>

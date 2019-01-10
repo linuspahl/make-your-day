@@ -11,6 +11,7 @@ import PublicRoute from '../PublicRoute/PublicRoute'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import Login from 'containers/Login/Login'
 import Dashboard from 'containers/Dashboard/Dashboard'
+import Settings from 'containers/Settings/Settings'
 
 export default props => (
   <Router>
@@ -25,6 +26,14 @@ export default props => (
         path="/"
         component={Dashboard}
         isUserLoggedIn={props.isUserLoggedIn}
+        exact
+      />
+      <PrivateRoute
+        path="/settings"
+        component={Settings}
+        clearLocalStorage={props.clearLocalStorage}
+        isUserLoggedIn={props.isUserLoggedIn}
+        exact
       />
     </Switch>
   </Router>

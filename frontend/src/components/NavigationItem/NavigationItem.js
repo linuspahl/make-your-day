@@ -16,7 +16,7 @@ export default props => {
   const isActive = activeRoute === path
   return (
     <ListItem>
-      <InnerLink to={path} onClick={() => isActive && toggleAction()}>
+      <InnerLink to={path} onClick={() => toggleAction()}>
         {title} {isActive && <RouteActive />}
       </InnerLink>
     </ListItem>

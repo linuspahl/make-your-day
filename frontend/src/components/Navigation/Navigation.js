@@ -14,7 +14,10 @@ class Navigation extends React.Component {
         location: { pathname: activeRoute },
       },
     } = this.props
-    const items = [{ path: '/', title: 'Dashboard' }]
+    const items = [
+      { path: '/', title: 'Dashboard' },
+      { path: '/settings', title: 'Einstellungen' },
+    ]
 
     return (
       <Layout>
