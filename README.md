@@ -66,7 +66,8 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * webpack-cli - Allows us to use webpack with the cli. Needed to run webpack as a yarn script
 * webpack-dev-server - Only needed for development, will watch for changes and automatically create a new bundle
 * webpack-merge - Allows us to split the webpack config in multiple files
-* html-webpack-plgin - The plugin will generate an HTML5 file for you that includes all your webpack bundles in the body using script tags.
+* html-webpack-plugin - The plugin will generate an HTML5 file for you that includes all your webpack bundles in the body using script tags.
+* copy-webpack-plugin - Needed to copy e.g. public files like the favicon
 * babel-loader - allows transpliling JavaScript files using Babel and webpack
 * @babel/preset-react - preset needed to transform the react code.
 * babel-plugin-styled-components - will create readable names for the styled components.

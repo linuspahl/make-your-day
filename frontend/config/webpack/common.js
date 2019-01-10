@@ -2,7 +2,8 @@
 
 const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
-const Dotenv = require('dotenv-webpack')
+const DotenvPlugin = require('dotenv-webpack')
+const CopyPlugin = require('copy-webpack-plugin')
 const moduleResolvers = require('../moduleResolvers')
 
 // * entry - configure entry point for babel polyfill
@@ -12,7 +13,8 @@ module.exports = {
   entry: ['@babel/polyfill', './src/index'],
   plugins: [
     new HtmlWebPackPlugin({ template: './src/index.html' }),
-    new Dotenv({ path: './config/.env' }),
+    new DotenvPlugin({ path: './config/.env' }),
+    new CopyPlugin([{ from: './src/globalStyles/favicon/', to: './' }]),
   ],
   module: {
     rules: [
