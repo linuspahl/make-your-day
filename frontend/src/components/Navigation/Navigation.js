@@ -9,7 +9,7 @@ import NavigationItem from 'components/NavigationItem/NavigationItem'
 class Navigation extends React.Component {
   render() {
     const {
-      toggleNavigation,
+      toggleAction,
       history: {
         location: { pathname: activeRoute },
       },
@@ -19,11 +19,12 @@ class Navigation extends React.Component {
     return (
       <Layout>
         <CloseIconWrapper>
-          <CloseIcon close={toggleNavigation} />
+          <CloseIcon close={toggleAction} />
         </CloseIconWrapper>
         <Pages>
           {items.map(route => (
             <NavigationItem
+              toggleAction={toggleAction}
               key={route.path}
               route={route}
               activeRoute={activeRoute}
