@@ -26,6 +26,18 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'graphql-tag/loader',
       },
+      {
+        test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'public/fonts/',
+            },
+          },
+        ],
+      },
     ],
   },
   resolve: {

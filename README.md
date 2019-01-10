@@ -83,6 +83,7 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * react-router-dom - DOM bindings for React Router.
 * style-loader - allows import of stylesheets
 * css-loader - interprets @import and url() like import/require() and will resolve them.
+* file-loader - webpack file loader, needed to import e.g. webfonts
 
 ## Backend
 * @babel/node - CLI that works exactly the same as the Node.js CLI, with the added benefit of compiling with Babel presets and plugins before running it.
