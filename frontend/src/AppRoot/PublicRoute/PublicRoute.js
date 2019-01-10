@@ -6,5 +6,9 @@ export default ({ component: Component, isUserLoggedIn, ...rest }) => {
   // If user is already logged in and tries to access a public route,
   // we will redirect him to to root route, the dashboard
   if (isUserLoggedIn) return <Redirect to="/" />
-  return <Route render={() => <Component {...rest} />} />
+  return (
+    <Route
+      render={() => <Component isUserLoggedIn={isUserLoggedIn} {...rest} />}
+    />
+  )
 }

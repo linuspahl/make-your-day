@@ -10,4 +10,6 @@ export const Layout = styled.div`
   grid-template-rows: 1fr 70px 1fr;
 `
 
-export default props => <PageLayout>Dashboard</PageLayout>
+export default props => (
+  <PageLayout isUserLoggedIn={props.isUserLoggedIn}>Dashboard</PageLayout>
+)

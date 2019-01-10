@@ -16,7 +16,7 @@ export const Form = styled.form`
   margin-top: 15px;
 `
 
-class LoginForm extends React.Component {
+export default class LoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = { username: '', password: '' }
@@ -87,5 +87,3 @@ class LoginForm extends React.Component {
     )
   }
 }
-
-export default LoginForm

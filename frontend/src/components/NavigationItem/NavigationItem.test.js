@@ -2,12 +2,12 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import Login from './Login'
+import NavigationItem from './NavigationItem'
 
-describe('Login should', () => {
+describe('NavigationItem should', () => {
   test('render without crashing', () => {
     new ShallowRenderer().render(
-      <Login isUserLoggedIn updateLocalStorage={() => {}} />
+      <NavigationItem route={{ title: 'Dashboard', path: '/' }} />
     )
   })
 })

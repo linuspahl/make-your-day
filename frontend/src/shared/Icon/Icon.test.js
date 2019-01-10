@@ -2,10 +2,10 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import H1 from './H1'
+import Icon from './Icon'
 
-describe('H1 should', () => {
+describe('Icon should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<H1>Content</H1>)
+    new ShallowRenderer().render(<Icon title="close" />)
   })
 })

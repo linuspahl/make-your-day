@@ -8,7 +8,7 @@ import ContentBox from 'shared/ContentBox/ContentBox'
 import LoginForm from 'components/LoginForm/LoginForm'
 
 export default props => (
-  <PageLayout>
+  <PageLayout isUserLoggedIn={props.isUserLoggedIn}>
     <ContentBox>
       <H1 context="page">Anmeldung</H1>
       <LoginForm updateLocalStorage={props.updateLocalStorage} />
