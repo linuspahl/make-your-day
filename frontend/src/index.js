@@ -10,6 +10,7 @@ import App from 'AppRoot/AppRoot'
 
 // Import global styles
 import './globalStyles/reset.css'
+import './globalStyles/global.css'
 import './globalStyles/webfonts/lineAwesome.css'
 
 // Initially we will render the app component to the DOM

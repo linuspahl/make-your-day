@@ -1,0 +1,21 @@
+/* Global styles, needed to unify common elements */
+
+body, textarea, input, select, button {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  /* Better fonts for chrome  */
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+div, a, textarea, input, select, button, ul, li {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
