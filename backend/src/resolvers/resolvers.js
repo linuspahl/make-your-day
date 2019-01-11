@@ -5,10 +5,20 @@
 
 // Mutations import
 import loginUser from './mutation/loginUser'
+import createCategory from './mutation/createCategory'
+import updateCategory from './mutation/updateCategory'
+// Queries import
+import getCategories from './query/getCategories'
+import getCategory from './query/getCategory'
 
 export default {
   Mutation: {
     loginUser,
+    createCategory,
+    updateCategory,
   },
-  Query: {},
+  Query: {
+    getCategory,
+    getCategories,
+  },
 }

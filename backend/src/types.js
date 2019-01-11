@@ -14,6 +14,19 @@ export default gql`
     nightMode: Boolean
   }
 
+  type Category {
+    id: Int!
+    user: User!
+    title: String
+    icon: String
+    color: String
+    unit: String
+    hasTitle: Boolean
+    hasDescription: Boolean
+    hasUnit: Boolean
+    parentCategory: Int
+  }
+
   # Responses
   type UserLogin {
     token: String!
@@ -23,8 +36,31 @@ export default gql`
 
   type Mutation {
     loginUser(username: String!, password: String!): UserLogin!
+    # Create
+    createCategory(
+      title: String!
+      icon: String
+      unit: String
+      color: String
+      hasTitle: Boolean
+      hasDescription: Boolean
+      hasUnit: Boolean
+    ): Category!
+    # Update
+    updateCategory(
+      id: Int!
+      title: String
+      icon: String
+      color: String
+      unit: String
+      hasDescription: Boolean
+      hasTitle: Boolean
+      hasUnit: Boolean
+    ): Category!
   }
+
   type Query {
-    placeholder: String
+    getCategories: [Category]!
+    getCategory(id: Int!): Category!
   }
 `

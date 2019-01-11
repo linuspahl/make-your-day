@@ -27,7 +27,7 @@ export default (User, { username, password }) => {
       // Set token object reference for further usage
       token = createdToken
       // Set generate token as user auth token
-      return updateToken(User, user.id, token)
+      return setToken(User, user.id, token)
     })
     .then(() => {
       // Return UserLogin type
@@ -38,14 +38,16 @@ export default (User, { username, password }) => {
       }
     })
     .catch(error => {
-      console.log('error', error)
+      console.log('Error: user login', error)
     })
 }
 
+// Compare login password with user password hash
 const validatePassword = (password, passwordHash) => {
   return bcrypt.compareSync(password, passwordHash)
 }
 
+// Create session token after successful login
 const createToken = () => {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(16, (err, data) => {
@@ -54,6 +56,7 @@ const createToken = () => {
   })
 }
 
-const updateToken = (User, id, token) => {
+// Set auth token
+const setToken = (User, id, token) => {
   return User.update({ token }, { where: { id } })
 }
