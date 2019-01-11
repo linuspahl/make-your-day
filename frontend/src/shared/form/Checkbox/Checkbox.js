@@ -10,7 +10,7 @@ const Element = styled.input`
   justify-content: center;
   position: relative;
 
-  background-color: #fff;
+  background-color: ${props => props.theme.white};
   border: 1px solid ${props => props.theme.border};
   border-radius: 0;
 
@@ -19,7 +19,6 @@ const Element = styled.input`
   overflow: hidden;
 
   &:checked :before {
-    background-color: white;
     content: '✓';
     font-size: 32px;
   }

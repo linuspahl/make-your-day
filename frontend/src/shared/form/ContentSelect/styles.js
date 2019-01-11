@@ -55,8 +55,15 @@ export const Options = styled.div`
   padding: 10px;
   border: 1px solid ${props => props.theme.border};
 
-  background-color: #fff;
+  background-color: ${props => props.theme.contentBoxBg};
   overflow: auto;
+`
+
+export const Option = styled(ListItem)`
+  background-color: ${props => (props.isSelected ? '#efefef' : 'none')};
+  &:active {
+    background-color: #efefef;
+  }
 `
 
 export const OptionPreview = styled.div`
@@ -70,11 +77,4 @@ export const OptionPreview = styled.div`
   margin-right: 10px;
 
   font-size: 25px;
-`
-
-export const Option = styled(ListItem)`
-  background-color: ${props => (props.isSelected ? '#efefef' : 'none')};
-  &:active {
-    background-color: #efefef;
-  }
 `

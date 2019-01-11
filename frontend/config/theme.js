@@ -14,7 +14,8 @@ export default {
   text: '#545454',
   // Other
   border: '#ccc',
-  contentBoxBg: '#ffffff',
+  contentBoxBg: '#fff',
+  white: '#fff',
 
   // Available category icon colors
   category: {
