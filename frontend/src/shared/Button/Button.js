@@ -25,14 +25,9 @@ const Layout = styled.button`
       color: ${props.theme.text};
       cursor: pointer;
 
-      &:active {
+      &:active, &:focus {
         background-color: ${activeBgColor};
       };
-
-      &:focus {
-        outline: none;
-      };
-
     `
   }}
 `

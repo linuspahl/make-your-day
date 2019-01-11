@@ -1,0 +1,50 @@
+mutation CreateCategory(
+  $title: String!,
+  $icon: String,
+  $color: String,
+  $hasTitle: Boolean,
+  $hasDescription: Boolean,
+  $hasUnit: Boolean
+) {
+  createCategory(
+    title: $title,
+    icon: $icon,
+    color: $color,
+    hasTitle: $hasTitle,
+    hasDescription: $hasDescription,
+    hasUnit: $hasUnit
+    ) {
+      id
+      title
+      icon
+      color
+      hasTitle
+      hasUnit
+      hasDescription
+    }
+}
+
+mutation UpdateCategory(
+  $id: Int!,
+  $title: String!,
+  $icon: String,
+  $color: String!,
+  $unit: String,
+  $hasDescription: Boolean,
+  $hasTitle: Boolean,
+  $hasUnit: Boolean
+) {
+  updateCategory(
+    id: $id,
+    title: $title,
+    icon: $icon,
+    color: $color,
+    unit: $unit,
+    hasDescription: $hasDescription,
+    hasTitle: $hasTitle,
+    hasUnit: $hasUnit
+  ) {
+    id
+    title
+  }
+}

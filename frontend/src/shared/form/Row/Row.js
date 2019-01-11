@@ -20,7 +20,13 @@ const Layout = styled.div`
 `
 
 export default props => (
-  <Layout disabled={props.disabled} className={props.className}>
+  <Layout
+    disabled={props.disabled}
+    className={props.className}
+    as={props.as}
+    htmlFor={props.htmlFor}
+    onClick={props.onClick}
+  >
     {props.children}
   </Layout>
 )

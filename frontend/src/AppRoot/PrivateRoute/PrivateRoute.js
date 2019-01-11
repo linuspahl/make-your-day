@@ -16,7 +16,9 @@ export default ({
     <Route
       path={path}
       exact={exact}
-      render={() => <Component isUserLoggedIn={isUserLoggedIn} {...rest} />}
+      render={() => (
+        <Component isUserLoggedIn={isUserLoggedIn} rootPath={path} {...rest} />
+      )}
     />
   )
 }

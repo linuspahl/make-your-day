@@ -1,3 +1,5 @@
+import config from '../../config/config'
+
 // Utility form function - will updade the form state on input change.
 // Used in every input.
 export const handleInputChange = (event, setState) => {
@@ -8,6 +10,20 @@ export const handleInputChange = (event, setState) => {
   setState({
     [name]: value,
   })
+}
+
+// Default log function for the develop mode
+// This will log errors like e.g. failing requests
+export const logError = error => {
+  if (config.isDevMode) console.log(error)
+}
+
+// Extract id param from router history object
+export const extractIdFromUrl = match => {
+  const {
+    params: { id },
+  } = match
+  return id ? parseInt(id, 10) : null
 }
 
 // Utility localstorage functions

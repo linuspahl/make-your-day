@@ -1,0 +1,19 @@
+query GetCategories {
+  getCategories {
+    id
+    title
+	}
+}
+
+query GetCategory($id: Int!) {
+  getCategory(id: $id) {
+    id
+    title
+    icon
+    unit
+    color
+    hasUnit
+    hasDescription
+    hasTitle
+	}
+}

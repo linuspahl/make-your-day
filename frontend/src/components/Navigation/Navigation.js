@@ -16,6 +16,7 @@ class Navigation extends React.Component {
     } = this.props
     const items = [
       { path: '/', title: 'Dashboard' },
+      { path: '/categories', title: 'Kategorien verwalten' },
       { path: '/settings', title: 'Einstellungen' },
     ]
 

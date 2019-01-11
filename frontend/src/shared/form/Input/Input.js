@@ -16,7 +16,7 @@ const Element = styled.input`
 `
 
 export default props => {
-  const { type, name, onChange, required, disabled, value } = props
+  const { type, name, onChange, required, disabled, value, tabIndex } = props
   return (
     <Element
       disabled={disabled}
@@ -25,6 +25,7 @@ export default props => {
       required={required}
       type={type || 'text'}
       value={value || ''}
+      tabIndex={tabIndex}
     />
   )
 }
