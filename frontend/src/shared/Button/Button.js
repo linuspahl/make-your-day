@@ -17,11 +17,14 @@ const Layout = styled.button`
     }
 
     return `
+      display: flex;
+      align-items: center;
+
       height: 40px;
-      padding: 10px 20px;
+      padding: 0 20px;
+      border: 0;
 
       background-color: ${bgColor};
-      border: 1px solid ${props.theme.border};
       color: ${props.theme.text};
       cursor: pointer;
 

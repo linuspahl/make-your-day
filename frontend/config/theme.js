@@ -9,13 +9,14 @@ export default {
   secondary: '#e2e2e2',
   secondaryActive: '#cccccc',
   // Default app bg
-  appBg: '#dae0e6',
+  appBg: '#e6eeff',
   // Font setting
   text: '#545454',
   // Other
   border: '#ccc',
   contentBoxBg: '#fff',
   white: '#fff',
+  active: 'rgba(0, 0, 0, 0.1)',
 
   // Available category icon colors
   category: {

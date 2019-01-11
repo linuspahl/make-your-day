@@ -16,9 +16,6 @@ export const Select = styled.div`
 
   padding: 0 10px;
   line-height: 40px;
-  &:active {
-    background-color: #efefef;
-  }
 `
 
 export const OptionsWrapper = styled.div`
@@ -60,10 +57,12 @@ export const Options = styled.div`
 `
 
 export const Option = styled(ListItem)`
-  background-color: ${props => (props.isSelected ? '#efefef' : 'none')};
-  &:active {
-    background-color: #efefef;
-  }
+  ${props => `
+    background-color: ${props.isSelected ? props.theme.active : 'none'};
+    &:active {
+      background-color: ${props.theme.active};
+    }
+  `}
 `
 
 export const OptionPreview = styled.div`

@@ -8,7 +8,7 @@ export const ListItem = styled.li`
   border-bottom: 1px solid ${props => props.theme.border};
 
   &:active {
-    background-color: ${props => props.theme.border};
+    background-color: ${props => props.theme.active};
   }
   &:last-child {
     border-bottom: 0;

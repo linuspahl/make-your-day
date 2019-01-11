@@ -13,6 +13,9 @@ const Wrapper = styled(Link)`
 
   font-size: 26px;
   color: ${props => props.theme.text};
+  &:active {
+    background-color: ${props => props.theme.active};
+  }
 `
 
 export default props => (

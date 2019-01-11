@@ -35,7 +35,7 @@ export const CloseIconWrapper = styled.div`
   position: fixed;
 
   &:active {
-    background-color: grey;
+    background-color: ${props => props.theme.active};
   }
 `
 

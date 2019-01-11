@@ -19,7 +19,7 @@ const ListItem = styled.li`
     props.clickable
       ? `
     &:active {
-      background-color: #efefef;
+      background-color: ${props => props.theme.active};
     }
   `
       : ``}
