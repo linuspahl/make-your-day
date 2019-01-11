@@ -7,10 +7,14 @@ const CopyPlugin = require('copy-webpack-plugin')
 const moduleResolvers = require('../moduleResolvers')
 
 // * entry - configure entry point for babel polyfill
+// * output - publicPath - needed to resolve bundle in sub routes
 // * plugins - HtmlWebpackPlugin - needed to create the index.html with a script tag for the created JS bundle
 // * resolve / modules - will make import paths shorter
 module.exports = {
   entry: ['@babel/polyfill', './src/index'],
+  output: {
+    publicPath: '/',
+  },
   plugins: [
     new HtmlWebPackPlugin({ template: './src/index.html' }),
     new DotenvPlugin({ path: './config/.env' }),
