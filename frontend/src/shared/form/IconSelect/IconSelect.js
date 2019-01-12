@@ -29,6 +29,7 @@ export default props => {
       onChange={onChange}
       name={name}
       options={icons}
+      title="Icon"
     />
   )
 }

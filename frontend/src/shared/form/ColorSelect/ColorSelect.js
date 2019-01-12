@@ -36,6 +36,7 @@ export default props => {
       onChange={onChange}
       name={name}
       options={colors}
+      title="Farbe"
     />
   )
 }

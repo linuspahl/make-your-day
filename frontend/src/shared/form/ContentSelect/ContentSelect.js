@@ -4,15 +4,20 @@
 
 // libraries
 import React from 'react'
-
+// components
+import CloseIcon from 'shared/CloseIcon/CloseIcon'
+import Icon from 'shared/Icon/Icon'
 import {
   Layout,
   Select,
+  Header,
+  Modal,
   OptionsWrapper,
   OptionsOffset,
   Options,
   OptionPreview,
   Option,
+  CloseIconWrapper,
 } from './styles'
 
 export default class ContentSelect extends React.Component {
@@ -99,7 +104,7 @@ export default class ContentSelect extends React.Component {
   }
 
   render() {
-    const { value, renderPreview, options, tabIndex, name } = this.props
+    const { title, value, renderPreview, options, tabIndex, name } = this.props
     const { isOpen, focusedOption } = this.state
 
     return (
@@ -112,26 +117,35 @@ export default class ContentSelect extends React.Component {
           onBlur={this.onBlur}
         >
           {value ? value : '-'}
+          <Icon title="angle-down" />
         </Select>
         {isOpen && (
           <OptionsWrapper>
             <OptionsOffset onClick={() => this.toggleSelect()} />
-            <Options>
-              {options.map(option => {
-                const isSelected = option.value === value
+            <Modal>
+              {title && (
+                <Header>
+                  {title}
+                  <CloseIcon close={this.toggleSelect} />
+                </Header>
+              )}
+              <Options>
+                {options.map(option => {
+                  const isSelected = option.value === value
 
-                return (
-                  <Option
-                    isSelected={isSelected}
-                    key={option.value}
-                    onClick={() => this.onOptionClick(option.value)}
-                  >
-                    <OptionPreview>{renderPreview(option)}</OptionPreview>
-                    <span>{option.title}</span>
-                  </Option>
-                )
-              })}
-            </Options>
+                  return (
+                    <Option
+                      isSelected={isSelected}
+                      key={option.value}
+                      onClick={() => this.onOptionClick(option.value)}
+                    >
+                      <OptionPreview>{renderPreview(option)}</OptionPreview>
+                      <span>{option.title}</span>
+                    </Option>
+                  )
+                })}
+              </Options>
+            </Modal>
           </OptionsWrapper>
         )}
       </Layout>

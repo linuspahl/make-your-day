@@ -11,11 +11,31 @@ export const Layout = styled.div`
 `
 
 export const Select = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   width: 100%;
   height: 100%;
 
   padding: 0 10px;
   line-height: 40px;
+
+  cursor: pointer;
+`
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 30px;
+
+  margin-bottom: 20px;
+  padding-left: 10px;
+
+  // border-bottom: 1px solid ${props => props.theme.border};
+  font-size: 20px;
 `
 
 export const OptionsWrapper = styled.div`
@@ -43,26 +63,36 @@ export const OptionsOffset = styled.div`
   background-color: rgba(0, 0, 0, 0.35);
 `
 
-export const Options = styled.div`
+export const Modal = styled.div`
   z-index: 2;
   max-width: 420px;
   width: calc(100% - 40px);
   max-height: calc(100vh - 40px);
 
-  padding: 10px;
+  padding: 20px;
   border: 1px solid ${props => props.theme.border};
 
   background-color: ${props => props.theme.contentBoxBg};
   overflow: auto;
+  display: grid;
+  grid-template-rows: 40px 1fr;
 `
 
 export const Option = styled(ListItem)`
   ${props => `
     background-color: ${props.isSelected ? props.theme.active : 'none'};
+    cursor: pointer;
     &:active {
       background-color: ${props.theme.active};
     }
   `}
+`
+
+export const Options = styled.div`
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const OptionPreview = styled.div`
