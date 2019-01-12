@@ -18,8 +18,8 @@ export const Layout = styled.div`
 export default props => {
   const { isUserLoggedIn, rootPath } = props
   return (
-    <PageLayout isUserLoggedIn={isUserLoggedIn}>
-      <ContentBox context="page">
+    <PageLayout isUserLoggedIn={isUserLoggedIn} rootPath={rootPath}>
+      <ContentBox>
         <Route
           exact
           path={rootPath}

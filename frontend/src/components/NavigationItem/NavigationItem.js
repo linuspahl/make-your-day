@@ -6,14 +6,14 @@ import { ListItem, InnerLink, RouteActive } from './styles'
 export default props => {
   const {
     route: { title, path },
-    activeRoute,
+    rootPath,
     toggleAction,
   } = props
   // Check if current route is active.
-  // activeRoute allways represents the root part of a route.
+  // rootPath allways represents the root part of a route.
   // In this case we also need to toggle the navigation manually
   // because the Navigation will not rerender
-  const isActive = activeRoute === path
+  const isActive = rootPath === path
   return (
     <ListItem>
       <InnerLink to={path} onClick={() => toggleAction()}>

@@ -56,13 +56,16 @@ export default class PageLayout extends React.Component {
   }
 
   render() {
-    const { isUserLoggedIn, children } = this.props
+    const { isUserLoggedIn, children, rootPath } = this.props
     const { isNavVisible } = this.state
 
     return (
       <Layout>
         {isUserLoggedIn && isNavVisible && (
-          <Navigation toggleAction={this.toggleNavigation} />
+          <Navigation
+            toggleAction={this.toggleNavigation}
+            rootPath={rootPath}
+          />
         )}
         {children}
       </Layout>

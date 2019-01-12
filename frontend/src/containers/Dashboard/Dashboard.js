@@ -11,5 +11,7 @@ export const Layout = styled.div`
 `
 
 export default props => (
-  <PageLayout isUserLoggedIn={props.isUserLoggedIn}>Dashboard</PageLayout>
+  <PageLayout isUserLoggedIn={props.isUserLoggedIn} rootPath={props.rootPath}>
+    Dashboard
+  </PageLayout>
 )

@@ -8,8 +8,8 @@ import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 
 export default props => (
-  <PageLayout isUserLoggedIn={props.isUserLoggedIn} exact>
-    <ContentBox context="page">
+  <PageLayout isUserLoggedIn={props.isUserLoggedIn} rootPath={props.rootPath}>
+    <ContentBox>
       <H1 context="page">Einstellungen</H1>
       <ActionRow>
         <Button clickAction={props.clearLocalStorage} context="secondary">
