@@ -17,6 +17,10 @@ const Form = styled.form`
   margin-top: 15px;
 `
 
+const HeadlineRow = styled(Row)`
+  padding-top: 25px;
+`
+
 class CategoryForm extends React.Component {
   constructor(props) {
     super(props)
@@ -50,7 +54,7 @@ class CategoryForm extends React.Component {
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
-          Shortcut Vorschau{' '}
+          <b>Ansicht Icon</b>
           <CategoryIcon icon={icon} title={title} color={color} />
         </Row>
         <Row>
@@ -81,8 +85,11 @@ class CategoryForm extends React.Component {
             tabIndex={3}
           />
         </Row>
+        <HeadlineRow>
+          <b>Aufbau Einträge</b>
+        </HeadlineRow>
         <Row>
-          Hat Einheit
+          Haben Einheit
           <Checkbox
             name="hasUnit"
             onChange={this.handleInputChange}
@@ -102,7 +109,7 @@ class CategoryForm extends React.Component {
           />
         </Row>
         <Row>
-          Hat Titel
+          Haben Titel
           <Checkbox
             name="hasTitle"
             onChange={this.handleInputChange}
@@ -111,7 +118,7 @@ class CategoryForm extends React.Component {
           />
         </Row>
         <Row>
-          Hat Beschreibung
+          Haben Beschreibung
           <Checkbox
             name="hasDescription"
             onChange={this.handleInputChange}
