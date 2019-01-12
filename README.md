@@ -16,7 +16,7 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 * Run `yarn install` to install all frontend dependencies
 * Create a postgres database manually (not yet part of the provisioning)
 * Run `cp ./config/.env.sample ./config/.env` add the required attributes in the created file
-* Run `yarn createDatabase` to initially create the database tables.
+* Run `yarn migrate` to run all migrations and create the database tables.
 * Run `yarn seed`. This will create an initial user with the credentials:
 ```
   username: Admin
