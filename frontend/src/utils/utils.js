@@ -15,7 +15,7 @@ export const handleInputChange = (event, setState) => {
 // Default log function for the develop mode
 // This will log errors like e.g. failing requests
 export const logError = error => {
-  if (config.isDevMode) console.log(error)
+  if (config.isDevEnv) console.log(error)
 }
 
 // Extract id param from router history object
