@@ -13,6 +13,7 @@ const Element = styled.input`
   color: ${props => props.theme.text};
   box-shadow: none;
   appearance: none;
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'text')};
 `
 
 export default props => {

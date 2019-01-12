@@ -15,6 +15,11 @@ const CloseIcon = styled.div`
   padding: 5px;
 
   font-size: 20px;
+  cursor: pointer;
+
+  &:active {
+    background-color: ${props => props.theme.active};
+  }
 `
 
 export default props => {
