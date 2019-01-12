@@ -4,7 +4,7 @@
 
 // libraries
 import React from 'react'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 // components
 import PublicRoute from '../PublicRoute/PublicRoute'
@@ -13,6 +13,7 @@ import Login from 'containers/Login/Login'
 import Dashboard from 'containers/Dashboard/Dashboard'
 import Settings from 'containers/Settings/Settings'
 import Categories from 'containers/Categories/Categories'
+import PageNotFound from 'containers/PageNotFound/PageNotFound'
 
 export default props => (
   <Router>
@@ -42,6 +43,7 @@ export default props => (
         component={Categories}
         isUserLoggedIn={props.isUserLoggedIn}
       />
+      <PrivateRoute path="*" component={PageNotFound} />
     </Switch>
   </Router>
 )
