@@ -4,9 +4,10 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('users', {
       id: {
-        type: Sequelize.INTEGER,
-        primaryKey: true,
+        allowNull: false,
         autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
       },
       username: {
         type: Sequelize.STRING,
@@ -16,9 +17,17 @@ module.exports = {
       passwordHash: { type: Sequelize.STRING, allowNull: false },
       token: Sequelize.STRING,
       role: {
-        type: Sequelize.STRING,
         allowNull: false,
+        type: Sequelize.STRING,
         validate: { isIn: [['admin', 'user']] },
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
     })
   },

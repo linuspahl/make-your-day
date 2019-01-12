@@ -5,9 +5,10 @@ module.exports = {
     return queryInterface
       .createTable('categories', {
         id: {
-          type: Sequelize.INTEGER,
-          primaryKey: true,
+          allowNull: false,
           autoIncrement: true,
+          primaryKey: true,
+          type: Sequelize.INTEGER,
         },
         title: Sequelize.STRING,
         unit: Sequelize.STRING,
@@ -15,33 +16,41 @@ module.exports = {
         color: Sequelize.STRING,
         type: Sequelize.STRING,
         hasTitle: {
-          type: Sequelize.BOOLEAN,
           allowNull: false,
           defaultValue: false,
+          type: Sequelize.BOOLEAN,
         },
         hasDescription: {
-          type: Sequelize.BOOLEAN,
           allowNull: false,
           defaultValue: false,
+          type: Sequelize.BOOLEAN,
         },
         hasUnit: {
-          type: Sequelize.BOOLEAN,
           allowNull: false,
           defaultValue: false,
+          type: Sequelize.BOOLEAN,
         },
         hasSubcategories: {
-          type: Sequelize.BOOLEAN,
           allowNull: false,
           defaultValue: false,
+          type: Sequelize.BOOLEAN,
         },
         dailyUsage: {
-          type: Sequelize.BOOLEAN,
           allowNull: false,
           defaultValue: false,
+          type: Sequelize.BOOLEAN,
         },
         userId: {
-          type: Sequelize.INTEGER,
           allowNull: false,
+          type: Sequelize.INTEGER,
+        },
+        createdAt: {
+          allowNull: false,
+          type: Sequelize.DATE,
+        },
+        updatedAt: {
+          allowNull: false,
+          type: Sequelize.DATE,
         },
       })
       .then(() =>
