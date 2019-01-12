@@ -11,7 +11,10 @@ export default props => (
   <PageLayout isUserLoggedIn={props.isUserLoggedIn}>
     <ContentBox>
       <H1 context="page">Anmeldung</H1>
-      <LoginForm updateLocalStorage={props.updateLocalStorage} />
+      <LoginForm
+        updateLocalStorage={props.updateLocalStorage}
+        createNotificationBanner={props.createNotificationBanner}
+      />
     </ContentBox>
   </PageLayout>
 )

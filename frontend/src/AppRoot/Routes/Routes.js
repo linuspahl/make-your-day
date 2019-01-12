@@ -22,6 +22,7 @@ export default props => (
         component={Login}
         isUserLoggedIn={props.isUserLoggedIn}
         updateLocalStorage={props.updateLocalStorage}
+        createNotificationBanner={props.createNotificationBanner}
       />
       <PrivateRoute
         path="/"

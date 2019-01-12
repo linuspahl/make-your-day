@@ -41,10 +41,17 @@ export default class LoginForm extends React.Component {
       }
     }
 
-    this.handleSubmit = (event, loginUser) => {
-      event.preventDefault()
-      loginUser()
+    this.onError = error => {
+      this.props.createNotificationBanner({
+        type: 'error',
+        message: 'Anmeldung fehlgeschlagen',
+      })
     }
+  }
+
+  handleSubmit(event, loginUser) {
+    event.preventDefault()
+    loginUser()
   }
 
   render() {
@@ -54,6 +61,7 @@ export default class LoginForm extends React.Component {
         mutation={LoginUser}
         variables={{ username, password }}
         onCompleted={data => this.submitCompleted(data)}
+        onError={error => this.onError(error)}
       >
         {loginUser => (
           <Form onSubmit={event => this.handleSubmit(event, loginUser)}>
