@@ -3,38 +3,42 @@ import Sequelize from 'sequelize'
 export default sequelize =>
   sequelize.define('category', {
     id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
       autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
     },
     title: Sequelize.STRING,
     unit: Sequelize.STRING,
     icon: Sequelize.STRING,
     color: Sequelize.STRING,
-    type: Sequelize.STRING,
+    type: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      validate: { isIn: [['journal', 'list', 'counter']] },
+    },
     hasTitle: {
-      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+      type: Sequelize.BOOLEAN,
     },
     hasDescription: {
-      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+      type: Sequelize.BOOLEAN,
     },
     hasUnit: {
-      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+      type: Sequelize.BOOLEAN,
     },
     hasSubcategories: {
-      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+      type: Sequelize.BOOLEAN,
     },
     dailyUsage: {
-      type: Sequelize.BOOLEAN,
       allowNull: false,
       defaultValue: false,
+      type: Sequelize.BOOLEAN,
     },
   })
