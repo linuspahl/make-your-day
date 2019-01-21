@@ -3,20 +3,21 @@ import Sequelize from 'sequelize'
 export default sequelize =>
   sequelize.define('user', {
     id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
+      allowNull: false,
       autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER,
     },
     username: {
+      allowNull: false,
       type: Sequelize.STRING,
       unique: true,
-      allowNull: false,
     },
     passwordHash: { type: Sequelize.STRING, allowNull: false },
     token: Sequelize.STRING,
     role: {
-      type: Sequelize.STRING,
       allowNull: false,
+      type: Sequelize.STRING,
       validate: { isIn: [['admin', 'user']] },
     },
   })
