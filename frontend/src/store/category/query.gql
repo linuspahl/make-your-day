@@ -7,13 +7,14 @@ query GetCategories {
 
 query GetCategory($id: Int!) {
   getCategory(id: $id) {
-    id
-    title
-    icon
-    unit
     color
-    hasUnit
     hasDescription
     hasTitle
+    hasUnit
+    icon
+    id
+    title
+    type
+    unit
 	}
 }

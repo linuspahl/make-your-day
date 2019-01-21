@@ -1,48 +1,56 @@
 mutation CreateCategory(
-  $title: String!,
-  $icon: String,
   $color: String,
-  $hasTitle: Boolean,
   $hasDescription: Boolean,
-  $hasUnit: Boolean
+  $hasTitle: Boolean,
+  $hasUnit: Boolean,
+  $icon: String,
+  $title: String!,
+  $type: String!,
+  $unit: String,
 ) {
   createCategory(
-    title: $title,
-    icon: $icon,
     color: $color,
-    hasTitle: $hasTitle,
     hasDescription: $hasDescription,
-    hasUnit: $hasUnit
+    hasTitle: $hasTitle,
+    hasUnit: $hasUnit,
+    icon: $icon,
+    title: $title,
+    type: $type,
+    unit: $unit
     ) {
-      id
-      title
-      icon
       color
+      hasDescription
       hasTitle
       hasUnit
-      hasDescription
+      icon
+      id
+      title
+      type
+      unit
     }
 }
 
 mutation UpdateCategory(
-  $id: Int!,
-  $title: String!,
-  $icon: String,
   $color: String!,
-  $unit: String,
   $hasDescription: Boolean,
   $hasTitle: Boolean,
-  $hasUnit: Boolean
+  $hasUnit: Boolean,
+  $icon: String,
+  $id: Int!,
+  $title: String!,
+  $type: String!,
+  $unit: String,
 ) {
   updateCategory(
-    id: $id,
-    title: $title,
-    icon: $icon,
     color: $color,
-    unit: $unit,
     hasDescription: $hasDescription,
     hasTitle: $hasTitle,
     hasUnit: $hasUnit
+    icon: $icon,
+    id: $id,
+    title: $title,
+    type: $type,
+    unit: $unit
   ) {
     id
     title

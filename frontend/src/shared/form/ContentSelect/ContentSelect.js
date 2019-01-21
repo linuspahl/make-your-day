@@ -1,6 +1,7 @@
 // ContentSelect component. Needed to create form selects with more content for the options than just a string.
 // This component behaves exactly like a normal html <select>, e.g. in case of form tab navigation and other key usage
 // The only disadvantage is, all form elements require a tabIndex
+// If a selection is not required, add an option with the title '-' an without any value
 
 // libraries
 import React from 'react'

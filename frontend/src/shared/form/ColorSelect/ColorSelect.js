@@ -24,7 +24,7 @@ const prepareColors = colors => {
 }
 
 export default props => {
-  const { value, toggleSelect, onChange, name, tabIndex } = props
+  const { value, onChange, name, tabIndex } = props
   const colors = prepareColors(theme.category)
 
   return (
@@ -32,7 +32,6 @@ export default props => {
       tabIndex={tabIndex}
       value={value}
       renderPreview={option => <SmallColorPreview color={option.value} />}
-      toggleSelect={toggleSelect}
       onChange={onChange}
       name={name}
       options={colors}

@@ -12,6 +12,7 @@ import ColorSelect from 'shared/form/ColorSelect/ColorSelect'
 import IconSelect from 'shared/form/IconSelect/IconSelect'
 import Button from 'shared/Button/Button'
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
+import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 
 const Form = styled.form`
   margin-top: 15px;
@@ -20,6 +21,11 @@ const Form = styled.form`
 const HeadlineRow = styled(Row)`
   padding-top: 25px;
 `
+const typeOptions = [
+  { value: 'journal', title: 'Journal' },
+  { value: 'list', title: 'Liste' },
+  { value: 'counter', title: 'Zähler' },
+]
 
 class CategoryForm extends React.Component {
   constructor(props) {
@@ -43,13 +49,14 @@ class CategoryForm extends React.Component {
   render() {
     const { mode, rootPath } = this.props
     const {
-      title,
-      hasDescription,
-      hasUnit,
-      unit,
-      icon,
       color,
+      hasDescription,
       hasTitle,
+      hasUnit,
+      icon,
+      title,
+      type,
+      unit,
     } = this.state
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
@@ -89,12 +96,24 @@ class CategoryForm extends React.Component {
           <b>Aufbau Einträge</b>
         </HeadlineRow>
         <Row>
+          Art
+          <ContentSelect
+            name="type"
+            onChange={this.handleInputChange}
+            value={type}
+            renderPreview={option => <div />}
+            tabIndex={4}
+            title="Art"
+            options={typeOptions}
+          />
+        </Row>
+        <Row>
           Haben Einheit
           <Checkbox
             name="hasUnit"
             onChange={this.handleInputChange}
             checked={hasUnit}
-            tabIndex={4}
+            tabIndex={5}
           />
         </Row>
         <Row disabled={!hasUnit}>
@@ -105,7 +124,7 @@ class CategoryForm extends React.Component {
             onChange={this.handleInputChange}
             required
             value={unit}
-            tabIndex={5}
+            tabIndex={6}
           />
         </Row>
         <Row>
@@ -114,7 +133,7 @@ class CategoryForm extends React.Component {
             name="hasTitle"
             onChange={this.handleInputChange}
             value={hasTitle}
-            tabIndex={6}
+            tabIndex={7}
           />
         </Row>
         <Row>
@@ -123,7 +142,7 @@ class CategoryForm extends React.Component {
             name="hasDescription"
             onChange={this.handleInputChange}
             value={hasDescription}
-            tabIndex={7}
+            tabIndex={8}
           />
         </Row>
         <ActionRow>

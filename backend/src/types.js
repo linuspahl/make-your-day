@@ -15,16 +15,17 @@ export default gql`
   }
 
   type Category {
-    id: Int!
-    user: User!
-    title: String
-    icon: String
     color: String
-    unit: String
-    hasTitle: Boolean
     hasDescription: Boolean
+    hasTitle: Boolean
     hasUnit: Boolean
-    parentCategory: Int
+    icon: String
+    id: Int!
+    parentCategory: Category
+    title: String
+    type: String!
+    unit: String
+    user: User!
   }
 
   # Responses
@@ -38,24 +39,26 @@ export default gql`
     loginUser(username: String!, password: String!): UserLogin!
     # Create
     createCategory(
-      title: String!
-      icon: String
-      unit: String
       color: String
-      hasTitle: Boolean
       hasDescription: Boolean
+      hasTitle: Boolean
       hasUnit: Boolean
+      icon: String
+      title: String!
+      type: String!
+      unit: String
     ): Category!
     # Update
     updateCategory(
-      id: Int!
-      title: String
-      icon: String
       color: String
-      unit: String
       hasDescription: Boolean
       hasTitle: Boolean
       hasUnit: Boolean
+      icon: String
+      id: Int!
+      title: String
+      type: String!
+      unit: String
     ): Category!
   }
 
