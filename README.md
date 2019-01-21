@@ -38,15 +38,23 @@ You'll find the test suit setup in `config/test`.
 A common component test case is to check if the component renders correctly.
 You should use `react-test-render/shallow` for this.
 
-#### Creating seeds
-Sometimes it makes sense to insert some seed data, e.g. to have an initial user.
-Like mentioned in the setup part, you can insert all existing seeds with `yarn seed`.
-To create a new seed run  `sequelize model:generate --name migration-name`
 
 ### Backend
 * Enter the backend directory with the cli
 * For development run `yarn start` to start nodemon / babel-node.
 * For production run `yarn startProd` to run babel-node directly. The node instance will not restart on changes.
+
+#### Creating seeds
+Sometimes it makes sense to insert some seed data, e.g. to have an initial user.
+Like mentioned in the setup part, you can insert all existing seeds with `yarn seed`.
+To create a new seed run  `yarn sequelize seed:generate --name seed-name`
+
+#### Creating migrations
+Like mentioned in the setup part, you can run all migrations with `yarn migrate`.
+To create a new migration run  `yarn sequelize migration:generate --name migration-name`
+To revert the last migration run `yarn migrateDown`
+Sequelize is also able to create the database, based on the model definitions. You can run this with `yarn createDatabse` It can't replace the the migrations,
+but sometimes it is nice to see how the database would look like, when it's based on the model definitions.
 
 
 ## Packages overview

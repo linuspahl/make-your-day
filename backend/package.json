@@ -9,6 +9,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node --inspect ./src/index.js",
     "startProd": "babel-node ./src/index.js",
+    "createDatabase": "babel-node ./config/setup/createDatabase.js",
     "sequelize": "sequelize --config ./config/sequelize-cli.js --models-path ./src/models",
     "migrate": "yarn sequelize db:migrate",
     "migrateDown": "yarn sequelize db:migrate:undo",
