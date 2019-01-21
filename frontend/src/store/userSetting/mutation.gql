@@ -1,0 +1,10 @@
+mutation CreateUserSetting($settingId: Int!) {
+  createUserSetting(settingId: $settingId) {
+    id
+    value
+	}
+}
+
+mutation DeleteUserSetting($settingId: Int!) {
+  deleteUserSetting(settingId: $settingId)
+}

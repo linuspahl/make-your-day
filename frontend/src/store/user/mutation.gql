@@ -3,5 +3,11 @@ mutation LoginUser($username: String!, $password: String!) {
     id
     token
     role
+    userSettings {
+      value
+      setting {
+        type
+      }
+    }
   }
 }

@@ -35,7 +35,9 @@ export default props => (
         path="/settings"
         component={Settings}
         clearLocalStorage={props.clearLocalStorage}
+        updateLocalStorage={props.updateLocalStorage}
         isUserLoggedIn={props.isUserLoggedIn}
+        userSettings={props.userSettings}
         exact
       />
       <PrivateRoute

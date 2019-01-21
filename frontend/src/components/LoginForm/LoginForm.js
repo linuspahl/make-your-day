@@ -27,9 +27,15 @@ export default class LoginForm extends React.Component {
 
     this.submitCompleted = async data => {
       const {
-        loginUser: { token: authToken, id: userId, role: userRole, nightMode },
+        loginUser: {
+          token: authToken,
+          id: userId,
+          role: userRole,
+          userSettings,
+        },
       } = data
       const { updateLocalStorage, history } = this.props
+      const settings = formatUserSettings(userSettings)
       // Update local storage / app state reset  with received user data
       // App will redirect when authToken and userId is defined in app state
       if (authToken) {
@@ -37,16 +43,31 @@ export default class LoginForm extends React.Component {
           authToken,
           userId,
           userRole,
+          ...settings,
         })
       }
     }
 
-    this.onError = error => {
+    this.onError = error =>
       this.props.createNotificationBanner({
         type: 'error',
         message: 'Anmeldung fehlgeschlagen',
       })
-    }
+  }
+
+  formatUserSettings(userSettings) {
+    // Part of the login is to update the localstorage with the received user settings, like the night mode.
+    // For this case we need to format the settings in a {key: value} format
+    return userSettings.reduce((result, userSetting) => {
+      const {
+        value,
+        setting: { type },
+      } = userSetting
+
+      result[type] = value
+
+      return result
+    }, {})
   }
 
   handleSubmit(event, loginUser) {

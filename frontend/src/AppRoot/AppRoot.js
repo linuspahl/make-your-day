@@ -7,12 +7,7 @@ import React, { Fragment } from 'react'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from 'react-apollo'
 import apolloClient from './ApolloClient'
-import {
-  getLocalString,
-  getLocalBoolean,
-  getLocalNumber,
-  updateLocalStorage,
-} from 'utils/utils'
+import { getLocalStorage, updateLocalStorage } from 'utils/utils'
 
 // theme
 import colorTheme from '../../config/theme'
@@ -27,10 +22,13 @@ export default class AppRoot extends React.Component {
 
     this.notificationBanner = React.createRef()
 
-    this.state = {
-      authToken: getLocalString('authToken'),
-      userId: getLocalNumber('userId'),
-    }
+    this.state = getLocalStorage([
+      'authToken',
+      'userId',
+      'nightMode',
+      'leftHandMode',
+      'showAppBgImage',
+    ])
 
     this.updateLocalStorage = newStore => {
       updateLocalStorage(newStore, this.setState.bind(this))
@@ -38,14 +36,32 @@ export default class AppRoot extends React.Component {
 
     this.clearLocalStorage = () => {
       localStorage.clear()
-      this.setState({ authToken: null, userId: null })
+      this.setState({
+        authToken: null,
+        userId: null,
+        nightMode: false,
+        leftHandMode: false,
+        showAppBgImage: false,
+      })
     }
 
     this.createNotificationBanner = notification =>
       this.notificationBanner.current.addNotification(notification)
   }
   render() {
-    const { userId, authToken } = this.state
+    const {
+      userId,
+      authToken,
+      nightMode,
+      leftHandMode,
+      showAppBgImage,
+    } = this.state
+
+    const userSettings = {
+      nightMode,
+      leftHandMode,
+      showAppBgImage,
+    }
 
     return (
       <ApolloProvider client={apolloClient}>
@@ -57,6 +73,7 @@ export default class AppRoot extends React.Component {
               updateLocalStorage={this.updateLocalStorage}
               clearLocalStorage={this.clearLocalStorage}
               createNotificationBanner={this.createNotificationBanner}
+              userSettings={userSettings}
             />
           </Fragment>
         </ThemeProvider>
