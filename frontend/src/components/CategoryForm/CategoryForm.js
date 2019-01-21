@@ -58,6 +58,7 @@ class CategoryForm extends React.Component {
       type,
       unit,
     } = this.state
+    let tabIndex = 1
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
@@ -71,7 +72,7 @@ class CategoryForm extends React.Component {
             onChange={this.handleInputChange}
             required
             value={title}
-            tabIndex={1}
+            tabIndex={tabIndex++}
           />
         </Row>
         <Row htmlFor="color">
@@ -80,7 +81,7 @@ class CategoryForm extends React.Component {
             name="color"
             onChange={this.handleInputChange}
             value={color}
-            tabIndex={2}
+            tabIndex={tabIndex++}
           />
         </Row>
         <Row htmlFor="icon">
@@ -89,7 +90,7 @@ class CategoryForm extends React.Component {
             name="icon"
             onChange={this.handleInputChange}
             value={icon}
-            tabIndex={3}
+            tabIndex={tabIndex++}
           />
         </Row>
         <HeadlineRow>
@@ -102,7 +103,7 @@ class CategoryForm extends React.Component {
             onChange={this.handleInputChange}
             value={type}
             renderPreview={option => <div />}
-            tabIndex={4}
+            tabIndex={tabIndex++}
             title="Art"
             options={typeOptions}
           />
@@ -113,7 +114,7 @@ class CategoryForm extends React.Component {
             name="hasUnit"
             onChange={this.handleInputChange}
             checked={hasUnit}
-            tabIndex={5}
+            tabIndex={tabIndex++}
           />
         </Row>
         <Row disabled={!hasUnit}>
@@ -124,7 +125,7 @@ class CategoryForm extends React.Component {
             onChange={this.handleInputChange}
             required
             value={unit}
-            tabIndex={6}
+            tabIndex={tabIndex++}
           />
         </Row>
         <Row>
@@ -133,7 +134,7 @@ class CategoryForm extends React.Component {
             name="hasTitle"
             onChange={this.handleInputChange}
             value={hasTitle}
-            tabIndex={7}
+            tabIndex={tabIndex++}
           />
         </Row>
         <Row>
@@ -142,14 +143,14 @@ class CategoryForm extends React.Component {
             name="hasDescription"
             onChange={this.handleInputChange}
             value={hasDescription}
-            tabIndex={8}
+            tabIndex={tabIndex++}
           />
         </Row>
         <ActionRow>
-          <Button to={rootPath} context="secondary" tabIndex={8}>
+          <Button to={rootPath} context="secondary" tabIndex={tabIndex++}>
             Abbrechen
           </Button>
-          <Button type="submit" context="primary" tabIndex={9}>
+          <Button type="submit" context="primary" tabIndex={tabIndex++}>
             {mode === 'create' ? 'Erstellen' : 'Bearbeiten'}
           </Button>
         </ActionRow>
