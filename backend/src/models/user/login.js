@@ -30,12 +30,9 @@ export default (User, { username, password }) => {
       return setToken(User, user.id, token)
     })
     .then(() => {
-      // Return UserLogin type
-      return {
-        token,
-        id: user.id,
-        role: user.role,
-      }
+      // We need to return the user query again, to be able to work dynamically together with the graphql schema
+      // This means we can't return the needed attributes in a static way
+      return User.findOne({ where: { id: user.id } })
     })
     .catch(error => {
       console.log('Error: user login', error)
