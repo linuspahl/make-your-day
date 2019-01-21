@@ -10,8 +10,10 @@ export default gql`
   type User {
     id: Int!
     username: String!
+    token: String
     role: String!
     nightMode: Boolean
+    userSettings: [UserSetting]!
   }
 
   type Category {
@@ -28,15 +30,22 @@ export default gql`
     user: User!
   }
 
-  # Responses
-  type UserLogin {
-    token: String!
+  type Setting {
     id: Int!
-    role: String!
+    title: String!
+    type: String!
+    defaultValue: String!
+  }
+
+  type UserSetting {
+    id: Int!
+    value: String
+    user: User!
+    setting: Setting!
   }
 
   type Mutation {
-    loginUser(username: String!, password: String!): UserLogin!
+    loginUser(username: String!, password: String!): User!
     # Create
     createCategory(
       color: String
@@ -48,6 +57,7 @@ export default gql`
       type: String!
       unit: String
     ): Category!
+    createUserSetting(settingId: Int!, value: String): UserSetting!
     # Update
     updateCategory(
       color: String
@@ -60,10 +70,13 @@ export default gql`
       type: String!
       unit: String
     ): Category!
+    # Delete
+    deleteUserSetting(settingId: Int!): Boolean
   }
 
   type Query {
     getCategories: [Category]!
     getCategory(id: Int!): Category!
+    getSettings: [Setting]!
   }
 `
