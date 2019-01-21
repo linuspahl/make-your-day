@@ -36,7 +36,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    console.log('Delete all user seeds')
+    console.log('Delete settings')
     return queryInterface.bulkDelete('settings', null, {})
   },
 }
