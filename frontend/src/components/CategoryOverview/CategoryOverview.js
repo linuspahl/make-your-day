@@ -38,14 +38,12 @@ export default props => {
           if (data.getCategories.length === 0) return <NoResult />
           return (
             <List>
-              {data.getCategories.map(category => {
-                return (
-                  <ListItem key={category.id} spaceBetween>
-                    {category.title}
-                    <EditIcon to={`${rootPath}/edit/${category.id}`} />
-                  </ListItem>
-                )
-              })}
+              {data.getCategories.map(category => (
+                <ListItem key={category.id} spaceBetween>
+                  {category.title}
+                  <EditIcon to={`${rootPath}/edit/${category.id}`} />
+                </ListItem>
+              ))}
             </List>
           )
         }}

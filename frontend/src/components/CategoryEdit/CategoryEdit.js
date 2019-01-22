@@ -7,6 +7,8 @@ import { extractIdFromUrl, logError } from 'utils/utils'
 import H1 from 'shared/H1/H1'
 import CategoryForm from 'components/CategoryForm/CategoryForm'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
+import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { Query, Mutation } from 'react-apollo'
 import { UpdateCategory } from 'store/category/mutation.gql'
@@ -47,11 +49,18 @@ class CategoryEdit extends React.Component {
     return (
       <Fragment>
         <H1 context="page">Kategorie bearbeiten</H1>
-        <Query variables={{ id: categoryId }} query={GetCategory}>
+
+        <Query query={GetCategory} variables={{ id: categoryId }}>
           {({ loading, error, data }) => {
             if (loading) return <CenteredSpinner />
-            if (error) return `Error! ${error.message}`
-
+            if (error)
+              return (
+                <ErrorMessage
+                  error={error}
+                  message="Kategorie konnte nicht geladen werden"
+                />
+              )
+            if (!data.getCategory.id) return <NoResult />
             return (
               <Mutation
                 mutation={UpdateCategory}

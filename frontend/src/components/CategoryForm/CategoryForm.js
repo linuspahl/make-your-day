@@ -32,18 +32,15 @@ class CategoryForm extends React.Component {
     super(props)
     this.state = {}
 
-    if (props.initialData) {
-      this.state = props.initialData
-    }
+    if (props.initialData) this.state = props.initialData
 
     this.handleSubmit = event => {
       event.preventDefault()
       this.props.submitAction(this.state)
     }
 
-    this.handleInputChange = event => {
+    this.handleInputChange = event =>
       handleInputChange(event, this.setState.bind(this))
-    }
   }
 
   render() {
@@ -63,7 +60,7 @@ class CategoryForm extends React.Component {
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
           <b>Ansicht Icon</b>
-          <CategoryIcon icon={icon} title={title} color={color} />
+          <CategoryIcon color={color} icon={icon} title={title} />
         </Row>
         <Row>
           Name
@@ -71,8 +68,8 @@ class CategoryForm extends React.Component {
             name="title"
             onChange={this.handleInputChange}
             required
-            value={title}
             tabIndex={tabIndex++}
+            value={title}
           />
         </Row>
         <Row htmlFor="color">
@@ -80,8 +77,8 @@ class CategoryForm extends React.Component {
           <ColorSelect
             name="color"
             onChange={this.handleInputChange}
-            value={color}
             tabIndex={tabIndex++}
+            value={color}
           />
         </Row>
         <Row htmlFor="icon">
@@ -89,8 +86,8 @@ class CategoryForm extends React.Component {
           <IconSelect
             name="icon"
             onChange={this.handleInputChange}
-            value={icon}
             tabIndex={tabIndex++}
+            value={icon}
           />
         </Row>
         <HeadlineRow>
@@ -101,19 +98,19 @@ class CategoryForm extends React.Component {
           <ContentSelect
             name="type"
             onChange={this.handleInputChange}
-            value={type}
+            options={typeOptions}
             renderPreview={option => <div />}
             tabIndex={tabIndex++}
             title="Art"
-            options={typeOptions}
+            value={type}
           />
         </Row>
         <Row>
           Haben Einheit
           <Checkbox
+            checked={hasUnit}
             name="hasUnit"
             onChange={this.handleInputChange}
-            checked={hasUnit}
             tabIndex={tabIndex++}
           />
         </Row>
@@ -124,33 +121,33 @@ class CategoryForm extends React.Component {
             name="unit"
             onChange={this.handleInputChange}
             required
-            value={unit}
             tabIndex={tabIndex++}
+            value={unit}
           />
         </Row>
         <Row>
           Haben Titel
           <Checkbox
+            checked={hasTitle}
             name="hasTitle"
             onChange={this.handleInputChange}
-            checked={hasTitle}
             tabIndex={tabIndex++}
           />
         </Row>
         <Row>
           Haben Beschreibung
           <Checkbox
+            checked={hasDescription}
             name="hasDescription"
             onChange={this.handleInputChange}
-            checked={hasDescription}
             tabIndex={tabIndex++}
           />
         </Row>
         <ActionRow>
-          <Button to={rootPath} context="secondary" tabIndex={tabIndex++}>
+          <Button context="secondary" tabIndex={tabIndex++} to={rootPath}>
             Abbrechen
           </Button>
-          <Button type="submit" context="primary" tabIndex={tabIndex++}>
+          <Button context="primary" tabIndex={tabIndex++} type="submit">
             {mode === 'create' ? 'Erstellen' : 'Bearbeiten'}
           </Button>
         </ActionRow>
