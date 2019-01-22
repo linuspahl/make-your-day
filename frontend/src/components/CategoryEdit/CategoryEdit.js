@@ -13,13 +13,31 @@ import { UpdateCategory } from 'store/category/mutation.gql'
 import { GetCategory } from 'store/category/query.gql'
 
 class CategoryEdit extends React.Component {
-  submitCompleted(data) {
-    const { history, rootPath } = this.props
+  // Form submit function
+  async onComplete(data) {
+    const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateCategory: { title },
     } = data
-    // go to the categories overview
+
+    // Inform user about success
+    createNotificationBanner({
+      type: 'success',
+      message: `Kategorie ${title} erfolgreich bearbeitet`,
+    })
+
+    // Go to the categories overview
     history.push(rootPath)
+  }
+
+  // Form error function
+  onError(error) {
+    const { createNotificationBanner } = this.props
+    createNotificationBanner({
+      type: 'error',
+      message: 'Bearbeitung der Kategorie fehlgeschlagen',
+    })
+    logError(error)
   }
 
   render() {
@@ -37,13 +55,13 @@ class CategoryEdit extends React.Component {
             return (
               <Mutation
                 mutation={UpdateCategory}
-                onCompleted={this.submitCompleted.bind(this)}
-                onError={logError}
+                onCompleted={this.onComplete.bind(this)}
+                onError={this.onError.bind(this)}
               >
                 {updateUser => (
                   <CategoryForm
-                    rootPath={rootPath}
                     initialData={data.getCategory}
+                    rootPath={rootPath}
                     submitAction={variables => updateUser({ variables })}
                   />
                 )}

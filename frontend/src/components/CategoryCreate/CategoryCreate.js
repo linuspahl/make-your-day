@@ -14,28 +14,50 @@ import { CreateCategory } from 'store/category/mutation.gql'
 class CategoryCreate extends React.Component {
   // Form submit function
   async onComplete(data) {
-    const { history, rootPath } = this.props
-    // Go to the users overview
+    const { history, rootPath, createNotificationBanner } = this.props
+    const {
+      createCategory: { title },
+    } = data
+
+    // Inform user about success
+    createNotificationBanner({
+      type: 'success',
+      message: `Kategorie ${title} erfolgreich erstellt`,
+    })
+
+    // Go to the categories overview
     history.push(rootPath)
   }
 
+  // Form error function
+  onError(error) {
+    const { createNotificationBanner } = this.props
+    createNotificationBanner({
+      type: 'error',
+      message: 'Bearbeitung der Kategorie fehlgeschlagen',
+    })
+    logError(error)
+  }
+
   render() {
-    const { rootPath } = this.props
+    const { rootPath, createNotificationBanner } = this.props
     return (
       <Fragment>
         <H1 context="page">Kategorie erstellen</H1>
         <Mutation
           mutation={CreateCategory}
           onCompleted={this.onComplete.bind(this)}
-          onError={logError}
+          onError={this.onError.bind(this)}
           update={addCategory}
         >
           {createCategory => (
             <CategoryForm
+              createNotificationBanner={createNotificationBanner}
+              mode="create"
               mutation={CreateCategory}
               rootPath={rootPath}
               submitAction={variables => createCategory({ variables })}
-              mode="create"
+              initialData={{ type: 'journal' }}
             />
           )}
         </Mutation>

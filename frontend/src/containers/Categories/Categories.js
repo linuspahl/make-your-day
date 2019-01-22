@@ -16,7 +16,7 @@ export const Layout = styled.div`
 `
 
 export default props => {
-  const { isUserLoggedIn, rootPath } = props
+  const { isUserLoggedIn, rootPath, createNotificationBanner } = props
   return (
     <PageLayout isUserLoggedIn={isUserLoggedIn} rootPath={rootPath}>
       <ContentBox>
@@ -28,12 +28,22 @@ export default props => {
         <Route
           exact
           path={`${rootPath}/create`}
-          render={() => <CategoryCreate rootPath={rootPath} />}
+          render={() => (
+            <CategoryCreate
+              rootPath={rootPath}
+              createNotificationBanner={createNotificationBanner}
+            />
+          )}
         />
         <Route
           exact
           path={`${rootPath}/edit/:id`}
-          render={() => <CategoryEdit rootPath={rootPath} />}
+          render={() => (
+            <CategoryEdit
+              rootPath={rootPath}
+              createNotificationBanner={createNotificationBanner}
+            />
+          )}
         />
       </ContentBox>
     </PageLayout>
