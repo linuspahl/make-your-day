@@ -53,6 +53,14 @@ mutation UpdateCategory(
     unit: $unit
   ) {
     id
+    color
+    hasDescription
+    hasTitle
+    hasUnit
+    icon
+    id
     title
+    type
+    unit
   }
 }
