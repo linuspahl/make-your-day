@@ -133,7 +133,7 @@ class CategoryForm extends React.Component {
           <Checkbox
             name="hasTitle"
             onChange={this.handleInputChange}
-            value={hasTitle}
+            checked={hasTitle}
             tabIndex={tabIndex++}
           />
         </Row>
@@ -142,7 +142,7 @@ class CategoryForm extends React.Component {
           <Checkbox
             name="hasDescription"
             onChange={this.handleInputChange}
-            value={hasDescription}
+            checked={hasDescription}
             tabIndex={tabIndex++}
           />
         </Row>
