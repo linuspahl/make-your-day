@@ -34,7 +34,7 @@ class CategoryCreate extends React.Component {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',
-      message: 'Bearbeitung der Kategorie fehlgeschlagen',
+      message: 'Erstellung der Kategorie fehlgeschlagen',
     })
     logError(error)
   }

@@ -27,7 +27,7 @@ const typeOptions = [
   { value: 'counter', title: 'Zähler' },
 ]
 
-class CategoryForm extends React.Component {
+export default class CategoryForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -155,5 +155,3 @@ class CategoryForm extends React.Component {
     )
   }
 }
-
-export default CategoryForm
