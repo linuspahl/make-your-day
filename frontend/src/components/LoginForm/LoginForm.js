@@ -25,7 +25,7 @@ export default class LoginForm extends React.Component {
       handleInputChange(event, this.setState.bind(this))
     }
 
-    this.submitCompleted = async data => {
+    this.onCompleted = async data => {
       const {
         loginUser: {
           token: authToken,
@@ -81,7 +81,7 @@ export default class LoginForm extends React.Component {
       <Mutation
         mutation={LoginUser}
         variables={{ username, password }}
-        onCompleted={data => this.submitCompleted(data)}
+        onCompleted={data => this.onCompleted(data)}
         onError={error => this.onError(error)}
       >
         {loginUser => (
