@@ -9,42 +9,49 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 // components
 import PublicRoute from '../PublicRoute/PublicRoute'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
-import Login from 'containers/Login/Login'
-import Dashboard from 'containers/Dashboard/Dashboard'
-import Settings from 'containers/Settings/Settings'
 import Categories from 'containers/Categories/Categories'
+import Dashboard from 'containers/Dashboard/Dashboard'
+import Login from 'containers/Login/Login'
 import PageNotFound from 'containers/PageNotFound/PageNotFound'
+import Settings from 'containers/Settings/Settings'
+import Widgets from 'containers/Widgets/Widgets'
 
 export default props => (
   <Router>
     <Switch>
       <PublicRoute
-        path="/login"
         component={Login}
-        isUserLoggedIn={props.isUserLoggedIn}
-        updateLocalStorage={props.updateLocalStorage}
         createNotificationBanner={props.createNotificationBanner}
+        isUserLoggedIn={props.isUserLoggedIn}
+        path="/login"
+        updateLocalStorage={props.updateLocalStorage}
       />
       <PrivateRoute
-        path="/"
         component={Dashboard}
-        isUserLoggedIn={props.isUserLoggedIn}
         exact
+        isUserLoggedIn={props.isUserLoggedIn}
+        path="/"
       />
       <PrivateRoute
-        path="/settings"
-        component={Settings}
         clearLocalStorage={props.clearLocalStorage}
-        updateLocalStorage={props.updateLocalStorage}
-        isUserLoggedIn={props.isUserLoggedIn}
-        userSettings={props.userSettings}
+        component={Settings}
         exact
+        isUserLoggedIn={props.isUserLoggedIn}
+        path="/settings"
+        updateLocalStorage={props.updateLocalStorage}
+        userSettings={props.userSettings}
       />
       <PrivateRoute
-        path="/categories"
-        createNotificationBanner={props.createNotificationBanner}
         component={Categories}
+        createNotificationBanner={props.createNotificationBanner}
         isUserLoggedIn={props.isUserLoggedIn}
+        path="/categories"
+      />
+      <PrivateRoute
+        component={Widgets}
+        createNotificationBanner={props.createNotificationBanner}
+        isUserLoggedIn={props.isUserLoggedIn}
+        path="/widgets"
       />
       <PrivateRoute path="*" component={PageNotFound} />
     </Switch>

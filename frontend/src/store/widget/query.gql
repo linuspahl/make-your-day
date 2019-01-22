@@ -1,0 +1,17 @@
+query GetWidget($id: Int!) {
+  getWidget(id: $id) {
+    id
+    title
+    value
+    type
+	}
+}
+
+query GetWidgets {
+  getWidgets {
+    id
+    title
+    type
+    value
+	}
+}
