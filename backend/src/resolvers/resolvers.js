@@ -4,15 +4,19 @@
 // Gets included in the apollo server setup
 
 // Mutations import
-import loginUser from './mutation/loginUser'
 import createCategory from './mutation/createCategory'
-import updateCategory from './mutation/updateCategory'
 import createUserSetting from './mutation/createUserSetting'
+import createWidget from './mutation/createWidget'
 import deleteUserSetting from './mutation/deleteUserSetting'
+import loginUser from './mutation/loginUser'
+import updateCategory from './mutation/updateCategory'
+import updateWidget from './mutation/updateWidget'
 // Queries import
 import getCategories from './query/getCategories'
 import getCategory from './query/getCategory'
 import getSettings from './query/getSettings'
+import getWidgets from './query/getWidgets'
+import getWidget from './query/getWidget'
 // Queries relation resolvers import
 import getUserUserSettings from './query/getUserUserSettings'
 import getUserSettingSetting from './query/getUserSettingSetting'
@@ -25,15 +29,19 @@ export default {
     setting: getUserSettingSetting,
   },
   Mutation: {
-    loginUser,
     createCategory,
-    updateCategory,
     createUserSetting,
+    createWidget,
     deleteUserSetting,
+    loginUser,
+    updateCategory,
+    updateWidget,
   },
   Query: {
     getCategory,
     getCategories,
     getSettings,
+    getWidgets,
+    getWidget,
   },
 }

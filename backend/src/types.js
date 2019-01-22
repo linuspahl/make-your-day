@@ -44,6 +44,14 @@ export default gql`
     setting: Setting!
   }
 
+  type Widget {
+    id: Int!
+    user: User!
+    title: String!
+    type: String!
+    value: String
+  }
+
   type Mutation {
     loginUser(username: String!, password: String!): User!
     # Create
@@ -58,6 +66,7 @@ export default gql`
       unit: String
     ): Category!
     createUserSetting(settingId: Int!, value: String): UserSetting!
+    createWidget(title: String!, type: String!, value: String): Widget!
     # Update
     updateCategory(
       color: String
@@ -70,6 +79,12 @@ export default gql`
       type: String!
       unit: String
     ): Category!
+    updateWidget(
+      id: Int!
+      title: String!
+      type: String!
+      value: String
+    ): Widget!
     # Delete
     deleteUserSetting(settingId: Int!): Boolean
   }
@@ -77,6 +92,8 @@ export default gql`
   type Query {
     getCategories: [Category]!
     getCategory(id: Int!): Category!
+    getWidgets: [Widget]!
+    getWidget(id: Int!): Widget!
     getSettings: [Setting]!
   }
 `
