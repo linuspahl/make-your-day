@@ -35,7 +35,7 @@ export default class LoginForm extends React.Component {
         },
       } = data
       const { updateLocalStorage, history } = this.props
-      const settings = formatUserSettings(userSettings)
+      const settings = this.formatUserSettings(userSettings)
       // Update local storage / app state reset  with received user data
       // App will redirect when authToken and userId is defined in app state
       if (authToken) {
