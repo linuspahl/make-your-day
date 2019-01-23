@@ -1,6 +1,6 @@
 import { GetWidgets } from 'store/category/query.gql'
 
-export const addWidget = (cache, createCategory) => {
+export const addWidget = (cache, createWidget) => {
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the the overview list will not get fetched
   try {
@@ -9,7 +9,7 @@ export const addWidget = (cache, createCategory) => {
     cache.writeQuery({
       query: GetWidgets,
       data: {
-        getWidgets: widgets.getWidgets.concat([createCategory]),
+        getWidgets: widgets.getWidgets.concat([createWidget]),
       },
     })
   } catch {}
