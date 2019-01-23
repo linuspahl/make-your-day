@@ -30,7 +30,7 @@ export default props => {
     <Element
       type="checkbox"
       name={name}
-      checked={checked}
+      value={checked}
       onChange={onChange}
       disabled={disabled}
       tabIndex={tabIndex}
