@@ -52,9 +52,7 @@ class CategoryCreate extends React.Component {
         >
           {createCategory => (
             <CategoryForm
-              createNotificationBanner={createNotificationBanner}
               mode="create"
-              mutation={CreateCategory}
               rootPath={rootPath}
               submitAction={variables => createCategory({ variables })}
               initialData={{ type: 'journal' }}

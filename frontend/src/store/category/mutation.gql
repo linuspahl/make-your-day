@@ -1,6 +1,7 @@
 mutation CreateCategory(
   $color: String,
   $hasDescription: Boolean,
+  $hasSubcategories: Boolean,
   $hasTitle: Boolean,
   $hasUnit: Boolean,
   $icon: String,
@@ -11,6 +12,7 @@ mutation CreateCategory(
   createCategory(
     color: $color,
     hasDescription: $hasDescription,
+    hasSubcategories: $hasSubcategories,
     hasTitle: $hasTitle,
     hasUnit: $hasUnit,
     icon: $icon,
@@ -20,6 +22,7 @@ mutation CreateCategory(
     ) {
       color
       hasDescription
+      hasSubcategories
       hasTitle
       hasUnit
       icon
@@ -27,12 +30,13 @@ mutation CreateCategory(
       title
       type
       unit
-    }
+  }
 }
 
 mutation UpdateCategory(
   $color: String!,
   $hasDescription: Boolean,
+  $hasSubcategories: Boolean,
   $hasTitle: Boolean,
   $hasUnit: Boolean,
   $icon: String,
@@ -44,6 +48,7 @@ mutation UpdateCategory(
   updateCategory(
     color: $color,
     hasDescription: $hasDescription,
+    hasSubcategories: $hasSubcategories,
     hasTitle: $hasTitle,
     hasUnit: $hasUnit
     icon: $icon,
@@ -55,6 +60,7 @@ mutation UpdateCategory(
     id
     color
     hasDescription
+    hasSubcategories
     hasTitle
     hasUnit
     icon

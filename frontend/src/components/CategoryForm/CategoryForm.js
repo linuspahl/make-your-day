@@ -48,6 +48,7 @@ export default class CategoryForm extends React.Component {
     const {
       color,
       hasDescription,
+      hasSubcategories,
       hasTitle,
       hasUnit,
       icon,
@@ -103,6 +104,15 @@ export default class CategoryForm extends React.Component {
             tabIndex={tabIndex++}
             title="Art"
             value={type}
+          />
+        </Row>
+        <Row>
+          Auswahl Unterkategorie
+          <Checkbox
+            checked={hasSubcategories}
+            name="hasSubcategories"
+            onChange={this.handleInputChange}
+            tabIndex={tabIndex++}
           />
         </Row>
         <Row>
