@@ -118,4 +118,7 @@ It will affect e.g. the setup of the VS Code node debugging.
 E.g: FE: Setup yarn package.json
 * React components naming convention:
 Use `Component/Component.js` instead of `Component/index.js`. It looks redundant at first, but will a lot when switching between components, during the development.
-* Imports should be grouped by e.g. Components, Libraries, Store related actions, etc. Have a look at the `App.js` for a real example.
+* In the frontend we try to structure the imports. The definition of an import type is very subjective, but we are trying to seperate the imports by:
+// libraries - all dependencies installed with yarn
+// components - all components in the `src` directory
+// graphql - all actions in the `store` driectory like grapqhl queries and mutations
