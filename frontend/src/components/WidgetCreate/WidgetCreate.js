@@ -52,7 +52,6 @@ class WidgetCreate extends React.Component {
         >
           {createWidget => (
             <WidgetForm
-              createNotificationBanner={createNotificationBanner}
               mode="create"
               mutation={CreateWidget}
               rootPath={rootPath}
