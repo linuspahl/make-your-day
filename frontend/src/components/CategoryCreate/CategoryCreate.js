@@ -15,8 +15,8 @@ class CategoryCreate extends React.Component {
   constructor(props) {
     super(props)
 
-    this.onComplete = this.onComplete.bind(this)
-    this.onError = this.onError.bind(this)
+    this.handleCompleted = this.handleCompleted.bind(this)
+    this.handleError = this.handleError.bind(this)
   }
 
   render() {
@@ -26,8 +26,8 @@ class CategoryCreate extends React.Component {
         <H1 context="page">Kategorie erstellen</H1>
         <Mutation
           mutation={CreateCategory}
-          onCompleted={this.onComplete}
-          onError={this.onError}
+          onCompleted={this.handleCompleted}
+          onError={this.handleError}
           update={addCategory}
         >
           {createCategory => (
@@ -44,7 +44,7 @@ class CategoryCreate extends React.Component {
   }
 
   // Form submit function
-  async onComplete(data) {
+  async handleCompleted(data) {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       createCategory: { title },
@@ -61,7 +61,7 @@ class CategoryCreate extends React.Component {
   }
 
   // Form error function
-  onError(error) {
+  handleError(error) {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

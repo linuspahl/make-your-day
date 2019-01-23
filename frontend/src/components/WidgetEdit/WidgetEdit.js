@@ -19,7 +19,7 @@ class WidgetEdit extends React.Component {
     super(props)
 
     this.onComplete = this.onComplete.bind(this)
-    this.onError = this.onError.bind(this)
+    this.handleError = this.handleError.bind(this)
   }
 
   render() {
@@ -45,7 +45,7 @@ class WidgetEdit extends React.Component {
               <Mutation
                 mutation={UpdateWidget}
                 onCompleted={this.onComplete}
-                onError={this.onError}
+                onError={this.handleError}
               >
                 {updateUser => (
                   <WidgetForm
@@ -80,7 +80,7 @@ class WidgetEdit extends React.Component {
   }
 
   // Form error function
-  onError(error) {
+  handleError(error) {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

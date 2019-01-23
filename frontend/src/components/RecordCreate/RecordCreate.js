@@ -18,8 +18,8 @@ class RecordCreate extends React.Component {
   constructor(props) {
     super(props)
 
-    this.onComplete = this.onComplete.bind(this)
-    this.onError = this.onError.bind(this)
+    this.handleCompleted = this.handleCompleted.bind(this)
+    this.handleError = this.handleError.bind(this)
   }
 
   render() {
@@ -49,8 +49,8 @@ class RecordCreate extends React.Component {
             return (
               <Mutation
                 mutation={CreateRecord}
-                onCompleted={this.onComplete}
-                onError={this.onError}
+                onCompleted={this.handleCompleted}
+                onError={this.handleError}
               >
                 {createRecord => (
                   <RecordForm
@@ -73,7 +73,7 @@ class RecordCreate extends React.Component {
   }
 
   // Form submit function
-  async onComplete(data) {
+  async handleCompleted(data) {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       createRecord: { title },
@@ -90,7 +90,7 @@ class RecordCreate extends React.Component {
   }
 
   // Form error function
-  onError(error) {
+  handleError(error) {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

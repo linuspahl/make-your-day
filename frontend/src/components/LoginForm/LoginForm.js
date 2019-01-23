@@ -23,8 +23,8 @@ export default class LoginForm extends React.Component {
     this.state = { username: '', password: '' }
 
     this.handleInputChange = this.handleInputChange.bind(this)
-    this.onCompleted = this.onCompleted.bind(this)
-    this.onError = this.onError.bind(this)
+    this.handleCompleted = this.handleCompleted.bind(this)
+    this.handleError = this.handleError.bind(this)
   }
 
   render() {
@@ -33,8 +33,8 @@ export default class LoginForm extends React.Component {
       <Mutation
         mutation={LoginUser}
         variables={{ username, password }}
-        onCompleted={data => this.onCompleted(data)}
-        onError={error => this.onError(error)}
+        onCompleted={this.handleCompleted}
+        onError={this.handleError}
       >
         {loginUser => (
           <Form onSubmit={event => this.handleSubmit(event, loginUser)}>
@@ -77,7 +77,7 @@ export default class LoginForm extends React.Component {
     loginUser()
   }
 
-  async onCompleted(data) {
+  async handleCompleted(data) {
     const {
       loginUser: { token: authToken, id: userId, role: userRole, userSettings },
     } = data
@@ -110,7 +110,7 @@ export default class LoginForm extends React.Component {
     }, {})
   }
 
-  onError(error) {
+  handleError(error) {
     this.props.createNotificationBanner({
       type: 'error',
       message: 'Anmeldung fehlgeschlagen',

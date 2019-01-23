@@ -18,8 +18,8 @@ class CategoryEdit extends React.Component {
   constructor(props) {
     super(props)
 
-    this.onComplete = this.onComplete.bind(this)
-    this.onError = this.onError.bind(this)
+    this.handleCompleted = this.handleCompleted.bind(this)
+    this.handleError = this.handleError.bind(this)
   }
 
   render() {
@@ -44,8 +44,8 @@ class CategoryEdit extends React.Component {
             return (
               <Mutation
                 mutation={UpdateCategory}
-                onCompleted={this.onComplete}
-                onError={this.onError}
+                onCompleted={this.handleCompleted}
+                onError={this.handleError}
               >
                 {updateUser => (
                   <CategoryForm
@@ -63,7 +63,7 @@ class CategoryEdit extends React.Component {
   }
 
   // Form submit function
-  async onComplete(data) {
+  async handleError(data) {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateCategory: { title },
@@ -80,7 +80,7 @@ class CategoryEdit extends React.Component {
   }
 
   // Form error function
-  onError(error) {
+  handleCompleted(error) {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',
