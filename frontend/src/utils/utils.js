@@ -1,5 +1,14 @@
 import config from '../../config/config'
 
+// Basic sort function
+export const sortBy = (array, attribute, order = 'desc') => {
+  return array.sort((obj1, obj2) =>
+    order === 'desc'
+      ? obj1[attribute] - obj2[attribute]
+      : obj2[attribute] - obj1[attribute]
+  )
+}
+
 // Utility form function - will updade the form state on input change.
 // Used in every input.
 export const handleInputChange = (event, setState) => {

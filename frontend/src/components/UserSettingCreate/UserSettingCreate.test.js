@@ -6,6 +6,6 @@ import UserSettingCreate from './UserSettingCreate'
 
 describe('UserSettingCreate should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<UserSettingCreate category={{}} />)
+    new ShallowRenderer().render(<UserSettingCreate setting={{}} />)
   })
 })

@@ -28,6 +28,7 @@ export default props => (
       />
       <PrivateRoute
         component={Dashboard}
+        createNotificationBanner={props.createNotificationBanner}
         exact
         isUserLoggedIn={props.isUserLoggedIn}
         path="/"

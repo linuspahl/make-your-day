@@ -6,6 +6,6 @@ import UserSettingDelete from './UserSettingDelete'
 
 describe('UserSettingDelete should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<UserSettingDelete category={{}} />)
+    new ShallowRenderer().render(<UserSettingDelete setting={{}} />)
   })
 })
