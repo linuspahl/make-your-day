@@ -5,6 +5,15 @@ query GetCategories {
 	}
 }
 
+query GetCategoriesIcon {
+  getCategories {
+    color
+    icon
+    id
+    type
+  }
+}
+
 query GetCategory($id: Int!) {
   getCategory(id: $id) {
     color
