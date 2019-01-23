@@ -4,6 +4,7 @@
 import sequelize from '../core/sequelize'
 import Category from './category/category'
 import Setting from './setting/setting'
+import Record from './record/record'
 import User from './user/user'
 import UserSetting from './userSetting/userSetting'
 import Widget from './widget/widget'
@@ -11,8 +12,9 @@ import Widget from './widget/widget'
 // Initialize models
 const models = {}
 
-models.Category = Category(sequelize)
+models.Record = Record(sequelize)
 models.Widget = Widget(sequelize)
+models.Category = Category(sequelize, models)
 models.UserSetting = UserSetting(sequelize)
 models.Setting = Setting(sequelize, models)
 models.User = User(sequelize, models)

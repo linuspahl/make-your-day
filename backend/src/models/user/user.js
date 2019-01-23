@@ -2,7 +2,7 @@ import definition from './definition'
 import login from './login'
 
 export default (sequelize, models) => {
-  const { Category, UserSetting, Widget } = models
+  const { Category, UserSetting, Widget, Record } = models
   const User = definition(sequelize)
 
   // model actions
@@ -12,6 +12,7 @@ export default (sequelize, models) => {
   User.hasMany(Category, { onDelete: 'cascade' })
   User.hasMany(Widget, { onDelete: 'cascade' })
   User.hasMany(UserSetting, { onDelete: 'cascade' })
+  User.hasMany(Record, { onDelete: 'cascade' })
 
   return User
 }

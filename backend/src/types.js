@@ -19,6 +19,7 @@ export default gql`
   type Category {
     color: String
     hasDescription: Boolean
+    hasSubcategories: Boolean
     hasTitle: Boolean
     hasUnit: Boolean
     icon: String
@@ -27,6 +28,16 @@ export default gql`
     title: String
     type: String!
     unit: String
+    user: User!
+  }
+
+  type Record {
+    amount: String
+    category: Category!
+    createdAt: String!
+    description: String
+    id: Int!
+    title: String
     user: User!
   }
 
@@ -58,6 +69,7 @@ export default gql`
     createCategory(
       color: String
       hasDescription: Boolean
+      hasSubcategories: Boolean
       hasTitle: Boolean
       hasUnit: Boolean
       icon: String
@@ -65,12 +77,19 @@ export default gql`
       type: String!
       unit: String
     ): Category!
+    createRecord(
+      title: String
+      description: String
+      amount: String
+      categoryId: Int!
+    ): Record!
     createUserSetting(settingId: Int!, value: String): UserSetting!
     createWidget(title: String!, type: String!, value: String): Widget!
     # Update
     updateCategory(
       color: String
       hasDescription: Boolean
+      hasSubcategories: Boolean
       hasTitle: Boolean
       hasUnit: Boolean
       icon: String
@@ -95,5 +114,6 @@ export default gql`
     getWidgets: [Widget]!
     getWidget(id: Int!): Widget!
     getSettings: [Setting]!
+    getRecords: [Record]!
   }
 `

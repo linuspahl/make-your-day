@@ -5,6 +5,7 @@
 
 // Mutations import
 import createCategory from './mutation/createCategory'
+import createRecord from './mutation/createRecord'
 import createUserSetting from './mutation/createUserSetting'
 import createWidget from './mutation/createWidget'
 import deleteUserSetting from './mutation/deleteUserSetting'
@@ -14,6 +15,7 @@ import updateWidget from './mutation/updateWidget'
 // Queries import
 import getCategories from './query/getCategories'
 import getCategory from './query/getCategory'
+import getRecords from './query/getRecords'
 import getSettings from './query/getSettings'
 import getWidgets from './query/getWidgets'
 import getWidget from './query/getWidget'
@@ -30,6 +32,7 @@ export default {
   },
   Mutation: {
     createCategory,
+    createRecord,
     createUserSetting,
     createWidget,
     deleteUserSetting,
@@ -40,6 +43,7 @@ export default {
   Query: {
     getCategory,
     getCategories,
+    getRecords,
     getSettings,
     getWidgets,
     getWidget,
