@@ -1,0 +1,15 @@
+mutation CreateRecord(
+  $amount: String,
+  $categoryId: Int!,
+  $description: String,
+  $title: String
+  ) {
+  createRecord(
+    amount: $amount,
+    categoryId: $categoryId,
+    description: $description,
+    title: $title
+    ) {
+      id
+    }
+}

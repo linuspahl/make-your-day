@@ -1,0 +1,9 @@
+query GetRecords {
+  getRecords {
+    id
+    title
+    amount
+    description
+    createdAt
+	}
+}
