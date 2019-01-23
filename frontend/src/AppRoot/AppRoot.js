@@ -4,9 +4,9 @@
 
 // libraries
 import React, { Fragment } from 'react'
+import apolloClient from './ApolloClient'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from 'react-apollo'
-import apolloClient from './ApolloClient'
 import { getLocalStorage, updateLocalStorage } from 'utils/utils'
 
 // theme

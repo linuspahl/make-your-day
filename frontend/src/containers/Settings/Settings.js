@@ -1,5 +1,6 @@
 // libraries
 import React from 'react'
+import { Query } from 'react-apollo'
 // components
 import PageLayout from 'components/PageLayout/PageLayout'
 import H1 from 'shared/H1/H1'
@@ -12,7 +13,6 @@ import UserSettingDelete from 'components/UserSettingDelete/UserSettingDelete'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 // qraphql
 import GetSettings from 'store/setting/query.gql'
-import { Query } from 'react-apollo'
 
 export default props => (
   <PageLayout isUserLoggedIn={props.isUserLoggedIn} rootPath={props.rootPath}>

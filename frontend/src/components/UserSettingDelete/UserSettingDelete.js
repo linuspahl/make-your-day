@@ -1,9 +1,9 @@
 // libraries
 import React from 'react'
+import { Mutation } from 'react-apollo'
 // components
 import Checkbox from 'shared/form/Checkbox/Checkbox'
 // graphql
-import { Mutation } from 'react-apollo'
 import { DeleteUserSetting } from 'store/userSetting/mutation.gql'
 
 export default props => (

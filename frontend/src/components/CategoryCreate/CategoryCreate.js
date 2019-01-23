@@ -1,13 +1,13 @@
 // libraries
 import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
+import { Mutation } from 'react-apollo'
 // utils
 import { logError } from 'utils/utils'
 // components
 import H1 from 'shared/H1/H1'
 import CategoryForm from 'components/CategoryForm/CategoryForm'
 // graphql
-import { Mutation } from 'react-apollo'
 import { addCategory } from 'store/category/update'
 import { CreateCategory } from 'store/category/mutation.gql'
 

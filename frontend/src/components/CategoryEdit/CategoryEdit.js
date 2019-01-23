@@ -1,6 +1,7 @@
 // libraries
 import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
+import { Query, Mutation } from 'react-apollo'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
@@ -10,7 +11,6 @@ import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
-import { Query, Mutation } from 'react-apollo'
 import { UpdateCategory } from 'store/category/mutation.gql'
 import { GetCategory } from 'store/category/query.gql'
 

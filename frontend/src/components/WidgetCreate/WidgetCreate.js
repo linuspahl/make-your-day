@@ -1,13 +1,13 @@
 // libraries
 import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
+import { Mutation } from 'react-apollo'
 // utils
 import { logError } from 'utils/utils'
 // components
 import H1 from 'shared/H1/H1'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
 // graphql
-import { Mutation } from 'react-apollo'
 import { addWidget } from 'store/widget/update'
 import { CreateWidget } from 'store/widget/mutation.gql'
 
