@@ -3,9 +3,9 @@ import Sequelize from 'sequelize'
 export default sequelize =>
   sequelize.define('record', {
     id: {
+      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      allowNull: false,
       type: Sequelize.INTEGER,
     },
     amount: Sequelize.STRING,

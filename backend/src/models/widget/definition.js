@@ -9,8 +9,8 @@ export default sequelize =>
       type: Sequelize.INTEGER,
     },
     title: {
-      type: Sequelize.STRING,
       allowNull: false,
+      type: Sequelize.STRING,
     },
     type: {
       allowNull: false,

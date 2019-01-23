@@ -3,6 +3,7 @@ import Sequelize from 'sequelize'
 export default sequelize =>
   sequelize.define('category', {
     id: {
+      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
@@ -12,8 +13,8 @@ export default sequelize =>
     icon: Sequelize.STRING,
     color: Sequelize.STRING,
     type: {
-      type: Sequelize.STRING,
       allowNull: false,
+      type: Sequelize.STRING,
       validate: { isIn: [['journal', 'list', 'counter']] },
     },
     hasTitle: {

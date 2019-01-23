@@ -9,10 +9,10 @@ export default (sequelize, models) => {
   User.login = params => login(User, params)
 
   // model relations
-  User.hasMany(Category, { onDelete: 'cascade' })
-  User.hasMany(Widget, { onDelete: 'cascade' })
-  User.hasMany(UserSetting, { onDelete: 'cascade' })
-  User.hasMany(Record, { onDelete: 'cascade' })
+  User.hasMany(Category, { onDelete: 'cascade', onUpdate: 'cascade' })
+  User.hasMany(Widget, { onDelete: 'cascade', onUpdate: 'cascade' })
+  User.hasMany(UserSetting, { onDelete: 'cascade', onUpdate: 'cascade' })
+  User.hasMany(Record, { onDelete: 'cascade', onUpdate: 'cascade' })
 
   return User
 }

@@ -9,12 +9,12 @@ export default sequelize =>
       type: Sequelize.INTEGER,
     },
     title: {
-      type: Sequelize.STRING,
       allowNull: false,
+      type: Sequelize.STRING,
     },
     type: {
-      type: Sequelize.STRING,
       allowNull: false,
+      type: Sequelize.STRING,
       validate: { isIn: [['nightMode', 'leftHandMode', 'showAppBgImage']] },
     },
     defaultValue: {
