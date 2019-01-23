@@ -12,7 +12,7 @@ const Layout = styled.div`
   justify-content: center;
   overflow: auto;
 
-  padding: 20px;
+  padding: ${props => (props.noPadding ? 0 : '20px')};
 
   background-color: ${props => props.theme.appBg};
 
@@ -42,11 +42,11 @@ export default class PageLayout extends React.Component {
   }
 
   render() {
-    const { isUserLoggedIn, children, rootPath } = this.props
+    const { isUserLoggedIn, children, rootPath, noPadding } = this.props
     const { isNavVisible } = this.state
 
     return (
-      <Layout>
+      <Layout noPadding={noPadding}>
         {isUserLoggedIn && isNavVisible && (
           <Navigation
             toggleAction={this.toggleNavigation}

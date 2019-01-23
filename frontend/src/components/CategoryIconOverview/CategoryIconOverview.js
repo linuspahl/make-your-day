@@ -2,7 +2,7 @@
 import React from 'react'
 import { Query } from 'react-apollo'
 // styles
-import { Layout, List } from './styles'
+import { Layout, IconWrapper } from './styles'
 // components
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
@@ -12,23 +12,21 @@ import NoResult from 'shared/NoResult/NoResult'
 import { GetCategoriesIcon } from 'store/category/query.gql'
 
 export default props => {
-  const { inline } = props
-
   return (
-    <Layout inline={inline}>
-      <List inline={inline}>
-        <Query query={GetCategoriesIcon}>
-          {({ loading, error, data }) => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Kategorien konnten nicht geladen werden"
-                />
-              )
-            if (data.getCategories.length === 0) return <NoResult />
-            return data.getCategories.map(category => (
+    <Layout>
+      <Query query={GetCategoriesIcon}>
+        {({ loading, error, data }) => {
+          if (loading) return <CenteredSpinner />
+          if (error)
+            return (
+              <ErrorMessage
+                error={error}
+                message="Kategorien konnten nicht geladen werden"
+              />
+            )
+          if (data.getCategories.length === 0) return <NoResult />
+          return data.getCategories.map(category => (
+            <IconWrapper>
               <CategoryIcon
                 color={category.color}
                 icon={category.icon}
@@ -36,10 +34,10 @@ export default props => {
                 title={category.title}
                 to={`categories/${category.id}/records/create`}
               />
-            ))
-          }}
-        </Query>
-      </List>
+            </IconWrapper>
+          ))
+        }}
+      </Query>
     </Layout>
   )
 }

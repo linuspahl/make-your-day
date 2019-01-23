@@ -8,6 +8,7 @@ import DashboardWidgets from 'components/DashboardWidgets/DashboardWidgets'
 
 export const Layout = styled.div`
   height: 100%;
+  width: 100%;
 
   display: grid;
   grid-template-rows: 1fr 70px 1fr;
@@ -15,10 +16,14 @@ export const Layout = styled.div`
 `
 
 export default props => (
-  <PageLayout isUserLoggedIn={props.isUserLoggedIn} rootPath={props.rootPath}>
+  <PageLayout
+    isUserLoggedIn={props.isUserLoggedIn}
+    rootPath={props.rootPath}
+    noPadding
+  >
     <Layout>
       <div />
-      <CategoryIconOverview inline />
+      <CategoryIconOverview />
       <DashboardWidgets
         createNotificationBanner={props.createNotificationBanner}
       />

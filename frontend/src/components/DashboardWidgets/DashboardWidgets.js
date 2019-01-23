@@ -14,6 +14,7 @@ import { GetWidgets } from 'store/widget/query.gql'
 export const Layout = styled.div`
   display: flex;
 
+  padding: 0 20px;
   overflow-x: auto;
   overflow-y: hidden;
 `
