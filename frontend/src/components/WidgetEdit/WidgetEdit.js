@@ -1,6 +1,7 @@
 // libraries
 import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
+import { Query, Mutation } from 'react-apollo'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
@@ -10,11 +11,57 @@ import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
-import { Query, Mutation } from 'react-apollo'
 import { UpdateWidget } from 'store/widget/mutation.gql'
 import { GetWidget } from 'store/widget/query.gql'
 
 class WidgetEdit extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.onComplete = this.onComplete.bind(this)
+    this.onError = this.onError.bind(this)
+  }
+
+  render() {
+    const { match, rootPath } = this.props
+    const widgetId = extractIdFromUrl(match)
+
+    return (
+      <Fragment>
+        <H1 context="page">Widget bearbeiten</H1>
+
+        <Query query={GetWidget} variables={{ id: widgetId }}>
+          {({ loading, error, data }) => {
+            if (loading) return <CenteredSpinner />
+            if (error)
+              return (
+                <ErrorMessage
+                  error={error}
+                  message="Widget konnte nicht geladen werden"
+                />
+              )
+            if (!data.getWidget.id) return <NoResult />
+            return (
+              <Mutation
+                mutation={UpdateWidget}
+                onCompleted={this.onComplete}
+                onError={this.onError}
+              >
+                {updateUser => (
+                  <WidgetForm
+                    initialData={data.getWidget}
+                    rootPath={rootPath}
+                    submitAction={variables => updateUser({ variables })}
+                  />
+                )}
+              </Mutation>
+            )
+          }}
+        </Query>
+      </Fragment>
+    )
+  }
+
   // Form submit function
   async onComplete(data) {
     const { history, rootPath, createNotificationBanner } = this.props
@@ -40,46 +87,6 @@ class WidgetEdit extends React.Component {
       message: 'Bearbeitung der Widget fehlgeschlagen',
     })
     logError(error)
-  }
-
-  render() {
-    const { match, rootPath } = this.props
-    const widgetId = extractIdFromUrl(match)
-
-    return (
-      <Fragment>
-        <H1 context="page">Widget bearbeiten</H1>
-
-        <Query query={GetWidget} variables={{ id: widgetId }}>
-          {({ loading, error, data }) => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Widget konnte nicht geladen werden"
-                />
-              )
-            if (!data.getWidget.id) return <NoResult />
-            return (
-              <Mutation
-                mutation={UpdateWidget}
-                onCompleted={this.onComplete.bind(this)}
-                onError={this.onError.bind(this)}
-              >
-                {updateUser => (
-                  <WidgetForm
-                    initialData={data.getWidget}
-                    rootPath={rootPath}
-                    submitAction={variables => updateUser({ variables })}
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
-      </Fragment>
-    )
   }
 }
 

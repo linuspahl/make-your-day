@@ -15,6 +15,53 @@ import { UpdateCategory } from 'store/category/mutation.gql'
 import { GetCategory } from 'store/category/query.gql'
 
 class CategoryEdit extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.onComplete = this.onComplete.bind(this)
+    this.onError = this.onError.bind(this)
+  }
+
+  render() {
+    const { match, rootPath } = this.props
+    const categoryId = extractIdFromUrl(match)
+
+    return (
+      <Fragment>
+        <H1 context="page">Kategorie bearbeiten</H1>
+
+        <Query query={GetCategory} variables={{ id: categoryId }}>
+          {({ loading, error, data }) => {
+            if (loading) return <CenteredSpinner />
+            if (error)
+              return (
+                <ErrorMessage
+                  error={error}
+                  message="Kategorie konnte nicht geladen werden"
+                />
+              )
+            if (!data.getCategory.id) return <NoResult />
+            return (
+              <Mutation
+                mutation={UpdateCategory}
+                onCompleted={this.onComplete}
+                onError={this.onError}
+              >
+                {updateUser => (
+                  <CategoryForm
+                    initialData={data.getCategory}
+                    rootPath={rootPath}
+                    submitAction={variables => updateUser({ variables })}
+                  />
+                )}
+              </Mutation>
+            )
+          }}
+        </Query>
+      </Fragment>
+    )
+  }
+
   // Form submit function
   async onComplete(data) {
     const { history, rootPath, createNotificationBanner } = this.props
@@ -40,46 +87,6 @@ class CategoryEdit extends React.Component {
       message: 'Bearbeitung der Kategorie fehlgeschlagen',
     })
     logError(error)
-  }
-
-  render() {
-    const { match, rootPath } = this.props
-    const categoryId = extractIdFromUrl(match)
-
-    return (
-      <Fragment>
-        <H1 context="page">Kategorie bearbeiten</H1>
-
-        <Query query={GetCategory} variables={{ id: categoryId }}>
-          {({ loading, error, data }) => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Kategorie konnte nicht geladen werden"
-                />
-              )
-            if (!data.getCategory.id) return <NoResult />
-            return (
-              <Mutation
-                mutation={UpdateCategory}
-                onCompleted={this.onComplete.bind(this)}
-                onError={this.onError.bind(this)}
-              >
-                {updateUser => (
-                  <CategoryForm
-                    initialData={data.getCategory}
-                    rootPath={rootPath}
-                    submitAction={variables => updateUser({ variables })}
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
-      </Fragment>
-    )
   }
 }
 

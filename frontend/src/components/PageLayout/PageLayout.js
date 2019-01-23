@@ -22,27 +22,13 @@ const Layout = styled.div`
 export default class PageLayout extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
       isNavVisible: false,
     }
-    this.toggleNavigation = () => {
-      const isNavVisible = this.state.isNavVisible
 
-      this.setState({
-        isNavVisible: !isNavVisible,
-      })
-    }
-    this.detectPinch = event => {
-      // Detect when:
-      // - user clicks with two fingers (mobile)
-      // or when the user click the alt key (desktop)
-      if (
-        (event.touches && event.touches.length === 2) ||
-        event.keyCode === 18
-      ) {
-        this.toggleNavigation()
-      }
-    }
+    this.toggleNavigation = this.toggleNavigation.bind(this)
+    this.detectPinch = this.detectPinch.bind(this)
   }
 
   componentDidMount() {
@@ -70,5 +56,22 @@ export default class PageLayout extends React.Component {
         {children}
       </Layout>
     )
+  }
+
+  toggleNavigation() {
+    const isNavVisible = this.state.isNavVisible
+
+    this.setState({
+      isNavVisible: !isNavVisible,
+    })
+  }
+
+  detectPinch(event) {
+    // Detect when:
+    // - user clicks with two fingers (mobile)
+    // - or when the user click the alt key (desktop)
+    if ((event.touches && event.touches.length === 2) || event.keyCode === 18) {
+      this.toggleNavigation()
+    }
   }
 }

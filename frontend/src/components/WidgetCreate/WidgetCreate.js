@@ -12,6 +12,38 @@ import { addWidget } from 'store/widget/update'
 import { CreateWidget } from 'store/widget/mutation.gql'
 
 class WidgetCreate extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.onComplete = this.onComplete.bind(this)
+    this.onError = this.onError.bind(this)
+  }
+
+  render() {
+    const { rootPath, createNotificationBanner } = this.props
+    return (
+      <Fragment>
+        <H1 context="page">Widget erstellen</H1>
+        <Mutation
+          mutation={CreateWidget}
+          onCompleted={this.onComplete}
+          onError={this.onError}
+          update={addWidget}
+        >
+          {createWidget => (
+            <WidgetForm
+              mode="create"
+              mutation={CreateWidget}
+              rootPath={rootPath}
+              submitAction={variables => createWidget({ variables })}
+              initialData={{ type: 'textarea' }}
+            />
+          )}
+        </Mutation>
+      </Fragment>
+    )
+  }
+
   // Form submit function
   async onComplete(data) {
     const { history, rootPath, createNotificationBanner } = this.props
@@ -37,31 +69,6 @@ class WidgetCreate extends React.Component {
       message: 'Erstellung des Widgets fehlgeschlagen',
     })
     logError(error)
-  }
-
-  render() {
-    const { rootPath, createNotificationBanner } = this.props
-    return (
-      <Fragment>
-        <H1 context="page">Widget erstellen</H1>
-        <Mutation
-          mutation={CreateWidget}
-          onCompleted={this.onComplete.bind(this)}
-          onError={this.onError.bind(this)}
-          update={addWidget}
-        >
-          {createWidget => (
-            <WidgetForm
-              mode="create"
-              mutation={CreateWidget}
-              rootPath={rootPath}
-              submitAction={variables => createWidget({ variables })}
-              initialData={{ type: 'textarea' }}
-            />
-          )}
-        </Mutation>
-      </Fragment>
-    )
   }
 }
 

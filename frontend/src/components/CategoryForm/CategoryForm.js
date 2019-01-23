@@ -30,17 +30,11 @@ const typeOptions = [
 export default class CategoryForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
 
-    if (props.initialData) this.state = props.initialData
+    this.state = props.initialData || {}
 
-    this.handleSubmit = event => {
-      event.preventDefault()
-      this.props.submitAction(this.state)
-    }
-
-    this.handleInputChange = event =>
-      handleInputChange(event, this.setState.bind(this))
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   render() {
@@ -163,5 +157,14 @@ export default class CategoryForm extends React.Component {
         </ActionRow>
       </Form>
     )
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    this.props.submitAction(this.state)
+  }
+
+  handleInputChange(event) {
+    handleInputChange(event, this.setState.bind(this))
   }
 }

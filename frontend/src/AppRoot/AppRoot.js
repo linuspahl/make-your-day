@@ -20,8 +20,6 @@ export default class AppRoot extends React.Component {
   constructor(props) {
     super(props)
 
-    this.notificationBanner = React.createRef()
-
     this.state = getLocalStorage([
       'authToken',
       'userId',
@@ -30,24 +28,13 @@ export default class AppRoot extends React.Component {
       'showAppBgImage',
     ])
 
-    this.updateLocalStorage = newStore => {
-      updateLocalStorage(newStore, this.setState.bind(this))
-    }
+    this.notificationBanner = React.createRef()
 
-    this.clearLocalStorage = () => {
-      localStorage.clear()
-      this.setState({
-        authToken: null,
-        userId: null,
-        nightMode: false,
-        leftHandMode: false,
-        showAppBgImage: false,
-      })
-    }
-
-    this.createNotificationBanner = notification =>
-      this.notificationBanner.current.addNotification(notification)
+    this.updateLocalStorage = this.updateLocalStorage.bind(this)
+    this.clearLocalStorage = this.clearLocalStorage.bind(this)
+    this.createNotificationBanner = this.createNotificationBanner.bind(this)
   }
+
   render() {
     const {
       userId,
@@ -79,5 +66,24 @@ export default class AppRoot extends React.Component {
         </ThemeProvider>
       </ApolloProvider>
     )
+  }
+
+  updateLocalStorage(newStore) {
+    updateLocalStorage(newStore, this.setState.bind(this))
+  }
+
+  clearLocalStorage() {
+    localStorage.clear()
+    this.setState({
+      authToken: null,
+      userId: null,
+      nightMode: false,
+      leftHandMode: false,
+      showAppBgImage: false,
+    })
+  }
+
+  createNotificationBanner(notification) {
+    this.notificationBanner.current.addNotification(notification)
   }
 }

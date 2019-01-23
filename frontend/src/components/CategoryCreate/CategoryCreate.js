@@ -12,6 +12,37 @@ import { addCategory } from 'store/category/update'
 import { CreateCategory } from 'store/category/mutation.gql'
 
 class CategoryCreate extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.onComplete = this.onComplete.bind(this)
+    this.onError = this.onError.bind(this)
+  }
+
+  render() {
+    const { rootPath, createNotificationBanner } = this.props
+    return (
+      <Fragment>
+        <H1 context="page">Kategorie erstellen</H1>
+        <Mutation
+          mutation={CreateCategory}
+          onCompleted={this.onComplete}
+          onError={this.onError}
+          update={addCategory}
+        >
+          {createCategory => (
+            <CategoryForm
+              mode="create"
+              rootPath={rootPath}
+              submitAction={variables => createCategory({ variables })}
+              initialData={{ type: 'journal' }}
+            />
+          )}
+        </Mutation>
+      </Fragment>
+    )
+  }
+
   // Form submit function
   async onComplete(data) {
     const { history, rootPath, createNotificationBanner } = this.props
@@ -37,30 +68,6 @@ class CategoryCreate extends React.Component {
       message: 'Erstellung der Kategorie fehlgeschlagen',
     })
     logError(error)
-  }
-
-  render() {
-    const { rootPath, createNotificationBanner } = this.props
-    return (
-      <Fragment>
-        <H1 context="page">Kategorie erstellen</H1>
-        <Mutation
-          mutation={CreateCategory}
-          onCompleted={this.onComplete.bind(this)}
-          onError={this.onError.bind(this)}
-          update={addCategory}
-        >
-          {createCategory => (
-            <CategoryForm
-              mode="create"
-              rootPath={rootPath}
-              submitAction={variables => createCategory({ variables })}
-              initialData={{ type: 'journal' }}
-            />
-          )}
-        </Mutation>
-      </Fragment>
-    )
   }
 }
 

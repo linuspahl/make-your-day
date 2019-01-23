@@ -12,32 +12,12 @@ export default class GlobalNotification extends React.Component {
     this.state = {
       notification: null,
     }
+
     this.closeCountDown = null
 
-    this.startCloseCountdown = () => {
-      // clear current timeout
-      if (this.closeCountDown) {
-        clearTimeout(this.closeCountDown)
-      }
-      this.closeCountDown = setTimeout(() => {
-        this.close()
-      }, 6000)
-    }
-    this.addNotification = data => {
-      this.startCloseCountdown()
-      // set a new or overwrite the current notification
-      this.setState({
-        notification: {
-          createdAt: new Date(),
-          message: data.message,
-          type: data.type,
-        },
-      })
-    }
-    this.close = () => {
-      this.setState({ notification: null })
-      clearTimeout(this.startCloseCountdown)
-    }
+    this.startCloseCountdown = this.startCloseCountdown.bind(this)
+    this.addNotification = this.addNotification.bind(this)
+    this.removeNotification = this.removeNotification.bind(this)
   }
 
   render() {
@@ -54,12 +34,39 @@ export default class GlobalNotification extends React.Component {
             durationAnimation={durationAnimation}
           >
             {notification.message}
-            <CircleTimer clickAction={() => this.close()}>
+            <CircleTimer clickAction={() => this.removeNotification()}>
               <CloseIcon />
             </CircleTimer>
           </Alert>
         )}
       </Fragment>
     )
+  }
+
+  startCloseCountdown() {
+    // clear current timeout
+    if (this.closeCountDown) {
+      clearTimeout(this.closeCountDown)
+    }
+    this.closeCountDown = setTimeout(() => {
+      this.removeNotification()
+    }, 6000)
+  }
+
+  addNotification(data) {
+    this.startCloseCountdown()
+    // set a new or overwrite the current notification
+    this.setState({
+      notification: {
+        createdAt: new Date(),
+        message: data.message,
+        type: data.type,
+      },
+    })
+  }
+
+  removeNotification() {
+    this.setState({ notification: null })
+    clearTimeout(this.startCloseCountdown)
   }
 }

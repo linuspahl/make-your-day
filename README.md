@@ -94,7 +94,7 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * css-loader - interprets @import and url() like import/require() and will resolve them.
 * file-loader - webpack file loader, needed to import e.g. webfonts
 
-## Backend
+### Backend
 * @babel/node - CLI that works exactly the same as the Node.js CLI, with the added benefit of compiling with Babel presets and plugins before running it.
 * nodemon - will restart babel-node on code changes
 * dotenv - allows us to store sensetive or envoronment specific data in an env file. The file is included in the gitignore.
@@ -109,6 +109,7 @@ Needed for the database setup
 * graphql - JavaScript reference implementation for GraphQL
 * apollo-server - GraphQL Server
 
+
 ## Best Practices:
 * We are trying to avoid global dependencies.
 The package manager should be the only global dependency.
@@ -116,9 +117,36 @@ This will make the setup easier and reduce potential errors.
 It will affect e.g. the setup of the VS Code node debugging.
 * All vcs commits should start with the affected project parts (FE or BE, or both).
 E.g: FE: Setup yarn package.json
+
+### Frontend
 * React components naming convention:
 Use `Component/Component.js` instead of `Component/index.js`. It looks redundant at first, but will a lot when switching between components, during the development.
-* In the frontend we try to structure the imports. The definition of an import type is very subjective, but we are trying to seperate the imports by:
+* We try to structure the imports. The definition of an import type is very subjective, but we are trying to seperate the imports by:
 // libraries - all dependencies installed with yarn
 // components - all components in the `src` directory
 // graphql - all actions in the `store` driectory like grapqhl queries and mutations
+* Example React component structur:
+```
+export default class ExampleComponent extends React.Component {
+  // The first part is the constructur (when needed)
+  // We'll bind this to all functions which need access to the component context
+  // This will keep the constructor clean
+  constructor(props) {
+    super(props)
+
+    this.state = {}
+
+    this.exampleStateChange = this.exampleStateChange.bind(this)
+  }
+
+  // Component lifecycle methods
+  componentDidMount() {}
+
+  // Render
+  render() {}
+
+  // Other functions should be placed after the render function
+  // This increases the readability
+  exampleStateChange() {}
+}
+```

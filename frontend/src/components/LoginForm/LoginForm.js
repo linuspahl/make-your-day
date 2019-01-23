@@ -19,60 +19,12 @@ export const Form = styled.form`
 export default class LoginForm extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = { username: '', password: '' }
 
-    this.handleInputChange = event => {
-      handleInputChange(event, this.setState.bind(this))
-    }
-
-    this.onCompleted = async data => {
-      const {
-        loginUser: {
-          token: authToken,
-          id: userId,
-          role: userRole,
-          userSettings,
-        },
-      } = data
-      const { updateLocalStorage, history } = this.props
-      const settings = this.formatUserSettings(userSettings)
-      // Update local storage / app state reset  with received user data
-      // App will redirect when authToken and userId is defined in app state
-      if (authToken) {
-        updateLocalStorage({
-          authToken,
-          userId,
-          userRole,
-          ...settings,
-        })
-      }
-    }
-
-    this.onError = error =>
-      this.props.createNotificationBanner({
-        type: 'error',
-        message: 'Anmeldung fehlgeschlagen',
-      })
-  }
-
-  formatUserSettings(userSettings) {
-    // Part of the login is to update the localstorage with the received user settings, like the night mode.
-    // For this case we need to format the settings in a {key: value} format
-    return userSettings.reduce((result, userSetting) => {
-      const {
-        value,
-        setting: { type },
-      } = userSetting
-
-      result[type] = value
-
-      return result
-    }, {})
-  }
-
-  handleSubmit(event, loginUser) {
-    event.preventDefault()
-    loginUser()
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.onCompleted = this.onCompleted.bind(this)
+    this.onError = this.onError.bind(this)
   }
 
   render() {
@@ -114,5 +66,54 @@ export default class LoginForm extends React.Component {
         )}
       </Mutation>
     )
+  }
+
+  handleInputChange(event) {
+    handleInputChange(event, this.setState.bind(this))
+  }
+
+  handleSubmit(event, loginUser) {
+    event.preventDefault()
+    loginUser()
+  }
+
+  async onCompleted(data) {
+    const {
+      loginUser: { token: authToken, id: userId, role: userRole, userSettings },
+    } = data
+    const { updateLocalStorage, history } = this.props
+    const settings = this.formatUserSettings(userSettings)
+    // Update local storage / app state reset  with received user data
+    // App will redirect when authToken and userId is defined in app state
+    if (authToken) {
+      updateLocalStorage({
+        authToken,
+        userId,
+        userRole,
+        ...settings,
+      })
+    }
+  }
+
+  formatUserSettings(userSettings) {
+    // Part of the login is to update the localstorage with the received user settings, like the night mode.
+    // For this case we need to format the settings in a {key: value} format
+    return userSettings.reduce((result, userSetting) => {
+      const {
+        value,
+        setting: { type },
+      } = userSetting
+
+      result[type] = value
+
+      return result
+    }, {})
+  }
+
+  onError(error) {
+    this.props.createNotificationBanner({
+      type: 'error',
+      message: 'Anmeldung fehlgeschlagen',
+    })
   }
 }
