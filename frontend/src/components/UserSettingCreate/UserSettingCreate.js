@@ -17,7 +17,7 @@ export default props => (
     }
   >
     {(perfomMutation, { data }) => (
-      <Checkbox checked={false} onChange={perfomMutation} />
+      <Checkbox value={false} onChange={perfomMutation} />
     )}
   </Mutation>
 )

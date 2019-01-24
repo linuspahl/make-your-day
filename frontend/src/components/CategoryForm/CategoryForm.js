@@ -103,19 +103,19 @@ export default class CategoryForm extends React.Component {
         <Row>
           Auswahl Unterkategorie
           <Checkbox
-            checked={hasSubcategories}
             name="hasSubcategories"
             onChange={this.handleInputChange}
             tabIndex={tabIndex++}
+            value={hasSubcategories}
           />
         </Row>
         <Row>
           Haben Einheit
           <Checkbox
-            checked={hasUnit}
             name="hasUnit"
             onChange={this.handleInputChange}
             tabIndex={tabIndex++}
+            value={hasUnit}
           />
         </Row>
         <Row disabled={!hasUnit}>
@@ -132,19 +132,19 @@ export default class CategoryForm extends React.Component {
         <Row>
           Haben Titel
           <Checkbox
-            checked={hasTitle}
             name="hasTitle"
             onChange={this.handleInputChange}
             tabIndex={tabIndex++}
+            value={hasTitle}
           />
         </Row>
         <Row>
           Haben Beschreibung
           <Checkbox
-            checked={hasDescription}
             name="hasDescription"
             onChange={this.handleInputChange}
             tabIndex={tabIndex++}
+            value={hasDescription}
           />
         </Row>
         <ActionRow>

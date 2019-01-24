@@ -25,15 +25,15 @@ const Element = styled.input`
 `
 
 export default props => {
-  const { checked, onChange, name, disabled, tabIndex } = props
+  const { value, onChange, name, disabled, tabIndex } = props
   return (
     <Element
-      type="checkbox"
-      name={name}
-      value={checked}
-      onChange={onChange}
+      checked={value}
       disabled={disabled}
+      name={name}
+      onChange={onChange}
       tabIndex={tabIndex}
+      type="checkbox"
     />
   )
 }
