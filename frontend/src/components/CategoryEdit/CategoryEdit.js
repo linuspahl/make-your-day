@@ -63,7 +63,7 @@ class CategoryEdit extends React.Component {
   }
 
   // Form submit function
-  async handleError(data) {
+  handleCompleted(data) {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateCategory: { title },
@@ -80,7 +80,7 @@ class CategoryEdit extends React.Component {
   }
 
   // Form error function
-  handleCompleted(error) {
+  async handleError(error) {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',
