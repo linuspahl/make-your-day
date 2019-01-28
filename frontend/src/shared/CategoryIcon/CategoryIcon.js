@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom'
 import Icon from 'shared/Icon/Icon'
 
 const Circle = styled.div`
-  height: 50px;
-  width: 50px;
+  min-height: ${props => props.size || 50}px;
+  min-width: ${props => props.size || 50}px;
 
   display: flex;
   align-items: center;
@@ -19,14 +19,15 @@ const Circle = styled.div`
   background-color: ${props =>
     props.color ? props.theme.category[props.color] : props.theme.border};
   color: ${props => props.theme.categoryText[props.color]};
-  font-size: 28px;
+  font-size: ${props => props.size / 2 || 28}px;
 `
 
 export default props => {
-  const { icon, color, title, to } = props
+  const { icon, color, title, to, size } = props
   const isLink = Boolean(to)
   return (
     <Circle
+      size={size}
       color={color}
       // CategoryIcon is a Link
       to={isLink ? to : null}

@@ -26,7 +26,7 @@ export default props => {
             )
           if (data.getCategories.length === 0) return <NoResult />
           return data.getCategories.map(category => (
-            <IconWrapper>
+            <IconWrapper key={category.id}>
               <CategoryIcon
                 color={category.color}
                 icon={category.icon}

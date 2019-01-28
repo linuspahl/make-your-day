@@ -21,6 +21,7 @@ const Form = styled.form`
 const HeadlineRow = styled(Row)`
   padding-top: 25px;
 `
+
 const typeOptions = [
   { value: 'journal', title: 'Journal' },
   { value: 'list', title: 'Liste' },

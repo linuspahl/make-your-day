@@ -31,12 +31,14 @@ export default class Widget extends React.Component {
   }
 
   render() {
+    const { value, title } = this.state
     return (
       <Mutation mutation={UpdateWidget} onError={this.handleError}>
         {updateWidget => (
           <Element
-            defaultValue={this.state.value}
+            defaultValue={value}
             name="value"
+            placeholder={title}
             onBlur={() => updateWidget({ variables: this.state })}
             onChange={this.handleInputChange}
           />

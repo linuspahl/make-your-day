@@ -22,6 +22,7 @@ import getWidget from './query/getWidget'
 // Queries relation resolvers import
 import getUserUserSettings from './query/getUserUserSettings'
 import getUserSettingSetting from './query/getUserSettingSetting'
+import getRecordCategory from './query/getRecordCategory'
 
 export default {
   User: {
@@ -29,6 +30,9 @@ export default {
   },
   UserSetting: {
     setting: getUserSettingSetting,
+  },
+  Record: {
+    category: getRecordCategory,
   },
   Mutation: {
     createCategory,

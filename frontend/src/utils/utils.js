@@ -9,6 +9,18 @@ export const sortBy = (array, attribute, order = 'desc') => {
   )
 }
 
+export const formatUnixDate = unixDate => {
+  const unixDateInt = parseInt(unixDate, 10)
+  const date = new Date(unixDateInt)
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`
+}
+
+export const getWeekDayNr = unixDate => {
+  const unixDateInt = parseInt(unixDate, 10)
+  const date = new Date(unixDateInt)
+  return date.getDay()
+}
+
 // Utility form function - will updade the form state on input change.
 // Used in every input.
 export const handleInputChange = (event, setState) => {

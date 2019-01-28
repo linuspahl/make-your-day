@@ -5,5 +5,13 @@ query GetRecords {
     amount
     description
     createdAt
+    category {
+      id
+      icon
+      color
+      type
+      hasUnit
+      unit
+    }
 	}
 }
