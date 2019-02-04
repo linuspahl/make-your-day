@@ -19,4 +19,5 @@ export const Layout = styled.div`
 
 export const IconWrapper = styled.div`
   display: inline-block;
+  vertical-align: middle;
 `
