@@ -4,18 +4,7 @@ import React from 'react'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import Icon from 'shared/Icon/Icon'
 
-const icons = [
-  { value: null, title: '-' },
-  { value: 'glass', title: 'Glass' },
-  { value: 'car', title: 'Auto' },
-  { value: 'archive', title: 'Box' },
-  { value: 'at', title: '@' },
-  { value: 'check', title: 'Checkmark' },
-  { value: 'book', title: 'Buch' },
-  { value: 'gift', title: 'Geschenk' },
-  { value: 'bicycle', title: 'Fahrrad' },
-  { value: 'cutlery', title: 'Messer und Gabel' },
-]
+import { categoryIcons } from '../../../config/params'
 
 export default props => {
   const { value, toggleSelect, onChange, name, tabIndex } = props
@@ -28,7 +17,7 @@ export default props => {
       toggleSelect={toggleSelect}
       onChange={onChange}
       name={name}
-      options={icons}
+      options={categoryIcons}
       title="Icon"
     />
   )
