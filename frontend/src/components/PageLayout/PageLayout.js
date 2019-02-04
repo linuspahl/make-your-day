@@ -1,7 +1,9 @@
 // libraries
+
 import React from 'react'
 import styled from 'styled-components'
 import Navigation from 'components/Navigation/Navigation'
+import appBgImage from './appBg.jpg'
 
 const Layout = styled.div`
   height: 100%;
@@ -14,7 +16,15 @@ const Layout = styled.div`
 
   padding: ${props => (props.noPadding ? 0 : '20px')};
 
-  background-color: ${props => props.theme.appBg};
+  ${props => props.theme.settings.showAppBgImage ?
+    `
+    background-image: url(${appBgImage});
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    `
+    : `background-color: ${props.theme.appBg}`
+  };
 
   color: ${props => props.theme.text};
 `

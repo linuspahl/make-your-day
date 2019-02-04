@@ -74,11 +74,11 @@ const nightModeTheme = {
   border: '#545454',
 }
 
-
 export default userSettings => {
+  let colors = defaultTheme;
   if (userSettings.nightMode) {
     // if nightmode is active, we will just change some specific colors
-    return merge(defaultTheme, nightModeTheme)
+    colors = merge(defaultTheme, nightModeTheme)
   }
-  return {...defaultTheme, settings: {...userSettings}}
+  return {...colors, settings: {...userSettings}}
 }
