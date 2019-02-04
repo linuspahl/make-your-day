@@ -6,3 +6,6 @@
 
 # Node modules needs to be fresh installed for every machine
 node_modules
+
+# Avoid macOS finder files
+.DS_Store
