@@ -48,13 +48,14 @@ export default class CategoryForm extends React.Component {
           handleInputChange={this.handleInputChange}
         />
         <RecordFields
-          type={type}
           handleInputChange={this.handleInputChange}
-          hasSubcategories={hasSubcategories}
           hasDescription={hasDescription}
-          hasUnit={hasUnit}
-          unit={unit}
+          hasSubcategories={hasSubcategories}
           hasTitle={hasTitle}
+          hasUnit={hasUnit}
+          mode={mode}
+          type={type}
+          unit={unit}
         />
         <ActionRow>
           <Button context="secondary" tabIndex={tabIndex++} to={rootPath}>

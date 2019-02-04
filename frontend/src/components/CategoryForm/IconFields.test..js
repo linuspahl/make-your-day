@@ -2,10 +2,10 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import CategoryForm from './CategoryForm'
+import IconFields from './IconFields'
 
-describe('CategoryForm should', () => {
+describe('IconFields should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<CategoryForm />)
+    new ShallowRenderer().render(<IconFields />)
   })
 })

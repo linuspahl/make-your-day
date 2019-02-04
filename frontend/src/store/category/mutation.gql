@@ -36,37 +36,27 @@ mutation CreateCategory(
 mutation UpdateCategory(
   $color: String!,
   $hasDescription: Boolean,
-  $hasSubcategories: Boolean,
   $hasTitle: Boolean,
-  $hasUnit: Boolean,
   $icon: String,
   $id: Int!,
   $title: String!,
-  $type: String!,
   $unit: String,
 ) {
   updateCategory(
     color: $color,
     hasDescription: $hasDescription,
-    hasSubcategories: $hasSubcategories,
     hasTitle: $hasTitle,
-    hasUnit: $hasUnit
     icon: $icon,
     id: $id,
     title: $title,
-    type: $type,
     unit: $unit
   ) {
-    id
     color
     hasDescription
-    hasSubcategories
     hasTitle
-    hasUnit
     icon
     id
     title
-    type
     unit
   }
 }

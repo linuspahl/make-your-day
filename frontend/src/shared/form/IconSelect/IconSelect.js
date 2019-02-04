@@ -4,7 +4,7 @@ import React from 'react'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import Icon from 'shared/Icon/Icon'
 
-import { categoryIcons } from '../../../config/params'
+import { categoryIcons } from '../../../../config/params'
 
 export default props => {
   const { value, toggleSelect, onChange, name, tabIndex } = props
