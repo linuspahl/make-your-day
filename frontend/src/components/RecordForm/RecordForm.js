@@ -9,6 +9,7 @@ import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Input from 'shared/form/Input/Input'
 import Button from 'shared/Button/Button'
 import Textarea from 'shared/form/Textarea/Textarea'
+import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 
 const Form = styled.form`
   margin-top: 15px;
@@ -31,16 +32,20 @@ export default class RecordForm extends React.Component {
       category: {
         color,
         hasDescription,
-        hasSubcategories,
         hasTitle,
         hasUnit,
         icon,
         unit,
+        title: categoryTitle,
       },
     } = this.props
     const { title, amount, description } = this.state
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
+        <Row>
+          Kategorie
+          <CategoryIcon icon={icon} color={color} title={categoryTitle} />
+        </Row>
         {hasTitle && (
           <Row>
             Titel

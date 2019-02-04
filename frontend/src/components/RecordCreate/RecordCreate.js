@@ -10,7 +10,6 @@ import RecordForm from 'components/RecordForm/RecordForm'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 // graphql
-import { addRecord } from 'store/record/update'
 import { CreateRecord } from 'store/record/mutation.gql'
 import { GetCategory } from 'store/category/query.gql'
 
@@ -24,8 +23,6 @@ class RecordCreate extends React.Component {
 
   render() {
     const {
-      rootPath,
-      createNotificationBanner,
       match: {
         params: { categoryId },
       },
@@ -82,7 +79,7 @@ class RecordCreate extends React.Component {
     // Inform user about success
     createNotificationBanner({
       type: 'success',
-      message: `Record ${title} erfolgreich erstellt`,
+      message: `Eintrag erfolgreich erstellt`,
     })
 
     // Go to the dashboard
@@ -94,7 +91,7 @@ class RecordCreate extends React.Component {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',
-      message: 'Erstellung der Record fehlgeschlagen',
+      message: 'Erstellung des Eintrags fehlgeschlagen',
     })
     logError(error)
   }
