@@ -42,7 +42,7 @@ export const categoryTypeOptions = [
   { value: 'counter', title: 'Zähler' },
 ]
 
-export const icons = [
+export const categoryIcons = [
   { value: null, title: '-' },
   { value: 'glass', title: 'Glass' },
   { value: 'car', title: 'Auto' },

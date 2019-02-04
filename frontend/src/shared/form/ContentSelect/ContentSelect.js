@@ -8,6 +8,7 @@ import React from 'react'
 // components
 import CloseIcon from 'shared/CloseIcon/CloseIcon'
 import Icon from 'shared/Icon/Icon'
+
 import {
   Layout,
   Select,
@@ -18,6 +19,7 @@ import {
   Options,
   OptionPreview,
   Option,
+  ArrowIcon,
 } from './styles'
 
 export default class ContentSelect extends React.Component {
@@ -56,7 +58,9 @@ export default class ContentSelect extends React.Component {
           onBlur={disabled ? null : this.onBlur}
         >
           {value ? value : '-'}
-          <Icon title="angle-down" />
+          <ArrowIcon>
+            <Icon title="angle-down" />
+          </ArrowIcon>
         </Select>
         {isOpen && (
           <OptionsWrapper>

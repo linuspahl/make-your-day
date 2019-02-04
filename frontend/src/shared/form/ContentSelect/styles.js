@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import ListItem from 'shared/list/ListItem/ListItem'
 
 export const Layout = styled.div`
-  height: 40px;
   width: 100%;
 
   border: 1px solid ${props => props.theme.border};
@@ -16,12 +15,25 @@ export const Select = styled.div`
   align-items: center;
 
   width: 100%;
-  height: 100%;
+  height: 40px;
 
-  padding: 0 10px;
+  padding-left: 10px;
   line-height: 40px;
 
   cursor: pointer;
+`
+
+export const ArrowIcon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 100%;
+
+  font-size: 24px;
+
+  color: inherit;
 `
 
 export const Header = styled.div`
@@ -29,12 +41,10 @@ export const Header = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  height: 30px;
+  height: 40px;
 
   margin-bottom: 20px;
   padding-left: 10px;
-
-  // border-bottom: 1px solid ${props => props.theme.border};
   font-size: 20px;
 `
 
