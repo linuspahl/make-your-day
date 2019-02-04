@@ -10,7 +10,7 @@ const Layout = styled(Row)`
       justify-content: center
     `};
   ${props =>
-    props.theme.leftHandMode &&
+    props.theme.settings.leftHandMode &&
     `
       flex-direction: row-reverse;
     `};
