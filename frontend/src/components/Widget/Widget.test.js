@@ -6,6 +6,6 @@ import Widget from './Widget'
 
 describe('Widget should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<Widget />)
+    new ShallowRenderer().render(<Widget widget={{}} />)
   })
 })
