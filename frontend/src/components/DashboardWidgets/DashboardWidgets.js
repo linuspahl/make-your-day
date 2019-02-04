@@ -8,6 +8,7 @@ import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 import Widget from 'components/Widget/Widget'
+import ContentBox from 'shared/ContentBox/ContentBox'
 // graphql
 import { GetWidgets } from 'store/widget/query.gql'
 
@@ -48,7 +49,12 @@ export default props => {
                 message="Widgets konnten nicht geladen werden"
               />
             )
-          if (data.getWidgets.length === 0) return <NoResult />
+          if (data.getWidgets.length === 0)
+            return (
+              <ContentBox>
+                <NoResult />
+              </ContentBox>
+            )
           return sortBy(data.getWidgets, 'id').map(widget => (
             <WidgetLayout key={widget.id}>
               <Widget

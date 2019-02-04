@@ -13,12 +13,6 @@ export const Layout = styled.div`
   }
 `
 
-export const Box = styled.div`
-  padding: 10px;
-  border: 1px solid ${props => props.theme.border};
-  background-color: ${props => props.theme.contentBoxBg};
-`
-
 export const Day = styled.div`
   width: 100%;
 

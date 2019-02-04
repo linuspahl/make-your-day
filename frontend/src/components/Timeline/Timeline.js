@@ -7,6 +7,7 @@ import Icon from 'shared/Icon/Icon'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
+import ContentBox from 'shared/ContentBox/ContentBox'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
 
@@ -32,7 +33,7 @@ export default class Timeline extends React.Component {
   render() {
     return (
       <Layout>
-        <Box>
+        <ContentBox>
           <Query query={GetRecords}>
             {({ loading, error, data }) => {
               if (loading) return <CenteredSpinner />
@@ -77,7 +78,7 @@ export default class Timeline extends React.Component {
               })
             }}
           </Query>
-        </Box>
+        </ContentBox>
       </Layout>
     )
   }
