@@ -16,15 +16,15 @@ const Layout = styled.div`
 
   padding: ${props => (props.noPadding ? 0 : '20px')};
 
-  ${props => props.theme.settings.showAppBgImage ?
-    `
+  ${props =>
+    props.theme.settings.showAppBgImage
+      ? `
     background-image: url(${appBgImage});
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;
     `
-    : `background-color: ${props.theme.appBg}`
-  };
+      : `background-color: ${props.theme.appBg}`};
 
   color: ${props => props.theme.text};
 `

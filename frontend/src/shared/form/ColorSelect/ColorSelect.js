@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 // helper
-import theme from '../../../../config/theme'
+import { categoryColors } from '../../../../config/params'
 // components
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 
@@ -25,7 +25,7 @@ const prepareColors = colors => {
 
 export default props => {
   const { value, onChange, name, tabIndex } = props
-  const colors = prepareColors(theme.category)
+  const colors = prepareColors(categoryColors)
 
   return (
     <ContentSelect
