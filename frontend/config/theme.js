@@ -1,7 +1,10 @@
 // Theme configuration file
 // Not only for colors, more a config file for all kind of theme settings
 
-export default {
+import { merge } from '../src/utils/utils'
+
+
+const defaultTheme = {
   // Primary  color, mostly used by buttons
   primary: '#a5d7ff',
   primaryActive: '#8cccff',
@@ -56,4 +59,26 @@ export default {
     gray: '#000',
     silver: '#000',
   },
+}
+
+// set of colors which will be used for the night mode
+const nightModeTheme = {
+  primary: '#525252',
+  primaryActive: '#313131',
+  secondary: '#8e8e8e',
+  secondaryActive: '#585858',
+  appBg: '#030303',
+  contentBoxBg: '#1a1a1b',
+
+  text: '#fff',
+  border: '#545454',
+}
+
+
+export default userSettings => {
+  if (userSettings.nightMode) {
+    // if nightmode is active, we will just change some specific colors
+    return merge(defaultTheme, nightModeTheme)
+  }
+  return {...defaultTheme, settings: {...userSettings}}
 }

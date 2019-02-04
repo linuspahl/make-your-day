@@ -52,7 +52,7 @@ export default class AppRoot extends React.Component {
 
     return (
       <ApolloProvider client={apolloClient}>
-        <ThemeProvider theme={colorTheme}>
+        <ThemeProvider theme={colorTheme(userSettings)}>
           <Fragment>
             <NotificationBanner ref={this.notificationBanner} />
             <Routes

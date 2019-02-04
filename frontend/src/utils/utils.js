@@ -9,6 +9,22 @@ export const sortBy = (array, attribute, order = 'desc') => {
   )
 }
 
+
+// This function will merge two objects and overwrite
+// doublicated values with the value of the target object
+export const merge = (sourceObj, targetObj) => {
+  // we need to create a clone of the source object
+  // to avoid any manipualtion of the source object
+  const sourceObjClone = Object.assign({}, sourceObj)
+
+  for (const objKey in targetObj) {
+    sourceObjClone[objKey] = targetObj[objKey]
+  }
+
+  return sourceObjClone
+}
+
+// This function will convert a unix date to a YYYY-MM-DD string
 export const formatUnixDate = unixDate => {
   const unixDateInt = parseInt(unixDate, 10)
   const date = new Date(unixDateInt)
