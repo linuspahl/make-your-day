@@ -1,39 +1,63 @@
 import React from 'react'
 import styled from 'styled-components'
+import Icon from 'shared/Icon/Icon'
+
+const Wrapper = styled.div`
+  position: relative;
+
+  height: 40px;
+  width: 40px;
+
+  background-color: ${props => props.theme.white};
+  border: 1px solid ${props => props.theme.border};
+
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+`
 
 const Element = styled.input`
-  height: 30px;
-  width: 30px;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  border-radius: 0;
+
+  appearance: none;
+
+  cursor: inherit;
+`
+
+const Checkmark = styled.div`
+  position: absolute;
+
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 
-  background-color: ${props => props.theme.white};
-  border: 1px solid ${props => props.theme.border};
-  border-radius: 0;
-
-  cursor: pointer;
-  appearance: none;
-  overflow: hidden;
-
-  &:checked :before {
-    content: '✓';
-    font-size: 32px;
-  }
+  font-size: 24px;
 `
 
 export default props => {
   const { value, onChange, name, disabled, tabIndex } = props
   return (
-    <Element
-      checked={value}
-      disabled={disabled}
-      name={name}
-      onChange={onChange}
-      tabIndex={tabIndex}
-      type="checkbox"
-    />
+    <Wrapper disabled={disabled}>
+      {value && (
+        <Checkmark>
+          <Icon title="check" />
+        </Checkmark>
+      )}
+      <Element
+        checked={value}
+        disabled={disabled}
+        name={name}
+        onChange={onChange}
+        tabIndex={tabIndex}
+        type="checkbox"
+      />
+    </Wrapper>
   )
 }

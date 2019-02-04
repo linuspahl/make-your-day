@@ -10,7 +10,7 @@ const Element = styled.input`
   border-radius: 0;
   border: 1px solid ${props => props.theme.border};
 
-  color: ${props => props.theme.text};
+  color: ${props => (props.disabled ? '#b5b5b5' : props.theme.text)};
   box-shadow: none;
   appearance: none;
   cursor: ${props => (props.disabled ? 'not-allowed' : 'text')};

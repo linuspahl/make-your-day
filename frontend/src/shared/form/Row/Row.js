@@ -15,7 +15,7 @@ const Layout = styled.div`
   ${props =>
     props.disabled &&
     `
-    color: grey;
+    color: #b5b5b5;
     cursor: not-allowed;
   `};
 `
