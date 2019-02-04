@@ -8,7 +8,7 @@ import Row from 'shared/form/Row/Row'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Input from 'shared/form/Input/Input'
 import Button from 'shared/Button/Button'
-import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
+import Textarea from 'shared/form/Textarea/Textarea'
 
 const Form = styled.form`
   margin-top: 15px;
@@ -38,7 +38,7 @@ export default class RecordForm extends React.Component {
         unit,
       },
     } = this.props
-    const { title, type, amount } = this.state
+    const { title, amount, description } = this.state
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         {hasTitle && (
@@ -55,7 +55,7 @@ export default class RecordForm extends React.Component {
         {hasDescription && (
           <Row>
             Beschreibung
-            <Input
+            <Textarea
               name="description"
               onChange={this.handleInputChange}
               value={description}
