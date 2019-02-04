@@ -18,6 +18,7 @@ query GetCategory($id: Int!) {
   getCategory(id: $id) {
     color
     hasDescription
+    hasSubcategories
     hasTitle
     hasUnit
     icon

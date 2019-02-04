@@ -89,9 +89,10 @@ export default class CategoryForm extends React.Component {
         <HeadlineRow>
           <b>Aufbau Einträge</b>
         </HeadlineRow>
-        <Row>
+        <Row disabled={mode !== 'create'}>
           Art
           <ContentSelect
+            disabled={mode !== 'create'}
             name="type"
             onChange={this.handleInputChange}
             options={typeOptions}
@@ -101,51 +102,56 @@ export default class CategoryForm extends React.Component {
             value={type}
           />
         </Row>
-        <Row>
+        <Row disabled={mode !== 'create' || type !== 'journal'}>
           Auswahl Unterkategorie
           <Checkbox
             name="hasSubcategories"
             onChange={this.handleInputChange}
             tabIndex={tabIndex++}
-            value={hasSubcategories}
+            value={type === 'journal' ? hasSubcategories : false}
+            disabled={mode !== 'create' || type !== 'journal'}
           />
         </Row>
-        <Row>
+        <Row disabled={mode !== 'create' || type === 'counter'}>
           Haben Einheit
           <Checkbox
+            disabled={mode !== 'create' || type === 'counter'}
             name="hasUnit"
             onChange={this.handleInputChange}
             tabIndex={tabIndex++}
-            value={hasUnit}
+            value={type !== 'counter' ? hasUnit : false}
           />
         </Row>
-        <Row disabled={!hasUnit}>
+        <Row disabled={!hasUnit || type === 'counter'}>
           Einheit
           <Input
-            disabled={!hasUnit}
+            disabled={!hasUnit || type === 'counter'}
             name="unit"
             onChange={this.handleInputChange}
             required
             tabIndex={tabIndex++}
-            value={unit}
+            value={type !== 'counter' ? unit : null}
           />
         </Row>
-        <Row>
+        <Row disabled={type === 'counter'}>
           Haben Titel
           <Checkbox
             name="hasTitle"
             onChange={this.handleInputChange}
             tabIndex={tabIndex++}
-            value={hasTitle}
+            value={
+              type === 'counter' ? false : type === 'journal' ? hasTitle : true
+            }
           />
         </Row>
-        <Row>
+        <Row disabled={type !== 'journal'}>
           Haben Beschreibung
           <Checkbox
+            disabled={type !== 'journal'}
             name="hasDescription"
             onChange={this.handleInputChange}
             tabIndex={tabIndex++}
-            value={hasDescription}
+            value={type === 'journal' ? hasDescription : false}
           />
         </Row>
         <ActionRow>

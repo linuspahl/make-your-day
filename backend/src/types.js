@@ -89,13 +89,10 @@ export default gql`
     updateCategory(
       color: String
       hasDescription: Boolean
-      hasSubcategories: Boolean
       hasTitle: Boolean
-      hasUnit: Boolean
       icon: String
       id: Int!
       title: String
-      type: String!
       unit: String
     ): Category!
     updateWidget(
