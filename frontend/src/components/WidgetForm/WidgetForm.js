@@ -40,7 +40,6 @@ export default class WidgetForm extends React.Component {
   render() {
     const { mode, rootPath } = this.props
     const { title, type, value } = this.state
-    let tabIndex = 1
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
@@ -49,7 +48,7 @@ export default class WidgetForm extends React.Component {
             name="title"
             onChange={this.handleInputChange}
             required
-            tabIndex={tabIndex++}
+            tabIndex={1}
             value={title}
           />
         </Row>
@@ -59,8 +58,7 @@ export default class WidgetForm extends React.Component {
             name="type"
             onChange={this.handleInputChange}
             options={typeOptions}
-            renderPreview={option => <div />}
-            tabIndex={tabIndex++}
+            tabIndex={1}
             title="Art"
             value={type}
           />
@@ -75,10 +73,10 @@ export default class WidgetForm extends React.Component {
           />
         </Row>
         <ActionRow>
-          <Button context="secondary" tabIndex={tabIndex++} to={rootPath}>
+          <Button context="secondary" tabIndex={1} to={rootPath}>
             Abbrechen
           </Button>
-          <Button context="primary" tabIndex={tabIndex++} type="submit">
+          <Button context="primary" tabIndex={1} type="submit">
             {mode === 'create' ? 'Erstellen' : 'Bearbeiten'}
           </Button>
         </ActionRow>

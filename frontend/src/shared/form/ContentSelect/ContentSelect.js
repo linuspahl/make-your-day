@@ -47,7 +47,7 @@ export default class ContentSelect extends React.Component {
       disabled,
     } = this.props
     const { isOpen } = this.state
-
+    const hasPreview = typeof renderPreview == 'function'
     const currentOption = options.find(option => option.value === value)
 
     return (
@@ -84,7 +84,9 @@ export default class ContentSelect extends React.Component {
                       key={option.value}
                       onClick={() => this.onOptionClick(option.value)}
                     >
-                      <OptionPreview>{renderPreview(option)}</OptionPreview>
+                      {hasPreview && (
+                        <OptionPreview>{renderPreview(option)}</OptionPreview>
+                      )}
                       <span>{option.title}</span>
                     </Option>
                   )

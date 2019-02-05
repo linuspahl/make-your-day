@@ -52,7 +52,6 @@ export default props => {
           name="type"
           onChange={handleInputChange}
           options={categoryTypeOptions}
-          renderPreview={option => <div />}
           tabIndex={1}
           title="Art"
           value={type}

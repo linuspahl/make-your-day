@@ -44,7 +44,6 @@ export default class RecordForm extends React.Component {
     } = this.props
     const { categoryId, title, amount, description } = this.state
     const subcategoryOptions = this.prepareSubcategories(subcategories)
-    let tabIndex = 1
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
@@ -58,7 +57,7 @@ export default class RecordForm extends React.Component {
               name="title"
               onChange={this.handleInputChange}
               required
-              tabIndex={tabIndex++}
+              tabIndex={1}
               value={title}
             />
           </Row>
@@ -70,8 +69,7 @@ export default class RecordForm extends React.Component {
               name="categoryId"
               onChange={this.handleInputChange}
               options={subcategoryOptions}
-              renderPreview={option => <div />}
-              tabIndex={tabIndex++}
+              tabIndex={1}
               title="Unterkategorie"
               value={categoryId}
             />
