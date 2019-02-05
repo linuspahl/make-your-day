@@ -12,26 +12,22 @@ import ContentBox from 'shared/ContentBox/ContentBox'
 // graphql
 import { GetWidgets } from 'store/widget/query.gql'
 
-export const Layout = styled.div`
-  display: flex;
-
-  padding: 0 20px 20px 20px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
-`
-
-export const WidgetLayout = styled.div`
+const Layout = styled.div`
   width: 100%;
   height: 100%;
 
-  flex: 0 0 auto;
+  padding: 0 20px 20px 20px;
 
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+`
+
+const WidgetLayout = styled.div`
+  width: 100%;
+  height: 100%;
+  display: inline-block;
   margin-right: 20px;
-
-  &:last-child {
-    margin-right: 0;
-  }
 `
 
 export default props => {

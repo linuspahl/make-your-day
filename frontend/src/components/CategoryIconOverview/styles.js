@@ -1,7 +1,5 @@
 // libraries
 import styled from 'styled-components'
-// components
-import ContentBox from 'shared/ContentBox/ContentBox'
 
 export const Layout = styled.div`
   ${props => `
