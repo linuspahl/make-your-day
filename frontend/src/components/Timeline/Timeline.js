@@ -1,13 +1,14 @@
 // libraries
 import React, { Fragment } from 'react'
 import { Query } from 'react-apollo'
+// utils
 import { sortBy, formatUnixDate, getWeekDayNr } from 'utils/utils'
+import { weekDayLabels } from '../../../config/params'
 // components
 import Icon from 'shared/Icon/Icon'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
-import ContentBox from 'shared/ContentBox/ContentBox'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
 
@@ -17,11 +18,9 @@ import {
   Shortcut,
   Categories,
   Category,
-  Box,
   IconWrapper,
+  Box,
 } from './styles'
-
-const days = { 1: 'Mo', 1: 'Di', 3: 'Mi', 4: 'Do', 5: 'Fr', 6: 'Sa', 7: 'So' }
 
 export default class Timeline extends React.Component {
   constructor(props) {
@@ -33,7 +32,7 @@ export default class Timeline extends React.Component {
   render() {
     return (
       <Layout>
-        <ContentBox>
+        <Box>
           <Query query={GetRecords}>
             {({ loading, error, data }) => {
               if (loading) return <CenteredSpinner />
@@ -51,7 +50,7 @@ export default class Timeline extends React.Component {
               return Object.values(timeline).map(day => {
                 return (
                   <Day key={day.date}>
-                    <Shortcut>{days[day.shortcut]}</Shortcut>
+                    <Shortcut>{weekDayLabels[day.shortcut]}</Shortcut>
                     <Categories>
                       {Object.values(day.categories).map(category => {
                         const {
@@ -78,7 +77,7 @@ export default class Timeline extends React.Component {
               })
             }}
           </Query>
-        </ContentBox>
+        </Box>
       </Layout>
     )
   }
@@ -90,7 +89,9 @@ export default class Timeline extends React.Component {
     const timeline = {}
 
     records.forEach(record => {
-      const { category } = record
+      console.log('timeline', timeline)
+      const { category: recordCategory } = record
+      const category = recordCategory.parent || recordCategory
       const categoryKey = `${category.id}`
       // get createdAt date and format to string
       const createdAtDate = formatUnixDate(record.createdAt)
@@ -111,12 +112,12 @@ export default class Timeline extends React.Component {
         // If no entry exists, create one and set the amount of the record
         categoryEnry = {
           ...category,
-          recordAmountSum: this.getRecordAmount(record),
+          recordAmountSum: this.getRecordAmount(record, category),
         }
       } else {
         // Otherwise only sum up the record amount
         categoryEnry.recordAmountSum =
-          categoryEnry.recordAmountSum + this.getRecordAmount(record)
+          categoryEnry.recordAmountSum + this.getRecordAmount(record, category)
       }
       timeline[createdAtDate].categories[categoryKey] = categoryEnry
     })
@@ -124,8 +125,8 @@ export default class Timeline extends React.Component {
     return sortBy(Object.values(timeline), 'date')
   }
 
-  getRecordAmount(record) {
-    if (record.category.hasUnit) {
+  getRecordAmount(record, category) {
+    if (category.hasUnit) {
       return parseInt(record.amount, 10)
     }
     return 1

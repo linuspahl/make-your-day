@@ -1,3 +1,15 @@
+// File for all static content, that is not related to the config
+
+export const weekDayLabels = {
+  1: 'Mo',
+  2: 'Di',
+  3: 'Mi',
+  4: 'Do',
+  5: 'Fr',
+  6: 'Sa',
+  7: 'So',
+}
+
 export const categoryColors = {
   navy: '#001f3f',
   blue: '#0074D9',
@@ -52,5 +64,11 @@ export const categoryIcons = [
   { value: 'book', title: 'Buch' },
   { value: 'gift', title: 'Geschenk' },
   { value: 'bicycle', title: 'Fahrrad' },
+  { value: 'eur', title: '€' },
   { value: 'cutlery', title: 'Messer und Gabel' },
+  { value: 'balance-scale', title: 'Wage' },
+  { value: 'home', title: 'Haus' },
+  { value: 'clock-o', title: 'Uhr' },
+  { value: 'tv', title: 'TV' },
+  { value: 'money', title: 'Geld' },
 ]
