@@ -10,6 +10,7 @@ import Input from 'shared/form/Input/Input'
 import Button from 'shared/Button/Button'
 import Textarea from 'shared/form/Textarea/Textarea'
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
+import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 
 const Form = styled.form`
   margin-top: 15px;
@@ -37,9 +38,13 @@ export default class RecordForm extends React.Component {
         icon,
         unit,
         title: categoryTitle,
+        hasSubcategories,
+        subcategories,
       },
     } = this.props
-    const { title, amount, description } = this.state
+    const { categoryId, title, amount, description } = this.state
+    const subcategoryOptions = this.prepareSubcategories(subcategories)
+    let tabIndex = 1
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
@@ -53,7 +58,22 @@ export default class RecordForm extends React.Component {
               name="title"
               onChange={this.handleInputChange}
               required
+              tabIndex={tabIndex++}
               value={title}
+            />
+          </Row>
+        )}
+        {hasSubcategories && (
+          <Row>
+            Unterkategorie
+            <ContentSelect
+              name="categoryId"
+              onChange={this.handleInputChange}
+              options={subcategoryOptions}
+              renderPreview={option => <div />}
+              tabIndex={tabIndex++}
+              title="Unterkategorie"
+              value={categoryId}
             />
           </Row>
         )}
@@ -70,7 +90,7 @@ export default class RecordForm extends React.Component {
         )}
         {hasUnit && (
           <Row>
-            Einheit ({unit})
+            Anzahl ({unit})
             <Input
               name="amount"
               onChange={this.handleInputChange}
@@ -98,5 +118,11 @@ export default class RecordForm extends React.Component {
 
   handleInputChange(event) {
     handleInputChange(event, this.setState.bind(this))
+  }
+
+  prepareSubcategories(subcategories) {
+    return subcategories.map(subcategory => {
+      return { value: subcategory.id, title: subcategory.title }
+    })
   }
 }

@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
 // utils
-import { logError } from 'utils/utils'
+import { extractIdFromUrl, logError } from 'utils/utils'
 // components
 import H1 from 'shared/H1/H1'
 import RecordForm from 'components/RecordForm/RecordForm'
@@ -11,7 +11,8 @@ import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 // graphql
 import { CreateRecord } from 'store/record/mutation.gql'
-import { GetCategory } from 'store/category/query.gql'
+import { GetCategoryWithChildren } from 'store/category/query.gql'
+import { addRecord } from 'store/record/update'
 
 class RecordCreate extends React.Component {
   constructor(props) {
@@ -22,16 +23,16 @@ class RecordCreate extends React.Component {
   }
 
   render() {
-    const {
-      match: {
-        params: { categoryId },
-      },
-    } = this.props
+    const { match } = this.props
+    const categoryId = extractIdFromUrl(match, 'categoryId')
 
     return (
       <Fragment>
         <H1 context="page">Eintrag erstellen</H1>
-        <Query query={GetCategory} variables={{ id: parseInt(categoryId, 10) }}>
+        <Query
+          query={GetCategoryWithChildren}
+          variables={{ id: parseInt(categoryId, 10) }}
+        >
           {({ loading, error, data }) => {
             if (loading) return <CenteredSpinner />
             if (error)
@@ -43,22 +44,28 @@ class RecordCreate extends React.Component {
               )
             const category = data.getCategory
             if (!category) return <NoResult />
+
+            // If the category has some subcategories, make the first one the
+            // default selection
+            const initialData = { categoryId: category.id }
+            if (category.subcategories && category.subcategories.length !== 0) {
+              initialData.categoryId = category.subcategories[0].id
+            }
+
             return (
               <Mutation
                 mutation={CreateRecord}
                 onCompleted={this.handleCompleted}
                 onError={this.handleError}
+                update={addRecord}
               >
                 {createRecord => (
                   <RecordForm
                     category={category}
                     mode="create"
                     rootPath={'/'}
-                    submitAction={variables =>
-                      createRecord({
-                        variables: { ...variables, categoryId: category.id },
-                      })
-                    }
+                    initialData={initialData}
+                    submitAction={variables => createRecord({ variables })}
                   />
                 )}
               </Mutation>
@@ -71,10 +78,7 @@ class RecordCreate extends React.Component {
 
   // Form submit function
   async handleCompleted(data) {
-    const { history, rootPath, createNotificationBanner } = this.props
-    const {
-      createRecord: { title },
-    } = data
+    const { history, createNotificationBanner } = this.props
 
     // Inform user about success
     createNotificationBanner({
