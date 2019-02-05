@@ -1,6 +1,8 @@
+// libraried
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+// components
 import Icon from 'shared/Icon/Icon'
 
 const Wrapper = styled(Link)`
@@ -10,6 +12,7 @@ const Wrapper = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+  float: left;
 
   font-size: 26px;
   color: ${props => props.theme.text};
@@ -20,6 +23,6 @@ const Wrapper = styled(Link)`
 
 export default props => (
   <Wrapper to={props.to}>
-    <Icon title="edit" />
+    <Icon title={props.icon} />
   </Wrapper>
 )

@@ -2,10 +2,10 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import EditIcon from './EditIcon'
+import ActionIcon from './ActionIcon'
 
-describe('EditIcon should', () => {
+describe('ActionIcon should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<EditIcon />)
+    new ShallowRenderer().render(<ActionIcon />)
   })
 })

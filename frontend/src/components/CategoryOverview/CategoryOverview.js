@@ -7,7 +7,7 @@ import H1 from 'shared/H1/H1'
 import Button from 'shared/Button/Button'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ListItem from 'shared/list/ListItem/ListItem'
-import EditIcon from 'shared/list/EditIcon/EditIcon'
+import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
@@ -41,7 +41,19 @@ export default props => {
               {data.getCategories.map(category => (
                 <ListItem key={category.id} spaceBetween>
                   {category.title}
-                  <EditIcon to={`${rootPath}/edit/${category.id}`} />
+                  <div>
+                    {category.hasSubcategories && (
+                      <ActionIcon
+                        to={`${rootPath}/${category.id}/subcategories`}
+                        icon="list-ul"
+                      />
+                    )}
+
+                    <ActionIcon
+                      to={`${rootPath}/edit/${category.id}`}
+                      icon="edit"
+                    />
+                  </div>
                 </ListItem>
               ))}
             </List>
