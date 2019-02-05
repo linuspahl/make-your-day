@@ -48,7 +48,7 @@ const validatePassword = (password, passwordHash) => {
 const createToken = () => {
   return new Promise((resolve, reject) => {
     crypto.randomBytes(16, (err, data) => {
-      err ? reject(err) : resolve(data.toString('base64'))
+      error ? reject(error) : resolve(data.toString('base64'))
     })
   })
 }
