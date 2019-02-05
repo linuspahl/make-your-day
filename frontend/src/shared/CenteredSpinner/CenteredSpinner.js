@@ -26,7 +26,7 @@ const Spinner = styled.div`
   height: 60px;
 
   position: relative;
-  margin: 100px auto;
+  margin: 0 auto;
 `
 
 const DoubleBouncer1 = styled.div`

@@ -12,12 +12,12 @@ export const Element = styled.textarea`
 
   padding: 10px;
   border: 1px solid ${props => props.theme.border};
+  border-radius: 0;
 
   background-color: ${props => props.theme.contentBoxBg};
 
   color: ${props => props.theme.text};
-
-  border-radius: 0;
+  line-height: 1.4;
 `
 
 export default class Widget extends React.Component {

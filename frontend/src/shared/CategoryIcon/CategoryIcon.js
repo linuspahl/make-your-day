@@ -12,8 +12,6 @@ const Circle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  margin: 0 2px 0 2px;
   border-radius: 50%;
 
   background-color: ${props =>

@@ -20,7 +20,7 @@ class CategoryCreate extends React.Component {
   }
 
   render() {
-    const { rootPath, createNotificationBanner } = this.props
+    const { rootPath } = this.props
     return (
       <Fragment>
         <H1 context="page">Kategorie erstellen</H1>

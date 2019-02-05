@@ -13,4 +13,6 @@ const Layout = styled.div`
   background-color: ${props => props.theme.contentBoxBg};
 `
 
-export default props => <Layout>{props.children}</Layout>
+export default props => (
+  <Layout className={props.className}>{props.children}</Layout>
+)
