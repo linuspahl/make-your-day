@@ -5,6 +5,7 @@
 
 // Mutations import
 import createCategory from './mutation/createCategory'
+import createSubcategory from './mutation/createSubcategory'
 import createRecord from './mutation/createRecord'
 import createUserSetting from './mutation/createUserSetting'
 import createWidget from './mutation/createWidget'
@@ -23,6 +24,8 @@ import getWidget from './query/getWidget'
 import getUserUserSettings from './query/getUserUserSettings'
 import getUserSettingSetting from './query/getUserSettingSetting'
 import getRecordCategory from './query/getRecordCategory'
+import getCategorySubcategories from './query/getCategorySubcategories'
+import getCategoryParent from './query/getCategoryParent'
 
 export default {
   User: {
@@ -34,8 +37,13 @@ export default {
   Record: {
     category: getRecordCategory,
   },
+  Category: {
+    subcategories: getCategorySubcategories,
+    parent: getCategoryParent,
+  },
   Mutation: {
     createCategory,
+    createSubcategory,
     createRecord,
     createUserSetting,
     createWidget,

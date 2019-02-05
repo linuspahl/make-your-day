@@ -24,11 +24,13 @@ export default gql`
     hasUnit: Boolean
     icon: String
     id: Int!
-    parentCategory: Category
+    parentId: Int
+    parent: Category
     title: String
     type: String!
     unit: String
     user: User!
+    subcategories: [Category]!
   }
 
   type Record {
@@ -77,6 +79,7 @@ export default gql`
       type: String!
       unit: String
     ): Category!
+    createSubcategory(title: String!, parentId: Int!): Category!
     createRecord(
       title: String
       description: String
