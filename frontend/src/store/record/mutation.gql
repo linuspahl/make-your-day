@@ -11,5 +11,17 @@ mutation CreateRecord(
     title: $title
     ) {
       id
+      title
+      amount
+      description
+      createdAt
+      category {
+        id
+        icon
+        color
+        type
+        hasUnit
+        unit
+      }
     }
 }

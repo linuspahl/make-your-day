@@ -2,7 +2,8 @@ query GetCategories {
   getCategories {
     id
     title
-	}
+    hasSubcategories
+  }
 }
 
 query GetCategoriesIcon {
@@ -26,5 +27,36 @@ query GetCategory($id: Int!) {
     title
     type
     unit
+	}
+}
+
+query GetCategoryWithChildren($id: Int!) {
+  getCategory(id: $id) {
+    color
+    hasDescription
+    hasSubcategories
+    hasTitle
+    hasUnit
+    icon
+    id
+    title
+    type
+    unit
+    subcategories {
+      id
+      title
+    }
+	}
+}
+
+query GetCategoryPlainWithChildren($id: Int!) {
+  getCategory(id: $id) {
+    hasSubcategories
+    id
+    title
+    subcategories {
+      id
+      title
+    }
 	}
 }

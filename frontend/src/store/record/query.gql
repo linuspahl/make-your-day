@@ -12,6 +12,14 @@ query GetRecords {
       type
       hasUnit
       unit
+      parent {
+        id
+        icon
+        color
+        type
+        hasUnit
+        unit
+      }
     }
 	}
 }

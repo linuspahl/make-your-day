@@ -33,6 +33,13 @@ mutation CreateCategory(
   }
 }
 
+mutation CreateSubcategory($parentId: Int!, $title: String!) {
+  createSubcategory(parentId: $parentId, title: $title) {
+    id
+    title
+  }
+}
+
 mutation UpdateCategory(
   $color: String!,
   $hasDescription: Boolean,
@@ -58,5 +65,13 @@ mutation UpdateCategory(
     id
     title
     unit
+  }
+}
+
+mutation UpdateSubcategory($id: Int!, $title: String!) {
+  updateCategory(id: $id, title: $title) {
+    id
+    parentId
+    title
   }
 }

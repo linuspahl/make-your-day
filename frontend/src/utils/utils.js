@@ -9,7 +9,6 @@ export const sortBy = (array, attribute, order = 'desc') => {
   )
 }
 
-
 // This function will merge two objects and overwrite
 // doublicated values with the value of the target object
 export const merge = (sourceObj, targetObj) => {
@@ -56,10 +55,10 @@ export const logError = error => {
 }
 
 // Extract id param from router history object
-export const extractIdFromUrl = match => {
-  const {
-    params: { id },
-  } = match
+export const extractIdFromUrl = (match, attribute = 'id') => {
+  const { params } = match
+  const id = params[attribute]
+
   return id ? parseInt(id, 10) : null
 }
 
