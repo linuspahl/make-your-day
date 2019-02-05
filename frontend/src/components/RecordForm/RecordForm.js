@@ -26,6 +26,14 @@ export default class RecordForm extends React.Component {
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
+  componentDidMount() {
+    // If the category is type counter, we want to submit the form directly
+    // This is possible, because the categoryId is alredy defined and the only required attribute
+    if (this.props.category.type === 'counter') {
+      this.props.submitAction(this.state)
+    }
+  }
+
   render() {
     const {
       mode,
