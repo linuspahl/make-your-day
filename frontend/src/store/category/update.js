@@ -18,7 +18,7 @@ export const addCategory = (cache, result) => {
     cache.writeQuery({
       query: GetCategories,
       data: {
-        getCategories: { ...categories.getCategories, createCategory },
+        getCategories: [...categories.getCategories, createCategory],
       },
     })
   } catch (error) {

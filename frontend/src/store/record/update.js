@@ -15,7 +15,7 @@ export const addRecord = (cache, result) => {
     cache.writeQuery({
       query: GetRecords,
       data: {
-        getRecords: { ...records.getRecords, createRecord },
+        getRecords: [...records.getRecords, createRecord],
       },
     })
   } catch (error) {

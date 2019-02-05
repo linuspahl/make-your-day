@@ -15,7 +15,7 @@ export const addWidget = (cache, result) => {
     cache.writeQuery({
       query: GetWidgets,
       data: {
-        getWidgets: { ...widgets.getWidgets, createWidget },
+        getWidgets: [...widgets.getWidgets, createWidget],
       },
     })
   } catch (error) {
