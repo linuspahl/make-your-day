@@ -53,7 +53,7 @@ export default props => {
           onChange={handleInputChange}
           options={categoryTypeOptions}
           renderPreview={option => <div />}
-          tabIndex={tabIndex++}
+          tabIndex={1}
           title="Art"
           value={type}
         />
@@ -64,7 +64,7 @@ export default props => {
           disabled={disabledFields.hasSubcategories}
           name="hasSubcategories"
           onChange={handleInputChange}
-          tabIndex={tabIndex++}
+          tabIndex={1}
           value={type === 'journal' ? hasSubcategories : false}
         />
       </Row>
@@ -74,7 +74,7 @@ export default props => {
           disabled={disabledFields.hasUnit}
           name="hasUnit"
           onChange={handleInputChange}
-          tabIndex={tabIndex++}
+          tabIndex={1}
           value={type !== 'counter' ? hasUnit : false}
         />
       </Row>
@@ -85,7 +85,7 @@ export default props => {
           name="unit"
           onChange={handleInputChange}
           required
-          tabIndex={tabIndex++}
+          tabIndex={1}
           value={type !== 'counter' ? unit : null}
         />
       </Row>
@@ -95,7 +95,7 @@ export default props => {
           disabled={disabledFields.hasTitle}
           name="hasTitle"
           onChange={handleInputChange}
-          tabIndex={tabIndex++}
+          tabIndex={1}
           value={
             type === 'counter' ? false : type === 'journal' ? hasTitle : true
           }
@@ -107,7 +107,7 @@ export default props => {
           disabled={disabledFields.hasDescription}
           name="hasDescription"
           onChange={handleInputChange}
-          tabIndex={tabIndex++}
+          tabIndex={1}
           value={type === 'journal' ? hasDescription : false}
         />
       </Row>

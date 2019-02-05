@@ -10,7 +10,6 @@ import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 
 export default props => {
   const { color, icon, title, handleInputChange } = props
-  let tabIndex = 1
   return (
     <div>
       <Row>
@@ -23,7 +22,7 @@ export default props => {
           name="title"
           onChange={handleInputChange}
           required
-          tabIndex={tabIndex++}
+          tabIndex={1}
           value={title}
         />
       </Row>
@@ -32,7 +31,7 @@ export default props => {
         <ColorSelect
           name="color"
           onChange={handleInputChange}
-          tabIndex={tabIndex++}
+          tabIndex={1}
           value={color}
         />
       </Row>
@@ -41,7 +40,7 @@ export default props => {
         <IconSelect
           name="icon"
           onChange={handleInputChange}
-          tabIndex={tabIndex++}
+          tabIndex={1}
           value={icon}
         />
       </Row>

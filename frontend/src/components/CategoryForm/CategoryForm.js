@@ -37,8 +37,6 @@ export default class CategoryForm extends React.Component {
       unit,
     } = this.state
 
-    let tabIndex = 1
-
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <IconFields
@@ -58,10 +56,10 @@ export default class CategoryForm extends React.Component {
           unit={unit}
         />
         <ActionRow>
-          <Button context="secondary" tabIndex={tabIndex++} to={rootPath}>
+          <Button context="secondary" tabIndex={1} to={rootPath}>
             Abbrechen
           </Button>
-          <Button context="primary" tabIndex={tabIndex++} type="submit">
+          <Button context="primary" tabIndex={1} type="submit">
             {mode === 'create' ? 'Erstellen' : 'Bearbeiten'}
           </Button>
         </ActionRow>
