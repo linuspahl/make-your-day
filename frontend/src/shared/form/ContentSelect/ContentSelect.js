@@ -48,6 +48,8 @@ export default class ContentSelect extends React.Component {
     } = this.props
     const { isOpen } = this.state
 
+    const currentOption = options.find(option => option.value === value)
+
     return (
       <Layout>
         <Select
@@ -57,7 +59,7 @@ export default class ContentSelect extends React.Component {
           onFocus={disabled ? null : this.onFocus}
           onBlur={disabled ? null : this.onBlur}
         >
-          {value ? value : '-'}
+          {value ? currentOption.title : '-'}
           <ArrowIcon>
             <Icon title="angle-down" />
           </ArrowIcon>
