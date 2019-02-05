@@ -67,7 +67,7 @@ export default class Timeline extends React.Component {
                               <Icon title={icon} />
                             </IconWrapper>
                             {recordAmountSum}
-                            {hasUnit ? unit : '&bull;'}
+                            {hasUnit ? unit : '×'}
                           </Category>
                         )
                       })}
@@ -89,7 +89,6 @@ export default class Timeline extends React.Component {
     const timeline = {}
 
     records.forEach(record => {
-      console.log('timeline', timeline)
       const { category: recordCategory } = record
       const category = recordCategory.parent || recordCategory
       const categoryKey = `${category.id}`
