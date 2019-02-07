@@ -42,7 +42,7 @@ class Timeline extends React.Component {
                 return (
                   <ErrorMessage
                     error={error}
-                    message="Einträge konnte nicht geladen werden"
+                    message="Einträge konnten nicht geladen werden"
                   />
                 )
               if (data.getRecords.length === 0) return <NoResult />
