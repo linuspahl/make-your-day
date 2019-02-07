@@ -29,6 +29,10 @@ const defaultTheme = {
   categoryText: categoryTextColors,
 }
 
+const mediaQuery = {
+  tablet: '800px',
+}
+
 // set of colors which will be used for the night mode
 const nightModeTheme = {
   primary: '#525252',
@@ -48,5 +52,5 @@ export default userSettings => {
     // if nightmode is active, we will just change some specific colors
     colors = merge(defaultTheme, nightModeTheme)
   }
-  return { ...colors, settings: { ...userSettings } }
+  return { ...colors, settings: { ...userSettings }, mediaQuery }
 }

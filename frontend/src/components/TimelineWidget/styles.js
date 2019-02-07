@@ -17,6 +17,11 @@ export const Layout = styled.div`
   ::-webkit-scrollbar {
     display: none;
   }
+
+  @media (min-width: ${props =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    padding: 20px 0 20px 20px;
+  }
 `
 
 export const Box = styled(ContentBox)`

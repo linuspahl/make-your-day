@@ -6,6 +6,7 @@ export const Layout = styled.div`
   ${props =>
     props.context === 'horizontal-scroll'
       ? `
+      height: 100%;
       padding: 10px 20px;
 
       border-top: 1px solid ${props.theme.border};
@@ -15,6 +16,14 @@ export const Layout = styled.div`
       overflow-x: auto;
       overflow-y: hidden;
       white-space: nowrap;
+
+      @media (min-width: ${
+        props.theme.mediaQuery.tablet
+      }) and (orientation: landscape) {
+        padding: 20px 10px;
+        white-space: normal;
+      }
+
     `
       : ''}
 `
@@ -30,8 +39,17 @@ export const IconWrapper = styled.div`
   }
 
   ${props =>
-    props.context !== 'horizontal-scroll'
+    props.context === 'horizontal-scroll'
       ? `
-        margin-bottom: 5px;`
-      : ``}
+      @media (min-width: ${props.theme.mediaQuery.tablet}) {
+        margin-right: 0;
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottm: 0;
+        }
+      }
+        `
+      : `
+        margin-bottom: 5px;
+      `}
 `

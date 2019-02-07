@@ -18,16 +18,34 @@ const Layout = styled.div`
 
   padding: 0 20px 20px;
 
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
+
+  @media (min-width: ${props =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    padding: 20px 20px 20px 0;
+    white-space: normal;
+    overflow-y: scroll;
+  }
 `
 
 const WidgetLayout = styled.div`
+  display: inline-block;
+
   width: 100%;
   height: 100%;
-  display: inline-block;
+
   margin-right: 20px;
+
+  @media (min-width: ${props =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    margin-right: 0;
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 `
 
 export default props => {

@@ -14,6 +14,12 @@ export const Layout = styled.div`
   display: grid;
   grid-template-rows: 1fr 70px 1fr;
   grid-gap: 20px;
+
+  @media (min-width: ${props =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    grid-template-columns: 1fr 70px 1fr;
+    grid-template-rows: none;
+  }
 `
 
 export default props => (
