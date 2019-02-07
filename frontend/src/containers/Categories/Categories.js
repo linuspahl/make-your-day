@@ -8,6 +8,7 @@ import CategoryOverview from 'components/CategoryOverview/CategoryOverview'
 import CategoryEdit from 'components/CategoryEdit/CategoryEdit'
 import CategoryCreate from 'components/CategoryCreate/CategoryCreate'
 import RecordCreate from 'components/RecordCreate/RecordCreate'
+import RecordUpdate from 'components/RecordUpdate/RecordUpdate'
 import SubcategoryOverview from 'components/SubcategoryOverview/SubcategoryOverview'
 import SubcategoryCreate from 'components/SubcategoryCreate/SubcategoryCreate'
 import SubcategoryEdit from 'components/SubcategoryEdit/SubcategoryEdit'
@@ -47,6 +48,13 @@ export default props => {
           path={`${rootPath}/:categoryId/records/create`}
           render={() => (
             <RecordCreate createNotificationBanner={createNotificationBanner} />
+          )}
+        />
+        <Route
+          exact
+          path={`${rootPath}/:categoryId/records/:id/edit`}
+          render={() => (
+            <RecordUpdate createNotificationBanner={createNotificationBanner} />
           )}
         />
         <Route

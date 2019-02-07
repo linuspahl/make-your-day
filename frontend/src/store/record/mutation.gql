@@ -2,9 +2,41 @@ mutation CreateRecord(
   $amount: String,
   $categoryId: Int!,
   $description: String,
-  $title: String
+  $title: String,
+  $createdAt: String,
   ) {
   createRecord(
+    amount: $amount,
+    categoryId: $categoryId,
+    description: $description,
+    title: $title
+    createdAt: $createdAt,
+    ) {
+      id
+      title
+      amount
+      description
+      createdAt
+      category {
+        id
+        icon
+        color
+        type
+        hasUnit
+        unit
+      }
+    }
+}
+
+mutation UpdateRecord (
+  $id: Int!,
+  $amount: String,
+  $categoryId: Int!,
+  $description: String,
+  $title: String
+  ) {
+  updateRecord(
+    id: $id,
     amount: $amount,
     categoryId: $categoryId,
     description: $description,
