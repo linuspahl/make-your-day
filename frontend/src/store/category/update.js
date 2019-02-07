@@ -1,5 +1,3 @@
-// utils
-import { logError } from 'utils/utils'
 // graphql
 import {
   GetCategories,
@@ -21,9 +19,7 @@ export const addCategory = (cache, result) => {
         getCategories: [...categories.getCategories, createCategory],
       },
     })
-  } catch (error) {
-    logError(error)
-  }
+  } catch {}
 }
 
 export const addSubcategory = (cache, result, variables) => {
@@ -51,7 +47,5 @@ export const addSubcategory = (cache, result, variables) => {
       },
       variables,
     })
-  } catch (error) {
-    logError(error)
-  }
+  } catch {}
 }

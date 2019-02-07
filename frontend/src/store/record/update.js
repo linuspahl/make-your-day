@@ -1,5 +1,3 @@
-// utils
-import { logError } from 'utils/utils'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
 
@@ -18,7 +16,5 @@ export const addRecord = (cache, result) => {
         getRecords: [...records.getRecords, createRecord],
       },
     })
-  } catch (error) {
-    logError(error)
-  }
+  } catch {}
 }

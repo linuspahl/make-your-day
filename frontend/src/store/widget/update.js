@@ -1,5 +1,3 @@
-// utils
-import { logError } from 'utils/utils'
 // graphql
 import { GetWidgets } from 'store/category/query.gql'
 
@@ -18,7 +16,5 @@ export const addWidget = (cache, result) => {
         getWidgets: [...widgets.getWidgets, createWidget],
       },
     })
-  } catch (error) {
-    logError(error)
-  }
+  } catch {}
 }
