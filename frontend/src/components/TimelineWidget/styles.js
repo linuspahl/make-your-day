@@ -1,6 +1,7 @@
 // libraries
 import styled from 'styled-components'
-
+import { Link } from 'react-router-dom'
+// components
 import ContentBox from 'shared/ContentBox/ContentBox'
 
 export const Layout = styled.div`
@@ -22,7 +23,7 @@ export const Box = styled(ContentBox)`
   padding: 10px;
 `
 
-export const Day = styled.div`
+export const Day = styled(Link)`
   width: 100%;
 
   display: flex;

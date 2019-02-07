@@ -15,6 +15,7 @@ import Login from 'containers/Login/Login'
 import PageNotFound from 'containers/PageNotFound/PageNotFound'
 import Settings from 'containers/Settings/Settings'
 import Widgets from 'containers/Widgets/Widgets'
+import Timeline from 'containers/Timeline/Timeline'
 
 export default props => (
   <Router>
@@ -53,6 +54,11 @@ export default props => (
         createNotificationBanner={props.createNotificationBanner}
         isUserLoggedIn={props.isUserLoggedIn}
         path="/widgets"
+      />
+      <PrivateRoute
+        component={Timeline}
+        isUserLoggedIn={props.isUserLoggedIn}
+        path="/timeline"
       />
       <PrivateRoute path="*" component={PageNotFound} />
     </Switch>

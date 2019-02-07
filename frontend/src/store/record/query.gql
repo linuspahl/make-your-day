@@ -1,25 +1,46 @@
-query GetRecords {
-  getRecords {
+query GetRecords($createdAt: String) {
+  getRecords(createdAt: $createdAt) {
     id
     title
     amount
     description
     createdAt
     category {
-      id
-      icon
       color
-      type
       hasUnit
+      icon
+      id
+      title
+      type
       unit
       parent {
-        id
-        icon
         color
-        type
         hasUnit
+        icon
+        id
+        title
+        type
         unit
       }
+    }
+	}
+}
+
+query GetRecord($id: Int!) {
+  getRecord(id: $id) {
+    id
+    title
+    amount
+    description
+    createdAt
+    category {
+      color
+      hasUnit
+      icon
+      id
+      title
+      type
+      unit
     }
 	}
 }

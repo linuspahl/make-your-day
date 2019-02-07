@@ -1,12 +1,14 @@
+// Utility file for all multiplate needed helper functions
+
 import config from '../../config/config'
 
 // Basic sort function
 export const sortBy = (array, attribute, order = 'desc') => {
-  return array.sort((obj1, obj2) =>
-    order === 'desc'
-      ? obj1[attribute] - obj2[attribute]
-      : obj2[attribute] - obj1[attribute]
-  )
+  return array.sort((a, b) => {
+    if (a[attribute] < b[attribute]) return order === 'desc' ? -1 : 1
+    if (a[attribute] > b[attribute]) return order === 'desc' ? 1 : -1
+    return 0
+  })
 }
 
 // This function will merge two objects and overwrite
@@ -25,15 +27,16 @@ export const merge = (sourceObj, targetObj) => {
 
 // This function will convert a unix date to a YYYY-MM-DD string
 export const formatUnixDate = unixDate => {
+  // Expects unix date string like '1549395636726'
   const unixDateInt = parseInt(unixDate, 10)
-  const date = new Date(unixDateInt)
-  return `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}`
+  return new Date(unixDateInt)
 }
 
-export const getWeekDayNr = unixDate => {
-  const unixDateInt = parseInt(unixDate, 10)
-  const date = new Date(unixDateInt)
-  return date.getDay()
+export const getDateString = dateParam => {
+  // Expects a JS date object
+  // Returns a string with the format like 'YYYY-M-D'
+  const date = new Date(dateParam)
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
 }
 
 // Utility form function - will updade the form state on input change.
@@ -60,6 +63,21 @@ export const extractIdFromUrl = (match, attribute = 'id') => {
   const id = params[attribute]
 
   return id ? parseInt(id, 10) : null
+}
+
+export const generateUrlParams = params => {
+  let paramsString = ''
+  if (params) {
+    Object.keys(params).forEach(key => {
+      const value = params[key]
+      let paramsSeparater = '&'
+      if (!paramsString) {
+        paramsSeparater = `?`
+      }
+      paramsString = paramsString.concat(`${paramsSeparater}${key}=${value}`)
+    })
+  }
+  return paramsString
 }
 
 // Utility localstorage functions
