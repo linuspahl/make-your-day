@@ -5,11 +5,14 @@
 
 // Mutations import
 import createCategory from './mutation/createCategory'
-import createSubcategory from './mutation/createSubcategory'
 import createRecord from './mutation/createRecord'
+import createSubcategory from './mutation/createSubcategory'
 import createUserSetting from './mutation/createUserSetting'
 import createWidget from './mutation/createWidget'
+import deleteCategory from './mutation/deleteCategory'
+import deleteRecord from './mutation/deleteRecord'
 import deleteUserSetting from './mutation/deleteUserSetting'
+import deleteWidget from './mutation/deleteWidget'
 import loginUser from './mutation/loginUser'
 import updateCategory from './mutation/updateCategory'
 import updateRecord from './mutation/updateRecord'
@@ -17,11 +20,11 @@ import updateWidget from './mutation/updateWidget'
 // Queries import
 import getCategories from './query/getCategories'
 import getCategory from './query/getCategory'
-import getRecords from './query/getRecords'
 import getRecord from './query/getRecord'
+import getRecords from './query/getRecords'
 import getSettings from './query/getSettings'
-import getWidgets from './query/getWidgets'
 import getWidget from './query/getWidget'
+import getWidgets from './query/getWidgets'
 // Queries relation resolvers import
 import getUserUserSettings from './query/getUserUserSettings'
 import getUserSettingSetting from './query/getUserSettingSetting'
@@ -45,11 +48,14 @@ export default {
   },
   Mutation: {
     createCategory,
-    createSubcategory,
     createRecord,
+    createSubcategory,
     createUserSetting,
     createWidget,
+    deleteCategory,
+    deleteRecord,
     deleteUserSetting,
+    deleteWidget,
     loginUser,
     updateCategory,
     updateRecord,

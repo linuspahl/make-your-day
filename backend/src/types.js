@@ -114,6 +114,9 @@ export default gql`
     ): Record!
     # Delete
     deleteUserSetting(settingId: Int!): Boolean
+    deleteCategory(id: Int!): Boolean
+    deleteWidget(id: Int!): Boolean
+    deleteRecord(id: Int!): Boolean
   }
 
   type Query {
