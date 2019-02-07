@@ -6,6 +6,8 @@ import RecordForm from './RecordForm'
 
 describe('RecordForm should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<RecordForm category={{}} />)
+    new ShallowRenderer().render(
+      <RecordForm category={{ subcategories: [] }} />
+    )
   })
 })

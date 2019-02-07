@@ -2,10 +2,10 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import RecordCreate from './RecordCreate'
+import RecordUpdate from './RecordUpdate'
 
-describe('RecordCreate should', () => {
+describe('RecordUpdate should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<RecordCreate>Page content</RecordCreate>)
+    new ShallowRenderer().render(<RecordUpdate>Page content</RecordUpdate>)
   })
 })

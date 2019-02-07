@@ -6,6 +6,6 @@ import ContentSelect from './ContentSelect'
 
 describe('ContentSelect should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<ContentSelect />)
+    new ShallowRenderer().render(<ContentSelect options={[]} />)
   })
 })
