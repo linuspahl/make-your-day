@@ -5,15 +5,17 @@ import styled from 'styled-components'
 const Layout = styled(Row)`
   margin-top: 40px;
   ${props =>
-    props.amountChildren === 1 &&
-    `
+    props.amountChildren === 1
+      ? `
       justify-content: center
-    `};
-  ${props =>
-    props.theme.settings.leftHandMode &&
     `
+      : ``};
+  ${props =>
+    props.theme.settings.leftHandMode
+      ? `
       flex-direction: row-reverse;
-    `};
+    `
+      : ``}
 `
 
 export default props => (
