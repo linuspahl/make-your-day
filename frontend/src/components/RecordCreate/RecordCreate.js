@@ -23,7 +23,13 @@ class RecordCreate extends React.Component {
   }
 
   render() {
-    const { match } = this.props
+    const {
+      history: {
+        location: { search },
+      },
+      match,
+    } = this.props
+    const urlParams = new URLSearchParams(search)
     const categoryId = extractIdFromUrl(match, 'categoryId')
 
     return (
@@ -47,7 +53,10 @@ class RecordCreate extends React.Component {
 
             // If the category has some subcategories, make the first one the
             // default selection
-            const initialData = { categoryId: category.id }
+            const initialData = {
+              categoryId: category.id,
+              createdAt: urlParams.get('createdAt'),
+            }
             if (category.subcategories && category.subcategories.length !== 0) {
               initialData.categoryId = category.subcategories[0].id
             }
