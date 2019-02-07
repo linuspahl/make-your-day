@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import PageLayout from 'components/PageLayout/PageLayout'
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 import DashboardWidgets from 'components/DashboardWidgets/DashboardWidgets'
-import Timeline from 'components/Timeline/Timeline'
+import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
 
 export const Layout = styled.div`
   height: 100%;
@@ -23,8 +23,8 @@ export default props => (
     noPadding
   >
     <Layout>
-      <Timeline />
-      <CategoryIconOverview />
+      <TimelineWidget />
+      <CategoryIconOverview context="horizontal-scroll" />
       <DashboardWidgets
         createNotificationBanner={props.createNotificationBanner}
       />
