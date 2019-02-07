@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 // utils
 import { handleInputChange } from 'utils/utils'
@@ -10,6 +10,7 @@ import Input from 'shared/form/Input/Input'
 import Button from 'shared/Button/Button'
 import Textarea from 'shared/form/Textarea/Textarea'
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
+
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 
 const Form = styled.form`
@@ -53,10 +54,34 @@ export default class RecordForm extends React.Component {
         title: categoryTitle,
         hasSubcategories,
         subcategories,
+        id: parentCatId,
       },
     } = this.props
     const { categoryId, title, amount, description } = this.state
     const subcategoryOptions = this.prepareSubcategories(subcategories)
+
+    // If a category is defined with 'hasSubcategories'
+    // but the user did not created subcategories yet
+    // we'll show an info instead of the form
+    if (hasSubcategories && subcategoryOptions.length === 0) {
+      return (
+        <Fragment>
+          <Row>
+            Für die Kategorie "{categoryTitle}" muss mindestens eine
+            Unterkategorie angelegt werden.
+          </Row>
+          <ActionRow>
+            <Button
+              context="primary"
+              to={`/categories/${parentCatId}/subcategories/create`}
+            >
+              Untekategorie anlegen
+            </Button>
+          </ActionRow>
+        </Fragment>
+      )
+    }
+
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
@@ -77,15 +102,17 @@ export default class RecordForm extends React.Component {
         )}
         {hasSubcategories && (
           <Row>
-            Unterkategorie
-            <ContentSelect
-              name="categoryId"
-              onChange={this.handleInputChange}
-              options={subcategoryOptions}
-              tabIndex={1}
-              title="Unterkategorie"
-              value={categoryId}
-            />
+            <Fragment>
+              Unterkategorie
+              <ContentSelect
+                name="categoryId"
+                onChange={this.handleInputChange}
+                options={subcategoryOptions}
+                tabIndex={1}
+                title="Unterkategorie"
+                value={categoryId}
+              />
+            </Fragment>
           </Row>
         )}
         {hasDescription && (
