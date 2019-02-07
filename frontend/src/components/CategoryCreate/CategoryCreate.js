@@ -47,7 +47,7 @@ class CategoryCreate extends React.Component {
   async handleCompleted(data) {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
-      createCategory: { title },
+      createCategory: { id, title, hasSubcategories },
     } = data
 
     // Inform user about success
@@ -57,7 +57,11 @@ class CategoryCreate extends React.Component {
     })
 
     // Go to the categories overview
-    history.push(rootPath)
+    if (hasSubcategories) {
+      history.push(`${rootPath}/${id}/subcategories/create`)
+    } else {
+      history.push(rootPath)
+    }
   }
 
   // Form error function
