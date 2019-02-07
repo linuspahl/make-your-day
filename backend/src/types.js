@@ -81,6 +81,7 @@ export default gql`
     ): Category!
     createSubcategory(title: String!, parentId: Int!): Category!
     createRecord(
+      createdAt: String
       title: String
       description: String
       amount: String
@@ -104,6 +105,13 @@ export default gql`
       type: String!
       value: String
     ): Widget!
+    updateRecord(
+      id: Int!
+      title: String
+      description: String
+      amount: String
+      categoryId: Int!
+    ): Record!
     # Delete
     deleteUserSetting(settingId: Int!): Boolean
   }
@@ -114,6 +122,7 @@ export default gql`
     getWidgets: [Widget]!
     getWidget(id: Int!): Widget!
     getSettings: [Setting]!
-    getRecords: [Record]!
+    getRecords(createdAt: String): [Record]!
+    getRecord(id: Int!): Record!
   }
 `

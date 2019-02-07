@@ -1,8 +1,20 @@
 import checkAccess from '../checkAccess'
 
-export default (parent, { title }, { models, authToken }) =>
-  checkAccess(models, authToken).then(user =>
-    models.Record.findAll({
-      where: { userId: user.id },
+export default (parent, { createdAt }, { models, authToken }) =>
+  checkAccess(models, authToken).then(user => {
+    const cond = { userId: user.id }
+    // const createdAt = getDateString(createdAt)
+
+    if (createdAt) {
+      // If createdAt param is defined, we want to get all records of the related day
+      const date = new Date(createdAt)
+      cond.createdAt = {
+        ['$gte']: date.setHours(0, 0, 0),
+        ['$lte']: date.setHours(23, 59, 59),
+      }
+    }
+
+    return models.Record.findAll({
+      where: cond,
     })
-  )
+  })

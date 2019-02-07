@@ -12,11 +12,13 @@ import createWidget from './mutation/createWidget'
 import deleteUserSetting from './mutation/deleteUserSetting'
 import loginUser from './mutation/loginUser'
 import updateCategory from './mutation/updateCategory'
+import updateRecord from './mutation/updateRecord'
 import updateWidget from './mutation/updateWidget'
 // Queries import
 import getCategories from './query/getCategories'
 import getCategory from './query/getCategory'
 import getRecords from './query/getRecords'
+import getRecord from './query/getRecord'
 import getSettings from './query/getSettings'
 import getWidgets from './query/getWidgets'
 import getWidget from './query/getWidget'
@@ -50,12 +52,14 @@ export default {
     deleteUserSetting,
     loginUser,
     updateCategory,
+    updateRecord,
     updateWidget,
   },
   Query: {
     getCategory,
     getCategories,
     getRecords,
+    getRecord,
     getSettings,
     getWidgets,
     getWidget,

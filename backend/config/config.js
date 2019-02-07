@@ -12,6 +12,7 @@ const {
     DB_NAME,
     DB_USER,
     DB_PASSWORD,
+    DB_TIMEZONE,
   },
 } = process
 
@@ -26,5 +27,6 @@ export default {
     name: DB_NAME,
     user: DB_USER,
     password: DB_PASSWORD,
+    timezone: DB_TIMEZONE,
   },
 }
