@@ -15,6 +15,10 @@ const Layout = styled.button`
       bgColor = props.theme.secondary
       activeBgColor = props.theme.secondaryActive
     }
+    if (props.context === 'delete') {
+      bgColor = props.theme.delete
+      activeBgColor = props.theme.deleteActive
+    }
 
     return `
       display: flex;

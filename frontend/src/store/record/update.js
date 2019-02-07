@@ -18,3 +18,25 @@ export const addRecord = (cache, result) => {
     })
   } catch {}
 }
+
+export const deleteRecord = (cache, result, variables) => {
+  const {
+    data: { deleteRecord },
+  } = result
+
+  try {
+    if (deleteRecord) {
+      const RecordsQuery = cache.readQuery({ query: GetRecords })
+      const updatedRecords = RecordsQuery.getRecords.filter(records => {
+        return records.id !== variables.id
+      })
+
+      cache.writeQuery({
+        query: GetRecords,
+        data: {
+          getRecords: [...updatedRecords],
+        },
+      })
+    }
+  } catch {}
+}

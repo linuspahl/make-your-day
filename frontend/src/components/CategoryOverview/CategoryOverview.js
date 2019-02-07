@@ -8,11 +8,14 @@ import Button from 'shared/Button/Button'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ListItem from 'shared/list/ListItem/ListItem'
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
+import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetCategories } from 'store/category/query.gql'
+import { DeleteCategory } from 'store/category/mutation.gql'
+import { deleteCategory } from 'store/category/update'
 
 const List = styled.div`
   margin-top: 25px;
@@ -48,10 +51,15 @@ export default props => {
                         icon="list-ul"
                       />
                     )}
-
                     <ActionIcon
                       to={`${rootPath}/edit/${category.id}`}
                       icon="edit"
+                    />
+                    <DeleteIcon
+                      id={category.id}
+                      mutation={DeleteCategory}
+                      onUpdate={deleteCategory}
+                      title={category.title}
                     />
                   </div>
                 </ListItem>

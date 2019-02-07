@@ -11,8 +11,11 @@ import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
+import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 // graphql
 import { GetWidgets } from 'store/widget/query.gql'
+import { DeleteWidget } from 'store/widget/mutation.gql'
+import { deleteWidget } from 'store/widget/update'
 
 const List = styled.div`
   margin-top: 25px;
@@ -41,10 +44,18 @@ export default props => {
               {data.getWidgets.map(widget => (
                 <ListItem key={widget.id} spaceBetween>
                   {widget.title}
-                  <ActionIcon
-                    to={`${rootPath}/edit/${widget.id}`}
-                    icon="edit"
-                  />
+                  <div>
+                    <ActionIcon
+                      to={`${rootPath}/edit/${widget.id}`}
+                      icon="edit"
+                    />
+                    <DeleteIcon
+                      id={widget.id}
+                      mutation={DeleteWidget}
+                      onUpdate={deleteWidget}
+                      title={widget.title}
+                    />
+                  </div>
                 </ListItem>
               ))}
             </List>

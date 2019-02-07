@@ -37,11 +37,12 @@ mutation CreateSubcategory($parentId: Int!, $title: String!) {
   createSubcategory(parentId: $parentId, title: $title) {
     id
     title
+    parentId
   }
 }
 
 mutation UpdateCategory(
-  $color: String!,
+  $color: String,
   $hasDescription: Boolean,
   $hasTitle: Boolean,
   $icon: String,
@@ -74,4 +75,8 @@ mutation UpdateSubcategory($id: Int!, $title: String!) {
     parentId
     title
   }
+}
+
+mutation DeleteCategory($id: Int!) {
+  deleteCategory(id: $id)
 }

@@ -9,11 +9,13 @@ import H1 from 'shared/H1/H1'
 import RecordForm from 'components/RecordForm/RecordForm'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import DeleteButton from 'shared/DeleteButton/DeleteButton'
+import ActionRow from 'shared/form/ActionRow/ActionRow'
 // graphql
-import { UpdateRecord } from 'store/record/mutation.gql'
+import { UpdateRecord, DeleteRecord } from 'store/record/mutation.gql'
 import { GetRecord } from 'store/record/query.gql'
 import { GetCategoryWithChildren } from 'store/category/query.gql'
-import { addRecord } from 'store/record/update'
+import { addRecord, deleteRecord } from 'store/record/update'
 
 class RecordCreate extends React.Component {
   constructor(props) {
@@ -24,7 +26,7 @@ class RecordCreate extends React.Component {
   }
 
   render() {
-    const { match } = this.props
+    const { match, history } = this.props
     const categoryId = extractIdFromUrl(match, 'categoryId')
     const recordId = extractIdFromUrl(match, 'id')
 
@@ -70,23 +72,35 @@ class RecordCreate extends React.Component {
                   }
 
                   return (
-                    <Mutation
-                      mutation={UpdateRecord}
-                      onCompleted={this.handleCompleted}
-                      onError={this.handleError}
-                      update={addRecord}
-                    >
-                      {updateRecord => (
-                        <RecordForm
-                          category={category}
-                          rootPath={'/'}
-                          initialData={initialData}
-                          submitAction={variables =>
-                            updateRecord({ variables })
-                          }
+                    <Fragment>
+                      <Mutation
+                        mutation={UpdateRecord}
+                        onCompleted={this.handleCompleted}
+                        onError={this.handleError}
+                        update={addRecord}
+                      >
+                        {updateRecord => (
+                          <RecordForm
+                            category={category}
+                            rootPath={'/'}
+                            initialData={initialData}
+                            submitAction={variables =>
+                              updateRecord({ variables })
+                            }
+                          />
+                        )}
+                      </Mutation>
+                      <ActionRow>
+                        <DeleteButton
+                          context="delete"
+                          id={record.id}
+                          mutation={DeleteRecord}
+                          onUpdate={deleteRecord}
+                          title={record.title}
+                          onDelete={() => history.push('/')}
                         />
-                      )}
-                    </Mutation>
+                      </ActionRow>
+                    </Fragment>
                   )
                 }}
               </Query>

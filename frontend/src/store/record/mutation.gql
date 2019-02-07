@@ -21,6 +21,7 @@ mutation CreateRecord(
         id
         icon
         color
+        title
         type
         hasUnit
         unit
@@ -56,4 +57,8 @@ mutation UpdateRecord (
         unit
       }
     }
+}
+
+mutation DeleteRecord($id: Int!) {
+  deleteRecord(id: $id)
 }

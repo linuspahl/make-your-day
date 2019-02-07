@@ -11,6 +11,8 @@ const defaultTheme = {
   // Secondary color, mostly used by buttons
   secondary: '#e2e2e2',
   secondaryActive: '#cccccc',
+  // Delete
+  delete: '#ff6060',
   // Default app bg
   appBg: '#e6eeff',
   // Font setting

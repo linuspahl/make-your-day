@@ -13,3 +13,7 @@ mutation UpdateWidget($id: Int!, $title: String!, $type: String!, $value: String
     value
 	}
 }
+
+mutation DeleteWidget($id: Int!) {
+  deleteWidget(id: $id)
+}

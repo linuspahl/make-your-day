@@ -49,3 +49,27 @@ export const addSubcategory = (cache, result, variables) => {
     })
   } catch {}
 }
+
+export const deleteCategory = (cache, result, variables) => {
+  const {
+    data: { deleteCategory },
+  } = result
+
+  try {
+    if (deleteCategory) {
+      const categoriesQuery = cache.readQuery({ query: GetCategories })
+      const updatedCategories = categoriesQuery.getCategories.filter(
+        category => {
+          return category.id !== variables.id
+        }
+      )
+
+      cache.writeQuery({
+        query: GetCategories,
+        data: {
+          getCategories: [...updatedCategories],
+        },
+      })
+    }
+  } catch {}
+}
