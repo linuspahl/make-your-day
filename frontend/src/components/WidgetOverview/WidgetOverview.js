@@ -1,21 +1,23 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Query } from 'react-apollo'
 // components
-import H1 from 'shared/H1/H1'
-import Button from 'shared/Button/Button'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ListItem from 'shared/list/ListItem/ListItem'
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import NoResult from 'shared/NoResult/NoResult'
+import Button from 'shared/Button/Button'
+import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
+import ContentBox from 'shared/ContentBox/ContentBox'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
+import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import H1 from 'shared/H1/H1'
+import ListItem from 'shared/list/ListItem/ListItem'
+import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetWidgets } from 'store/widget/query.gql'
 import { DeleteWidget } from 'store/widget/mutation.gql'
 import { deleteWidget } from 'store/widget/update'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
 
 const List = styled.div`
   margin-top: 25px;
@@ -25,9 +27,8 @@ export default props => {
   const { rootPath } = props
 
   return (
-    <Fragment>
+    <FadeTransition fullWidth>
       <H1 context="page">Widgets verwalten</H1>
-
       <Query query={GetWidgets}>
         {({ loading, error, data }) => {
           if (loading) return <CenteredSpinner />
@@ -68,6 +69,6 @@ export default props => {
           Widget erstellen
         </Button>
       </ActionRow>
-    </Fragment>
+    </FadeTransition>
   )
 }

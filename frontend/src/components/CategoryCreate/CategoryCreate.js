@@ -1,12 +1,13 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 // utils
 import { logError } from 'utils/utils'
 // components
-import H1 from 'shared/H1/H1'
 import CategoryForm from 'components/CategoryForm/CategoryForm'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import H1 from 'shared/H1/H1'
 // graphql
 import { addCategory } from 'store/category/update'
 import { CreateCategory } from 'store/category/mutation.gql'
@@ -22,7 +23,7 @@ class CategoryCreate extends React.Component {
   render() {
     const { rootPath } = this.props
     return (
-      <Fragment>
+      <FadeTransition fullWidth>
         <H1 context="page">Kategorie erstellen</H1>
         <Mutation
           mutation={CreateCategory}
@@ -39,7 +40,7 @@ class CategoryCreate extends React.Component {
             />
           )}
         </Mutation>
-      </Fragment>
+      </FadeTransition>
     )
   }
 

@@ -1,15 +1,5 @@
 // libraries
-import styled, { keyframes } from 'styled-components'
-import { Link } from 'react-router-dom'
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
+import styled from 'styled-components'
 
 export const Layout = styled.div`
   height: 100%;
@@ -20,12 +10,12 @@ export const Layout = styled.div`
   position: fixed;
   display: flex;
   align-items: center;
+  justify-content: center;
 
   padding: 20px;
   background-color: ${props => props.theme.appBg};
 
   z-index: 1;
-  animation: ${fadeIn} 0.4s ease-out;
 `
 
 export const CloseIconWrapper = styled.div`
@@ -41,8 +31,9 @@ export const CloseIconWrapper = styled.div`
 
 export const Pages = styled.ul`
   width: 100%;
+  max-width: 420px;
 
-  padding: 5px 10px;
+  padding: 40px 20px 40px 20px;
   border: 1px solid ${props => props.theme.border};
 
   background-color: ${props => props.theme.contentBoxBg};

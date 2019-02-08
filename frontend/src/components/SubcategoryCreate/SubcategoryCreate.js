@@ -1,12 +1,13 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
 // utils
 import { logError, extractIdFromUrl } from 'utils/utils'
 // components
-import H1 from 'shared/H1/H1'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import H1 from 'shared/H1/H1'
 import NoResult from 'shared/NoResult/NoResult'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
 // graphql
@@ -26,7 +27,7 @@ class SubcategoryCreate extends React.Component {
     const { rootPath, match } = this.props
     const categoryId = extractIdFromUrl(match)
     return (
-      <Fragment>
+      <FadeTransition>
         <H1 context="page">Subkategorie erstellen</H1>
 
         <Query query={GetCategory} variables={{ id: categoryId }}>
@@ -62,7 +63,7 @@ class SubcategoryCreate extends React.Component {
             )
           }}
         </Query>
-      </Fragment>
+      </FadeTransition>
     )
   }
 

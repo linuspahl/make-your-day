@@ -5,12 +5,13 @@ import { Mutation, Query } from 'react-apollo'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
+import ActionRow from 'shared/form/ActionRow/ActionRow'
+import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
+import DeleteButton from 'shared/DeleteButton/DeleteButton'
+import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import RecordForm from 'components/RecordForm/RecordForm'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import DeleteButton from 'shared/DeleteButton/DeleteButton'
-import ActionRow from 'shared/form/ActionRow/ActionRow'
 // graphql
 import { UpdateRecord, DeleteRecord } from 'store/record/mutation.gql'
 import { GetRecord } from 'store/record/query.gql'
@@ -31,7 +32,7 @@ class RecordCreate extends React.Component {
     const recordId = extractIdFromUrl(match, 'id')
 
     return (
-      <Fragment>
+      <FadeTransition>
         <H1 context="page">Eintrag bearbeiten</H1>
         <Query
           query={GetCategoryWithChildren}
@@ -107,7 +108,7 @@ class RecordCreate extends React.Component {
             )
           }}
         </Query>
-      </Fragment>
+      </FadeTransition>
     )
   }
 

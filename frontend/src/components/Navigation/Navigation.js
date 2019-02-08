@@ -1,10 +1,10 @@
 // libraries
 import React from 'react'
-import { withRouter } from 'react-router-dom'
 // components
+import { CloseIconWrapper, Layout, Pages } from './styles'
 import CloseIcon from 'shared/CloseIcon/CloseIcon'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import NavigationItem from 'components/NavigationItem/NavigationItem'
-import { CloseIconWrapper, Layout, Pages, RouteActive } from './styles'
 
 export default props => {
   const { toggleAction, rootPath } = props
@@ -21,14 +21,16 @@ export default props => {
         <CloseIcon close={toggleAction} />
       </CloseIconWrapper>
       <Pages>
-        {items.map(route => (
-          <NavigationItem
-            toggleAction={toggleAction}
-            key={route.path}
-            route={route}
-            rootPath={rootPath}
-          />
-        ))}
+        <FadeTransition>
+          {items.map(route => (
+            <NavigationItem
+              toggleAction={toggleAction}
+              key={route.path}
+              route={route}
+              rootPath={rootPath}
+            />
+          ))}
+        </FadeTransition>
       </Pages>
     </Layout>
   )

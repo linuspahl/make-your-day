@@ -1,14 +1,13 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
-import { withRouter } from 'react-router-dom'
 import { handleInputChange } from 'utils/utils'
 // components
-import Input from 'shared/form/Input/Input'
-import Row from 'shared/form/Row/Row'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
+import Input from 'shared/form/Input/Input'
+import Row from 'shared/form/Row/Row'
 // graphql
 import { LoginUser } from 'store/user/mutation.gql'
 

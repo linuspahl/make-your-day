@@ -1,10 +1,11 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 // utils
 import { logError } from 'utils/utils'
 // components
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
 // graphql
@@ -20,9 +21,9 @@ class WidgetCreate extends React.Component {
   }
 
   render() {
-    const { rootPath, createNotificationBanner } = this.props
+    const { rootPath } = this.props
     return (
-      <Fragment>
+      <FadeTransition fullWidth>
         <H1 context="page">Widget erstellen</H1>
         <Mutation
           mutation={CreateWidget}
@@ -40,7 +41,7 @@ class WidgetCreate extends React.Component {
             />
           )}
         </Mutation>
-      </Fragment>
+      </FadeTransition>
     )
   }
 

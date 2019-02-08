@@ -2,9 +2,10 @@
 import React from 'react'
 import styled from 'styled-components'
 // components
-import PageLayout from 'components/PageLayout/PageLayout'
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 import DashboardWidgets from 'components/DashboardWidgets/DashboardWidgets'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import PageLayout from 'components/PageLayout/PageLayout'
 import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
 
 export const Layout = styled.div`
@@ -28,12 +29,14 @@ export default props => (
     rootPath={props.rootPath}
     noPadding
   >
-    <Layout>
-      <TimelineWidget />
-      <CategoryIconOverview context="horizontal-scroll" />
-      <DashboardWidgets
-        createNotificationBanner={props.createNotificationBanner}
-      />
-    </Layout>
+    <FadeTransition fullHeight fullWidth>
+      <Layout>
+        <TimelineWidget />
+        <CategoryIconOverview context="horizontal-scroll" />
+        <DashboardWidgets
+          createNotificationBanner={props.createNotificationBanner}
+        />
+      </Layout>
+    </FadeTransition>
   </PageLayout>
 )

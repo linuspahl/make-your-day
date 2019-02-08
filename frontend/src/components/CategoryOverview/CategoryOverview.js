@@ -1,16 +1,17 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Query } from 'react-apollo'
 // components
-import H1 from 'shared/H1/H1'
+import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
+import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ListItem from 'shared/list/ListItem/ListItem'
-import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
-import ActionRow from 'shared/form/ActionRow/ActionRow'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import H1 from 'shared/H1/H1'
+import ListItem from 'shared/list/ListItem/ListItem'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetCategories } from 'store/category/query.gql'
@@ -25,7 +26,7 @@ export default props => {
   const { rootPath } = props
 
   return (
-    <Fragment>
+    <FadeTransition fullWidth>
       <H1 context="page">Kategorien verwalten</H1>
 
       <Query query={GetCategories}>
@@ -74,6 +75,6 @@ export default props => {
           Kategorie erstellen
         </Button>
       </ActionRow>
-    </Fragment>
+    </FadeTransition>
   )
 }

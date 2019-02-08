@@ -2,9 +2,9 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 // components
-import PageLayout from 'components/PageLayout/PageLayout'
 import ContentBox from 'shared/ContentBox/ContentBox'
 import DayEdit from 'components/DayEdit/DayEdit'
+import PageLayout from 'components/PageLayout/PageLayout'
 
 export default props => {
   const { isUserLoggedIn, rootPath } = props

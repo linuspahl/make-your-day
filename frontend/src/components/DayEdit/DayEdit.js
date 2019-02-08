@@ -5,19 +5,19 @@ import { withRouter } from 'react-router-dom'
 // utils
 import { sortBy } from 'utils/utils'
 // components
+import { Records, Record, IconWrapper, NewRecordSection } from './styles'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
-import Icon from 'shared/Icon/Icon'
 import Button from 'shared/Button/Button'
+import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import NoResult from 'shared/NoResult/NoResult'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import H2 from 'shared/H2/H2'
-import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
+import Icon from 'shared/Icon/Icon'
+import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
-
-import { Records, Record, IconWrapper, NewRecordSection } from './styles'
 
 class Timeline extends React.Component {
   render() {
@@ -27,7 +27,7 @@ class Timeline extends React.Component {
       },
     } = this.props
     return (
-      <Fragment>
+      <FadeTransition>
         <H1 context="page">Einträge {date}</H1>
         <NewRecordSection>
           <H2>Neu erstellen</H2>
@@ -78,7 +78,7 @@ class Timeline extends React.Component {
             Zum Dashboard
           </Button>
         </ActionRow>
-      </Fragment>
+      </FadeTransition>
     )
   }
 

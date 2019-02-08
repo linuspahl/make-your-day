@@ -49,6 +49,7 @@
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
     "react-test-renderer": "^16.7.0",
+    "react-transition-group": "^2.5.3",
     "styled-components": "^4.1.3"
   }
 }

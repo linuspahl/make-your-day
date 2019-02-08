@@ -1,14 +1,15 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Query, Mutation } from 'react-apollo'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
-import H1 from 'shared/H1/H1'
 import CategoryForm from 'components/CategoryForm/CategoryForm'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import H1 from 'shared/H1/H1'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { UpdateCategory } from 'store/category/mutation.gql'
@@ -27,7 +28,7 @@ class CategoryEdit extends React.Component {
     const categoryId = extractIdFromUrl(match)
 
     return (
-      <Fragment>
+      <FadeTransition fullWidth>
         <H1 context="page">Kategorie bearbeiten</H1>
 
         <Query query={GetCategory} variables={{ id: categoryId }}>
@@ -58,7 +59,7 @@ class CategoryEdit extends React.Component {
             )
           }}
         </Query>
-      </Fragment>
+      </FadeTransition>
     )
   }
 

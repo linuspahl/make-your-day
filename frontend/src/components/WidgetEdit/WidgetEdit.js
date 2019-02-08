@@ -1,15 +1,16 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Query, Mutation } from 'react-apollo'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
-import H1 from 'shared/H1/H1'
-import WidgetForm from 'components/WidgetForm/WidgetForm'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import H1 from 'shared/H1/H1'
 import NoResult from 'shared/NoResult/NoResult'
+import WidgetForm from 'components/WidgetForm/WidgetForm'
 // graphql
 import { UpdateWidget } from 'store/widget/mutation.gql'
 import { GetWidget } from 'store/widget/query.gql'
@@ -27,7 +28,7 @@ class WidgetEdit extends React.Component {
     const widgetId = extractIdFromUrl(match)
 
     return (
-      <Fragment>
+      <FadeTransition fullWidth>
         <H1 context="page">Widget bearbeiten</H1>
 
         <Query query={GetWidget} variables={{ id: widgetId }}>
@@ -58,7 +59,7 @@ class WidgetEdit extends React.Component {
             )
           }}
         </Query>
-      </Fragment>
+      </FadeTransition>
     )
   }
 

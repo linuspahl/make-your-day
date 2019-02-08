@@ -1,18 +1,19 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 import { Query } from 'react-apollo'
 // utils
 import { extractIdFromUrl } from 'utils/utils'
 // components
-import H1 from 'shared/H1/H1'
-import Button from 'shared/Button/Button'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ListItem from 'shared/list/ListItem/ListItem'
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
+import Button from 'shared/Button/Button'
+import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import H1 from 'shared/H1/H1'
+import ListItem from 'shared/list/ListItem/ListItem'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetCategoryPlainWithChildren } from 'store/category/query.gql'
@@ -27,7 +28,7 @@ class CategoryEdit extends React.Component {
     const categoryId = extractIdFromUrl(match)
 
     return (
-      <Fragment>
+      <FadeTransition>
         <H1 context="page">Subkategorien verwalten</H1>
 
         <Query
@@ -75,7 +76,7 @@ class CategoryEdit extends React.Component {
             Subkategorie erstellen
           </Button>
         </ActionRow>
-      </Fragment>
+      </FadeTransition>
     )
   }
 }

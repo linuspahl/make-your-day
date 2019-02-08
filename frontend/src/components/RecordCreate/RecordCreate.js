@@ -1,14 +1,15 @@
 // libraries
-import React, { Fragment } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
-import H1 from 'shared/H1/H1'
-import RecordForm from 'components/RecordForm/RecordForm'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import H1 from 'shared/H1/H1'
+import RecordForm from 'components/RecordForm/RecordForm'
 // graphql
 import { CreateRecord } from 'store/record/mutation.gql'
 import { GetCategoryWithChildren } from 'store/category/query.gql'
@@ -33,7 +34,7 @@ class RecordCreate extends React.Component {
     const categoryId = extractIdFromUrl(match, 'categoryId')
 
     return (
-      <Fragment>
+      <FadeTransition>
         <H1 context="page">Eintrag erstellen</H1>
         <Query
           query={GetCategoryWithChildren}
@@ -81,7 +82,7 @@ class RecordCreate extends React.Component {
             )
           }}
         </Query>
-      </Fragment>
+      </FadeTransition>
     )
   }
 

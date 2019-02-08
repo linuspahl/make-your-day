@@ -2,11 +2,11 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 // components
-import PageLayout from 'components/PageLayout/PageLayout'
 import ContentBox from 'shared/ContentBox/ContentBox'
-import WidgetOverview from 'components/WidgetOverview/WidgetOverview'
-import WidgetEdit from 'components/WidgetEdit/WidgetEdit'
+import PageLayout from 'components/PageLayout/PageLayout'
 import WidgetCreate from 'components/WidgetCreate/WidgetCreate'
+import WidgetEdit from 'components/WidgetEdit/WidgetEdit'
+import WidgetOverview from 'components/WidgetOverview/WidgetOverview'
 
 export default props => {
   const { createNotificationBanner, isUserLoggedIn, rootPath } = props
