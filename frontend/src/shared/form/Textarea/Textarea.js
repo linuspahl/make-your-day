@@ -12,6 +12,7 @@ const Element = styled.textarea`
   border-radius: 0;
   border: 1px solid ${props => props.theme.border};
 
+  background-color: transparent;
   color: ${props => props.theme.text};
 
   box-shadow: none;

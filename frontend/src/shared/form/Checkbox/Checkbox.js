@@ -8,9 +8,10 @@ const Wrapper = styled.div`
   height: 40px;
   width: 40px;
 
-  background-color: ${props => props.theme.white};
+  background-color: transparent;
   border: 1px solid ${props => props.theme.border};
 
+  color: ${props => props.theme.text};
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
 `
 
