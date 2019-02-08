@@ -47,7 +47,7 @@ const validatePassword = (password, passwordHash) => {
 // Create session token after successful login
 const createToken = () => {
   return new Promise((resolve, reject) => {
-    crypto.randomBytes(16, (err, data) => {
+    crypto.randomBytes(16, (error, data) => {
       error ? reject(error) : resolve(data.toString('base64'))
     })
   })
