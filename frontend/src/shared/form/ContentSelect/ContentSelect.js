@@ -59,7 +59,7 @@ export default class ContentSelect extends React.Component {
           onFocus={disabled ? null : this.onFocus}
           onBlur={disabled ? null : this.onBlur}
         >
-          {value ? currentOption.title : '-'}
+          {value && currentOption ? currentOption.title : '-'}
           <ArrowIcon>
             <Icon title="angle-down" />
           </ArrowIcon>
@@ -126,7 +126,7 @@ export default class ContentSelect extends React.Component {
       this.toggleSelect()
     }
 
-    // Detect space an enter key and toggle select
+    // Detect space and enter key and toggle select
     if (keyCode === 13 || keyCode === 32) {
       // We need to prevent the default window scrolling for the space key
       // And the default form submit for the enter key

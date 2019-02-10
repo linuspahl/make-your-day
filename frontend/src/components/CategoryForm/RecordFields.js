@@ -34,10 +34,10 @@ export default props => {
   const disabledFields = {
     type: isUpdateMode,
     hasSubcategories: isUpdateMode || type !== 'journal',
-    hasUnit: isUpdateMode || type === 'counter',
-    unit: !hasUnit || type === 'counter',
+    hasUnit: isUpdateMode,
+    unit: !hasUnit || isUpdateMode,
     hasDescription: type !== 'journal',
-    hasTitle: type === 'counter',
+    hasTitle: type === 'counter' || type === 'list',
   }
 
   return (
@@ -64,7 +64,7 @@ export default props => {
           name="hasSubcategories"
           onChange={handleInputChange}
           tabIndex={1}
-          value={type === 'journal' ? hasSubcategories : false}
+          value={hasSubcategories}
         />
       </Row>
       <Row disabled={disabledFields.hasUnit}>
@@ -74,7 +74,7 @@ export default props => {
           name="hasUnit"
           onChange={handleInputChange}
           tabIndex={1}
-          value={type !== 'counter' ? hasUnit : false}
+          value={hasUnit}
         />
       </Row>
       <Row disabled={disabledFields.unit}>
@@ -85,7 +85,7 @@ export default props => {
           onChange={handleInputChange}
           required
           tabIndex={1}
-          value={type !== 'counter' ? unit : null}
+          value={unit}
         />
       </Row>
       <Row disabled={disabledFields.hasTitle}>
@@ -95,9 +95,7 @@ export default props => {
           name="hasTitle"
           onChange={handleInputChange}
           tabIndex={1}
-          value={
-            type === 'counter' ? false : type === 'journal' ? hasTitle : true
-          }
+          value={hasTitle}
         />
       </Row>
       <Row disabled={disabledFields.hasDescription}>
@@ -107,7 +105,7 @@ export default props => {
           name="hasDescription"
           onChange={handleInputChange}
           tabIndex={1}
-          value={type === 'journal' ? hasDescription : false}
+          value={hasDescription}
         />
       </Row>
     </div>

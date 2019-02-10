@@ -21,6 +21,7 @@ export default class CategoryForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.changeState = this.changeState.bind(this)
   }
 
   render() {
@@ -73,6 +74,23 @@ export default class CategoryForm extends React.Component {
   }
 
   handleInputChange(event) {
-    handleInputChange(event, this.setState.bind(this))
+    handleInputChange(event, this.changeState)
+  }
+
+  // Some options depend on the selected type
+  // This means the need to set / reset the the depending values
+  changeState(updatedEntry) {
+    const stateChanges = { ...updatedEntry }
+    if (updatedEntry.type === 'counter') {
+      stateChanges.hasSubcategories = false
+      stateChanges.hasTitle = false
+      stateChanges.hasDescription = false
+    }
+    if (updatedEntry.type === 'list') {
+      stateChanges.hasSubcategories = false
+      stateChanges.hasTitle = true
+      stateChanges.hasDescription = false
+    }
+    this.setState({ ...stateChanges })
   }
 }

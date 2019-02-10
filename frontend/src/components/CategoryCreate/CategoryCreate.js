@@ -36,7 +36,7 @@ class CategoryCreate extends React.Component {
               mode="create"
               rootPath={rootPath}
               submitAction={variables => createCategory({ variables })}
-              initialData={{ type: 'journal' }}
+              initialData={{ type: 'journal', icon: null, color: null }}
             />
           )}
         </Mutation>

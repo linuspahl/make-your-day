@@ -41,12 +41,12 @@ export const getDateString = dateParam => {
 
 // Utility form function - will updade the form state on input change.
 // Used in every input.
-export const handleInputChange = (event, setState) => {
+export const handleInputChange = (event, changeState) => {
   const { target } = event
   const { name } = target
   const value = target.type === 'checkbox' ? target.checked : target.value
 
-  setState({
+  changeState({
     [name]: value,
   })
 }
