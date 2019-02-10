@@ -52,7 +52,7 @@ export default props => {
         </Checkmark>
       )}
       <Element
-        checked={value}
+        checked={value || false}
         disabled={disabled}
         name={name}
         onChange={onChange}
