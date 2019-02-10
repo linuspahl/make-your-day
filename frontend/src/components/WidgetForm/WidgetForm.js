@@ -3,6 +3,10 @@ import React from 'react'
 import styled from 'styled-components'
 // utils
 import { handleInputChange } from 'utils/utils'
+import {
+  widgetTypeOptions,
+  widgetPositionOptions,
+} from '../../../config/params'
 // components
 import Row from 'shared/form/Row/Row'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
@@ -14,12 +18,6 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 const Form = styled.form`
   margin-top: 15px;
 `
-
-const HeadlineRow = styled(Row)`
-  padding-top: 25px;
-`
-
-const typeOptions = [{ value: 'textarea', title: 'Freitext' }]
 
 export default class WidgetForm extends React.Component {
   constructor(props) {
@@ -39,7 +37,8 @@ export default class WidgetForm extends React.Component {
 
   render() {
     const { mode, rootPath } = this.props
-    const { title, type, value } = this.state
+    const { title, type, value, position } = this.state
+
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
@@ -57,10 +56,21 @@ export default class WidgetForm extends React.Component {
           <ContentSelect
             name="type"
             onChange={this.handleInputChange}
-            options={typeOptions}
+            options={widgetTypeOptions}
             tabIndex={1}
             title="Art"
             value={type}
+          />
+        </Row>
+        <Row>
+          Position
+          <ContentSelect
+            name="position"
+            onChange={this.handleInputChange}
+            options={widgetPositionOptions}
+            tabIndex={1}
+            title="Position"
+            value={position}
           />
         </Row>
         <Row disabled={type !== 'textarea'}>

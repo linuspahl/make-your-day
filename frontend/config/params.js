@@ -72,3 +72,10 @@ export const categoryIcons = [
   { value: 'tv', title: 'TV' },
   { value: 'money', title: 'Geld' },
 ]
+
+export const widgetTypeOptions = [{ value: 'textarea', title: 'Freitext' }]
+
+export const widgetPositionOptions = [
+  { value: 'dashboard-top', title: 'Dashboard oben' },
+  { value: 'dashboard-bottom', title: 'Dashboard unten' },
+]

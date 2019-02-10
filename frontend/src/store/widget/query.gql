@@ -4,6 +4,7 @@ query GetWidget($id: Int!) {
     title
     value
     type
+    position
 	}
 }
 
@@ -13,5 +14,6 @@ query GetWidgets {
     title
     type
     value
+    position
 	}
 }

@@ -37,7 +37,7 @@ class WidgetCreate extends React.Component {
               mutation={CreateWidget}
               rootPath={rootPath}
               submitAction={variables => createWidget({ variables })}
-              initialData={{ type: 'textarea' }}
+              initialData={{ type: 'textarea', position: 'dashboard-bottom' }}
             />
           )}
         </Mutation>
