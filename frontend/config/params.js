@@ -1,13 +1,13 @@
 // File for all static content, that is not related to the config
 
 export const weekDayLabels = {
+  0: 'So',
   1: 'Mo',
   2: 'Di',
   3: 'Mi',
   4: 'Do',
   5: 'Fr',
   6: 'Sa',
-  7: 'So',
 }
 
 export const categoryColors = {

@@ -65,7 +65,7 @@ export const Categories = styled.div`
 `
 
 export const Category = styled.div`
-height: 17px
+  height: 17px
 
   font-size: 12px;
 
@@ -75,7 +75,8 @@ height: 17px
   padding: 5px 8px;
   border-radius: 20px;
 
-  background-color: ${props => props.theme.category[props.color]};
+  background-color: ${props =>
+    props.color ? props.theme.category[props.color] : props.theme.border};
   color: ${props => props.theme.categoryText[props.color]};
 
   margin: 2px 4px 2px 0;

@@ -122,7 +122,7 @@ export default class Timeline extends React.Component {
   }
 
   getRecordAmount(record, category) {
-    if (category.hasUnit) {
+    if (category.hasUnit && category.type !== 'counter') {
       return parseInt(record.amount, 10)
     }
     return 1
