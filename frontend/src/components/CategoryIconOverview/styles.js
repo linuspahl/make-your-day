@@ -6,6 +6,9 @@ export const Layout = styled.div`
   ${props =>
     props.context === 'horizontal-scroll'
       ? `
+      display: flex;
+      align-items: center;
+  
       height: 100%;
       padding: 10px 20px;
 
@@ -23,7 +26,6 @@ export const Layout = styled.div`
         padding: 20px 10px;
         white-space: normal;
       }
-
     `
       : ''}
 `
