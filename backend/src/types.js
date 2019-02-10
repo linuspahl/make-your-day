@@ -63,6 +63,7 @@ export default gql`
     title: String!
     type: String!
     value: String
+    position: String!
   }
 
   type Mutation {
@@ -88,7 +89,12 @@ export default gql`
       categoryId: Int!
     ): Record!
     createUserSetting(settingId: Int!, value: String): UserSetting!
-    createWidget(title: String!, type: String!, value: String): Widget!
+    createWidget(
+      title: String!
+      type: String!
+      value: String
+      position: String!
+    ): Widget!
     # Update
     updateCategory(
       color: String
@@ -104,6 +110,7 @@ export default gql`
       title: String!
       type: String!
       value: String
+      position: String!
     ): Widget!
     updateRecord(
       id: Int!

@@ -17,5 +17,11 @@ export default sequelize =>
       type: Sequelize.STRING,
       validate: { isIn: [['textarea']] },
     },
+    position: {
+      allowNull: false,
+      defaultValue: 'dashboard-bottom',
+      type: Sequelize.STRING,
+      validate: { isIn: [['dashboard-bottom', 'dashboard-top']] },
+    },
     value: Sequelize.TEXT,
   })
