@@ -1,45 +1,43 @@
-import Sequelize from 'sequelize'
-
-export default sequelize =>
+export default (sequelize, DataTypes) =>
   sequelize.define('category', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
-    title: Sequelize.STRING,
-    unit: Sequelize.STRING,
-    icon: Sequelize.STRING,
-    color: Sequelize.STRING,
+    title: DataTypes.STRING,
+    unit: DataTypes.STRING,
+    icon: DataTypes.STRING,
+    color: DataTypes.STRING,
     type: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: { isIn: [['journal', 'list', 'counter']] },
     },
     hasTitle: {
       allowNull: false,
       defaultValue: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     hasDescription: {
       allowNull: false,
       defaultValue: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     hasUnit: {
       allowNull: false,
       defaultValue: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     hasSubcategories: {
       allowNull: false,
       defaultValue: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
     dailyUsage: {
       allowNull: false,
       defaultValue: false,
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
     },
   })

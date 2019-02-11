@@ -1,23 +1,21 @@
-import Sequelize from 'sequelize'
-
-export default sequelize =>
+export default (sequelize, DataTypes) =>
   sequelize.define('user', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     username: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       unique: true,
     },
-    passwordHash: { type: Sequelize.STRING, allowNull: false },
-    token: Sequelize.STRING,
+    passwordHash: { type: DataTypes.STRING, allowNull: false },
+    token: DataTypes.STRING,
     role: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: { isIn: [['admin', 'user']] },
     },
   })

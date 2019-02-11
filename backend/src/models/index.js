@@ -2,21 +2,23 @@
 // Will setup all existing models
 // The models provide all definitons needed for the database setup
 import sequelize from '../core/sequelize'
-import Category from './category/category'
-import Setting from './setting/setting'
-import Record from './record/record'
-import User from './user/user'
-import UserSetting from './userSetting/userSetting'
-import Widget from './widget/widget'
 
-// Initialize models
-const models = {}
+// We need to use sequelize import method to call every model definition
+const models = {
+  Record: sequelize.import('./record/record'),
+  Widget: sequelize.import('./widget/widget'),
+  Category: sequelize.import('./category/category'),
+  UserSetting: sequelize.import('./userSetting/userSetting'),
+  Setting: sequelize.import('./setting/setting'),
+  User: sequelize.import('./user/user'),
+}
 
-models.Record = Record(sequelize)
-models.Widget = Widget(sequelize)
-models.Category = Category(sequelize, models)
-models.UserSetting = UserSetting(sequelize)
-models.Setting = Setting(sequelize, models)
-models.User = User(sequelize, models)
+// When we finished all model creations, we can define all relations.
+// All model relations are defined in the model associate attribute.
+Object.keys(models).forEach(key => {
+  if ('associate' in models[key]) {
+    models[key].associate(models)
+  }
+})
 
 export default models

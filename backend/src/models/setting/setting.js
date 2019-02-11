@@ -1,8 +1,13 @@
 import definition from './definition'
 
-export default (sequelize, models) => {
-  const { UserSetting } = models
-  const Setting = definition(sequelize)
-  Setting.hasMany(UserSetting, { onDelete: 'cascade', onUpdate: 'cascade' })
+export default (sequelize, DataTypes) => {
+  const Setting = definition(sequelize, DataTypes)
+  Setting.associate = models => {
+    Setting.hasMany(models.UserSetting, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    })
+  }
+
   return Setting
 }

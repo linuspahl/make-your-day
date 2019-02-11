@@ -1,25 +1,23 @@
-import Sequelize from 'sequelize'
-
-export default sequelize =>
+export default (sequelize, DataTypes) =>
   sequelize.define('setting', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
     title: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
     type: {
       allowNull: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       validate: { isIn: [['nightMode', 'leftHandMode', 'showAppBgImage']] },
     },
     defaultValue: {
       allowNull: false,
       defaultValue: false,
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
     },
   })

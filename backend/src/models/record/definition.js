@@ -1,14 +1,12 @@
-import Sequelize from 'sequelize'
-
-export default sequelize =>
+export default (sequelize, DataTypes) =>
   sequelize.define('record', {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
-    amount: Sequelize.STRING,
-    title: Sequelize.STRING,
-    description: Sequelize.TEXT,
+    amount: DataTypes.STRING,
+    title: DataTypes.STRING,
+    description: DataTypes.TEXT,
   })

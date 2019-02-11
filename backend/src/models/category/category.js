@@ -1,15 +1,20 @@
 import definition from './definition'
 
-export default (sequelize, models) => {
-  const { Record } = models
-  const Category = definition(sequelize)
+export default (sequelize, DataTypes) => {
+  const Category = definition(sequelize, DataTypes)
 
   Category.hasOne(Category, {
     as: 'parent',
     onDelete: 'cascade',
     onUpdate: 'cascade',
   })
-  Category.hasMany(Record, { onDelete: 'cascade', onUpdate: 'cascade' })
+
+  Category.associate = models => {
+    Category.hasMany(models.Record, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    })
+  }
 
   return Category
 }

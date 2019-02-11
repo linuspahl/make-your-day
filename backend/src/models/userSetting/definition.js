@@ -1,6 +1,4 @@
-import Sequelize from 'sequelize'
-
-export default sequelize =>
+export default (sequelize, DataTypes) =>
   sequelize.define(
     'userSetting',
     {
@@ -8,12 +6,12 @@ export default sequelize =>
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
       },
       value: {
         allowNull: false,
         defaultValue: true,
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
     },
     {
