@@ -15,7 +15,7 @@ const corsSettings = { optionsSuccessStatus: 200 }
 // This will allow every local machine to access the backend
 // For production, we wnat to limit the allowed origin to our related frontend
 if (!config.isDevEnv) {
-  corsSettings.origin = `${config.frontendHost}:${config.frontendPort}`
+  corsSettings.origin = `http://${config.frontendHost}`
 }
 app.use(cors(corsSettings))
 

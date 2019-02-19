@@ -9,6 +9,8 @@
   "scripts": {
     "start": "nodemon --exec babel-node --inspect ./src/index.js",
     "startProd": "pm2 start --interpreter babel-node ./src/index.js",
+    "stopProd": "pm2 stop index",
+    "logProd": "pm2 logs",
     "createDatabase": "babel-node ./config/setup/createDatabase.js",
     "sequelize": "sequelize --config ./config/sequelize-cli.js --models-path ./src/models",
     "migrate": "yarn sequelize db:migrate",
