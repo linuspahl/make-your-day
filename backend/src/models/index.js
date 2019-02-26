@@ -11,6 +11,7 @@ const models = {
   UserSetting: sequelize.import('./userSetting/userSetting'),
   Setting: sequelize.import('./setting/setting'),
   User: sequelize.import('./user/user'),
+  UserSession: sequelize.import('./userSession/userSession'),
 }
 
 // When we finished all model creations, we can define all relations.

@@ -1,18 +1,23 @@
 // checkAccess will check if a user is allowed to execute a resolver
 export default (models, authToken, restrictedRoles = []) => {
-  const { User } = models
+  const { UserSession, User } = models
 
-  return User.findOne({
+  return UserSession.findOne({
     where: {
       token: authToken,
-      ['$and']: { role: { ['$in']: restrictedRoles } },
     },
+    include: [{ model: User, where: { role: { ['$in']: restrictedRoles } } }],
   })
-    .then(user => {
-      if (!Boolean(user)) {
+    .then(userSession => {
+      if (
+        !Boolean(userSession) ||
+        !Boolean(userSession.dataValues) ||
+        !Boolean(userSession.dataValues.user)
+      ) {
         throw Error('User not authorized')
       }
-      return user
+
+      return userSession.dataValues.user
     })
     .catch(error => console.log('Error: check access', error))
 }

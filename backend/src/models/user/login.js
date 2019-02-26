@@ -3,7 +3,8 @@
 import bcrypt from 'bcrypt-nodejs'
 import crypto from 'crypto'
 
-export default (User, { username, password }) => {
+export default (models, { username, password, device }) => {
+  const { User, UserSession } = models
   let user
   let token
 
@@ -27,12 +28,14 @@ export default (User, { username, password }) => {
       // Set token object reference for further usage
       token = createdToken
       // Set generate token as user auth token
-      return setToken(User, user.id, token)
+      return setToken(UserSession, user.id, token, device)
     })
     .then(() => {
       // We need to return the user query again, to be able to work dynamically together with the graphql schema
       // This means we can't return the needed attributes in a static way
-      return User.findOne({ where: { id: user.id } })
+      return User.findOne({
+        where: { id: user.id },
+      })
     })
     .catch(error => {
       console.log('Error: user login', error)
@@ -54,6 +57,13 @@ const createToken = () => {
 }
 
 // Set auth token
-const setToken = (User, id, token) => {
-  return User.update({ token }, { where: { id } })
+const setToken = (UserSession, userId, token, device) => {
+  var today = new Date()
+  const in30Days = today.setDate(today.getDate() + 30)
+  return UserSession.create({
+    token,
+    userId,
+    expiresAt: in30Days,
+    device,
+  })
 }

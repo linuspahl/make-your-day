@@ -1,2 +1,2 @@
-export default (parent, { username, password }, { models }) =>
-  models.User.login({ username, password })
+export default (parent, { username, password, device }, { models }) =>
+  models.User.login({ username, password, device })

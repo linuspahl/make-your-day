@@ -10,10 +10,16 @@ export default gql`
   type User {
     id: Int!
     username: String!
+    role: String!
+  }
+
+  type Login {
+    id: Int!
+    username: String!
     token: String
     role: String!
-    nightMode: Boolean
     userSettings: [UserSetting]!
+    userSession: UserSessionCreate!
   }
 
   type Category {
@@ -57,6 +63,21 @@ export default gql`
     setting: Setting!
   }
 
+  type UserSession {
+    id: Int!
+    device: String!
+    expiresAt: String!
+    createdAt: String!
+  }
+
+  type UserSessionCreate {
+    id: Int!
+    device: String!
+    expiresAt: String!
+    createdAt: String!
+    token: String!
+  }
+
   type Widget {
     id: Int!
     user: User!
@@ -67,7 +88,7 @@ export default gql`
   }
 
   type Mutation {
-    loginUser(username: String!, password: String!): User!
+    loginUser(username: String!, password: String!, device: String!): Login!
     # Create
     createCategory(
       color: String
@@ -121,6 +142,7 @@ export default gql`
     ): Record!
     # Delete
     deleteUserSetting(settingId: Int!): Boolean
+    deleteUserSession(id: Int!): Boolean
     deleteCategory(id: Int!): Boolean
     deleteWidget(id: Int!): Boolean
     deleteRecord(id: Int!): Boolean
@@ -129,10 +151,11 @@ export default gql`
   type Query {
     getCategories: [Category]!
     getCategory(id: Int!): Category!
-    getWidgets: [Widget]!
-    getWidget(id: Int!): Widget!
-    getSettings: [Setting]!
-    getRecords(createdAt: String): [Record]!
     getRecord(id: Int!): Record!
+    getRecords(createdAt: String): [Record]!
+    getSettings: [Setting]!
+    getUserSessions: [UserSession]!
+    getWidget(id: Int!): Widget!
+    getWidgets: [Widget]!
   }
 `

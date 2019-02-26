@@ -12,6 +12,7 @@ import createWidget from './mutation/createWidget'
 import deleteCategory from './mutation/deleteCategory'
 import deleteRecord from './mutation/deleteRecord'
 import deleteUserSetting from './mutation/deleteUserSetting'
+import deleteUserSession from './mutation/deleteUserSession'
 import deleteWidget from './mutation/deleteWidget'
 import loginUser from './mutation/loginUser'
 import updateCategory from './mutation/updateCategory'
@@ -23,6 +24,8 @@ import getCategory from './query/getCategory'
 import getRecord from './query/getRecord'
 import getRecords from './query/getRecords'
 import getSettings from './query/getSettings'
+import getUserSessions from './query/getUserSessions'
+import getUserUserSession from './query/getUserUserSession'
 import getWidget from './query/getWidget'
 import getWidgets from './query/getWidgets'
 // Queries relation resolvers import
@@ -33,8 +36,9 @@ import getCategorySubcategories from './query/getCategorySubcategories'
 import getCategoryParent from './query/getCategoryParent'
 
 export default {
-  User: {
+  Login: {
     userSettings: getUserUserSettings,
+    userSession: getUserUserSession,
   },
   UserSetting: {
     setting: getUserSettingSetting,
@@ -55,6 +59,7 @@ export default {
     deleteCategory,
     deleteRecord,
     deleteUserSetting,
+    deleteUserSession,
     deleteWidget,
     loginUser,
     updateCategory,
@@ -67,6 +72,7 @@ export default {
     getRecords,
     getRecord,
     getSettings,
+    getUserSessions,
     getWidgets,
     getWidget,
   },
