@@ -8,7 +8,7 @@ import LoginForm from 'components/LoginForm/LoginForm'
 import PageLayout from 'components/PageLayout/PageLayout'
 
 export default props => (
-  <PageLayout isUserLoggedIn={props.isUserLoggedIn} rootPath={props.rootPath}>
+  <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
     <ContentBox>
       <FadeTransition>
         <H1 context="page">Anmeldung</H1>

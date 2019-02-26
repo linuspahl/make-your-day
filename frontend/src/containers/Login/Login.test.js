@@ -6,8 +6,6 @@ import Login from './Login'
 
 describe('Login should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(
-      <Login isUserLoggedIn updateLocalStorage={() => {}} />
-    )
+    new ShallowRenderer().render(<Login updateLocalStorage={() => {}} />)
   })
 })

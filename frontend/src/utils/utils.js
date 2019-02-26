@@ -107,8 +107,9 @@ export const getLocalStorage = stateKeys =>
 // format function for all existing local storage values
 const formatAppStateValue = (key, value) => {
   switch (key) {
-    // Nubers
+    // Numbers
     case 'userId':
+    case 'expiresAt':
       return value ? parseInt(value, 10) : null
     // Booleans
     case 'nightMode':

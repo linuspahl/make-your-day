@@ -14,9 +14,9 @@ import SubcategoryCreate from 'components/SubcategoryCreate/SubcategoryCreate'
 import SubcategoryEdit from 'components/SubcategoryEdit/SubcategoryEdit'
 
 export default props => {
-  const { createNotificationBanner, isUserLoggedIn, rootPath } = props
+  const { createNotificationBanner, userSession, rootPath } = props
   return (
-    <PageLayout isUserLoggedIn={isUserLoggedIn} rootPath={rootPath}>
+    <PageLayout userSession={userSession} rootPath={rootPath}>
       <ContentBox>
         <Route
           exact

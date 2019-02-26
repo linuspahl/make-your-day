@@ -2,13 +2,11 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
-export default ({ component: Component, isUserLoggedIn, ...rest }) => {
+export default ({ component: Component, userSession, ...rest }) => {
   // If user is already logged in and tries to access a public route,
   // we will redirect him to to root route, the dashboard
-  if (isUserLoggedIn) return <Redirect to="/" />
+  if (userSession && userSession.token) return <Redirect to="/" />
   return (
-    <Route
-      render={() => <Component isUserLoggedIn={isUserLoggedIn} {...rest} />}
-    />
+    <Route render={() => <Component userSession={userSession} {...rest} />} />
   )
 }

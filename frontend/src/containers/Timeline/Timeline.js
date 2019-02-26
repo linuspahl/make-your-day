@@ -7,9 +7,9 @@ import DayEdit from 'components/DayEdit/DayEdit'
 import PageLayout from 'components/PageLayout/PageLayout'
 
 export default props => {
-  const { isUserLoggedIn, rootPath } = props
+  const { userSession, rootPath } = props
   return (
-    <PageLayout isUserLoggedIn={isUserLoggedIn} rootPath={rootPath}>
+    <PageLayout userSession={userSession} rootPath={rootPath}>
       <ContentBox>
         <Route
           exact

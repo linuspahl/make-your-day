@@ -23,7 +23,7 @@ export default props => (
       <PublicRoute
         component={Login}
         createNotificationBanner={props.createNotificationBanner}
-        isUserLoggedIn={props.isUserLoggedIn}
+        userSession={props.userSession}
         path="/login"
         updateLocalStorage={props.updateLocalStorage}
       />
@@ -31,14 +31,14 @@ export default props => (
         component={Dashboard}
         createNotificationBanner={props.createNotificationBanner}
         exact
-        isUserLoggedIn={props.isUserLoggedIn}
+        userSession={props.userSession}
         path="/"
       />
       <PrivateRoute
         clearLocalStorage={props.clearLocalStorage}
         component={Settings}
-        exact
-        isUserLoggedIn={props.isUserLoggedIn}
+        expiresAt={props.expiresAt}
+        userSession={props.userSession}
         path="/settings"
         updateLocalStorage={props.updateLocalStorage}
         userSettings={props.userSettings}
@@ -46,18 +46,18 @@ export default props => (
       <PrivateRoute
         component={Categories}
         createNotificationBanner={props.createNotificationBanner}
-        isUserLoggedIn={props.isUserLoggedIn}
+        userSession={props.userSession}
         path="/categories"
       />
       <PrivateRoute
         component={Widgets}
         createNotificationBanner={props.createNotificationBanner}
-        isUserLoggedIn={props.isUserLoggedIn}
+        userSession={props.userSession}
         path="/widgets"
       />
       <PrivateRoute
         component={Timeline}
-        isUserLoggedIn={props.isUserLoggedIn}
+        userSession={props.userSession}
         path="/timeline"
       />
       <PrivateRoute path="*" component={PageNotFound} />

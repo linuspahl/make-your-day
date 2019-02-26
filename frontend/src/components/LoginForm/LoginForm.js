@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
 import { handleInputChange } from 'utils/utils'
+import { sortBy } from 'utils/utils'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
@@ -31,7 +32,7 @@ export default class LoginForm extends React.Component {
     return (
       <Mutation
         mutation={LoginUser}
-        variables={{ username, password }}
+        variables={{ username, password, device: navigator.platform }}
         onCompleted={this.handleCompleted}
         onError={this.handleError}
       >
@@ -78,17 +79,18 @@ export default class LoginForm extends React.Component {
 
   async handleCompleted(data) {
     const {
-      loginUser: { token: authToken, id: userId, role: userRole, userSettings },
+      loginUser: { userSession, id: userId, role: userRole, userSettings },
     } = data
-    const { updateLocalStorage, history } = this.props
+    const { updateLocalStorage } = this.props
     const settings = this.formatUserSettings(userSettings)
     // Update local storage / app state reset  with received user data
     // App will redirect when authToken and userId is defined in app state
-    if (authToken) {
+    if (userSession && userSession.token) {
       updateLocalStorage({
-        authToken,
+        authToken: userSession.token,
         userId,
         userRole,
+        expiresAt: userSession.expiresAt,
         ...settings,
       })
     }

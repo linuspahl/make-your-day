@@ -25,7 +25,7 @@ export const Layout = styled.div`
 
 export default props => (
   <PageLayout
-    isUserLoggedIn={props.isUserLoggedIn}
+    userSession={props.userSession}
     rootPath={props.rootPath}
     noPadding
   >

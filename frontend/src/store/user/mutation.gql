@@ -1,5 +1,5 @@
-mutation LoginUser($username: String!, $password: String!) {
-  loginUser(username: $username, password: $password) {
+mutation LoginUser($username: String!, $password: String!, $device: String!) {
+  loginUser(username: $username, password: $password, device: $device) {
     id
     token
     role
@@ -9,5 +9,15 @@ mutation LoginUser($username: String!, $password: String!) {
         type
       }
     }
+    userSession {
+      id
+      token
+      expiresAt
+      createdAt
+    }
   }
+}
+
+mutation DeleteUserSession($id: Int!) {
+  deleteUserSession(id: $id)
 }

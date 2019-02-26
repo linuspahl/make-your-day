@@ -7,7 +7,7 @@ import PageNotFound from './PageNotFound'
 describe('PageNotFound should', () => {
   test('render without crashing', () => {
     new ShallowRenderer().render(
-      <PageNotFound isUserLoggedIn updateLocalStorage={() => {}} />
+      <PageNotFound userSession updateLocalStorage={() => {}} />
     )
   })
 })

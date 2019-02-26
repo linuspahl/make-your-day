@@ -17,7 +17,7 @@ export const Layout = styled.div`
 `
 
 export default props => (
-  <PageLayout isUserLoggedIn={props.isUserLoggedIn} rootPath={props.rootPath}>
+  <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
     <ContentBox>
       <FadeTransition>
         <H1 context="page">Seite nicht gefunden</H1>

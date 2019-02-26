@@ -22,10 +22,11 @@ export default class AppRoot extends React.Component {
 
     this.state = getLocalStorage([
       'authToken',
-      'userId',
-      'nightMode',
+      'expiresAt',
       'leftHandMode',
+      'nightMode',
       'showAppBgImage',
+      'userId',
     ])
 
     this.notificationBanner = React.createRef()
@@ -37,12 +38,15 @@ export default class AppRoot extends React.Component {
 
   render() {
     const {
-      userId,
       authToken,
-      nightMode,
+      expiresAt,
       leftHandMode,
+      nightMode,
       showAppBgImage,
+      userId,
     } = this.state
+
+    const userSession = { userId, expiresAt, token: authToken }
 
     const userSettings = {
       nightMode,
@@ -56,10 +60,11 @@ export default class AppRoot extends React.Component {
           <Fragment>
             <NotificationBanner ref={this.notificationBanner} />
             <Routes
-              isUserLoggedIn={userId && authToken}
-              updateLocalStorage={this.updateLocalStorage}
               clearLocalStorage={this.clearLocalStorage}
               createNotificationBanner={this.createNotificationBanner}
+              expiresAt={expiresAt}
+              userSession={userSession}
+              updateLocalStorage={this.updateLocalStorage}
               userSettings={userSettings}
             />
           </Fragment>
@@ -76,10 +81,11 @@ export default class AppRoot extends React.Component {
     localStorage.clear()
     this.setState({
       authToken: null,
-      userId: null,
-      nightMode: false,
+      expiresAt: null,
       leftHandMode: false,
+      nightMode: false,
       showAppBgImage: false,
+      userId: null,
     })
   }
 

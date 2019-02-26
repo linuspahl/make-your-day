@@ -2,10 +2,10 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import Timeline from './Timeline'
+import Grid from './Grid'
 
-describe('Timeline should', () => {
+describe('Grid should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<Timeline>Content</Timeline>)
+    new ShallowRenderer().render(<Grid>Content</Grid>)
   })
 })
