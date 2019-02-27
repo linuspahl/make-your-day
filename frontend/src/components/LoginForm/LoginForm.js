@@ -90,6 +90,7 @@ export default class LoginForm extends React.Component {
         authToken: userSession.token,
         userId,
         userRole,
+        userSessionId: userSession.id,
         expiresAt: userSession.expiresAt,
         ...settings,
       })

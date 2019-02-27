@@ -5,7 +5,7 @@ import { Query } from 'react-apollo'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import Button from 'shared/Button/Button'
+import LogoutButton from 'shared/LogoutButton/LogoutButton'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
@@ -25,7 +25,7 @@ export default props => (
           return (
             <ErrorMessage
               error={error}
-              message="Kategorien konnten nicht geladen werden"
+              message="Angemeldete Geräte konnten nicht geladen werden"
             />
           )
         // We are getting the userSettings as props
@@ -55,9 +55,11 @@ export default props => (
       <Link to={`${props.rootPath}/sessions`}>Angmeldete Geräte verwalten</Link>
     </Row>
     <ActionRow>
-      <Button clickAction={props.clearLocalStorage} context="secondary">
-        Abmelden
-      </Button>
+      <LogoutButton
+        clearLocalStorage={props.clearLocalStorage}
+        createNotificationBanner={props.createNotificationBanner}
+        userSessionId={props.userSession.id}
+      />
     </ActionRow>
   </FadeTransition>
 )

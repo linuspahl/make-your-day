@@ -36,6 +36,7 @@ export default props => (
       />
       <PrivateRoute
         clearLocalStorage={props.clearLocalStorage}
+        createNotificationBanner={props.createNotificationBanner}
         component={Settings}
         expiresAt={props.expiresAt}
         userSession={props.userSession}

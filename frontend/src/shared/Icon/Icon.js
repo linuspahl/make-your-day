@@ -3,6 +3,9 @@
 // All stylings like font-size or color should be defined in the parent component.
 // This is more flexible then creating a prop for every possible styling attribute
 
+// libraries
 import React from 'react'
 
-export default props => <i className={`la la-${props.title}`} />
+const Icon = props => <i className={`la la-${props.title}`} />
+
+export default Icon

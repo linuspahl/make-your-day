@@ -27,6 +27,7 @@ export default class AppRoot extends React.Component {
       'nightMode',
       'showAppBgImage',
       'userId',
+      'userSessionId',
     ])
 
     this.notificationBanner = React.createRef()
@@ -44,9 +45,15 @@ export default class AppRoot extends React.Component {
       nightMode,
       showAppBgImage,
       userId,
+      userSessionId,
     } = this.state
 
-    const userSession = { userId, expiresAt, token: authToken }
+    const userSession = {
+      userId,
+      expiresAt,
+      token: authToken,
+      id: userSessionId,
+    }
 
     const userSettings = {
       nightMode,

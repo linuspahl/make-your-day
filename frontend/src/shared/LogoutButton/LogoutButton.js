@@ -2,28 +2,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
-// components
+// compoents
+import Button from 'shared/Button/Button'
 import Icon from 'shared/Icon/Icon'
 // graphql
 import { DeleteUserSession } from 'store/user/mutation.gql'
-import { deleteUserSession } from 'store/user/update'
 
-const Wrapper = styled.div`
-  height: 40px;
-  width: 40px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  float: left;
-
-  font-size: 26px;
-  color: ${props => props.theme.text};
-  cursor: pointer;
-
-  &:active {
-    background-color: ${props => props.theme.active};
-  }
+const IconWrapper = styled.div`
+  margin-left: 5px;
+  font-size: 20px;
 `
 
 export default props => {
@@ -40,9 +27,15 @@ export default props => {
       onError={() => handleError(createNotificationBanner, clearLocalStorage)}
     >
       {perfomMutation => (
-        <Wrapper onClick={() => handleClick(perfomMutation)}>
-          <Icon title="sign-out" />
-        </Wrapper>
+        <Button
+          context="secondary"
+          clickAction={() => handleClick(perfomMutation)}
+        >
+          Abmelden
+          <IconWrapper>
+            <Icon title="sign-out" />
+          </IconWrapper>
+        </Button>
       )}
     </Mutation>
   )
@@ -69,6 +62,6 @@ const handleError = (createNotificationBanner, clearLocalStorage) => {
   clearLocalStorage()
   createNotificationBanner({
     type: 'error',
-    message: 'Sitzung konnte nicht in der Datenbank gelöscht werden',
+    message: 'Sitzung konnte auf dem Sevrer nicht gelöscht werden',
   })
 }

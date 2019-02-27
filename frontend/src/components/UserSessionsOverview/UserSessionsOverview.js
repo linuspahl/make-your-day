@@ -59,11 +59,11 @@ export default props => (
                     <GridCell justify="flex-end">
                       {isCurrentSession && (
                         <LogoutIcon
-                          id={userSession.id}
-                          mutation={DeleteUserSession}
+                          userSessionId={userSession.id}
                           clearLocalStorage={props.clearLocalStorage}
-                          onUpdate={deleteUserSession}
-                          title={userSession.title}
+                          createNotificationBanner={
+                            props.createNotificationBanner
+                          }
                         />
                       )}
                       {!isCurrentSession && (
@@ -71,7 +71,6 @@ export default props => (
                           id={userSession.id}
                           mutation={DeleteUserSession}
                           onUpdate={deleteUserSession}
-                          title={userSession.title}
                         />
                       )}
                     </GridCell>

@@ -8,8 +8,8 @@ export const deleteUserSession = (cache, result, variables) => {
 
   try {
     if (deleteUserSession) {
-      const UserSessionsQuery = cache.readQuery({ query: GetUserSessions })
-      const updatedUserSessions = UserSessionsQuery.getUserSessions.filter(
+      const userSessionsQuery = cache.readQuery({ query: GetUserSessions })
+      const updatedUserSessions = userSessionsQuery.getUserSessions.filter(
         userSessions => {
           return userSessions.id !== variables.id
         }

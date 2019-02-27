@@ -109,6 +109,7 @@ const formatAppStateValue = (key, value) => {
   switch (key) {
     // Numbers
     case 'userId':
+    case 'userSessionId':
     case 'expiresAt':
       return value ? parseInt(value, 10) : null
     // Booleans
