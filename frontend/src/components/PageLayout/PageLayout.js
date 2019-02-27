@@ -4,6 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Navigation from 'components/Navigation/Navigation'
 import appBgImage from './appBg.jpg'
+import appBgImageDark from './appBgDark.jpg'
 
 const Layout = styled.div`
   height: 100%;
@@ -14,12 +15,17 @@ const Layout = styled.div`
   justify-content: center;
   overflow: auto;
 
+  opacity: 1;
+  transition: background-image 1s linear, background-color 1.5s linear;
+
   padding: ${props => (props.noPadding ? 0 : '20px')};
 
   ${props =>
     props.theme.settings.showAppBgImage
       ? `
-    background-image: url(${appBgImage});
+    background-image: url(${
+      props.theme.settings.nightMode ? appBgImageDark : appBgImage
+    });
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 50% 50%;

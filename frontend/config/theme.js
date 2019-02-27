@@ -39,7 +39,7 @@ const nightModeTheme = {
   primaryActive: '#313131',
   secondary: '#8e8e8e',
   secondaryActive: '#585858',
-  appBg: '#030303',
+  appBg: '#1e1e1e',
   contentBoxBg: '#1a1a1b',
 
   text: '#fff',
