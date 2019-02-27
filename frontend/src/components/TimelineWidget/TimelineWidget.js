@@ -5,19 +5,11 @@ import { Query } from 'react-apollo'
 import { sortBy, formatUnixDate, getDateString } from 'utils/utils'
 import { weekDayLabels } from '../../../config/params'
 // components
-import Icon from 'shared/Icon/Icon'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
-import {
-  Layout,
-  Day,
-  Shortcut,
-  Categories,
-  Category,
-  IconWrapper,
-  Box,
-} from './styles'
+import CategorySummary from 'shared/CategorySummary/CategorySummary'
+import { Layout, Day, Shortcut, Categories, Box } from './styles'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
 
@@ -50,22 +42,12 @@ export default class Timeline extends React.Component {
                   <Shortcut>{weekDayLabels[day.shortcut]}</Shortcut>
                   <Categories>
                     {Object.values(day.categories).map(category => {
-                      const {
-                        color,
-                        hasUnit,
-                        icon,
-                        id,
-                        recordAmountSum,
-                        unit,
-                      } = category
                       return (
-                        <Category key={id} color={color}>
-                          <IconWrapper>
-                            <Icon title={icon} />
-                          </IconWrapper>
-                          {recordAmountSum}
-                          {hasUnit ? unit : '×'}
-                        </Category>
+                        <CategorySummary
+                          amount={category.recordAmountSum}
+                          category={category}
+                          key={category.id}
+                        />
                       )
                     })}
                   </Categories>

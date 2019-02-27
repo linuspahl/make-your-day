@@ -5,7 +5,8 @@ import { withRouter } from 'react-router-dom'
 // utils
 import { sortBy } from 'utils/utils'
 // components
-import { Records, Record, IconWrapper, NewRecordSection } from './styles'
+import CategorySummary from 'shared/CategorySummary/CategorySummary'
+import { Records, NewRecordSection } from './styles'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
@@ -14,7 +15,6 @@ import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import H2 from 'shared/H2/H2'
-import Icon from 'shared/Icon/Icon'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
@@ -53,19 +53,14 @@ class Timeline extends React.Component {
                 return (
                   <Fragment key={category.id}>
                     {sortBy(category.records, 'categoryId').map(record => (
-                      <Record
+                      <CategorySummary
+                        amount={category.hasUnit ? record.amount : 1}
+                        category={category}
                         key={record.id}
-                        color={category.color}
                         to={`/categories/${category.id}/records/${
                           record.id
                         }/edit`}
-                      >
-                        <IconWrapper>
-                          <Icon title={category.icon} />
-                        </IconWrapper>
-                        {category.hasUnit ? record.amount : 1}
-                        {category.hasUnit ? category.unit : '×'}
-                      </Record>
+                      />
                     ))}
                   </Fragment>
                 )

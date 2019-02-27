@@ -22,6 +22,7 @@ const defaultTheme = {
   contentBoxBg: '#fff',
   white: '#fff',
   active: 'rgba(0, 0, 0, 0.1)',
+  timelineDay: '#add6ae',
 
   // Available category icon colors
   category: categoryColors,
@@ -41,6 +42,7 @@ const nightModeTheme = {
   secondaryActive: '#585858',
   appBg: '#1e1e1e',
   contentBoxBg: '#1a1a1b',
+  timelineDay: '#596d59',
 
   text: '#fff',
   border: '#545454',

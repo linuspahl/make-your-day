@@ -35,8 +35,8 @@ export const Day = styled(Link)`
   align-items: center;
 
   padding: 5px 0;
-
   border-top: 1px solid ${props => props.theme.border};
+
   &:first-child {
     border-top: 0;
   }
@@ -53,8 +53,9 @@ export const Shortcut = styled.div`
   margin-right: 5px;
 
   border-radius: 50%;
+  border: 1px solid ${props => props.theme.border};
 
-  background-color: #add6ae;
+  background-color: ${props => props.theme.timelineDay};
 `
 
 export const Categories = styled.div`
@@ -62,30 +63,4 @@ export const Categories = styled.div`
   flex-flow: wrap;
 
   padding: 5px;
-`
-
-export const Category = styled.div`
-  height: 17px
-
-  font-size: 12px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px 8px;
-  border-radius: 20px;
-
-  background-color: ${props =>
-    props.color ? props.theme.category[props.color] : props.theme.border};
-  color: ${props => props.theme.categoryText[props.color]};
-
-  margin: 2px 4px 2px 0;
-  &:last-child {
-    margin-right: 0;
-  }
-`
-
-export const IconWrapper = styled.div`
-  font-size: 16px;
-  margin-right: 4px;
 `
