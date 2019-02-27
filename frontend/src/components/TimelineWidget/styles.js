@@ -26,6 +26,10 @@ export const Layout = styled.div`
 
 export const Box = styled(ContentBox)`
   padding: 10px;
+  @media (min-width: ${props =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    max-width: 100%;
+  }
 `
 
 export const Day = styled(Link)`

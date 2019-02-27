@@ -23,6 +23,7 @@ export const Layout = styled.div`
       @media (min-width: ${
         props.theme.mediaQuery.tablet
       }) and (orientation: landscape) {
+        flex-direction: column;
         padding: 20px 10px;
         white-space: normal;
       }
@@ -43,11 +44,13 @@ export const IconWrapper = styled.div`
   ${props =>
     props.context === 'horizontal-scroll'
       ? `
-      @media (min-width: ${props.theme.mediaQuery.tablet}) {
+      @media (min-width: ${
+        props.theme.mediaQuery.tablet
+      }) and (orientation: landscape) {
         margin-right: 0;
         margin-bottom: 10px;
         &:last-child {
-          margin-bottm: 0;
+          margin-bottom: 0;
         }
       }
         `
