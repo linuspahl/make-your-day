@@ -8,7 +8,7 @@ export const Layout = styled.div`
       ? `
       display: flex;
       align-items: center;
-  
+
       height: 100%;
       padding: 10px 20px;
 
@@ -24,8 +24,18 @@ export const Layout = styled.div`
         props.theme.mediaQuery.tablet
       }) and (orientation: landscape) {
         flex-direction: column;
+        
+        height: auto;
+
+        border-top: 0;
+        border-bottom: 0;
+        border-left: 1px solid ${props.theme.border};
+        border-right: 1px solid ${props.theme.border};
         padding: 20px 10px;
+
         white-space: normal;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
     `
       : ''}
