@@ -9,6 +9,6 @@ const Element = styled.h1`
   ${props => props.context === 'page' && 'margin-bottom: 60px;'};
 `
 
-export default props => (
-  <Element context={props.context}>{props.children}</Element>
-)
+const H1 = props => <Element context={props.context}>{props.children}</Element>
+
+export default H1

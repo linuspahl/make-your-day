@@ -7,7 +7,7 @@ import PageLayout from 'components/PageLayout/PageLayout'
 import UserSettingsOverview from 'components/UserSettingsOverview/UserSettingsOverview'
 import UserSessionsOverview from 'components/UserSessionsOverview/UserSessionsOverview'
 
-export default props => {
+const Settings = props => {
   return (
     <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
       <ContentBox>
@@ -41,3 +41,5 @@ export default props => {
     </PageLayout>
   )
 }
+
+export default Settings

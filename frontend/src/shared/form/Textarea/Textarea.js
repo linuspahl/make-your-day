@@ -19,7 +19,7 @@ const Element = styled.textarea`
   appearance: none;
 `
 
-export default props => {
+const Textarea = props => {
   const { type, name, onChange, required, disabled, value } = props
   return (
     <Element
@@ -32,3 +32,5 @@ export default props => {
     />
   )
 }
+
+export default Textarea

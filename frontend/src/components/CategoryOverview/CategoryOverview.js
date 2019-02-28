@@ -22,7 +22,7 @@ const List = styled.div`
   margin-top: 25px;
 `
 
-export default props => {
+const CategoryOverview = props => {
   const { rootPath } = props
 
   return (
@@ -78,3 +78,5 @@ export default props => {
     </FadeTransition>
   )
 }
+
+export default CategoryOverview

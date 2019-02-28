@@ -8,7 +8,7 @@ import ColorSelect from 'shared/form/ColorSelect/ColorSelect'
 import IconSelect from 'shared/form/IconSelect/IconSelect'
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 
-export default props => {
+const IconFields = props => {
   const { color, icon, title, handleInputChange } = props
   return (
     <div>
@@ -47,3 +47,5 @@ export default props => {
     </div>
   )
 }
+
+export default IconFields

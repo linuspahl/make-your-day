@@ -6,19 +6,21 @@ import Icon from 'shared/Icon/Icon'
 
 import { categoryIcons } from '../../../../config/params'
 
-export default props => {
+const IconSelect = props => {
   const { value, toggleSelect, onChange, name, tabIndex } = props
 
   return (
     <ContentSelect
-      tabIndex={tabIndex}
-      value={value}
-      renderPreview={option => <Icon title={option.value} />}
-      toggleSelect={toggleSelect}
-      onChange={onChange}
       name={name}
+      onChange={onChange}
       options={categoryIcons}
+      renderPreview={option => <Icon title={option.value} />}
+      tabIndex={tabIndex}
       title="Icon"
+      toggleSelect={toggleSelect}
+      value={value}
     />
   )
 }
+
+export default IconSelect

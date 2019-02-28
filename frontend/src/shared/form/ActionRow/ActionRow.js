@@ -18,6 +18,8 @@ const Layout = styled(Row)`
       : ``}
 `
 
-export default props => (
+const ActionRow = props => (
   <Layout amountChildren={props.children.length || 1}>{props.children}</Layout>
 )
+
+export default ActionRow

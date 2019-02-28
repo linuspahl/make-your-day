@@ -17,7 +17,7 @@ import Settings from 'containers/Settings/Settings'
 import Widgets from 'containers/Widgets/Widgets'
 import Timeline from 'containers/Timeline/Timeline'
 
-export default props => (
+const Routes = props => (
   <Router>
     <Switch>
       <PublicRoute
@@ -65,3 +65,5 @@ export default props => (
     </Switch>
   </Router>
 )
+
+export default Routes

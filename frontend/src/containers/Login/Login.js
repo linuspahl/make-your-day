@@ -7,7 +7,7 @@ import H1 from 'shared/H1/H1'
 import LoginForm from 'components/LoginForm/LoginForm'
 import PageLayout from 'components/PageLayout/PageLayout'
 
-export default props => (
+const Layout = props => (
   <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
     <ContentBox>
       <FadeTransition>
@@ -21,3 +21,5 @@ export default props => (
     </ContentBox>
   </PageLayout>
 )
+
+export default Layout

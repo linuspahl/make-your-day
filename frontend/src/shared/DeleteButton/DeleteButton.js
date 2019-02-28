@@ -12,7 +12,7 @@ const handleClick = (action, onDelete, title) => {
   }
 }
 
-export default props => {
+const DeleteButton = props => {
   const { id, mutation, onUpdate, title, onDelete } = props
   const variables = { id }
 
@@ -33,3 +33,5 @@ export default props => {
     </Mutation>
   )
 }
+
+export default DeleteButton

@@ -17,7 +17,7 @@ const Element = styled.input`
   cursor: ${props => (props.disabled ? 'not-allowed' : 'text')};
 `
 
-export default props => {
+const Input = props => {
   const { type, name, onChange, required, disabled, value, tabIndex } = props
   return (
     <Element
@@ -31,3 +31,5 @@ export default props => {
     />
   )
 }
+
+export default Input

@@ -39,7 +39,7 @@ const Layout = styled.button`
   }}
 `
 
-export default props => {
+const Button = props => {
   const { clickAction, children, type, context, to } = props
   const hasClickAction = typeof clickAction === 'function'
   const isLink = Boolean(to)
@@ -58,3 +58,5 @@ export default props => {
     </Layout>
   )
 }
+
+export default Button

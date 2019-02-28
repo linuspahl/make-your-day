@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   }
 `
 
-export default props => {
+const LogoutIcon = props => {
   const { userSessionId, clearLocalStorage, createNotificationBanner } = props
   const variables = { id: userSessionId }
 
@@ -72,3 +72,5 @@ const handleError = (createNotificationBanner, clearLocalStorage) => {
     message: 'Sitzung konnte nicht in der Datenbank gelöscht werden',
   })
 }
+
+export default LogoutIcon

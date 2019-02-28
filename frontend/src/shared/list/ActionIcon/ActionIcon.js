@@ -21,8 +21,9 @@ const Wrapper = styled(Link)`
   }
 `
 
-export default props => (
+const ActionRow = props => (
   <Wrapper to={props.to}>
     <Icon title={props.icon} />
   </Wrapper>
 )
+export default ActionRow

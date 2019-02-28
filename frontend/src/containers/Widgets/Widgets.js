@@ -8,7 +8,7 @@ import WidgetCreate from 'components/WidgetCreate/WidgetCreate'
 import WidgetEdit from 'components/WidgetEdit/WidgetEdit'
 import WidgetOverview from 'components/WidgetOverview/WidgetOverview'
 
-export default props => {
+const Widgets = props => {
   const { createNotificationBanner, isUserLoggedIn, rootPath } = props
   return (
     <PageLayout isUserLoggedIn={isUserLoggedIn} rootPath={rootPath}>
@@ -42,3 +42,5 @@ export default props => {
     </PageLayout>
   )
 }
+
+export default Widgets

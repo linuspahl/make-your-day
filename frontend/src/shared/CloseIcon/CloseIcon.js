@@ -4,7 +4,7 @@ import styled from 'styled-components'
 // components
 import Icon from 'shared/Icon/Icon'
 
-const CloseIcon = styled.div`
+const Element = styled.div`
   width: 30px;
   height: 30px;
 
@@ -22,11 +22,13 @@ const CloseIcon = styled.div`
   }
 `
 
-export default props => {
+const CloseIcon = props => {
   const hasClickAction = typeof props.close === 'function'
   return (
-    <CloseIcon onClick={() => hasClickAction && props.close()}>
+    <Element onClick={() => hasClickAction && props.close()}>
       <Icon title="times" />
-    </CloseIcon>
+    </Element>
   )
 }
+
+export default CloseIcon

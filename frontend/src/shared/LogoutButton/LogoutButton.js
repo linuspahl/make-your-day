@@ -13,7 +13,7 @@ const IconWrapper = styled.div`
   font-size: 20px;
 `
 
-export default props => {
+const LogoutButton = props => {
   const { userSessionId, clearLocalStorage, createNotificationBanner } = props
   const variables = { id: userSessionId }
 
@@ -65,3 +65,5 @@ const handleError = (createNotificationBanner, clearLocalStorage) => {
     message: 'Sitzung konnte auf dem Sevrer nicht gelöscht werden',
   })
 }
+
+export default LogoutButton

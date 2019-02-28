@@ -6,7 +6,7 @@ import Checkbox from 'shared/form/Checkbox/Checkbox'
 // graphql
 import { CreateUserSetting } from 'store/userSetting/mutation.gql'
 
-export default props => (
+const UserSettingCreate = props => (
   <Mutation
     mutation={CreateUserSetting}
     variables={{ settingId: props.setting.id }}
@@ -19,3 +19,5 @@ export default props => (
     {perfomMutation => <Checkbox value={false} onChange={perfomMutation} />}
   </Mutation>
 )
+
+export default UserSettingCreate

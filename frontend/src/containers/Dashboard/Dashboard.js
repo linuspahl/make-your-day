@@ -23,7 +23,7 @@ export const Layout = styled.div`
   }
 `
 
-export default props => (
+const Dashboard = props => (
   <PageLayout
     userSession={props.userSession}
     rootPath={props.rootPath}
@@ -40,3 +40,5 @@ export default props => (
     </FadeTransition>
   </PageLayout>
 )
+
+export default Dashboard

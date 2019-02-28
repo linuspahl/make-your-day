@@ -19,7 +19,7 @@ import { GetUserSessions } from 'store/user/query.gql'
 import { DeleteUserSession } from 'store/user/mutation.gql'
 import { deleteUserSession } from 'store/user/update'
 
-export default props => (
+const UserSessionOverview = props => (
   <FadeTransition>
     <H1 context="page">Angemeldete Geräte</H1>
 
@@ -84,3 +84,5 @@ export default props => (
     </Query>
   </FadeTransition>
 )
+
+export default UserSessionOverview

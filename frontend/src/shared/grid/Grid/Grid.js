@@ -1,7 +1,6 @@
 // libraries
 import React from 'react'
-import styled from 'styled-components'
 
-const Grid = styled.div``
+const Grid = props => <div>{props.children}</div>
 
-export default props => <Grid>{props.children}</Grid>
+export default Grid

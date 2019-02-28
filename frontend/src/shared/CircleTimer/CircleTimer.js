@@ -1,7 +1,7 @@
 import React from 'react'
 import { Layout, SvgWrapper, SvgCircle } from './styles'
 
-export default props => {
+const CircleTimer = props => {
   const hasClickAction = typeof props.clickAction
   return (
     <Layout onClick={() => hasClickAction && props.clickAction()}>
@@ -12,3 +12,5 @@ export default props => {
     </Layout>
   )
 }
+
+export default CircleTimer

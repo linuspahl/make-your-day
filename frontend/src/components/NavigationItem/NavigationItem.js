@@ -3,7 +3,7 @@ import React from 'react'
 // components
 import { ListItem, InnerLink, RouteActive } from './styles'
 
-export default props => {
+const NavigationItem = props => {
   const {
     route: { title, path },
     rootPath,
@@ -22,3 +22,5 @@ export default props => {
     </ListItem>
   )
 }
+
+export default NavigationItem

@@ -30,7 +30,7 @@ const IconWrapper = styled.div`
   margin-right: 4px;
 `
 
-export default props => {
+const CategorySummary = props => {
   const {
     category: { color, icon, hasUnit, unit },
     amount,
@@ -52,3 +52,5 @@ export default props => {
     </Category>
   )
 }
+
+export default CategorySummary

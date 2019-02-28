@@ -2,11 +2,13 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const GridCell = styled.div`
+const Element = styled.div`
   display: flex;
   justify-content: ${props => props.justify || 'flex-start'};
 `
 
-export default props => (
-  <GridCell justify={props.justify}>{props.children}</GridCell>
+const GridCell = props => (
+  <Element justify={props.justify}>{props.children}</Element>
 )
+
+export default GridCell

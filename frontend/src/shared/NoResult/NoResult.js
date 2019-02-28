@@ -2,10 +2,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Layout = styled.div`
+const Element = styled.div`
   width: 100%;
 
   text-align: center;
 `
 
-export default props => <Layout>Kein Eintrag vorhanden</Layout>
+const NoResult = () => <Element>Kein Eintrag vorhanden</Element>
+
+export default NoResult

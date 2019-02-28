@@ -21,7 +21,7 @@ const Circle = styled.div`
   font-size: ${props => props.size / 2 || 28}px;
 `
 
-export default props => {
+const CategoryIcon = props => {
   const { icon, color, title, to, size } = props
   const isLink = Boolean(to)
   return (
@@ -37,3 +37,5 @@ export default props => {
     </Circle>
   )
 }
+
+export default CategoryIcon

@@ -13,7 +13,7 @@ import SubcategoryOverview from 'components/SubcategoryOverview/SubcategoryOverv
 import SubcategoryCreate from 'components/SubcategoryCreate/SubcategoryCreate'
 import SubcategoryEdit from 'components/SubcategoryEdit/SubcategoryEdit'
 
-export default props => {
+const Categories = props => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
@@ -86,3 +86,5 @@ export default props => {
     </PageLayout>
   )
 }
+
+export default Categories

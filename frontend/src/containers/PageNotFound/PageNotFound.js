@@ -16,7 +16,7 @@ export const Layout = styled.div`
   grid-template-rows: 1fr 70px 1fr;
 `
 
-export default props => (
+const PageNotFound = props => (
   <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
     <ContentBox>
       <FadeTransition>
@@ -34,3 +34,5 @@ export default props => (
     </ContentBox>
   </PageLayout>
 )
+
+export default PageNotFound

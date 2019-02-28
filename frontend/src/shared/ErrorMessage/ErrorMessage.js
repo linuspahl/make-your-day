@@ -8,8 +8,10 @@ const Layout = styled.div`
   text-align: center;
 `
 
-export default props => {
+const ErrorMessage = props => {
   const { error, message } = props
   if (error) logError(error)
   return <Layout>{message}</Layout>
 }
+
+export default ErrorMessage

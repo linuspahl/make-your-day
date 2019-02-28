@@ -12,7 +12,7 @@ import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetCategoriesIcon } from 'store/category/query.gql'
 
-export default props => (
+const CategoryIconOverview = props => (
   <Layout context={props.context}>
     <Query query={GetCategoriesIcon}>
       {({ loading, error, data }) => {
@@ -43,3 +43,5 @@ export default props => (
     </Query>
   </Layout>
 )
+
+export default CategoryIconOverview

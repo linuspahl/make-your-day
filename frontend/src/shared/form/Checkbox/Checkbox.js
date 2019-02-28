@@ -42,7 +42,7 @@ const Checkmark = styled.div`
   font-size: 24px;
 `
 
-export default props => {
+const Checkbox = props => {
   const { value, onChange, name, disabled, tabIndex } = props
   return (
     <Wrapper disabled={disabled}>
@@ -62,3 +62,5 @@ export default props => {
     </Wrapper>
   )
 }
+
+export default Checkbox

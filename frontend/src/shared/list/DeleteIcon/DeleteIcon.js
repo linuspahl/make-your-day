@@ -28,7 +28,7 @@ const handleClick = (action, title) => {
   }
 }
 
-export default props => {
+const DeleteIcon = props => {
   const { id, mutation, onUpdate, title } = props
   const variables = { id }
 
@@ -46,3 +46,5 @@ export default props => {
     </Mutation>
   )
 }
+
+export default DeleteIcon

@@ -23,7 +23,7 @@ const prepareColors = colors => {
   return colorsOptions
 }
 
-export default props => {
+const ColorSelect = props => {
   const { value, onChange, name, tabIndex } = props
   const colors = prepareColors(categoryColors)
 
@@ -39,3 +39,5 @@ export default props => {
     />
   )
 }
+
+export default ColorSelect

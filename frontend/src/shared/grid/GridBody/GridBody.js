@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const GridBody = styled.div`
+const Element = styled.div`
   display: grid;
   grid-template-columns: repeat(${props => props.columnAmount}, 1fr);
   width: 100%;
@@ -16,6 +16,8 @@ const GridBody = styled.div`
   }
 `
 
-export default props => (
-  <GridBody columnAmount={props.columnAmount}>{props.children}</GridBody>
+const GridBody = props => (
+  <Element columnAmount={props.columnAmount}>{props.children}</Element>
 )
+
+export default GridBody

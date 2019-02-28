@@ -150,3 +150,15 @@ export default class ExampleComponent extends React.Component {
   exampleStateChange() {}
 }
 ```
+* Component module export:
+When the component is just a function, make sure you still use a named export like
+```
+const ComponentName = props => {}
+export const ComponentName
+```
+and not
+```
+export default props => {}
+```
+This makes debugging easier, e.g. with the React Devtools
+

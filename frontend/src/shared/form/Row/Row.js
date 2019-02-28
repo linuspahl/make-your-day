@@ -20,7 +20,7 @@ const Layout = styled.div`
   `};
 `
 
-export default props => (
+const Row = props => (
   <Layout
     disabled={props.disabled}
     className={props.className}
@@ -31,3 +31,5 @@ export default props => (
     {props.children}
   </Layout>
 )
+
+export default Row

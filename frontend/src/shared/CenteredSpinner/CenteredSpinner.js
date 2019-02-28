@@ -48,7 +48,7 @@ const DoubleBouncer2 = styled(DoubleBouncer1)`
   animation-delay: -1s;
 `
 
-export default () => (
+const CenteredSpinner = () => (
   <Layout>
     <Spinner>
       <DoubleBouncer1 />
@@ -56,3 +56,5 @@ export default () => (
     </Spinner>
   </Layout>
 )
+
+export default CenteredSpinner

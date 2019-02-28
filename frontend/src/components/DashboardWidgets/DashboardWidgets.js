@@ -48,7 +48,7 @@ const WidgetLayout = styled.div`
   }
 `
 
-export default props => {
+const DashboardWidgets = props => {
   const { createNotificationBanner } = props
 
   return (
@@ -82,3 +82,5 @@ export default props => {
     </Layout>
   )
 }
+
+export default DashboardWidgets

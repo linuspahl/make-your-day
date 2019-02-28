@@ -26,7 +26,7 @@ const List = styled.div`
   margin-bottom: 20px;
 `
 
-export default props => {
+const WidgetOverview = props => {
   const { rootPath } = props
 
   return (
@@ -100,3 +100,5 @@ const sortWidgetsByPosition = widgets => {
   })
   return positions
 }
+
+export default WidgetOverview

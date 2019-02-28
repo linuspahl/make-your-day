@@ -25,7 +25,7 @@ const ListItem = styled.li`
       : ``}
 `
 
-export default props => {
+const LogoutIcon = props => {
   const clickable = props.onClick
   return (
     <ListItem
@@ -40,3 +40,5 @@ export default props => {
     </ListItem>
   )
 }
+
+export default LogoutIcon

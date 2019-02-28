@@ -15,7 +15,7 @@ import UserSettingDelete from 'components/UserSettingDelete/UserSettingDelete'
 // graphql
 import { GetSettings } from 'store/setting/query.gql'
 
-export default props => (
+const UserSettingsOverview = props => (
   <FadeTransition>
     <H1 context="page">Einstellungen</H1>
     <Query query={GetSettings}>
@@ -63,3 +63,5 @@ export default props => (
     </ActionRow>
   </FadeTransition>
 )
+
+export default UserSettingsOverview

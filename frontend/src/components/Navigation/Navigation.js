@@ -6,7 +6,7 @@ import CloseIcon from 'shared/CloseIcon/CloseIcon'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import NavigationItem from 'components/NavigationItem/NavigationItem'
 
-export default props => {
+const Navigation = props => {
   const { toggleAction, rootPath } = props
   const items = [
     { path: '/', title: 'Dashboard' },
@@ -35,3 +35,5 @@ export default props => {
     </Layout>
   )
 }
+
+export default Navigation

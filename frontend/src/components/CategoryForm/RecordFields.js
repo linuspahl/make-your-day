@@ -14,7 +14,7 @@ const HeadlineRow = styled(Row)`
   padding-top: 25px;
 `
 
-export default props => {
+const RecordFields = props => {
   const {
     handleInputChange,
     hasDescription,
@@ -111,3 +111,5 @@ export default props => {
     </div>
   )
 }
+
+export default RecordFields

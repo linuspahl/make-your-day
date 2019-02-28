@@ -6,7 +6,7 @@ import Checkbox from 'shared/form/Checkbox/Checkbox'
 // graphql
 import { DeleteUserSetting } from 'store/userSetting/mutation.gql'
 
-export default props => (
+const UserSettingDelete = props => (
   <Mutation
     mutation={DeleteUserSetting}
     variables={{ settingId: props.setting.id }}
@@ -21,3 +21,5 @@ export default props => (
     )}
   </Mutation>
 )
+
+export default UserSettingDelete

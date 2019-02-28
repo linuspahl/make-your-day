@@ -6,7 +6,7 @@ import ContentBox from 'shared/ContentBox/ContentBox'
 import DayEdit from 'components/DayEdit/DayEdit'
 import PageLayout from 'components/PageLayout/PageLayout'
 
-export default props => {
+const Timeline = props => {
   const { userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
@@ -20,3 +20,5 @@ export default props => {
     </PageLayout>
   )
 }
+
+export default Timeline

@@ -11,6 +11,6 @@ const Element = styled.h2`
   hyphens: auto;
 `
 
-export default props => (
-  <Element context={props.context}>{props.children}</Element>
-)
+const H2 = props => <Element context={props.context}>{props.children}</Element>
+
+export default H2
