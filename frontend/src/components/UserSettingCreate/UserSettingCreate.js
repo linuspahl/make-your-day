@@ -12,7 +12,7 @@ const UserSettingCreate = props => (
     variables={{ settingId: props.setting.id }}
     onCompleted={data =>
       props.updateLocalStorage({
-        [props.setting.type]: JSON.parse(data.createUserSetting.value),
+        [props.setting.type]: data.createUserSetting.value,
       })
     }
   >

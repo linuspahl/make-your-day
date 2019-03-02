@@ -9,9 +9,9 @@ import WidgetEdit from 'components/WidgetEdit/WidgetEdit'
 import WidgetOverview from 'components/WidgetOverview/WidgetOverview'
 
 const Widgets = props => {
-  const { createNotificationBanner, isUserLoggedIn, rootPath } = props
+  const { createNotificationBanner, userSession, rootPath } = props
   return (
-    <PageLayout isUserLoggedIn={isUserLoggedIn} rootPath={rootPath}>
+    <PageLayout userSession={userSession} rootPath={rootPath}>
       <ContentBox>
         <Route
           exact
