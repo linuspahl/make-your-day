@@ -6,17 +6,25 @@ export default (sequelize, DataTypes) =>
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    device: { allowNull: false, type: DataTypes.STRING },
-    userId: {
+    device: {
       allowNull: false,
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
     },
     token: {
       allowNull: false,
       type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
     },
     expiresAt: {
       allowNull: false,
       type: DataTypes.DATE,
+      validate: {
+        notEmpty: true,
+      },
     },
   })

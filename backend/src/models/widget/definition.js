@@ -9,6 +9,9 @@ export default (sequelize, DataTypes) =>
     title: {
       allowNull: false,
       type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
     },
     type: {
       allowNull: false,

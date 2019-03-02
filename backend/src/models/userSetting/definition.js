@@ -12,6 +12,9 @@ export default (sequelize, DataTypes) =>
         allowNull: false,
         defaultValue: true,
         type: DataTypes.STRING,
+        validate: {
+          notEmpty: true,
+        },
       },
     },
     {

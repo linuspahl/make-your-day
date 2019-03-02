@@ -10,8 +10,17 @@ export default (sequelize, DataTypes) =>
       allowNull: false,
       type: DataTypes.STRING,
       unique: true,
+      validate: {
+        notEmpty: true,
+      },
     },
-    passwordHash: { type: DataTypes.STRING, allowNull: false },
+    passwordHash: {
+      allowNull: false,
+      type: DataTypes.STRING,
+      validate: {
+        notEmpty: true,
+      },
+    },
     role: {
       allowNull: false,
       type: DataTypes.STRING,
