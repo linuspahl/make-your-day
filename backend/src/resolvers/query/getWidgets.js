@@ -1,8 +1,4 @@
-import checkAccess from '../checkAccess'
-
-export default (parent, { title }, { models, authToken }) =>
-  checkAccess(models, authToken).then(user =>
-    models.Widget.findAll({
-      where: { userId: user.id },
-    })
-  )
+export default (parent, args, { models, currentUser }) =>
+  models.Widget.findAll({
+    where: { userId: currentUser.id },
+  })

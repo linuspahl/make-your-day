@@ -5,6 +5,7 @@ const {
   env: {
     API_HOST,
     API_PORT,
+    API_SECRET,
     FRONTEND_HOST,
     FRONTEND_PORT,
     CURRENT_ENV,
@@ -19,6 +20,7 @@ const {
 export default {
   apiHost: API_HOST,
   apiPort: API_PORT,
+  apiSecret: API_SECRET,
   frontendHost: FRONTEND_HOST,
   frontendPort: FRONTEND_PORT,
   isDevEnv: CURRENT_ENV === 'development',

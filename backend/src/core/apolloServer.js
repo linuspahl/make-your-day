@@ -9,7 +9,18 @@ import config from '../../config/config'
 export default new ApolloServer({
   typeDefs,
   resolvers,
-  context: req => ({ models, authToken: req.req.headers.authorization }),
+  context: async req => {
+    const {
+      req: {
+        headers: { authorization },
+      },
+    } = req
+    const token = authorization !== 'null' ? authorization : null
+    return {
+      models,
+      currentUser: token ? await models.User.findByToken(token) : null,
+    }
+  },
   playground: {
     endpoint: config.apiEndpoint,
     settings: {

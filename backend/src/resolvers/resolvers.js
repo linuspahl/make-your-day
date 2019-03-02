@@ -3,6 +3,9 @@
 // For each query / mutation a resolver exists
 // Gets included in the apollo server setup
 
+import { combineResolvers } from 'graphql-resolvers'
+import { isAuthenticated } from './authorization'
+
 // Mutations import
 import createCategory from './mutation/createCategory'
 import createRecord from './mutation/createRecord'
@@ -51,29 +54,29 @@ export default {
     parent: getCategoryParent,
   },
   Mutation: {
-    createCategory,
-    createRecord,
-    createSubcategory,
-    createUserSetting,
-    createWidget,
-    deleteCategory,
-    deleteRecord,
-    deleteUserSetting,
-    deleteUserSession,
-    deleteWidget,
-    loginUser,
-    updateCategory,
-    updateRecord,
-    updateWidget,
+    createCategory: combineResolvers(isAuthenticated, createCategory),
+    createRecord: combineResolvers(isAuthenticated, createRecord),
+    createSubcategory: combineResolvers(isAuthenticated, createSubcategory),
+    createUserSetting: combineResolvers(isAuthenticated, createUserSetting),
+    createWidget: combineResolvers(isAuthenticated, createWidget),
+    deleteCategory: combineResolvers(isAuthenticated, deleteCategory),
+    deleteRecord: combineResolvers(isAuthenticated, deleteRecord),
+    deleteUserSetting: combineResolvers(isAuthenticated, deleteUserSetting),
+    deleteUserSession: combineResolvers(isAuthenticated, deleteUserSession),
+    deleteWidget: combineResolvers(isAuthenticated, deleteWidget),
+    loginUser: loginUser,
+    updateCategory: combineResolvers(isAuthenticated, updateCategory),
+    updateRecord: combineResolvers(isAuthenticated, updateRecord),
+    updateWidget: combineResolvers(isAuthenticated, updateWidget),
   },
   Query: {
-    getCategory,
-    getCategories,
-    getRecords,
-    getRecord,
-    getSettings,
-    getUserSessions,
-    getWidgets,
-    getWidget,
+    getCategory: combineResolvers(isAuthenticated, getCategory),
+    getCategories: combineResolvers(isAuthenticated, getCategories),
+    getRecords: combineResolvers(isAuthenticated, getRecords),
+    getRecord: combineResolvers(isAuthenticated, getRecord),
+    getSettings: combineResolvers(isAuthenticated, getSettings),
+    getUserSessions: combineResolvers(isAuthenticated, getUserSessions),
+    getWidgets: combineResolvers(isAuthenticated, getWidgets),
+    getWidget: combineResolvers(isAuthenticated, getWidget),
   },
 }

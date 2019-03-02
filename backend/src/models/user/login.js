@@ -1,7 +1,9 @@
 // Login function, will create an auth token on success
 
+import { AuthenticationError, UserInputError } from 'apollo-server-express'
 import bcrypt from 'bcrypt-nodejs'
-import crypto from 'crypto'
+import jwt from 'jsonwebtoken'
+import config from '../../../config/config'
 
 export default (models, { username, password, device }) => {
   const { User, UserSession } = models
@@ -15,14 +17,14 @@ export default (models, { username, password, device }) => {
       user = matchigUser
       // Throw error when there is no user with the username
       if (!user) {
-        throw new Error('Username or Password invalid')
+        throw new UserInputError('Username or Password invalid')
       }
       // Validate users password
       if (!validatePassword(password, user.passwordHash)) {
-        throw new Error('Username or Password invalid')
+        throw new AuthenticationError('Username or Password invalid')
       }
       // Create random token
-      return createToken()
+      return createToken(user, config.apiSecret, '30d')
     })
     .then(createdToken => {
       // Set token object reference for further usage
@@ -48,17 +50,16 @@ const validatePassword = (password, passwordHash) => {
 }
 
 // Create session token after successful login
-const createToken = () => {
-  return new Promise((resolve, reject) => {
-    crypto.randomBytes(16, (error, data) => {
-      error ? reject(error) : resolve(data.toString('base64'))
-    })
+const createToken = async (user, secret, expiresIn) => {
+  const { id, username } = user
+  return await jwt.sign({ id, username }, secret, {
+    expiresIn,
   })
 }
 
 // Set auth token
 const setToken = (UserSession, userId, token, device) => {
-  var today = new Date()
+  const today = new Date()
   const in30Days = today.setDate(today.getDate() + 30)
   return UserSession.create({
     token,

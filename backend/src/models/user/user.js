@@ -1,5 +1,6 @@
 import definition from './definition'
 import login from './login'
+import findByToken from './findByToken'
 
 export default (sequelize, DataTypes) => {
   const User = definition(sequelize, DataTypes)
@@ -20,6 +21,7 @@ export default (sequelize, DataTypes) => {
 
     // model actions
     User.login = params => login(models, params)
+    User.findByToken = params => findByToken(models, params)
   }
 
   return User

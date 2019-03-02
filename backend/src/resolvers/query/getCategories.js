@@ -1,8 +1,4 @@
-import checkAccess from '../checkAccess'
-
-export default (parent, { title }, { models, authToken }) =>
-  checkAccess(models, authToken).then(user =>
-    models.Category.findAll({
-      where: { userId: user.id, parentId: null },
-    })
-  )
+export default (parent, { title }, { models, currentUser }) =>
+  models.Category.findAll({
+    where: { userId: currentUser.id, parentId: null },
+  })

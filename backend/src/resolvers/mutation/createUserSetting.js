@@ -1,6 +1,2 @@
-import checkAccess from '../checkAccess'
-
-export default (parent, args, { models, authToken }) =>
-  checkAccess(models, authToken).then(user =>
-    models.UserSetting.create({ ...args, userId: user.id })
-  )
+export default (parent, args, { models, currentUser }) =>
+  models.UserSetting.create({ ...args, userId: currentUser.id })
