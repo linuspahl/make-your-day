@@ -19,10 +19,11 @@ export default (models, token) => {
   })
     .then(userSession => {
       if (
-        !Boolean(userSession) ||
-        !Boolean(userSession.dataValues) ||
-        !Boolean(userSession.dataValues.user)
+        !userSession ||
+        !userSession.dataValues ||
+        !userSession.dataValues.user
       ) {
+        throw new AuthenticationError()
       }
       return userSession.dataValues.user
     })

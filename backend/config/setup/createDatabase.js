@@ -9,7 +9,6 @@
 // - this would affect the integrety of the models object
 // - we are only using the sync function for this script, shich is not a part of this project
 
-import models from '../../src/models'
 import sequelize from '../../src/core/sequelize'
 
 // Enable the force option to drop the existing database and create a brand new one

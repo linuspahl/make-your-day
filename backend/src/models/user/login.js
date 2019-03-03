@@ -39,9 +39,6 @@ export default (models, { username, password, device }) => {
         where: { id: user.id },
       })
     })
-    .catch(error => {
-      console.log('Error: user login', error)
-    })
 }
 
 // Compare login password with user password hash

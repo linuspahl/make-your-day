@@ -1,5 +1,5 @@
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: queryInterface => {
     console.log(
       'Seed initial admin user (For production: change password afterwards!)'
     )
@@ -24,7 +24,7 @@ module.exports = {
       .catch(error => console.log('Error: ', error.original.message))
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     console.log('Delete all user seeds')
     return queryInterface.bulkDelete('users', null, {})
   },

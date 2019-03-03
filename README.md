@@ -38,6 +38,10 @@ You'll find the test suit setup in `config/test`.
 A common component test case is to check if the component renders correctly.
 You should use `react-test-render/shallow` for this.
 
+#### Linting
+We are using Eslint for the linting.
+Before each commit, you should check the linting with `yarn lint`.
+For the best development experiennce, you should install the Prettier Extension for zout IDE.
 
 ### Backend
 * Enter the backend directory with the cli
@@ -55,6 +59,12 @@ To create a new migration run  `yarn sequelize migration:generate --name migrati
 To revert the last migration run `yarn migrateDown`
 Sequelize is also able to create the database, based on the model definitions. You can run this with `yarn createDatabse` It can't replace the the migrations,
 but sometimes it is nice to see how the database would look like, when it's based on the model definitions.
+
+#### Linting
+We are using Eslint for the linting.
+Before each commit, you should check the linting with `yarn lint`.
+For the best development experiennce, you should install the Prettier Extension for zout IDE.
+
 
 
 ## Packages overview

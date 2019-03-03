@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: queryInterface => {
     console.log(
       'Seed default settings (nightMode, leftHandMode, showAppBgImage)'
     )
@@ -35,7 +35,7 @@ module.exports = {
       .catch(error => console.log('Error: ', error.original.message))
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: queryInterface => {
     console.log('Delete settings')
     return queryInterface.bulkDelete('settings', null, {})
   },

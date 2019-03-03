@@ -8,9 +8,11 @@
     "prettier"
   ],
   "extends": [
+    "eslint:recommended",
     "prettier"
   ],
   "rules": {
+    "no-console": "off",
     "prettier/prettier": [
       "error",
       {
