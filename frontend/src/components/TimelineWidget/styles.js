@@ -1,6 +1,5 @@
 // libraries
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 // components
 import ContentBox from 'shared/ContentBox/ContentBox'
 

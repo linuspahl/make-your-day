@@ -15,7 +15,8 @@
     "sequelize": "sequelize --config ./config/sequelize-cli.js --models-path ./src/models",
     "migrate": "yarn sequelize db:migrate",
     "migrateDown": "yarn sequelize db:migrate:undo",
-    "seed": "yarn sequelize db:seed:all"
+    "seed": "yarn sequelize db:seed:all",
+    "lint": "yarn run eslint src config"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

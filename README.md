@@ -81,6 +81,8 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * babel-plugin-styled-components - will create readable names for the styled components.
 * @babel/polyfill - This will emulate a full ES2015+ environment. This means you can use new built-ins like Promise.
 * uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code.
+* eslint-plugin-react - for react specific eslint rules
+* eslint-plugin-jest - for jest specific eslint rules
 * jest - to test the js code.
 * babel-jest - to transform our code inside of the test environment.
 * jest-transform-graphql - Needed to combine graphql-tag loader with Jest

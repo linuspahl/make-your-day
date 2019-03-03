@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
   ${props => (props.fullWidth ? 'width: 100%;' : '')}
 `
 
-export default ({ children, fullHeight, fullWidth }) => (
+const FadeTrasnition = ({ children, fullHeight, fullWidth }) => (
   <Transition in unmountOnExit timeout={0}>
     {status => {
       return (
@@ -29,3 +29,5 @@ export default ({ children, fullHeight, fullWidth }) => (
     }}
   </Transition>
 )
+
+export default FadeTrasnition

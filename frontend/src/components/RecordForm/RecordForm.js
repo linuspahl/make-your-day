@@ -67,7 +67,7 @@ export default class RecordForm extends React.Component {
       return (
         <Fragment>
           <Row>
-            Für die Kategorie "{categoryTitle}" muss mindestens eine
+            Für die Kategorie {categoryTitle} muss mindestens eine
             Unterkategorie angelegt werden.
           </Row>
           <ActionRow>

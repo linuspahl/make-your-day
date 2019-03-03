@@ -26,8 +26,6 @@ const RecordFields = props => {
     unit,
   } = props
 
-  let tabIndex = 1
-
   // We need to disable some fields for some conditions
   // E.g. some fields can't be changed after the category creation
   const isUpdateMode = mode !== 'create'

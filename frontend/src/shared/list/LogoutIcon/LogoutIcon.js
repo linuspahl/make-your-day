@@ -6,7 +6,6 @@ import { Mutation } from 'react-apollo'
 import Icon from 'shared/Icon/Icon'
 // graphql
 import { DeleteUserSession } from 'store/user/mutation.gql'
-import { deleteUserSession } from 'store/user/update'
 
 const Wrapper = styled.div`
   height: 40px;

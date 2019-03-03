@@ -3,16 +3,20 @@
   "env": {
     "es6": true,
     "browser": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
   "plugins": [
+    "jest",
     "prettier"
   ],
   "extends": [
-    "prettier",
-    "prettier/react"
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "prettier"
   ],
   "rules": {
+    "react/prop-types": "off",
     "prettier/prettier": [
       "error",
       {
@@ -21,6 +25,12 @@
         "semi": false,
         "singleQuote": true
       }
-    ]
+    ],
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
   }
 }

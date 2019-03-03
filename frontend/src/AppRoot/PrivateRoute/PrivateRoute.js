@@ -2,7 +2,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
-export default ({
+const PrivateRoute = ({
   component: Component,
   userSession,
   path,
@@ -22,3 +22,5 @@ export default ({
     />
   )
 }
+
+export default PrivateRoute

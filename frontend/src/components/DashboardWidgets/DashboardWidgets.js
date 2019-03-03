@@ -51,7 +51,7 @@ const WidgetLayout = styled.div`
   }
 `
 
-const LoadingPlaceholder = props => (
+const LoadingPlaceholder = () => (
   <WidgetLayout>
     <PlaceholderGroup>
       <WidgetPlaceholder />

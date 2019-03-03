@@ -51,9 +51,12 @@ export const handleInputChange = (event, changeState) => {
   })
 }
 
-// Default log function for the develop mode
+// Central place for handling error logging
 // This will log errors like e.g. failing requests
+// So far only needed for development
 export const logError = error => {
+  // Only case in the app where we use the console.log function
+  // eslint-disable-next-line no-console
   if (config.isDevEnv) console.log(error)
 }
 

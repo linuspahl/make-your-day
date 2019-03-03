@@ -1,6 +1,5 @@
 // Webpack base config
 
-const webpack = require('webpack')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const DotenvPlugin = require('dotenv-webpack')
 const CopyPlugin = require('copy-webpack-plugin')
@@ -46,8 +45,8 @@ module.exports = {
       },
       {
         test: /\.jpg$/,
-        loader: 'file-loader'
-      }
+        loader: 'file-loader',
+      },
     ],
   },
   resolve: {

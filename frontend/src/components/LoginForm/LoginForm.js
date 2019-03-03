@@ -3,7 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
 import { handleInputChange } from 'utils/utils'
-import { sortBy } from 'utils/utils'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
@@ -112,7 +111,7 @@ export default class LoginForm extends React.Component {
     }, {})
   }
 
-  handleError(error) {
+  handleError() {
     this.props.createNotificationBanner({
       type: 'error',
       message: 'Anmeldung fehlgeschlagen',

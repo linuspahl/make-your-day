@@ -10,6 +10,7 @@ import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import NoResult from 'shared/NoResult/NoResult'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
+import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 // graphql
 import { addSubcategory } from 'store/category/update'
 import { CreateSubcategory } from 'store/category/mutation.gql'
