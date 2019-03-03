@@ -28,7 +28,7 @@ export const Day = styled(Link)`
   padding: 5px 0;
   border-top: 1px solid ${props => props.theme.border};
 
-  &:first-child {
+  &:last-child {
     border-top: 0;
   }
 `

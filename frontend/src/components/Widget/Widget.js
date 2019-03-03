@@ -10,7 +10,7 @@ export const Element = styled.textarea`
   width: 100%;
   height: 100%;
 
-  padding: 10px;
+  padding: 20px;
   border: 1px solid ${props => props.theme.border};
   border-radius: 0;
 

@@ -73,7 +73,10 @@ export const categoryIcons = [
   { value: 'money', title: 'Geld' },
 ]
 
-export const widgetTypeOptions = [{ value: 'textarea', title: 'Freitext' }]
+export const widgetTypeOptions = [
+  { value: 'textarea', title: 'Freitext' },
+  { value: 'timeline', title: 'Timeline' },
+]
 
 export const widgetPositionOptions = [
   { value: 'dashboard-top', title: 'Dashboard oben' },

@@ -7,7 +7,7 @@ import { sortBy, formatUnixDate, getDateString } from 'utils/utils'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
-import { Layout, Box } from './styles'
+import { Layout } from './styles'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
 import TimelineWidgetDay from 'components/TimelineWidgetDay/TimelineWidgetDay'
@@ -31,33 +31,31 @@ export default class TimelineWidget extends React.Component {
   render() {
     return (
       <Layout>
-        <Box>
-          <Query query={GetRecords}>
-            {({ loading, error, data }) => {
-              if (loading) return <LoadingPlaceholder />
+        <Query query={GetRecords}>
+          {({ loading, error, data }) => {
+            if (loading) return <LoadingPlaceholder />
 
-              if (error)
-                return (
-                  <ErrorMessage
-                    error={error}
-                    message="Einträge konnten nicht geladen werden"
-                  />
-                )
-
-              if (data.getRecords.length === 0) return <NoResult />
-
-              const timeline = this.prepareTimeline(data.getRecords)
-              return Object.values(timeline).map(day => (
-                <TimelineWidgetDay
-                  categories={day.categories}
-                  date={day.date}
-                  key={day.date}
-                  shortcut={day.shortcut}
+            if (error)
+              return (
+                <ErrorMessage
+                  error={error}
+                  message="Einträge konnten nicht geladen werden"
                 />
-              ))
-            }}
-          </Query>
-        </Box>
+              )
+
+            if (data.getRecords.length === 0) return <NoResult />
+
+            const timeline = this.prepareTimeline(data.getRecords)
+            return Object.values(timeline).map(day => (
+              <TimelineWidgetDay
+                categories={day.categories}
+                date={day.date}
+                key={day.date}
+                shortcut={day.shortcut}
+              />
+            ))
+          }}
+        </Query>
       </Layout>
     )
   }
