@@ -6,17 +6,29 @@ import { generateUrlParams } from 'utils/utils'
 import { Layout, IconWrapper } from './styles'
 // components
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
+import CategoryIconPlaceholder from 'shared/CategoryIcon/CategoryIconPlaceholder'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
+import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 // graphql
 import { GetCategoriesIcon } from 'store/category/query.gql'
+
+const LoadingPlaceholder = props => (
+  <PlaceholderGroup>
+    {[...Array(6)].map((value, key) => (
+      <IconWrapper key={key} context={props.context}>
+        <CategoryIconPlaceholder />
+      </IconWrapper>
+    ))}
+  </PlaceholderGroup>
+)
 
 const CategoryIconOverview = props => (
   <Layout context={props.context}>
     <Query query={GetCategoriesIcon}>
       {({ loading, error, data }) => {
-        if (loading) return <CenteredSpinner />
+        if (loading) return <LoadingPlaceholder context={props.context} />
+
         if (error)
           return (
             <ErrorMessage
@@ -24,9 +36,11 @@ const CategoryIconOverview = props => (
               message="Kategorien konnten nicht geladen werden"
             />
           )
+
         if (data.getCategories.length === 0) return <NoResult />
+
+        const urlParams = generateUrlParams(props.params)
         return data.getCategories.map(category => {
-          const urlParams = generateUrlParams(props.params)
           return (
             <IconWrapper key={category.id} context={props.context}>
               <CategoryIcon

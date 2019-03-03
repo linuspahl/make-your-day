@@ -4,13 +4,14 @@ import styled from 'styled-components'
 import { Query } from 'react-apollo'
 import { sortBy } from 'utils/utils'
 // components
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
+import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 import Widget from 'components/Widget/Widget'
 import ContentBox from 'shared/ContentBox/ContentBox'
 // graphql
 import { GetWidgets } from 'store/widget/query.gql'
+import WidgetPlaceholder from '../Widget/WidgetPlaceholder'
 
 const Layout = styled.div`
   width: 100%;
@@ -36,6 +37,8 @@ const WidgetLayout = styled.div`
   width: 100%;
   height: 100%;
 
+  background-color: ${props => props.theme.contentBoxBg};
+
   margin-right: 20px;
 
   @media (min-width: ${props =>
@@ -48,6 +51,14 @@ const WidgetLayout = styled.div`
   }
 `
 
+const LoadingPlaceholder = props => (
+  <WidgetLayout>
+    <PlaceholderGroup>
+      <WidgetPlaceholder />
+    </PlaceholderGroup>
+  </WidgetLayout>
+)
+
 const DashboardWidgets = props => {
   const { createNotificationBanner } = props
 
@@ -55,7 +66,7 @@ const DashboardWidgets = props => {
     <Layout>
       <Query query={GetWidgets}>
         {({ loading, error, data }) => {
-          if (loading) return <CenteredSpinner />
+          if (loading) return <LoadingPlaceholder />
           if (error)
             return (
               <ErrorMessage

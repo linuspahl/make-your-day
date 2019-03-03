@@ -3,17 +3,25 @@ import React from 'react'
 import { Query } from 'react-apollo'
 // utils
 import { sortBy, formatUnixDate, getDateString } from 'utils/utils'
-import { weekDayLabels } from '../../../config/params'
 // components
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
-import CategorySummary from 'shared/CategorySummary/CategorySummary'
-import { Layout, Day, Shortcut, Categories, Box } from './styles'
+import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
+import { Layout, Box } from './styles'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
+import TimelineWidgetDay from 'components/TimelineWidgetDay/TimelineWidgetDay'
+import TimelineWidgetDayPlaceholder from 'components/TimelineWidgetDay/TimelineWidgetDayPlaceholder'
 
-export default class Timeline extends React.Component {
+const LoadingPlaceholder = () => (
+  <PlaceholderGroup>
+    {[...Array(3)].map((value, key) => {
+      return <TimelineWidgetDayPlaceholder as="div" key={key} />
+    })}
+  </PlaceholderGroup>
+)
+
+export default class TimelineWidget extends React.Component {
   constructor(props) {
     super(props)
 
@@ -26,7 +34,8 @@ export default class Timeline extends React.Component {
         <Box>
           <Query query={GetRecords}>
             {({ loading, error, data }) => {
-              if (loading) return <CenteredSpinner />
+              if (loading) return <LoadingPlaceholder />
+
               if (error)
                 return (
                   <ErrorMessage
@@ -34,24 +43,17 @@ export default class Timeline extends React.Component {
                     message="Einträge konnten nicht geladen werden"
                   />
                 )
-              if (data.getRecords.length === 0) return <NoResult />
-              const timeline = this.prepareTimeline(data.getRecords)
 
+              if (data.getRecords.length === 0) return <NoResult />
+
+              const timeline = this.prepareTimeline(data.getRecords)
               return Object.values(timeline).map(day => (
-                <Day key={day.date} to={`/timeline/${day.date}`}>
-                  <Shortcut>{weekDayLabels[day.shortcut]}</Shortcut>
-                  <Categories>
-                    {Object.values(day.categories).map(category => {
-                      return (
-                        <CategorySummary
-                          amount={category.recordAmountSum}
-                          category={category}
-                          key={category.id}
-                        />
-                      )
-                    })}
-                  </Categories>
-                </Day>
+                <TimelineWidgetDay
+                  categories={day.categories}
+                  date={day.date}
+                  key={day.date}
+                  shortcut={day.shortcut}
+                />
               ))
             }}
           </Query>
