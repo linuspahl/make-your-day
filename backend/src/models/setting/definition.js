@@ -16,6 +16,7 @@ export default (sequelize, DataTypes) =>
     type: {
       allowNull: false,
       type: DataTypes.STRING,
+      unique: true,
       validate: {
         isIn: [['nightMode', 'leftHandMode', 'showAppBgImage']],
       },
