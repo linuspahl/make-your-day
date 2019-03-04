@@ -15,7 +15,7 @@ const Layout = styled.div`
   width: 100%;
   height: 100%;
 
-  padding: 0 20px;
+  padding: 20px;
 
   overflow-x: auto;
   white-space: nowrap;
@@ -29,16 +29,11 @@ const WidgetLayout = styled.div`
   height: 100%;
 
   margin-right: 20px;
-  padding: 20px 0;
 
   &:last-child {
     margin-bottom: 0;
     margin-right: 0;
   }
-`
-
-const TimelineWidgetLayout = styled(WidgetLayout)`
-  padding-top: 0;
 `
 
 const LoadingPlaceholder = () => (
@@ -60,9 +55,9 @@ const DashboardWidgets = props => {
     <Layout>
       {sortBy(widgets, 'id').map(widget =>
         widget.type === 'timeline' ? (
-          <TimelineWidgetLayout>
+          <WidgetLayout>
             <TimelineWidget loading={loading} key={widget.id} />
-          </TimelineWidgetLayout>
+          </WidgetLayout>
         ) : (
           <WidgetLayout key={widget.id}>
             <Widget

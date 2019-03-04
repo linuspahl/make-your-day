@@ -59,7 +59,6 @@ export const OptionsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
 `
 
 export const OptionsOffset = styled.div`
@@ -74,7 +73,7 @@ export const OptionsOffset = styled.div`
 `
 
 export const Modal = styled.div`
-  z-index: 2;
+  z-index: ${props => props.theme.layerIndex.modal};
   max-width: 420px;
   width: calc(100% - 40px);
   max-height: calc(100vh - 40px);

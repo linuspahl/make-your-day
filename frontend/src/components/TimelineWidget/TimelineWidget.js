@@ -31,42 +31,40 @@ export default class TimelineWidget extends React.Component {
   render() {
     return (
       <Outer>
-        <FlexboxSpacer>
-          <Layout>
-            <Query
-              query={GetRecords}
-              variables={{
-                createdAtFrom: getDateString(
-                  new Date().setDate(new Date().getDate() - 7)
-                ),
-              }}
-            >
-              {({ loading, error, data }) => {
-                if (loading) return <LoadingPlaceholder />
+        <Layout>
+          <Query
+            query={GetRecords}
+            variables={{
+              createdAtFrom: getDateString(
+                new Date().setDate(new Date().getDate() - 7)
+              ),
+            }}
+          >
+            {({ loading, error, data }) => {
+              if (loading) return <LoadingPlaceholder />
 
-                if (error)
-                  return (
-                    <ErrorMessage
-                      error={error}
-                      message="Einträge konnten nicht geladen werden"
-                    />
-                  )
-
-                if (data.getRecords.length === 0) return <NoResult />
-
-                const timeline = this.prepareTimeline(data.getRecords)
-                return Object.values(timeline).map(day => (
-                  <TimelineWidgetDay
-                    categories={day.categories}
-                    date={day.date}
-                    key={day.date}
-                    shortcut={day.shortcut}
+              if (error)
+                return (
+                  <ErrorMessage
+                    error={error}
+                    message="Einträge konnten nicht geladen werden"
                   />
-                ))
-              }}
-            </Query>
-          </Layout>
-        </FlexboxSpacer>
+                )
+
+              if (data.getRecords.length === 0) return <NoResult />
+
+              const timeline = this.prepareTimeline(data.getRecords)
+              return Object.values(timeline).map(day => (
+                <TimelineWidgetDay
+                  categories={day.categories}
+                  date={day.date}
+                  key={day.date}
+                  shortcut={day.shortcut}
+                />
+              ))
+            }}
+          </Query>
+        </Layout>
       </Outer>
     )
   }

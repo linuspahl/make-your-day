@@ -48,11 +48,16 @@ const nightModeTheme = {
   border: '#545454',
 }
 
+// Overview of all z-index used in the app
+const layerIndex = {
+  modal: 10,
+}
+
 export default userSettings => {
   let colors = defaultTheme
   if (userSettings.nightMode) {
     // if nightmode is active, we will just change some specific colors
     colors = merge(defaultTheme, nightModeTheme)
   }
-  return { ...colors, settings: { ...userSettings }, mediaQuery }
+  return { ...colors, settings: { ...userSettings }, mediaQuery, layerIndex }
 }

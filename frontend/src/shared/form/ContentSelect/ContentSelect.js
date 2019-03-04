@@ -8,6 +8,7 @@ import React from 'react'
 // components
 import CloseIcon from 'shared/CloseIcon/CloseIcon'
 import Icon from 'shared/Icon/Icon'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
 
 import {
   Layout,
@@ -65,35 +66,37 @@ export default class ContentSelect extends React.Component {
           </ArrowIcon>
         </Select>
         {isOpen && (
-          <OptionsWrapper>
-            <OptionsOffset onClick={() => this.toggleSelect()} />
-            <Modal>
-              {title && (
-                <Header>
-                  {title}
-                  <CloseIcon close={this.toggleSelect} />
-                </Header>
-              )}
-              <Options>
-                {options.map(option => {
-                  const isSelected = option.value === value
+          <FadeTransition>
+            <OptionsWrapper>
+              <OptionsOffset onClick={() => this.toggleSelect()} />
+              <Modal>
+                {title && (
+                  <Header>
+                    {title}
+                    <CloseIcon close={this.toggleSelect} />
+                  </Header>
+                )}
+                <Options>
+                  {options.map(option => {
+                    const isSelected = option.value === value
 
-                  return (
-                    <Option
-                      isSelected={isSelected}
-                      key={option.value}
-                      onClick={() => this.onOptionClick(option.value)}
-                    >
-                      {hasPreview && (
-                        <OptionPreview>{renderPreview(option)}</OptionPreview>
-                      )}
-                      <span>{option.title}</span>
-                    </Option>
-                  )
-                })}
-              </Options>
-            </Modal>
-          </OptionsWrapper>
+                    return (
+                      <Option
+                        isSelected={isSelected}
+                        key={option.value}
+                        onClick={() => this.onOptionClick(option.value)}
+                      >
+                        {hasPreview && (
+                          <OptionPreview>{renderPreview(option)}</OptionPreview>
+                        )}
+                        <span>{option.title}</span>
+                      </Option>
+                    )
+                  })}
+                </Options>
+              </Modal>
+            </OptionsWrapper>
+          </FadeTransition>
         )}
       </Layout>
     )

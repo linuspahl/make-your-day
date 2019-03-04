@@ -15,7 +15,7 @@ export const Layout = styled.div`
   padding: 20px;
   background-color: ${props => props.theme.appBg};
 
-  z-index: 1;
+  z-index: ${props => props.theme.layerIndex.modal};
 `
 
 export const CloseIconWrapper = styled.div`
