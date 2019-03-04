@@ -1,6 +1,6 @@
 // Login function, will create an auth token on success
 
-import { AuthenticationError, UserInputError } from 'apollo-server-express'
+import { UserInputError } from 'apollo-server-express'
 import bcrypt from 'bcrypt-nodejs'
 import jwt from 'jsonwebtoken'
 import config from '../../../config/config'
@@ -21,7 +21,7 @@ export default (models, { username, password, device }) => {
       }
       // Validate users password
       if (!validatePassword(password, user.passwordHash)) {
-        throw new AuthenticationError('Username or Password invalid')
+        throw new UserInputError('Username or Password invalid')
       }
       // Create random token
       return createToken(user, config.apiSecret, '30d')

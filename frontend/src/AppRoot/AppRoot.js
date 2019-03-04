@@ -4,7 +4,7 @@
 
 // libraries
 import React, { Fragment } from 'react'
-import apolloClient from './ApolloClient'
+import createApolloClient from './ApolloClient'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from 'react-apollo'
 import { getLocalStorage, updateLocalStorage } from 'utils/utils'
@@ -60,6 +60,11 @@ export default class AppRoot extends React.Component {
       leftHandMode,
       showAppBgImage,
     }
+
+    const apolloClient = createApolloClient(
+      this.clearLocalStorage,
+      this.createNotificationBanner
+    )
 
     return (
       <ApolloProvider client={apolloClient}>
