@@ -15,7 +15,6 @@ export const Shortcut = styled.div`
 
   border-radius: 50%;
   border: 1px solid ${props => props.theme.border};
-
   background-color: ${props => props.theme.timelineDay};
 `
 
@@ -26,10 +25,10 @@ export const Day = styled(Link)`
   align-items: center;
 
   padding: 5px 0;
-  border-top: 1px solid ${props => props.theme.border};
+  border-bottom: 1px solid ${props => props.theme.border};
 
   &:last-child {
-    border-top: 0;
+    border-bottom: 0;
   }
 `
 

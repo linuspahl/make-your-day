@@ -1,5 +1,5 @@
-query GetRecords($createdAt: String) {
-  getRecords(createdAt: $createdAt) {
+query GetRecords($createdAt: String, $createdAtFrom: String, $createdAtTo: String) {
+  getRecords(createdAt: $createdAt, createdAtFrom: $createdAtFrom, createdAtTo: $createdAtTo) {
     id
     title
     amount

@@ -7,7 +7,7 @@ import { sortBy, formatUnixDate, getDateString } from 'utils/utils'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
-import { Layout } from './styles'
+import { Layout, Outer, FlexboxSpacer } from './styles'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
 import TimelineWidgetDay from 'components/TimelineWidgetDay/TimelineWidgetDay'
@@ -30,33 +30,44 @@ export default class TimelineWidget extends React.Component {
 
   render() {
     return (
-      <Layout>
-        <Query query={GetRecords}>
-          {({ loading, error, data }) => {
-            if (loading) return <LoadingPlaceholder />
+      <Outer>
+        <FlexboxSpacer>
+          <Layout>
+            <Query
+              query={GetRecords}
+              variables={{
+                createdAtFrom: getDateString(
+                  new Date().setDate(new Date().getDate() - 7)
+                ),
+              }}
+            >
+              {({ loading, error, data }) => {
+                if (loading) return <LoadingPlaceholder />
 
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Einträge konnten nicht geladen werden"
-                />
-              )
+                if (error)
+                  return (
+                    <ErrorMessage
+                      error={error}
+                      message="Einträge konnten nicht geladen werden"
+                    />
+                  )
 
-            if (data.getRecords.length === 0) return <NoResult />
+                if (data.getRecords.length === 0) return <NoResult />
 
-            const timeline = this.prepareTimeline(data.getRecords)
-            return Object.values(timeline).map(day => (
-              <TimelineWidgetDay
-                categories={day.categories}
-                date={day.date}
-                key={day.date}
-                shortcut={day.shortcut}
-              />
-            ))
-          }}
-        </Query>
-      </Layout>
+                const timeline = this.prepareTimeline(data.getRecords)
+                return Object.values(timeline).map(day => (
+                  <TimelineWidgetDay
+                    categories={day.categories}
+                    date={day.date}
+                    key={day.date}
+                    shortcut={day.shortcut}
+                  />
+                ))
+              }}
+            </Query>
+          </Layout>
+        </FlexboxSpacer>
+      </Outer>
     )
   }
 
@@ -66,6 +77,18 @@ export default class TimelineWidget extends React.Component {
     // Based on the day we will group all related records by category
     const timeline = {}
 
+    var date = new Date()
+
+    for (let index = 0; index <= 6; index++) {
+      const day = new Date(date).setDate(date.getDate() - index)
+      const dayDate = getDateString(day)
+      timeline[dayDate] = {
+        shortcut: index,
+        categories: {},
+        date: dayDate,
+      }
+    }
+
     records.forEach(record => {
       const { category: recordCategory } = record
       const category = recordCategory.parent || recordCategory
@@ -74,30 +97,23 @@ export default class TimelineWidget extends React.Component {
       const createdAtDate = formatUnixDate(record.createdAt)
       const createdAtDay = getDateString(createdAtDate)
 
-      // Check if an entry for the record related day exists
-      if (!timeline[createdAtDay]) {
-        // If no entry exists, create one
-        timeline[createdAtDay] = {
-          shortcut: createdAtDate.getDay(),
-          date: createdAtDay,
-          categories: {},
+      if (timeline[createdAtDay]) {
+        // Check if an entry for the category exists
+        let categoryEnry = timeline[createdAtDay].categories[categoryKey]
+        if (!categoryEnry) {
+          // If no entry exists, create one and set the amount of the record
+          categoryEnry = {
+            ...category,
+            recordAmountSum: this.getRecordAmount(record, category),
+          }
+        } else {
+          // Otherwise only sum up the record amount
+          categoryEnry.recordAmountSum =
+            categoryEnry.recordAmountSum +
+            this.getRecordAmount(record, category)
         }
+        timeline[createdAtDay].categories[categoryKey] = categoryEnry
       }
-
-      // Check if an entry for the category exists
-      let categoryEnry = timeline[createdAtDay].categories[categoryKey]
-      if (!categoryEnry) {
-        // If no entry exists, create one and set the amount of the record
-        categoryEnry = {
-          ...category,
-          recordAmountSum: this.getRecordAmount(record, category),
-        }
-      } else {
-        // Otherwise only sum up the record amount
-        categoryEnry.recordAmountSum =
-          categoryEnry.recordAmountSum + this.getRecordAmount(record, category)
-      }
-      timeline[createdAtDay].categories[categoryKey] = categoryEnry
     })
 
     return sortBy(Object.values(timeline), 'date')

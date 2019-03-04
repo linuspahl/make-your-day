@@ -15,7 +15,7 @@ export const Layout = styled.div`
   width: 100%;
 
   display: grid;
-  grid-template-rows: 1fr 70px 1fr;
+  grid-template-rows: calc(50vh - 35px) 70px calc(50vh - 35px);
 
   @media (min-width: ${props =>
       props.theme.mediaQuery.tablet}) and (orientation: landscape) {
