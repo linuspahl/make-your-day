@@ -1,4 +1,8 @@
-export default (parent, { createdAt }, { models, currentUser }) => {
+export default (
+  parent,
+  { createdAt, createdAtFrom, createdAtTo },
+  { models, currentUser }
+) => {
   const cond = { userId: currentUser.id }
   // const createdAt = getDateString(createdAt)
 
@@ -11,6 +15,15 @@ export default (parent, { createdAt }, { models, currentUser }) => {
     }
   }
 
+  if (createdAtFrom || createdAtTo) {
+    const createdAtCond = {}
+    if (createdAtFrom)
+      createdAtCond['$gt'] = new Date(createdAtFrom).setHours(0, 0, 0)
+    if (createdAtTo)
+      createdAtCond['$lt'] = new Date(createdAtTo).setHours(23, 59, 59)
+
+    cond['$and'] = { createdAt: createdAtCond }
+  }
   return models.Record.findAll({
     where: cond,
   })

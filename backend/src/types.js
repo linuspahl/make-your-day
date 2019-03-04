@@ -152,7 +152,11 @@ export default gql`
     getCategories: [Category]!
     getCategory(id: Int!): Category!
     getRecord(id: Int!): Record!
-    getRecords(createdAt: String): [Record]!
+    getRecords(
+      createdAt: String
+      createdAtFrom: String
+      createdAtTo: String
+    ): [Record]!
     getSettings: [Setting]!
     getUserSessions: [UserSession]!
     getWidget(id: Int!): Widget!
