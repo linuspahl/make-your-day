@@ -55,7 +55,7 @@ const DashboardWidgets = props => {
     <Layout>
       {sortBy(widgets, 'id').map(widget =>
         widget.type === 'timeline' ? (
-          <WidgetLayout>
+          <WidgetLayout key={widget.id}>
             <TimelineWidget loading={loading} key={widget.id} />
           </WidgetLayout>
         ) : (
