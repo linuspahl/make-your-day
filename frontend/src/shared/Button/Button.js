@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const Layout = styled.button`
+  user-select: none;
+
   ${props => {
     let bgColor = `#fff`
     let activeBgColor = `#efefef`
