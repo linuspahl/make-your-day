@@ -15,6 +15,7 @@ import Login from 'containers/Login/Login'
 import PageNotFound from 'containers/PageNotFound/PageNotFound'
 import Settings from 'containers/Settings/Settings'
 import Widgets from 'containers/Widgets/Widgets'
+import Evaluations from 'containers/Evaluations/Evaluations'
 import Timeline from 'containers/Timeline/Timeline'
 
 const Routes = props => (
@@ -55,6 +56,12 @@ const Routes = props => (
         createNotificationBanner={props.createNotificationBanner}
         userSession={props.userSession}
         path="/widgets"
+      />
+      <PrivateRoute
+        component={Evaluations}
+        createNotificationBanner={props.createNotificationBanner}
+        userSession={props.userSession}
+        path="/evaluations"
       />
       <PrivateRoute
         component={Timeline}

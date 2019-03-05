@@ -12,6 +12,7 @@ const Navigation = props => {
     { path: '/', title: 'Dashboard' },
     { path: '/categories', title: 'Kategorien verwalten' },
     { path: '/widgets', title: 'Widgets verwalten' },
+    { path: '/evaluations', title: 'Auswertungen verwalten' },
     { path: '/settings', title: 'Einstellungen' },
   ]
 

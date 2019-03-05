@@ -82,3 +82,19 @@ export const widgetPositionOptions = [
   { value: 'dashboard-top', title: 'Dashboard oben' },
   { value: 'dashboard-bottom', title: 'Dashboard unten' },
 ]
+
+export const evaluationTypeOptions = [
+  { value: 'list', title: 'Liste' },
+  { value: 'linechart', title: 'Liniendiagram' },
+  { value: 'barchart', title: 'Balkendiagram' },
+  { value: 'piechart', title: 'Kuchendiagram' },
+]
+
+export const evaluationPeriodOptions = [
+  { value: 'day', title: 'Dieser Tag' },
+  { value: 'month', title: 'Dieser Monat' },
+  { value: 'year', title: 'Dieses Jahr' },
+  { value: 'lastDay', title: 'Vergange 24 Stunden' },
+  { value: 'lastMonth', title: 'Vergangene 30 Tage' },
+  { value: 'lastYear', title: 'Vergangene 365 Tage' },
+]

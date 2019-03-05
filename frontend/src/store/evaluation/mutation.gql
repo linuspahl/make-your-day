@@ -1,0 +1,39 @@
+mutation CreateEvaluation (
+  $title: String!
+  $categoryId: Int!
+  $type: String!
+  $period: String!
+) {
+  createEvaluation (
+    title: $title
+    categoryId: $categoryId
+    type: $type
+    period: $period
+    ) {
+      id
+      title
+  }
+}
+
+mutation UpdateEvaluation (
+  $id: Int!
+  $title: String!
+  $categoryId: Int!
+  $type: String!
+  $period: String!
+) {
+  updateEvaluation (
+    id: $id
+    title: $title
+    categoryId: $categoryId
+    type: $type
+    period: $period
+  ) {
+    id
+    title
+  }
+}
+
+mutation DeleteEvaluation($id: Int!) {
+  deleteEvaluation(id: $id)
+}

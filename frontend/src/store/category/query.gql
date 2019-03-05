@@ -1,8 +1,20 @@
 query GetCategories {
-  getCategories {
+  getCategories(parentsOnly: true) {
     id
     title
     hasSubcategories
+  }
+}
+
+query GetCategoriesWithChildren {
+  getCategories(parentsOnly: true) {
+    id
+    title
+    hasSubcategories
+    subcategories {
+      id
+      title
+    }
   }
 }
 
