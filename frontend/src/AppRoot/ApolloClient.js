@@ -18,16 +18,18 @@ export default (clearLocalStorage, createNotificationBanner) =>
       })
     },
     onError: error => {
-      // On auhth error, e.g. when session expires, logout user
-      const authErrors = error.graphQLErrors.filter(
-        error => error.extensions.code === 'UNAUTHENTICATED'
-      )
-      if (authErrors) {
-        createNotificationBanner({
-          type: 'error',
-          message: 'Die Sitzung ist nicht mehr gültig',
-        })
-        clearLocalStorage()
+      // On auth error, e.g. when session expires, logout user
+      if (error && error.graphQLErrors) {
+        const authErrors = error.graphQLErrors.filter(
+          error => error.extensions.code === 'UNAUTHENTICATED'
+        )
+        if (authErrors && authErrors.length !== 0) {
+          createNotificationBanner({
+            type: 'error',
+            message: 'Die Sitzung ist nicht mehr gültig',
+          })
+          clearLocalStorage()
+        }
       }
     },
   })
