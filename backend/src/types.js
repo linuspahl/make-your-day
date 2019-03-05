@@ -49,6 +49,17 @@ export default gql`
     user: User!
   }
 
+  type Evaluation {
+    id: Int!
+    title: String!
+    user: User!
+    categoryId: Int!
+    category: Category!
+    groupSubcategories: Boolean!
+    type: String!
+    period: String!
+  }
+
   type Setting {
     id: Int!
     title: String!
@@ -90,6 +101,13 @@ export default gql`
   type Mutation {
     loginUser(username: String!, password: String!, device: String!): Login!
     # Create
+    createEvaluation(
+      title: String!
+      categoryId: Int!
+      groupSubcategories: Boolean
+      type: String!
+      period: String
+    ): Evaluation
     createCategory(
       color: String
       hasDescription: Boolean
@@ -117,6 +135,14 @@ export default gql`
       position: String!
     ): Widget!
     # Update
+    updateEvaluation(
+      id: Int!
+      title: String!
+      categoryId: Int!
+      groupSubcategories: Boolean
+      type: String!
+      period: String
+    ): Evaluation
     updateCategory(
       color: String
       hasDescription: Boolean
@@ -146,11 +172,14 @@ export default gql`
     deleteCategory(id: Int!): Boolean
     deleteWidget(id: Int!): Boolean
     deleteRecord(id: Int!): Boolean
+    deleteEvaluation(id: Int!): Boolean
   }
 
   type Query {
-    getCategories: [Category]!
+    getCategories(parentsOnly: Boolean): [Category]!
     getCategory(id: Int!): Category!
+    getEvaluations: [Evaluation]!
+    getEvaluation(id: Int!): Evaluation!
     getRecord(id: Int!): Record!
     getRecords(
       createdAt: String

@@ -18,6 +18,10 @@ export default (sequelize, DataTypes) => {
       onUpdate: 'cascade',
     })
     User.hasMany(models.Record, { onDelete: 'cascade', onUpdate: 'cascade' })
+    User.hasMany(models.Evaluation, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    })
 
     // model actions
     User.login = params => login(models, params)

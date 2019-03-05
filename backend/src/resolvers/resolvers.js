@@ -8,20 +8,25 @@ import { isAuthenticated } from './authorization'
 
 // Mutations import
 import createCategory from './mutation/createCategory'
+import createEvaluation from './mutation/createEvaluation'
 import createRecord from './mutation/createRecord'
 import createSubcategory from './mutation/createSubcategory'
 import createUserSetting from './mutation/createUserSetting'
 import createWidget from './mutation/createWidget'
 import deleteCategory from './mutation/deleteCategory'
 import deleteRecord from './mutation/deleteRecord'
+import deleteEvaluation from './mutation/deleteEvaluation'
 import deleteUserSetting from './mutation/deleteUserSetting'
 import deleteUserSession from './mutation/deleteUserSession'
 import deleteWidget from './mutation/deleteWidget'
 import loginUser from './mutation/loginUser'
 import updateCategory from './mutation/updateCategory'
+import updateEvaluation from './mutation/updateEvaluation'
 import updateRecord from './mutation/updateRecord'
 import updateWidget from './mutation/updateWidget'
 // Queries import
+import getEvaluation from './query/getEvaluation'
+import getEvaluations from './query/getEvaluations'
 import getCategories from './query/getCategories'
 import getCategory from './query/getCategory'
 import getRecord from './query/getRecord'
@@ -55,23 +60,28 @@ export default {
   },
   Mutation: {
     createCategory: combineResolvers(isAuthenticated, createCategory),
+    createEvaluation: combineResolvers(isAuthenticated, createEvaluation),
     createRecord: combineResolvers(isAuthenticated, createRecord),
     createSubcategory: combineResolvers(isAuthenticated, createSubcategory),
     createUserSetting: combineResolvers(isAuthenticated, createUserSetting),
     createWidget: combineResolvers(isAuthenticated, createWidget),
     deleteCategory: combineResolvers(isAuthenticated, deleteCategory),
+    deleteEvaluation: combineResolvers(isAuthenticated, deleteEvaluation),
     deleteRecord: combineResolvers(isAuthenticated, deleteRecord),
     deleteUserSetting: combineResolvers(isAuthenticated, deleteUserSetting),
     deleteUserSession: combineResolvers(isAuthenticated, deleteUserSession),
     deleteWidget: combineResolvers(isAuthenticated, deleteWidget),
     loginUser: loginUser,
     updateCategory: combineResolvers(isAuthenticated, updateCategory),
+    updateEvaluation: combineResolvers(isAuthenticated, updateEvaluation),
     updateRecord: combineResolvers(isAuthenticated, updateRecord),
     updateWidget: combineResolvers(isAuthenticated, updateWidget),
   },
   Query: {
     getCategory: combineResolvers(isAuthenticated, getCategory),
     getCategories: combineResolvers(isAuthenticated, getCategories),
+    getEvaluation: combineResolvers(isAuthenticated, getEvaluation),
+    getEvaluations: combineResolvers(isAuthenticated, getEvaluations),
     getRecords: combineResolvers(isAuthenticated, getRecords),
     getRecord: combineResolvers(isAuthenticated, getRecord),
     getSettings: combineResolvers(isAuthenticated, getSettings),

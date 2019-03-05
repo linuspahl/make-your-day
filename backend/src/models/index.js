@@ -6,6 +6,7 @@ import sequelize from '../core/sequelize'
 // We need to use sequelize import method to call every model definition
 const models = {
   Record: sequelize.import('./record/record'),
+  Evaluation: sequelize.import('./evaluation/evaluation'),
   Widget: sequelize.import('./widget/widget'),
   Category: sequelize.import('./category/category'),
   UserSetting: sequelize.import('./userSetting/userSetting'),
