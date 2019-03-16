@@ -63,9 +63,8 @@ export default class EvaluationForm extends React.Component {
   render() {
     const { mode, rootPath, categories } = this.props
     const { title, type, groupSubcategories, period, categoryId } = this.state
-    const selectedCategory = categories.find(
-      category => category.id === categoryId
-    )
+    const selectedCategory =
+      categories && categories.find(category => category.id === categoryId)
     const categoryOptions = generateCategoryOptions(categories)
     const disabledFields = {
       groupSubcategories: selectedCategory && !!selectedCategory.parentId,

@@ -2,10 +2,10 @@
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import EvaluatuionOverview from './EvaluatuionOverview'
+import EvaluationOverview from './EvaluationOverview'
 
-describe('EvaluatuionOverview should', () => {
+describe('EvaluationOverview should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<EvaluatuionOverview />)
+    new ShallowRenderer().render(<EvaluationOverview />)
   })
 })
