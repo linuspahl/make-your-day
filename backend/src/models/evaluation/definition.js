@@ -16,7 +16,7 @@ export default (sequelize, DataTypes) =>
     type: {
       allowNull: false,
       type: DataTypes.STRING,
-      validate: { isIn: [['list', 'barchart', 'linechart', 'piechart']] },
+      validate: { isIn: [['barchart', 'linechart', 'piechart']] },
     },
     groupSubcategories: {
       allowNull: false,
@@ -28,7 +28,18 @@ export default (sequelize, DataTypes) =>
       defaultValue: false,
       type: DataTypes.STRING,
       validate: {
-        isIn: [['day', 'month', 'year', 'lastDay', 'lastMonth', 'lastYear']],
+        isIn: [
+          [
+            'day',
+            'week',
+            'month',
+            'year',
+            'lastDay',
+            'lastWeek',
+            'lastMonth',
+            'lastYear',
+          ],
+        ],
       },
     },
   })

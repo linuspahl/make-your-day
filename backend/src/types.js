@@ -58,6 +58,18 @@ export default gql`
     groupSubcategories: Boolean!
     type: String!
     period: String!
+    result: EvaluationResult!
+  }
+
+  type EvaluationResult {
+    labels: [String]
+    datasets: [EvaluationResultDataset]
+  }
+
+  type EvaluationResultDataset {
+    label: String!
+    data: [Int]!
+    backgroundColor: String!
   }
 
   type Setting {

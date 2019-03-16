@@ -39,6 +39,7 @@
     "graphql": "^14.0.2",
     "graphql-resolvers": "^0.3.2",
     "jsonwebtoken": "^8.5.0",
+    "moment": "^2.24.0",
     "pg": "^7.7.1",
     "pm2": "^3.3.1",
     "sequelize": "^4.42.0",

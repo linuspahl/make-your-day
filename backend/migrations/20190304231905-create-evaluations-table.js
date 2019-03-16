@@ -41,7 +41,16 @@ module.exports = {
           type: Sequelize.STRING,
           validate: {
             isIn: [
-              ['day', 'month', 'year', 'lastDay', 'lastMonth', 'lastYear'],
+              [
+                'day',
+                'week',
+                'month',
+                'year',
+                'lastDay',
+                'lasWeek',
+                'lastMonth',
+                'lastYear',
+              ],
             ],
           },
         },
@@ -71,7 +80,7 @@ module.exports = {
           type: 'foreign key',
           name: 'evaluations_categoryId_fkey',
           references: {
-            table: 'users',
+            table: 'categories',
             field: 'id',
           },
           onDelete: 'cascade',

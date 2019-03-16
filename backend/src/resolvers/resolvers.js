@@ -42,6 +42,8 @@ import getUserSettingSetting from './query/getUserSettingSetting'
 import getRecordCategory from './query/getRecordCategory'
 import getCategorySubcategories from './query/getCategorySubcategories'
 import getCategoryParent from './query/getCategoryParent'
+import getEvaluationCategory from './query/getEvaluationCategory'
+import getEvaluationResult from './query/getEvaluationResult'
 
 export default {
   Login: {
@@ -57,6 +59,10 @@ export default {
   Category: {
     subcategories: getCategorySubcategories,
     parent: getCategoryParent,
+  },
+  Evaluation: {
+    category: getEvaluationCategory,
+    result: getEvaluationResult,
   },
   Mutation: {
     createCategory: combineResolvers(isAuthenticated, createCategory),
