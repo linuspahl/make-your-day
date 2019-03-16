@@ -3,15 +3,21 @@ mutation CreateEvaluation (
   $categoryId: Int!
   $type: String!
   $period: String!
+  $groupSubcategories: Boolean!
 ) {
   createEvaluation (
     title: $title
     categoryId: $categoryId
     type: $type
     period: $period
+    groupSubcategories: $groupSubcategories
     ) {
       id
       title
+      categoryId
+      type
+      period
+      groupSubcategories
   }
 }
 
@@ -21,6 +27,7 @@ mutation UpdateEvaluation (
   $categoryId: Int!
   $type: String!
   $period: String!
+  $groupSubcategories: Boolean!
 ) {
   updateEvaluation (
     id: $id
@@ -28,9 +35,14 @@ mutation UpdateEvaluation (
     categoryId: $categoryId
     type: $type
     period: $period
+    groupSubcategories: $groupSubcategories
   ) {
     id
     title
+    categoryId
+    type
+    period
+    groupSubcategories
   }
 }
 

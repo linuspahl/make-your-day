@@ -27,7 +27,7 @@ const EvaluationOverview = props => {
 
   return (
     <FadeTransition fullWidth>
-      <H1 context="page">Auswertungn verwalten</H1>
+      <H1 context="page">Auswertungen verwalten</H1>
 
       <Query query={GetEvaluations}>
         {({ loading, error, data }) => {
@@ -46,6 +46,10 @@ const EvaluationOverview = props => {
                 <ListItem key={evaluation.id} spaceBetween>
                   {evaluation.title}
                   <div>
+                    <ActionIcon
+                      to={`${rootPath}/view/${evaluation.id}`}
+                      icon="bar-chart"
+                    />
                     <ActionIcon
                       to={`${rootPath}/edit/${evaluation.id}`}
                       icon="edit"

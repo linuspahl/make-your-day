@@ -50,7 +50,7 @@ const generateCategoryOptions = categories => {
   return categoryOptions
 }
 
-export default class CategoryForm extends React.Component {
+export default class EvaluationForm extends React.Component {
   constructor(props) {
     super(props)
 
@@ -63,8 +63,14 @@ export default class CategoryForm extends React.Component {
   render() {
     const { mode, rootPath, categories } = this.props
     const { title, type, groupSubcategories, period, categoryId } = this.state
-
+    const selectedCategory = categories.find(
+      category => category.id === categoryId
+    )
     const categoryOptions = generateCategoryOptions(categories)
+    const disabledFields = {
+      groupSubcategories: selectedCategory && !!selectedCategory.parentId,
+    }
+
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
         <Row>
@@ -89,6 +95,16 @@ export default class CategoryForm extends React.Component {
           />
         </Row>
         <Row>
+          Gruppiere Unterkategorien
+          <Checkbox
+            disabled={disabledFields['groupSubcategories']}
+            name="groupSubcategories"
+            onChange={this.handleInputChange}
+            tabIndex={1}
+            value={groupSubcategories}
+          />
+        </Row>
+        <Row>
           Art
           <ContentSelect
             name="type"
@@ -97,15 +113,6 @@ export default class CategoryForm extends React.Component {
             tabIndex={1}
             title="Art"
             value={type}
-          />
-        </Row>
-        <Row>
-          Gruppiere Unterkategorien
-          <Checkbox
-            name="groupSubcategories"
-            onChange={this.handleInputChange}
-            tabIndex={1}
-            value={groupSubcategories}
           />
         </Row>
         <Row>
@@ -137,6 +144,6 @@ export default class CategoryForm extends React.Component {
   }
 
   handleInputChange(event) {
-    handleInputChange(event, this.setState)
+    handleInputChange(event, this.setState.bind(this))
   }
 }

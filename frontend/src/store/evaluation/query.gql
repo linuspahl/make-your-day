@@ -13,5 +13,16 @@ query GetEvaluation($id: Int!) {
     groupSubcategories
     type
     period
+    category {
+      title
+    }
+    result {
+      labels
+      datasets {
+        label
+        data
+        backgroundColor
+      }
+    }
 	}
 }

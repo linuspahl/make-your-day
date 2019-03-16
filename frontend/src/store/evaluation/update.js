@@ -8,12 +8,12 @@ export const addEvaluation = (cache, result) => {
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the the overview list will not get fetched
   try {
-    const Evaluations = cache.readQuery({ query: GetEvaluations })
+    const evaluations = cache.readQuery({ query: GetEvaluations })
 
     cache.writeQuery({
       query: GetEvaluations,
       data: {
-        getEvaluations: [...Evaluations.getEvaluations, createEvaluation],
+        getEvaluations: [...evaluations.getEvaluations, createEvaluation],
       },
     })
   } catch {}

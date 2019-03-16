@@ -74,6 +74,7 @@ export const categoryIcons = [
 ]
 
 export const widgetTypeOptions = [
+  { value: 'evaluation', title: 'Auswertung' },
   { value: 'textarea', title: 'Freitext' },
   { value: 'timeline', title: 'Timeline' },
 ]
@@ -92,9 +93,11 @@ export const evaluationTypeOptions = [
 
 export const evaluationPeriodOptions = [
   { value: 'day', title: 'Dieser Tag' },
+  { value: 'week', title: 'Diese Woche' },
   { value: 'month', title: 'Dieser Monat' },
   { value: 'year', title: 'Dieses Jahr' },
   { value: 'lastDay', title: 'Vergange 24 Stunden' },
+  { value: 'lastWeek', title: 'Vergange 7 Tage' },
   { value: 'lastMonth', title: 'Vergangene 30 Tage' },
   { value: 'lastYear', title: 'Vergangene 365 Tage' },
 ]
