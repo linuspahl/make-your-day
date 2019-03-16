@@ -32,11 +32,30 @@ export const formatUnixDate = unixDate => {
   return new Date(unixDateInt)
 }
 
+// This function will add a yero for every number less than ten
+// It's needed for the date string and will always return a string
+const formatDatePartial = dateNumber => {
+  if (dateNumber < 10) {
+    return `0${dateNumber}`
+  }
+
+  return `${dateNumber}`
+}
+
 export const getDateString = dateParam => {
   // Expects a JS date object
   // Returns a string with the format like 'YYYY-M-D'
   const date = new Date(dateParam)
-  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
+  // Get number of the day and month
+  const monthNr = date.getMonth() + 1
+  const dayNr = date.getDate()
+
+  // Convert day and month to string
+  const month = formatDatePartial(monthNr)
+  const day = formatDatePartial(dayNr)
+
+  return `${date.getFullYear()}-${month}-${day}`
 }
 
 // Utility form function - will updade the form state on input change.

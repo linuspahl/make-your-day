@@ -5,9 +5,8 @@ import { Query } from 'react-apollo'
 import { sortBy, formatUnixDate, getDateString } from 'utils/utils'
 // components
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import NoResult from 'shared/NoResult/NoResult'
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
-import { Layout, Outer, FlexboxSpacer } from './styles'
+import { Layout, Outer } from './styles'
 // graphql
 import { GetRecords } from 'store/record/query.gql'
 import TimelineWidgetDay from 'components/TimelineWidgetDay/TimelineWidgetDay'
@@ -51,9 +50,8 @@ export default class TimelineWidget extends React.Component {
                   />
                 )
 
-              if (data.getRecords.length === 0) return <NoResult />
-
               const timeline = this.prepareTimeline(data.getRecords)
+
               return Object.values(timeline).map(day => (
                 <TimelineWidgetDay
                   categories={day.categories}
@@ -77,11 +75,15 @@ export default class TimelineWidget extends React.Component {
 
     var date = new Date()
 
+    // First we start by adding a key to the timeline for the last seven days
     for (let index = 0; index <= 6; index++) {
+      // Define a new date and set the date based on the index
+      // E.g. today - 0 results in days, today - 1 will result in yesterdays date, etc.
       const day = new Date(date).setDate(date.getDate() - index)
       const dayDate = getDateString(day)
+      const dayWeekNr = new Date(dayDate).getDay()
       timeline[dayDate] = {
-        shortcut: index,
+        shortcut: dayWeekNr,
         categories: {},
         date: dayDate,
       }

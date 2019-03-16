@@ -8,9 +8,13 @@ import { logError } from 'utils/utils'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
+import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
+import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 // graphql
+import { Query } from 'react-apollo'
 import { addWidget } from 'store/widget/update'
 import { CreateWidget } from 'store/widget/mutation.gql'
+import { GetEvaluations } from 'store/evaluation/query.gql'
 
 class WidgetCreate extends React.Component {
   constructor(props) {
@@ -25,22 +29,41 @@ class WidgetCreate extends React.Component {
     return (
       <FadeTransition fullWidth>
         <H1 context="page">Widget erstellen</H1>
-        <Mutation
-          mutation={CreateWidget}
-          onCompleted={this.handleCompleted}
-          onError={this.hanldeError}
-          update={addWidget}
-        >
-          {createWidget => (
-            <WidgetForm
-              mode="create"
-              mutation={CreateWidget}
-              rootPath={rootPath}
-              submitAction={variables => createWidget({ variables })}
-              initialData={{ type: 'textarea', position: 'dashboard-bottom' }}
-            />
-          )}
-        </Mutation>
+        <Query query={GetEvaluations}>
+          {({ loading, error, data }) => {
+            if (loading) return <CenteredSpinner />
+            if (error)
+              return (
+                <ErrorMessage
+                  error={error}
+                  message="Kategorien konnten nicht geladen werden"
+                />
+              )
+
+            return (
+              <Mutation
+                mutation={CreateWidget}
+                onCompleted={this.handleCompleted}
+                onError={this.hanldeError}
+                update={addWidget}
+              >
+                {createWidget => (
+                  <WidgetForm
+                    mode="create"
+                    mutation={CreateWidget}
+                    evaluations={data.getEvaluations}
+                    rootPath={rootPath}
+                    submitAction={variables => createWidget({ variables })}
+                    initialData={{
+                      type: 'textarea',
+                      position: 'dashboard-bottom',
+                    }}
+                  />
+                )}
+              </Mutation>
+            )
+          }}
+        </Query>
       </FadeTransition>
     )
   }
