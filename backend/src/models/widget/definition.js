@@ -16,7 +16,7 @@ export default (sequelize, DataTypes) =>
     type: {
       allowNull: false,
       type: DataTypes.STRING,
-      validate: { isIn: [['textarea', 'timeline']] },
+      validate: { isIn: [['textarea', 'timeline', 'evaluation']] },
     },
     position: {
       allowNull: false,

@@ -103,6 +103,8 @@ export default gql`
 
   type Widget {
     id: Int!
+    evaluation: Evaluation
+    evaluationId: Int
     user: User!
     title: String!
     type: String!
@@ -144,6 +146,7 @@ export default gql`
       title: String!
       type: String!
       value: String
+      evaluationId: Int
       position: String!
     ): Widget!
     # Update

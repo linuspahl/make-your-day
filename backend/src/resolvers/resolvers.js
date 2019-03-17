@@ -44,6 +44,7 @@ import getCategorySubcategories from './query/getCategorySubcategories'
 import getCategoryParent from './query/getCategoryParent'
 import getEvaluationCategory from './query/getEvaluationCategory'
 import getEvaluationResult from './query/getEvaluationResult'
+import getWidgetEvaluation from './query/getWidgetEvaluation'
 
 export default {
   Login: {
@@ -63,6 +64,9 @@ export default {
   Evaluation: {
     category: getEvaluationCategory,
     result: getEvaluationResult,
+  },
+  Widget: {
+    evaluation: getWidgetEvaluation,
   },
   Mutation: {
     createCategory: combineResolvers(isAuthenticated, createCategory),
