@@ -19,7 +19,7 @@ query GetCategoriesWithChildren {
 }
 
 query GetCategoriesIcon {
-  getCategories {
+  getCategories(parentsOnly: true) {
     color
     icon
     id
