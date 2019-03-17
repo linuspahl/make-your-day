@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   background-color: transparent;
   border: 1px solid ${props => props.theme.border};
 
-  color: ${props => props.theme.text};
+  color: ${props => (props.disabled ? props.theme.border : props.theme.text)};
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
 `
 
