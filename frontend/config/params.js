@@ -85,7 +85,6 @@ export const widgetPositionOptions = [
 ]
 
 export const evaluationTypeOptions = [
-  { value: 'list', title: 'Liste' },
   { value: 'linechart', title: 'Liniendiagram' },
   { value: 'barchart', title: 'Balkendiagram' },
   { value: 'piechart', title: 'Kuchendiagram' },
