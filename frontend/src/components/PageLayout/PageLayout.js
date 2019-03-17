@@ -28,6 +28,7 @@ const Layout = styled.div`
     });
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
     background-position: 50% 50%;
     `
       : `background-color: ${props.theme.appBg}`};
