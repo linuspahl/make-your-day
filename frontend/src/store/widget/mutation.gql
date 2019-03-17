@@ -1,5 +1,5 @@
-mutation CreateWidget($title: String!, $type: String!, $value: String, $position: String!) {
-  createWidget(value: $value, title: $title, type: $type, position: $position) {
+mutation CreateWidget($title: String!, $type: String!, $value: String, $position: String!, $evaluationId: Int!) {
+  createWidget(value: $value, title: $title, type: $type, position: $position, evaluationId: $evaluationId) {
     id
     title
     position

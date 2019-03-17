@@ -19,6 +19,37 @@ const Form = styled.form`
   margin-top: 15px;
 `
 
+const generateEvaluationOptions = categories => {
+  let categoryOptions = []
+
+  if (!categories || categories.length === 0) {
+    return categoryOptions
+  }
+
+  categories.forEach(category => {
+    categoryOptions = [
+      ...categoryOptions,
+      {
+        value: category.id,
+        title: category.title,
+      },
+    ]
+    if (category.subcategories) {
+      category.subcategories.forEach(subcategory => {
+        categoryOptions = [
+          ...categoryOptions,
+          {
+            value: subcategory.id,
+            title: `${category.title} -> ${subcategory.title}`,
+          },
+        ]
+      })
+    }
+  })
+
+  return categoryOptions
+}
+
 export default class WidgetForm extends React.Component {
   constructor(props) {
     super(props)
@@ -36,8 +67,15 @@ export default class WidgetForm extends React.Component {
   }
 
   render() {
-    const { mode, rootPath } = this.props
-    const { title, type, value, position } = this.state
+    const { mode, rootPath, evaluations } = this.props
+    const { title, type, value, position, evaluationId } = this.state
+
+    const evaluationOptions = generateEvaluationOptions(evaluations)
+    const disabledFields = {
+      type: mode !== 'create',
+      evaluationId: type !== 'evaluation',
+      disabledFields: type !== 'textarea',
+    }
 
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
@@ -51,15 +89,28 @@ export default class WidgetForm extends React.Component {
             value={title}
           />
         </Row>
-        <Row>
+        <Row disabled={disabledFields['type']}>
           Art
           <ContentSelect
+            disabled={disabledFields['type']}
             name="type"
             onChange={this.handleInputChange}
             options={widgetTypeOptions}
             tabIndex={1}
             title="Art"
             value={type}
+          />
+        </Row>
+        <Row disabled={disabledFields['evaluationId']}>
+          Auswertung
+          <ContentSelect
+            disabled={disabledFields['evaluationId']}
+            name="evaluationId"
+            onChange={this.handleInputChange}
+            options={evaluationOptions}
+            tabIndex={1}
+            title="Auswertung"
+            value={evaluationId}
           />
         </Row>
         <Row>
@@ -71,15 +122,6 @@ export default class WidgetForm extends React.Component {
             tabIndex={1}
             title="Position"
             value={position}
-          />
-        </Row>
-        <Row disabled={type !== 'textarea'}>
-          Inhalt
-          <Textarea
-            name="value"
-            onChange={this.handleInputChange}
-            disabled={type !== 'textarea'}
-            value={value}
           />
         </Row>
         <ActionRow>

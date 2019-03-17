@@ -7,6 +7,7 @@ import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import NoResult from 'shared/NoResult/NoResult'
 import Widget from 'components/Widget/Widget'
 import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
+import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
 
 // graphql
 import WidgetPlaceholder from '../Widget/WidgetPlaceholder'
@@ -53,12 +54,27 @@ const DashboardWidgets = props => {
 
   return (
     <Layout>
-      {sortBy(widgets, 'id').map(widget =>
-        widget.type === 'timeline' ? (
-          <WidgetLayout key={widget.id}>
-            <TimelineWidget loading={loading} key={widget.id} />
-          </WidgetLayout>
-        ) : (
+      {sortBy(widgets, 'id').map(widget => {
+        if (widget.type === 'timeline') {
+          return (
+            <WidgetLayout key={widget.id}>
+              <TimelineWidget loading={loading} key={widget.id} />
+            </WidgetLayout>
+          )
+        }
+
+        if (widget.type === 'evaluation') {
+          return (
+            <WidgetLayout key={widget.id}>
+              <EvaluationWidget
+                evaluation={widget.evaluation}
+                key={widget.id}
+              />
+            </WidgetLayout>
+          )
+        }
+
+        return (
           <WidgetLayout key={widget.id}>
             <Widget
               createNotificationBanner={createNotificationBanner}
@@ -66,7 +82,7 @@ const DashboardWidgets = props => {
             />
           </WidgetLayout>
         )
-      )}
+      })}
     </Layout>
   )
 }

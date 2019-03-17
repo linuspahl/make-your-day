@@ -16,7 +16,7 @@ import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
-import { GetWidgets } from 'store/widget/query.gql'
+import { GetWidgetsOverview } from 'store/widget/query.gql'
 import { DeleteWidget } from 'store/widget/mutation.gql'
 import { deleteWidget } from 'store/widget/update'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
@@ -33,7 +33,7 @@ const WidgetOverview = props => {
     <FadeTransition fullWidth>
       <H1 context="page">Widgets verwalten</H1>
 
-      <Query query={GetWidgets}>
+      <Query query={GetWidgetsOverview}>
         {({ loading, error, data }) => {
           if (loading) return <CenteredSpinner />
           if (error)

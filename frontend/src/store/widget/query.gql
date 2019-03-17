@@ -15,5 +15,35 @@ query GetWidgets {
     type
     value
     position
+    evaluation {
+      id
+      title
+      categoryId
+      groupSubcategories
+      type
+      period
+      category {
+        title
+      }
+      result {
+        labels
+        datasets {
+          label
+          data
+          backgroundColor
+        }
+      }
+    }
+	}
+}
+
+
+query GetWidgetsOverview {
+  getWidgets {
+    id
+    title
+    type
+    value
+    position
 	}
 }

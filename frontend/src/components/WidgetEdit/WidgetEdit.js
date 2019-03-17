@@ -14,6 +14,7 @@ import WidgetForm from 'components/WidgetForm/WidgetForm'
 // graphql
 import { UpdateWidget } from 'store/widget/mutation.gql'
 import { GetWidget } from 'store/widget/query.gql'
+import { GetEvaluations } from 'store/evaluation/query.gql'
 
 class WidgetEdit extends React.Component {
   constructor(props) {
@@ -31,31 +32,48 @@ class WidgetEdit extends React.Component {
       <FadeTransition fullWidth>
         <H1 context="page">Widget bearbeiten</H1>
 
-        <Query query={GetWidget} variables={{ id: widgetId }}>
+        <Query query={GetEvaluations}>
           {({ loading, error, data }) => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
                 <ErrorMessage
                   error={error}
-                  message="Widget konnte nicht geladen werden"
+                  message="Kategorien konnten nicht geladen werden"
                 />
               )
-            if (!data.getWidget.id) return <NoResult />
+
+            const evaluations = data.getEvaluations
             return (
-              <Mutation
-                mutation={UpdateWidget}
-                onCompleted={this.onComplete}
-                onError={this.handleError}
-              >
-                {updateUser => (
-                  <WidgetForm
-                    initialData={data.getWidget}
-                    rootPath={rootPath}
-                    submitAction={variables => updateUser({ variables })}
-                  />
-                )}
-              </Mutation>
+              <Query query={GetWidget} variables={{ id: widgetId }}>
+                {({ loading, error, data }) => {
+                  if (loading) return <CenteredSpinner />
+                  if (error)
+                    return (
+                      <ErrorMessage
+                        error={error}
+                        message="Widget konnte nicht geladen werden"
+                      />
+                    )
+                  if (!data.getWidget.id) return <NoResult />
+                  return (
+                    <Mutation
+                      mutation={UpdateWidget}
+                      onCompleted={this.onComplete}
+                      onError={this.handleError}
+                    >
+                      {updateUser => (
+                        <WidgetForm
+                          evaulations={evaluations}
+                          initialData={data.getWidget}
+                          rootPath={rootPath}
+                          submitAction={variables => updateUser({ variables })}
+                        />
+                      )}
+                    </Mutation>
+                  )
+                }}
+              </Query>
             )
           }}
         </Query>
