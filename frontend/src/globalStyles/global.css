@@ -41,4 +41,5 @@ b {
 
 input {
   margin: 0;
+  -webkit-appearance: none;
 }
