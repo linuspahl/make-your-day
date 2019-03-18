@@ -53,12 +53,12 @@ export const OptionsWrapper = styled.div`
   width: 100%;
   top: 0;
   right: 0;
-  left: 0;
 
   position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+  padding: 20px;
+
+  z-index: ${props => props.theme.layerIndex.modal};
 `
 
 export const OptionsOffset = styled.div`
@@ -67,24 +67,35 @@ export const OptionsOffset = styled.div`
   width: 100%;
   height: 100%;
 
-  position: absolute;
+  position: fixed;
 
   background-color: rgba(0, 0, 0, 0.35);
 `
 
+export const ModalWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: ${props => props.theme.layerIndex.modalContent};
+`
+
 export const Modal = styled.div`
-  z-index: ${props => props.theme.layerIndex.modal};
   max-width: 420px;
-  width: calc(100% - 40px);
-  max-height: calc(100vh - 40px);
+  max-height: 100%;
+  width: 100%;
+
+  position: relative;
+  display: grid;
+  grid-template-rows: 40px 1fr;
 
   padding: 20px;
   border: 1px solid ${props => props.theme.border};
 
   background-color: ${props => props.theme.contentBoxBg};
-  overflow: auto;
-  display: grid;
-  grid-template-rows: 40px 1fr;
 `
 
 export const Option = styled(ListItem)`

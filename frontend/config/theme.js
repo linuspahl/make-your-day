@@ -51,6 +51,7 @@ const nightModeTheme = {
 // Overview of all z-index used in the app
 const layerIndex = {
   modal: 10,
+  modalContent: 11,
 }
 
 export default userSettings => {

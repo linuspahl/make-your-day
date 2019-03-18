@@ -15,6 +15,7 @@ import {
   Select,
   Header,
   Modal,
+  ModalWrapper,
   OptionsWrapper,
   OptionsOffset,
   Options,
@@ -69,32 +70,36 @@ export default class ContentSelect extends React.Component {
           <FadeTransition>
             <OptionsWrapper>
               <OptionsOffset onClick={() => this.toggleSelect()} />
-              <Modal>
-                {title && (
-                  <Header>
-                    {title}
-                    <CloseIcon close={this.toggleSelect} />
-                  </Header>
-                )}
-                <Options>
-                  {options.map(option => {
-                    const isSelected = option.value === value
+              <ModalWrapper>
+                <Modal>
+                  {title && (
+                    <Header>
+                      {title}
+                      <CloseIcon close={this.toggleSelect} />
+                    </Header>
+                  )}
+                  <Options>
+                    {options.map(option => {
+                      const isSelected = option.value === value
 
-                    return (
-                      <Option
-                        isSelected={isSelected}
-                        key={option.value}
-                        onClick={() => this.onOptionClick(option.value)}
-                      >
-                        {hasPreview && (
-                          <OptionPreview>{renderPreview(option)}</OptionPreview>
-                        )}
-                        <span>{option.title}</span>
-                      </Option>
-                    )
-                  })}
-                </Options>
-              </Modal>
+                      return (
+                        <Option
+                          isSelected={isSelected}
+                          key={option.value}
+                          onClick={() => this.onOptionClick(option.value)}
+                        >
+                          {hasPreview && (
+                            <OptionPreview>
+                              {renderPreview(option)}
+                            </OptionPreview>
+                          )}
+                          <span>{option.title}</span>
+                        </Option>
+                      )
+                    })}
+                  </Options>
+                </Modal>
+              </ModalWrapper>
             </OptionsWrapper>
           </FadeTransition>
         )}

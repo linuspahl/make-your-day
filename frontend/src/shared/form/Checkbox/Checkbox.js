@@ -8,7 +8,6 @@ const Wrapper = styled.div`
   height: 40px;
   width: 40px;
 
-  background-color: transparent;
   border: 1px solid ${props => props.theme.border};
 
   color: ${props => (props.disabled ? props.theme.border : props.theme.text)};
@@ -20,7 +19,9 @@ const Element = styled.input`
   height: 100%;
   width: 100%;
 
+  background-color: transparent;
   border-radius: 0;
+  border: 0;
 
   appearance: none;
 
