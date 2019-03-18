@@ -9,7 +9,8 @@
   "scripts": {
     "start": "webpack-dev-server --config config/webpack/development.js",
     "build": "webpack --progress --verbose --config config/webpack/production.js",
-    "test": "jest --config config/test/jest-config.js"
+    "test": "jest --config config/test/jest-config.js",
+    "lint": "yarn run eslint src config"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",

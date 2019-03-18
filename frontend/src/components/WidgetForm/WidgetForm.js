@@ -11,7 +11,6 @@ import {
 import Row from 'shared/form/Row/Row'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Input from 'shared/form/Input/Input'
-import Textarea from 'shared/form/Textarea/Textarea'
 import Button from 'shared/Button/Button'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 
@@ -68,7 +67,7 @@ export default class WidgetForm extends React.Component {
 
   render() {
     const { mode, rootPath, evaluations } = this.props
-    const { title, type, value, position, evaluationId } = this.state
+    const { title, type, position, evaluationId } = this.state
 
     const evaluationOptions = generateEvaluationOptions(evaluations)
     const disabledFields = {
