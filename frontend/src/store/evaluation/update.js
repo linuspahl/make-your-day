@@ -1,5 +1,5 @@
 // graphql
-import { GetEvaluations } from 'store/category/query.gql'
+import { GetEvaluations } from 'store/evaluation/query.gql'
 
 export const addEvaluation = (cache, result) => {
   const {
@@ -28,8 +28,8 @@ export const deleteEvaluation = (cache, result, variables) => {
     if (deleteEvaluation) {
       const EvaluationsQuery = cache.readQuery({ query: GetEvaluations })
       const updatedEvaluations = EvaluationsQuery.getEvaluations.filter(
-        category => {
-          return category.id !== variables.id
+        evaluation => {
+          return evaluation.id !== variables.id
         }
       )
 
