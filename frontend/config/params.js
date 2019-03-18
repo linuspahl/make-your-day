@@ -55,7 +55,7 @@ export const categoryTypeOptions = [
 ]
 
 export const categoryIcons = [
-  { value: null, title: '-' },
+  { value: null, title: 'Keine Auswahl' },
   { value: 'glass', title: 'Glass' },
   { value: 'car', title: 'Auto' },
   { value: 'archive', title: 'Box' },

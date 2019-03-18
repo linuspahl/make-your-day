@@ -14,7 +14,7 @@ const SmallColorPreview = styled.div`
 `
 const prepareColors = colors => {
   // Make "no selection" selectable
-  const noSelection = { value: null, title: '-' }
+  const noSelection = { value: null, title: 'Keine Auswahl' }
   // Create select options based on theme colors
   const colorsOptions = Object.keys(colors).map(key => {
     return { value: key, title: key }

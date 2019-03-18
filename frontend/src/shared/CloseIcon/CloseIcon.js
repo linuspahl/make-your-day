@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import Icon from 'shared/Icon/Icon'
 
 const Element = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 
   display: flex;
   justify-content: center;

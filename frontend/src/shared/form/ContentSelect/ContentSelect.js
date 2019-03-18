@@ -6,18 +6,12 @@
 // libraries
 import React from 'react'
 // components
-import CloseIcon from 'shared/CloseIcon/CloseIcon'
 import Icon from 'shared/Icon/Icon'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import Modal from 'shared/Modal/Modal'
 
 import {
   Layout,
   Select,
-  Header,
-  Modal,
-  ModalWrapper,
-  OptionsWrapper,
-  OptionsOffset,
   Options,
   OptionPreview,
   Option,
@@ -61,47 +55,32 @@ export default class ContentSelect extends React.Component {
           onFocus={disabled ? null : this.onFocus}
           onBlur={disabled ? null : this.onBlur}
         >
-          {value && currentOption ? currentOption.title : '-'}
+          {value && currentOption ? currentOption.title : 'Keine Auswahl'}
           <ArrowIcon>
             <Icon title="angle-down" />
           </ArrowIcon>
         </Select>
         {isOpen && (
-          <FadeTransition>
-            <OptionsWrapper>
-              <OptionsOffset onClick={() => this.toggleSelect()} />
-              <ModalWrapper>
-                <Modal>
-                  {title && (
-                    <Header>
-                      {title}
-                      <CloseIcon close={this.toggleSelect} />
-                    </Header>
-                  )}
-                  <Options>
-                    {options.map(option => {
-                      const isSelected = option.value === value
+          <Modal headline={title} toggleAction={this.toggleSelect}>
+            <Options>
+              {options.map(option => {
+                const isSelected = option.value === value
 
-                      return (
-                        <Option
-                          isSelected={isSelected}
-                          key={option.value}
-                          onClick={() => this.onOptionClick(option.value)}
-                        >
-                          {hasPreview && (
-                            <OptionPreview>
-                              {renderPreview(option)}
-                            </OptionPreview>
-                          )}
-                          <span>{option.title}</span>
-                        </Option>
-                      )
-                    })}
-                  </Options>
-                </Modal>
-              </ModalWrapper>
-            </OptionsWrapper>
-          </FadeTransition>
+                return (
+                  <Option
+                    isSelected={isSelected}
+                    key={option.value}
+                    onClick={() => this.onOptionClick(option.value)}
+                  >
+                    {hasPreview && (
+                      <OptionPreview>{renderPreview(option)}</OptionPreview>
+                    )}
+                    <span>{option.title}</span>
+                  </Option>
+                )
+              })}
+            </Options>
+          </Modal>
         )}
       </Layout>
     )
