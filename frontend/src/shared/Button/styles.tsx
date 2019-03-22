@@ -1,9 +1,9 @@
 // libraries
-import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+//interfaces
+interface LayoutInterfacte { type: string, to: string, as: any, onClick: () => void, context: string }
 
-const Layout = styled.button`
+export const Layout = styled.button<LayoutInterfacte>`
   user-select: none;
 
   ${props => {
@@ -40,25 +40,3 @@ const Layout = styled.button`
     `
   }}
 `
-
-const Button = props => {
-  const { clickAction, children, type, context, to } = props
-  const hasClickAction = typeof clickAction === 'function'
-  const isLink = Boolean(to)
-
-  return (
-    <Layout
-      type={type || 'button'}
-      context={context}
-      // Button is a Link
-      to={isLink ? to : null}
-      as={isLink ? Link : null}
-      // Button is clickable
-      onClick={() => hasClickAction && clickAction()}
-    >
-      {children}
-    </Layout>
-  )
-}
-
-export default Button
