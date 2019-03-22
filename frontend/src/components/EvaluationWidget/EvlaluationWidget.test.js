@@ -6,6 +6,6 @@ import EvaluationWidget from './EvaluationWidget'
 
 describe('EvaluationWidget should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<EvaluationWidget />)
+    new ShallowRenderer().render(<EvaluationWidget evaluation={{}} />)
   })
 })

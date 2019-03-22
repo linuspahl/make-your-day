@@ -6,6 +6,6 @@ import EvaluationChart from './EvaluationChart'
 
 describe('EvaluationChart should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<EvaluationChart />)
+    new ShallowRenderer().render(<EvaluationChart evaluation={{}} />)
   })
 })
