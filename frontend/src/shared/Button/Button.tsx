@@ -3,8 +3,14 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 // components
 import {Layout} from './styles'
-// interfaces
-interface Props { context?: ('primary' | 'secondary'), clickAction?: () => void, children?: string, type?: 'submit', to?: string}
+
+interface Props {
+  context?: ('primary' | 'secondary'),
+  clickAction?: () => void,
+  children?: string,
+  type?: 'submit',
+  to?: string
+}
 
 const Button = (props: Props) => {
   const { clickAction, children, type, context, to } = props

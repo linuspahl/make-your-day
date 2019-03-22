@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 import { Element } from './styles'
-// interfaces
+
 interface Props { context?: string; children: string; }
 
 const H1 = (props: Props) => <Element context={props.context}>{props.children}</Element>
