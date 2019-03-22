@@ -92,7 +92,8 @@ Can optionally be used with the cli e.g. `yarn run eslint example/target.js`.
 * @babel/polyfill - This will emulate a full ES2015+ environment. This means you can use new built-ins like Promise.
 * uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code.
 * typescript - to type js code
-* @types/react, @types/react-dom, @types/styled-components - types for specified libs, needed for TypeScript usage
+* ts-jest - TypeScript preprocessor with source map support for Jest that lets you use Jest to test projects written in TypeScript.
+* @types/react, @types/react-dom, @types/styled-components, @types/jest - types for specified libs, needed for TypeScript usage
 * awesome-typescript-loader - helps Webpack compile your TypeScript code using the TypeScript’s standard configuration file.
 * soucrce-map-loader - uses any sourcemap outputs from TypeScript to inform webpack when generating its own sourcemaps. This will allow you to debug your final output file as if you were debugging your original TypeScript source code.
 * eslint-plugin-react - for react specific eslint rules

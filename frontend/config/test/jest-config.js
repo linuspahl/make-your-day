@@ -5,6 +5,7 @@
 const moduleResolvers = require('../moduleResolvers')
 
 module.exports = {
+  preset: 'ts-jest',
   transform: {
     '^.+\\.js?$': './babel-jest.js',
     '^.+\\.gql?$': 'jest-transform-graphql',
