@@ -7,7 +7,7 @@ import { logError } from 'utils/utils'
 // components
 import CategoryForm from 'components/CategoryForm/CategoryForm'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1'
+import H1 from 'shared/H1/H1.tsx'
 // graphql
 import { addCategory } from 'store/category/update'
 import { CreateCategory } from 'store/category/mutation.gql'

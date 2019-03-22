@@ -3,7 +3,7 @@ import React from 'react'
 // components
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import CloseIcon from 'shared/CloseIcon/CloseIcon'
-import H1 from 'shared/H1/H1'
+import H1 from 'shared/H1/H1.tsx'
 import {
   Wrapper,
   Offset,

@@ -7,7 +7,7 @@ import Button from 'shared/Button/Button'
 import ContentBox from 'shared/ContentBox/ContentBox'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1'
+import H1 from 'shared/H1/H1.tsx'
 import PageLayout from 'components/PageLayout/PageLayout'
 
 export const Layout = styled.div`

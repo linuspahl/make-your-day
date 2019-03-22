@@ -9,7 +9,7 @@ import EvaluationForm from 'components/EvaluationForm/EvaluationForm'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import H1 from 'shared/H1/H1'
+import H1 from 'shared/H1/H1.tsx'
 // graphql
 import { addEvaluation } from 'store/evaluation/update'
 import { CreateEvaluation } from 'store/evaluation/mutation.gql'

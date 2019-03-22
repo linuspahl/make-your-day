@@ -9,7 +9,7 @@ import CategoryForm from 'components/CategoryForm/CategoryForm'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1'
+import H1 from 'shared/H1/H1.tsx'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { UpdateCategory } from 'store/category/mutation.gql'

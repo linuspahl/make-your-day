@@ -13,7 +13,7 @@ import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOv
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1'
+import H1 from 'shared/H1/H1.tsx'
 import H2 from 'shared/H2/H2'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
