@@ -1,9 +1,9 @@
 // libraries
 import styled from 'styled-components'
 //interfaces
-interface LayoutInterfacte { type: string, to: string, as: any, onClick: () => void, context: string }
+interface LayoutProps { type: string, to: string, as: any, onClick: () => void, context: string }
 
-export const Layout = styled.button<LayoutInterfacte>`
+export const Layout = styled.button<LayoutProps>`
   user-select: none;
 
   ${props => {

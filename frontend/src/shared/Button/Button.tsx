@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 // components
 import {Layout} from './styles'
 // interfaces
-interface Button { context?: ('primary' | 'secondary'), clickAction?: () => void, children?: string, type?: 'submit', to?: string}
+interface Props { context?: ('primary' | 'secondary'), clickAction?: () => void, children?: string, type?: 'submit', to?: string}
 
-const Button = (props: Button) => {
+const Button = (props: Props) => {
   const { clickAction, children, type, context, to } = props
   const hasClickAction = typeof clickAction === 'function'
   const isLink = Boolean(to)

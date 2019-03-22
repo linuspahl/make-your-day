@@ -1,9 +1,9 @@
 // libraries
 import styled from 'styled-components'
 // interfaces
-interface Element {context: string }
+interface ElementProps {context: string }
 
-export const Element = styled.h1<Element>`
+export const Element = styled.h1<ElementProps>`
   font-size: 28px;
   text-align: center;
   hyphens: auto;
