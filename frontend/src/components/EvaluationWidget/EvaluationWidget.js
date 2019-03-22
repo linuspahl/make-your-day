@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 // components
 import EvaluationChart from 'components/EvaluationChart/EvaluationChart'
-import H1 from 'shared/H1/H1.tsx'
+import H1 from 'shared/H1/H1'
 
 const Layout = styled.div`
   width: 100%;

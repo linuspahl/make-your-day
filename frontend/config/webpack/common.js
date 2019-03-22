@@ -58,5 +58,6 @@ module.exports = {
   },
   resolve: {
     modules: moduleResolvers,
+    extensions: ['.mjs', '.js', '.ts', '.tsx'],
   },
 }

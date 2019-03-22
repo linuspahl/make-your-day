@@ -6,7 +6,7 @@ import { Mutation } from 'react-apollo'
 import { logError } from 'utils/utils'
 // components
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1.tsx'
+import H1 from 'shared/H1/H1'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'

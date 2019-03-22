@@ -7,7 +7,7 @@ import { logError, extractIdFromUrl } from 'utils/utils'
 // components
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1.tsx'
+import H1 from 'shared/H1/H1'
 import NoResult from 'shared/NoResult/NoResult'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'

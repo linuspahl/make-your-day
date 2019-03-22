@@ -10,7 +10,7 @@ import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import DeleteButton from 'shared/DeleteButton/DeleteButton'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1.tsx'
+import H1 from 'shared/H1/H1'
 import NoResult from 'shared/NoResult/NoResult'
 import RecordForm from 'components/RecordForm/RecordForm'
 // graphql

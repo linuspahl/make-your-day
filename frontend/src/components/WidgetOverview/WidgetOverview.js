@@ -12,7 +12,7 @@ import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 import H2 from 'shared/H2/H2'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import H1 from 'shared/H1/H1.tsx'
+import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql

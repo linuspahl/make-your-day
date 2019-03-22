@@ -5,12 +5,13 @@
         "noImplicitAny": true,
         "target": "es5",
         "jsx": "react",
-        "lib": ["es6"]
+        "lib": ["es6"],
+        "moduleResolution": "node"
     },
     "include": [
         "./src/**/*"
     ],
     "exclude": [
         "node_modules",
-      ]
+    ]
 }

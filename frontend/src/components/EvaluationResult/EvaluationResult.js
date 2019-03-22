@@ -8,7 +8,7 @@ import { extractIdFromUrl, logError } from 'utils/utils'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1.tsx'
+import H1 from 'shared/H1/H1'
 import NoResult from 'shared/NoResult/NoResult'
 import EvaluationChart from 'components/EvaluationChart/EvaluationChart'
 // graphql
