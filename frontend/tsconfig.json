@@ -5,12 +5,16 @@
         "noImplicitAny": true,
         "target": "es5",
         "jsx": "react",
-        "lib": ["es6", "dom"],
+        "types": ["react", "jest"],
+        "lib": ["es6", "dom", "esnext.asynciterable"],
         "baseUrl": ".",
         "paths": {
             "shared/*": [
                 "src/shared/*"
-            ]
+            ],
+            "store/*": [
+                "src/store/*"
+            ],
         }
     },
     "include": [

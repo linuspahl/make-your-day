@@ -4,6 +4,7 @@ const HtmlWebPackPlugin = require('html-webpack-plugin')
 const DotenvPlugin = require('dotenv-webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 const moduleResolvers = require('../moduleResolvers')
+const getGqlTransformer = require('ts-transform-graphql-tag').getTransformer
 
 // * entry - configure entry point for babel polyfill
 // * output - publicPath - needed to resolve bundle in sub routes
@@ -21,7 +22,13 @@ module.exports = {
   ],
   module: {
     rules: [
-      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+      {
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
+        options: {
+          getCustomTransformers: () => ({ before: [getGqlTransformer()] }),
+        },
+      },
       {
         test: /\.js$/,
         enforce: 'pre',

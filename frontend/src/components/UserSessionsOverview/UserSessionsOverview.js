@@ -15,9 +15,9 @@ import GridHead from 'shared/grid/GridHead/GridHead'
 import GridBody from 'shared/grid/GridBody/GridBody'
 import GridCell from 'shared/grid/GridCell/GridCell'
 // qraphql
-import { GetUserSessions } from 'store/user/query.gql'
-import { DeleteUserSession } from 'store/user/mutation.gql'
-import { deleteUserSession } from 'store/user/update'
+import { GetUserSessions } from 'store/userSession/query'
+import { DeleteUserSession } from 'store/userSession/mutation'
+import { deleteUserSession } from 'store/userSession/update'
 
 const UserSessionOverview = props => (
   <FadeTransition>

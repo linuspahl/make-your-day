@@ -9,7 +9,7 @@ import Button from 'shared/Button/Button'
 import Input from 'shared/form/Input/Input'
 import Row from 'shared/form/Row/Row'
 // graphql
-import { LoginUser } from 'store/user/mutation.gql'
+import { LoginUser } from 'store/userSession/mutation'
 
 export const Form = styled.form`
   margin-top: 15px;

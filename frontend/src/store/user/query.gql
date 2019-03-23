@@ -1,7 +1,0 @@
-query GetUserSessions {
-  getUserSessions {
-    id
-    device
-    expiresAt
-  }
-}
