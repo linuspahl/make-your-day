@@ -5,8 +5,13 @@
         "noImplicitAny": true,
         "target": "es5",
         "jsx": "react",
-        "lib": ["es6"],
-        "moduleResolution": "node"
+        "lib": ["es6", "dom"],
+        "baseUrl": ".",
+        "paths": {
+            "shared/*": [
+                "src/shared/*"
+            ]
+        }
     },
     "include": [
         "./src/**/*"
