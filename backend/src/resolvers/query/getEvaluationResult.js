@@ -60,19 +60,19 @@ const getPeriodDates = period => {
   let end = null
   switch (period) {
     case 'lastDay':
-      start = moment().duration(-1, 'days')
+      start = moment().subtract(1, 'days')
       break
     case 'lastWeek':
       duration = 7
-      start = moment().duration(-1, 'weeks')
+      start = moment().subtract(1, 'weeks')
       break
     case 'lastMonth':
       duration = 30
-      start = moment().duration(-1, 'months')
+      start = moment().subtract(1, 'months')
       break
     case 'lastYear':
       duration = 365
-      start = moment().duration(-1, 'years')
+      start = moment().subtract(1, 'years')
       break
     case 'day':
       duration = 1
