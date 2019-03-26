@@ -1,4 +1,7 @@
+// libraries
 import styled, { keyframes } from 'styled-components'
+// interfaces
+import { Notification } from 'types/types'
 
 const moveIn = keyframes`
   0% {
@@ -20,7 +23,13 @@ const moveOut = keyframes`
   }
 `
 
-export const Alert = styled.div`
+interface AlertProps {
+  durationAnimation: number
+  durationVisible: number
+  role: Notification['type']
+}
+
+export const Alert = styled.div<AlertProps>`
   position: fixed;
   width: 100%;
 

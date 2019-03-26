@@ -3,9 +3,8 @@
 // Each route will render a container component
 
 // libraries
-import React from 'react'
+import * as React from 'react'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
-
 // components
 import PublicRoute from '../PublicRoute/PublicRoute'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
@@ -17,8 +16,19 @@ import Settings from 'containers/Settings/Settings'
 import Widgets from 'containers/Widgets/Widgets'
 import Evaluations from 'containers/Evaluations/Evaluations'
 import Timeline from 'containers/Timeline/Timeline'
+// interfaces
+import { NotificationCreate, LocalStorageCreate } from 'types/types'
+import { UserSession } from 'store/userSession/type'
 
-const Routes = props => (
+interface Props {
+  clearLocalStorage: () => void
+  createNotificationBanner: (notification: NotificationCreate) => void
+  updateLocalStorage: (localStorage: LocalStorageCreate) => void
+  userSession: UserSession
+  userSettings: { [key: string]: boolean }
+}
+
+const Routes = (props: Props) => (
   <Router>
     <Switch>
       <PublicRoute
@@ -39,7 +49,6 @@ const Routes = props => (
         clearLocalStorage={props.clearLocalStorage}
         createNotificationBanner={props.createNotificationBanner}
         component={Settings}
-        expiresAt={props.expiresAt}
         userSession={props.userSession}
         path="/settings"
         updateLocalStorage={props.updateLocalStorage}
@@ -68,7 +77,7 @@ const Routes = props => (
         userSession={props.userSession}
         path="/timeline"
       />
-      <PrivateRoute path="*" component={PageNotFound} />
+      <PublicRoute path="*" component={PageNotFound} />
     </Switch>
   </Router>
 )

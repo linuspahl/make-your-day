@@ -3,21 +3,25 @@
 // like the theme and apollo provider and the routes
 
 // libraries
-import React, { Fragment } from 'react'
+import * as React from 'react'
 import createApolloClient from './ApolloClient'
 import { ThemeProvider } from 'styled-components'
 import { ApolloProvider } from 'react-apollo'
 import { getLocalStorage, updateLocalStorage } from 'utils/utils'
-
 // theme
 import colorTheme from '../../config/theme'
-
 // components
 import Routes from './Routes/Routes'
 import NotificationBanner from './NotificationBanner/NotificationBanner'
+// interfaces
+import { LocalStorage, LocalStorageCreate, NotificationCreate } from 'types/types';
+import { UserSession } from 'store/userSession/type';
 
-export default class AppRoot extends React.Component {
-  constructor(props) {
+
+export default class AppRoot extends React.Component<{}, LocalStorage> {
+  notificationBanner: React.RefObject<NotificationBanner>
+
+  constructor(props: {}) {
     super(props)
 
     this.state = getLocalStorage([
@@ -48,7 +52,7 @@ export default class AppRoot extends React.Component {
       userSessionId,
     } = this.state
 
-    const userSession = {
+    const userSession: UserSession = {
       userId,
       expiresAt,
       token: authToken,
@@ -69,23 +73,22 @@ export default class AppRoot extends React.Component {
     return (
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={colorTheme(userSettings)}>
-          <Fragment>
+          <React.Fragment>
             <NotificationBanner ref={this.notificationBanner} />
             <Routes
               clearLocalStorage={this.clearLocalStorage}
               createNotificationBanner={this.createNotificationBanner}
-              expiresAt={expiresAt}
               userSession={userSession}
               updateLocalStorage={this.updateLocalStorage}
               userSettings={userSettings}
             />
-          </Fragment>
+          </React.Fragment>
         </ThemeProvider>
       </ApolloProvider>
     )
   }
 
-  updateLocalStorage(newStore) {
+  updateLocalStorage(newStore: LocalStorageCreate) {
     updateLocalStorage(newStore, this.setState.bind(this))
   }
 
@@ -101,7 +104,7 @@ export default class AppRoot extends React.Component {
     })
   }
 
-  createNotificationBanner(notification) {
+  createNotificationBanner(notification: NotificationCreate) {
     this.notificationBanner.current.addNotification(notification)
   }
 }

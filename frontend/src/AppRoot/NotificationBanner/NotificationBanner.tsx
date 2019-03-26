@@ -1,12 +1,21 @@
 // libraries
-import React, { Fragment } from 'react'
+import * as React from 'react'
 // components
 import CloseIcon from 'shared/CloseIcon/CloseIcon'
 import CircleTimer from 'shared/CircleTimer/CircleTimer'
 import { Alert } from './styles'
+// interface
+import { Notification, NotificationCreate } from 'types/types'
 
-export default class GlobalNotification extends React.Component {
-  constructor(props) {
+interface State {
+  notification?: Notification
+}
+
+export default class GlobalNotification extends React.Component<{}, State> {
+  // class types
+  closeCountDown?: number
+
+  constructor(props: {}) {
     super(props)
 
     this.state = {
@@ -25,10 +34,9 @@ export default class GlobalNotification extends React.Component {
     const durationVisible = 6 // time the notification is visible in seconds
     const durationAnimation = 0.5
     return (
-      <Fragment>
+      <React.Fragment>
         {notification && (
           <Alert
-            key={notification.createdAt}
             role={notification.type}
             durationVisible={durationVisible}
             durationAnimation={durationAnimation}
@@ -39,7 +47,7 @@ export default class GlobalNotification extends React.Component {
             </CircleTimer>
           </Alert>
         )}
-      </Fragment>
+      </React.Fragment>
     )
   }
 
@@ -48,12 +56,13 @@ export default class GlobalNotification extends React.Component {
     if (this.closeCountDown) {
       clearTimeout(this.closeCountDown)
     }
-    this.closeCountDown = setTimeout(() => {
-      this.removeNotification()
-    }, 6000)
+    this.closeCountDown = window.setTimeout(
+      () => this.removeNotification(),
+      6000
+    )
   }
 
-  addNotification(data) {
+  addNotification(data: NotificationCreate ) {
     this.startCloseCountdown()
     // set a new or overwrite the current notification
     this.setState({
@@ -67,6 +76,8 @@ export default class GlobalNotification extends React.Component {
 
   removeNotification() {
     this.setState({ notification: null })
-    clearTimeout(this.startCloseCountdown)
+    if (this.closeCountDown) {
+      clearTimeout(this.closeCountDown)
+    }
   }
 }

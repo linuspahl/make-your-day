@@ -2,11 +2,14 @@
 
 // We need to define a fetch polyfill to test the apollo client correctly
 import 'cross-fetch/polyfill'
-
-import ApolloClient from 'apollo-boost'
+// config
 import config from '../../config/config'
+// libraries
+import ApolloClient from 'apollo-boost'
+// interfaces
+import { NotificationCreate } from 'types/types';
 
-export default (clearLocalStorage, createNotificationBanner) =>
+export default (clearLocalStorage: () => void, createNotificationBanner: (notification: NotificationCreate) => void) =>
   new ApolloClient({
     uri: `${config.apiHost}:${config.apiPort}/graphql`,
     request: async operation => {
