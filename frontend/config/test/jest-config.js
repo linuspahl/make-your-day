@@ -1,8 +1,8 @@
 // Config file for testing with jest.
 // Jest will use babel-jest as a transformer, to be able to test es5 code.
-// This part could be placed in the package.json under a "jest" tag, as well, but we prefer a seperate config file.
+// This part could be placed in the package.json under a 'jest' tag, as well, but we prefer a seperate config file.
 
-const moduleResolvers = require('../moduleResolvers')
+const moduleResolvers = require('../moduleResolvers');
 
 module.exports = {
   preset: 'ts-jest',
@@ -10,8 +10,9 @@ module.exports = {
     '^.+\\.js?$': './babel-jest.js',
     '^.+\\.gql?$': 'jest-transform-graphql',
   },
-  collectCoverageFrom: ['../../src/**.{js}'],
+  collectCoverageFrom: ['../../src/**.{tsx}'],
   roots: ['../../'],
+  testRegex: '.*\\.test\\.tsx$',
   moduleDirectories: moduleResolvers,
   moduleFileExtensions: ['ts', 'tsx', 'js'],
   moduleNameMapper: {
