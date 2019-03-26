@@ -41,11 +41,6 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.gql$/,
-        exclude: /node_modules/,
-        loader: 'graphql-tag/loader',
-      },
-      {
         test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {

@@ -54,7 +54,7 @@ const layerIndex = {
   modalContent: 11,
 }
 
-export default userSettings => {
+export default (userSettings: { [key: string]: boolean }) => {
   let colors = defaultTheme
   if (userSettings.nightMode) {
     // if nightmode is active, we will just change some specific colors
