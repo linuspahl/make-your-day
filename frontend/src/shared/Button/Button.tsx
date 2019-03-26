@@ -2,14 +2,15 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom'
 // components
-import {Layout} from './styles'
+import { Layout } from './styles'
 
 interface Props {
-  context?: ('primary' | 'secondary'),
-  clickAction?: () => void,
-  children?: string,
-  type?: 'submit',
+  children?: React.ReactNode
+  clickAction?: () => void
+  context?: ('primary' | 'secondary' | 'delete')
+  tabIndex?: number
   to?: string
+  type?: 'submit'
 }
 
 const Button = (props: Props) => {

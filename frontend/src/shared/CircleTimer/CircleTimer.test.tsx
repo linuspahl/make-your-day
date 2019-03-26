@@ -2,10 +2,10 @@
 import * as React from 'react'
 import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import ActionIcon from './ActionIcon'
+import CircleTimer from './CircleTimer'
 
-describe('ActionIcon should', () => {
+describe('CircleTimer should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<ActionIcon to="/" icon="check" />)
+    ShallowRenderer.createRenderer().render(<CircleTimer>Icon</CircleTimer>)
   })
 })

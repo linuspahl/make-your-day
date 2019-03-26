@@ -2,8 +2,9 @@
 import styled from 'styled-components'
 
 interface ListItemProps {
-    spaceBetween: 'space-between' | 'start'
+    spaceBetween?: boolean
     clickable: boolean
+    children: React.ReactNode
 }
 
 export const ListItem = styled.li<ListItemProps>`

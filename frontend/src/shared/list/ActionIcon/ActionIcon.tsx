@@ -1,17 +1,34 @@
 // libraried
 import * as React from 'react'
+import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 // components
 import Icon from 'shared/Icon/Icon'
-import { Element } from './styles'
+
+const Wrapper = styled(Link)`
+  height: 40px;
+  width: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+
+  font-size: 26px;
+  color: ${props => props.theme.text};
+  &:active {
+    background-color: ${props => props.theme.active};
+  }
+`
 
 interface Props {
-  to: string,
   icon: string
+  to: string
 }
 
-const ActionIcon = (props: Props) => (
-  <Element to={props.to}>
+const ActionRow = (props: Props) => (
+  <Wrapper to={props.to}>
     <Icon title={props.icon} />
-  </Element>
+  </Wrapper>
 )
-export default ActionIcon
+export default ActionRow

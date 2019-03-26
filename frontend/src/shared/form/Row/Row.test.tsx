@@ -2,10 +2,10 @@
 import * as React from 'react'
 import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import ActionIcon from './ActionIcon'
+import Row from './Row'
 
-describe('ActionIcon should', () => {
+describe('Row should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<ActionIcon to="/" icon="check" />)
+    ShallowRenderer.createRenderer().render(<Row>Content</Row>)
   })
 })

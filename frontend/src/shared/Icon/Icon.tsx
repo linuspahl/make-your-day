@@ -7,7 +7,7 @@
 import * as React from 'react'
 
 interface Props {
-    title: string
+  title: string
 }
 
 const Icon = (props: Props) => <i className={`la la-${props.title}`} />

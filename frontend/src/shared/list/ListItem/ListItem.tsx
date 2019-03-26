@@ -4,24 +4,24 @@ import * as React from 'react'
 import { ListItem } from './styles'
 
 interface Props {
-  onFocus?: () => void
-  tabIndex: number
-  onClick?: () => void
-  spaceBetween?: 'space-between' | 'start'
+  children: React.ReactNode
   className?: string
-  children: string
+  onClick?: () => void
+  onFocus?: () => void
+  spaceBetween?: boolean
+  tabIndex?: number
 }
 
 const LogoutIcon = (props: Props) => {
   const clickable = typeof props.onClick === 'function'
   return (
     <ListItem
-      onFocus={props.onFocus}
-      tabIndex={props.tabIndex}
+      className={props.className}
       clickable={clickable}
       onClick={props.onClick}
+      onFocus={props.onFocus}
       spaceBetween={props.spaceBetween}
-      className={props.className}
+      tabIndex={props.tabIndex}
     >
       {props.children}
     </ListItem>

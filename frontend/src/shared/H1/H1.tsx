@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { Element } from './styles'
 
-interface Props { context?: string; children: string; }
+interface Props { context?: string; children: React.ReactNode; }
 
 const H1 = (props: Props) => <Element context={props.context}>{props.children}</Element>
 
