@@ -1,4 +1,4 @@
-import { CategoryPlain, Category } from 'store/category/type'
+import { CategoryPlain, CategoryFull } from 'store/category/type'
 
 export const categoryPlain: CategoryPlain = {
   id: 1,
@@ -7,12 +7,13 @@ export const categoryPlain: CategoryPlain = {
   title: 'Title'
 }
 
-export const category: Category = {
+export const category: CategoryFull = {
   color: 'red',
   hasDescription: false,
   hasSubcategories: false,
   hasTitle: false,
   hasUnit: true,
+  subcategories: [],
   icon: 'check',
   id: 1,
   title: 'title',

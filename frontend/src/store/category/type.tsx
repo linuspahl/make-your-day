@@ -8,7 +8,7 @@ export type CategoryFull = {
   id: number
   parent?: Category
   parentId?: number
-  subcategories?: [Category]
+  subcategories?: [Category?]
   title: string
   type: string
   unit?: string

@@ -6,6 +6,6 @@ import EvaluationEdit from './EvaluationEdit'
 
 describe('EvaluationEdit should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<EvaluationEdit />)
+    ShallowRenderer.createRenderer().render(<EvaluationEdit createNotificationBanner={() => {}} rootPath="/" />)
   })
 })

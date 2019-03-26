@@ -10,7 +10,15 @@ export const evaluation: Evaluation = {
   groupSubcategories: false,
   type: 'barchart',
   period: 'lastDay',
-  category:  category
+  category:  category,
+  result: { 
+    datasets: [{
+      label: 'Label',
+      data: [1, 2],
+      backgroundColor: 'red',
+    }],
+    labels: ['Mo', 'Di'],
+  }
 }
 
 export const chart: ChartType = {
