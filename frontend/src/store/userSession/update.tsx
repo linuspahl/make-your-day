@@ -3,7 +3,7 @@ import { GetUserSessions } from 'store/userSession/query'
 import { DataProxy } from 'apollo-cache'
 import { FetchResult } from 'react-apollo'
 // interfaces
-import {UserSessionPlain} from 'store/userSession/types'
+import { UserSession } from 'store/userSession/type'
 
 export const deleteUserSession = (
   cache: DataProxy,
@@ -16,7 +16,7 @@ export const deleteUserSession = (
 
   try {
     if (deleteUserSession) {
-      const userSessionsQuery: {getUserSessions: Array<UserSessionPlain>} = cache.readQuery({ query: GetUserSessions })
+      const userSessionsQuery: {getUserSessions: Array<UserSession>} = cache.readQuery({ query: GetUserSessions })
 
       if (userSessionsQuery.getUserSessions) {
         const updatedUserSessions = userSessionsQuery.getUserSessions.filter(

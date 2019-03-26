@@ -1,14 +1,20 @@
+// libraries
+import { DataProxy } from 'apollo-cache';
+import { FetchResult } from 'react-apollo';
 // graphql
-import { GetEvaluations } from 'store/evaluation/query.gql'
+import { GetEvaluations } from 'store/evaluation/query'
+import { Evaluation } from 'store/evaluation/type';
 
-export const addEvaluation = (cache, result) => {
+export const addEvaluation = (cache: DataProxy, result: FetchResult) => {
   const {
     data: { createEvaluation },
   } = result
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the the overview list will not get fetched
   try {
-    const evaluations = cache.readQuery({ query: GetEvaluations })
+    const evaluations: {
+      getEvaluations: Array<Evaluation>
+    } = cache.readQuery({ query: GetEvaluations })
 
     cache.writeQuery({
       query: GetEvaluations,
@@ -19,15 +25,22 @@ export const addEvaluation = (cache, result) => {
   } catch {}
 }
 
-export const deleteEvaluation = (cache, result, variables) => {
+export const deleteEvaluation = (
+  cache: DataProxy,
+  result: FetchResult,
+  variables: { id: number }
+) => {
   const {
     data: { deleteEvaluation },
   } = result
 
   try {
     if (deleteEvaluation) {
-      const EvaluationsQuery = cache.readQuery({ query: GetEvaluations })
-      const updatedEvaluations = EvaluationsQuery.getEvaluations.filter(
+      const evaluationsQuery: {
+        getEvaluations: Array<Evaluation>
+      } = cache.readQuery({ query: GetEvaluations })
+      
+      const updatedEvaluations = evaluationsQuery.getEvaluations.filter(
         evaluation => {
           return evaluation.id !== variables.id
         }

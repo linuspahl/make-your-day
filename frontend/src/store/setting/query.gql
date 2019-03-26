@@ -1,8 +1,0 @@
-query GetSettings {
-  getSettings {
-    id
-    title
-    type
-    defaultValue
-	}
-}

@@ -1,11 +1,16 @@
+// libraries
+import { DataProxy } from 'apollo-cache';
+import { FetchResult } from 'react-apollo';
 // graphql
-import { GetRecords } from 'store/record/query.gql'
+import { GetRecords } from 'store/record/query'
+// interfaces
+import { Record } from 'store/record/type';
 
-export const addRecord = (cache, result) => {
+export const addRecord = (cache: DataProxy, result: FetchResult) => {
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the the overview list will not get fetched
   try {
-    const records = cache.readQuery({ query: GetRecords })
+    const records: { getRecords: Array<Record>} = cache.readQuery({ query: GetRecords })
     const {
       data: { createRecord },
     } = result
@@ -19,15 +24,15 @@ export const addRecord = (cache, result) => {
   } catch {}
 }
 
-export const deleteRecord = (cache, result, variables) => {
+export const deleteRecord = (cache: DataProxy, result: FetchResult, variables: { id: number }) => {
   const {
     data: { deleteRecord },
   } = result
 
   try {
     if (deleteRecord) {
-      const RecordsQuery = cache.readQuery({ query: GetRecords })
-      const updatedRecords = RecordsQuery.getRecords.filter(records => {
+      const recordsQuery: { getRecords: Array<Record>} = cache.readQuery({ query: GetRecords })
+      const updatedRecords = recordsQuery.getRecords.filter(records => {
         return records.id !== variables.id
       })
 
