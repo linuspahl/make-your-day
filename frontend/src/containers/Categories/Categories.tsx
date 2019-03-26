@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import * as React from 'react'
 import { Route } from 'react-router-dom'
 // components
 import PageLayout from 'components/PageLayout/PageLayout'
@@ -8,12 +8,21 @@ import CategoryOverview from 'components/CategoryOverview/CategoryOverview'
 import CategoryEdit from 'components/CategoryEdit/CategoryEdit'
 import CategoryCreate from 'components/CategoryCreate/CategoryCreate'
 import RecordCreate from 'components/RecordCreate/RecordCreate'
-import RecordUpdate from 'components/RecordUpdate/RecordUpdate'
+import RecordUpdate from 'components/RecordUpdate/RecordEdit'
 import SubcategoryOverview from 'components/SubcategoryOverview/SubcategoryOverview'
 import SubcategoryCreate from 'components/SubcategoryCreate/SubcategoryCreate'
 import SubcategoryEdit from 'components/SubcategoryEdit/SubcategoryEdit'
+// interfaces
+import { UserSession } from 'store/userSession/type'
+import { NotificationCreate } from 'types/types'
 
-const Categories = props => {
+interface Props {
+  createNotificationBanner: (notification: NotificationCreate) => void
+  rootPath: string
+  userSession: UserSession
+}
+
+const Categories = (props: Props) => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>

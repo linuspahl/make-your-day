@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import * as React from 'react'
 import { Route } from 'react-router-dom'
 // components
 import ContentBox from 'shared/ContentBox/ContentBox'
@@ -7,8 +7,17 @@ import PageLayout from 'components/PageLayout/PageLayout'
 import WidgetCreate from 'components/WidgetCreate/WidgetCreate'
 import WidgetEdit from 'components/WidgetEdit/WidgetEdit'
 import WidgetOverview from 'components/WidgetOverview/WidgetOverview'
+// interfaces
+import { UserSession } from 'store/userSession/type'
+import { NotificationCreate } from 'types/types'
 
-const Widgets = props => {
+interface Props {
+  createNotificationBanner: (notification: NotificationCreate) => void
+  rootPath: string
+  userSession: UserSession
+}
+
+const Widgets = (props: Props) => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>

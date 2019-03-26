@@ -1,5 +1,5 @@
 // libraries
-import React, { Fragment } from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 import { Query } from 'react-apollo'
 // components
@@ -8,7 +8,11 @@ import DashboardWidgets from 'components/DashboardWidgets/DashboardWidgets'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import PageLayout from 'components/PageLayout/PageLayout'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import { GetWidgets } from 'store/widget/query.gql'
+import { GetWidgets } from 'store/widget/query'
+// interfaces
+import { UserSession } from 'store/userSession/type'
+import { NotificationCreate } from 'types/types'
+import { Widget } from 'store/widget/type';
 
 export const Layout = styled.div`
   height: 100%;
@@ -24,7 +28,13 @@ export const Layout = styled.div`
   }
 `
 
-const Dashboard = props => (
+interface Props {
+  createNotificationBanner: (notification: NotificationCreate) => void
+  rootPath: string
+  userSession: UserSession
+}
+
+const Dashboard = (props: Props) => (
   <PageLayout
     userSession={props.userSession}
     rootPath={props.rootPath}
@@ -42,7 +52,7 @@ const Dashboard = props => (
                 />
               )
 
-            const widgets = data.getWidgets
+            const widgets: Array<Widget> = data.getWidgets
             let dashboardTopWidgets = null
             let dashboardBottomWidgets = null
 
@@ -56,7 +66,7 @@ const Dashboard = props => (
             }
 
             return (
-              <Fragment>
+              <React.Fragment>
                 <DashboardWidgets
                   createNotificationBanner={props.createNotificationBanner}
                   loading={loading}
@@ -68,7 +78,7 @@ const Dashboard = props => (
                   loading={loading}
                   widgets={dashboardBottomWidgets}
                 />
-              </Fragment>
+              </React.Fragment>
             )
           }}
         </Query>

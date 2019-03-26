@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
@@ -9,6 +9,13 @@ import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import PageLayout from 'components/PageLayout/PageLayout'
+// interfaces
+import { UserSession } from 'store/userSession/type'
+
+interface Props {
+  rootPath: string
+  userSession: UserSession
+}
 
 export const Layout = styled.div`
   height: 100%;
@@ -16,7 +23,7 @@ export const Layout = styled.div`
   grid-template-rows: 1fr 70px 1fr;
 `
 
-const PageNotFound = props => (
+const PageNotFound = (props: Props) => (
   <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
     <ContentBox>
       <FadeTransition>

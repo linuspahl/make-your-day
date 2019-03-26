@@ -1,13 +1,26 @@
 // libraries
-import React from 'react'
+import * as React from 'react'
 import { Route } from 'react-router-dom'
 // components
 import ContentBox from 'shared/ContentBox/ContentBox'
 import PageLayout from 'components/PageLayout/PageLayout'
 import UserSettingsOverview from 'components/UserSettingsOverview/UserSettingsOverview'
 import UserSessionsOverview from 'components/UserSessionsOverview/UserSessionsOverview'
+// interfaces
+import { UserSession } from 'store/userSession/type'
+import { NotificationCreate, LocalStorage } from 'types/types'
+import { UserSetting } from 'store/userSetting/type';
 
-const Settings = props => {
+interface Props {
+  clearLocalStorage: () => void
+  createNotificationBanner: (notification: NotificationCreate) => void
+  rootPath: string
+  updateLocalStorage: (localStorage: LocalStorage) => void
+  userSession: UserSession
+  userSettings: { [key: string]: UserSetting }
+}
+
+const Settings = (props: Props) => {
   return (
     <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
       <ContentBox>
@@ -32,7 +45,6 @@ const Settings = props => {
             <UserSessionsOverview
               clearLocalStorage={props.clearLocalStorage}
               createNotificationBanner={props.createNotificationBanner}
-              rootPath={props.rootPath}
               userSession={props.userSession}
             />
           )}

@@ -1,12 +1,19 @@
 // libraries
-import React from 'react'
+import * as React from 'react'
 import { Route } from 'react-router-dom'
 // components
 import ContentBox from 'shared/ContentBox/ContentBox'
 import DayEdit from 'components/DayEdit/DayEdit'
 import PageLayout from 'components/PageLayout/PageLayout'
+// interfaces
+import { UserSession } from 'store/userSession/type'
 
-const Timeline = props => {
+interface Props {
+  rootPath: string
+  userSession: UserSession
+}
+
+const Timeline = (props: Props) => {
   const { userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
@@ -14,7 +21,7 @@ const Timeline = props => {
         <Route
           exact
           path={`${rootPath}/:date`}
-          render={() => <DayEdit rootPath={rootPath} />}
+          render={() => <DayEdit />}
         />
       </ContentBox>
     </PageLayout>

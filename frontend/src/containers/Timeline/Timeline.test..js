@@ -1,11 +1,11 @@
 // libraries
-import React from 'react'
-import ShallowRenderer from 'react-test-renderer/shallow'
+import * as React from 'react'
+import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import Timeline from './Timeline'
 
 describe('Timeline should', () => {
   test('render without crashing', () => {
-    new ShallowRenderer().render(<Timeline>Content</Timeline>)
+    ShallowRenderer.createRenderer().render(<Timeline>Content</Timeline>)
   })
 })

@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import * as React from 'react'
 import { Route } from 'react-router-dom'
 // components
 import PageLayout from 'components/PageLayout/PageLayout'
@@ -8,8 +8,17 @@ import EvaluationOverview from 'components/EvaluationOverview/EvaluationOverview
 import EvaluationEdit from 'components/EvaluationEdit/EvaluationEdit'
 import EvaluationResult from 'components/EvaluationResult/EvaluationResult'
 import EvaluationCreate from 'components/EvaluationCreate/EvaluationCreate'
+// interfaces
+import { UserSession } from 'store/userSession/type'
+import { NotificationCreate } from 'types/types'
 
-const Evaluations = props => {
+interface Props {
+  createNotificationBanner: (notification: NotificationCreate) => void
+  rootPath: string
+  userSession: UserSession
+}
+
+const Evaluations = (props: Props) => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
