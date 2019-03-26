@@ -1,0 +1,77 @@
+// libraries
+import styled from 'styled-components'
+
+interface LayoutProps {
+  context?: 'horizontal-scroll'
+}
+
+export const Layout = styled.div<LayoutProps>`
+  padding: 10px 0 5px 0;
+  ${props =>
+    props.context === 'horizontal-scroll'
+      ? `
+      display: flex;
+      align-items: center;
+
+      height: 100%;
+      padding: 10px 20px;
+
+      border-top: 1px solid ${props.theme.border};
+      border-bottom: 1px solid ${props.theme.border};
+
+      background-color: ${props.theme.contentBoxBg};
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+
+      @media (min-width: ${
+        props.theme.mediaQuery.tablet
+      }) and (orientation: landscape) {
+        flex-direction: column;
+        
+        height: auto;
+
+        border-top: 0;
+        border-bottom: 0;
+        border-left: 1px solid ${props.theme.border};
+        border-right: 1px solid ${props.theme.border};
+        padding: 20px 10px;
+
+        white-space: normal;
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+    `
+      : ''}
+`
+interface IconWrapperProps {
+  context?: 'horizontal-scroll'
+}
+
+export const IconWrapper = styled.div<IconWrapperProps>`
+  display: inline-block;
+  vertical-align: middle;
+
+  margin-right: 10px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  ${props =>
+    props.context === 'horizontal-scroll'
+      ? `
+      @media (min-width: ${
+        props.theme.mediaQuery.tablet
+      }) and (orientation: landscape) {
+        margin-right: 0;
+        margin-bottom: 10px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+        `
+      : `
+        margin-bottom: 5px;
+      `}
+`
