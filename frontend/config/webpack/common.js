@@ -5,6 +5,8 @@ const DotenvPlugin = require('dotenv-webpack')
 const CopyPlugin = require('copy-webpack-plugin')
 const moduleResolvers = require('../moduleResolvers')
 const getGqlTransformer = require('ts-transform-graphql-tag').getTransformer
+const webpack = require('webpack');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // * entry - configure entry point for babel polyfill
 // * output - publicPath - needed to resolve bundle in sub routes
@@ -19,6 +21,7 @@ module.exports = {
     new HtmlWebPackPlugin({ template: './src/index.html' }),
     new DotenvPlugin({ path: './config/.env' }),
     new CopyPlugin([{ from: './src/globalStyles/favicon/', to: './' }]),
+    // new BundleAnalyzerPlugin(),
   ],
   module: {
     rules: [

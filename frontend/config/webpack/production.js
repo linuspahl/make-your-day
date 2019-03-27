@@ -8,6 +8,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // * module - babel-loader - we need a different babel-loader config for production mode,
 // to minify the app in an elegant way (compared with the minify plugin)
 // * optimization - uglify - another useful minifyer
+
 module.exports = merge(common, {
   mode: 'production',
   module: {

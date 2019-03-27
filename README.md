@@ -149,7 +149,7 @@ export default class ExampleComponent extends React.Component {
   // The first part is the constructur (when needed)
   // We'll bind this to all functions which need access to the component context
   // This will keep the constructor clean
-  constructor(props) {
+  constructor(props: Props) {
     super(props)
 
     this.state = {}
