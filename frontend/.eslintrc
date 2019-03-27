@@ -1,20 +1,27 @@
 {
-  "parser": "babel-eslint",
   "env": {
     "es6": true,
     "browser": true,
     "node": true,
     "jest": true
   },
-  "plugins": [
-    "jest",
-    "prettier"
-  ],
+  "plugins": ["@typescript-eslint", "jest", "prettier"],
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "prettier"
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "prettier/@typescript-eslint"
   ],
+  "parserOptions": {
+    "parser": "@typescript-eslint/parser",
+    "ecmaVersion": 2018,
+    "source": "module",
+    "jsx": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "react/prop-types": "off",
     "prettier/prettier": [
