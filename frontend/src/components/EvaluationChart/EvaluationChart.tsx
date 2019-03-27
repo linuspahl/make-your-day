@@ -6,36 +6,47 @@ import Linechart from 'shared/chart/Linechart/Linechart'
 import Piechart from 'shared/chart/Piechart/Piechart'
 // interface
 import { Evaluation } from 'store/evaluation/type'
+import moment = require('moment');
+
+const formatLabels = (labels: Array<string>) => {
+  return labels.map(label => moment(label).format('dd DD.'))
+}
 
 interface Props {
   evaluation: Evaluation
-} 
+}
 
 const EvaluationChart = (props: Props) => {
-  const { evaluation } = props
-  if (evaluation.type === 'barchart') {
+  const { evaluation:
+      {
+        type,
+        result: { labels, datasets }
+      }
+  } = props
+  const formatedLabels = formatLabels(labels)
+  if (type === 'barchart') {
     return (
       <Barchart
-        labels={evaluation.result.labels}
-        datasets={evaluation.result.datasets}
+        labels={formatedLabels}
+        datasets={datasets}
       />
     )
   }
 
-  if (evaluation.type === 'linechart') {
+  if (type === 'linechart') {
     return (
       <Linechart
-        labels={evaluation.result.labels}
-        datasets={evaluation.result.datasets}
+        labels={formatedLabels}
+        datasets={datasets}
       />
     )
   }
 
-  if (evaluation.type === 'piechart') {
+  if (type === 'piechart') {
     return (
       <Piechart
-        labels={evaluation.result.labels}
-        datasets={evaluation.result.datasets}
+        labels={labels}
+        datasets={datasets}
       />
     )
   }
