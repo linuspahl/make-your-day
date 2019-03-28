@@ -1,4 +1,4 @@
-import * as common from './common'
+import common from './common'
 import merge from 'webpack-merge'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
@@ -17,22 +17,6 @@ interface Configuration extends WebpackConfiguration {
 
 const devConfig: Configuration = {
   mode: 'development',
-  devtool: 'eval-source-map',
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/env', '@babel/react'],
-            plugins: ['babel-plugin-styled-components'],
-          },
-        },
-      },
-    ],
-  },
   devServer: {
     historyApiFallback: true,
   },

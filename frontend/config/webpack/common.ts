@@ -5,6 +5,7 @@ import DotenvPlugin from 'dotenv-webpack'
 import CopyPlugin from 'copy-webpack-plugin'
 import moduleResolvers from '../moduleResolvers'
 import * as getGqlTransformer from 'ts-transform-graphql-tag'
+import { Configuration } from 'webpack'
 
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -12,8 +13,8 @@ import * as getGqlTransformer from 'ts-transform-graphql-tag'
 // * output - publicPath - needed to resolve bundle in sub routes
 // * plugins - HtmlWebpackPlugin - needed to create the index.html with a script tag for the created JS bundle
 // * resolve / modules - will make import paths shorter
-module.exports = {
-  entry: ['@babel/polyfill', './src/index'],
+const commonConfigutation: Configuration = {
+  entry: ['./src/index'],
   output: {
     publicPath: '/',
   },
@@ -27,12 +28,24 @@ module.exports = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
-        options: {
-          getCustomTransformers: () => ({
-            before: [getGqlTransformer.getTransformer()],
-          }),
+        use: {
+          loader: 'awesome-typescript-loader',
+          options: {
+            presets: [
+              '@babel/typescript',
+              '@babel/react',
+              ['@babel/env', { modules: false }],
+            ],
+            getCustomTransformers: () => ({
+              before: [getGqlTransformer.getTransformer()],
+            }),
+          },
         },
+      },
+      {
+        test: /\.js$/,
+        use: ['source-map-loader'],
+        enforce: 'pre',
       },
       {
         test: /\.css$/,
@@ -62,3 +75,5 @@ module.exports = {
     extensions: ['.mjs', '.js', '.ts', '.tsx'],
   },
 }
+
+export default commonConfigutation

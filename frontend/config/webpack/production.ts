@@ -1,4 +1,4 @@
-import * as common from './common'
+import common from './common'
 import merge from 'webpack-merge'
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 
