@@ -1,9 +1,9 @@
-import { CategoryPlain } from "store/category/type";
+import { CategoryPlain } from 'store/category/type'
 
 export interface EvaluationPlain {
   id: number
   title: string
-} 
+}
 
 export interface Evaluation {
   category: CategoryPlain
@@ -24,22 +24,29 @@ export interface EvaluationCreate {
   type: 'barchart' | 'linechart' | 'piechart'
 }
 
-export type EvaluationPeriod = 'week' | 'month' | 'year' | 'lastDay' | 'lastWeek' | 'lastMonth' | 'lastYear'
+export type EvaluationPeriod =
+  | 'week'
+  | 'month'
+  | 'year'
+  | 'lastDay'
+  | 'lastWeek'
+  | 'lastMonth'
+  | 'lastYear'
 
 export interface EvaluationResult {
-  datasets: Array<{
+  datasets: {
     backgroundColor: string
-    data: Array<number>
+    data: number[]
     label: string
-  }>
-  labels: Array<string>
+  }[]
+  labels: string[]
 }
 
 export interface Chart {
-  datasets: Array<{
+  datasets: {
     backgroundColor: string
-    data: Array<number>
+    data: number[]
     label: string
-  }>
-  labels: Array<string>
+  }[]
+  labels: string[]
 }

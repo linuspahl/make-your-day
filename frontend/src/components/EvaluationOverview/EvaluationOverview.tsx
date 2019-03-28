@@ -18,7 +18,7 @@ import { GetEvaluations } from 'store/evaluation/query'
 import { DeleteEvaluation } from 'store/evaluation/mutation'
 import { deleteEvaluation } from 'store/evaluation/update'
 // interfaces
-import { Evaluation } from 'store/evaluation/type';
+import { Evaluation } from 'store/evaluation/type'
 
 const List = styled.div`
   margin-top: 25px;
@@ -28,7 +28,7 @@ interface Props {
   rootPath: string
 }
 
-const EvaluationOverview = (props: Props) => {
+const EvaluationOverview = (props: Props): React.ReactElement => {
   const { rootPath } = props
 
   return (

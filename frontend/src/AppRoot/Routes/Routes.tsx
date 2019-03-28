@@ -28,7 +28,7 @@ interface Props {
   userSettings: { [key: string]: boolean }
 }
 
-const Routes = (props: Props) => (
+const Routes = (props: Props): React.ReactElement => (
   <Router>
     <Switch>
       <PublicRoute

@@ -1,6 +1,6 @@
 // File for all static content, that is not related to the config
 
-export const weekDayLabels: {[key: string]: string} = {
+export const weekDayLabels: { [key: string]: string } = {
   0: 'So',
   1: 'Mo',
   2: 'Di',

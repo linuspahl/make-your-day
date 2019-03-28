@@ -9,7 +9,7 @@ import * as React from 'react'
 import Icon from 'shared/Icon/Icon'
 import Modal from 'shared/Modal/Modal'
 // interfaces
-import { SelectOption, InputEvent } from 'src/types/types'
+import { SelectOption, InputEvent } from 'types/types'
 
 import {
   Layout,
@@ -24,7 +24,7 @@ interface Props {
   disabled?: boolean
   name: string
   onChange: (event: InputEvent) => void
-  options: Array<SelectOption>
+  options: SelectOption[]
   renderPreview?: (option: SelectOption) => React.ReactChild
   tabIndex: number
   title: string
@@ -36,7 +36,7 @@ interface State {
 }
 
 export default class ContentSelect extends React.Component<Props, State> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     // isOpen represents if the select dropdown is open
@@ -49,7 +49,7 @@ export default class ContentSelect extends React.Component<Props, State> {
     this.onBlur = this.onBlur.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const {
       title,
       value,
@@ -106,12 +106,12 @@ export default class ContentSelect extends React.Component<Props, State> {
   }
 
   // Toggle select dropdown
-  toggleSelect() {
+  private toggleSelect(): void {
     this.setState({ isOpen: !this.state.isOpen })
   }
 
   // Change form state with the selected value
-  changeValue(value: string | number) {
+  private changeValue(value: string | number): void {
     const { onChange, name } = this.props
     onChange({
       target: { name, value },
@@ -121,7 +121,7 @@ export default class ContentSelect extends React.Component<Props, State> {
   // This function provides the same key navigation like the default html <select>
   // The only litte difference, the user is able to close the dropdown with the space key
   // This is not realy a disadvantage for the user and makes the code smaller
-  detectKeydown(event: KeyboardEvent) {
+  private detectKeydown(event: KeyboardEvent): void {
     const { options, value } = this.props
     const { isOpen } = this.state
     const { keyCode } = event
@@ -167,17 +167,17 @@ export default class ContentSelect extends React.Component<Props, State> {
   }
 
   // onFocus will be triggered, when the user selects / focus the component
-  onFocus() {
+  private onFocus(): void {
     document.addEventListener('keydown', this.detectKeydown, false)
   }
 
   // onBlur will be triggered, when the user deselects / loses the focus of the component
-  onBlur() {
+  private onBlur(): void {
     document.removeEventListener('keydown', this.detectKeydown, false)
   }
 
   // When user clicks on option, update the form ond close the select
-  onOptionClick(value: string | number) {
+  private onOptionClick(value: string | number): void {
     this.changeValue(value)
     this.toggleSelect()
   }

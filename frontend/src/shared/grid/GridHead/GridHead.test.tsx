@@ -10,6 +10,7 @@ describe('GridHead should', () => {
       <GridHead>
         <div>Content1</div>
         <div>Content2</div>
-      </GridHead>)
+      </GridHead>
+    )
   })
 })

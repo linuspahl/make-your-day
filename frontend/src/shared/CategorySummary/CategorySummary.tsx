@@ -8,12 +8,12 @@ import { Category, IconWrapper } from './styles'
 import { CategoryPlain } from 'store/category/type'
 
 interface Props {
-  amount: number,
-  category: CategoryPlain,
-  to?: string,
+  amount: number
+  category: CategoryPlain
+  to?: string
 }
 
-const CategorySummary = (props: Props) => {
+const CategorySummary = (props: Props): React.ReactElement => {
   const {
     category: { color, icon, hasUnit, unit },
     amount,

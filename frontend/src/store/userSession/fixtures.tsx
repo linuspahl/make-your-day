@@ -6,5 +6,5 @@ export const userSession: UserSession = {
   userId: 1,
   token: 'tokenxy',
   expiresAt: '1553598046', // unix date
-  createdAt: '1553598046'
+  createdAt: '1553598046',
 }

@@ -6,6 +6,8 @@ import WidgetCreate from './WidgetCreate'
 
 describe('WidgetCreate should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<WidgetCreate rootPath="/" createNotificationBanner={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <WidgetCreate rootPath="/" createNotificationBanner={() => {}} />
+    )
   })
 })

@@ -13,9 +13,9 @@ import NoResult from 'shared/NoResult/NoResult'
 import EvaluationChart from 'components/EvaluationChart/EvaluationChart'
 // graphql
 import { GetEvaluation } from 'store/evaluation/query'
-import { Evaluation } from 'store/evaluation/type';
-import { NotificationCreate } from 'types/types';
-import { ApolloError } from 'apollo-boost';
+import { Evaluation } from 'store/evaluation/type'
+import { NotificationCreate } from 'types/types'
+import { ApolloError } from 'apollo-boost'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -23,14 +23,14 @@ interface Props extends RouteComponentProps {
 }
 
 class EvaluationEdit extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { match } = this.props
     const evaluationId = extractIdFromUrl(match)
 
@@ -58,7 +58,7 @@ class EvaluationEdit extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted(data: { updateEvaluation: Evaluation }) {
+  private handleCompleted(data: { updateEvaluation: Evaluation }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateEvaluation: { title },
@@ -75,7 +75,7 @@ class EvaluationEdit extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

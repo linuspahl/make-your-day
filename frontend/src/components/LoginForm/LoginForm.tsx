@@ -11,9 +11,9 @@ import Row from 'shared/form/Row/Row'
 // graphql
 import { LoginUser } from 'store/userSession/mutation'
 // interfaces
-import { LocalStorage, InputEvent, NotificationCreate } from 'types/types';
-import { UserSession } from 'store/userSession/type';
-import { UserSetting } from 'store/userSetting/type';
+import { LocalStorage, InputEvent, NotificationCreate } from 'types/types'
+import { UserSession } from 'store/userSession/type'
+import { UserSetting } from 'store/userSetting/type'
 
 export const Form = styled.form`
   margin-top: 15px;
@@ -30,7 +30,7 @@ interface State {
 }
 
 export default class LoginForm extends React.Component<Props, State> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.state = { username: '', password: '' }
@@ -40,7 +40,7 @@ export default class LoginForm extends React.Component<Props, State> {
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { username, password } = this.state
     return (
       <Mutation
@@ -83,26 +83,23 @@ export default class LoginForm extends React.Component<Props, State> {
     )
   }
 
-  handleInputChange(event: InputEvent) {
+  private handleInputChange(event: InputEvent): void {
     handleInputChange(event, this.setState.bind(this))
   }
 
-  handleSubmit(event: React.FormEvent, loginUser: () => void) {
+  private handleSubmit(event: React.FormEvent, loginUser: () => void): void {
     event.preventDefault()
     loginUser()
   }
 
-  handleCompleted(
-    data: {
-      loginUser:
-        {
-          userSession: UserSession,
-          role: string,
-          userSettings: Array<UserSetting>,
-          id: number
-        }
-      }
-    ) {
+  private handleCompleted(data: {
+    loginUser: {
+      userSession: UserSession
+      role: string
+      userSettings: UserSetting[]
+      id: number
+    }
+  }): void {
     const {
       loginUser: { userSession, id: userId, role: userRole, userSettings },
     } = data
@@ -122,22 +119,27 @@ export default class LoginForm extends React.Component<Props, State> {
     }
   }
 
-  formatUserSettings(userSettings: Array<UserSetting>) {
+  private formatUserSettings(
+    userSettings: UserSetting[]
+  ): { [key: string]: string } {
     // Part of the login is to update the localstorage with the received user settings, like the night mode.
     // For this case we need to format the settings in a {key: value} format
-    return userSettings.reduce((result: {[key: string]: string}, userSetting) => {
-      const {
-        value,
-        setting: { type },
-      } = userSetting
+    return userSettings.reduce(
+      (result: { [key: string]: string }, userSetting) => {
+        const {
+          value,
+          setting: { type },
+        } = userSetting
 
-      result[type] = value
+        result[type] = value
 
-      return result
-    }, {})
+        return result
+      },
+      {}
+    )
   }
 
-  handleError() {
+  private handleError(): void {
     this.props.createNotificationBanner({
       type: 'error',
       message: 'Anmeldung fehlgeschlagen',

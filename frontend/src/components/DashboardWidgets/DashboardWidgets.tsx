@@ -1,6 +1,6 @@
 // libraries
 import * as React from 'react'
-import { sortBy } from 'utils/utils'
+import { sortBy } from 'lodash'
 // components
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import NoResult from 'shared/NoResult/NoResult'
@@ -10,10 +10,10 @@ import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
 import WidgetPlaceholder from '../Widget/WidgetPlaceholder'
 import { Layout, WidgetLayout } from './styles'
 // graphql
-import { NotificationCreate } from 'types/types';
+import { NotificationCreate } from 'types/types'
 import { Widget as WidgetType } from 'store/widget/type'
 
-const LoadingPlaceholder = () => (
+const LoadingPlaceholder = (): React.ReactElement => (
   <WidgetLayout>
     <PlaceholderGroup>
       <WidgetPlaceholder />
@@ -24,10 +24,10 @@ const LoadingPlaceholder = () => (
 interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
   loading: boolean
-  widgets: Array<WidgetType>
+  widgets: WidgetType[]
 }
 
-const DashboardWidgets = (props: Props) => {
+const DashboardWidgets = (props: Props): React.ReactElement => {
   const { createNotificationBanner, widgets, loading } = props
 
   if (loading) return <LoadingPlaceholder />

@@ -2,21 +2,15 @@
 
 import config from '../../config/config'
 // interfaces
-import { LocalStorageCreate, InputEvent, LocalStorage } from 'src/types/types'
-import { ApolloError } from 'apollo-boost';
-
-// Basic sort function
-export const sortBy = (array: Array<any>, attribute: string, order: string = 'desc') => {
-  return array.sort((a, b) => {
-    if (a[attribute] < b[attribute]) return order === 'desc' ? -1 : 1
-    if (a[attribute] > b[attribute]) return order === 'desc' ? 1 : -1
-    return 0
-  })
-}
+import { LocalStorageCreate, InputEvent, LocalStorage } from 'types/types'
+import { ApolloError } from 'apollo-boost'
 
 // This function will merge two objects and overwrite
 // doublicated values with the value of the target object
-export const merge = (sourceObj: any, targetObj: any) => {
+export const merge = (
+  sourceObj: { [key: string]: object },
+  targetObj: { [key: string]: object }
+): object => {
   // we need to create a clone of the source object
   // to avoid any manipualtion of the source object
   const sourceObjClone = Object.assign({}, sourceObj)
@@ -29,7 +23,7 @@ export const merge = (sourceObj: any, targetObj: any) => {
 }
 
 // This function will convert a unix date to a YYYY-MM-DD string
-export const formatUnixDate = (unixDate: string) => {
+export const formatUnixDate = (unixDate: string): Date => {
   // Expects unix date string like '1549395636726'
   const unixDateInt = parseInt(unixDate, 10)
   return new Date(unixDateInt)
@@ -37,7 +31,7 @@ export const formatUnixDate = (unixDate: string) => {
 
 // This function will add a yero for every number less than ten
 // It's needed for the date string and will always return a string
-const formatDatePartial = (dateNumber: number) => {
+const formatDatePartial = (dateNumber: number): string => {
   if (dateNumber < 10) {
     return `0${dateNumber}`
   }
@@ -45,7 +39,7 @@ const formatDatePartial = (dateNumber: number) => {
   return `${dateNumber}`
 }
 
-export const getDateString = (dateParam: Date) => {
+export const getDateString = (dateParam: Date): string => {
   // Expects a JS date object
   // Returns a string with the format like 'YYYY-M-D'
   const date = new Date(dateParam)
@@ -66,8 +60,7 @@ export const getDateString = (dateParam: Date) => {
 export const handleInputChange = (
   event: InputEvent,
   changeState: (state: object) => void
-  ) => {
-
+): void => {
   const { target } = event
   const { name } = target
   const value = target.type === 'checkbox' ? target.checked : target.value
@@ -80,21 +73,26 @@ export const handleInputChange = (
 // Central place for handling error logging
 // This will log errors like e.g. failing requests
 // So far only needed for development
-export const logError = (error: ApolloError | string) => {
+export const logError = (error: ApolloError | string): void => {
   // Only case in the app where we use the console.log function
   // eslint-disable-next-line no-console
   if (config.isDevEnv) console.log(error)
 }
 
 // Extract id param from router history object
-export const extractIdFromUrl = (match: { params: any }, attribute: string = 'id') => {
+export const extractIdFromUrl = (
+  match: { params: { [key: string]: string } },
+  attribute: string = 'id'
+): number => {
   const { params } = match
   const id = params[attribute]
 
   return id ? parseInt(id, 10) : null
 }
 
-export const generateUrlParams = (params: any) => {
+export const generateUrlParams = (params: {
+  [key: string]: string
+}): string => {
   let paramsString = ''
   if (params) {
     Object.keys(params).forEach(key => {
@@ -109,43 +107,18 @@ export const generateUrlParams = (params: any) => {
   return paramsString
 }
 
-
 // Utility localstorage functions
-// Update local storage needed when setting e.g. user settings like the darkmode
-export const updateLocalStorage = (
-  newStore: LocalStorageCreate,
-  setState: (state: LocalStorage) => void
-) => {
-  // We prefere to use SCREAMING_SNAKE_CASE notation for local store DataTransferItemList, but in this case it is easier to use the camelCase notation
-  // This way we don't need to map the different notations
-
-  // Create a clean store without undefined values
-  const updatedStore: any = {}
-  Object.keys(newStore).forEach((key: string) => {
-    const value = formatAppStateValue(key, newStore[key])
-    updatedStore[key] = value
-    localStorage.setItem(key, value)
-  })
-  setState(updatedStore)
-}
-
-// get localstorage values by provided keys
-export const getLocalStorage = (stateKeys: Array<string>) =>
-  stateKeys.reduce((
-    result: {[key: string]: string},
-    key: string
-  ) => {
-    const value = localStorage.getItem(key)
-    result[key] = formatAppStateValue(key, value)
-    return result
-  }, {})
 
 // format function for all existing local storage values
-const formatAppStateValue = (key: string, value: string ) => {
+const formatAppStateValue = (
+  key: string,
+  value: string
+): string | number | boolean => {
   switch (key) {
     // Numbers
     case 'userId':
     case 'userSessionId':
+      return parseInt(value, 10)
     // Booleans
     case 'nightMode':
     case 'leftHandMode':
@@ -155,3 +128,36 @@ const formatAppStateValue = (key: string, value: string ) => {
       return value || null
   }
 }
+
+// Update local storage needed when setting e.g. user settings like the darkmode
+export const updateLocalStorage = (
+  newStore: LocalStorageCreate,
+  setState: (state: LocalStorage) => void
+): void => {
+  // We prefere to use SCREAMING_SNAKE_CASE notation for local store DataTransferItemList, but in this case it is easier to use the camelCase notation
+  // This way we don't need to map the different notations
+
+  // Create a clean app store without undefined values
+  const updatedStore: { [key: string]: string | number | boolean } = {}
+  Object.keys(newStore).forEach((key: string) => {
+    // format to int / boolean and update specified  app state
+    const value = formatAppStateValue(key, newStore[key])
+    updatedStore[key] = value
+    // format value to string and update LocalStorage
+    localStorage.setItem(key, String(value))
+  })
+  setState(updatedStore)
+}
+
+// get localstorage values by provided keys
+export const getLocalStorage = (
+  stateKeys: string[]
+): { [key: string]: string } =>
+  stateKeys.reduce(
+    (result: { [key: string]: string | number | boolean }, key: string) => {
+      const value = localStorage.getItem(key)
+      result[key] = formatAppStateValue(key, value)
+      return result
+    },
+    {}
+  )

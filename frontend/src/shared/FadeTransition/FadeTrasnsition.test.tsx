@@ -6,6 +6,8 @@ import FadeTransition from './FadeTransition'
 
 describe('FadeTransition should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<FadeTransition>Children</FadeTransition>)
+    ShallowRenderer.createRenderer().render(
+      <FadeTransition>Children</FadeTransition>
+    )
   })
 })

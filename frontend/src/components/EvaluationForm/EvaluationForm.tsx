@@ -15,16 +15,18 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import Row from 'shared/form/Row/Row'
 import Input from 'shared/form/Input/Input'
 // interfaces
-import { CategoryFull } from 'store/category/type';
-import { EvaluationCreate } from 'store/evaluation/type';
-import { Form, SelectOption, InputEvent } from 'types/types';
+import { CategoryFull } from 'store/category/type'
+import { EvaluationCreate } from 'store/evaluation/type'
+import { Form as FormType, SelectOption, InputEvent } from 'types/types'
 
 const Form = styled.form`
   margin-top: 15px;
 `
 
-const generateCategoryOptions = (categories: Array<CategoryFull>) => {
-  let categoryOptions: Array<SelectOption> = []
+const generateCategoryOptions = (
+  categories: CategoryFull[]
+): SelectOption[] => {
+  let categoryOptions: SelectOption[] = []
 
   if (!categories || categories.length === 0) {
     return categoryOptions
@@ -55,15 +57,18 @@ const generateCategoryOptions = (categories: Array<CategoryFull>) => {
 }
 
 interface Props {
-  categories: Array<CategoryFull>
+  categories: CategoryFull[]
   initialData?: EvaluationCreate
-  mode?: Form['mode']
+  mode?: FormType['mode']
   rootPath: string
   submitAction: (evaluation: EvaluationCreate) => void
 }
 
-export default class EvaluationForm extends React.Component<Props, EvaluationCreate> {
-  constructor(props: Props) {
+export default class EvaluationForm extends React.Component<
+  Props,
+  EvaluationCreate
+> {
+  public constructor(props: Props) {
     super(props)
 
     // overview of all form values
@@ -73,18 +78,18 @@ export default class EvaluationForm extends React.Component<Props, EvaluationCre
       type: null,
       groupSubcategories: null,
       period: null,
-      categoryId: null
+      categoryId: null,
     }
 
     if (props.initialData) {
-      this.state = {...this.state, ...props.initialData}
+      this.state = { ...this.state, ...props.initialData }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { mode, rootPath, categories } = this.props
     const { title, type, groupSubcategories, period, categoryId } = this.state
     const selectedCategory =
@@ -161,12 +166,12 @@ export default class EvaluationForm extends React.Component<Props, EvaluationCre
     )
   }
 
-  handleSubmit(event: React.FormEvent) {
+  private handleSubmit(event: React.FormEvent): void {
     event.preventDefault()
     this.props.submitAction(this.state)
   }
 
-  handleInputChange(event: InputEvent) {
+  private handleInputChange(event: InputEvent): void {
     handleInputChange(event, this.setState.bind(this))
   }
 }

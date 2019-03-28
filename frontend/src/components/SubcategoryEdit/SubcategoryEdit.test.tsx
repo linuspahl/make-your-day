@@ -7,9 +7,7 @@ import SubcategoryEdit from './SubcategoryEdit'
 describe('SubcategoryEdit should', () => {
   test('render without crashing', () => {
     ShallowRenderer.createRenderer().render(
-      <SubcategoryEdit
-        rootPath="/"
-        createNotificationBanner={() => {}}
-      />)
+      <SubcategoryEdit rootPath="/" createNotificationBanner={() => {}} />
+    )
   })
 })

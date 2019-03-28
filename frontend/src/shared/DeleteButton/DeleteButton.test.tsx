@@ -7,7 +7,6 @@ import DeleteButton from './DeleteButton'
 import { DeleteUserSession } from 'store/userSession/mutation'
 import { deleteUserSession } from 'store/userSession/update'
 
-
 describe('DeleteButton should', () => {
   test('render without crashing', () => {
     ShallowRenderer.createRenderer().render(
@@ -17,6 +16,7 @@ describe('DeleteButton should', () => {
         mutation={DeleteUserSession}
         onUpdate={deleteUserSession}
         onDelete={() => {}}
-      />)
+      />
+    )
   })
 })

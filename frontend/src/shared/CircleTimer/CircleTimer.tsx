@@ -3,11 +3,11 @@ import * as React from 'react'
 import { Layout, SvgWrapper, SvgCircle } from './styles'
 
 interface Props {
-  children: React.ReactNode,
-  clickAction?: () => void,
+  children: React.ReactNode
+  clickAction?: () => void
 }
 
-const CircleTimer = (props: Props) => {
+const CircleTimer = (props: Props): React.ReactElement => {
   const hasClickAction = typeof props.clickAction === 'function'
   return (
     <Layout onClick={() => hasClickAction && props.clickAction()}>

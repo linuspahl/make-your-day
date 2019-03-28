@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import Piechart from './Piechart'
 // fixtures
-import {chart as chartFixture} from 'store/evaluation/fixtures'
+import { chart as chartFixture } from 'store/evaluation/fixtures'
 
 describe('Piechart should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<Piechart {...chartFixture}/>)
+    ShallowRenderer.createRenderer().render(<Piechart {...chartFixture} />)
   })
 })

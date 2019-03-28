@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2'
 // interfaces
 import { Chart } from 'store/evaluation/type'
 
-const Linechart = (props: Chart) => (
+const Linechart = (props: Chart): React.ReactElement => (
   <Line
     data={{
       labels: props.labels,

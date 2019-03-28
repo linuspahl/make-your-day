@@ -1,6 +1,6 @@
 // libraries
 import * as React from 'react'
-import { ApolloError } from 'apollo-boost';
+import { ApolloError } from 'apollo-boost'
 import { Mutation, Query } from 'react-apollo'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 // utils
@@ -20,21 +20,21 @@ import { GetRecord } from 'store/record/query'
 import { GetCategoryWithChildren } from 'store/category/query'
 import { addRecord, deleteRecord } from 'store/record/update'
 // interfaces
-import { NotificationCreate } from 'types/types';
+import { NotificationCreate } from 'types/types'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
 }
 
 class RecordEdit extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { match, history } = this.props
     const categoryId = extractIdFromUrl(match, 'categoryId')
     const recordId = extractIdFromUrl(match, 'id')
@@ -42,10 +42,7 @@ class RecordEdit extends React.Component<Props> {
     return (
       <FadeTransition>
         <H1 context="page">Eintrag bearbeiten</H1>
-        <Query
-          query={GetCategoryWithChildren}
-          variables={{ id: categoryId }}
-        >
+        <Query query={GetCategoryWithChildren} variables={{ id: categoryId }}>
           {({ loading, error, data }) => {
             if (loading) return <CenteredSpinner />
             if (error)
@@ -59,10 +56,7 @@ class RecordEdit extends React.Component<Props> {
             if (!category) return <NoResult />
 
             return (
-              <Query
-                query={GetRecord}
-                variables={{ id: recordId }}
-              >
+              <Query query={GetRecord} variables={{ id: recordId }}>
                 {({ loading, error, data }) => {
                   if (loading) return <CenteredSpinner />
                   if (error)
@@ -115,7 +109,7 @@ class RecordEdit extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted() {
+  private handleCompleted(): void {
     const { history, createNotificationBanner } = this.props
 
     // Inform user about success
@@ -129,7 +123,7 @@ class RecordEdit extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

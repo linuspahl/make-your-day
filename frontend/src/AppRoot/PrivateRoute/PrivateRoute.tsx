@@ -4,7 +4,6 @@ import { Route, Redirect } from 'react-router-dom'
 // interfaces
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate, LocalStorageCreate } from 'types/types'
-import { UserSetting } from 'store/userSetting/type';
 
 interface Props {
   clearLocalStorage?: () => void
@@ -23,7 +22,7 @@ const PrivateRoute = ({
   path,
   userSession,
   ...rest
-} : Props) => {
+}: Props): React.ReactElement => {
   // If user is not logged in and tries to access a private route,
   // we will redirect him to the login page
   if (!userSession || !userSession.token) return <Redirect to="/login" />

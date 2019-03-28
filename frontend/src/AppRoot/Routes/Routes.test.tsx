@@ -3,7 +3,7 @@ import * as React from 'react'
 import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import Routes from './Routes'
-import { userSession } from 'store/userSession/fixtures';
+import { userSession } from 'store/userSession/fixtures'
 
 describe('Routes should', () => {
   test('render without crashing', () => {
@@ -14,6 +14,7 @@ describe('Routes should', () => {
         updateLocalStorage={() => {}}
         userSession={userSession}
         userSettings={{ nightMode: false }}
-      />)
+      />
+    )
   })
 })

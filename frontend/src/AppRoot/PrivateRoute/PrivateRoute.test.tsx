@@ -15,6 +15,7 @@ describe('PrivateRoute should', () => {
         createNotificationBanner={() => {}}
         path="/"
         userSession={userSession}
-      />)
+      />
+    )
   })
 })

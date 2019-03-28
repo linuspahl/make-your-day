@@ -11,11 +11,12 @@ describe('ContentSelect should', () => {
         onChange={() => {}}
         title="Title"
         value="value"
-        renderPreview={option => <div></div>}
-        options={[{value: "value", title: "title"}]}
+        renderPreview={() => <div />}
+        options={[{ value: 'value', title: 'title' }]}
         tabIndex={1}
         name="Name"
         disabled={false}
-      />)
+      />
+    )
   })
 })

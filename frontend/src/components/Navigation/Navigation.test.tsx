@@ -6,6 +6,8 @@ import Navigation from './Navigation'
 
 describe('Navigation should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<Navigation rootPath="/" toggleAction={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <Navigation rootPath="/" toggleAction={() => {}} />
+    )
   })
 })

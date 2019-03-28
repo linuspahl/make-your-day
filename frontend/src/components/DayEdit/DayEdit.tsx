@@ -1,9 +1,9 @@
 // libraries
 import * as React from 'react'
 import { Query } from 'react-apollo'
-import { withRouter, RouteComponentProps} from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 // utils
-import { sortBy } from 'utils/utils'
+import { sortBy } from 'lodash'
 // components
 import { Records, NewRecordSection } from './styles'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
@@ -18,32 +18,31 @@ import H2 from 'shared/H2/H2'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetRecords } from 'store/record/query'
-import { Record } from 'store/record/type'
-import { CategoryFull } from 'store/category/type';
+import { Record as RecordType } from 'store/record/type'
+import { CategoryFull } from 'store/category/type'
 
 // needed for prepareCategories function
 interface CategoryEnry extends CategoryFull {
-  records: Array<Record>
+  records: RecordType[]
 }
 
 interface Props extends RouteComponentProps {
   match: {
-    isExact: true,
-    params: { date: string },
-    path: string,
+    isExact: true
+    params: { date: string }
+    path: string
     url: string
   }
 }
 
 class Timeline extends React.Component<Props> {
-  render() {
+  public render(): React.ReactElement {
     const {
       match: {
-        params: { date }
+        params: { date },
       },
     } = this.props
 
-  
     return (
       <FadeTransition>
         <H1 context="page">Einträge {date}</H1>
@@ -70,16 +69,18 @@ class Timeline extends React.Component<Props> {
               return Object.values(categories).map(category => {
                 return (
                   <React.Fragment key={category.id}>
-                    {sortBy(category.records, 'categoryId').map(record => (
-                      <CategorySummary
-                        amount={category.hasUnit ? record.amount : 1}
-                        category={category}
-                        key={record.id}
-                        to={`/categories/${category.id}/records/${
-                          record.id
-                        }/edit`}
-                      />
-                    ))}
+                    {sortBy(category.records, 'categoryId').map(
+                      (record: RecordType) => (
+                        <CategorySummary
+                          amount={category.hasUnit ? Number(record.amount) : 1}
+                          category={category}
+                          key={record.id}
+                          to={`/categories/${category.id}/records/${
+                            record.id
+                          }/edit`}
+                        />
+                      )
+                    )}
                   </React.Fragment>
                 )
               })
@@ -95,8 +96,8 @@ class Timeline extends React.Component<Props> {
     )
   }
 
-  prepareCategories(records: Array<Record>): Array<CategoryEnry> {
-    const categories: {[key: string]: CategoryEnry} = {}
+  private prepareCategories(records: RecordType[]): CategoryEnry[] {
+    const categories: { [key: string]: CategoryEnry } = {}
 
     records.forEach(record => {
       const category = record.category.parent || record.category

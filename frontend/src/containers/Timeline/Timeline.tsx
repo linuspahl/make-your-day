@@ -13,16 +13,12 @@ interface Props {
   userSession: UserSession
 }
 
-const Timeline = (props: Props) => {
+const Timeline = (props: Props): React.ReactElement => {
   const { userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
       <ContentBox>
-        <Route
-          exact
-          path={`${rootPath}/:date`}
-          render={() => <DayEdit />}
-        />
+        <Route exact path={`${rootPath}/:date`} render={() => <DayEdit />} />
       </ContentBox>
     </PageLayout>
   )

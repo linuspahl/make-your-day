@@ -12,9 +12,9 @@ import Textarea from 'shared/form/Textarea/Textarea'
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 // interfaces
-import { CategoryFull, CategoryCreate } from 'store/category/type';
-import { Form, InputEvent } from 'types/types';
-import { RecordCreate } from 'store/record/type';
+import { CategoryFull } from 'store/category/type'
+import { Form as FormType, InputEvent, SelectOption } from 'types/types'
+import { RecordCreate } from 'store/record/type'
 
 const Form = styled.form`
   margin-top: 15px;
@@ -23,21 +23,24 @@ const Form = styled.form`
 interface Props {
   category: CategoryFull
   initialData?: RecordCreate
-  mode?: Form['mode']
+  mode?: FormType['mode']
   params?: { createdAt: RecordCreate['createdAt'] }
   rootPath: string
   submitAction: (record: RecordCreate) => void
 }
 
 export default class RecordForm extends React.Component<Props, RecordCreate> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     let initialCategoryId: number = props.category.id
-    if (props.category.hasSubcategories && props.category.subcategories.length >= 1) {
+    if (
+      props.category.hasSubcategories &&
+      props.category.subcategories.length >= 1
+    ) {
       initialCategoryId = props.category.subcategories[0].id
     }
-    console.log(initialCategoryId)
+
     // overview of all form values
     // initial state create mode
     this.state = {
@@ -45,18 +48,19 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
       title: null,
       amount: null,
       description: null,
-      createdAt: (props.params && props.params.createdAt) ? props.params.createdAt : null
+      createdAt:
+        props.params && props.params.createdAt ? props.params.createdAt : null,
     }
-    
+
     if (props.initialData) {
-      this.state = {...this.state, ...props.initialData}
+      this.state = { ...this.state, ...props.initialData }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  componentDidMount() {
+  public componentDidMount(): void {
     const {
       category: { type },
       submitAction,
@@ -69,7 +73,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     }
   }
 
-  render() {
+  public render(): React.ReactElement {
     const {
       mode,
       rootPath,
@@ -179,16 +183,16 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     )
   }
 
-  handleSubmit(event: React.FormEvent) {
+  private handleSubmit(event: React.FormEvent): void {
     event.preventDefault()
     this.props.submitAction(this.state)
   }
 
-  handleInputChange(event: InputEvent) {
+  private handleInputChange(event: InputEvent): void {
     handleInputChange(event, this.setState.bind(this))
   }
 
-  prepareSubcategories(subcategories?: Array<CategoryFull>) {
+  private prepareSubcategories(subcategories?: CategoryFull[]): SelectOption[] {
     return subcategories.map(subcategory => {
       return { value: subcategory.id, title: subcategory.title }
     })

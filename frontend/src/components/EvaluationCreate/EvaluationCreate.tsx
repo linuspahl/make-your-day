@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
-import { ApolloError } from 'apollo-boost';
+import { ApolloError } from 'apollo-boost'
 // utils
 import { logError } from 'utils/utils'
 // components
@@ -16,7 +16,7 @@ import { addEvaluation } from 'store/evaluation/update'
 import { CreateEvaluation } from 'store/evaluation/mutation'
 import { GetCategoriesWithChildren } from 'store/category/query'
 // interfaces
-import { Evaluation } from 'store/evaluation/type';
+import { Evaluation } from 'store/evaluation/type'
 import { NotificationCreate } from 'types/types'
 
 interface Props extends RouteComponentProps {
@@ -25,14 +25,14 @@ interface Props extends RouteComponentProps {
 }
 
 class EvaluationCreate extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { rootPath } = this.props
     return (
       <FadeTransition fullWidth>
@@ -72,7 +72,7 @@ class EvaluationCreate extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted(data: { createEvaluation: Evaluation}) {
+  private handleCompleted(data: { createEvaluation: Evaluation }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       createEvaluation: { title },
@@ -89,7 +89,7 @@ class EvaluationCreate extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

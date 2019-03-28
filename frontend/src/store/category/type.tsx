@@ -1,4 +1,4 @@
-export type CategoryFull = {
+export interface CategoryFull {
   color?: string
   hasDescription: boolean
   hasSubcategories: boolean
@@ -40,7 +40,7 @@ export interface Category {
 }
 
 export interface CategoryCreate {
-  color?: string,
+  color?: string
   hasDescription: boolean
   hasSubcategories: boolean
   hasTitle: boolean

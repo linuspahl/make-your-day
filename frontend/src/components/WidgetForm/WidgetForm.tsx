@@ -16,22 +16,24 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 // interface
 import { EvaluationPlain } from 'store/evaluation/type'
 import { WidgetCreate } from 'store/widget/type'
-import { Form, SelectOption, InputEvent } from 'types/types';
+import { Form as FormType, SelectOption, InputEvent } from 'types/types'
 
 const Form = styled.form`
   margin-top: 15px;
 `
 
 interface Props {
-  evaluations?: Array<EvaluationPlain>
+  evaluations?: EvaluationPlain[]
   initialData?: WidgetCreate
-  mode?: Form['mode']
+  mode?: FormType['mode']
   rootPath: string
   submitAction: (widget: WidgetCreate) => void
 }
 
-const generateEvaluationOptions = (evaluations?: Array<EvaluationPlain>) => {
-  let evaluationOptions: Array<SelectOption> = []
+const generateEvaluationOptions = (
+  evaluations?: EvaluationPlain[]
+): SelectOption[] => {
+  let evaluationOptions: SelectOption[] = []
 
   if (!evaluations || evaluations.length === 0) {
     return evaluationOptions
@@ -51,10 +53,10 @@ const generateEvaluationOptions = (evaluations?: Array<EvaluationPlain>) => {
 }
 
 export default class WidgetForm extends React.Component<Props, WidgetCreate> {
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
-  handleInputChange: (event: InputEvent) => void
+  private handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+  private handleInputChange: (event: InputEvent) => void
 
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     // overview of all form values
@@ -66,7 +68,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
     }
 
     if (props.initialData) {
-      this.state = {...this.state, ...props.initialData}
+      this.state = { ...this.state, ...props.initialData }
     }
 
     this.handleSubmit = event => {
@@ -78,7 +80,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
       handleInputChange(event, this.setState.bind(this))
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { mode, rootPath, evaluations } = this.props
     const { title, type, position, evaluationId } = this.state
 

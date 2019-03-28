@@ -6,6 +6,8 @@ import WidgetEdit from './WidgetEdit'
 
 describe('WidgetEdit should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<WidgetEdit rootPath="/" createNotificationBanner={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <WidgetEdit rootPath="/" createNotificationBanner={() => {}} />
+    )
   })
 })

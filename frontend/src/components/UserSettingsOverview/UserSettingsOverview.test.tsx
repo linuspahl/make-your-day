@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import UserSettingsOverview from './UserSettingsOverview'
 // fixtures
-import { userSession } from 'store/userSession/fixtures';
-import { userSetting } from 'store/userSetting/fixtures';
+import { userSession } from 'store/userSession/fixtures'
+import { userSetting } from 'store/userSetting/fixtures'
 
 describe('UserSettingsOverview should', () => {
   test('render without crashing', () => {
@@ -16,7 +16,7 @@ describe('UserSettingsOverview should', () => {
         createNotificationBanner={() => {}}
         rootPath="/"
         userSession={userSession}
-        userSettings={{ 'nightmode': userSetting }}
+        userSettings={{ nightmode: userSetting }}
       />
     )
   })

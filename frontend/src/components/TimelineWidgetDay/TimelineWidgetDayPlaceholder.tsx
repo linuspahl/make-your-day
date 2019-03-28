@@ -9,7 +9,7 @@ const ShortcutLoading = styled(Shortcut)`
   background-color: ${props => props.theme.border};
 `
 
-const TimelineWidgetDayPlaceholder = () => (
+const TimelineWidgetDayPlaceholder = (): React.ReactElement => (
   <Day>
     <ShortcutLoading />
     <Categories>

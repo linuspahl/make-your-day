@@ -6,6 +6,8 @@ import PageLayout from './PageLayout'
 
 describe('PageLayout should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<PageLayout rootPath="/">Page content</PageLayout>)
+    ShallowRenderer.createRenderer().render(
+      <PageLayout rootPath="/">Page content</PageLayout>
+    )
   })
 })

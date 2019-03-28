@@ -8,7 +8,7 @@ interface Props {
   className?: string
 }
 
-const ContentBox = (props: Props) => (
+const ContentBox = (props: Props): React.ReactElement => (
   <Element className={props.className}>{props.children}</Element>
 )
 

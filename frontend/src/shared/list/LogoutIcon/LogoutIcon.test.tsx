@@ -11,6 +11,7 @@ describe('LogoutIcon should', () => {
         createNotificationBanner={() => {}}
         userSessionId={1}
         clearLocalStorage={() => {}}
-      />)
+      />
+    )
   })
 })

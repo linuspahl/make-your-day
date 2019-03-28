@@ -4,7 +4,7 @@ import { Pie } from 'react-chartjs-2'
 // interfaces
 import { Chart } from 'store/evaluation/type'
 
-const Piechart = (props: Chart) => (
+const Piechart = (props: Chart): React.ReactElement => (
   <Pie
     data={{
       labels: props.labels,

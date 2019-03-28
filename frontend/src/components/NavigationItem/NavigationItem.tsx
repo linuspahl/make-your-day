@@ -5,11 +5,11 @@ import { ListItem, InnerLink, RouteActive } from './styles'
 
 interface Props {
   rootPath: string
-  route: { title: string, path: string }
+  route: { title: string; path: string }
   toggleAction: () => void
 }
 
-const NavigationItem = (props: Props) => {
+const NavigationItem = (props: Props): React.ReactElement => {
   const {
     route: { title, path },
     rootPath,

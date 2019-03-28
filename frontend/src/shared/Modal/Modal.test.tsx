@@ -6,6 +6,8 @@ import Modal from './Modal'
 
 describe('Modal should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<Modal toggleAction={() => {}}>Content</Modal>)
+    ShallowRenderer.createRenderer().render(
+      <Modal toggleAction={() => {}}>Content</Modal>
+    )
   })
 })

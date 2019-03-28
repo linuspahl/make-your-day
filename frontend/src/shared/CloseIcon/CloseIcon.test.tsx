@@ -6,6 +6,8 @@ import CloseIcon from './CloseIcon'
 
 describe('CloseIcon should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<CloseIcon closeAction={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <CloseIcon closeAction={() => {}} />
+    )
   })
 })

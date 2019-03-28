@@ -6,6 +6,8 @@ import WidgetForm from './WidgetForm'
 
 describe('WidgetForm should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<WidgetForm rootPath="/" submitAction={() => {}}/>)
+    ShallowRenderer.createRenderer().render(
+      <WidgetForm rootPath="/" submitAction={() => {}} />
+    )
   })
 })

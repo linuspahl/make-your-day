@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
-import { ApolloError } from 'apollo-boost';
+import { ApolloError } from 'apollo-boost'
 // utils
 import { logError } from 'utils/utils'
 // components
@@ -13,7 +13,10 @@ import H1 from 'shared/H1/H1'
 import { addCategory } from 'store/category/update'
 import { CreateCategory } from 'store/category/mutation'
 // interface
-import { Category, CategoryCreate as CategoryCreateType } from 'store/category/type'
+import {
+  Category,
+  CategoryCreate as CategoryCreateType,
+} from 'store/category/type'
 import { NotificationCreate } from 'types/types'
 
 interface Props extends RouteComponentProps {
@@ -22,14 +25,14 @@ interface Props extends RouteComponentProps {
 }
 
 class CategoryCreate extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { rootPath } = this.props
     return (
       <FadeTransition fullWidth>
@@ -44,7 +47,9 @@ class CategoryCreate extends React.Component<Props> {
             <CategoryForm
               mode="create"
               rootPath={rootPath}
-              submitAction={(variables: CategoryCreateType) => createCategory({ variables })}
+              submitAction={(variables: CategoryCreateType) =>
+                createCategory({ variables })
+              }
             />
           )}
         </Mutation>
@@ -53,7 +58,7 @@ class CategoryCreate extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted(data: { createCategory: Category }) {
+  private handleCompleted(data: { createCategory: Category }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       createCategory: { id, title, hasSubcategories },
@@ -74,7 +79,7 @@ class CategoryCreate extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

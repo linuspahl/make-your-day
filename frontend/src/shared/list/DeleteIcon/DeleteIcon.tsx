@@ -1,31 +1,30 @@
 // libraries
 import * as React from 'react'
 import { Mutation, FetchResult } from 'react-apollo'
-import { DataProxy } from 'apollo-cache';
-import { DocumentNode } from 'graphql';
+import { DataProxy } from 'apollo-cache'
+import { DocumentNode } from 'graphql'
 // components
 import { Element } from './styles'
 import Icon from 'shared/Icon/Icon'
 
-
 interface Props {
-  id: number,
-  mutation: DocumentNode,
+  id: number
+  mutation: DocumentNode
   onUpdate: (
     cache: DataProxy,
     data: FetchResult,
     variables: { id: number }
-  ) => void,
+  ) => void
   title: string
 }
 
-const handleClick = (action: () => void, title: string) => {
+const handleClick = (action: () => void, title: string): void => {
   if (confirm(`${title} wirklich löschen?`)) {
     action()
   }
 }
 
-const DeleteIcon = (props: Props) => {
+const DeleteIcon = (props: Props): React.ReactElement => {
   const { id, mutation, onUpdate, title } = props
   const variables = { id }
 

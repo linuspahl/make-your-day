@@ -12,7 +12,7 @@ interface Props {
   tabIndex?: number
 }
 
-const LogoutIcon = (props: Props) => {
+const LogoutIcon = (props: Props): React.ReactElement => {
   const clickable = typeof props.onClick === 'function'
   return (
     <ListItem

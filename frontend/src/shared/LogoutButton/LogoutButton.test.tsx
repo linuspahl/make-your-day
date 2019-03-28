@@ -6,6 +6,12 @@ import LogoutButton from './LogoutButton'
 
 describe('LogoutButton should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<LogoutButton userSessionId={1} clearLocalStorage={() => {}} createNotificationBanner={() => {}}/>)
+    ShallowRenderer.createRenderer().render(
+      <LogoutButton
+        userSessionId={1}
+        clearLocalStorage={() => {}}
+        createNotificationBanner={() => {}}
+      />
+    )
   })
 })

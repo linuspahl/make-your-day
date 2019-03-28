@@ -4,7 +4,7 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import Categories from './Categories'
 // fixtures
-import { userSession } from 'store/userSession/fixtures';
+import { userSession } from 'store/userSession/fixtures'
 
 describe('Categories should', () => {
   test('render without crashing', () => {

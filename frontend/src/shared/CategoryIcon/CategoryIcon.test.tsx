@@ -6,6 +6,8 @@ import CategoryIcon from './CategoryIcon'
 
 describe('CategoryIcon should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<CategoryIcon title="Title" size={10}/>)
+    ShallowRenderer.createRenderer().render(
+      <CategoryIcon title="Title" size={10} />
+    )
   })
 })

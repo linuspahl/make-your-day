@@ -4,19 +4,17 @@ import * as React from 'react'
 import { Layout } from './styles'
 
 interface Props {
-  as?: any
-  children: any
+  children: React.ReactNode
   className?: string
   disabled?: boolean
   htmlFor?: string
   onClick?: () => {}
 }
 
-const Row = (props: Props) => (
+const Row = (props: Props): React.ReactElement => (
   <Layout
     disabled={props.disabled}
     className={props.className}
-    as={props.as}
     htmlFor={props.htmlFor}
     onClick={props.onClick}
   >

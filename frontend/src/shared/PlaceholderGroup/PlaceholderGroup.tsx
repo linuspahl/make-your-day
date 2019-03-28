@@ -31,6 +31,8 @@ interface Props {
   children: React.ReactNode
 }
 
-const PlaceholderGroup = (props: Props) => <Element>{props.children}</Element>
+const PlaceholderGroup = (props: Props): React.ReactElement => (
+  <Element>{props.children}</Element>
+)
 
 export default PlaceholderGroup

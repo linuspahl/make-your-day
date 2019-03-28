@@ -11,7 +11,7 @@ interface Props {
   closeAction?: () => void
 }
 
-const CloseIcon = (props: Props) => {
+const CloseIcon = (props: Props): React.ReactElement => {
   const hasClickAction = typeof props.closeAction === 'function'
   return (
     <Element onClick={() => hasClickAction && props.closeAction()}>

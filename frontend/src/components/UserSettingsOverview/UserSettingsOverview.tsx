@@ -17,8 +17,8 @@ import { GetSettings } from 'store/setting/query'
 // interface
 import { UserSetting } from 'store/userSetting/type'
 import { Setting } from 'store/setting/type'
-import { UserSession } from 'store/userSession/type';
-import { NotificationCreate, LocalStorage } from 'types/types';
+import { UserSession } from 'store/userSession/type'
+import { NotificationCreate, LocalStorage } from 'types/types'
 
 interface Props {
   clearLocalStorage: () => void
@@ -29,7 +29,7 @@ interface Props {
   userSettings: { [key: string]: UserSetting }
 }
 
-const UserSettingsOverview = (props: Props) => (
+const UserSettingsOverview = (props: Props): React.ReactElement => (
   <FadeTransition>
     <H1 context="page">Einstellungen</H1>
     <Query query={GetSettings}>

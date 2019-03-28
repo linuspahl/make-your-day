@@ -7,9 +7,7 @@ import CategoryCreate from './CategoryCreate'
 describe('CategoryCreate should', () => {
   test('render without crashing', () => {
     ShallowRenderer.createRenderer().render(
-      <CategoryCreate
-        rootPath="/"
-        createNotificationBanner={() => {}}
-      />)
+      <CategoryCreate rootPath="/" createNotificationBanner={() => {}} />
+    )
   })
 })

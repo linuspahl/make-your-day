@@ -3,8 +3,10 @@ import styled from 'styled-components'
 
 interface LayoutProps {
   disabled?: boolean
-  htmlFor?: string
-  onClick: () => {}
+  children: React.ReactNode
+  onClick: () => void
+  className: string
+  htmlFor: string
 }
 
 export const Layout = styled.div<LayoutProps>`
@@ -23,6 +25,5 @@ export const Layout = styled.div<LayoutProps>`
     `
       color: #b5b5b5;
        cursor: not-allowed;
-    `
-  };
+    `};
 `

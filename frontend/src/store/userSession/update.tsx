@@ -9,14 +9,16 @@ export const deleteUserSession = (
   cache: DataProxy,
   result: FetchResult,
   variables: { id: number }
-) => {
+): void => {
   const {
     data: { deleteUserSession },
   } = result
 
   try {
     if (deleteUserSession) {
-      const userSessionsQuery: {getUserSessions: Array<UserSession>} = cache.readQuery({ query: GetUserSessions })
+      const userSessionsQuery: {
+        getUserSessions: UserSession[]
+      } = cache.readQuery({ query: GetUserSessions })
 
       if (userSessionsQuery.getUserSessions) {
         const updatedUserSessions = userSessionsQuery.getUserSessions.filter(
@@ -24,7 +26,7 @@ export const deleteUserSession = (
             return userSessions.id !== variables.id
           }
         )
-  
+
         cache.writeQuery({
           query: GetUserSessions,
           data: {
@@ -32,7 +34,6 @@ export const deleteUserSession = (
           },
         })
       }
-      
     }
   } catch {}
 }

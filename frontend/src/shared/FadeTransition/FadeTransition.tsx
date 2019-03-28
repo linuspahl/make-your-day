@@ -10,14 +10,11 @@ interface Props {
   fullWidth?: boolean
 }
 
-const FadeTransition = (props: Props) => (
+const FadeTransition = (props: Props): React.ReactElement => (
   <Transition in unmountOnExit timeout={0}>
-    {status => {
+    {() => {
       return (
-        <Wrapper
-          fullHeight={props.fullHeight}
-          fullWidth={props.fullWidth}
-        >
+        <Wrapper fullHeight={props.fullHeight} fullWidth={props.fullWidth}>
           {props.children}
         </Wrapper>
       )

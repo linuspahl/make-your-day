@@ -9,10 +9,7 @@ import { setting } from 'store/setting/fixtures'
 describe('UserSettingDelete should', () => {
   test('render without crashing', () => {
     ShallowRenderer.createRenderer().render(
-      <UserSettingDelete
-        updateLocalStorage={() => {}}
-        setting={setting}
-      />
+      <UserSettingDelete updateLocalStorage={() => {}} setting={setting} />
     )
   })
 })

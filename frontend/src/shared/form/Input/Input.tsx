@@ -3,8 +3,7 @@ import * as React from 'react'
 // components
 import { Element } from './styles'
 // interfaces
-import { InputEvent } from 'src/types/types'
-
+import { InputEvent } from 'types/types'
 
 interface Props {
   disabled?: boolean
@@ -16,16 +15,8 @@ interface Props {
   value: string
 }
 
-const Input = (props: Props) => {
-  const {
-    disabled,
-    name,
-    onChange,
-    required,
-    tabIndex,
-    type,
-    value,
-  } = props
+const Input = (props: Props): React.ReactElement => {
+  const { disabled, name, onChange, required, tabIndex, type, value } = props
   return (
     <Element
       disabled={disabled}

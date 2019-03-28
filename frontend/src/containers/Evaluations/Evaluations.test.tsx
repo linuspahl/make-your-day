@@ -4,7 +4,7 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import Evaluations from './Evaluations'
 // fixtures
-import { userSession } from 'store/userSession/fixtures';
+import { userSession } from 'store/userSession/fixtures'
 
 describe('Evaluations should', () => {
   test('render without crashing', () => {

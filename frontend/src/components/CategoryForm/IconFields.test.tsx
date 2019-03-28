@@ -6,6 +6,8 @@ import IconFields from './IconFields'
 
 describe('IconFields should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<IconFields title="Title" handleInputChange={() => {}}/>)
+    ShallowRenderer.createRenderer().render(
+      <IconFields title="Title" handleInputChange={() => {}} />
+    )
   })
 })

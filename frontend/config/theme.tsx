@@ -1,7 +1,7 @@
 // Theme configuration file
 // Not only for colors, more a config file for all kind of theme settings
 
-import { merge } from '../src/utils/utils'
+import { merge } from 'lodash'
 import { categoryTextColors, categoryColors } from './params'
 
 const defaultTheme = {

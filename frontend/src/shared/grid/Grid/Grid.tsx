@@ -2,9 +2,9 @@
 import * as React from 'react'
 
 interface Props {
-  children: any
+  children: React.ReactNode
 }
 
-const Grid = (props: Props) => <div>{props.children}</div>
+const Grid = (props: Props): React.ReactElement => <div>{props.children}</div>
 
 export default Grid

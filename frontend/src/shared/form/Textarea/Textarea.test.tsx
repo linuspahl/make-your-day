@@ -6,6 +6,8 @@ import Textarea from './Textarea'
 
 describe('Textarea should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<Textarea name="name" value="value" onChange={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <Textarea name="name" value="value" onChange={() => {}} />
+    )
   })
 })

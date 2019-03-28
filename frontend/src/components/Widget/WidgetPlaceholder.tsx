@@ -9,6 +9,6 @@ const Element = styled.div`
   background-color: ${props => props.theme.border};
 `
 
-const WidgetPlaceholder = () => <Element />
+const WidgetPlaceholder = (): React.ReactElement => <Element />
 
 export default WidgetPlaceholder

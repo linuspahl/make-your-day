@@ -3,7 +3,7 @@ import * as React from 'react'
 // components
 import { Element } from './styles'
 // interfaces
-import { InputEvent } from 'src/types/types'
+import { InputEvent } from 'types/types'
 
 interface Props {
   disabled?: boolean
@@ -14,7 +14,7 @@ interface Props {
   value: string
 }
 
-const Textarea = (props: Props) => {
+const Textarea = (props: Props): React.ReactElement => {
   const { type, name, onChange, required, disabled, value } = props
   return (
     <Element

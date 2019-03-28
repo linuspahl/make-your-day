@@ -1,8 +1,8 @@
 // libraries
-import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 
-export const Element = styled(Link)`
+import styled from 'styled-components'
+
+export const Wrapper = styled.div`
   height: 40px;
   width: 40px;
 
@@ -13,6 +13,8 @@ export const Element = styled(Link)`
 
   font-size: 26px;
   color: ${props => props.theme.text};
+  cursor: pointer;
+
   &:active {
     background-color: ${props => props.theme.active};
   }

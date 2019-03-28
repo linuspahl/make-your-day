@@ -2,8 +2,9 @@
 import * as React from 'react'
 import { Query } from 'react-apollo'
 import moment from 'moment'
+import { sortBy } from 'lodash'
 // utils
-import { sortBy, formatUnixDate, getDateString } from 'utils/utils'
+import { formatUnixDate, getDateString } from 'utils/utils'
 // components
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
@@ -14,7 +15,7 @@ import TimelineWidgetDay from 'components/TimelineWidgetDay/TimelineWidgetDay'
 import TimelineWidgetDayPlaceholder from 'components/TimelineWidgetDay/TimelineWidgetDayPlaceholder'
 // interfaces
 import { Record } from 'store/record/type'
-import { Category } from 'store/category/type';
+import { Category } from 'store/category/type'
 
 interface CategoryEntry extends Category {
   recordAmountSum: number
@@ -25,7 +26,7 @@ interface DayEntry {
   date: string
 }
 
-const LoadingPlaceholder = () => (
+const LoadingPlaceholder = (): React.ReactElement => (
   <PlaceholderGroup>
     {[...Array(3)].map((value, key) => {
       return <TimelineWidgetDayPlaceholder key={key} />
@@ -34,17 +35,16 @@ const LoadingPlaceholder = () => (
 )
 
 export default class TimelineWidget extends React.Component {
-  constructor(props: {}) {
+  public constructor(props: {}) {
     super(props)
 
     this.prepareTimeline = this.prepareTimeline.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const createdAt = new Date()
     // Change it so that it is 7 days in the past.
     createdAt.setDate(createdAt.getDate() - 7)
-    
 
     return (
       <Outer>
@@ -70,7 +70,7 @@ export default class TimelineWidget extends React.Component {
 
               return sortBy(Object.values(timeline), 'date').map(day => (
                 <TimelineWidgetDay
-                  categories={day.categories}
+                  categories={Object.values(day.categories)}
                   date={day.date}
                   key={day.date}
                 />
@@ -82,7 +82,7 @@ export default class TimelineWidget extends React.Component {
     )
   }
 
-  prepareTimeline(records: Array<Record>) {
+  private prepareTimeline(records: Record[]): { [key: string]: DayEntry } {
     // The timeline object has an array of records as input
     // for each day with a record, we'll create an entry
     // Based on the day we will group all related records by category
@@ -128,10 +128,10 @@ export default class TimelineWidget extends React.Component {
       }
     })
 
-    return Object.values(timeline)
+    return timeline
   }
 
-  getRecordAmount(record: Record, category: Category) {
+  private getRecordAmount(record: Record, category: Category): number {
     if (category.hasUnit && category.type !== 'counter') {
       return parseInt(record.amount, 10)
     }

@@ -8,6 +8,8 @@ import { evaluation } from 'store/evaluation/fixtures'
 
 describe('EvaluationChart should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<EvaluationChart evaluation={evaluation} />)
+    ShallowRenderer.createRenderer().render(
+      <EvaluationChart evaluation={evaluation} />
+    )
   })
 })

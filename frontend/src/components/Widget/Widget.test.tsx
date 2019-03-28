@@ -8,6 +8,8 @@ import { widget } from 'store/widget/fixtures'
 
 describe('Widget should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<Widget widget={widget} createNotificationBanner={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <Widget widget={widget} createNotificationBanner={() => {}} />
+    )
   })
 })

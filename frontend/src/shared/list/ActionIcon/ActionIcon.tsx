@@ -26,7 +26,7 @@ interface Props {
   to: string
 }
 
-const ActionRow = (props: Props) => (
+const ActionRow = (props: Props): React.ReactElement => (
   <Wrapper to={props.to}>
     <Icon title={props.icon} />
   </Wrapper>

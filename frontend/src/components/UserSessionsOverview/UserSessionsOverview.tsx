@@ -28,7 +28,7 @@ interface Props {
   userSession: UserSession
 }
 
-const UserSessionOverview = (props: Props) => (
+const UserSessionOverview = (props: Props): React.ReactElement => (
   <FadeTransition>
     <H1 context="page">Angemeldete Geräte</H1>
 
@@ -44,7 +44,7 @@ const UserSessionOverview = (props: Props) => (
             />
           )
 
-        const userSessions: Array<UserSession> = data.getUserSessions
+        const userSessions: UserSession[] = data.getUserSessions
 
         // We are getting the userSettings as props
         // Because we are just using booleans for the settings value so far, we are able to use only checkboxes
@@ -57,7 +57,8 @@ const UserSessionOverview = (props: Props) => (
             </GridHead>
             <GridBody columnAmount={3}>
               {userSessions.map((userSession: UserSession) => {
-                const isCurrentSession = userSession.expiresAt === props.userSession.expiresAt
+                const isCurrentSession =
+                  userSession.expiresAt === props.userSession.expiresAt
                 const expiresAtDate = getDateString(
                   formatUnixDate(userSession.expiresAt)
                 )

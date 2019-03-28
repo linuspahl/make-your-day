@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
-import { ApolloError } from 'apollo-boost';
+import { ApolloError } from 'apollo-boost'
 // utils
 import { logError } from 'utils/utils'
 // components
@@ -25,14 +25,14 @@ interface Props extends RouteComponentProps {
 }
 
 class WidgetCreate extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.hanldeError = this.hanldeError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { rootPath } = this.props
     return (
       <FadeTransition fullWidth>
@@ -60,7 +60,9 @@ class WidgetCreate extends React.Component<Props> {
                     mode="create"
                     evaluations={data.getEvaluations}
                     rootPath={rootPath}
-                    submitAction={(variables: WidgetCreateType) => createWidget({ variables })}
+                    submitAction={(variables: WidgetCreateType) =>
+                      createWidget({ variables })
+                    }
                   />
                 )}
               </Mutation>
@@ -72,7 +74,7 @@ class WidgetCreate extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted(data: { createWidget: Widget }) {
+  private handleCompleted(data: { createWidget: Widget }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       createWidget: { title },
@@ -89,7 +91,7 @@ class WidgetCreate extends React.Component<Props> {
   }
 
   // Form error function
-  hanldeError(error: ApolloError) {
+  private hanldeError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

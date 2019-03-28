@@ -6,7 +6,7 @@ import { categoryColors } from '../../../../config/params'
 // components
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 // interfaces
-import { SelectOption, InputEvent } from 'src/types/types'
+import { SelectOption, InputEvent } from 'types/types'
 
 const SmallColorPreview = styled.div`
   height: 25px;
@@ -14,11 +14,11 @@ const SmallColorPreview = styled.div`
 
   background-color: ${props => props.color};
 `
-const prepareOptions = () => {
+const prepareOptions = (): SelectOption[] => {
   // Make "no selection" selectable
   const noSelection: SelectOption = { value: null, title: 'Keine Auswahl' }
   // Create select options based on theme colors
-  const colorsOptions: Array<SelectOption> = Object.keys(categoryColors).map(key => {
+  const colorsOptions: SelectOption[] = Object.keys(categoryColors).map(key => {
     return { value: key, title: key }
   })
   colorsOptions.unshift(noSelection)
@@ -26,13 +26,13 @@ const prepareOptions = () => {
 }
 
 interface Props {
- name: string
- onChange: (event: InputEvent) => void
- tabIndex: number
- value: string
+  name: string
+  onChange: (event: InputEvent) => void
+  tabIndex: number
+  value: string
 }
 
-const ColorSelect = (props: Props) => {
+const ColorSelect = (props: Props): React.ReactElement => {
   const { value, onChange, name, tabIndex } = props
   const colors = prepareOptions()
 
@@ -40,7 +40,9 @@ const ColorSelect = (props: Props) => {
     <ContentSelect
       tabIndex={tabIndex}
       value={value}
-      renderPreview={(option: SelectOption) => <SmallColorPreview color={String(option.value)} />}
+      renderPreview={(option: SelectOption) => (
+        <SmallColorPreview color={String(option.value)} />
+      )}
       onChange={onChange}
       name={name}
       options={colors}

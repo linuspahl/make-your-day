@@ -1,16 +1,16 @@
 // libraries
-import { DataProxy } from 'apollo-cache';
-import { FetchResult } from 'react-apollo';
+import { DataProxy } from 'apollo-cache'
+import { FetchResult } from 'react-apollo'
 // graphql
 import { GetWidgets } from 'store/widget/query'
-import { Widget } from 'store/widget/type';
+import { Widget } from 'store/widget/type'
 
-export const addWidget = (cache: DataProxy, result: FetchResult) => {
+export const addWidget = (cache: DataProxy, result: FetchResult): void => {
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the the overview list will not get fetched
   try {
     const widgets: {
-      getWidgets: Array<Widget>
+      getWidgets: Widget[]
     } = cache.readQuery({ query: GetWidgets })
 
     const {
@@ -30,7 +30,7 @@ export const deleteWidget = (
   cache: DataProxy,
   result: FetchResult,
   variables: { id: number }
-) => {
+): void => {
   const {
     data: { deleteWidget },
   } = result
@@ -38,7 +38,7 @@ export const deleteWidget = (
   try {
     if (deleteWidget) {
       const widgetsQuery: {
-        getWidgets: Array<Widget>
+        getWidgets: Widget[]
       } = cache.readQuery({ query: GetWidgets })
 
       const updatedWidgets = widgetsQuery.getWidgets.filter(widgets => {

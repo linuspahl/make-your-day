@@ -16,9 +16,9 @@ import { addSubcategory } from 'store/category/update'
 import { CreateSubcategory } from 'store/category/mutation'
 import { GetCategory } from 'store/category/query'
 // interfaces
-import { CategoryFull, CategoryCreate, Category } from 'store/category/type';
-import { NotificationCreate } from 'types/types';
-import { ApolloError } from 'apollo-boost';
+import { CategoryFull, CategoryCreate, Category } from 'store/category/type'
+import { NotificationCreate } from 'types/types'
+import { ApolloError } from 'apollo-boost'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -26,14 +26,14 @@ interface Props extends RouteComponentProps {
 }
 
 class SubcategoryCreate extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { rootPath, match } = this.props
     const categoryId = extractIdFromUrl(match)
     return (
@@ -50,7 +50,7 @@ class SubcategoryCreate extends React.Component<Props> {
                   message="Subkategorie konnten nicht geladen werden"
                 />
               )
-            
+
             const parentCategory: CategoryFull = data.getCategory
             if (!parentCategory) return <NoResult />
 
@@ -67,7 +67,9 @@ class SubcategoryCreate extends React.Component<Props> {
                   <SubcategoryForm
                     mode="create"
                     rootPath={rootPath}
-                    submitAction={(variables: CategoryCreate) => createSubcategory({ variables })}
+                    submitAction={(variables: CategoryCreate) =>
+                      createSubcategory({ variables })
+                    }
                     parentCategory={parentCategory}
                   />
                 )}
@@ -80,7 +82,7 @@ class SubcategoryCreate extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted(data: { createSubcategory: Category }) {
+  private handleCompleted(data: { createSubcategory: Category }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       createSubcategory: { title, parentId },
@@ -97,7 +99,7 @@ class SubcategoryCreate extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

@@ -7,7 +7,8 @@ interface Props {
   children: React.ReactNode | React.ReactNodeArray
 }
 
-const ActionRow = (props: Props) => {
-  return <Layout amountChildren={2}>{props.children}</Layout>}
+const ActionRow = (props: Props): React.ReactElement => {
+  return <Layout amountChildren={2}>{props.children}</Layout>
+}
 
 export default ActionRow

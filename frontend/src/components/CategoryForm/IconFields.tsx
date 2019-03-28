@@ -9,7 +9,7 @@ import IconSelect from 'shared/form/IconSelect/IconSelect'
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 // interface
 import { Category } from 'store/category/type'
-import { InputEvent } from 'types/types';
+import { InputEvent } from 'types/types'
 
 interface Props {
   color?: Category['color']
@@ -18,7 +18,7 @@ interface Props {
   title: Category['title']
 }
 
-const IconFields = (props: Props) => {
+const IconFields = (props: Props): React.ReactElement => {
   const { color, icon, title, handleInputChange } = props
   return (
     <div>

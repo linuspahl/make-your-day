@@ -7,13 +7,13 @@ import { Layout } from './styles'
 interface Props {
   children?: React.ReactNode
   clickAction?: () => void
-  context?: ('primary' | 'secondary' | 'delete')
+  context?: 'primary' | 'secondary' | 'delete'
   tabIndex?: number
   to?: string
   type?: 'submit'
 }
 
-const Button = (props: Props) => {
+const Button = (props: Props): React.ReactElement => {
   const { clickAction, children, type, context, to } = props
   const hasClickAction = typeof clickAction === 'function'
   const isLink = Boolean(to)

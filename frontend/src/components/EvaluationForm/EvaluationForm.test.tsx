@@ -6,6 +6,8 @@ import EvaluationForm from './EvaluationForm'
 
 describe('EvaluationForm should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<EvaluationForm rootPath="/" categories={[]} submitAction={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <EvaluationForm rootPath="/" categories={[]} submitAction={() => {}} />
+    )
   })
 })

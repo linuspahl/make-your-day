@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom'
 import CategorySummary from 'shared/CategorySummary/CategorySummary'
 import { Day, Shortcut, Categories } from './styles'
 // interface
-import { Category } from 'store/category/type';
-import moment from 'moment';
+import { Category } from 'store/category/type'
+import moment from 'moment'
 
 interface CategoryEntry extends Category {
   recordAmountSum: number
 }
 
 interface Props {
-  categories: Array<CategoryEntry>
+  categories: CategoryEntry[]
   date: string
 }
 
-const TimelineWidgetDay = (props: Props) => {
+const TimelineWidgetDay = (props: Props): React.ReactElement => {
   const { categories, date } = props
   return (
     <Day key={date}>

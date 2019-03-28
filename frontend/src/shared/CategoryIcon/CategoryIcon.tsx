@@ -13,7 +13,7 @@ interface Props {
   to?: string
 }
 
-const CategoryIcon = (props: Props) => {
+const CategoryIcon = (props: Props): React.ReactElement => {
   const { icon, color, title, to, size } = props
   const isLink = Boolean(to)
   return (

@@ -4,7 +4,7 @@ export const categoryPlain: CategoryPlain = {
   id: 1,
   hasUnit: false,
   hasSubcategories: false,
-  title: 'Title'
+  title: 'Title',
 }
 
 export const category: CategoryFull = {
@@ -18,5 +18,5 @@ export const category: CategoryFull = {
   id: 1,
   title: 'title',
   type: 'string',
-  unit: 'string'
+  unit: 'string',
 }

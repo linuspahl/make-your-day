@@ -2,32 +2,32 @@
 import gql from 'graphql-tag'
 
 export const CreateEvaluation = gql`
-  mutation CreateEvaluation (
+  mutation CreateEvaluation(
     $title: String!
     $categoryId: Int!
     $type: String!
     $period: String!
     $groupSubcategories: Boolean
   ) {
-    createEvaluation (
+    createEvaluation(
       title: $title
       categoryId: $categoryId
       type: $type
       period: $period
       groupSubcategories: $groupSubcategories
-      ) {
-        id
-        title
-        categoryId
-        type
-        period
-        groupSubcategories
+    ) {
+      id
+      title
+      categoryId
+      type
+      period
+      groupSubcategories
     }
   }
 `
 
 export const UpdateEvaluation = gql`
-  mutation UpdateEvaluation (
+  mutation UpdateEvaluation(
     $id: Int!
     $title: String!
     $categoryId: Int!
@@ -35,7 +35,7 @@ export const UpdateEvaluation = gql`
     $period: String!
     $groupSubcategories: Boolean
   ) {
-    updateEvaluation (
+    updateEvaluation(
       id: $id
       title: $title
       categoryId: $categoryId

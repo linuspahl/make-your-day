@@ -4,11 +4,11 @@ import * as React from 'react'
 import { Element } from './styles'
 
 interface Props {
-  children?: React.ReactNode 
+  children?: React.ReactNode
   justify?: string
 }
 
-const GridCell = (props: Props) => (
+const GridCell = (props: Props): React.ReactElement => (
   <Element justify={props.justify}>{props.children}</Element>
 )
 

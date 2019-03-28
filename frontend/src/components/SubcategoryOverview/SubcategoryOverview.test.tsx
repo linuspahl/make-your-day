@@ -6,6 +6,8 @@ import SubcategoryOverview from './SubcategoryOverview'
 
 describe('SubcategoryOverview should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<SubcategoryOverview rootPath="/" />)
+    ShallowRenderer.createRenderer().render(
+      <SubcategoryOverview rootPath="/" />
+    )
   })
 })

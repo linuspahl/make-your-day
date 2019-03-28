@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import EvaluationChart from 'components/EvaluationChart/EvaluationChart'
 import H1 from 'shared/H1/H1'
 // interfaces
-import { Evaluation } from 'store/evaluation/type';
+import { Evaluation } from 'store/evaluation/type'
 
 const Layout = styled.div`
   width: 100%;
@@ -31,7 +31,7 @@ interface Props {
 }
 
 export default class EvaluationWidget extends React.Component<Props> {
-  render() {
+  public render(): React.ReactElement {
     const { evaluation } = this.props
 
     return (

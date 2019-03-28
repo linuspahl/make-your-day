@@ -4,7 +4,7 @@ import * as React from 'react'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import Icon from 'shared/Icon/Icon'
 // interfaces
-import { InputEvent } from 'src/types/types'
+import { InputEvent } from 'types/types'
 
 import { categoryIcons } from '../../../../config/params'
 
@@ -16,7 +16,7 @@ interface Props {
   value: string
 }
 
-const IconSelect = (props: Props) => {
+const IconSelect = (props: Props): React.ReactElement => {
   const { value, onChange, name, tabIndex, disabled } = props
 
   return (

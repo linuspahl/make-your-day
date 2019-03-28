@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Layout } from './styles'
 import Navigation from 'components/Navigation/Navigation'
 // interfaces
-import { UserSession } from 'store/userSession/type';
+import { UserSession } from 'store/userSession/type'
 
 interface Props {
   children: React.ReactNode
@@ -18,7 +18,7 @@ interface State {
 }
 
 export default class PageLayout extends React.Component<Props, State> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -30,17 +30,17 @@ export default class PageLayout extends React.Component<Props, State> {
     this.detectKeydown = this.detectKeydown.bind(this)
   }
 
-  componentDidMount() {
+  public componentDidMount(): void {
     document.addEventListener('touchstart', this.detectTouchstart, false)
     document.addEventListener('keydown', this.detectKeydown, false)
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount(): void {
     document.removeEventListener('touchstart', this.detectTouchstart, false)
     document.removeEventListener('keydown', this.detectKeydown, false)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { userSession, children, rootPath, noPadding } = this.props
     const { isNavVisible } = this.state
 
@@ -57,7 +57,7 @@ export default class PageLayout extends React.Component<Props, State> {
     )
   }
 
-  toggleNavigation() {
+  private toggleNavigation(): void {
     const isNavVisible = this.state.isNavVisible
 
     this.setState({
@@ -65,7 +65,7 @@ export default class PageLayout extends React.Component<Props, State> {
     })
   }
 
-  detectKeydown(event: KeyboardEvent) {
+  private detectKeydown(event: KeyboardEvent): void {
     // Detect when:
     // - or when the user click the alt key (desktop)
     if (event.keyCode === 18) {
@@ -73,7 +73,7 @@ export default class PageLayout extends React.Component<Props, State> {
     }
   }
 
-  detectTouchstart(event: TouchEvent) {
+  private detectTouchstart(event: TouchEvent): void {
     // Detect when:
     // - user clicks with two fingers (mobile)
     if (event.type && event.touches.length === 2) {

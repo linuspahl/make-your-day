@@ -4,10 +4,10 @@ import * as React from 'react'
 import { Element } from './styles'
 
 interface Props {
-  children: Array<React.ReactNode>
+  children: React.ReactNode[]
 }
 
-const GridHead = (props: Props) => (
+const GridHead = (props: Props): React.ReactElement => (
   <Element columnAmount={props.children.length}>{props.children}</Element>
 )
 

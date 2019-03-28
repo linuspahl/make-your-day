@@ -6,6 +6,8 @@ import ErrorMessage from './ErrorMessage'
 
 describe('ErrorMessage should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<ErrorMessage message="Message" error="Error" />)
+    ShallowRenderer.createRenderer().render(
+      <ErrorMessage message="Message" error="Error" />
+    )
   })
 })

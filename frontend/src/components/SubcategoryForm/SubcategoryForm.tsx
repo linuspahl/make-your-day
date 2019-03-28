@@ -9,8 +9,8 @@ import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Input from 'shared/form/Input/Input'
 import Button from 'shared/Button/Button'
 // interfaces
-import { SubcategoryCreate, CategoryFull } from 'store/category/type';
-import { Form, InputEvent } from 'types/types';
+import { SubcategoryCreate, CategoryFull } from 'store/category/type'
+import { Form as FormType, InputEvent } from 'types/types'
 
 const Form = styled.form`
   margin-top: 15px;
@@ -18,14 +18,17 @@ const Form = styled.form`
 
 interface Props {
   initialData?: SubcategoryCreate
-  mode?: Form['mode']
+  mode?: FormType['mode']
   parentCategory: CategoryFull
   rootPath: string
   submitAction: (category: SubcategoryCreate) => void
 }
 
-export default class SubcategoryForm extends React.Component<Props, SubcategoryCreate> {
-  constructor(props: Props) {
+export default class SubcategoryForm extends React.Component<
+  Props,
+  SubcategoryCreate
+> {
+  public constructor(props: Props) {
     super(props)
 
     // overview of all form values
@@ -36,14 +39,14 @@ export default class SubcategoryForm extends React.Component<Props, SubcategoryC
     }
 
     if (props.initialData) {
-      this.state = {...this.state, ...props.initialData}
+      this.state = { ...this.state, ...props.initialData }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { mode, rootPath } = this.props
     const { title } = this.state
     return (
@@ -70,12 +73,12 @@ export default class SubcategoryForm extends React.Component<Props, SubcategoryC
     )
   }
 
-  handleSubmit(event: React.FormEvent) {
+  private handleSubmit(event: React.FormEvent): void {
     event.preventDefault()
     this.props.submitAction(this.state)
   }
 
-  handleInputChange(event: InputEvent) {
+  private handleInputChange(event: InputEvent): void {
     handleInputChange(event, this.setState.bind(this))
   }
 }

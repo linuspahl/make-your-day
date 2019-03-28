@@ -1,41 +1,25 @@
 {
-    "compilerOptions": {
-        "outDir": "./dist/",
-        "sourceMap": true,
-        "noImplicitAny": true,
-        "target": "es5",
-        "esModuleInterop": true,
-        "jsx": "react",
-        "declaration": true,
-        "types": ["react", "jest", "node"],
-        "lib": ["es6", "dom", "esnext.asynciterable"],
-        "baseUrl": ".",
-        "paths": {
-            "shared/*": [
-                "src/shared/*"
-            ],
-            "components/*": [
-                "src/components/*"
-            ],
-            "containers/*": [
-                "src/containers/*"
-            ],
-            "store/*": [
-                "src/store/*"
-            ],
-            "types/*": [
-                "src/types/*"
-            ],
-            "utils/*": [
-                "src/utils/*"
-            ],
-        }
-    },
-    "include": [
-        "**/*.ts",
-		"**/*.tsx"
-    ],
-    "exclude": [
-        "node_modules",
-    ]
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "target": "es5",
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "jsx": "react",
+    "declaration": true,
+    "types": ["react", "jest", "node"],
+    "lib": ["es6", "dom", "esnext.asynciterable"],
+    "baseUrl": ".",
+    "paths": {
+      "shared/*": ["src/shared/*"],
+      "components/*": ["src/components/*"],
+      "containers/*": ["src/containers/*"],
+      "store/*": ["src/store/*"],
+      "types/*": ["src/types/*"],
+      "utils/*": ["src/utils/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
 }

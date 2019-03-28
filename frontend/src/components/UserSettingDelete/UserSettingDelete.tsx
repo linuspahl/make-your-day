@@ -6,16 +6,16 @@ import Checkbox from 'shared/form/Checkbox/Checkbox'
 // graphql
 import { DeleteUserSetting } from 'store/userSetting/mutation'
 // interfaces
-import { Setting } from 'store/setting/type';
+import { Setting } from 'store/setting/type'
 import { LocalStorage } from 'types/types'
-import { userSetting } from 'store/userSetting/fixtures';
+import { userSetting } from 'store/userSetting/fixtures'
 
 interface Props {
   setting: Setting
   updateLocalStorage: (localStorage: LocalStorage) => void
 }
 
-const UserSettingDelete = (props: Props) => (
+const UserSettingDelete = (props: Props): React.ReactElement => (
   <Mutation
     mutation={DeleteUserSetting}
     variables={{ settingId: props.setting.id }}
@@ -25,7 +25,14 @@ const UserSettingDelete = (props: Props) => (
       })
     }
   >
-    {perfomMutation => <Checkbox value={true} onChange={perfomMutation} name={userSetting.setting.title} tabIndex={1} />}
+    {perfomMutation => (
+      <Checkbox
+        value={true}
+        onChange={perfomMutation}
+        name={userSetting.setting.title}
+        tabIndex={1}
+      />
+    )}
   </Mutation>
 )
 

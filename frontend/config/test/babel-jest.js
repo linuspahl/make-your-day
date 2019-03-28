@@ -4,7 +4,7 @@
 // The babel presets for development / production environment are a part of the webpack config
 
 // libraries
-const babelJest = require('babel-jest')
+import babelJest from 'babel-jest'
 
 module.exports = babelJest.createTransformer({
   presets: ['@babel/env', '@babel/react'],

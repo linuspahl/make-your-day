@@ -45,7 +45,6 @@ export interface NotificationCreate {
   type: Notification['type']
 }
 
-
 export interface Form {
   mode?: 'create'
 }

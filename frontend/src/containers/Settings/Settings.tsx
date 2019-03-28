@@ -9,7 +9,7 @@ import UserSessionsOverview from 'components/UserSessionsOverview/UserSessionsOv
 // interfaces
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate, LocalStorage } from 'types/types'
-import { UserSetting } from 'store/userSetting/type';
+import { UserSetting } from 'store/userSetting/type'
 
 interface Props {
   clearLocalStorage: () => void
@@ -20,7 +20,7 @@ interface Props {
   userSettings: { [key: string]: UserSetting }
 }
 
-const Settings = (props: Props) => {
+const Settings = (props: Props): React.ReactElement => {
   return (
     <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
       <ContentBox>

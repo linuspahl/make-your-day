@@ -6,6 +6,8 @@ import ListItem from './ListItem'
 
 describe('ListItem should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<ListItem tabIndex={1}>Content</ListItem>)
+    ShallowRenderer.createRenderer().render(
+      <ListItem tabIndex={1}>Content</ListItem>
+    )
   })
 })

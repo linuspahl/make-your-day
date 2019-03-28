@@ -1,7 +1,7 @@
 // interfaces
 import { Chart as ChartType, Evaluation } from 'store/evaluation/type'
 // fixtures
-import { category } from 'store/category/fixtures';
+import { category } from 'store/category/fixtures'
 
 export const evaluation: Evaluation = {
   id: 1,
@@ -10,15 +10,17 @@ export const evaluation: Evaluation = {
   groupSubcategories: false,
   type: 'barchart',
   period: 'lastDay',
-  category:  category,
-  result: { 
-    datasets: [{
-      label: 'Label',
-      data: [1, 2],
-      backgroundColor: 'red',
-    }],
+  category: category,
+  result: {
+    datasets: [
+      {
+        label: 'Label',
+        data: [1, 2],
+        backgroundColor: 'red',
+      },
+    ],
     labels: ['Mo', 'Di'],
-  }
+  },
 }
 
 export const chart: ChartType = {
@@ -26,8 +28,8 @@ export const chart: ChartType = {
   datasets: [
     {
       label: 'Titel Kategorie',
-      data: [50, 40, 16, 0, 2 , 30, 5],
-      backgroundColor: 'red'
-    }
-  ] 
+      data: [50, 40, 16, 0, 2, 30, 5],
+      backgroundColor: 'red',
+    },
+  ],
 }

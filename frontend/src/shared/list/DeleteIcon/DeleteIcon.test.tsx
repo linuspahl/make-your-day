@@ -9,11 +9,12 @@ import { deleteUserSession } from 'store/userSession/update'
 describe('DeleteIcon should', () => {
   test('render without crashing', () => {
     ShallowRenderer.createRenderer().render(
-    <DeleteIcon
-      id={1}
-      mutation={DeleteUserSession}
-      title={'Title'}
-      onUpdate={deleteUserSession}
-      />)
+      <DeleteIcon
+        id={1}
+        mutation={DeleteUserSession}
+        title={'Title'}
+        onUpdate={deleteUserSession}
+      />
+    )
   })
 })

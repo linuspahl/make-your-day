@@ -28,11 +28,31 @@ const List = styled.div`
   margin-bottom: 20px;
 `
 
+const sortWidgetsByPosition = (
+  widgets: Widget[]
+): {
+  [key: string]: Widget[]
+} => {
+  // Expects common list of widgets
+  // Returns an object which has all positions as keys and an array of the related widgets as value
+  const positions: {
+    [key: string]: Widget[]
+  } = {}
+
+  widgets.forEach(widget => {
+    if (!positions[widget.position]) {
+      positions[widget.position] = []
+    }
+    positions[widget.position] = [...positions[widget.position], widget]
+  })
+  return positions
+}
+
 interface Props {
   rootPath: string
 }
 
-const WidgetOverview = (props: Props) => {
+const WidgetOverview = (props: Props): React.ReactElement => {
   const { rootPath } = props
 
   return (
@@ -92,22 +112,6 @@ const WidgetOverview = (props: Props) => {
       </ActionRow>
     </FadeTransition>
   )
-}
-
-const sortWidgetsByPosition = (widgets: Array<Widget>) => {
-  // Expects common list of widgets
-  // Returns an object which has all positions as keys and an array of the related widgets as value
-  const positions: {
-    [key: string]: Array<Widget>;
-  } = {}
-
-  widgets.forEach(widget => {
-    if (!positions[widget.position]) {
-      positions[widget.position] = []
-    }
-    positions[widget.position] = [...positions[widget.position], widget]
-  })
-  return positions
 }
 
 export default WidgetOverview

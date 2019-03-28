@@ -14,6 +14,7 @@ describe('RecordFields should', () => {
         hasTitle={false}
         hasUnit={true}
         type="journal"
-      />)
+      />
+    )
   })
 })

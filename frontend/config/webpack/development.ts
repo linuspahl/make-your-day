@@ -1,5 +1,7 @@
-const common = require('./common.js')
-const merge = require('webpack-merge')
+import * as common from './common'
+import merge from 'webpack-merge'
+import { Configuration as WebpackConfiguration } from 'webpack'
+import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 
 // Webpack settings only needed for development
 //
@@ -8,7 +10,12 @@ const merge = require('webpack-merge')
 // e.g. for the babel-plugin-styled-components plugin
 // * devServer - webpack-dev-server settings
 // (open - will open the browser on start)
-module.exports = merge(common, {
+
+interface Configuration extends WebpackConfiguration {
+  devServer?: WebpackDevServerConfiguration
+}
+
+const devConfig: Configuration = {
   mode: 'development',
   devtool: 'eval-source-map',
   module: {
@@ -28,6 +35,7 @@ module.exports = merge(common, {
   },
   devServer: {
     historyApiFallback: true,
-    open: true,
   },
-})
+}
+
+export default merge(common, devConfig)

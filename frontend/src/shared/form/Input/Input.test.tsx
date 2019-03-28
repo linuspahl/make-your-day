@@ -6,6 +6,8 @@ import Input from './Input'
 
 describe('Input should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<Input name="Name" onChange={() => {}} tabIndex={1} value="value" />)
+    ShallowRenderer.createRenderer().render(
+      <Input name="Name" onChange={() => {}} tabIndex={1} value="value" />
+    )
   })
 })

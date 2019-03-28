@@ -12,7 +12,7 @@ import { GetWidgets } from 'store/widget/query'
 // interfaces
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate } from 'types/types'
-import { Widget } from 'store/widget/type';
+import { Widget } from 'store/widget/type'
 
 export const Layout = styled.div`
   height: 100%;
@@ -34,7 +34,7 @@ interface Props {
   userSession: UserSession
 }
 
-const Dashboard = (props: Props) => (
+const Dashboard = (props: Props): React.ReactElement => (
   <PageLayout
     userSession={props.userSession}
     rootPath={props.rootPath}
@@ -52,7 +52,7 @@ const Dashboard = (props: Props) => (
                 />
               )
 
-            const widgets: Array<Widget> = data.getWidgets
+            const widgets: Widget[] = data.getWidgets
             let dashboardTopWidgets = null
             let dashboardBottomWidgets = null
 

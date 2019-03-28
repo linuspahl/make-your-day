@@ -7,11 +7,7 @@ import ColorSelect from './ColorSelect'
 describe('ColorSelect should', () => {
   test('render without crashing', () => {
     ShallowRenderer.createRenderer().render(
-      <ColorSelect
-        value="Color"
-        tabIndex={1}
-        name="Name"
-        onChange={() => {}}
-      />)
+      <ColorSelect value="Color" tabIndex={1} name="Name" onChange={() => {}} />
+    )
   })
 })

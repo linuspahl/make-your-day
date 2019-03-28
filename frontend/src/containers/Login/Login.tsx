@@ -17,7 +17,7 @@ interface Props {
   userSession: UserSession
 }
 
-const Layout = (props: Props) => (
+const Layout = (props: Props): React.ReactElement => (
   <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
     <ContentBox>
       <FadeTransition>

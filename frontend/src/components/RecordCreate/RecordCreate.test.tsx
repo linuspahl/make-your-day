@@ -6,6 +6,10 @@ import RecordCreate from './RecordCreate'
 
 describe('RecordCreate should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<RecordCreate createNotificationBanner={() => {}}>Page content</RecordCreate>) 
+    ShallowRenderer.createRenderer().render(
+      <RecordCreate createNotificationBanner={() => {}}>
+        Page content
+      </RecordCreate>
+    )
   })
 })

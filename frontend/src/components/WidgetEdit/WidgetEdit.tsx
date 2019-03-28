@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Query, Mutation } from 'react-apollo'
-import { ApolloError } from 'apollo-boost';
+import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
@@ -26,14 +26,14 @@ interface Props extends RouteComponentProps {
 }
 
 class WidgetEdit extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { match, rootPath } = this.props
     const widgetId = extractIdFromUrl(match)
 
@@ -76,7 +76,9 @@ class WidgetEdit extends React.Component<Props> {
                           evaluations={evaluations}
                           initialData={data.getWidget}
                           rootPath={rootPath}
-                          submitAction={(variables: Widget) => updateUser({ variables })}
+                          submitAction={(variables: Widget) =>
+                            updateUser({ variables })
+                          }
                         />
                       )}
                     </Mutation>
@@ -91,7 +93,7 @@ class WidgetEdit extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted(data: { updateWidget: Widget }) {
+  private handleCompleted(data: { updateWidget: Widget }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateWidget: { title },
@@ -108,7 +110,7 @@ class WidgetEdit extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

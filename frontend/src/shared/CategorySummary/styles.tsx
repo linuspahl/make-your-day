@@ -2,9 +2,9 @@
 import styled from 'styled-components'
 
 interface CategoryProps {
-  color?: string,
-  to?: string,
-  as?: any,
+  color?: string
+  to?: string
+  as?: React.ReactNode
 }
 
 export const Category = styled.div<CategoryProps>`

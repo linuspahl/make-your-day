@@ -20,7 +20,7 @@ interface Props {
 }
 
 export default class Modal extends React.Component<Props> {
-  render() {
+  public render(): React.ReactNode {
     const { toggleAction, children, headline } = this.props
     return (
       <FadeTransition fullHeight>

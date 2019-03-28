@@ -1,6 +1,6 @@
-const common = require('./common')
-const merge = require('webpack-merge')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+import * as common from './common'
+import merge from 'webpack-merge'
+import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 
 // Webpack settings only needed for production
 //

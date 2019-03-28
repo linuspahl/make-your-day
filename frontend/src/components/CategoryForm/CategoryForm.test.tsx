@@ -6,6 +6,8 @@ import CategoryForm from './CategoryForm'
 
 describe('CategoryForm should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<CategoryForm rootPath="/" submitAction={() => {}}/>)
+    ShallowRenderer.createRenderer().render(
+      <CategoryForm rootPath="/" submitAction={() => {}} />
+    )
   })
 })

@@ -1,8 +1,8 @@
 // libraries
 import * as React from 'react'
-import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
 // compoents
+import { IconWrapper } from './styles'
 import Button from 'shared/Button/Button'
 import Icon from 'shared/Icon/Icon'
 // graphql
@@ -10,10 +10,37 @@ import { DeleteUserSession } from 'store/userSession/mutation'
 // interfaces
 import { Notification, NotificationCreate } from 'types/types'
 
-const IconWrapper = styled.div`
-  margin-left: 5px;
-  font-size: 20px;
-`
+const handleClick = (action: () => void): void => {
+  if (confirm(`Wirklich abmelden?`)) {
+    action()
+  }
+}
+
+const handleCompleted = (
+  data: { deleteUserSession: boolean },
+  createNotificationBanner: (notification: NotificationCreate) => void,
+  clearLocalStorage: () => void
+): void => {
+  if (data.deleteUserSession) {
+    clearLocalStorage()
+    // Inform user about success
+    createNotificationBanner({
+      type: 'success',
+      message: `Erfolgreich abgemeldet`,
+    })
+  }
+}
+
+const handleError = (
+  createNotificationBanner: (notification: NotificationCreate) => void,
+  clearLocalStorage: () => void
+): void => {
+  clearLocalStorage()
+  createNotificationBanner({
+    type: 'error',
+    message: 'Sitzung konnte auf dem Sevrer nicht gelöscht werden',
+  })
+}
 
 interface Props {
   userSessionId: number
@@ -21,7 +48,7 @@ interface Props {
   createNotificationBanner: (notification: Notification) => void
 }
 
-const LogoutButton = (props: Props) => {
+const LogoutButton = (props: Props): React.ReactElement => {
   const { userSessionId, clearLocalStorage, createNotificationBanner } = props
   const variables = { id: userSessionId }
 
@@ -47,35 +74,6 @@ const LogoutButton = (props: Props) => {
       )}
     </Mutation>
   )
-}
-
-const handleClick = (action: () => void) => {
-  if (confirm(`Wirklich abmelden?`)) {
-    action()
-  }
-}
-
-const handleCompleted = (
-    data: { deleteUserSession: boolean },
-    createNotificationBanner: (notification: NotificationCreate) => void,
-    clearLocalStorage: () => void
-  ) => {
-  if (data.deleteUserSession) {
-    clearLocalStorage()
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Erfolgreich abgemeldet`,
-    })
-  }
-}
-
-const handleError = (createNotificationBanner: (notification: NotificationCreate) => void, clearLocalStorage: () => void ) => {
-  clearLocalStorage()
-  createNotificationBanner({
-    type: 'error',
-    message: 'Sitzung konnte auf dem Sevrer nicht gelöscht werden',
-  })
 }
 
 export default LogoutButton

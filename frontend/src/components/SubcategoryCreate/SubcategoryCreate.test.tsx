@@ -6,6 +6,8 @@ import SubcategoryCreate from './SubcategoryCreate'
 
 describe('SubcategoryCreate should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<SubcategoryCreate createNotificationBanner={() => {}} rootPath="/" />)
+    ShallowRenderer.createRenderer().render(
+      <SubcategoryCreate createNotificationBanner={() => {}} rootPath="/" />
+    )
   })
 })

@@ -15,6 +15,7 @@ describe('PublicRoute should', () => {
         userSession={userSession}
         path="/"
         component={<div>Content</div>}
-      />)
+      />
+    )
   })
 })

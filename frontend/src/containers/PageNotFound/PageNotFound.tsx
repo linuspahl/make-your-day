@@ -23,7 +23,7 @@ export const Layout = styled.div`
   grid-template-rows: 1fr 70px 1fr;
 `
 
-const PageNotFound = (props: Props) => (
+const PageNotFound = (props: Props): React.ReactElement => (
   <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
     <ContentBox>
       <FadeTransition>

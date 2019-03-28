@@ -9,22 +9,25 @@ import Button from 'shared/Button/Button'
 import IconFields from './IconFields'
 import RecordFields from './RecordFields'
 // interfaces
-import { Form, InputEvent } from 'types/types'
-import { CategoryCreate, Category } from 'store/category/type'
+import { Form as FormType, InputEvent } from 'types/types'
+import { CategoryCreate } from 'store/category/type'
 
 const Form = styled.form`
   margin-top: 15px;
 `
 
 interface Props {
-  initialData?: CategoryCreate,
-  mode?: Form['mode']
+  initialData?: CategoryCreate
+  mode?: FormType['mode']
   rootPath: string
   submitAction: (category: CategoryCreate) => void
 }
 
-export default class CategoryForm extends React.Component<Props, CategoryCreate> {
-  constructor(props: Props) {
+export default class CategoryForm extends React.Component<
+  Props,
+  CategoryCreate
+> {
+  public constructor(props: Props) {
     super(props)
 
     // overview of all form values
@@ -41,7 +44,7 @@ export default class CategoryForm extends React.Component<Props, CategoryCreate>
     }
 
     if (props.initialData) {
-      this.state = {...this.state, ...props.initialData}
+      this.state = { ...this.state, ...props.initialData }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -49,7 +52,7 @@ export default class CategoryForm extends React.Component<Props, CategoryCreate>
     this.changeState = this.changeState.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { mode, rootPath } = this.props
     const {
       color,
@@ -93,18 +96,18 @@ export default class CategoryForm extends React.Component<Props, CategoryCreate>
     )
   }
 
-  handleSubmit(event: React.FormEvent) {
+  private handleSubmit(event: React.FormEvent): void {
     event.preventDefault()
     this.props.submitAction(this.state)
   }
 
-  handleInputChange(event: InputEvent) {
+  private handleInputChange(event: InputEvent): void {
     handleInputChange(event, this.changeState)
   }
 
   // Some options depend on the selected type
   // This means the need to set / reset the the depending values
-  changeState(updatedEntry: CategoryCreate) {
+  private changeState(updatedEntry: CategoryCreate): void {
     const stateChanges = { ...updatedEntry }
     if (updatedEntry.type === 'counter') {
       stateChanges.hasSubcategories = false

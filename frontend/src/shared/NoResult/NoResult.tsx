@@ -8,6 +8,8 @@ const Element = styled.div`
   text-align: center;
 `
 
-const NoResult = () => <Element>Kein Eintrag vorhanden</Element>
+const NoResult = (): React.ReactElement => (
+  <Element>Kein Eintrag vorhanden</Element>
+)
 
 export default NoResult

@@ -13,13 +13,15 @@ import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 // graphql
 import { GetCategoriesIcon } from 'store/category/query'
 // interfaces
-import { Category } from 'store/category/type';
+import { Category } from 'store/category/type'
 
 interface LoadingPlaceholderProps {
   context?: 'horizontal-scroll'
 }
 
-const LoadingPlaceholder = (props: LoadingPlaceholderProps) => (
+const LoadingPlaceholder = (
+  props: LoadingPlaceholderProps
+): React.ReactElement => (
   <PlaceholderGroup>
     {[...Array(6)].map((value, key) => (
       <IconWrapper key={key} context={props.context}>
@@ -31,10 +33,10 @@ const LoadingPlaceholder = (props: LoadingPlaceholderProps) => (
 
 interface Props {
   context?: 'horizontal-scroll'
-  params?: any
+  params?: { [key: string]: string }
 }
 
-const CategoryIconOverview = (props: Props) => (
+const CategoryIconOverview = (props: Props): React.ReactElement => (
   <Layout context={props.context}>
     <Query query={GetCategoriesIcon}>
       {({ loading, error, data }) => {

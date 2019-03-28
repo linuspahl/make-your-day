@@ -14,14 +14,17 @@ import colorTheme from '../../config/theme'
 import Routes from './Routes/Routes'
 import NotificationBanner from './NotificationBanner/NotificationBanner'
 // interfaces
-import { LocalStorage, LocalStorageCreate, NotificationCreate } from 'types/types';
-import { UserSession } from 'store/userSession/type';
-
+import {
+  LocalStorage,
+  LocalStorageCreate,
+  NotificationCreate,
+} from 'types/types'
+import { UserSession } from 'store/userSession/type'
 
 export default class AppRoot extends React.Component<{}, LocalStorage> {
-  notificationBanner: React.RefObject<NotificationBanner>
+  private notificationBanner: React.RefObject<NotificationBanner>
 
-  constructor(props: {}) {
+  public constructor(props: {}) {
     super(props)
 
     this.state = getLocalStorage([
@@ -41,7 +44,7 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
     this.createNotificationBanner = this.createNotificationBanner.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const {
       authToken,
       expiresAt,
@@ -88,11 +91,11 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
     )
   }
 
-  updateLocalStorage(newStore: LocalStorageCreate) {
+  private updateLocalStorage(newStore: LocalStorageCreate): void {
     updateLocalStorage(newStore, this.setState.bind(this))
   }
 
-  clearLocalStorage() {
+  private clearLocalStorage(): void {
     localStorage.clear()
     this.setState({
       authToken: null,
@@ -104,7 +107,7 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
     })
   }
 
-  createNotificationBanner(notification: NotificationCreate) {
+  private createNotificationBanner(notification: NotificationCreate): void {
     this.notificationBanner.current.addNotification(notification)
   }
 }

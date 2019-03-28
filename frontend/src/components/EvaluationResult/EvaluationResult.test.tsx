@@ -6,6 +6,8 @@ import EvaluationResult from './EvaluationResult'
 
 describe('EvaluationResult should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<EvaluationResult rootPath="/" createNotificationBanner={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <EvaluationResult rootPath="/" createNotificationBanner={() => {}} />
+    )
   })
 })

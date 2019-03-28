@@ -17,7 +17,7 @@ import ListItem from 'shared/list/ListItem/ListItem'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetCategoryPlainWithChildren } from 'store/category/query'
-import { Subcategory } from 'store/category/type';
+import { Subcategory } from 'store/category/type'
 
 const List = styled.div`
   margin-top: 25px;
@@ -28,7 +28,7 @@ interface Props extends RouteComponentProps {
 }
 
 class CategoryEdit extends React.Component<Props> {
-  render() {
+  public render(): React.ReactElement {
     const { rootPath, match } = this.props
     const categoryId = extractIdFromUrl(match)
 
@@ -50,23 +50,26 @@ class CategoryEdit extends React.Component<Props> {
                 />
               )
             if (
-              !data.getCategory || data.getCategory.subcategories.length === 0
+              !data.getCategory ||
+              data.getCategory.subcategories.length === 0
             )
               return <NoResult />
 
             return (
               <List>
-                {data.getCategory.subcategories.map((subcategory: Subcategory) => (
-                  <ListItem key={subcategory.id} spaceBetween>
-                    {subcategory.title}
-                    <ActionIcon
-                      to={`${rootPath}/${categoryId}/subcategories/${
-                        subcategory.id
-                      }/edit`}
-                      icon="edit"
-                    />
-                  </ListItem>
-                ))}
+                {data.getCategory.subcategories.map(
+                  (subcategory: Subcategory) => (
+                    <ListItem key={subcategory.id} spaceBetween>
+                      {subcategory.title}
+                      <ActionIcon
+                        to={`${rootPath}/${categoryId}/subcategories/${
+                          subcategory.id
+                        }/edit`}
+                        icon="edit"
+                      />
+                    </ListItem>
+                  )
+                )}
               </List>
             )
           }}

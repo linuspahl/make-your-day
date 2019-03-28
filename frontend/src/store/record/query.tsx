@@ -2,8 +2,16 @@
 import gql from 'graphql-tag'
 
 export const GetRecords = gql`
-  query GetRecords($createdAt: String, $createdAtFrom: String, $createdAtTo: String) {
-    getRecords(createdAt: $createdAt, createdAtFrom: $createdAtFrom, createdAtTo: $createdAtTo) {
+  query GetRecords(
+    $createdAt: String
+    $createdAtFrom: String
+    $createdAtTo: String
+  ) {
+    getRecords(
+      createdAt: $createdAt
+      createdAtFrom: $createdAtFrom
+      createdAtTo: $createdAtTo
+    ) {
       id
       title
       amount

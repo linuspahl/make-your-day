@@ -1,7 +1,7 @@
 // libraries
 import styled from 'styled-components'
 // interfaces
-import { InputEvent } from 'src/types/types'
+import { InputEvent } from 'types/types'
 
 interface ElementProps {
   disabled?: boolean

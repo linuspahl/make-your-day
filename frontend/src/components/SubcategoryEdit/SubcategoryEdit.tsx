@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Query, Mutation } from 'react-apollo'
-import { ApolloError } from 'apollo-boost';
+import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
@@ -17,7 +17,7 @@ import { UpdateSubcategory } from 'store/category/mutation'
 import { GetCategory } from 'store/category/query'
 // interface
 import { NotificationCreate } from 'types/types'
-import { Category } from 'store/category/type';
+import { Category } from 'store/category/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -25,14 +25,14 @@ interface Props extends RouteComponentProps {
 }
 
 class SubcategoryEdit extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { match, rootPath } = this.props
     const categoryId = extractIdFromUrl(match)
 
@@ -78,7 +78,7 @@ class SubcategoryEdit extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted(data: { updateCategory: Category}) {
+  private handleCompleted(data: { updateCategory: Category }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateCategory: { parentId, title },
@@ -95,7 +95,7 @@ class SubcategoryEdit extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

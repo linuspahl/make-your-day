@@ -6,6 +6,8 @@ import CategoryEdit from './CategoryEdit'
 
 describe('CategoryEdit should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<CategoryEdit rootPath="/" createNotificationBanner={() => {}} />)
+    ShallowRenderer.createRenderer().render(
+      <CategoryEdit rootPath="/" createNotificationBanner={() => {}} />
+    )
   })
 })

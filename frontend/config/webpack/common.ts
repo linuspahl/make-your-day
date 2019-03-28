@@ -1,11 +1,11 @@
 // Webpack base config
 
-const HtmlWebPackPlugin = require('html-webpack-plugin')
-const DotenvPlugin = require('dotenv-webpack')
-const CopyPlugin = require('copy-webpack-plugin')
-const moduleResolvers = require('../moduleResolvers')
-const getGqlTransformer = require('ts-transform-graphql-tag').getTransformer
-const webpack = require('webpack');
+import HtmlWebPackPlugin from 'html-webpack-plugin'
+import DotenvPlugin from 'dotenv-webpack'
+import CopyPlugin from 'copy-webpack-plugin'
+import moduleResolvers from '../moduleResolvers'
+import * as getGqlTransformer from 'ts-transform-graphql-tag'
+
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // * entry - configure entry point for babel polyfill
@@ -29,14 +29,10 @@ module.exports = {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader',
         options: {
-          getCustomTransformers: () => ({ before: [getGqlTransformer()] }),
+          getCustomTransformers: () => ({
+            before: [getGqlTransformer.getTransformer()],
+          }),
         },
-      },
-      {
-        test: /\.js$/,
-        enforce: 'pre',
-        loader: 'source-map-loader',
-        exclude: /node_modules/,
       },
       {
         test: /\.css$/,

@@ -1,11 +1,11 @@
 // libraries
 import * as React from 'react'
 // components
-import { Wrapper, Checkmark, Element} from './styles'
+import { Wrapper, Checkmark, Element } from './styles'
 import Icon from 'shared/Icon/Icon'
 // interfaces
-import { InputEvent } from 'src/types/types'
-import { MutationOptions } from 'react-apollo';
+import { InputEvent } from 'types/types'
+import { MutationOptions } from 'react-apollo'
 
 interface Props {
   disabled?: boolean
@@ -15,7 +15,7 @@ interface Props {
   value: boolean
 }
 
-const Checkbox = (props: Props) => {
+const Checkbox = (props: Props): React.ReactElement => {
   const { value, onChange, name, disabled, tabIndex } = props
   return (
     <Wrapper disabled={disabled}>

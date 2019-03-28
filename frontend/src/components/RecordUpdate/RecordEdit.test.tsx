@@ -6,6 +6,10 @@ import RecordUpdate from './RecordEdit'
 
 describe('RecordUpdate should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<RecordUpdate createNotificationBanner={() => {}}>Page content</RecordUpdate>)
+    ShallowRenderer.createRenderer().render(
+      <RecordUpdate createNotificationBanner={() => {}}>
+        Page content
+      </RecordUpdate>
+    )
   })
 })

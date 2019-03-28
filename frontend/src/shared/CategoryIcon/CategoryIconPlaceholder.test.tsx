@@ -6,6 +6,8 @@ import CategoryIconPlaceholder from './CategoryIconPlaceholder'
 
 describe('CategoryIconPlaceholder should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<CategoryIconPlaceholder size={10}/>)
+    ShallowRenderer.createRenderer().render(
+      <CategoryIconPlaceholder size={10} />
+    )
   })
 })

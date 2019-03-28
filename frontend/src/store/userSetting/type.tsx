@@ -1,5 +1,5 @@
 // interfaces
-import { Setting } from "store/setting/type";
+import { Setting } from 'store/setting/type'
 
 export interface UserSetting {
   id: number

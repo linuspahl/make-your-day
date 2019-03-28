@@ -4,11 +4,11 @@ import * as React from 'react'
 import { Element } from './styles'
 
 interface Props {
-  children: any
+  children: React.ReactNode
   columnAmount: number
 }
 
-const GridBody = (props: Props) => (
+const GridBody = (props: Props): React.ReactElement => (
   <Element columnAmount={props.columnAmount}>{props.children}</Element>
 )
 

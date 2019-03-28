@@ -18,7 +18,7 @@ import { GetEvaluation } from 'store/evaluation/query'
 import { GetCategoriesWithChildren } from 'store/category/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
-import { Evaluation, EvaluationCreate } from 'store/evaluation/type';
+import { Evaluation, EvaluationCreate } from 'store/evaluation/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -26,14 +26,14 @@ interface Props extends RouteComponentProps {
 }
 
 class EvaluationEdit extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
+  public render(): React.ReactElement {
     const { match, rootPath } = this.props
     const evaluationId = extractIdFromUrl(match)
 
@@ -76,7 +76,9 @@ class EvaluationEdit extends React.Component<Props> {
                           categories={categories}
                           initialData={data.getEvaluation}
                           rootPath={rootPath}
-                          submitAction={(variables: EvaluationCreate) => updateUser({ variables })}
+                          submitAction={(variables: EvaluationCreate) =>
+                            updateUser({ variables })
+                          }
                         />
                       )}
                     </Mutation>
@@ -91,7 +93,7 @@ class EvaluationEdit extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted(data: { updateEvaluation: Evaluation } ) {
+  private handleCompleted(data: { updateEvaluation: Evaluation }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateEvaluation: { title },
@@ -108,7 +110,7 @@ class EvaluationEdit extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

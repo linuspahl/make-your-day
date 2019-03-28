@@ -1,6 +1,5 @@
 // libraries
 import * as React from 'react'
-import * as moment from 'moment'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
 // utils
@@ -16,39 +15,29 @@ import RecordForm from 'components/RecordForm/RecordForm'
 import { CreateRecord } from 'store/record/mutation'
 import { GetCategoryWithChildren } from 'store/category/query'
 import { addRecord } from 'store/record/update'
-import { NotificationCreate } from 'types/types';
-import { ApolloError } from 'apollo-boost';
-
+import { NotificationCreate } from 'types/types'
+import { ApolloError } from 'apollo-boost'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
 }
 
 class RecordCreate extends React.Component<Props> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props)
 
     this.handleCompleted = this.handleCompleted.bind(this)
     this.handleError = this.handleError.bind(this)
   }
 
-  render() {
-    const {
-      history: {
-        location: { search },
-      },
-      match,
-    } = this.props
-    const urlParams = new URLSearchParams(search)
+  public render(): React.ReactElement {
+    const { match } = this.props
     const categoryId = extractIdFromUrl(match, 'categoryId')
 
     return (
       <FadeTransition>
         <H1 context="page">Eintrag erstellen</H1>
-        <Query
-          query={GetCategoryWithChildren}
-          variables={{ id: categoryId }}
-        >
+        <Query query={GetCategoryWithChildren} variables={{ id: categoryId }}>
           {({ loading, error, data }) => {
             if (loading) return <CenteredSpinner />
             if (error)
@@ -86,7 +75,7 @@ class RecordCreate extends React.Component<Props> {
   }
 
   // Form submit function
-  handleCompleted() {
+  private handleCompleted(): void {
     const { history, createNotificationBanner } = this.props
 
     // Inform user about success
@@ -100,7 +89,7 @@ class RecordCreate extends React.Component<Props> {
   }
 
   // Form error function
-  handleError(error: ApolloError) {
+  private handleError(error: ApolloError): void {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',

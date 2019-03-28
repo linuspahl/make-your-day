@@ -10,6 +10,8 @@ interface Props {
   title: string
 }
 
-const Icon = (props: Props) => <i className={`la la-${props.title}`} />
+const Icon = (props: Props): React.ReactElement => (
+  <i className={`la la-${props.title}`} />
+)
 
 export default Icon

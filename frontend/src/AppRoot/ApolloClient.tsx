@@ -7,9 +7,12 @@ import config from '../../config/config'
 // libraries
 import ApolloClient from 'apollo-boost'
 // interfaces
-import { NotificationCreate } from 'types/types';
+import { NotificationCreate } from 'types/types'
 
-export default (clearLocalStorage: () => void, createNotificationBanner: (notification: NotificationCreate) => void) =>
+export default (
+  clearLocalStorage: () => void,
+  createNotificationBanner: (notification: NotificationCreate) => void
+) =>
   new ApolloClient({
     uri: `${config.apiHost}:${config.apiPort}/graphql`,
     request: async operation => {

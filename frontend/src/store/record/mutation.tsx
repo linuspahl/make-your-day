@@ -3,18 +3,18 @@ import gql from 'graphql-tag'
 
 export const CreateRecord = gql`
   mutation CreateRecord(
-    $amount: String,
-    $categoryId: Int!,
-    $description: String,
-    $title: String,
-    $createdAt: String,
-    ) {
+    $amount: String
+    $categoryId: Int!
+    $description: String
+    $title: String
+    $createdAt: String
+  ) {
     createRecord(
-      amount: $amount,
-      categoryId: $categoryId,
-      description: $description,
+      amount: $amount
+      categoryId: $categoryId
+      description: $description
       title: $title
-      createdAt: $createdAt,
+      createdAt: $createdAt
     ) {
       id
       title
@@ -36,17 +36,17 @@ export const CreateRecord = gql`
 
 export const UpdateRecord = gql`
   mutation UpdateRecord(
-    $id: Int!,
-    $amount: String,
-    $categoryId: Int!,
-    $description: String,
+    $id: Int!
+    $amount: String
+    $categoryId: Int!
+    $description: String
     $title: String
   ) {
     updateRecord(
-      id: $id,
-      amount: $amount,
-      categoryId: $categoryId,
-      description: $description,
+      id: $id
+      amount: $amount
+      categoryId: $categoryId
+      description: $description
       title: $title
     ) {
       id

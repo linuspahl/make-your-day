@@ -18,7 +18,7 @@ interface Props {
   userSession: UserSession
 }
 
-const Evaluations = (props: Props) => {
+const Evaluations = (props: Props): React.ReactElement => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
@@ -26,11 +26,13 @@ const Evaluations = (props: Props) => {
         <Route
           exact
           path={rootPath}
+          public
           render={() => <EvaluationOverview rootPath={rootPath} />}
         />
         <Route
           exact
           path={`${rootPath}/create`}
+          public
           render={() => (
             <EvaluationCreate
               createNotificationBanner={createNotificationBanner}
@@ -41,6 +43,7 @@ const Evaluations = (props: Props) => {
         <Route
           exact
           path={`${rootPath}/edit/:id`}
+          public
           render={() => (
             <EvaluationEdit
               createNotificationBanner={createNotificationBanner}
@@ -51,6 +54,7 @@ const Evaluations = (props: Props) => {
         <Route
           exact
           path={`${rootPath}/view/:id`}
+          public
           render={() => (
             <EvaluationResult
               createNotificationBanner={createNotificationBanner}

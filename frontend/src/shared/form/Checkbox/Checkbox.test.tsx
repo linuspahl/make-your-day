@@ -13,6 +13,7 @@ describe('Checkbox should', () => {
         name="Name"
         disabled={false}
         tabIndex={1}
-      />)
+      />
+    )
   })
 })

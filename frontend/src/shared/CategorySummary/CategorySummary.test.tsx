@@ -8,6 +8,8 @@ import { categoryPlain } from 'store/category/fixtures'
 
 describe('CategorySummary should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<CategorySummary amount={10} category={categoryPlain} />)
+    ShallowRenderer.createRenderer().render(
+      <CategorySummary amount={10} category={categoryPlain} />
+    )
   })
 })

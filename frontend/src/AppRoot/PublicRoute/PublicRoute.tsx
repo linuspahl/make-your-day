@@ -14,7 +14,11 @@ interface Props {
   userSession?: UserSession
 }
 
-const PublicRoute = ({ component: Component, userSession, ...rest }: Props) => {
+const PublicRoute = ({
+  component: Component,
+  userSession,
+  ...rest
+}: Props): React.ReactElement => {
   // If user is already logged in and tries to access a public route,
   // we will redirect him to to root route, the dashboard
   if (userSession && userSession.token) return <Redirect to="/" />
