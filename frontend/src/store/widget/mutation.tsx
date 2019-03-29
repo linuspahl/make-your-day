@@ -19,6 +19,7 @@ export const CreateWidget = gql`
       id
       title
       position
+      type
     }
   }
 `

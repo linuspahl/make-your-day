@@ -50,7 +50,6 @@ export const GetWidgetsOverview = gql`
       id
       title
       type
-      value
       position
     }
   }

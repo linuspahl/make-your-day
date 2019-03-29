@@ -29,53 +29,59 @@ interface Props {
   userSettings: { [key: string]: UserSetting }
 }
 
-const UserSettingsOverview = (props: Props): React.ReactElement => (
-  <FadeTransition>
-    <H1 context="page">Einstellungen</H1>
-    <Query query={GetSettings}>
-      {({ loading, error, data }) => {
-        if (loading) return <CenteredSpinner />
-        if (error)
-          return (
-            <ErrorMessage
-              error={error}
-              message="Angemeldete Geräte konnten nicht geladen werden"
-            />
-          )
-        // We are getting the userSettings as props
-        // Because we are just using booleans for the settings value so far, we are able to use checkboxes only
-        return data.getSettings.map((setting: Setting) => {
-          const isSelected = props.userSettings[setting.type]
-          return (
-            <Row key={setting.id}>
-              {setting.title}{' '}
-              {isSelected ? (
-                <UserSettingDelete
-                  setting={setting}
-                  updateLocalStorage={props.updateLocalStorage}
+class UserSettingsOverview extends React.Component<Props> {
+  public render(): React.ReactElement {
+    return (
+      <FadeTransition>
+        <H1 context="page">Einstellungen</H1>
+        <Query query={GetSettings}>
+          {({ loading, error, data }) => {
+            if (loading) return <CenteredSpinner />
+            if (error)
+              return (
+                <ErrorMessage
+                  error={error}
+                  message="Angemeldete Geräte konnten nicht geladen werden"
                 />
-              ) : (
-                <UserSettingCreate
-                  setting={setting}
-                  updateLocalStorage={props.updateLocalStorage}
-                />
-              )}
-            </Row>
-          )
-        })
-      }}
-    </Query>
-    <Row>
-      <Link to={`${props.rootPath}/sessions`}>Angmeldete Geräte verwalten</Link>
-    </Row>
-    <ActionRow>
-      <LogoutButton
-        clearLocalStorage={props.clearLocalStorage}
-        createNotificationBanner={props.createNotificationBanner}
-        userSessionId={props.userSession.id}
-      />
-    </ActionRow>
-  </FadeTransition>
-)
+              )
+            // We are getting the userSettings as props
+            // Because we are just using booleans for the settings value so far, we are able to use checkboxes only
+            return data.getSettings.map((setting: Setting) => {
+              const isSelected = this.props.userSettings[setting.type]
+              return (
+                <Row key={setting.id}>
+                  {setting.title}{' '}
+                  {isSelected ? (
+                    <UserSettingDelete
+                      setting={setting}
+                      updateLocalStorage={this.props.updateLocalStorage}
+                    />
+                  ) : (
+                    <UserSettingCreate
+                      setting={setting}
+                      updateLocalStorage={this.props.updateLocalStorage}
+                    />
+                  )}
+                </Row>
+              )
+            })
+          }}
+        </Query>
+        <Row>
+          <Link to={`${this.props.rootPath}/sessions`}>
+            Angmeldete Geräte verwalten
+          </Link>
+        </Row>
+        <ActionRow>
+          <LogoutButton
+            clearLocalStorage={this.props.clearLocalStorage}
+            createNotificationBanner={this.props.createNotificationBanner}
+            userSessionId={this.props.userSession.id}
+          />
+        </ActionRow>
+      </FadeTransition>
+    )
+  }
+}
 
 export default UserSettingsOverview

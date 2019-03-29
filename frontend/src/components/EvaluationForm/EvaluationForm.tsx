@@ -76,7 +76,7 @@ export default class EvaluationForm extends React.Component<
     this.state = {
       title: null,
       type: null,
-      groupSubcategories: null,
+      groupSubcategories: false,
       period: null,
       categoryId: null,
     }

@@ -2,7 +2,7 @@
 import { DataProxy } from 'apollo-cache'
 import { FetchResult } from 'react-apollo'
 // graphql
-import { GetWidgets } from 'store/widget/query'
+import { GetWidgets, GetWidgetsOverview } from 'store/widget/query'
 import { Widget } from 'store/widget/type'
 
 export const addWidget = (cache: DataProxy, result: FetchResult): void => {
@@ -11,7 +11,7 @@ export const addWidget = (cache: DataProxy, result: FetchResult): void => {
   try {
     const widgets: {
       getWidgets: Widget[]
-    } = cache.readQuery({ query: GetWidgets })
+    } = cache.readQuery({ query: GetWidgetsOverview })
 
     const {
       data: { createWidget },
@@ -34,15 +34,14 @@ export const deleteWidget = (
   const {
     data: { deleteWidget },
   } = result
-
   try {
     if (deleteWidget) {
       const widgetsQuery: {
         getWidgets: Widget[]
-      } = cache.readQuery({ query: GetWidgets })
+      } = cache.readQuery({ query: GetWidgetsOverview })
 
-      const updatedWidgets = widgetsQuery.getWidgets.filter(widgets => {
-        return widgets.id !== variables.id
+      const updatedWidgets = widgetsQuery.getWidgets.filter(widget => {
+        return widget.id !== variables.id
       })
 
       cache.writeQuery({
