@@ -8,17 +8,17 @@ import Widget from 'components/Widget/Widget'
 import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
 import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
 import WidgetPlaceholder from '../Widget/WidgetPlaceholder'
-import { Layout, WidgetLayout } from './styles'
+import { Layout, WidgetLayout, NoResultBox, PlaceholderWrapper } from './styles'
 // graphql
 import { NotificationCreate } from 'types/types'
 import { Widget as WidgetType } from 'store/widget/type'
 
 const LoadingPlaceholder = (): React.ReactElement => (
-  <WidgetLayout>
+  <PlaceholderWrapper>
     <PlaceholderGroup>
       <WidgetPlaceholder />
     </PlaceholderGroup>
-  </WidgetLayout>
+  </PlaceholderWrapper>
 )
 
 interface Props {
@@ -32,7 +32,14 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
 
   if (loading) return <LoadingPlaceholder />
 
-  if (!widgets || widgets.length === 0) return <NoResult />
+  if (!widgets || widgets.length === 0)
+    return (
+      <PlaceholderWrapper>
+        <NoResultBox>
+          <NoResult />
+        </NoResultBox>
+      </PlaceholderWrapper>
+    )
 
   return (
     <Layout>

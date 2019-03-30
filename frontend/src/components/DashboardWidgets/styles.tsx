@@ -1,5 +1,7 @@
 // libraries
 import styled from 'styled-components'
+// components
+import ContentBox from 'shared/ContentBox/ContentBox'
 
 export const Layout = styled.div`
   width: 100%;
@@ -24,4 +26,17 @@ export const WidgetLayout = styled.div`
     margin-bottom: 0;
     margin-right: 0;
   }
+`
+
+export const PlaceholderWrapper = styled.div`
+  padding: 20px;
+  width: 100%;
+`
+
+export const NoResultBox = styled(ContentBox)`
+  height: 100%;
+  max-width: 100%;
+
+  display: flex;
+  align-items: center;
 `
