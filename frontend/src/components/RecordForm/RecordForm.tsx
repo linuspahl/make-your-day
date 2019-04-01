@@ -1,9 +1,9 @@
 // libraries
 import * as React from 'react'
-import styled from 'styled-components'
 // utils
 import { handleInputChange } from 'utils/utils'
 // components
+import { Form, CategoryIconWrapper, Category } from './styles'
 import Row from 'shared/form/Row/Row'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Input from 'shared/form/Input/Input'
@@ -15,10 +15,6 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import { CategoryFull } from 'store/category/type'
 import { Form as FormType, InputEvent, SelectOption } from 'types/types'
 import { RecordCreate } from 'store/record/type'
-
-const Form = styled.form`
-  margin-top: 15px;
-`
 
 interface Props {
   category: CategoryFull
@@ -117,10 +113,12 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
 
     return (
       <Form onSubmit={event => this.handleSubmit(event)}>
-        <Row>
-          Kategorie
-          <CategoryIcon icon={icon} color={color} title={categoryTitle} />
-        </Row>
+        <Category>
+          <CategoryIconWrapper>
+            <CategoryIcon icon={icon} color={color} title={categoryTitle} />
+          </CategoryIconWrapper>
+          {categoryTitle}
+        </Category>
         {hasTitle && (
           <Row>
             Titel

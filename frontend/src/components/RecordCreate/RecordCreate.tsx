@@ -36,7 +36,7 @@ class RecordCreate extends React.Component<Props> {
 
     return (
       <FadeTransition>
-        <H1 context="page">Eintrag erstellen</H1>
+        <H1>Eintrag erstellen</H1>
         <Query query={GetCategoryWithChildren} variables={{ id: categoryId }}>
           {({ loading, error, data }) => {
             if (loading) return <CenteredSpinner />
