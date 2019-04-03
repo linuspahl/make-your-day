@@ -73,21 +73,27 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
       this.createNotificationBanner
     )
 
+    // Beside the alwaysStrict setting in the tsconfig, we are using the
+    // React.StrictMode component for highlighting potential react specific problems
+    // with e.g. the lifecycle of a component.
+    // For more info have a look at: https://reactjs.org/docs/strict-mode.html
     return (
-      <ApolloProvider client={apolloClient}>
-        <ThemeProvider theme={colorTheme(userSettings)}>
-          <React.Fragment>
-            <NotificationBanner ref={this.notificationBanner} />
-            <Routes
-              clearLocalStorage={this.clearLocalStorage}
-              createNotificationBanner={this.createNotificationBanner}
-              userSession={userSession}
-              updateLocalStorage={this.updateLocalStorage}
-              userSettings={userSettings}
-            />
-          </React.Fragment>
-        </ThemeProvider>
-      </ApolloProvider>
+      <React.StrictMode>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider theme={colorTheme(userSettings)}>
+            <React.Fragment>
+              <NotificationBanner ref={this.notificationBanner} />
+              <Routes
+                clearLocalStorage={this.clearLocalStorage}
+                createNotificationBanner={this.createNotificationBanner}
+                userSession={userSession}
+                updateLocalStorage={this.updateLocalStorage}
+                userSettings={userSettings}
+              />
+            </React.Fragment>
+          </ThemeProvider>
+        </ApolloProvider>
+      </React.StrictMode>
     )
   }
 

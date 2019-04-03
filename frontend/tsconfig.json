@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
+    "alwaysStrict": true,
     "sourceMap": true,
     "noImplicitAny": true,
     "target": "es5",
