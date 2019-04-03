@@ -1,4 +1,5 @@
-// Apollo client setup
+// Apollo client setup, will handle all api data fetching.
+// It's the counterpart for the backend apollo server.
 
 // We need to define a fetch polyfill to test the apollo client correctly
 import 'cross-fetch/polyfill'
@@ -24,17 +25,20 @@ export default (
       })
     },
     onError: error => {
-      // On auth error, e.g. when session expires, logout user
+      // When an auth error occures, e.g. when session expires,
+      // we want to logout user
       if (error && error.graphQLErrors) {
         const authErrors = error.graphQLErrors.filter(
           error => error.extensions.code === 'UNAUTHENTICATED'
         )
         if (authErrors && authErrors.length !== 0) {
+          // First we clear the localStorage / userSession
+          clearLocalStorage()
+          // Then we notify the user
           createNotificationBanner({
             type: 'error',
             message: 'Die Sitzung ist nicht mehr gültig',
           })
-          clearLocalStorage()
         }
       }
     },

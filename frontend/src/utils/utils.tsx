@@ -1,9 +1,10 @@
 // Utility file for all multiplate needed helper functions
 
 import config from '../../config/config'
+// libraries
+import { ApolloError } from 'apollo-boost'
 // interfaces
 import { LocalStorageCreate, InputEvent, LocalStorage } from 'types/types'
-import { ApolloError } from 'apollo-boost'
 
 // This function will merge two objects and overwrite
 // doublicated values with the value of the target object

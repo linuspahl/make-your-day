@@ -3,11 +3,11 @@
 // like the theme and apollo provider and the routes
 
 // libraries
-import * as React from 'react'
 import createApolloClient from './ApolloClient'
-import { ThemeProvider } from 'styled-components'
+import * as React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { getLocalStorage, updateLocalStorage } from 'utils/utils'
+import { ThemeProvider } from 'styled-components'
 // theme
 import colorTheme from '../../config/theme'
 // components
@@ -27,6 +27,10 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
   public constructor(props: {}) {
     super(props)
 
+    // The AppRoot state is a representation of localStorage.
+    // We are using the getLocalStorage utility function to
+    // format the localStorage values (only stores strings),
+    // before storing them in the state
     this.state = getLocalStorage([
       'authToken',
       'expiresAt',
@@ -55,6 +59,10 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
       userSessionId,
     } = this.state
 
+    // Since the localStorage only can store plain stings we can't directly store the
+    // UserSession object we receive on login.
+    // We could stringify the whole object, but prefer to just store the values
+    // and recreate the UserSession object
     const userSession: UserSession = {
       userId,
       expiresAt,
@@ -62,12 +70,19 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
       id: userSessionId,
     }
 
+    // On login we also receive the userSettings.
+    // They are needed for the theme, e.g. when a user is using the nightMode,
+    // the theme will return different colors.
+    // And because we already fetched them, we are using them on the settings page
+    // to determine if an options is selected.
     const userSettings = {
       nightMode,
       leftHandMode,
       showAppBgImage,
     }
 
+    // Finally we are creating the apollo client, needed to comunicate
+    // with our backend apollo server.
     const apolloClient = createApolloClient(
       this.clearLocalStorage,
       this.createNotificationBanner
@@ -82,6 +97,10 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={colorTheme(userSettings)}>
             <React.Fragment>
+              {/*
+                We are using the NotificationBanner above all routes,
+                this way the notifications won't unmount on route changes
+              */}
               <NotificationBanner ref={this.notificationBanner} />
               <Routes
                 clearLocalStorage={this.clearLocalStorage}
@@ -97,10 +116,15 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
     )
   }
 
+  // updateLocalStorage - Needed to update the localStorage,
+  // e.g. when user logs in / out
   private updateLocalStorage(newStore: LocalStorageCreate): void {
     updateLocalStorage(newStore, this.setState.bind(this))
   }
 
+  // clearLocalStorage - Will clear the localStore.
+  // Since the AppRoot state is a representation of the localStorage,
+  // we need to clear it as well.
   private clearLocalStorage(): void {
     localStorage.clear()
     this.setState({
@@ -113,6 +137,8 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
     })
   }
 
+  // createNotificationBanner - Will be used in the children components.
+  // Uses the this.notificationBanner reference to create a new banner
   private createNotificationBanner(notification: NotificationCreate): void {
     this.notificationBanner.current.addNotification(notification)
   }

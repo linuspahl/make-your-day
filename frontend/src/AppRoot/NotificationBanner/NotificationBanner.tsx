@@ -1,3 +1,8 @@
+// "Root" component to create a page independent notification banner
+// This componnents gets included as a reference in the AppRoot.
+// With the reference, we call the addNotification function, to trigger a new notification,
+// outside of this component
+
 // libraries
 import * as React from 'react'
 // components
@@ -11,8 +16,9 @@ interface State {
   notification?: Notification
 }
 
-export default class GlobalNotification extends React.Component<{}, State> {
+export default class NotificationBanner extends React.Component<{}, State> {
   private closeCountDown?: number
+  private visibilityDuration: number
 
   public constructor(props: {}) {
     super(props)
@@ -21,11 +27,14 @@ export default class GlobalNotification extends React.Component<{}, State> {
       notification: null,
     }
 
+    // Duration a new notification is visible in ms
+    this.visibilityDuration = 6000
+
     this.closeCountDown = null
 
-    this.startCloseCountdown = this.startCloseCountdown.bind(this)
+    this.initiateCloseTimeout = this.initiateCloseTimeout.bind(this)
     this.addNotification = this.addNotification.bind(this)
-    this.removeNotification = this.removeNotification.bind(this)
+    this.closeNotification = this.closeNotification.bind(this)
   }
 
   public render(): React.ReactElement {
@@ -41,7 +50,7 @@ export default class GlobalNotification extends React.Component<{}, State> {
             durationAnimation={durationAnimation}
           >
             {notification.message}
-            <CircleTimer clickAction={() => this.removeNotification()}>
+            <CircleTimer clickAction={() => this.closeNotification()}>
               <CloseIcon />
             </CircleTimer>
           </Alert>
@@ -50,19 +59,22 @@ export default class GlobalNotification extends React.Component<{}, State> {
     )
   }
 
-  private startCloseCountdown(): void {
-    // clear current timeout
+  // initiateCloseTimeout - Needed to trigger the banner closing after X seconds
+  private initiateCloseTimeout(): void {
+    // If existing, clear current timeout
     if (this.closeCountDown) {
       clearTimeout(this.closeCountDown)
     }
+    // Create timeout to trigger the close
     this.closeCountDown = window.setTimeout(
-      () => this.removeNotification(),
-      6000
+      () => this.closeNotification(),
+      this.visibilityDuration
     )
   }
 
+  // addNotification - The function to add a new notification
   public addNotification(data: NotificationCreate): void {
-    this.startCloseCountdown()
+    this.initiateCloseTimeout()
     // set a new or overwrite the current notification
     this.setState({
       notification: {
@@ -73,8 +85,11 @@ export default class GlobalNotification extends React.Component<{}, State> {
     })
   }
 
-  private removeNotification(): void {
+  // closeNotification - Will close the notification
+  private closeNotification(): void {
+    // Deletes the state notification entry.
     this.setState({ notification: null })
+    // And clears the timeout, that triggered this close action
     if (this.closeCountDown) {
       clearTimeout(this.closeCountDown)
     }
