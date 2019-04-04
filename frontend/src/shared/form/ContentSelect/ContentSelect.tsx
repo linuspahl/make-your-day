@@ -5,6 +5,8 @@
 
 // libraries
 import * as React from 'react'
+// utils
+import { sortBy } from 'lodash'
 // components
 import Icon from 'shared/Icon/Icon'
 import Modal from 'shared/Modal/Modal'
@@ -36,11 +38,17 @@ interface State {
 }
 
 export default class ContentSelect extends React.Component<Props, State> {
+  private sortedOptions: SelectOption[]
+
   public constructor(props: Props) {
     super(props)
 
     // isOpen represents if the select dropdown is open
     this.state = { isOpen: false }
+
+    // Since we need to sort the options and don't want to do it multiple times
+    // we store them in a class variable
+    this.sortedOptions = sortBy(props.options, 'title')
 
     this.toggleSelect = this.toggleSelect.bind(this)
     this.changeValue = this.changeValue.bind(this)
@@ -50,19 +58,11 @@ export default class ContentSelect extends React.Component<Props, State> {
   }
 
   public render(): React.ReactElement {
-    const {
-      title,
-      value,
-      renderPreview,
-      options,
-      tabIndex,
-      name,
-      disabled,
-    } = this.props
+    const { title, value, renderPreview, tabIndex, name, disabled } = this.props
     const { isOpen } = this.state
     const hasPreview = typeof renderPreview == 'function'
-    const currentOption = options.find(option => option.value === value)
-
+    const sortedOptions = this.sortedOptions
+    const currentOption = sortedOptions.find(option => option.value === value)
     return (
       <Layout>
         <Select
@@ -80,7 +80,7 @@ export default class ContentSelect extends React.Component<Props, State> {
         {isOpen && (
           <Modal headline={title} toggleAction={this.toggleSelect}>
             <Options>
-              {options.map(option => {
+              {sortedOptions.map(option => {
                 const isSelected = option.value === value
 
                 return (
@@ -122,9 +122,10 @@ export default class ContentSelect extends React.Component<Props, State> {
   // The only litte difference, the user is able to close the dropdown with the space key
   // This is not realy a disadvantage for the user and makes the code smaller
   private detectKeydown(event: KeyboardEvent): void {
-    const { options, value } = this.props
+    const { value } = this.props
     const { isOpen } = this.state
     const { keyCode } = event
+    const sortedOptions = this.sortedOptions
 
     // Disable tab navigation, when select is open and close select instead
     if (keyCode === 9 && isOpen) {
@@ -146,11 +147,13 @@ export default class ContentSelect extends React.Component<Props, State> {
       event.preventDefault()
 
       // Get current option index
-      const currentIndex = options.findIndex(option => option.value === value)
+      const currentIndex = sortedOptions.findIndex(
+        option => option.value === value
+      )
 
       // On arrow down select next option
       if (keyCode === 40) {
-        const nextOption = options[currentIndex + 1]
+        const nextOption = sortedOptions[currentIndex + 1]
         if (nextOption) {
           this.changeValue(nextOption.value)
         }
@@ -158,7 +161,7 @@ export default class ContentSelect extends React.Component<Props, State> {
 
       // On arrow up select previous option
       if (keyCode === 38) {
-        const prevOption = options[currentIndex - 1]
+        const prevOption = sortedOptions[currentIndex - 1]
         if (prevOption) {
           this.changeValue(prevOption.value)
         }
