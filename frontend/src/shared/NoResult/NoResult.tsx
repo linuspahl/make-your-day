@@ -5,6 +5,9 @@ import styled from 'styled-components'
 const Element = styled.div`
   width: 100%;
 
+  // hyphens works not in all browsers https://caniuse.com/#search=hyphens
+  hyphens: auto;
+  word-break: break-word;
   text-align: center;
 `
 
