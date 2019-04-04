@@ -21,6 +21,7 @@ export const Layout = styled.div<LayoutProps>`
       border-top: 1px solid ${props.theme.border};
       border-bottom: 1px solid ${props.theme.border};
 
+      box-shadow: ${props.theme.boxShadow};
       background-color: ${props.theme.contentBoxBg};
       overflow-x: auto;
       overflow-y: hidden;

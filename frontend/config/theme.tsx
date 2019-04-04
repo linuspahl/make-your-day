@@ -19,6 +19,8 @@ const defaultTheme = {
   text: '#545454',
   // Other
   border: '#ccc',
+  // box shadow inspired by google material design
+  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
   contentBoxBg: '#fff',
   white: '#fff',
   active: 'rgba(0, 0, 0, 0.1)',

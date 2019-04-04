@@ -7,7 +7,8 @@ export const Element = styled.div`
 
   padding: 40px 20px 40px 20px;
   margin: auto;
-  border: 1px solid ${props => props.theme.border};
+  border-radius: 2px;
 
+  box-shadow: ${props => props.theme.boxShadow};
   background-color: ${props => props.theme.contentBoxBg};
 `
