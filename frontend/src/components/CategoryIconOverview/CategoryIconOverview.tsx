@@ -2,8 +2,9 @@
 import * as React from 'react'
 import { Query } from 'react-apollo'
 import { generateUrlParams } from 'utils/utils'
+import { Link } from 'react-router-dom'
 // styles
-import { Layout, IconWrapper } from './styles'
+import { Layout, IconWrapper, NoResultWrapper } from './styles'
 // components
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 import CategoryIconPlaceholder from 'shared/CategoryIcon/CategoryIconPlaceholder'
@@ -50,7 +51,14 @@ const CategoryIconOverview = (props: Props): React.ReactElement => (
             />
           )
 
-        if (data.getCategories.length === 0) return <NoResult />
+        if (data.getCategories.length === 0)
+          return (
+            <NoResultWrapper>
+              <Link to="/categories/create">
+                <NoResult message="Noch keine Kategorie vorhanden" />
+              </Link>
+            </NoResultWrapper>
+          )
 
         const urlParams = generateUrlParams(props.params)
         return data.getCategories.map((category: Category) => {

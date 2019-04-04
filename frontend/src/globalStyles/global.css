@@ -32,6 +32,15 @@ li {
 
 a {
   text-decoration: none;
+}
+/*
+  Since we often use the react-router-dom Link component,
+  but don't want to color the inner text (e.g. for the Navigation)
+  you can add the noLinkColor className to use the default text color.
+  So far, this is the only time we are using the className prop.
+  But it's the easiest way to deal with the described conditions
+*/
+a.noLinkColor {
   color: inherit;
 }
 

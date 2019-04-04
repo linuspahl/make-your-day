@@ -1,5 +1,7 @@
 // libraries
 import styled from 'styled-components'
+// components
+import ContentBox from 'shared/ContentBox/ContentBox'
 
 interface LayoutProps {
   context?: 'horizontal-scroll'
@@ -28,7 +30,7 @@ export const Layout = styled.div<LayoutProps>`
         props.theme.mediaQuery.tablet
       }) and (orientation: landscape) {
         flex-direction: column;
-        
+
         height: auto;
 
         border-top: 0;
@@ -74,4 +76,13 @@ export const IconWrapper = styled.div<IconWrapperProps>`
       : `
         margin-bottom: 5px;
       `}
+`
+
+export const NoResultWrapper = styled.div`
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

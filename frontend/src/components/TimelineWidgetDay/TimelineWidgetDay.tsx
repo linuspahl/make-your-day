@@ -21,7 +21,7 @@ const TimelineWidgetDay = (props: Props): React.ReactElement => {
   const { categories, date } = props
   return (
     <Day key={date}>
-      <Link to={`/timeline/${date}`} />
+      <Link to={`/timeline/${date}`} className="noTextColor" />
       <Shortcut>{moment(date).format('dd')}</Shortcut>
       <Categories>
         {Boolean(categories) &&

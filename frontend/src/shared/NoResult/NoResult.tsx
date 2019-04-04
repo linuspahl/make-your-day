@@ -8,8 +8,12 @@ const Element = styled.div`
   text-align: center;
 `
 
-const NoResult = (): React.ReactElement => (
-  <Element>Kein Eintrag vorhanden</Element>
+interface Props {
+  message?: string
+}
+
+const NoResult = (props: Props): React.ReactElement => (
+  <Element>{props.message || 'Kein Eintrag vorhanden'}</Element>
 )
 
 export default NoResult

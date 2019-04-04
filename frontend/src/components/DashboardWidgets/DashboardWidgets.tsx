@@ -1,6 +1,7 @@
 // libraries
 import * as React from 'react'
 import { sortBy } from 'lodash'
+import { Link } from 'react-router-dom'
 // components
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import NoResult from 'shared/NoResult/NoResult'
@@ -8,7 +9,12 @@ import Widget from 'components/Widget/Widget'
 import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
 import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
 import WidgetPlaceholder from '../Widget/WidgetPlaceholder'
-import { Layout, WidgetLayout, NoResultBox, PlaceholderWrapper } from './styles'
+import {
+  Layout,
+  WidgetLayout,
+  NoResultWrapper,
+  PlaceholderWrapper,
+} from './styles'
 // graphql
 import { NotificationCreate } from 'types/types'
 import { Widget as WidgetType } from 'store/widget/type'
@@ -35,9 +41,11 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
   if (!widgets || widgets.length === 0)
     return (
       <PlaceholderWrapper>
-        <NoResultBox>
-          <NoResult />
-        </NoResultBox>
+        <NoResultWrapper>
+          <Link to="/widgets/create" className="defaultColor">
+            <NoResult message="Noch kein Widget vorhanden" />
+          </Link>
+        </NoResultWrapper>
       </PlaceholderWrapper>
     )
 
