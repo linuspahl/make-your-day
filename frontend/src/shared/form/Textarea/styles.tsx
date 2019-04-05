@@ -21,7 +21,7 @@ export const Element = styled.textarea<ElementProps>`
 
   padding: 10px;
   margin-top: 3px;
-  border-radius: 0;
+  border-radius: inherit;
   border: 1px solid ${props => props.theme.border};
 
   background-color: transparent;
