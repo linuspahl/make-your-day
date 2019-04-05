@@ -41,7 +41,7 @@ class RecordEdit extends React.Component<Props> {
 
     return (
       <FadeTransition>
-        <H1 context="page">Eintrag bearbeiten</H1>
+        <H1>Eintrag bearbeiten</H1>
         <Query query={GetCategoryWithChildren} variables={{ id: categoryId }}>
           {({ loading, error, data }) => {
             if (loading) return <CenteredSpinner />
