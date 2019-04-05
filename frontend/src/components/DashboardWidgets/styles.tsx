@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 // components
 import ContentBox from 'shared/ContentBox/ContentBox'
+import Box from 'shared/Box/Box'
 
 export const Layout = styled.div`
   width: 100%;
@@ -16,11 +17,9 @@ export const Layout = styled.div`
   white-space: nowrap;
 `
 
-export const WidgetLayout = styled.div`
+export const WidgetLayout = styled(Box)`
   display: inline-block;
   vertical-align: top;
-
-  overflow-y auto;
 
   width: 100%;
   height: 100%;

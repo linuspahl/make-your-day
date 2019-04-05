@@ -3,27 +3,28 @@ import * as React from 'react'
 import styled from 'styled-components'
 // components
 import EvaluationChart from 'components/EvaluationChart/EvaluationChart'
-import H1 from 'shared/H1/H1'
+
 // interfaces
 import { Evaluation } from 'store/evaluation/type'
 
-const Layout = styled.div`
+const Outer = styled.div`
   width: 100%;
   height: 100%;
+  overflow-y: auto;
 
-  // If the display: flex prop gets unnecessary,
-  // you can delete the wrapping div of this components.
-  // See the comment in the render part
+  padding: 20px;
+`
+
+const Layout = styled.div`
+  height: 100%;
+  width: 100%;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  padding: 20px;
-  border: 1px solid ${props => props.theme.border};
-  border-radius: 0;
-
-  background-color: ${props => props.theme.contentBoxBg};
-
+  // Workaroung to prevent horizontal scrolling,
+  // if chart stops resizing on small screens
   canvas {
     max-width: 100%;
   }
@@ -37,15 +38,12 @@ export default class EvaluationWidget extends React.Component<Props> {
   public render(): React.ReactElement {
     const { evaluation } = this.props
 
-    // The wrapping div is only needed, because the Layout Component would ignore it's parents padding,
-    // due to the `display: flex` styling
     return (
-      <div>
+      <Outer>
         <Layout>
-          <H1 context="page">{evaluation.title}</H1>
           <EvaluationChart evaluation={evaluation} />
         </Layout>
-      </div>
+      </Outer>
     )
   }
 }

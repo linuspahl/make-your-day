@@ -7,9 +7,6 @@ export const Outer = styled.div`
 
   height: 100%;
 
-  border: 1px solid ${props => props.theme.border};
-  background-color: ${props => props.theme.contentBoxBg};
-
   overflow-y: auto;
 `
 
