@@ -11,6 +11,9 @@ const Layout = styled.div`
   width: 100%;
   height: 100%;
 
+  // If the display: flex prop gets unnecessary,
+  // you can delete the wrapping div of this components.
+  // See the comment in the render part
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,11 +37,15 @@ export default class EvaluationWidget extends React.Component<Props> {
   public render(): React.ReactElement {
     const { evaluation } = this.props
 
+    // The wrapping div is only needed, because the Layout Component would ignore it's parents padding,
+    // due to the `display: flex` styling
     return (
-      <Layout>
-        <H1 context="page">{evaluation.title}</H1>
-        <EvaluationChart evaluation={evaluation} />
-      </Layout>
+      <div>
+        <Layout>
+          <H1 context="page">{evaluation.title}</H1>
+          <EvaluationChart evaluation={evaluation} />
+        </Layout>
+      </div>
     )
   }
 }

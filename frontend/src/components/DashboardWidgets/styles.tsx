@@ -6,6 +6,9 @@ import ContentBox from 'shared/ContentBox/ContentBox'
 export const Layout = styled.div`
   width: 100%;
   height: 100%;
+  // The max-width is needed to make sure, the Widget has always the correct width.
+  // max-width: 100% could lead to a higher width then the "100%" we want.
+  max-width: 100vw;
 
   padding: 20px;
 
@@ -16,6 +19,8 @@ export const Layout = styled.div`
 export const WidgetLayout = styled.div`
   display: inline-block;
   vertical-align: top;
+
+  overflow-y auto;
 
   width: 100%;
   height: 100%;
