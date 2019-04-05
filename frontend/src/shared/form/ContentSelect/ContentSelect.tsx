@@ -23,6 +23,7 @@ import {
 } from './styles'
 
 interface Props {
+  allowEmpty?: boolean
   disabled?: boolean
   name: string
   onChange: (event: InputEvent) => void
@@ -48,8 +49,9 @@ export default class ContentSelect extends React.Component<Props, State> {
 
     // Since we need to sort the options and don't want to do it multiple times
     // we store them in a class variable
-    this.sortedOptions = sortBy(props.options, 'title')
+    this.sortedOptions = this.prepareOptions()
 
+    this.prepareOptions = this.prepareOptions.bind(this)
     this.toggleSelect = this.toggleSelect.bind(this)
     this.changeValue = this.changeValue.bind(this)
     this.detectKeydown = this.detectKeydown.bind(this)
@@ -183,5 +185,17 @@ export default class ContentSelect extends React.Component<Props, State> {
   private onOptionClick(value: string | number): void {
     this.changeValue(value)
     this.toggleSelect()
+  }
+
+  private prepareOptions(): SelectOption[] {
+    let sortedProps = sortBy(this.props.options, 'title')
+
+    // If no selection is possible, we add this option in this step.
+    // It's important to do this after the sorting, to show this option at top.
+    if (this.props.allowEmpty) {
+      sortedProps = [{ value: null, title: 'Keine Auswahl' }, ...sortedProps]
+    }
+
+    return sortedProps
   }
 }

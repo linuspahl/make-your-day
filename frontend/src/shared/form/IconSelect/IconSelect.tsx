@@ -21,6 +21,7 @@ const IconSelect = (props: Props): React.ReactElement => {
 
   return (
     <ContentSelect
+      allowEmpty
       disabled={disabled}
       name={name}
       onChange={onChange}

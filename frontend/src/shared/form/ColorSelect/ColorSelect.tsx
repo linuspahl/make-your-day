@@ -14,16 +14,12 @@ const SmallColorPreview = styled.div`
 
   background-color: ${props => props.color};
 `
-const prepareOptions = (): SelectOption[] => {
-  // Make "no selection" selectable
-  const noSelection: SelectOption = { value: null, title: 'Keine Auswahl' }
-  // Create select options based on theme colors
-  const colorsOptions: SelectOption[] = Object.keys(categoryColors).map(key => {
+
+// Create select options based on theme colors
+const prepareOptions = (): SelectOption[] =>
+  Object.keys(categoryColors).map(key => {
     return { value: key, title: key }
   })
-  colorsOptions.unshift(noSelection)
-  return colorsOptions
-}
 
 interface Props {
   name: string
@@ -38,6 +34,7 @@ const ColorSelect = (props: Props): React.ReactElement => {
 
   return (
     <ContentSelect
+      allowEmpty
       tabIndex={tabIndex}
       value={value}
       renderPreview={(option: SelectOption) => (
