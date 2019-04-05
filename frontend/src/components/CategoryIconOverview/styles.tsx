@@ -1,13 +1,13 @@
 // libraries
 import styled from 'styled-components'
 // components
-import ContentBox from 'shared/ContentBox/ContentBox'
+import Box from 'shared/Box/Box'
 
 interface LayoutProps {
   context?: 'horizontal-scroll'
 }
 
-export const Layout = styled.div<LayoutProps>`
+export const Layout = styled(Box)<LayoutProps>`
   padding: 10px 0 5px 0;
   ${props =>
     props.context === 'horizontal-scroll'
@@ -18,11 +18,11 @@ export const Layout = styled.div<LayoutProps>`
       height: 100%;
       padding: 10px 20px;
 
-      box-shadow: ${props.theme.boxShadow};
       background-color: ${props.theme.contentBoxBg};
       overflow-x: auto;
       overflow-y: hidden;
       white-space: nowrap;
+      z-index: ${props.theme.layerIndex.protrudeContent}
 
       @media (min-width: ${
         props.theme.mediaQuery.tablet
@@ -30,11 +30,6 @@ export const Layout = styled.div<LayoutProps>`
         flex-direction: column;
 
         height: auto;
-
-        border-top: 0;
-        border-bottom: 0;
-        border-left: 1px solid ${props.theme.border};
-        border-right: 1px solid ${props.theme.border};
         padding: 20px 10px;
 
         white-space: normal;

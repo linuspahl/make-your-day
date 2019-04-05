@@ -52,6 +52,9 @@ const nightModeTheme = {
 
 // Overview of all z-index used in the app
 const layerIndex = {
+  // E.g. needed to scroll the DashboardWidgets behind the Dashboard CategoryIconOverview
+  protrudeContent: 1,
+
   modal: 10,
   modalContent: 11,
 
