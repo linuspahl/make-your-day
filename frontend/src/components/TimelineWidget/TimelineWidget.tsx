@@ -5,6 +5,7 @@ import moment from 'moment'
 import { sortBy } from 'lodash'
 // utils
 import { formatUnixDate, getDateString } from 'utils/utils'
+import { fill } from 'lodash'
 // components
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
@@ -28,7 +29,7 @@ interface DayEntry {
 
 const LoadingPlaceholder = (): React.ReactElement => (
   <PlaceholderGroup>
-    {[...Array(3)].map((value, key) => {
+    {fill(Array(3), null).map((value, key) => {
       return <TimelineWidgetDayPlaceholder key={key} />
     })}
   </PlaceholderGroup>

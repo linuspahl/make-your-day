@@ -9,15 +9,19 @@ const ShortcutLoading = styled(Shortcut)`
   background-color: ${props => props.theme.border};
 `
 
+const DayPlaceholer = styled(Day)`
+  cursor: default;
+`
+
 const TimelineWidgetDayPlaceholder = (): React.ReactElement => (
-  <Day>
+  <DayPlaceholer>
     <ShortcutLoading />
     <Categories>
       <CategorySummaryPlaceholder />
       <CategorySummaryPlaceholder size="large" />
       <CategorySummaryPlaceholder />
     </Categories>
-  </Day>
+  </DayPlaceholer>
 )
 
 export default TimelineWidgetDayPlaceholder

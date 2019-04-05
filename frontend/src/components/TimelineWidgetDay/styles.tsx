@@ -21,6 +21,7 @@ export const Day = styled.div`
 
   display: flex;
   align-items: center;
+  cursor: pointer;
 
   padding: 5px 0;
   border-bottom: 1px solid ${props => props.theme.border};

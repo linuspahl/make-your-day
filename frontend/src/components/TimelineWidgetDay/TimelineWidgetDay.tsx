@@ -1,6 +1,6 @@
 // libraries
 import * as React from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter, RouteComponentProps } from 'react-router-dom'
 // components
 import CategorySummary from 'shared/CategorySummary/CategorySummary'
 import { Day, Shortcut, Categories } from './styles'
@@ -12,16 +12,15 @@ interface CategoryEntry extends Category {
   recordAmountSum: number
 }
 
-interface Props {
+interface Props extends RouteComponentProps {
   categories: CategoryEntry[]
   date: string
 }
 
 const TimelineWidgetDay = (props: Props): React.ReactElement => {
-  const { categories, date } = props
+  const { categories, date, history } = props
   return (
-    <Day key={date}>
-      <Link to={`/timeline/${date}`} className="noTextColor" />
+    <Day key={date} onClick={() => history.push(`/timeline/${date}`)}>
       <Shortcut>{moment(date).format('dd')}</Shortcut>
       <Categories>
         {Boolean(categories) &&
@@ -38,4 +37,4 @@ const TimelineWidgetDay = (props: Props): React.ReactElement => {
   )
 }
 
-export default TimelineWidgetDay
+export default withRouter(TimelineWidgetDay)
