@@ -6,21 +6,38 @@ import { Element } from './styles'
 import { InputEvent } from 'types/types'
 
 interface Props {
+  className?: string
+  defaultValue?: string
   disabled?: boolean
   name: string
+  onBlur?: () => void
   onChange: (event: InputEvent) => void
+  placeholder?: string
   required?: boolean
   type?: string
   value: string
 }
 
 const Textarea = (props: Props): React.ReactElement => {
-  const { type, name, onChange, required, disabled, value } = props
+  const {
+    className,
+    disabled,
+    name,
+    onChange,
+    onBlur,
+    placeholder,
+    required,
+    type,
+    value,
+  } = props
   return (
     <Element
+      className={className}
       disabled={disabled}
       name={name}
+      onBlur={onBlur}
       onChange={onChange}
+      placeholder={placeholder}
       required={required}
       type={type || 'text'}
       value={value || ''}

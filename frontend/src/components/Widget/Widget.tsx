@@ -6,17 +6,19 @@ import { handleInputChange, logError } from 'utils/utils'
 import { ApolloError } from 'apollo-boost'
 // graphql
 import { UpdateWidget } from 'store/widget/mutation'
+// components
+import Textarea from 'shared/form/Textarea/Textarea'
 // interfaces
 import { Widget as WidgetType } from 'store/widget/type'
 import { InputEvent, NotificationCreate } from 'types/types'
 
-export const Element = styled.textarea`
+export const Element = styled(Textarea)`
   width: 100%;
   height: 100%;
 
+  margin: 0;
   padding: 20px;
-  border: 1px solid ${props => props.theme.border};
-  border-radius: 0;
+  border: 0;
 
   background-color: ${props => props.theme.contentBoxBg};
 
@@ -45,7 +47,7 @@ export default class Widget extends React.Component<Props, WidgetType> {
       <Mutation mutation={UpdateWidget} onError={this.handleError}>
         {updateWidget => (
           <Element
-            defaultValue={value}
+            value={value}
             name="value"
             placeholder={title}
             onBlur={() => updateWidget({ variables: this.state })}

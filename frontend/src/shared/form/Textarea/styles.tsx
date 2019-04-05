@@ -17,6 +17,7 @@ export const Element = styled.textarea<ElementProps>`
 
   max-width: 100%;
   min-width: 100%;
+  max-height: 100%;
 
   padding: 10px;
   margin-top: 3px;
