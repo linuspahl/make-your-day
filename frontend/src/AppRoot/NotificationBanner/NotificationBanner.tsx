@@ -19,6 +19,7 @@ interface State {
 export default class NotificationBanner extends React.Component<{}, State> {
   private closeCountDown?: number
   private visibilityDuration: number
+  private closeAnimationDuration: number
 
   public constructor(props: {}) {
     super(props)
@@ -27,8 +28,10 @@ export default class NotificationBanner extends React.Component<{}, State> {
       notification: null,
     }
 
-    // Duration a new notification is visible in ms
-    this.visibilityDuration = 6000
+    // Duration a new notification is visible in s
+    this.visibilityDuration = 6
+    // Duration of the close animation in s
+    this.closeAnimationDuration = 0.5
 
     this.closeCountDown = null
 
@@ -39,15 +42,13 @@ export default class NotificationBanner extends React.Component<{}, State> {
 
   public render(): React.ReactElement {
     const { notification } = this.state
-    const durationVisible = 6 // time the notification is visible in seconds
-    const durationAnimation = 0.5
     return (
       <React.Fragment>
         {notification && (
           <Alert
             role={notification.type}
-            durationVisible={durationVisible}
-            durationAnimation={durationAnimation}
+            durationVisible={this.visibilityDuration}
+            durationAnimation={this.closeAnimationDuration}
           >
             {notification.message}
             <CircleTimer clickAction={() => this.closeNotification()}>
@@ -68,7 +69,7 @@ export default class NotificationBanner extends React.Component<{}, State> {
     // Create timeout to trigger the close
     this.closeCountDown = window.setTimeout(
       () => this.closeNotification(),
-      this.visibilityDuration
+      this.visibilityDuration * 1000
     )
   }
 
