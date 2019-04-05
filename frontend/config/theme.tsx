@@ -58,7 +58,9 @@ const layerIndex = {
   modal: 10,
   modalContent: 11,
 
-  notificationBanner: 20,
+  navigation: 20,
+
+  notificationBanner: 30,
 }
 
 export default (userSettings: { [key: string]: boolean }) => {
