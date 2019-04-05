@@ -36,6 +36,7 @@ export const Alert = styled.div<AlertProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: ${props => props.theme.layerIndex.notificationBanner};
 
   border-radius: 0 0 5px 5px;
   padding: 10px 25px;

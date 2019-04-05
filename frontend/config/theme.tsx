@@ -54,6 +54,8 @@ const nightModeTheme = {
 const layerIndex = {
   modal: 10,
   modalContent: 11,
+
+  notificationBanner: 20,
 }
 
 export default (userSettings: { [key: string]: boolean }) => {
