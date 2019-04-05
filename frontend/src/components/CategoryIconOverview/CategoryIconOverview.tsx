@@ -3,6 +3,7 @@ import * as React from 'react'
 import { Query } from 'react-apollo'
 import { generateUrlParams } from 'utils/utils'
 import { Link } from 'react-router-dom'
+import { fill } from 'lodash'
 // styles
 import { Layout, IconWrapper, NoResultWrapper } from './styles'
 // components
@@ -24,7 +25,7 @@ const LoadingPlaceholder = (
   props: LoadingPlaceholderProps
 ): React.ReactElement => (
   <PlaceholderGroup>
-    {[...Array(6)].map((value, key) => (
+    {fill(Array(3), null).map((value, key) => (
       <IconWrapper key={key} context={props.context}>
         <CategoryIconPlaceholder />
       </IconWrapper>
