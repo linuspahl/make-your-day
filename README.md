@@ -1,26 +1,27 @@
 # make-your-day
 
-Web app (Node + React) to extend my knowledge about the used technologies. This app will help me to measure my daily goals.
+Web app (Node + React) to extend my knowledge about the used technologies. This app will help me measuring e.g. my expenses.
 
 ## Setup the project
 
 ### Global dependencies
 
-- yarn - package manager for all backend and frontend dependencies.
+- [yarn](https://yarnpkg.com/lang/en/docs/install) - package manager for all backend and frontend dependencies.
 
 ### Frontend
 
 - Enter frontend directory with the cli
 - Run `yarn install` to install all frontend dependencies
+- Run `cp ./config/.env.sample ./config/.env` add the required attributes in the created file
 
 ### Backend
 
 - Enter backend directory with the cli
 - Run `yarn install` to install all frontend dependencies
-- Create a postgres database manually (not yet part of the provisioning)
+- Create a postgres database manually (not yet part of the projekt)
 - Run `cp ./config/.env.sample ./config/.env` add the required attributes in the created file
 - Run `yarn migrate` to run all migrations and create the database tables.
-- Run `yarn seed`. This will create an initial user with the credentials:
+- Run `yarn seed`. This will, amongst other things, create an initial user with the credentials:
 
 ```
   username: Admin
@@ -32,7 +33,7 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 ### Frontend
 
 - Enter the frontend directory with the cli
-- For development run `yarn start` to start the webpack dev server. The browser will automatically open the frontend.
+- For development run `yarn start` to start the webpack dev server. And open: [http://localhost:4000](http://localhost:4000)
 - For production run `yarn build` to create an optimized version of the app in the `dist` directory.
 
 #### Testing
@@ -47,13 +48,13 @@ You should use `react-test-render/shallow` for this.
 
 We are using Eslint for the linting.
 Before each commit, you should check the linting with `yarn lint`.
-For the best development experiennce, you should install the Prettier Extension for zout IDE.
+For the best development experiennce, you should install the Prettier Extension for your IDE.
 
 ### Backend
 
 - Enter the backend directory with the cli
-- For development run `yarn start` to start nodemon / babel-node.
-- For production run `yarn startProd` to run babel-node directly. The node instance will not restart on changes.
+- For development run `yarn start` to start the node backend. Thanks [nodemon](https://nodemon.io/), the node instance will automatically restart on changes.
+- For production run `yarn startProd`. This will start [pm2](http://pm2.keymetrics.io/) a production process manager for Node.js. The node instance will not restart on changes.
 
 #### Creating seeds
 
@@ -66,14 +67,128 @@ To create a new seed run `yarn sequelize seed:generate --name seed-name`
 Like mentioned in the setup part, you can run all migrations with `yarn migrate`.
 To create a new migration run `yarn sequelize migration:generate --name migration-name`
 To revert the last migration run `yarn migrateDown`
-Sequelize is also able to create the database, based on the model definitions. You can run this with `yarn createDatabse` It can't replace the the migrations,
+Sequelize is also able to create the database, based on the model definitions. You can run this with `yarn createDatabse`. It can't replace the the migrations,
 but sometimes it is nice to see how the database would look like, when it's based on the model definitions.
 
 #### Linting
 
 We are using Eslint for the linting.
 Before each commit, you should check the linting with `yarn lint`.
-For the best development experiennce, you should install the Prettier Extension for zout IDE.
+For the best development experiennce, you should install the Prettier Extension for your IDE.
+
+## Project structure
+
+### Frontend
+
+- ./config
+  Contains all kind of config files, e.g. for weback, testing, env vars
+- ./src
+  Contains the app. Some could argue that e.g. the theme or static params in the config are also a part of the app source, but we prefer to split it this way.
+
+- ./src/index.html
+  App html index file. Contains nothing, but the meta data and a root element to
+  render the React App
+- ./src/index.tsx
+  App JS index file. Will render the AppRoot and import some global styles.
+
+- ./src/AppRoot
+  Directory to bundle all functionalities needed for the app base.
+  Like the ApolloProvider, ThemeProvider and Routes.
+
+- ./src/containers
+  Contains all top level components. Each component represents a route, included in the AppRoot Routes.
+- ./src/components
+  Contains all kind of child components used by the containers.
+- ./src/shared
+  Contains all kind of generic component used multiple times. E,g, a button or loading spinner component.
+- ./src/store
+  Represents the app store in an object oriented way. Contains all graphql mutation / queries to communicate with the backend. Usually contains an update file, needed to update the store correctly after an action.
+  Also contains the object type definitions and some fixtures, needed for the tests.
+- ./src/globalStyles
+  We try to avoid global styles, but sometimes it's needed, e.g. for the reset CSS file. Gets included by the AppRoot
+- ./src/utils
+  Some helpful utility functions, needed multiple times in the project.
+
+### Backend
+
+- ./config
+  Contains all kind of config files, e.g. the env vars and the sequelize cli.
+- ./migrations
+  Contains all migrations.
+- ./seeds
+  Contains all seeds, like the initial user.
+
+- ./src
+  Contains the app.
+- ./src/index.js
+  The app index file. Will initiate the express server.
+- ./src/core
+  Comparable to the frontend AppRoot. Contains everything needed for the base app, like the apollo and express server and the Sequelize database connection.
+- ./src/models
+  Classical, object orientated model and model relation definitions.
+- ./src/resolvers
+  Contains resolvers for all possible backend / api actions (mutations / queries).
+
+## Best Practices
+
+- We are trying to avoid global dependencies.
+  The package manager should be the only global dependency.
+  This will make the setup easier and reduce potential errors.
+  It will affect e.g. the setup of the VS Code node debugging.
+- All vcs commits should start with the affected project parts (FE or BE, or both).
+  E.g: FE: Setup yarn package.json
+
+### Frontend
+
+- React components naming convention:
+  Use `Component/Component.js` instead of `Component/index.js`. It looks redundant at first, but will help a lot when switching between components, during the development.
+- We try to structure the imports. The definition of an import type is very subjective, but we are trying to seperate the imports by:
+  // libraries - all dependencies installed with yarn
+  // components - all components in the `src` directory
+  // interfaces - all typeScript interfaces
+  // graphql - all actions in the `store` driectory like grapqhl queries and mutations
+- Example React component structur:
+
+```
+export default class ExampleComponent extends React.Component {
+  // The first part is the constructur (when needed)
+  // We'll bind this to all functions which need access to the component context
+  // This will keep the constructor clean
+public constructor(props: Props) {
+    super(props)
+
+    this.state = {}
+
+    this.exampleStateChange = this.exampleStateChange.bind(this)
+  }
+
+  // Component lifecycle methods
+  componentDidMount() {}
+
+  // Render
+  public render()()() {}
+
+  // Other functions should be placed after the render function
+  // This increases the readability
+  exampleStateChange() {}
+}
+```
+
+- Component module export:
+  When the component is just a function, make sure you still use a named export like
+
+```
+const ComponentName = props => {}
+export const ComponentName
+```
+
+and not
+
+```
+export default props => {}
+```
+
+This makes debugging easier, e.g. with the React Devtools
 
 ## Packages overview
 
@@ -137,63 +252,3 @@ For the best development experiennce, you should install the Prettier Extension 
 - bcrypt-nodejs - needed to compare the users password input with the password hash
 - graphql - JavaScript reference implementation for GraphQL
 - apollo-server - GraphQL Server
-
-## Best Practices:
-
-- We are trying to avoid global dependencies.
-  The package manager should be the only global dependency.
-  This will make the setup easier and reduce potential errors.
-  It will affect e.g. the setup of the VS Code node debugging.
-- All vcs commits should start with the affected project parts (FE or BE, or both).
-  E.g: FE: Setup yarn package.json
-
-### Frontend
-
-- React components naming convention:
-  Use `Component/Component.js` instead of `Component/index.js`. It looks redundant at first, but will a lot when switching between components, during the development.
-- We try to structure the imports. The definition of an import type is very subjective, but we are trying to seperate the imports by:
-  // libraries - all dependencies installed with yarn
-  // components - all components in the `src` directory
-  // graphql - all actions in the `store` driectory like grapqhl queries and mutations
-- Example React component structur:
-
-```
-export default class ExampleComponent extends React.Component {
-  // The first part is the constructur (when needed)
-  // We'll bind this to all functions which need access to the component context
-  // This will keep the constructor clean
-public constructor(props: Props) {
-    super(props)
-
-    this.state = {}
-
-    this.exampleStateChange = this.exampleStateChange.bind(this)
-  }
-
-  // Component lifecycle methods
-  componentDidMount() {}
-
-  // Render
-  public render()()() {}
-
-  // Other functions should be placed after the render function
-  // This increases the readability
-  exampleStateChange() {}
-}
-```
-
-- Component module export:
-  When the component is just a function, make sure you still use a named export like
-
-```
-const ComponentName = props => {}
-export const ComponentName
-```
-
-and not
-
-```
-export default props => {}
-```
-
-This makes debugging easier, e.g. with the React Devtools
