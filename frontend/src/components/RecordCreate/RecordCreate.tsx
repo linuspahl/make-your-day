@@ -17,8 +17,6 @@ import { CreateRecord } from 'store/record/mutation'
 import { GetCategoryWithChildren } from 'store/category/query'
 import { addRecord } from 'store/record/update'
 import { NotificationCreate } from 'types/types'
-// interfaces
-import { RecordCreate as RecordCreateType } from 'store/record/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -40,6 +38,7 @@ class RecordCreate extends React.Component<Props> {
     const categoryId = extractIdFromUrl(match, 'categoryId')
     const queryParams: { createdAt?: string } = parseQueryParams(search)
     const { createdAt } = queryParams
+
     return (
       <FadeTransition>
         <H1>Eintrag erstellen</H1>

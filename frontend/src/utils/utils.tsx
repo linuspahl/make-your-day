@@ -108,13 +108,18 @@ export const generateUrlParams = (params: {
   return paramsString
 }
 
-export const parseQueryParams = (query: string): object => {
-  const queryArray = query.split('?')[1].split('&')
+export const parseQueryParams = (queryString: string): object => {
   const queryParams: { [key: string]: string } = {}
-  for (let i = 0; i < queryArray.length; i++) {
-    const [key, val] = queryArray[i].split('=')
-    queryParams[key] = val
+
+  if (queryString) {
+    const queryArray = queryString.split('?')[1].split('&')
+
+    for (let i = 0; i < queryArray.length; i++) {
+      const [key, val] = queryArray[i].split('=')
+      queryParams[key] = val
+    }
   }
+
   return queryParams
 }
 
