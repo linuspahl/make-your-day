@@ -19,8 +19,8 @@ import { RecordCreate } from 'store/record/type'
 interface Props {
   category: CategoryFull
   initialData?: RecordCreate
+  params?: { createdAt?: string }
   mode?: FormType['mode']
-  params?: { createdAt: RecordCreate['createdAt'] }
   rootPath: string
   submitAction: (record: RecordCreate) => void
 }
@@ -40,16 +40,15 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     // overview of all form values
     // initial state create mode
     this.state = {
-      categoryId: initialCategoryId,
-      title: null,
       amount: null,
+      categoryId: initialCategoryId,
+      createdAt: null,
       description: null,
-      createdAt:
-        props.params && props.params.createdAt ? props.params.createdAt : null,
+      title: null,
     }
 
     if (props.initialData) {
-      this.state = { ...this.state, ...props.initialData }
+      this.state = { ...this.state, ...props.initialData, ...props.params }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)

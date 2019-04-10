@@ -2,8 +2,9 @@
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
+import { ApolloError } from 'apollo-boost'
 // utils
-import { extractIdFromUrl, logError } from 'utils/utils'
+import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
 // components
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
@@ -16,7 +17,8 @@ import { CreateRecord } from 'store/record/mutation'
 import { GetCategoryWithChildren } from 'store/category/query'
 import { addRecord } from 'store/record/update'
 import { NotificationCreate } from 'types/types'
-import { ApolloError } from 'apollo-boost'
+// interfaces
+import { RecordCreate as RecordCreateType } from 'store/record/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -31,9 +33,13 @@ class RecordCreate extends React.Component<Props> {
   }
 
   public render(): React.ReactElement {
-    const { match } = this.props
+    const {
+      match,
+      location: { search },
+    } = this.props
     const categoryId = extractIdFromUrl(match, 'categoryId')
-
+    const queryParams: { createdAt?: string } = parseQueryParams(search)
+    const { createdAt } = queryParams
     return (
       <FadeTransition>
         <H1>Eintrag erstellen</H1>
@@ -60,8 +66,8 @@ class RecordCreate extends React.Component<Props> {
                 {createRecord => (
                   <RecordForm
                     category={category}
+                    params={{ createdAt }}
                     mode="create"
-                    params={null}
                     rootPath={'/'}
                     submitAction={variables => createRecord({ variables })}
                   />

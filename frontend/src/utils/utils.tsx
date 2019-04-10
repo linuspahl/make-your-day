@@ -108,6 +108,16 @@ export const generateUrlParams = (params: {
   return paramsString
 }
 
+export const parseQueryParams = (query: string): object => {
+  const queryArray = query.split('?')[1].split('&')
+  const queryParams: { [key: string]: string } = {}
+  for (let i = 0; i < queryArray.length; i++) {
+    const [key, val] = queryArray[i].split('=')
+    queryParams[key] = val
+  }
+  return queryParams
+}
+
 // Utility localstorage functions
 
 // format function for all existing local storage values

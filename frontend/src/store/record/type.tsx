@@ -12,7 +12,7 @@ export interface Record {
 }
 
 export interface RecordCreate {
-  createdAt: string
+  createdAt?: string
   title: string
   amount?: string
   description: string
