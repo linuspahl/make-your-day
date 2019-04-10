@@ -33,7 +33,7 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 ### Frontend
 
 - Enter the frontend directory with the cli
-- For development run `yarn start` to start the webpack dev server. And open: [http://localhost:4000](http://localhost:4000)
+- For development run `yarn start` to start the webpack dev server. And open: [http://localhost:8080](http://localhost:8080)
 - For production run `yarn build` to create an optimized version of the app in the `dist` directory.
 
 #### Testing
@@ -145,7 +145,7 @@ For the best development experiennce, you should install the Prettier Extension 
 - We try to structure the imports. The definition of an import type is very subjective, but we are trying to seperate the imports by:
   // libraries - all dependencies installed with yarn
   // components - all components in the `src` directory
-  // interfaces - all typeScript interfaces
+  // interfaces - all TypeScript interfaces
   // graphql - all actions in the `store` driectory like grapqhl queries and mutations
 - Example React component structur:
 
