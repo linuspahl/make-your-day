@@ -37,7 +37,10 @@ export const Layout = styled(Box)<LayoutProps>`
         overflow-y: auto;
       }
     `
-      : ''}
+      : `
+      border-radius: 0;
+      box-shadow: none;
+    `}
 `
 interface IconWrapperProps {
   context?: 'horizontal-scroll'
