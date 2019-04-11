@@ -4,11 +4,12 @@ import gql from 'graphql-tag'
 export const GetWidget = gql`
   query GetWidget($id: Int!) {
     getWidget(id: $id) {
+      evaluationId
       id
-      title
-      value
-      type
       position
+      title
+      type
+      value
     }
   }
 `
