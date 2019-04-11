@@ -5,6 +5,10 @@ export default (sequelize, DataTypes) => {
 
   Evaluation.associate = models => {
     Evaluation.belongsTo(models.Category)
+    Evaluation.hasMany(models.Widget, {
+      onDelete: 'cascade',
+      onUpdate: 'cascade',
+    })
   }
 
   return Evaluation
