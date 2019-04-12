@@ -37,3 +37,11 @@ export const IconWrapper = styled.div`
 
   font-size: 16px;
 `
+
+export const CategoryTitle = styled.div`
+  max-width: 50px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 3px;
+`

@@ -32,6 +32,7 @@ export const GetCategoriesIcon = gql`
       color
       icon
       id
+      title
       type
     }
   }

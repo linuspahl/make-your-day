@@ -5,7 +5,13 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 // utils
 import { sortBy } from 'lodash'
 // components
-import { Records, NewRecordSection } from './styles'
+import {
+  Records,
+  NewRecordSection,
+  CategoryTitle,
+  Category,
+  CategoryRecords,
+} from './styles'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
@@ -68,20 +74,26 @@ class Timeline extends React.Component<Props> {
 
               return Object.values(categories).map(category => {
                 return (
-                  <React.Fragment key={category.id}>
-                    {sortBy(category.records, 'categoryId').map(
-                      (record: RecordType) => (
-                        <CategorySummary
-                          amount={category.hasUnit ? Number(record.amount) : 1}
-                          category={category}
-                          key={record.id}
-                          to={`/categories/${category.id}/records/${
-                            record.id
-                          }/edit`}
-                        />
-                      )
-                    )}
-                  </React.Fragment>
+                  <Category key={category.id}>
+                    <CategoryTitle>{category.title}</CategoryTitle>
+                    <CategoryRecords>
+                      {sortBy(category.records, 'category.id').map(
+                        (record: RecordType) => (
+                          <CategorySummary
+                            amount={
+                              category.hasUnit ? Number(record.amount) : 1
+                            }
+                            category={category}
+                            displayTitle={record.category.title}
+                            key={record.id}
+                            to={`/categories/${category.id}/records/${
+                              record.id
+                            }/edit`}
+                          />
+                        )
+                      )}
+                    </CategoryRecords>
+                  </Category>
                 )
               })
             }}
@@ -98,7 +110,6 @@ class Timeline extends React.Component<Props> {
 
   private prepareCategories(records: RecordType[]): CategoryEnry[] {
     const categories: { [key: string]: CategoryEnry } = {}
-
     records.forEach(record => {
       const category = record.category.parent || record.category
 
