@@ -160,12 +160,13 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
           <Row>
             Anzahl ({unit})
             <Input
-              tabIndex={1}
               name="amount"
               onChange={this.handleInputChange}
+              required
+              step="0.01"
+              tabIndex={1}
               type="number"
               value={amount}
-              required
             />
           </Row>
         )}
