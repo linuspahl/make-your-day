@@ -47,7 +47,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
       title: null,
     }
 
-    if (props.initialData) {
+    if (props.initialData || props.params) {
       this.state = { ...this.state, ...props.initialData, ...props.params }
     }
 
