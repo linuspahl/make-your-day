@@ -4,8 +4,7 @@ import styled from 'styled-components'
 export const Element = styled.h2`
   margin: 0;
 
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 18px;
 
   hyphens: auto;
 `

@@ -18,8 +18,8 @@ export const Layout = styled.div`
 `
 
 export const WidgetLayout = styled(Box)`
-  display: inline-block;
-  vertical-align: top;
+  display: inline-flex;
+  flex-direction: column;
 
   width: 100%;
   height: 100%;
@@ -30,6 +30,13 @@ export const WidgetLayout = styled(Box)`
     margin-bottom: 0;
     margin-right: 0;
   }
+`
+
+export const WidgetHeader = styled.div`
+  padding: 5px 20px;
+  border-bottom: 1px solid ${props => props.theme.border};
+
+  text-align: center;
 `
 
 export const PlaceholderWrapper = styled.div`

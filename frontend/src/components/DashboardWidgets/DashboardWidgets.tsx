@@ -8,12 +8,14 @@ import NoResult from 'shared/NoResult/NoResult'
 import Widget from 'components/Widget/Widget'
 import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
 import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
+import H2 from 'shared/H2/H2'
 import WidgetPlaceholder from '../Widget/WidgetPlaceholder'
 import {
   Layout,
-  WidgetLayout,
   NoResultWrapper,
   PlaceholderWrapper,
+  WidgetHeader,
+  WidgetLayout,
 } from './styles'
 // graphql
 import { NotificationCreate } from 'types/types'
@@ -51,35 +53,26 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
 
   return (
     <Layout>
-      {sortBy(widgets, 'id').map(widget => {
-        if (widget.type === 'timeline') {
-          return (
-            <WidgetLayout key={widget.id}>
-              <TimelineWidget key={widget.id} />
-            </WidgetLayout>
-          )
-        }
+      {sortBy(widgets, 'id').map(widget => (
+        <WidgetLayout key={widget.id}>
+          <WidgetHeader>
+            <H2>{widget.title}</H2>
+          </WidgetHeader>
 
-        if (widget.type === 'evaluation') {
-          return (
-            <WidgetLayout key={widget.id}>
-              <EvaluationWidget
-                evaluation={widget.evaluation}
-                key={widget.id}
-              />
-            </WidgetLayout>
-          )
-        }
+          {widget.type === 'timeline' && <TimelineWidget key={widget.id} />}
 
-        return (
-          <WidgetLayout key={widget.id}>
+          {widget.type === 'evaluation' && (
+            <EvaluationWidget evaluation={widget.evaluation} key={widget.id} />
+          )}
+
+          {widget.type === 'textarea' && (
             <Widget
               createNotificationBanner={createNotificationBanner}
               widget={widget}
             />
-          </WidgetLayout>
-        )
-      })}
+          )}
+        </WidgetLayout>
+      ))}
     </Layout>
   )
 }
