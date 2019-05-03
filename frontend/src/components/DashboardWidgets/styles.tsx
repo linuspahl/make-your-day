@@ -20,18 +20,13 @@ export const Layout = styled.div`
 export const WidgetLayout = styled(Box)`
   display: inline-flex;
   flex-direction: column;
+  vertical-align: top;
 
   width: 100%;
   height: 100%;
 
   margin-right: 20px;
-
-  &:last-child {
-    margin-bottom: 0;
-    margin-right: 0;
-  }
 `
-
 export const WidgetHeader = styled.div`
   padding: 5px 20px;
   border-bottom: 1px solid ${props => props.theme.border};
@@ -44,11 +39,31 @@ export const PlaceholderWrapper = styled.div`
   width: 100%;
 `
 
-export const NoResultWrapper = styled(ContentBox)`
-  height: 100%;
-  max-width: 100%;
+export const NewWidgetWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: top;
 
+  width: 100%;
+  height: 100%;
+`
+
+interface NewWidgetTile {
+  onClick?: () => void
+}
+
+export const NewWidgetTile = styled(ContentBox)<NewWidgetTile>`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  vertical-align: top;
+
+  cursor: pointer;
+`
+
+export const CreateWidgetIcon = styled.div`
+  margin-bottom: 40px;
+
+  font-size: 82px;
+  line-height: 76px;
+  text-align: center;
 `

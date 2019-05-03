@@ -49,7 +49,7 @@ export default class Widget extends React.Component<Props, WidgetType> {
           <Element
             value={value}
             name="value"
-            placeholder={title}
+            placeholder="Notiz"
             onBlur={() => updateWidget({ variables: this.state })}
             onChange={this.handleInputChange}
           />

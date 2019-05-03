@@ -1,18 +1,21 @@
 // libraries
 import * as React from 'react'
 import { sortBy } from 'lodash'
-import { Link } from 'react-router-dom'
+import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 // components
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import NoResult from 'shared/NoResult/NoResult'
 import Widget from 'components/Widget/Widget'
 import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
 import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
+import Icon from 'shared/Icon/Icon'
 import H2 from 'shared/H2/H2'
 import WidgetPlaceholder from '../Widget/WidgetPlaceholder'
 import {
+  CreateWidgetIcon,
   Layout,
-  NoResultWrapper,
+  NewWidgetTile,
+  NewWidgetWrapper,
   PlaceholderWrapper,
   WidgetHeader,
   WidgetLayout,
@@ -29,25 +32,25 @@ const LoadingPlaceholder = (): React.ReactElement => (
   </PlaceholderWrapper>
 )
 
-interface Props {
+interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
   loading: boolean
   widgets: WidgetType[]
 }
 
 const DashboardWidgets = (props: Props): React.ReactElement => {
-  const { createNotificationBanner, widgets, loading } = props
+  const { createNotificationBanner, widgets, loading, history } = props
 
   if (loading) return <LoadingPlaceholder />
 
   if (!widgets || widgets.length === 0)
     return (
       <PlaceholderWrapper>
-        <NoResultWrapper>
+        <NewWidgetTile>
           <Link to="/widgets/create" className="defaultColor">
             <NoResult message="Noch kein Widget vorhanden" />
           </Link>
-        </NoResultWrapper>
+        </NewWidgetTile>
       </PlaceholderWrapper>
     )
 
@@ -60,11 +63,9 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
           </WidgetHeader>
 
           {widget.type === 'timeline' && <TimelineWidget key={widget.id} />}
-
           {widget.type === 'evaluation' && (
             <EvaluationWidget evaluation={widget.evaluation} key={widget.id} />
           )}
-
           {widget.type === 'textarea' && (
             <Widget
               createNotificationBanner={createNotificationBanner}
@@ -73,8 +74,16 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
           )}
         </WidgetLayout>
       ))}
+      <NewWidgetWrapper>
+        <NewWidgetTile>
+          <CreateWidgetIcon onClick={() => history.push('/widgets/create')}>
+            <Icon title="plus" />
+          </CreateWidgetIcon>
+          <NoResult message="Weiteres Widget erstellen" />
+        </NewWidgetTile>
+      </NewWidgetWrapper>
     </Layout>
   )
 }
 
-export default DashboardWidgets
+export default withRouter(DashboardWidgets)
