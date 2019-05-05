@@ -64,6 +64,10 @@ export const NewWidgetTile = styled(ContentBox)<NewWidgetTile>`
   vertical-align: top;
 
   cursor: pointer;
+
+  &:active {
+    background-color: ${props => props.theme.active};
+  }
 `
 
 export const CreateWidgetIcon = styled.div`
