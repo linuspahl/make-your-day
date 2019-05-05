@@ -15,6 +15,7 @@ export const Layout = styled.div`
 
   overflow-x: auto;
   white-space: nowrap;
+  scroll-snap-type: x mandatory;
 `
 
 export const WidgetLayout = styled(Box)`
@@ -26,7 +27,10 @@ export const WidgetLayout = styled(Box)`
   height: 100%;
 
   margin-right: 20px;
+
+  scroll-snap-align: center;
 `
+
 export const WidgetHeader = styled.div`
   padding: 5px 20px;
   border-bottom: 1px solid ${props => props.theme.border};
@@ -46,6 +50,8 @@ export const NewWidgetWrapper = styled.div`
 
   width: 100%;
   height: 100%;
+
+  scroll-snap-align: center;
 `
 
 interface NewWidgetTile {
