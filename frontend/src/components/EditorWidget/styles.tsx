@@ -36,6 +36,7 @@ export const PellEditor = styled.div`
     border-right: 1px solid ${props => props.theme.border};
 
     background-color: transparent;
+    color: inherit;
 
     &:last-child {
       border-right: 0;
