@@ -14,7 +14,7 @@ export const evaluation: Evaluation = {
   result: {
     datasets: [
       {
-        label: 'Label',
+        label: '2010-01-01',
         data: [1, 2],
         backgroundColor: 'red',
       },
