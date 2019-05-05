@@ -14,7 +14,7 @@ describe('PublicRoute should', () => {
         updateLocalStorage={() => {}}
         userSession={userSession}
         path="/"
-        component={<div>Content</div>}
+        component={() => <div>Content</div>}
       />
     )
   })

@@ -7,7 +7,7 @@ import { NotificationCreate, LocalStorageCreate } from 'types/types'
 
 interface Props {
   clearLocalStorage?: () => void
-  component: any
+  component: React.ReactType
   createNotificationBanner?: (notification: NotificationCreate) => void
   exact?: boolean
   path: string

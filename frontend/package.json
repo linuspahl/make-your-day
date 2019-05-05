@@ -9,8 +9,10 @@
   "scripts": {
     "start": "webpack-dev-server --config config/webpack/development.ts",
     "build": "webpack --progress --verbose --config config/webpack/production.ts",
-    "test": "jest --config config/test/jest-config.js",
-    "lint": "yarn run eslint src config --debug --ext .js,.ts,.tsx"
+    "preCommit": "yarn lint && yarn checkTypes && yarn test",
+    "lint": "yarn run eslint src config --debug --ext .js,.ts,.tsx",
+    "checkTypes": "yarn run tsc",
+    "test": "jest --config config/test/jest-config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -67,7 +69,7 @@
     "@types/react": "^16.8.8",
     "@types/react-chartjs-2": "^2.5.7",
     "@types/react-dom": "^16.8.2",
-    "@types/react-router-dom": "^4.3.1",
+    "@types/react-router-dom": "^4.3.2",
     "@types/react-test-renderer": "^16.8.1",
     "@types/react-transition-group": "^2.0.16",
     "@types/styled-components": "^4.1.12",

@@ -54,11 +54,11 @@ export const NewWidgetWrapper = styled.div`
   scroll-snap-align: center;
 `
 
-interface NewWidgetTile {
+interface NewWidgetTileProps {
   onClick?: () => void
 }
 
-export const NewWidgetTile = styled(ContentBox)<NewWidgetTile>`
+export const NewWidgetTile = styled(ContentBox)<NewWidgetTileProps>`
   display: flex;
   flex-direction: column;
   vertical-align: top;

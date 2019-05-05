@@ -3,7 +3,7 @@ import * as React from 'react'
 // components
 import { Element } from './styles'
 
-interface Props {
+export interface Props {
   children: React.ReactNode
   className?: string
 }

@@ -6,7 +6,7 @@ import { UserSession } from 'store/userSession/type'
 import { NotificationCreate, LocalStorageCreate } from 'types/types'
 
 interface Props {
-  component: any
+  component: React.ReactType
   createNotificationBanner?: (notification: NotificationCreate) => void
   exact?: boolean
   path: string

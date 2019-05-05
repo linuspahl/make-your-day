@@ -1,6 +1,5 @@
 // libraries
 import * as React from 'react'
-import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
 import { handleInputChange, logError } from 'utils/utils'
 import { ApolloError } from 'apollo-boost'

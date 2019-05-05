@@ -11,7 +11,7 @@ describe('PrivateRoute should', () => {
     ShallowRenderer.createRenderer().render(
       <PrivateRoute
         clearLocalStorage={() => {}}
-        component={<div>Content</div>}
+        component={() => <div>Content</div>}
         createNotificationBanner={() => {}}
         path="/"
         userSession={userSession}

@@ -3,7 +3,7 @@ import * as React from 'react'
 // compoenents
 import { ListItem } from './styles'
 
-interface Props {
+export interface Props {
   children: React.ReactNode
   className?: string
   onClick?: () => void
