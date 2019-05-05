@@ -23,7 +23,7 @@ export const Layout = styled.div`
 
   @media (min-width: ${props =>
       props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-    grid-template-columns: 1fr 70px 1fr;
+    grid-template-columns: calc(50vw - 35px) 70px calc(50vw - 35px);
     grid-template-rows: none;
   }
 `

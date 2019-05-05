@@ -4,27 +4,14 @@ import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
 import { handleInputChange, logError } from 'utils/utils'
 import { ApolloError } from 'apollo-boost'
+import { init } from 'pell'
 // graphql
 import { UpdateWidget } from 'store/widget/mutation'
 // components
-import Textarea from 'shared/form/Textarea/Textarea'
+import { PellEditor } from './styles'
 // interfaces
 import { Widget as WidgetType } from 'store/widget/type'
 import { InputEvent, NotificationCreate } from 'types/types'
-
-export const Element = styled(Textarea)`
-  width: 100%;
-  height: 100%;
-
-  margin: 0;
-  padding: 20px;
-  border: 0;
-
-  background-color: ${props => props.theme.contentBoxBg};
-
-  color: ${props => props.theme.text};
-  line-height: 1.4;
-`
 
 interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -32,6 +19,9 @@ interface Props {
 }
 
 export default class Widget extends React.Component<Props, WidgetType> {
+  private editorRef: HTMLDivElement
+  private editor: PellElement
+
   public constructor(props: Props) {
     super(props)
 
@@ -41,17 +31,35 @@ export default class Widget extends React.Component<Props, WidgetType> {
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
+  public componentDidMount(): void {
+    this.editor = init({
+      element: this.editorRef,
+      onChange: (value: string) => this.setState({ value }),
+      actions: [
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        'heading1',
+        'heading2',
+        'paragraph',
+        'ulist',
+        'code',
+        'line',
+        'link',
+        'image',
+      ],
+    })
+    this.editor.content.innerHTML = this.props.widget.value
+  }
+
   public render(): React.ReactElement {
-    const { value, title } = this.state
     return (
       <Mutation mutation={UpdateWidget} onError={this.handleError}>
         {updateWidget => (
-          <Element
-            value={value}
-            name="value"
-            placeholder="Notiz"
+          <PellEditor
+            ref={test => (this.editorRef = test)}
             onBlur={() => updateWidget({ variables: this.state })}
-            onChange={this.handleInputChange}
           />
         )}
       </Mutation>

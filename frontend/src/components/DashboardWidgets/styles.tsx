@@ -18,8 +18,8 @@ export const Layout = styled.div`
 `
 
 export const WidgetLayout = styled(Box)`
-  display: inline-flex;
-  flex-direction: column;
+  display: inline-grid;
+  grid-template-rows: 36px calc(100% - 36px);
   vertical-align: top;
 
   width: 100%;

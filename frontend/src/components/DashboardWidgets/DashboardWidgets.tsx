@@ -5,12 +5,12 @@ import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
 // components
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import NoResult from 'shared/NoResult/NoResult'
-import Widget from 'components/Widget/Widget'
+import EditorWidget from 'components/EditorWidget/EditorWidget'
 import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
 import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
 import Icon from 'shared/Icon/Icon'
 import H2 from 'shared/H2/H2'
-import WidgetPlaceholder from '../Widget/WidgetPlaceholder'
+import EditorWidgetPlaceholder from 'components/EditorWidget/EditorWidgetPlaceholder'
 import {
   CreateWidgetIcon,
   Layout,
@@ -27,7 +27,7 @@ import { Widget as WidgetType } from 'store/widget/type'
 const LoadingPlaceholder = (): React.ReactElement => (
   <PlaceholderWrapper>
     <PlaceholderGroup>
-      <WidgetPlaceholder />
+      <EditorWidgetPlaceholder />
     </PlaceholderGroup>
   </PlaceholderWrapper>
 )
@@ -67,7 +67,7 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
             <EvaluationWidget evaluation={widget.evaluation} key={widget.id} />
           )}
           {widget.type === 'textarea' && (
-            <Widget
+            <EditorWidget
               createNotificationBanner={createNotificationBanner}
               widget={widget}
             />
