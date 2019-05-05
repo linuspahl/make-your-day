@@ -13,8 +13,8 @@
     "lint": "yarn run eslint src config --debug --ext .js,.ts,.tsx"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
-    "@babel/preset-env": "^7.4.2",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.3",
     "@types/copy-webpack-plugin": "^4.4.3",
@@ -28,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^1.5.0",
     "@typescript-eslint/parser": "^1.5.0",
     "awesome-typescript-loader": "^5.2.1",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
     "copy-webpack-plugin": "^4.6.0",

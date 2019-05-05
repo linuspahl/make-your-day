@@ -34,7 +34,7 @@ const commonConfigutation: Configuration = {
             presets: [
               '@babel/typescript',
               '@babel/react',
-              ['@babel/env', { modules: false }],
+              ['@babel/preset-env', { modules: false }],
             ],
             getCustomTransformers: () => ({
               before: [getGqlTransformer.getTransformer()],

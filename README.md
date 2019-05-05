@@ -200,6 +200,7 @@ This makes debugging easier, e.g. with the React Devtools
 - eslint-plugin-prettier - Runs Prettier as an ESLint rule and reports differences as individual ESLint issues.
 - eslint-config-prettier - Turns off all rules that are unnecessary or might conflict with Prettier.
 - @babel/core - will create browser friendly javascript
+- babel-core@7.0.0-bridge.0 - bridge for babel 7, needed for jest
 - @babel/preset-env - preset that allows us to use the latest JavaScript without needing to manage which syntax transforms are needed by your target environment.
 - babel-eslint - allows us to lint all valid Babel code.
 
