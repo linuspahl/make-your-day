@@ -3,7 +3,7 @@ import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation, Query } from 'react-apollo'
 // utils
-import { logError, extractIdFromUrl } from 'utils/utils'
+import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
 // components
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
@@ -34,8 +34,9 @@ class SubcategoryCreate extends React.Component<Props> {
   }
 
   public render(): React.ReactElement {
-    const { rootPath, match } = this.props
+    const { match, rootPath } = this.props
     const categoryId = extractIdFromUrl(match)
+
     return (
       <FadeTransition>
         <H1 context="page">Subkategorie erstellen</H1>
@@ -83,9 +84,16 @@ class SubcategoryCreate extends React.Component<Props> {
 
   // Form submit function
   private handleCompleted(data: { createSubcategory: Category }): void {
-    const { history, rootPath, createNotificationBanner } = this.props
     const {
-      createSubcategory: { title, parentId },
+      createNotificationBanner,
+      history,
+      location: { search },
+      rootPath,
+    } = this.props
+    const queryParams: { source?: string } = parseQueryParams(search)
+    const { source } = queryParams
+    const {
+      createSubcategory: { id, title, parentId },
     } = data
 
     // Inform user about success
@@ -94,8 +102,13 @@ class SubcategoryCreate extends React.Component<Props> {
       message: `Subkategorie ${title} erfolgreich erstellt`,
     })
 
-    // Go to the subcategories overview
-    history.push(`${rootPath}/${parentId}/subcategories`)
+    if (source === 'createRecord') {
+      // Go to the subcategories overview
+      history.push(`${rootPath}/${parentId}/records/create?subCategoryId=${id}`)
+    } else {
+      // By default Go to the subcategories overview
+      history.push(`${rootPath}/${parentId}/subcategories`)
+    }
   }
 
   // Form error function

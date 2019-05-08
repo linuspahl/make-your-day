@@ -81,3 +81,9 @@ export const OptionPreview = styled.div`
 
   font-size: 25px;
 `
+
+export const Footer = styled.div`
+  margin-top: 20px;
+
+  text-align: center;
+`

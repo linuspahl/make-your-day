@@ -35,9 +35,20 @@ class RecordCreate extends React.Component<Props> {
       match,
       location: { search },
     } = this.props
+    // get id of parent category, to fetch all possible subcategorories
     const categoryId = extractIdFromUrl(match, 'categoryId')
-    const queryParams: { createdAt?: string } = parseQueryParams(search)
-    const { createdAt } = queryParams
+    // extract query parameters.
+    // createdAt will be used to create records for previous days.
+    // subCategoryId will be set when the user has been to the record form befor,
+    // but clicked on the link to create another subcategory
+    const queryParams: {
+      createdAt?: string
+      subCategoryId?: string
+    } = parseQueryParams(search)
+    const {
+      createdAt: createdAtParam,
+      subCategoryId: subCategoryIdParam,
+    } = queryParams
 
     return (
       <FadeTransition>
@@ -65,7 +76,10 @@ class RecordCreate extends React.Component<Props> {
                 {createRecord => (
                   <RecordForm
                     category={category}
-                    params={{ createdAt }}
+                    params={{
+                      createdAt: createdAtParam,
+                      categoryId: parseInt(subCategoryIdParam, 10),
+                    }}
                     mode="create"
                     rootPath={'/'}
                     submitAction={variables => createRecord({ variables })}

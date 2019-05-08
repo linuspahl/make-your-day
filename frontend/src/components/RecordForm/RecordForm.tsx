@@ -1,5 +1,6 @@
 // libraries
 import * as React from 'react'
+import { Link } from 'react-router-dom'
 // utils
 import { handleInputChange } from 'utils/utils'
 // components
@@ -37,8 +38,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
       initialCategoryId = props.category.subcategories[0].id
     }
 
-    // overview of all form values
-    // initial state create mode
+    // initial form values
     this.state = {
       amount: null,
       categoryId: initialCategoryId,
@@ -47,8 +47,12 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
       title: null,
     }
 
+    // overwrite initial values, with form props.
+    // The initial data represents the full entry, used for the edit mode.
+    // The params prop represents the url query params.
+    // Beacuse of this usage the initialData has more priority than the query params.
     if (props.initialData || props.params) {
-      this.state = { ...this.state, ...props.initialData, ...props.params }
+      this.state = { ...this.state, ...props.params, ...props.initialData }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -141,6 +145,13 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
                 tabIndex={1}
                 title="Unterkategorie"
                 value={categoryId}
+                renderFooter={() => (
+                  <Link
+                    to={`/categories/${parentCatId}/subcategories/create?source=createRecord`}
+                  >
+                    Weitere Unterkategorie anlegen
+                  </Link>
+                )}
               />
             </React.Fragment>
           </Row>

@@ -14,12 +14,13 @@ import Modal from 'shared/Modal/Modal'
 import { SelectOption, InputEvent } from 'types/types'
 
 import {
-  Layout,
-  Select,
-  Options,
-  OptionPreview,
-  Option,
   ArrowIcon,
+  Footer,
+  Layout,
+  Option,
+  OptionPreview,
+  Options,
+  Select,
 } from './styles'
 
 interface Props {
@@ -29,6 +30,7 @@ interface Props {
   onChange: (event: InputEvent) => void
   options: SelectOption[]
   renderPreview?: (option: SelectOption) => React.ReactChild
+  renderFooter?: () => React.ReactChild
   tabIndex: number
   title: string
   value: string | number
@@ -60,11 +62,22 @@ export default class ContentSelect extends React.Component<Props, State> {
   }
 
   public render(): React.ReactElement {
-    const { title, value, renderPreview, tabIndex, name, disabled } = this.props
+    const {
+      title,
+      value,
+      renderPreview,
+      renderFooter,
+      tabIndex,
+      name,
+      disabled,
+    } = this.props
+
     const { isOpen } = this.state
     const hasPreview = typeof renderPreview == 'function'
+    const hasFooter = typeof renderFooter == 'function'
     const sortedOptions = this.sortedOptions
     const currentOption = sortedOptions.find(option => option.value === value)
+
     return (
       <Layout>
         <Select
@@ -101,6 +114,7 @@ export default class ContentSelect extends React.Component<Props, State> {
                 )
               })}
             </Options>
+            {hasFooter && <Footer>{renderFooter()}</Footer>}
           </Modal>
         )}
       </Layout>
