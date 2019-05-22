@@ -24,6 +24,7 @@ export const PellEditor = styled.div`
     border: 0;
 
     overflow-y: auto;
+    white-space: normal;
   }
 
   .pell-button {
