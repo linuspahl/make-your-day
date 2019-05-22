@@ -18,20 +18,18 @@ interface Props extends RouteComponentProps {
 }
 
 const TimelineWidgetDay = (props: Props): React.ReactElement => {
-  const { categories, date, history } = props
+  const { categories = [], date, history } = props
   return (
     <Day key={date} onClick={() => history.push(`/timeline/${date}`)}>
       <Shortcut>{moment(date).format('dd')}</Shortcut>
       <Categories>
-        {Boolean(categories) &&
-          categories.length !== 0 &&
-          Object.values(categories).map(category => (
-            <CategorySummary
-              amount={category.recordAmountSum}
-              category={category}
-              key={category.id}
-            />
-          ))}
+        {categories.map(category => (
+          <CategorySummary
+            amount={category.recordAmountSum}
+            category={category}
+            key={category.id}
+          />
+        ))}
       </Categories>
     </Day>
   )
