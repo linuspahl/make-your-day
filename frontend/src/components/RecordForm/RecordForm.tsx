@@ -202,7 +202,9 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     handleInputChange(event, this.setState.bind(this))
   }
 
-  private prepareSubcategories(subcategories?: CategoryFull[]): SelectOption[] {
+  private prepareSubcategories(
+    subcategories: CategoryFull[] = []
+  ): SelectOption[] {
     return subcategories.map(subcategory => {
       return { value: subcategory.id, title: subcategory.title }
     })

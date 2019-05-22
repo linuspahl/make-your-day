@@ -94,14 +94,14 @@ export default class LoginForm extends React.Component<Props, State> {
 
   private handleCompleted(data: {
     loginUser: {
-      userSession: UserSession
-      role: string
-      userSettings: UserSetting[]
       id: number
+      role: string
+      userSession: UserSession
+      userSettings: UserSetting[]
     }
   }): void {
     const {
-      loginUser: { userSession, id: userId, role: userRole, userSettings },
+      loginUser: { userSession, id: userId, role: userRole, userSettings = [] },
     } = data
     const { updateLocalStorage } = this.props
     const settings = this.formatUserSettings(userSettings)
@@ -120,7 +120,7 @@ export default class LoginForm extends React.Component<Props, State> {
   }
 
   private formatUserSettings(
-    userSettings: UserSetting[]
+    userSettings: UserSetting[] = []
   ): { [key: string]: string } {
     // Part of the login is to update the localstorage with the received user settings, like the night mode.
     // For this case we need to format the settings in a {key: value} format

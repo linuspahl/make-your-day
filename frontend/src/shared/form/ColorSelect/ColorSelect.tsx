@@ -15,7 +15,7 @@ const SmallColorPreview = styled.div`
   background-color: ${props => props.color};
 `
 
-// Create select options based on theme colors
+// Create select options based on theme colors.
 const prepareOptions = (): SelectOption[] =>
   Object.keys(categoryColors).map(key => {
     return { value: key, title: key }
@@ -30,7 +30,7 @@ interface Props {
 
 const ColorSelect = (props: Props): React.ReactElement => {
   const { value, onChange, name, tabIndex } = props
-  const colors = prepareOptions()
+  const colors = prepareOptions() // will return an empty array, if there should be no colors
 
   return (
     <ContentSelect

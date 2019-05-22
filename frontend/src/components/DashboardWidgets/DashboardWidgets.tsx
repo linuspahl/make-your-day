@@ -39,11 +39,11 @@ interface Props extends RouteComponentProps {
 }
 
 const DashboardWidgets = (props: Props): React.ReactElement => {
-  const { createNotificationBanner, widgets, loading, history } = props
+  const { createNotificationBanner, widgets = [], loading, history } = props
 
   if (loading) return <LoadingPlaceholder />
 
-  if (!widgets || widgets.length === 0)
+  if (widgets.length === 0)
     return (
       <PlaceholderWrapper>
         <NewWidgetTile>

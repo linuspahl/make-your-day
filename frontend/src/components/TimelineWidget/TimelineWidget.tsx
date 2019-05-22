@@ -83,7 +83,7 @@ export default class TimelineWidget extends React.Component {
     )
   }
 
-  private prepareTimeline(records: Record[]): { [key: string]: DayEntry } {
+  private prepareTimeline(records: Record[] = []): { [key: string]: DayEntry } {
     // The timeline object has an array of records as input
     // for each day with a record, we'll create an entry
     // Based on the day we will group all related records by category

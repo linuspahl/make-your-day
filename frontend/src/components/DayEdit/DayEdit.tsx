@@ -108,7 +108,7 @@ class Timeline extends React.Component<Props> {
     )
   }
 
-  private prepareCategories(records: RecordType[]): CategoryEnry[] {
+  private prepareCategories(records: RecordType[] = []): CategoryEnry[] {
     const categories: { [key: string]: CategoryEnry } = {}
     records.forEach(record => {
       const category = record.category.parent || record.category

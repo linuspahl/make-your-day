@@ -202,6 +202,7 @@ export default class ContentSelect extends React.Component<Props, State> {
   }
 
   private prepareOptions(): SelectOption[] {
+    // Sort options by title, will return an empty array, when there are no options
     let sortedProps = sortBy(this.props.options, 'title')
 
     // If no selection is possible, we add this option in this step.

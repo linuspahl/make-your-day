@@ -24,13 +24,9 @@ const Form = styled.form`
 `
 
 const generateCategoryOptions = (
-  categories: CategoryFull[]
+  categories: CategoryFull[] = []
 ): SelectOption[] => {
   let categoryOptions: SelectOption[] = []
-
-  if (!categories || categories.length === 0) {
-    return categoryOptions
-  }
 
   categories.forEach(category => {
     categoryOptions = [
@@ -90,10 +86,11 @@ export default class EvaluationForm extends React.Component<
   }
 
   public render(): React.ReactElement {
-    const { mode, rootPath, categories } = this.props
+    const { mode, rootPath, categories = [] } = this.props
     const { title, type, groupSubcategories, period, categoryId } = this.state
-    const selectedCategory =
-      categories && categories.find(category => category.id === categoryId)
+    const selectedCategory = categories.find(
+      category => category.id === categoryId
+    )
     const categoryOptions = generateCategoryOptions(categories)
     const disabledFields = {
       groupSubcategories: selectedCategory && !!selectedCategory.parentId,

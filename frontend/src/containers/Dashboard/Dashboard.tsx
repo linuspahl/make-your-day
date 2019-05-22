@@ -52,31 +52,26 @@ const Dashboard = (props: Props): React.ReactElement => (
                 />
               )
 
-            const widgets: Widget[] = data.getWidgets
-            let dashboardTopWidgets = null
-            let dashboardBottomWidgets = null
-
-            if (widgets) {
-              dashboardTopWidgets = widgets.filter(
-                widget => widget.position === 'dashboard-top'
-              )
-              dashboardBottomWidgets = widgets.filter(
-                widget => widget.position === 'dashboard-bottom'
-              )
-            }
+            const widgets: Widget[] = data.getWidgets || []
+            let widgetsDashboardTop = widgets.filter(
+              widget => widget.position === 'dashboard-top'
+            )
+            let widgetsDashboardBottom = widgets.filter(
+              widget => widget.position === 'dashboard-bottom'
+            )
 
             return (
               <React.Fragment>
                 <DashboardWidgets
                   createNotificationBanner={props.createNotificationBanner}
                   loading={loading}
-                  widgets={dashboardTopWidgets}
+                  widgets={widgetsDashboardTop}
                 />
                 <CategoryIconOverview context="horizontal-scroll" />
                 <DashboardWidgets
                   createNotificationBanner={props.createNotificationBanner}
                   loading={loading}
-                  widgets={dashboardBottomWidgets}
+                  widgets={widgetsDashboardBottom}
                 />
               </React.Fragment>
             )

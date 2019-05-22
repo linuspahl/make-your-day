@@ -31,13 +31,9 @@ interface Props {
 }
 
 const generateEvaluationOptions = (
-  evaluations?: EvaluationPlain[]
+  evaluations: EvaluationPlain[] = []
 ): SelectOption[] => {
   let evaluationOptions: SelectOption[] = []
-
-  if (!evaluations || evaluations.length === 0) {
-    return evaluationOptions
-  }
 
   evaluations.forEach(evaluation => {
     evaluationOptions = [

@@ -137,6 +137,17 @@ For the best development experiennce, you should install the Prettier Extension 
   It will affect e.g. the setup of the VS Code node debugging.
 - All vcs commits should start with the affected project parts (FE or BE, or both).
   E.g: FE: Setup yarn package.json
+- To prevent most "Cannot read property 'foo' of undefined" Errors, you should always define an empty array as default value, e.g. for parameters:
+
+```
+function bar(arrayOfItems = []) {..}
+```
+
+or deconstruction:
+
+```
+const {arrayOfItems = []} = this.props;
+```
 
 ### Frontend
 

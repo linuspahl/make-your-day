@@ -44,7 +44,7 @@ const UserSessionOverview = (props: Props): React.ReactElement => (
             />
           )
 
-        const userSessions: UserSession[] = data.getUserSessions
+        const userSessions: UserSession[] = data.getUserSessions || []
 
         // We are getting the userSettings as props
         // Because we are just using booleans for the settings value so far, we are able to use only checkboxes

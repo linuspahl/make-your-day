@@ -29,7 +29,7 @@ const List = styled.div`
 `
 
 const sortWidgetsByPosition = (
-  widgets: Widget[]
+  widgets: Widget[] = []
 ): {
   [key: string]: Widget[]
 } => {
@@ -45,6 +45,7 @@ const sortWidgetsByPosition = (
     }
     positions[widget.position] = [...positions[widget.position], widget]
   })
+
   return positions
 }
 

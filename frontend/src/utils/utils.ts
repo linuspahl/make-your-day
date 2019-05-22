@@ -167,7 +167,7 @@ export const updateLocalStorage = (
 
 // get localstorage values by provided keys
 export const getLocalStorage = (
-  stateKeys: string[]
+  stateKeys: string[] = []
 ): { [key: string]: string } =>
   stateKeys.reduce(
     (result: { [key: string]: string | number | boolean }, key: string) => {
