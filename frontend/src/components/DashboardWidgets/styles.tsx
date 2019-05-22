@@ -1,5 +1,6 @@
 // libraries
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 // components
 import ContentBox from 'shared/ContentBox/ContentBox'
 import Box from 'shared/Box/Box'
@@ -62,12 +63,21 @@ export const NewWidgetTile = styled(ContentBox)<NewWidgetTileProps>`
   display: flex;
   flex-direction: column;
   vertical-align: top;
+  align-items: center;
 
   cursor: pointer;
+  appearance: none;
 
   &:active {
     background-color: ${props => props.theme.active};
   }
+`
+
+// It would be cleaner to have no NewWidgetLink and add the "link" behavour to the NewWidgetTile,
+// but thats not possible with styled-components right now.
+export const NewWidgetLink = styled(Link)`
+  width: 100%;
+  height: 100%;
 `
 
 export const CreateWidgetIcon = styled.div`

@@ -16,7 +16,7 @@ export const Shortcut = styled.div`
   background-color: ${props => props.theme.timelineDay};
 `
 
-export const Day = styled.div`
+export const Day = styled.button`
   width: 100%;
 
   display: flex;
@@ -25,6 +25,10 @@ export const Day = styled.div`
 
   padding: 5px 0;
   border-bottom: 1px solid ${props => props.theme.border};
+  // Remove default button borders
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
 
   &:last-child {
     border-bottom: 0;

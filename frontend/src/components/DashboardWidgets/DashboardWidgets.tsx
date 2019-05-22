@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 import { sortBy } from 'lodash'
-import { Link, withRouter, RouteComponentProps } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 // components
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import NoResult from 'shared/NoResult/NoResult'
@@ -14,6 +14,7 @@ import EditorWidgetPlaceholder from 'components/EditorWidget/EditorWidgetPlaceho
 import {
   CreateWidgetIcon,
   Layout,
+  NewWidgetLink,
   NewWidgetTile,
   NewWidgetWrapper,
   PlaceholderWrapper,
@@ -32,14 +33,14 @@ const LoadingPlaceholder = (): React.ReactElement => (
   </PlaceholderWrapper>
 )
 
-interface Props extends RouteComponentProps {
+interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
   loading: boolean
   widgets: WidgetType[]
 }
 
 const DashboardWidgets = (props: Props): React.ReactElement => {
-  const { createNotificationBanner, widgets = [], loading, history } = props
+  const { createNotificationBanner, widgets = [], loading } = props
 
   if (loading) return <LoadingPlaceholder />
 
@@ -76,14 +77,16 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
       ))}
       <NewWidgetWrapper>
         <NewWidgetTile>
-          <CreateWidgetIcon onClick={() => history.push('/widgets/create')}>
-            <Icon title="plus" />
-          </CreateWidgetIcon>
-          <NoResult message="Weiteres Widget erstellen" />
+          <NewWidgetLink to="/widgets/create">
+            <CreateWidgetIcon>
+              <Icon title="plus" />
+            </CreateWidgetIcon>
+            <NoResult message="Weiteres Widget erstellen" />
+          </NewWidgetLink>
         </NewWidgetTile>
       </NewWidgetWrapper>
     </Layout>
   )
 }
 
-export default withRouter(DashboardWidgets)
+export default DashboardWidgets
