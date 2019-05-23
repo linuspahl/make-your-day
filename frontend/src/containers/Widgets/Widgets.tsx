@@ -21,7 +21,7 @@ const Widgets = (props: Props): React.ReactElement => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
-      <ContentBox>
+      <ContentBox role="main">
         <Route
           exact
           path={rootPath}

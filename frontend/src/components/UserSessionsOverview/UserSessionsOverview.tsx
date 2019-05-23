@@ -78,6 +78,9 @@ const UserSessionOverview = (props: Props): React.ReactElement => (
                       )}
                       {!isCurrentSession && (
                         <DeleteIcon
+                          ariaLabel={`Sitzung von ${
+                            userSession.device
+                          } entfernen`}
                           title="Sitzung"
                           id={userSession.id}
                           mutation={DeleteUserSession}

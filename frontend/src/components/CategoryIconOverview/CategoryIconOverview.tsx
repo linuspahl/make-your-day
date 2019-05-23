@@ -66,6 +66,7 @@ const CategoryIconOverview = (props: Props): React.ReactElement => (
           return (
             <IconWrapper key={category.id} context={props.context}>
               <CategoryIcon
+                ariaLabel={`Erstelle Eintrag für Kategorie ${category.title}`}
                 color={category.color}
                 icon={category.icon}
                 key={category.id}

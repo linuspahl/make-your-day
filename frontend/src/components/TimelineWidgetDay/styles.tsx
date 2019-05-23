@@ -25,10 +25,12 @@ export const Day = styled.button`
 
   padding: 5px 0;
   border-bottom: 1px solid ${props => props.theme.border};
-  // Remove default button borders
+
+  // Remove default button styles
   border-top: 0;
   border-left: 0;
   border-right: 0;
+  background-color: transparent;
 
   &:last-child {
     border-bottom: 0;

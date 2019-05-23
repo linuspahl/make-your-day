@@ -6,6 +6,8 @@ import ActionIcon from './ActionIcon'
 
 describe('ActionIcon should', () => {
   test('render without crashing', () => {
-    ShallowRenderer.createRenderer().render(<ActionIcon to="/" icon="check" />)
+    ShallowRenderer.createRenderer().render(
+      <ActionIcon to="/" icon="check" ariaLabel="Accessibility label" />
+    )
   })
 })

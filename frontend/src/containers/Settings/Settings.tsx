@@ -23,7 +23,7 @@ interface Props {
 const Settings = (props: Props): React.ReactElement => {
   return (
     <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
-      <ContentBox>
+      <ContentBox role="main">
         <Route
           exact
           path={props.rootPath}

@@ -20,7 +20,7 @@ import { deleteEvaluation } from 'store/evaluation/update'
 // interfaces
 import { Evaluation } from 'store/evaluation/type'
 
-const List = styled.div`
+const List = styled.ul`
   margin-top: 25px;
 `
 
@@ -53,14 +53,17 @@ const EvaluationOverview = (props: Props): React.ReactElement => {
                   {evaluation.title}
                   <div>
                     <ActionIcon
+                      ariaLabel={`Auswertung ${evaluation.title} anzeigen`}
                       to={`${rootPath}/view/${evaluation.id}`}
                       icon="bar-chart"
                     />
                     <ActionIcon
+                      ariaLabel={`Auswertung ${evaluation.title} bearbeiten`}
                       to={`${rootPath}/edit/${evaluation.id}`}
                       icon="edit"
                     />
                     <DeleteIcon
+                      ariaLabel={`Auswertung ${evaluation.title} löschen`}
                       id={evaluation.id}
                       mutation={DeleteEvaluation}
                       onUpdate={deleteEvaluation}

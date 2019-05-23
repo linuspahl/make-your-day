@@ -8,6 +8,7 @@ import { Element } from './styles'
 import Icon from 'shared/Icon/Icon'
 
 interface Props {
+  ariaLabel: string
   id: number
   mutation: DocumentNode
   onUpdate: (

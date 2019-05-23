@@ -41,7 +41,7 @@ const Dashboard = (props: Props): React.ReactElement => (
     noPadding
   >
     <FadeTransition fullHeight fullWidth>
-      <Layout>
+      <Layout role="main">
         <Query query={GetWidgets}>
           {({ loading, error, data }) => {
             if (error)

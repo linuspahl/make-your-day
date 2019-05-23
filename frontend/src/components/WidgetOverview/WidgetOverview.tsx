@@ -23,7 +23,7 @@ import FadeTransition from 'shared/FadeTransition/FadeTransition'
 // interfaces
 import { Widget } from 'store/widget/type'
 
-const List = styled.div`
+const List = styled.ul`
   margin-top: 10px;
   margin-bottom: 20px;
 `
@@ -87,10 +87,12 @@ const WidgetOverview = (props: Props): React.ReactElement => {
                       {widget.title}
                       <div>
                         <ActionIcon
+                          ariaLabel={`Widget ${widget.title} bearbeiten`}
                           to={`${rootPath}/edit/${widget.id}`}
                           icon="edit"
                         />
                         <DeleteIcon
+                          ariaLabel={`Widget ${widget.title} löschen`}
                           id={widget.id}
                           mutation={DeleteWidget}
                           onUpdate={deleteWidget}

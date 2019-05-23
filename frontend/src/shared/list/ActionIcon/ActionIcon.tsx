@@ -22,13 +22,14 @@ const Wrapper = styled(Link)`
 `
 
 interface Props {
+  ariaLabel: string
   icon: string
   to: string
 }
 
-const ActionRow = (props: Props): React.ReactElement => (
-  <Wrapper to={props.to}>
+const ActionIcon = (props: Props): React.ReactElement => (
+  <Wrapper to={props.to} aria-label={props.ariaLabel}>
     <Icon title={props.icon} />
   </Wrapper>
 )
-export default ActionRow
+export default ActionIcon

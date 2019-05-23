@@ -14,6 +14,7 @@ describe('DeleteIcon should', () => {
         mutation={DeleteUserSession}
         title={'Title'}
         onUpdate={deleteUserSession}
+        ariaLabel="Accessibility label"
       />
     )
   })

@@ -19,7 +19,7 @@ import NoResult from 'shared/NoResult/NoResult'
 import { GetCategoryPlainWithChildren } from 'store/category/query'
 import { Subcategory } from 'store/category/type'
 
-const List = styled.div`
+const List = styled.ul`
   margin-top: 25px;
 `
 
@@ -62,6 +62,9 @@ class CategoryEdit extends React.Component<Props> {
                     <ListItem key={subcategory.id} spaceBetween>
                       {subcategory.title}
                       <ActionIcon
+                        ariaLabel={`Subkategorie ${
+                          subcategory.title
+                        } bearbeiten`}
                         to={`${rootPath}/${categoryId}/subcategories/${
                           subcategory.id
                         }/edit`}

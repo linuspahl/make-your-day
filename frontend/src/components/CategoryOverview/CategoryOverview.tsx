@@ -20,7 +20,7 @@ import { deleteCategory } from 'store/category/update'
 // interfaces
 import { CategoryPlain } from 'store/category/type'
 
-const List = styled.div`
+const List = styled.ul`
   margin-top: 25px;
 `
 
@@ -56,13 +56,18 @@ const CategoryOverview = (props: Props): React.ReactElement => {
                       <ActionIcon
                         to={`${rootPath}/${category.id}/subcategories`}
                         icon="list-ul"
+                        ariaLabel={`Kategorie ${
+                          category.title
+                        } Subkategorien bearbeiten`}
                       />
                     )}
                     <ActionIcon
                       to={`${rootPath}/edit/${category.id}`}
                       icon="edit"
+                      ariaLabel={`Kategorie ${category.title} bearbeiten`}
                     />
                     <DeleteIcon
+                      ariaLabel={`Kategorie ${category.title} löschen`}
                       id={category.id}
                       mutation={DeleteCategory}
                       onUpdate={deleteCategory}

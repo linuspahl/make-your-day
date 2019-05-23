@@ -201,6 +201,11 @@ export default props => {}
 
 This makes debugging easier, e.g. with the React Devtools
 
+- Accessibility
+  Most common best practices are easy to check with e.g. the browser extension axe.
+  But still always check if tab navigation works.
+  Each page should have one main landmark. (role="main")
+
 ## Packages overview
 
 ### Frontend & Backend
