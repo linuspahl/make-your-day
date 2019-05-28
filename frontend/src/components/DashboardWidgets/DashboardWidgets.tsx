@@ -15,7 +15,7 @@ import {
   CreateWidgetIcon,
   Layout,
   NewWidgetLink,
-  NewWidgetTile,
+  NewWidgetBox,
   NewWidgetWrapper,
   PlaceholderWrapper,
   WidgetHeader,
@@ -47,11 +47,11 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
   if (widgets.length === 0)
     return (
       <PlaceholderWrapper>
-        <NewWidgetTile>
+        <NewWidgetBox>
           <Link to="/widgets/create" className="defaultColor">
             <NoResult message="Noch kein Widget vorhanden" />
           </Link>
-        </NewWidgetTile>
+        </NewWidgetBox>
       </PlaceholderWrapper>
     )
 
@@ -76,14 +76,14 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
         </WidgetLayout>
       ))}
       <NewWidgetWrapper>
-        <NewWidgetTile>
+        <NewWidgetBox>
           <NewWidgetLink to="/widgets/create">
             <CreateWidgetIcon>
               <Icon title="plus" />
             </CreateWidgetIcon>
             <NoResult message="Weiteres Widget erstellen" />
           </NewWidgetLink>
-        </NewWidgetTile>
+        </NewWidgetBox>
       </NewWidgetWrapper>
     </Layout>
   )
