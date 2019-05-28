@@ -5,6 +5,7 @@ export const Element = styled.h2`
   margin: 0;
 
   font-size: 18px;
-
   hyphens: auto;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `

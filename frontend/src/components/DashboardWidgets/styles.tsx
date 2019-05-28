@@ -37,6 +37,7 @@ export const WidgetHeader = styled.div`
   border-bottom: 1px solid ${props => props.theme.border};
 
   text-align: center;
+  overflow: hidden;
 `
 
 export const PlaceholderWrapper = styled.div`
