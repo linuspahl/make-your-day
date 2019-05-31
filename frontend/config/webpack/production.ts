@@ -1,7 +1,5 @@
-import common from './common'
-import merge from 'webpack-merge'
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
-
+import { Configuration } from 'webpack'
 // Webpack settings only needed for production
 //
 // * mode - will tell webpack to use its built-in optimizations
@@ -9,7 +7,7 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 // to minify the app in an elegant way (compared with the minify plugin)
 // * optimization - uglify - another useful minifyer
 
-module.exports = merge(common, {
+const prodConfig = () => ({
   mode: 'production',
   module: {
     rules: [
@@ -29,3 +27,5 @@ module.exports = merge(common, {
     minimizer: [new UglifyJsPlugin()],
   },
 })
+
+export default prodConfig

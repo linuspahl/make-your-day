@@ -1,5 +1,4 @@
-import common from './common'
-import merge from 'webpack-merge'
+import path from 'path'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server'
 
@@ -15,11 +14,14 @@ interface Configuration extends WebpackConfiguration {
   devServer?: WebpackDevServerConfiguration
 }
 
-const devConfig: Configuration = {
+const devConfig = (): Configuration => ({
   mode: 'development',
+  output: {
+    path: path.resolve(__dirname, 'devBuild'),
+  },
   devServer: {
     historyApiFallback: true,
   },
-}
+})
 
-export default merge(common, devConfig)
+export default devConfig

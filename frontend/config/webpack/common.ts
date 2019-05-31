@@ -5,75 +5,79 @@ import DotenvPlugin from 'dotenv-webpack'
 import CopyPlugin from 'copy-webpack-plugin'
 import moduleResolvers from '../moduleResolvers'
 import * as getGqlTransformer from 'ts-transform-graphql-tag'
-import { Configuration } from 'webpack'
+import { Configuration, ProgressPlugin } from 'webpack'
+import presetConfig from './presets/loadPresets'
+import merge from 'webpack-merge'
 
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
-// * entry - configure entry point for babel polyfill
-// * output - publicPath - needed to resolve bundle in sub routes
+// * entry - configure entry point of the application
+// * output
+// - path - directory of the output, defined in prod and dev conf
+// - publicPath - needed to resolve bundle in sub routes
 // * plugins - HtmlWebpackPlugin - needed to create the index.html with a script tag for the created JS bundle
 // * resolve / modules - will make import paths shorter
-const commonConfigutation: Configuration = {
-  entry: ['./src/index'],
-  output: {
-    publicPath: '/',
-  },
-  plugins: [
-    new HtmlWebPackPlugin({ template: './src/index.html' }),
-    new DotenvPlugin({ path: './config/.env' }),
-    new CopyPlugin([{ from: './src/globalStyles/favicon/', to: './' }]),
-    // new BundleAnalyzerPlugin(),
-  ],
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        use: {
-          loader: 'awesome-typescript-loader',
-          options: {
-            presets: [
-              '@babel/typescript',
-              '@babel/react',
-              ['@babel/preset-env', { modules: false }],
-            ],
-            getCustomTransformers: () => ({
-              before: [getGqlTransformer.getTransformer()],
-            }),
-          },
-        },
+
+const modeConfig = env => require(`./${env}`).default()
+
+const commonConfigutation = (
+  { mode, presets } = { mode: 'production', presets: [] }
+): Configuration => {
+  return merge(
+    {
+      entry: ['./src/index.tsx'],
+      output: {
+        publicPath: '/',
       },
-      {
-        test: /\.js$/,
-        use: ['source-map-loader'],
-        enforce: 'pre',
-      },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
+      module: {
+        rules: [
           {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'public/fonts/',
+            test: /\.tsx?$/,
+            use: {
+              loader: 'awesome-typescript-loader',
+              options: {
+                presets: ['@babel/typescript', '@babel/react', '@babel/env'],
+                getCustomTransformers: () => ({
+                  before: [getGqlTransformer.getTransformer()],
+                }),
+              },
             },
+          },
+          {
+            test: /\.css$/,
+            exclude: /node_modules/,
+            use: ['style-loader', 'css-loader'],
+          },
+          {
+            test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[ext]',
+                  outputPath: 'public/fonts/',
+                },
+              },
+            ],
+          },
+          {
+            test: /\.jpg$/,
+            loader: 'file-loader',
           },
         ],
       },
-      {
-        test: /\.jpg$/,
-        loader: 'file-loader',
+      plugins: [
+        new HtmlWebPackPlugin({ template: './src/index.html' }),
+        new DotenvPlugin({ path: './config/.env' }),
+        new CopyPlugin([{ from: './src/globalStyles/favicon/', to: './' }]),
+        new ProgressPlugin(),
+      ],
+      resolve: {
+        modules: moduleResolvers,
+        extensions: ['.mjs', '.js', '.ts', '.tsx'],
       },
-    ],
-  },
-  resolve: {
-    modules: moduleResolvers,
-    extensions: ['.mjs', '.js', '.ts', '.tsx'],
-  },
+    },
+    modeConfig(mode),
+    presetConfig({ mode, presets })
+  )
 }
 
 export default commonConfigutation
