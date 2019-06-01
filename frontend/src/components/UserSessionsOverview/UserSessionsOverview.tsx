@@ -21,6 +21,7 @@ import { deleteUserSession } from 'store/userSession/update'
 // interface
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate } from 'types/types'
+import { ApolloError } from 'apollo-boost'
 
 interface Props {
   clearLocalStorage: () => void
@@ -33,7 +34,15 @@ const UserSessionOverview = (props: Props): React.ReactElement => (
     <H1 context="page">Angemeldete Geräte</H1>
 
     <Query query={GetUserSessions}>
-      {({ loading, error, data }) => {
+      {({
+        loading,
+        error,
+        data,
+      }: {
+        loading: boolean
+        error?: ApolloError
+        data: { getUserSessions: UserSession[] }
+      }): JSX.Element => {
         if (loading) return <CenteredSpinner />
 
         if (error)
@@ -56,41 +65,43 @@ const UserSessionOverview = (props: Props): React.ReactElement => (
               <GridCell />
             </GridHead>
             <GridBody columnAmount={3}>
-              {userSessions.map((userSession: UserSession) => {
-                const isCurrentSession =
-                  userSession.expiresAt === props.userSession.expiresAt
-                const expiresAtDate = getDateString(
-                  formatUnixDate(userSession.expiresAt)
-                )
-                return (
-                  <React.Fragment key={userSession.id}>
-                    <div>{userSession.device}</div>
-                    <div>{expiresAtDate}</div>
-                    <GridCell justify="flex-end">
-                      {isCurrentSession && (
-                        <LogoutIcon
-                          userSessionId={userSession.id}
-                          clearLocalStorage={props.clearLocalStorage}
-                          createNotificationBanner={
-                            props.createNotificationBanner
-                          }
-                        />
-                      )}
-                      {!isCurrentSession && (
-                        <DeleteIcon
-                          ariaLabel={`Sitzung von ${
-                            userSession.device
-                          } entfernen`}
-                          title="Sitzung"
-                          id={userSession.id}
-                          mutation={DeleteUserSession}
-                          onUpdate={deleteUserSession}
-                        />
-                      )}
-                    </GridCell>
-                  </React.Fragment>
-                )
-              })}
+              {userSessions.map(
+                (userSession: UserSession): JSX.Element => {
+                  const isCurrentSession =
+                    userSession.expiresAt === props.userSession.expiresAt
+                  const expiresAtDate = getDateString(
+                    formatUnixDate(userSession.expiresAt)
+                  )
+                  return (
+                    <React.Fragment key={userSession.id}>
+                      <div>{userSession.device}</div>
+                      <div>{expiresAtDate}</div>
+                      <GridCell justify="flex-end">
+                        {isCurrentSession && (
+                          <LogoutIcon
+                            userSessionId={userSession.id}
+                            clearLocalStorage={props.clearLocalStorage}
+                            createNotificationBanner={
+                              props.createNotificationBanner
+                            }
+                          />
+                        )}
+                        {!isCurrentSession && (
+                          <DeleteIcon
+                            ariaLabel={`Sitzung von ${
+                              userSession.device
+                            } entfernen`}
+                            title="Sitzung"
+                            id={userSession.id}
+                            mutation={DeleteUserSession}
+                            onUpdate={deleteUserSession}
+                          />
+                        )}
+                      </GridCell>
+                    </React.Fragment>
+                  )
+                }
+              )}
             </GridBody>
           </Grid>
         )

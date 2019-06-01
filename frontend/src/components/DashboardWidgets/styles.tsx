@@ -33,7 +33,7 @@ export const WidgetLayout = styled(Box)`
 
 export const WidgetHeader = styled.div`
   padding: 5px 20px;
-  border-bottom: 1px solid ${props => props.theme.border};
+  border-bottom: 1px solid ${(props): string => props.theme.border};
 
   text-align: center;
   overflow: hidden;
@@ -74,11 +74,11 @@ export const NewWidgetLink = styled(Link)`
   padding: 10px;
 
   &:active {
-    background-color: ${props => props.theme.active};
+    background-color: ${(props): string => props.theme.active};
     color: initial;
   }
 
-  @media (min-width: ${props => props.theme.mediaQuery.tablet}) {
+  @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
     padding: 40px 20px;
   }
 `
@@ -90,7 +90,7 @@ export const CreateWidgetIcon = styled.div`
   line-height: 76px;
   text-align: center;
 
-  @media (min-width: ${props => props.theme.mediaQuery.tablet}) {
+  @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
     margin-bottom: 40px;
   }
 `

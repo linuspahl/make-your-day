@@ -22,6 +22,7 @@ import { deleteWidget } from 'store/widget/update'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 // interfaces
 import { Widget } from 'store/widget/type'
+import { ApolloError } from 'apollo-boost'
 
 const List = styled.ul`
   margin-top: 10px;
@@ -39,12 +40,14 @@ const sortWidgetsByPosition = (
     [key: string]: Widget[]
   } = {}
 
-  widgets.forEach(widget => {
-    if (!positions[widget.position]) {
-      positions[widget.position] = []
+  widgets.forEach(
+    (widget): void => {
+      if (!positions[widget.position]) {
+        positions[widget.position] = []
+      }
+      positions[widget.position] = [...positions[widget.position], widget]
     }
-    positions[widget.position] = [...positions[widget.position], widget]
-  })
+  )
 
   return positions
 }
@@ -61,7 +64,15 @@ const WidgetOverview = (props: Props): React.ReactElement => {
       <H1 context="page">Widgets verwalten</H1>
 
       <Query query={GetWidgetsOverview}>
-        {({ loading, error, data }) => {
+        {({
+          loading,
+          error,
+          data,
+        }: {
+          loading: boolean
+          error?: ApolloError
+          data: { getWidgets: Widget[] }
+        }): JSX.Element | JSX.Element[] => {
           if (loading) return <CenteredSpinner />
           if (error)
             return (
@@ -74,37 +85,41 @@ const WidgetOverview = (props: Props): React.ReactElement => {
 
           const widgetsByPosition = sortWidgetsByPosition(data.getWidgets)
 
-          return Object.keys(widgetsByPosition).map(position => {
-            const positionOption = widgetPositionOptions.find(
-              option => option.value === position
-            )
-            return (
-              <div key={position}>
-                <H2>{positionOption.title}</H2>
-                <List>
-                  {widgetsByPosition[position].map(widget => (
-                    <ListItem key={widget.id} spaceBetween>
-                      {widget.title}
-                      <div>
-                        <ActionIcon
-                          ariaLabel={`Widget ${widget.title} bearbeiten`}
-                          to={`${rootPath}/edit/${widget.id}`}
-                          icon="edit"
-                        />
-                        <DeleteIcon
-                          ariaLabel={`Widget ${widget.title} löschen`}
-                          id={widget.id}
-                          mutation={DeleteWidget}
-                          onUpdate={deleteWidget}
-                          title={widget.title}
-                        />
-                      </div>
-                    </ListItem>
-                  ))}
-                </List>
-              </div>
-            )
-          })
+          return Object.keys(widgetsByPosition).map(
+            (position): JSX.Element => {
+              const positionOption = widgetPositionOptions.find(
+                (option): boolean => option.value === position
+              )
+              return (
+                <div key={position}>
+                  <H2>{positionOption.title}</H2>
+                  <List>
+                    {widgetsByPosition[position].map(
+                      (widget): JSX.Element => (
+                        <ListItem key={widget.id} spaceBetween>
+                          {widget.title}
+                          <div>
+                            <ActionIcon
+                              ariaLabel={`Widget ${widget.title} bearbeiten`}
+                              to={`${rootPath}/edit/${widget.id}`}
+                              icon="edit"
+                            />
+                            <DeleteIcon
+                              ariaLabel={`Widget ${widget.title} löschen`}
+                              id={widget.id}
+                              mutation={DeleteWidget}
+                              onUpdate={deleteWidget}
+                              title={widget.title}
+                            />
+                          </div>
+                        </ListItem>
+                      )
+                    )}
+                  </List>
+                </div>
+              )
+            }
+          )
         }}
       </Query>
 

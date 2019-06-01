@@ -5,8 +5,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 import WidgetOverview from './WidgetOverview'
 // fixtures
 
-describe('WidgetOverview should', () => {
-  test('render without crashing', () => {
+describe('WidgetOverview should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<WidgetOverview rootPath="/" />)
   })
 })

@@ -19,6 +19,7 @@ import { GetCategoriesWithChildren } from 'store/category/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
 import { Evaluation, EvaluationCreate } from 'store/evaluation/type'
+import { CategoryFull } from 'store/category/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -42,7 +43,15 @@ class EvaluationEdit extends React.Component<Props> {
         <H1 context="page">Auswertung bearbeiten</H1>
 
         <Query query={GetCategoriesWithChildren}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getCategories: CategoryFull[] }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -55,7 +64,15 @@ class EvaluationEdit extends React.Component<Props> {
 
             return (
               <Query query={GetEvaluation} variables={{ id: evaluationId }}>
-                {({ loading, error, data }) => {
+                {({
+                  loading,
+                  error,
+                  data,
+                }: {
+                  loading: boolean
+                  error?: ApolloError
+                  data: { getEvaluation: Evaluation }
+                }): JSX.Element => {
                   if (loading) return <CenteredSpinner />
                   if (error)
                     return (
@@ -71,12 +88,18 @@ class EvaluationEdit extends React.Component<Props> {
                       onCompleted={this.handleCompleted}
                       onError={this.handleError}
                     >
-                      {updateUser => (
+                      {(
+                        updateUser: ({
+                          variables,
+                        }: {
+                          variables: EvaluationCreate
+                        }) => void
+                      ): JSX.Element => (
                         <EvaluationForm
                           categories={categories}
                           initialData={data.getEvaluation}
                           rootPath={rootPath}
-                          submitAction={(variables: EvaluationCreate) =>
+                          submitAction={(variables: EvaluationCreate): void =>
                             updateUser({ variables })
                           }
                         />

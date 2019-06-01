@@ -16,8 +16,12 @@ import { addEvaluation } from 'store/evaluation/update'
 import { CreateEvaluation } from 'store/evaluation/mutation'
 import { GetCategoriesWithChildren } from 'store/category/query'
 // interfaces
-import { Evaluation } from 'store/evaluation/type'
+import {
+  Evaluation,
+  EvaluationCreate as EvaluationCreateType,
+} from 'store/evaluation/type'
 import { NotificationCreate } from 'types/types'
+import { Category } from 'store/category/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -32,13 +36,21 @@ class EvaluationCreate extends React.Component<Props> {
     this.handleError = this.handleError.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { rootPath } = this.props
     return (
       <FadeTransition fullWidth>
         <H1 context="page">Auswertung erstellen</H1>
         <Query query={GetCategoriesWithChildren}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            data: { getCategories: Category[] }
+            error?: ApolloError
+          }): JSX.Element[] | JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -55,12 +67,20 @@ class EvaluationCreate extends React.Component<Props> {
                 onError={this.handleError}
                 update={addEvaluation}
               >
-                {createEvaluation => (
+                {(
+                  createEvaluation: ({
+                    variables,
+                  }: {
+                    variables: EvaluationCreateType
+                  }) => void
+                ): JSX.Element => (
                   <EvaluationForm
                     categories={data.getCategories}
                     mode="create"
                     rootPath={rootPath}
-                    submitAction={variables => createEvaluation({ variables })}
+                    submitAction={(variables): void =>
+                      createEvaluation({ variables })
+                    }
                   />
                 )}
               </Mutation>

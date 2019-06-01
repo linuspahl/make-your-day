@@ -41,7 +41,15 @@ class CategoryEdit extends React.Component<Props> {
         <H1 context="page">Kategorie bearbeiten</H1>
 
         <Query query={GetCategory} variables={{ id: categoryId }}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            data: { getCategory: Category }
+            error?: ApolloError
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -57,12 +65,18 @@ class CategoryEdit extends React.Component<Props> {
                 onCompleted={this.handleCompleted}
                 onError={this.handleError}
               >
-                {updateUser => (
+                {(
+                  updateCategory: ({
+                    variables,
+                  }: {
+                    variables: CategoryCreate
+                  }) => void
+                ): JSX.Element => (
                   <CategoryForm
                     initialData={data.getCategory}
                     rootPath={rootPath}
-                    submitAction={(variables: CategoryCreate) =>
-                      updateUser({ variables })
+                    submitAction={(variables: CategoryCreate): void =>
+                      updateCategory({ variables })
                     }
                   />
                 )}

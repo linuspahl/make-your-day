@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import EditorWidgetPlaceholder from './EditorWidgetPlaceholder'
 
-describe('EditorWidgetPlaceholder should', () => {
-  test('render without crashing', () => {
+describe('EditorWidgetPlaceholder should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<EditorWidgetPlaceholder />)
   })
 })

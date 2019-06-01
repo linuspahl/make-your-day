@@ -12,8 +12,8 @@ export const Shortcut = styled.div`
   margin-right: 5px;
 
   border-radius: 50%;
-  border: 1px solid ${props => props.theme.border};
-  background-color: ${props => props.theme.timelineDay};
+  border: 1px solid ${(props): string => props.theme.border};
+  background-color: ${(props): string => props.theme.timelineDay};
 `
 
 export const Day = styled.button`
@@ -24,7 +24,7 @@ export const Day = styled.button`
   cursor: pointer;
 
   padding: 5px 0;
-  border-bottom: 1px solid ${props => props.theme.border};
+  border-bottom: 1px solid ${(props): string => props.theme.border};
 
   // Remove default button styles
   border-top: 0;

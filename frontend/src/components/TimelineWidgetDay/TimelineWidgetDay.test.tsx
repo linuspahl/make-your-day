@@ -6,8 +6,8 @@ import TimelineWidgetDay from './TimelineWidgetDay'
 // fixtures
 import { category } from 'store/category/fixtures'
 
-describe('TimelineWidgetDay should', () => {
-  test('render without crashing', () => {
+describe('TimelineWidgetDay should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <TimelineWidgetDay
         categories={[{ ...category, recordAmountSum: 0 }]}

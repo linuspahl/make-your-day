@@ -4,13 +4,13 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import NavigationItem from './NavigationItem'
 
-describe('NavigationItem should', () => {
-  test('render without crashing', () => {
+describe('NavigationItem should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <NavigationItem
         rootPath="/"
         route={{ title: 'Dashboard', path: '/' }}
-        toggleAction={() => {}}
+        toggleAction={(): void => {}}
       />
     )
   })

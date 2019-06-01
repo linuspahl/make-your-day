@@ -17,6 +17,7 @@ import TimelineWidgetDayPlaceholder from 'components/TimelineWidgetDay/TimelineW
 // interfaces
 import { Record } from 'store/record/type'
 import { Category } from 'store/category/type'
+import { ApolloError } from 'apollo-boost'
 
 interface CategoryEntry extends Category {
   recordAmountSum: number
@@ -29,9 +30,11 @@ interface DayEntry {
 
 const LoadingPlaceholder = (): React.ReactElement => (
   <PlaceholderGroup>
-    {fill(Array(3), null).map((value, key) => {
-      return <TimelineWidgetDayPlaceholder key={key} />
-    })}
+    {fill(Array(3), null).map(
+      (value, key): JSX.Element => {
+        return <TimelineWidgetDayPlaceholder key={key} />
+      }
+    )}
   </PlaceholderGroup>
 )
 
@@ -56,7 +59,15 @@ export default class TimelineWidget extends React.Component {
               createdAtFrom: getDateString(createdAt),
             }}
           >
-            {({ loading, error, data }) => {
+            {({
+              loading,
+              error,
+              data,
+            }: {
+              loading: boolean
+              error?: ApolloError
+              data: { getRecords: Record[] }
+            }): JSX.Element | JSX.Element[] => {
               if (loading) return <LoadingPlaceholder />
 
               if (error)
@@ -69,13 +80,15 @@ export default class TimelineWidget extends React.Component {
 
               const timeline = this.prepareTimeline(data.getRecords)
 
-              return sortBy(Object.values(timeline), 'date').map(day => (
-                <TimelineWidgetDay
-                  categories={Object.values(day.categories)}
-                  date={day.date}
-                  key={day.date}
-                />
-              ))
+              return sortBy(Object.values(timeline), 'date').map(
+                (day): JSX.Element => (
+                  <TimelineWidgetDay
+                    categories={Object.values(day.categories)}
+                    date={day.date}
+                    key={day.date}
+                  />
+                )
+              )
             }}
           </Query>
         </Layout>
@@ -102,32 +115,34 @@ export default class TimelineWidget extends React.Component {
       }
     }
 
-    records.forEach(record => {
-      const { category: recordCategory } = record
-      const category = recordCategory.parent || recordCategory
-      const categoryKey = `${category.id}`
-      // get createdAt date and format to string
-      const createdAtDate = formatUnixDate(record.createdAt)
-      const createdAtDay = getDateString(createdAtDate)
+    records.forEach(
+      (record): void => {
+        const { category: recordCategory } = record
+        const category = recordCategory.parent || recordCategory
+        const categoryKey = `${category.id}`
+        // get createdAt date and format to string
+        const createdAtDate = formatUnixDate(record.createdAt)
+        const createdAtDay = getDateString(createdAtDate)
 
-      if (timeline[createdAtDay]) {
-        // Check if an entry for the category exists
-        let categoryEnry = timeline[createdAtDay].categories[categoryKey]
-        if (!categoryEnry) {
-          // If no entry exists, create one and set the amount of the record
-          categoryEnry = {
-            ...category,
-            recordAmountSum: this.getRecordAmount(record, category),
+        if (timeline[createdAtDay]) {
+          // Check if an entry for the category exists
+          let categoryEnry = timeline[createdAtDay].categories[categoryKey]
+          if (!categoryEnry) {
+            // If no entry exists, create one and set the amount of the record
+            categoryEnry = {
+              ...category,
+              recordAmountSum: this.getRecordAmount(record, category),
+            }
+          } else {
+            // Otherwise only sum up the record amount
+            categoryEnry.recordAmountSum =
+              categoryEnry.recordAmountSum +
+              this.getRecordAmount(record, category)
           }
-        } else {
-          // Otherwise only sum up the record amount
-          categoryEnry.recordAmountSum =
-            categoryEnry.recordAmountSum +
-            this.getRecordAmount(record, category)
+          timeline[createdAtDay].categories[categoryKey] = categoryEnry
         }
-        timeline[createdAtDay].categories[categoryKey] = categoryEnry
       }
-    })
+    )
 
     return timeline
   }

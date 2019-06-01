@@ -18,6 +18,7 @@ import { GetEvaluations } from 'store/evaluation/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
 import { Widget, WidgetCreate as WidgetCreateType } from 'store/widget/type'
+import { Evaluation } from 'store/evaluation/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -38,7 +39,15 @@ class WidgetCreate extends React.Component<Props> {
       <FadeTransition fullWidth>
         <H1 context="page">Widget erstellen</H1>
         <Query query={GetEvaluations}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getEvaluations: Evaluation[] }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -55,12 +64,18 @@ class WidgetCreate extends React.Component<Props> {
                 onError={this.hanldeError}
                 update={addWidget}
               >
-                {createWidget => (
+                {(
+                  createWidget: ({
+                    variables,
+                  }: {
+                    variables: WidgetCreateType
+                  }) => void
+                ): JSX.Element => (
                   <WidgetForm
                     mode="create"
                     evaluations={data.getEvaluations}
                     rootPath={rootPath}
-                    submitAction={(variables: WidgetCreateType) =>
+                    submitAction={(variables: WidgetCreateType): void =>
                       createWidget({ variables })
                     }
                   />

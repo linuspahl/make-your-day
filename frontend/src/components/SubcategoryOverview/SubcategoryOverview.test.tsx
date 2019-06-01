@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import SubcategoryOverview from './SubcategoryOverview'
 
-describe('SubcategoryOverview should', () => {
-  test('render without crashing', () => {
+describe('SubcategoryOverview should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <SubcategoryOverview rootPath="/" />
     )

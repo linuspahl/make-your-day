@@ -6,12 +6,12 @@ import UserSessionsOverview from './UserSessionsOverview'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
-describe('UserSessionsOverview should', () => {
-  test('render without crashing', () => {
+describe('UserSessionsOverview should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <UserSessionsOverview
-        clearLocalStorage={() => {}}
-        createNotificationBanner={() => {}}
+        clearLocalStorage={(): void => {}}
+        createNotificationBanner={(): void => {}}
         userSession={userSession}
       />
     )

@@ -19,6 +19,7 @@ import { GetEvaluations } from 'store/evaluation/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
 import { Widget } from 'store/widget/type'
+import { Evaluation } from 'store/evaluation/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -42,7 +43,15 @@ class WidgetEdit extends React.Component<Props> {
         <H1 context="page">Widget bearbeiten</H1>
 
         <Query query={GetEvaluations}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getEvaluations: Evaluation[] }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -55,7 +64,15 @@ class WidgetEdit extends React.Component<Props> {
             const evaluations = data.getEvaluations
             return (
               <Query query={GetWidget} variables={{ id: widgetId }}>
-                {({ loading, error, data }) => {
+                {({
+                  loading,
+                  error,
+                  data,
+                }: {
+                  loading: boolean
+                  error?: ApolloError
+                  data: { getWidget: Widget }
+                }): JSX.Element => {
                   if (loading) return <CenteredSpinner />
                   if (error)
                     return (
@@ -71,12 +88,18 @@ class WidgetEdit extends React.Component<Props> {
                       onCompleted={this.handleCompleted}
                       onError={this.handleError}
                     >
-                      {updateUser => (
+                      {(
+                        updateUser: ({
+                          variables,
+                        }: {
+                          variables: Widget
+                        }) => void
+                      ): JSX.Element => (
                         <WidgetForm
                           evaluations={evaluations}
                           initialData={data.getWidget}
                           rootPath={rootPath}
-                          submitAction={(variables: Widget) =>
+                          submitAction={(variables: Widget): void =>
                             updateUser({ variables })
                           }
                         />

@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import DayEdit from './DayEdit'
 
-describe('DayEdit should', () => {
-  test('render without crashing', () => {
+describe('DayEdit should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<DayEdit />)
   })
 })

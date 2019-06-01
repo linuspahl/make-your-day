@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import WidgetForm from './WidgetForm'
 
-describe('WidgetForm should', () => {
-  test('render without crashing', () => {
+describe('WidgetForm should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <WidgetForm rootPath="/" submitAction={() => {}} />
+      <WidgetForm rootPath="/" submitAction={(): void => {}} />
     )
   })
 })

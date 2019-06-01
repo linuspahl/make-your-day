@@ -16,6 +16,9 @@ import RecordForm from 'components/RecordForm/RecordForm'
 import { CreateRecord } from 'store/record/mutation'
 import { GetCategoryWithChildren } from 'store/category/query'
 import { addRecord } from 'store/record/update'
+// interfaces
+import { RecordCreate as RecordCreateType } from 'store/record/type'
+import { Category } from 'store/category/type'
 import { NotificationCreate } from 'types/types'
 
 interface Props extends RouteComponentProps {
@@ -54,7 +57,15 @@ class RecordCreate extends React.Component<Props> {
       <FadeTransition>
         <H1>Eintrag erstellen</H1>
         <Query query={GetCategoryWithChildren} variables={{ id: categoryId }}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getCategory: Category }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -73,7 +84,13 @@ class RecordCreate extends React.Component<Props> {
                 onError={this.handleError}
                 update={addRecord}
               >
-                {createRecord => (
+                {(
+                  createRecord: ({
+                    variables,
+                  }: {
+                    variables: RecordCreateType
+                  }) => void
+                ): JSX.Element => (
                   <RecordForm
                     category={category}
                     params={{
@@ -82,7 +99,9 @@ class RecordCreate extends React.Component<Props> {
                     }}
                     mode="create"
                     rootPath={'/'}
-                    submitAction={variables => createRecord({ variables })}
+                    submitAction={(variables: RecordCreateType): void =>
+                      createRecord({ variables })
+                    }
                   />
                 )}
               </Mutation>

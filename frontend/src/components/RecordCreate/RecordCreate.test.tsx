@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import RecordCreate from './RecordCreate'
 
-describe('RecordCreate should', () => {
-  test('render without crashing', () => {
+describe('RecordCreate should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <RecordCreate createNotificationBanner={() => {}}>
+      <RecordCreate createNotificationBanner={(): void => {}}>
         Page content
       </RecordCreate>
     )

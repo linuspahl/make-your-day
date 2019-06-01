@@ -17,7 +17,8 @@ import ListItem from 'shared/list/ListItem/ListItem'
 import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetCategoryPlainWithChildren } from 'store/category/query'
-import { Subcategory } from 'store/category/type'
+import { Subcategory, CategoryFull } from 'store/category/type'
+import { ApolloError } from 'apollo-boost'
 
 const List = styled.ul`
   margin-top: 25px;
@@ -40,7 +41,15 @@ class CategoryEdit extends React.Component<Props> {
           query={GetCategoryPlainWithChildren}
           variables={{ id: categoryId }}
         >
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getCategory: CategoryFull }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -58,7 +67,7 @@ class CategoryEdit extends React.Component<Props> {
             return (
               <List>
                 {data.getCategory.subcategories.map(
-                  (subcategory: Subcategory) => (
+                  (subcategory: Subcategory): JSX.Element => (
                     <ListItem key={subcategory.id} spaceBetween>
                       {subcategory.title}
                       <ActionIcon

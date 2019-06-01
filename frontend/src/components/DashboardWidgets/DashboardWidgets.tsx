@@ -57,24 +57,29 @@ const DashboardWidgets = (props: Props): React.ReactElement => {
 
   return (
     <Layout>
-      {sortBy(widgets, 'id').map(widget => (
-        <WidgetLayout key={widget.id}>
-          <WidgetHeader>
-            <H2>{widget.title}</H2>
-          </WidgetHeader>
+      {sortBy(widgets, 'id').map(
+        (widget): JSX.Element => (
+          <WidgetLayout key={widget.id}>
+            <WidgetHeader>
+              <H2>{widget.title}</H2>
+            </WidgetHeader>
 
-          {widget.type === 'timeline' && <TimelineWidget key={widget.id} />}
-          {widget.type === 'evaluation' && (
-            <EvaluationWidget evaluation={widget.evaluation} key={widget.id} />
-          )}
-          {widget.type === 'textarea' && (
-            <EditorWidget
-              createNotificationBanner={createNotificationBanner}
-              widget={widget}
-            />
-          )}
-        </WidgetLayout>
-      ))}
+            {widget.type === 'timeline' && <TimelineWidget key={widget.id} />}
+            {widget.type === 'evaluation' && (
+              <EvaluationWidget
+                evaluation={widget.evaluation}
+                key={widget.id}
+              />
+            )}
+            {widget.type === 'textarea' && (
+              <EditorWidget
+                createNotificationBanner={createNotificationBanner}
+                widget={widget}
+              />
+            )}
+          </WidgetLayout>
+        )
+      )}
       <NewWidgetWrapper>
         <NewWidgetBox>
           <NewWidgetLink to="/widgets/create">

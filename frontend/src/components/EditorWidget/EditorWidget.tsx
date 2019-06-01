@@ -33,7 +33,7 @@ export default class Widget extends React.Component<Props, WidgetType> {
   public componentDidMount(): void {
     this.editor = init({
       element: this.editorRef,
-      onChange: (value: string) => this.setState({ value }),
+      onChange: (value: string): void => this.setState({ value }),
       actions: [
         'bold',
         'italic',
@@ -55,10 +55,12 @@ export default class Widget extends React.Component<Props, WidgetType> {
   public render(): React.ReactElement {
     return (
       <Mutation mutation={UpdateWidget} onError={this.handleError}>
-        {updateWidget => (
+        {(
+          updateWidget: ({ variables }: { variables: WidgetType }) => void
+        ): JSX.Element => (
           <PellEditor
-            ref={test => (this.editorRef = test)}
-            onBlur={() => updateWidget({ variables: this.state })}
+            ref={(elementRef): HTMLDivElement => (this.editorRef = elementRef)}
+            onBlur={(): void => updateWidget({ variables: this.state })}
           />
         )}
       </Mutation>

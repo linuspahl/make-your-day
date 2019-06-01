@@ -49,8 +49,8 @@ export default class LoginForm extends React.Component<Props, State> {
         onCompleted={this.handleCompleted}
         onError={this.handleError}
       >
-        {loginUser => (
-          <Form onSubmit={event => this.handleSubmit(event, loginUser)}>
+        {(loginUser: () => void): JSX.Element => (
+          <Form onSubmit={(event): void => this.handleSubmit(event, loginUser)}>
             <Row>
               Username
               <Input
@@ -125,7 +125,10 @@ export default class LoginForm extends React.Component<Props, State> {
     // Part of the login is to update the localstorage with the received user settings, like the night mode.
     // For this case we need to format the settings in a {key: value} format
     return userSettings.reduce(
-      (result: { [key: string]: string }, userSetting) => {
+      (
+        result: { [key: string]: string },
+        userSetting
+      ): { [key: string]: string } => {
         const {
           value,
           setting: { type },

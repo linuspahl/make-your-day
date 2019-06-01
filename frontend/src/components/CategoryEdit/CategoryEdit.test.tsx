@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import CategoryEdit from './CategoryEdit'
 
-describe('CategoryEdit should', () => {
-  test('render without crashing', () => {
+describe('CategoryEdit should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <CategoryEdit rootPath="/" createNotificationBanner={() => {}} />
+      <CategoryEdit rootPath="/" createNotificationBanner={(): void => {}} />
     )
   })
 })

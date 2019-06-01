@@ -43,11 +43,17 @@ class CategoryCreate extends React.Component<Props> {
           onError={this.handleError}
           update={addCategory}
         >
-          {createCategory => (
+          {(
+            createCategory: ({
+              variables,
+            }: {
+              variables: CategoryCreateType
+            }) => void
+          ): JSX.Element => (
             <CategoryForm
               mode="create"
               rootPath={rootPath}
-              submitAction={(variables: CategoryCreateType) =>
+              submitAction={(variables: CategoryCreateType): void =>
                 createCategory({ variables })
               }
             />

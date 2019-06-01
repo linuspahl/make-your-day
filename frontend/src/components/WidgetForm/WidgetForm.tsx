@@ -35,15 +35,17 @@ const generateEvaluationOptions = (
 ): SelectOption[] => {
   let evaluationOptions: SelectOption[] = []
 
-  evaluations.forEach(evaluation => {
-    evaluationOptions = [
-      ...evaluationOptions,
-      {
-        value: evaluation.id,
-        title: evaluation.title,
-      },
-    ]
-  })
+  evaluations.forEach(
+    (evaluation): void => {
+      evaluationOptions = [
+        ...evaluationOptions,
+        {
+          value: evaluation.id,
+          title: evaluation.title,
+        },
+      ]
+    }
+  )
 
   return evaluationOptions
 }
@@ -67,12 +69,12 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
       this.state = { ...this.state, ...props.initialData }
     }
 
-    this.handleSubmit = event => {
+    this.handleSubmit = (event): void => {
       event.preventDefault()
       this.props.submitAction(this.state)
     }
 
-    this.handleInputChange = event =>
+    this.handleInputChange = (event): void =>
       handleInputChange(event, this.setState.bind(this))
   }
 
@@ -88,7 +90,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
     }
 
     return (
-      <Form onSubmit={event => this.handleSubmit(event)}>
+      <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <Row>
           Name
           <Input

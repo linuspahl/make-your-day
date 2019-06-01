@@ -6,7 +6,7 @@ import { Day, Shortcut, Categories } from './styles'
 import CategorySummaryPlaceholder from 'shared/CategorySummary/CategorySummaryPlaceholder'
 
 const ShortcutLoading = styled(Shortcut)`
-  background-color: ${props => props.theme.border};
+  background-color: ${(props): string => props.theme.border};
 `
 
 const DayPlaceholer = styled(Day)`

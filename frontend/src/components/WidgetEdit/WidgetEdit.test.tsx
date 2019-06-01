@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import WidgetEdit from './WidgetEdit'
 
-describe('WidgetEdit should', () => {
-  test('render without crashing', () => {
+describe('WidgetEdit should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <WidgetEdit rootPath="/" createNotificationBanner={() => {}} />
+      <WidgetEdit rootPath="/" createNotificationBanner={(): void => {}} />
     )
   })
 })

@@ -4,12 +4,12 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import LoginForm from './LoginForm'
 
-describe('LoginForm should', () => {
-  test('render without crashing', () => {
+describe('LoginForm should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <LoginForm
-        updateLocalStorage={() => {}}
-        createNotificationBanner={() => {}}
+        updateLocalStorage={(): void => {}}
+        createNotificationBanner={(): void => {}}
       />
     )
   })

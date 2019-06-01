@@ -20,9 +20,9 @@ export const Layout = styled.div<LayoutProps>`
   opacity: 1;
   transition: background-image 1s linear, background-color 1.5s linear;
 
-  padding: ${props => (props.noPadding ? 0 : '20px')};
+  padding: ${(props): string => (props.noPadding ? '0' : '20px')};
 
-  ${props =>
+  ${(props): string =>
     props.theme.settings.showAppBgImage
       ? `
     background-image: url(${
@@ -35,5 +35,5 @@ export const Layout = styled.div<LayoutProps>`
     `
       : `background-color: ${props.theme.appBg}`};
 
-  color: ${props => props.theme.text};
+  color: ${(props): string => props.theme.text};
 `

@@ -26,6 +26,7 @@ import NoResult from 'shared/NoResult/NoResult'
 import { GetRecords } from 'store/record/query'
 import { Record as RecordType } from 'store/record/type'
 import { CategoryFull } from 'store/category/type'
+import { ApolloError } from 'apollo-boost'
 
 // needed for prepareCategories function
 interface CategoryEnry extends CategoryFull {
@@ -59,7 +60,15 @@ class Timeline extends React.Component<Props> {
         <H2>Bestehende bearbeiten</H2>
         <Records>
           <Query query={GetRecords} variables={{ createdAt: date }}>
-            {({ loading, error, data }) => {
+            {({
+              loading,
+              error,
+              data,
+            }: {
+              loading: boolean
+              data: { getRecords: RecordType[] }
+              error?: ApolloError
+            }): JSX.Element | JSX.Element[] => {
               if (loading) return <CenteredSpinner />
               if (error)
                 return (
@@ -72,30 +81,32 @@ class Timeline extends React.Component<Props> {
 
               const categories = this.prepareCategories(data.getRecords)
 
-              return Object.values(categories).map(category => {
-                return (
-                  <Category key={category.id}>
-                    <CategoryTitle>{category.title}</CategoryTitle>
-                    <CategoryRecords>
-                      {sortBy(category.records, 'category.id').map(
-                        (record: RecordType) => (
-                          <CategorySummary
-                            amount={
-                              category.hasUnit ? Number(record.amount) : 1
-                            }
-                            category={category}
-                            displayTitle={record.category.title}
-                            key={record.id}
-                            to={`/categories/${category.id}/records/${
-                              record.id
-                            }/edit`}
-                          />
-                        )
-                      )}
-                    </CategoryRecords>
-                  </Category>
-                )
-              })
+              return Object.values(categories).map(
+                (category): JSX.Element => {
+                  return (
+                    <Category key={category.id}>
+                      <CategoryTitle>{category.title}</CategoryTitle>
+                      <CategoryRecords>
+                        {sortBy(category.records, 'category.id').map(
+                          (record: RecordType): React.ReactNode => (
+                            <CategorySummary
+                              amount={
+                                category.hasUnit ? Number(record.amount) : 1
+                              }
+                              category={category}
+                              displayTitle={record.category.title}
+                              key={record.id}
+                              to={`/categories/${category.id}/records/${
+                                record.id
+                              }/edit`}
+                            />
+                          )
+                        )}
+                      </CategoryRecords>
+                    </Category>
+                  )
+                }
+              )
             }}
           </Query>
         </Records>
@@ -110,25 +121,27 @@ class Timeline extends React.Component<Props> {
 
   private prepareCategories(records: RecordType[] = []): CategoryEnry[] {
     const categories: { [key: string]: CategoryEnry } = {}
-    records.forEach(record => {
-      const category = record.category.parent || record.category
+    records.forEach(
+      (record): void => {
+        const category = record.category.parent || record.category
 
-      const categoryKey = `${category.id}`
+        const categoryKey = `${category.id}`
 
-      let categoryEnry = categories[categoryKey]
-      if (categoryEnry) {
-        categoryEnry = {
-          ...category,
-          records: [...categoryEnry.records, record],
+        let categoryEnry = categories[categoryKey]
+        if (categoryEnry) {
+          categoryEnry = {
+            ...category,
+            records: [...categoryEnry.records, record],
+          }
+        } else {
+          categoryEnry = {
+            ...category,
+            records: [record],
+          }
         }
-      } else {
-        categoryEnry = {
-          ...category,
-          records: [record],
-        }
+        categories[categoryKey] = categoryEnry
       }
-      categories[categoryKey] = categoryEnry
-    })
+    )
     return Object.values(categories)
   }
 }

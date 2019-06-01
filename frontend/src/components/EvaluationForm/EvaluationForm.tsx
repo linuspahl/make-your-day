@@ -28,26 +28,30 @@ const generateCategoryOptions = (
 ): SelectOption[] => {
   let categoryOptions: SelectOption[] = []
 
-  categories.forEach(category => {
-    categoryOptions = [
-      ...categoryOptions,
-      {
-        value: category.id,
-        title: category.title,
-      },
-    ]
-    if (category.subcategories) {
-      category.subcategories.forEach((subcategory: CategoryFull) => {
-        categoryOptions = [
-          ...categoryOptions,
-          {
-            value: subcategory.id,
-            title: `${category.title} -> ${subcategory.title}`,
-          },
-        ]
-      })
+  categories.forEach(
+    (category): void => {
+      categoryOptions = [
+        ...categoryOptions,
+        {
+          value: category.id,
+          title: category.title,
+        },
+      ]
+      if (category.subcategories) {
+        category.subcategories.forEach(
+          (subcategory: CategoryFull): void => {
+            categoryOptions = [
+              ...categoryOptions,
+              {
+                value: subcategory.id,
+                title: `${category.title} -> ${subcategory.title}`,
+              },
+            ]
+          }
+        )
+      }
     }
-  })
+  )
 
   return categoryOptions
 }
@@ -89,7 +93,7 @@ export default class EvaluationForm extends React.Component<
     const { mode, rootPath, categories = [] } = this.props
     const { title, type, groupSubcategories, period, categoryId } = this.state
     const selectedCategory = categories.find(
-      category => category.id === categoryId
+      (category): boolean => category.id === categoryId
     )
     const categoryOptions = generateCategoryOptions(categories)
     const disabledFields = {
@@ -97,7 +101,7 @@ export default class EvaluationForm extends React.Component<
     }
 
     return (
-      <Form onSubmit={event => this.handleSubmit(event)}>
+      <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <Row>
           Name
           <Input

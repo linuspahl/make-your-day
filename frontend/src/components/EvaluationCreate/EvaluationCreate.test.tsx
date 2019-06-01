@@ -4,10 +4,13 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import EvaluationCreate from './EvaluationCreate'
 
-describe('EvaluationCreate should', () => {
-  test('render without crashing', () => {
+describe('EvaluationCreate should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <EvaluationCreate rootPath="/" createNotificationBanner={() => {}} />
+      <EvaluationCreate
+        rootPath="/"
+        createNotificationBanner={(): void => {}}
+      />
     )
   })
 })

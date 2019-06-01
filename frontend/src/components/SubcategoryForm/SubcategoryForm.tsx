@@ -50,7 +50,7 @@ export default class SubcategoryForm extends React.Component<
     const { mode, rootPath } = this.props
     const { title } = this.state
     return (
-      <Form onSubmit={event => this.handleSubmit(event)}>
+      <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <Row>
           Titel
           <Input

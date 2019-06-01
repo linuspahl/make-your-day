@@ -9,6 +9,8 @@ import { Setting } from 'store/setting/type'
 // interface
 import { LocalStorage } from 'types/types'
 import { userSetting } from 'store/userSetting/fixtures'
+// interfaces
+import { UserSetting } from 'store/userSetting/type'
 
 interface Props {
   setting: Setting
@@ -19,13 +21,13 @@ const UserSettingCreate = (props: Props): React.ReactElement => (
   <Mutation
     mutation={CreateUserSetting}
     variables={{ settingId: props.setting.id }}
-    onCompleted={data =>
+    onCompleted={(data: { createUserSetting: UserSetting }): void =>
       props.updateLocalStorage({
         [props.setting.type]: data.createUserSetting.value,
       })
     }
   >
-    {perfomMutation => (
+    {(perfomMutation: () => void): JSX.Element => (
       <Checkbox
         value={false}
         onChange={perfomMutation}

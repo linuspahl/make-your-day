@@ -6,10 +6,14 @@ import RecordForm from './RecordForm'
 // fixtures
 import { category } from 'store/category/fixtures'
 
-describe('RecordForm should', () => {
-  test('render without crashing', () => {
+describe('RecordForm should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <RecordForm category={category} rootPath="/" submitAction={() => {}} />
+      <RecordForm
+        category={category}
+        rootPath="/"
+        submitAction={(): void => {}}
+      />
     )
   })
 })

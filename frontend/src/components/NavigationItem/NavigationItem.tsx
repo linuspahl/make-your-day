@@ -22,7 +22,7 @@ const NavigationItem = (props: Props): React.ReactElement => {
   const isActive = rootPath === path
   return (
     <ListItem>
-      <InnerLink to={path} onClick={() => toggleAction()}>
+      <InnerLink to={path} onClick={(): void => toggleAction()}>
         {title} {isActive && <RouteActive />}
       </InnerLink>
     </ListItem>

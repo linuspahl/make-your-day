@@ -9,7 +9,7 @@ interface LayoutProps {
 
 export const Layout = styled(Box)<LayoutProps>`
   padding: 10px 0 5px 0;
-  ${props =>
+  ${(props): string =>
     props.context === 'horizontal-scroll'
       ? `
       display: flex;
@@ -56,7 +56,7 @@ export const IconWrapper = styled.div<IconWrapperProps>`
     margin-right: 0;
   }
 
-  ${props =>
+  ${(props): string =>
     props.context === 'horizontal-scroll'
       ? `
       @media (min-width: ${

@@ -4,10 +4,14 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import EvaluationForm from './EvaluationForm'
 
-describe('EvaluationForm should', () => {
-  test('render without crashing', () => {
+describe('EvaluationForm should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <EvaluationForm rootPath="/" categories={[]} submitAction={() => {}} />
+      <EvaluationForm
+        rootPath="/"
+        categories={[]}
+        submitAction={(): void => {}}
+      />
     )
   })
 })

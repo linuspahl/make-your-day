@@ -4,6 +4,7 @@ import { Query } from 'react-apollo'
 import { generateUrlParams } from 'utils/utils'
 import { Link } from 'react-router-dom'
 import { fill } from 'lodash'
+import { ApolloError } from 'apollo-boost'
 // styles
 import { Layout, IconWrapper, NoResultWrapper } from './styles'
 // components
@@ -25,11 +26,13 @@ const LoadingPlaceholder = (
   props: LoadingPlaceholderProps
 ): React.ReactElement => (
   <PlaceholderGroup>
-    {fill(Array(3), null).map((value, key) => (
-      <IconWrapper key={key} context={props.context}>
-        <CategoryIconPlaceholder />
-      </IconWrapper>
-    ))}
+    {fill(Array(3), null).map(
+      (value, key): JSX.Element => (
+        <IconWrapper key={key} context={props.context}>
+          <CategoryIconPlaceholder />
+        </IconWrapper>
+      )
+    )}
   </PlaceholderGroup>
 )
 
@@ -41,7 +44,15 @@ interface Props {
 const CategoryIconOverview = (props: Props): React.ReactElement => (
   <Layout context={props.context}>
     <Query query={GetCategoriesIcon}>
-      {({ loading, error, data }) => {
+      {({
+        loading,
+        error,
+        data,
+      }: {
+        loading: boolean
+        error?: ApolloError
+        data: { getCategories: Category[] }
+      }): JSX.Element | JSX.Element[] => {
         if (loading) return <LoadingPlaceholder context={props.context} />
 
         if (error)
@@ -62,8 +73,8 @@ const CategoryIconOverview = (props: Props): React.ReactElement => (
           )
 
         const urlParams = generateUrlParams(props.params)
-        return data.getCategories.map((category: Category) => {
-          return (
+        return data.getCategories.map(
+          (category: Category): JSX.Element => (
             <IconWrapper key={category.id} context={props.context}>
               <CategoryIcon
                 ariaLabel={`Erstelle Eintrag für Kategorie ${category.title}`}
@@ -75,7 +86,7 @@ const CategoryIconOverview = (props: Props): React.ReactElement => (
               />
             </IconWrapper>
           )
-        })
+        )
       }}
     </Query>
   </Layout>

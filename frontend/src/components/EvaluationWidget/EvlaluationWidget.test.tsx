@@ -6,8 +6,8 @@ import EvaluationWidget from './EvaluationWidget'
 // fixtures
 import { evaluation } from 'store/evaluation/fixtures'
 
-describe('EvaluationWidget should', () => {
-  test('render without crashing', () => {
+describe('EvaluationWidget should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <EvaluationWidget evaluation={evaluation} />
     )

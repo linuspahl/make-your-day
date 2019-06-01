@@ -6,13 +6,13 @@ import SubcategoryForm from './SubcategoryForm'
 // fixtures
 import { category } from 'store/category/fixtures'
 
-describe('SubcategoryForm should', () => {
-  test('render without crashing', () => {
+describe('SubcategoryForm should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <SubcategoryForm
         rootPath="/"
         parentCategory={category}
-        submitAction={() => {}}
+        submitAction={(): void => {}}
       />
     )
   })

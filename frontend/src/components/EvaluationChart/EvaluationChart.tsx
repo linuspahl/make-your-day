@@ -9,7 +9,9 @@ import Piechart from 'shared/chart/Piechart/Piechart'
 import { Evaluation } from 'store/evaluation/type'
 
 const formatLabels = (labels: string[] = []): string[] => {
-  return labels.map(label => moment(label, 'YYYY-MM-DD').format('dd DD.'))
+  return labels.map(
+    (label): string => moment(label, 'YYYY-MM-DD').format('dd DD.')
+  )
 }
 
 interface Props {

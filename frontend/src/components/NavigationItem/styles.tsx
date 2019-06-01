@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom'
 export const ListItem = styled.li`
   width: 100%;
   height: 60px;
-  border-bottom: 1px solid ${props => props.theme.border};
+  border-bottom: 1px solid ${(props): string => props.theme.border};
 
   &:active {
-    background-color: ${props => props.theme.active};
+    background-color: ${(props): string => props.theme.active};
   }
   &:last-child {
     border-bottom: 0;

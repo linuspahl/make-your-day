@@ -39,7 +39,15 @@ class EvaluationEdit extends React.Component<Props> {
         <H1 context="page">Ergebnis Auswertung</H1>
 
         <Query query={GetEvaluation} variables={{ id: evaluationId }}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getEvaluation: Evaluation }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (

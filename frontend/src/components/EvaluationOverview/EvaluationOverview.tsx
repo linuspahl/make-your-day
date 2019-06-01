@@ -2,6 +2,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Query } from 'react-apollo'
+import { ApolloError } from 'apollo-boost'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
@@ -36,7 +37,15 @@ const EvaluationOverview = (props: Props): React.ReactElement => {
       <H1 context="page">Auswertungen verwalten</H1>
 
       <Query query={GetEvaluations}>
-        {({ loading, error, data }) => {
+        {({
+          loading,
+          error,
+          data,
+        }: {
+          loading: boolean
+          error?: ApolloError
+          data: { getEvaluations: Evaluation[] }
+        }): JSX.Element => {
           if (loading) return <CenteredSpinner />
           if (error)
             return (
@@ -48,30 +57,32 @@ const EvaluationOverview = (props: Props): React.ReactElement => {
           if (data.getEvaluations.length === 0) return <NoResult />
           return (
             <List>
-              {data.getEvaluations.map((evaluation: Evaluation) => (
-                <ListItem key={evaluation.id} spaceBetween>
-                  {evaluation.title}
-                  <div>
-                    <ActionIcon
-                      ariaLabel={`Auswertung ${evaluation.title} anzeigen`}
-                      to={`${rootPath}/view/${evaluation.id}`}
-                      icon="bar-chart"
-                    />
-                    <ActionIcon
-                      ariaLabel={`Auswertung ${evaluation.title} bearbeiten`}
-                      to={`${rootPath}/edit/${evaluation.id}`}
-                      icon="edit"
-                    />
-                    <DeleteIcon
-                      ariaLabel={`Auswertung ${evaluation.title} löschen`}
-                      id={evaluation.id}
-                      mutation={DeleteEvaluation}
-                      onUpdate={deleteEvaluation}
-                      title={evaluation.title}
-                    />
-                  </div>
-                </ListItem>
-              ))}
+              {data.getEvaluations.map(
+                (evaluation: Evaluation): JSX.Element => (
+                  <ListItem key={evaluation.id} spaceBetween>
+                    {evaluation.title}
+                    <div>
+                      <ActionIcon
+                        ariaLabel={`Auswertung ${evaluation.title} anzeigen`}
+                        to={`${rootPath}/view/${evaluation.id}`}
+                        icon="bar-chart"
+                      />
+                      <ActionIcon
+                        ariaLabel={`Auswertung ${evaluation.title} bearbeiten`}
+                        to={`${rootPath}/edit/${evaluation.id}`}
+                        icon="edit"
+                      />
+                      <DeleteIcon
+                        ariaLabel={`Auswertung ${evaluation.title} löschen`}
+                        id={evaluation.id}
+                        mutation={DeleteEvaluation}
+                        onUpdate={deleteEvaluation}
+                        title={evaluation.title}
+                      />
+                    </div>
+                  </ListItem>
+                )
+              )}
             </List>
           )
         }}

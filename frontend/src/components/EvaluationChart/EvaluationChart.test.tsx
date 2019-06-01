@@ -6,8 +6,8 @@ import EvaluationChart from './EvaluationChart'
 // fixtures
 import { evaluation } from 'store/evaluation/fixtures'
 
-describe('EvaluationChart should', () => {
-  test('render without crashing', () => {
+describe('EvaluationChart should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <EvaluationChart evaluation={evaluation} />
     )

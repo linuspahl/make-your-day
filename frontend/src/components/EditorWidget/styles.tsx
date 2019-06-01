@@ -34,7 +34,7 @@ export const PellEditor = styled.div`
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-right: 1px solid ${props => props.theme.border};
+    border-right: 1px solid ${(props): string => props.theme.border};
 
     background-color: transparent;
     color: inherit;
@@ -43,7 +43,7 @@ export const PellEditor = styled.div`
       border-right: 0;
     }
     &:active {
-      background-color: ${props => props.theme.active};
+      background-color: ${(props): string => props.theme.active};
     }
   }
   .pell-button-selected {

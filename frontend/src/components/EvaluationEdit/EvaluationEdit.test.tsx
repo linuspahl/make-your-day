@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import EvaluationEdit from './EvaluationEdit'
 
-describe('EvaluationEdit should', () => {
-  test('render without crashing', () => {
+describe('EvaluationEdit should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <EvaluationEdit createNotificationBanner={() => {}} rootPath="/" />
+      <EvaluationEdit createNotificationBanner={(): void => {}} rootPath="/" />
     )
   })
 })

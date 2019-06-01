@@ -21,6 +21,8 @@ import { GetCategoryWithChildren } from 'store/category/query'
 import { addRecord, deleteRecord } from 'store/record/update'
 // interfaces
 import { NotificationCreate } from 'types/types'
+import { CategoryFull } from 'store/category/type'
+import { Record, RecordCreate } from 'store/record/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -43,7 +45,15 @@ class RecordEdit extends React.Component<Props> {
       <FadeTransition>
         <H1>Eintrag bearbeiten</H1>
         <Query query={GetCategoryWithChildren} variables={{ id: categoryId }}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getCategory: CategoryFull }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -57,7 +67,15 @@ class RecordEdit extends React.Component<Props> {
 
             return (
               <Query query={GetRecord} variables={{ id: recordId }}>
-                {({ loading, error, data }) => {
+                {({
+                  loading,
+                  error,
+                  data,
+                }: {
+                  loading: boolean
+                  error?: ApolloError
+                  data: { getRecord: Record }
+                }): JSX.Element => {
                   if (loading) return <CenteredSpinner />
                   if (error)
                     return (
@@ -77,12 +95,18 @@ class RecordEdit extends React.Component<Props> {
                         onError={this.handleError}
                         update={addRecord}
                       >
-                        {updateRecord => (
+                        {(
+                          updateRecord: ({
+                            variables,
+                          }: {
+                            variables: RecordCreate
+                          }) => void
+                        ): JSX.Element => (
                           <RecordForm
                             category={category}
                             rootPath={'/'}
                             initialData={record}
-                            submitAction={variables =>
+                            submitAction={(variables: RecordCreate): void =>
                               updateRecord({ variables })
                             }
                           />
@@ -94,7 +118,7 @@ class RecordEdit extends React.Component<Props> {
                           mutation={DeleteRecord}
                           onUpdate={deleteRecord}
                           title={record.title}
-                          onDelete={() => history.push('/')}
+                          onDelete={(): void => history.push('/')}
                         />
                       </ActionRow>
                     </React.Fragment>

@@ -115,7 +115,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     }
 
     return (
-      <Form onSubmit={event => this.handleSubmit(event)}>
+      <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <Category>
           <CategoryIconWrapper>
             <CategoryIcon icon={icon} color={color} title={categoryTitle} />
@@ -145,7 +145,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
                 tabIndex={1}
                 title="Unterkategorie"
                 value={categoryId}
-                renderFooter={() => (
+                renderFooter={(): JSX.Element => (
                   <Link
                     to={`/categories/${parentCatId}/subcategories/create?source=createRecord`}
                   >
@@ -205,8 +205,10 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
   private prepareSubcategories(
     subcategories: CategoryFull[] = []
   ): SelectOption[] {
-    return subcategories.map(subcategory => {
-      return { value: subcategory.id, title: subcategory.title }
-    })
+    return subcategories.map(
+      (subcategory): SelectOption => {
+        return { value: subcategory.id, title: subcategory.title }
+      }
+    )
   }
 }

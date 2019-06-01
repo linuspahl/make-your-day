@@ -6,11 +6,11 @@ import DashboardWidgets from './DashboardWidgets'
 // fixtures
 import { widget } from 'store/widget/fixtures'
 
-describe('DashboardWidgets should', () => {
-  test('render without crashing', () => {
+describe('DashboardWidgets should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <DashboardWidgets
-        createNotificationBanner={() => {}}
+        createNotificationBanner={(): void => {}}
         loading={false}
         widgets={[widget]}
       />

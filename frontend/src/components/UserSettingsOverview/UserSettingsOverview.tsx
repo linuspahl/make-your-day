@@ -19,6 +19,7 @@ import { UserSetting } from 'store/userSetting/type'
 import { Setting } from 'store/setting/type'
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate, LocalStorage } from 'types/types'
+import { ApolloError } from 'apollo-boost'
 
 interface Props {
   clearLocalStorage: () => void
@@ -35,7 +36,15 @@ class UserSettingsOverview extends React.Component<Props> {
       <FadeTransition>
         <H1 context="page">Einstellungen</H1>
         <Query query={GetSettings}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getSettings: Setting[] }
+          }): JSX.Element | JSX.Element[] => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -46,25 +55,27 @@ class UserSettingsOverview extends React.Component<Props> {
               )
             // We are getting the userSettings as props
             // Because we are just using booleans for the settings value so far, we are able to use checkboxes only
-            return data.getSettings.map((setting: Setting) => {
-              const isSelected = this.props.userSettings[setting.type]
-              return (
-                <Row key={setting.id}>
-                  {setting.title}{' '}
-                  {isSelected ? (
-                    <UserSettingDelete
-                      setting={setting}
-                      updateLocalStorage={this.props.updateLocalStorage}
-                    />
-                  ) : (
-                    <UserSettingCreate
-                      setting={setting}
-                      updateLocalStorage={this.props.updateLocalStorage}
-                    />
-                  )}
-                </Row>
-              )
-            })
+            return data.getSettings.map(
+              (setting: Setting): JSX.Element => {
+                const isSelected = this.props.userSettings[setting.type]
+                return (
+                  <Row key={setting.id}>
+                    {setting.title}{' '}
+                    {isSelected ? (
+                      <UserSettingDelete
+                        setting={setting}
+                        updateLocalStorage={this.props.updateLocalStorage}
+                      />
+                    ) : (
+                      <UserSettingCreate
+                        setting={setting}
+                        updateLocalStorage={this.props.updateLocalStorage}
+                      />
+                    )}
+                  </Row>
+                )
+              }
+            )
           }}
         </Query>
         <Row>

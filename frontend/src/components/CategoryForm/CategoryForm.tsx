@@ -67,7 +67,7 @@ export default class CategoryForm extends React.Component<
     } = this.state
 
     return (
-      <Form onSubmit={event => this.handleSubmit(event)}>
+      <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <IconFields
           color={color}
           icon={icon}

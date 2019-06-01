@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import IconFields from './IconFields'
 
-describe('IconFields should', () => {
-  test('render without crashing', () => {
+describe('IconFields should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <IconFields title="Title" handleInputChange={() => {}} />
+      <IconFields title="Title" handleInputChange={(): void => {}} />
     )
   })
 })

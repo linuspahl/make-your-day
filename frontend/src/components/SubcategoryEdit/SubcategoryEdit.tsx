@@ -41,7 +41,15 @@ class SubcategoryEdit extends React.Component<Props> {
         <H1 context="page">Subkategorie bearbeiten</H1>
 
         <Query query={GetCategory} variables={{ id: categoryId }}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getCategory: Category }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -57,12 +65,18 @@ class SubcategoryEdit extends React.Component<Props> {
                 onCompleted={this.handleCompleted}
                 onError={this.handleError}
               >
-                {updateCategory => (
+                {(
+                  updateCategory: ({
+                    variables,
+                  }: {
+                    variables: Category
+                  }) => void
+                ): JSX.Element => (
                   <SubcategoryForm
                     initialData={data.getCategory}
                     rootPath={rootPath}
                     parentCategory={data.getCategory}
-                    submitAction={variables =>
+                    submitAction={(variables: Category): void =>
                       updateCategory({
                         variables: { id: data.getCategory.id, ...variables },
                       })

@@ -8,7 +8,7 @@ import NavigationItem from 'components/NavigationItem/NavigationItem'
 // We need o use a wrapping div for the Modal component
 // To show the navigation above other currently open modals
 const IndexLayer = styled.div`
-  z-index: ${props => props.theme.layerIndex.navigation};
+  z-index: ${(props): string => props.theme.layerIndex.navigation};
 `
 
 interface Props {
@@ -30,14 +30,16 @@ const Navigation = (props: Props): React.ReactElement => {
     <IndexLayer>
       <Modal headline="Menü" toggleAction={toggleAction}>
         <ul>
-          {items.map(route => (
-            <NavigationItem
-              toggleAction={toggleAction}
-              key={route.path}
-              route={route}
-              rootPath={rootPath}
-            />
-          ))}
+          {items.map(
+            (route): JSX.Element => (
+              <NavigationItem
+                toggleAction={toggleAction}
+                key={route.path}
+                route={route}
+                rootPath={rootPath}
+              />
+            )
+          )}
         </ul>
       </Modal>
     </IndexLayer>

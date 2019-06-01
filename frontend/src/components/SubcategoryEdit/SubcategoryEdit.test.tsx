@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import SubcategoryEdit from './SubcategoryEdit'
 
-describe('SubcategoryEdit should', () => {
-  test('render without crashing', () => {
+describe('SubcategoryEdit should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <SubcategoryEdit rootPath="/" createNotificationBanner={() => {}} />
+      <SubcategoryEdit rootPath="/" createNotificationBanner={(): void => {}} />
     )
   })
 })

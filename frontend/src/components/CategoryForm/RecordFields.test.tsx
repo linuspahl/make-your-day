@@ -4,11 +4,11 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import RecordFields from './RecordFields'
 
-describe('RecordFields should', () => {
-  test('render without crashing', () => {
+describe('RecordFields should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <RecordFields
-        handleInputChange={() => {}}
+        handleInputChange={(): void => {}}
         hasDescription={false}
         hasSubcategories={false}
         hasTitle={false}

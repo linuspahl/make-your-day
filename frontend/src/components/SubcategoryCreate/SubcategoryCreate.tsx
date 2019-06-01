@@ -1,7 +1,9 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Mutation, Query } from 'react-apollo'
+import { Mutation, Query, FetchResult } from 'react-apollo'
+import { ApolloError } from 'apollo-boost'
+import { DataProxy } from 'apollo-cache'
 // utils
 import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
 // components
@@ -18,7 +20,6 @@ import { GetCategory } from 'store/category/query'
 // interfaces
 import { CategoryFull, CategoryCreate, Category } from 'store/category/type'
 import { NotificationCreate } from 'types/types'
-import { ApolloError } from 'apollo-boost'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -42,7 +43,15 @@ class SubcategoryCreate extends React.Component<Props> {
         <H1 context="page">Subkategorie erstellen</H1>
 
         <Query query={GetCategory} variables={{ id: categoryId }}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getCategory: Category }
+          }): JSX.Element => {
             if (loading) return <CenteredSpinner />
             if (error)
               return (
@@ -60,15 +69,21 @@ class SubcategoryCreate extends React.Component<Props> {
                 mutation={CreateSubcategory}
                 onCompleted={this.handleCompleted}
                 onError={this.handleError}
-                update={(cache, data) =>
+                update={(cache: DataProxy, data: FetchResult): void =>
                   addSubcategory(cache, data, { id: categoryId })
                 }
               >
-                {createSubcategory => (
+                {(
+                  createSubcategory: ({
+                    variables,
+                  }: {
+                    variables: CategoryCreate
+                  }) => void
+                ): JSX.Element => (
                   <SubcategoryForm
                     mode="create"
                     rootPath={rootPath}
-                    submitAction={(variables: CategoryCreate) =>
+                    submitAction={(variables: CategoryCreate): void =>
                       createSubcategory({ variables })
                     }
                     parentCategory={parentCategory}
