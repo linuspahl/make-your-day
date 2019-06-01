@@ -4,10 +4,15 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import IconSelect from './IconSelect'
 
-describe('IconSelect should', () => {
-  test('render without crashing', () => {
+describe('IconSelect should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <IconSelect value="value" onChange={() => {}} name="name" tabIndex={1} />
+      <IconSelect
+        value="value"
+        onChange={(): void => {}}
+        name="name"
+        tabIndex={1}
+      />
     )
   })
 })

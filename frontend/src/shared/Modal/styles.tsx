@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   height: 100%;
   width: 100%;
 
-  z-index: ${props => props.theme.layerIndex.modal};
+  z-index: ${(props): string => props.theme.layerIndex.modal};
   overflow-y: auto;
 `
 
@@ -35,7 +35,7 @@ export const ContentWrapper = styled.div`
 
   padding: 20px;
 
-  z-index: ${props => props.theme.layerIndex.modalContent};
+  z-index: ${(props): string => props.theme.layerIndex.modalContent};
 `
 
 export const Head = styled.div`

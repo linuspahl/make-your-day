@@ -6,7 +6,7 @@ import ListItem from 'shared/list/ListItem/ListItem'
 export const Layout = styled.div`
   width: 100%;
 
-  border: 1px solid ${props => props.theme.border};
+  border: 1px solid ${(props): string => props.theme.border};
 `
 
 export const Select = styled.div`
@@ -60,7 +60,7 @@ interface OptionProps {
 }
 
 export const Option = styled(ListItem)<OptionProps>`
-  ${props => `
+  ${(props): string => `
     background-color: ${props.isSelected ? props.theme.active : 'none'};
     cursor: pointer;
     &:active {

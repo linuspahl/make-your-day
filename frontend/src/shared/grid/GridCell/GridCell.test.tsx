@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import GridCell from './GridCell'
 
-describe('GridCell should', () => {
-  test('render without crashing', () => {
+describe('GridCell should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<GridCell>Content</GridCell>)
   })
 })

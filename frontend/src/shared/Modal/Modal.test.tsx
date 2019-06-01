@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import Modal from './Modal'
 
-describe('Modal should', () => {
-  test('render without crashing', () => {
+describe('Modal should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <Modal toggleAction={() => {}}>Content</Modal>
+      <Modal toggleAction={(): void => {}}>Content</Modal>
     )
   })
 })

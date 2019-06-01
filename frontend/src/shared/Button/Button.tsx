@@ -26,7 +26,7 @@ const Button = (props: Props): React.ReactElement => {
       to={isLink ? to : null}
       as={isLink ? Link : null}
       // Button is clickable
-      onClick={() => hasClickAction && clickAction()}
+      onClick={(): void => hasClickAction && clickAction()}
     >
       {children}
     </Layout>

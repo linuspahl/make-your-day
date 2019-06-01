@@ -6,8 +6,8 @@ import DeleteIcon from './DeleteIcon'
 import { DeleteUserSession } from 'store/userSession/mutation'
 import { deleteUserSession } from 'store/userSession/update'
 
-describe('DeleteIcon should', () => {
-  test('render without crashing', () => {
+describe('DeleteIcon should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <DeleteIcon
         id={1}

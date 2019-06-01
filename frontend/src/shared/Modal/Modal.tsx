@@ -25,7 +25,7 @@ export default class Modal extends React.Component<Props> {
     return (
       <Wrapper>
         <FadeTransition fullHeight>
-          <Offset onClick={() => toggleAction()} />
+          <Offset onClick={(): void => toggleAction()} />
           <ContentWrapper>
             <Content>
               <Head>

@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import Button from './Button'
 
-describe('Button should', () => {
-  test('render without crashing', () => {
+describe('Button should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<Button>Content</Button>)
   })
 })

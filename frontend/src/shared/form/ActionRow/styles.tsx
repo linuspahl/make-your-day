@@ -8,13 +8,13 @@ interface LayoutProps {
 
 export const Layout = styled(Row)<LayoutProps>`
   margin-top: 40px;
-  ${props =>
+  ${(props): string =>
     props.amountChildren === 1
       ? `
       justify-content: center
     `
       : ``};
-  ${props =>
+  ${(props): string =>
     props.theme.settings.leftHandMode
       ? `
       flex-direction: row-reverse;

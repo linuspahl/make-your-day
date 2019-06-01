@@ -6,8 +6,8 @@ import Piechart from './Piechart'
 // fixtures
 import { chart as chartFixture } from 'store/evaluation/fixtures'
 
-describe('Piechart should', () => {
-  test('render without crashing', () => {
+describe('Piechart should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<Piechart {...chartFixture} />)
   })
 })

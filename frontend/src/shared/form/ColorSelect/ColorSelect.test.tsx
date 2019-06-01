@@ -4,10 +4,15 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import ColorSelect from './ColorSelect'
 
-describe('ColorSelect should', () => {
-  test('render without crashing', () => {
+describe('ColorSelect should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <ColorSelect value="Color" tabIndex={1} name="Name" onChange={() => {}} />
+      <ColorSelect
+        value="Color"
+        tabIndex={1}
+        name="Name"
+        onChange={(): void => {}}
+      />
     )
   })
 })

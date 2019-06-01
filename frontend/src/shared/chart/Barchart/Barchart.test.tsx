@@ -6,8 +6,8 @@ import Barchart from './Barchart'
 // fixtures
 import { chart as chartFixture } from 'store/evaluation/fixtures'
 
-describe('Barchart should', () => {
-  test('render without crashing', () => {
+describe('Barchart should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<Barchart {...chartFixture} />)
   })
 })

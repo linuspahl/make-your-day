@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import ContentBox from './ContentBox'
 
-describe('ContentBox should', () => {
-  test('render without crashing', () => {
+describe('ContentBox should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<ContentBox>Content</ContentBox>)
   })
 })

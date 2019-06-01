@@ -56,15 +56,17 @@ const LogoutButton = (props: Props): React.ReactElement => {
     <Mutation
       mutation={DeleteUserSession}
       variables={variables}
-      onCompleted={data =>
+      onCompleted={(data: { deleteUserSession: boolean }): void =>
         handleCompleted(data, createNotificationBanner, clearLocalStorage)
       }
-      onError={() => handleError(createNotificationBanner, clearLocalStorage)}
+      onError={(): void =>
+        handleError(createNotificationBanner, clearLocalStorage)
+      }
     >
-      {perfomMutation => (
+      {(perfomMutation: () => void): JSX.Element => (
         <Button
           context="secondary"
-          clickAction={() => handleClick(perfomMutation)}
+          clickAction={(): void => handleClick(perfomMutation)}
         >
           Abmelden
           <IconWrapper>

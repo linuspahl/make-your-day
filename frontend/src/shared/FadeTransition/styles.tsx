@@ -17,6 +17,6 @@ interface WrapperProps {
 
 export const Wrapper = styled.div<WrapperProps>`
   animation: 0.35s ease-in 0s 1 ${fadeIn};
-  ${props => (props.fullHeight ? 'height: 100%;' : '')}
-  ${props => (props.fullWidth ? 'width: 100%;' : '')}
+  ${(props): string => (props.fullHeight ? 'height: 100%;' : '')}
+  ${(props): string => (props.fullWidth ? 'width: 100%;' : '')}
 `

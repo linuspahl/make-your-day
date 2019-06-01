@@ -4,10 +4,10 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import CloseIcon from './CloseIcon'
 
-describe('CloseIcon should', () => {
-  test('render without crashing', () => {
+describe('CloseIcon should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <CloseIcon closeAction={() => {}} />
+      <CloseIcon closeAction={(): void => {}} />
     )
   })
 })

@@ -37,7 +37,7 @@ export const DoubleBouncer1 = styled.div`
   position: absolute;
 
   border-radius: 50%;
-  background-color: ${props => props.theme.border};
+  background-color: ${(props): string => props.theme.border};
   opacity: 0.6;
 
   animation: ${bounce} 2s infinite ease-in-out;

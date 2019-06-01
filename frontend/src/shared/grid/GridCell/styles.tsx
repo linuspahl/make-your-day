@@ -7,5 +7,5 @@ interface ElementProps {
 
 export const Element = styled.div<ElementProps>`
   display: flex;
-  justify-content: ${props => props.justify || 'flex-start'};
+  justify-content: ${(props): string => props.justify || 'flex-start'};
 `

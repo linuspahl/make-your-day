@@ -37,11 +37,13 @@ const DeleteButton = (props: Props): React.ReactElement => {
     <Mutation
       mutation={mutation}
       variables={variables}
-      update={(cache, data) => onUpdate(cache, data, variables)}
+      update={(cache: DataProxy, data: FetchResult): void =>
+        onUpdate(cache, data, variables)
+      }
     >
-      {perfomMutation => (
+      {(perfomMutation: () => void): JSX.Element => (
         <Button
-          clickAction={() => handleClick(perfomMutation, onDelete, title)}
+          clickAction={(): void => handleClick(perfomMutation, onDelete, title)}
           context="delete"
         >
           Löschen

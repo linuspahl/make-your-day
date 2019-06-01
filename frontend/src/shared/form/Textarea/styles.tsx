@@ -22,10 +22,10 @@ export const Element = styled.textarea<ElementProps>`
   padding: 10px;
   margin-top: 3px;
   border-radius: inherit;
-  border: 1px solid ${props => props.theme.border};
+  border: 1px solid ${(props): string => props.theme.border};
 
   background-color: transparent;
-  color: ${props => props.theme.text};
+  color: ${(props): string => props.theme.text};
 
   box-shadow: none;
   appearance: none;

@@ -4,13 +4,13 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import LogoutIcon from './LogoutIcon'
 
-describe('LogoutIcon should', () => {
-  test('render without crashing', () => {
+describe('LogoutIcon should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <LogoutIcon
-        createNotificationBanner={() => {}}
+        createNotificationBanner={(): void => {}}
         userSessionId={1}
-        clearLocalStorage={() => {}}
+        clearLocalStorage={(): void => {}}
       />
     )
   })

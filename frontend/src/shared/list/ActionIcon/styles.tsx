@@ -12,8 +12,8 @@ export const Element = styled(Link)`
   float: left;
 
   font-size: 26px;
-  color: ${props => props.theme.text};
+  color: ${(props): string => props.theme.text};
   &:active {
-    background-color: ${props => props.theme.active};
+    background-color: ${(props): string => props.theme.active};
   }
 `

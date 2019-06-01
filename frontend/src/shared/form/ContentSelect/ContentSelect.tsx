@@ -76,14 +76,16 @@ export default class ContentSelect extends React.Component<Props, State> {
     const hasPreview = typeof renderPreview == 'function'
     const hasFooter = typeof renderFooter == 'function'
     const sortedOptions = this.sortedOptions
-    const currentOption = sortedOptions.find(option => option.value === value)
+    const currentOption = sortedOptions.find(
+      (option): boolean => option.value === value
+    )
 
     return (
       <Layout>
         <Select
           id={name}
           tabIndex={disabled ? -1 : tabIndex}
-          onClick={() => (!disabled ? this.toggleSelect() : null)}
+          onClick={(): void => (!disabled ? this.toggleSelect() : null)}
           onFocus={disabled ? null : this.onFocus}
           onBlur={disabled ? null : this.onBlur}
         >
@@ -95,24 +97,26 @@ export default class ContentSelect extends React.Component<Props, State> {
         {isOpen && (
           <Modal headline={title} toggleAction={this.toggleSelect}>
             <Options>
-              {sortedOptions.map(option => {
-                const isSelected = option.value === value
+              {sortedOptions.map(
+                (option): JSX.Element => {
+                  const isSelected = option.value === value
 
-                return (
-                  <Option
-                    isSelected={isSelected}
-                    key={option.value}
-                    onClick={() => this.onOptionClick(option.value)}
-                  >
-                    <React.Fragment>
-                      {hasPreview && (
-                        <OptionPreview>{renderPreview(option)}</OptionPreview>
-                      )}
-                      <span>{option.title}</span>
-                    </React.Fragment>
-                  </Option>
-                )
-              })}
+                  return (
+                    <Option
+                      isSelected={isSelected}
+                      key={option.value}
+                      onClick={(): void => this.onOptionClick(option.value)}
+                    >
+                      <React.Fragment>
+                        {hasPreview && (
+                          <OptionPreview>{renderPreview(option)}</OptionPreview>
+                        )}
+                        <span>{option.title}</span>
+                      </React.Fragment>
+                    </Option>
+                  )
+                }
+              )}
             </Options>
             {hasFooter && <Footer>{renderFooter()}</Footer>}
           </Modal>
@@ -164,7 +168,7 @@ export default class ContentSelect extends React.Component<Props, State> {
 
       // Get current option index
       const currentIndex = sortedOptions.findIndex(
-        option => option.value === value
+        (option): boolean => option.value === value
       )
 
       // On arrow down select next option

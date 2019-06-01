@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import CircleTimer from './CircleTimer'
 
-describe('CircleTimer should', () => {
-  test('render without crashing', () => {
+describe('CircleTimer should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<CircleTimer>Icon</CircleTimer>)
   })
 })

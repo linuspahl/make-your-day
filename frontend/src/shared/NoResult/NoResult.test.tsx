@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import NoResult from './NoResult'
 
-describe('NoResult should', () => {
-  test('render without crashing', () => {
+describe('NoResult should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<NoResult />)
   })
 })

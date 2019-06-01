@@ -6,8 +6,8 @@ import CategorySummary from './CategorySummary'
 // fixtures
 import { categoryPlain } from 'store/category/fixtures'
 
-describe('CategorySummary should', () => {
-  test('render without crashing', () => {
+describe('CategorySummary should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <CategorySummary amount={10} category={categoryPlain} />
     )

@@ -8,7 +8,7 @@ export interface Props {
   className?: string
   disabled?: boolean
   htmlFor?: string
-  onClick?: () => {}
+  onClick?: () => void
 }
 
 const Row = (props: Props): React.ReactElement => (

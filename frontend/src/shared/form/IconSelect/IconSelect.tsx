@@ -26,7 +26,9 @@ const IconSelect = (props: Props): React.ReactElement => {
       name={name}
       onChange={onChange}
       options={categoryIcons}
-      renderPreview={option => <Icon title={String(option.value)} />}
+      renderPreview={(option): JSX.Element => (
+        <Icon title={String(option.value)} />
+      )}
       tabIndex={tabIndex}
       title="Icon"
       value={value}

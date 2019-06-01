@@ -6,8 +6,8 @@ import Linechart from './Linechart'
 // fixtures
 import { chart as chartFixture } from 'store/evaluation/fixtures'
 
-describe('Linechart should', () => {
-  test('render without crashing', () => {
+describe('Linechart should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<Linechart {...chartFixture} />)
   })
 })

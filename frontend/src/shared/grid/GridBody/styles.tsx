@@ -7,7 +7,7 @@ interface ElementProps {
 
 export const Element = styled.div<ElementProps>`
   display: grid;
-  grid-template-columns: repeat(${props => props.columnAmount}, 1fr);
+  grid-template-columns: repeat(${(props): number => props.columnAmount}, 1fr);
   width: 100%;
   > div {
     display: flex;
@@ -15,6 +15,6 @@ export const Element = styled.div<ElementProps>`
 
     min-height: 40px;
 
-    border-top: 1px solid ${props => props.theme.border};
+    border-top: 1px solid ${(props): string => props.theme.border};
   }
 `

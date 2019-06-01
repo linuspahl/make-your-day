@@ -15,11 +15,11 @@ export const Category = styled.div<CategoryProps>`
   padding: 3px 8px;
   margin: 2px 4px 2px 0;
   border-radius: 20px;
-  border: 1px solid ${props => props.theme.border};
+  border: 1px solid ${(props): string => props.theme.border};
 
-  background-color: ${props =>
+  background-color: ${(props): string =>
     props.color ? props.theme.category[props.color] : props.theme.border};
-  color: ${props => props.theme.categoryText[props.color]};
+  color: ${(props): string => props.theme.categoryText[props.color]};
   font-size: 12px;
 
   &:last-child {

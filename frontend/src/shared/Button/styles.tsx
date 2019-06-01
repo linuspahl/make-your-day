@@ -11,7 +11,7 @@ interface LayoutProps {
 export const Layout = styled.button<LayoutProps>`
   user-select: none;
 
-  ${props => {
+  ${(props): string => {
     let bgColor = `#fff`
     let activeBgColor = `#efefef`
     if (props.context === 'primary') {

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const CategoryLoading = styled(Category)<Props>`
-  width: ${props => (props.size === 'large' ? 60 : 40)}px;
+  width: ${(props): number => (props.size === 'large' ? 60 : 40)}px;
   min-height: 30px;
 `
 

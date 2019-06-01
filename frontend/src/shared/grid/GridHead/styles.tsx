@@ -7,7 +7,7 @@ interface ElementProps {
 
 export const Element = styled.div<ElementProps>`
   display: grid;
-  grid-template-columns: repeat(${props => props.columnAmount}, 1fr);
+  grid-template-columns: repeat(${(props): number => props.columnAmount}, 1fr);
 
   width: 100%;
 

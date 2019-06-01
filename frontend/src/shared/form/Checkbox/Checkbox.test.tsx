@@ -4,12 +4,12 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import Checkbox from './Checkbox'
 
-describe('Checkbox should', () => {
-  test('render without crashing', () => {
+describe('Checkbox should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Checkbox
         value={false}
-        onChange={() => {}}
+        onChange={(): void => {}}
         name="Name"
         disabled={false}
         tabIndex={1}

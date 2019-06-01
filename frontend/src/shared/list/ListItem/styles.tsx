@@ -10,17 +10,18 @@ interface ListItemProps {
 export const ListItem = styled.li<ListItemProps>`
   display: flex;
   align-items: center;
-  justify-content: ${props => (props.spaceBetween ? 'space-between' : 'start')};
+  justify-content: ${(props): string =>
+    props.spaceBetween ? 'space-between' : 'start'};
 
   min-height: 40px;
 
-  border-top: 1px solid ${props => props.theme.border};
+  border-top: 1px solid ${(props): string => props.theme.border};
   padding: 0 10px;
   &:first-child {
     border-top: 0;
   }
 
-  ${props =>
+  ${(props): string =>
     props.clickable
       ? `
     &:active {

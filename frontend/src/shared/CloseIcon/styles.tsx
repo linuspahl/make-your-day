@@ -15,6 +15,6 @@ export const Element = styled.div`
   cursor: pointer;
 
   &:active {
-    background-color: ${props => props.theme.active};
+    background-color: ${(props): string => props.theme.active};
   }
 `

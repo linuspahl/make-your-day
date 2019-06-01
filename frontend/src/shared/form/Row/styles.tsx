@@ -20,7 +20,7 @@ export const Layout = styled.div<LayoutProps>`
     margin-bottom: 0;
   }
 
-  ${props =>
+  ${(props): string =>
     props.disabled &&
     `
       color: #b5b5b5;

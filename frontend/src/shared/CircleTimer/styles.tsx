@@ -44,6 +44,6 @@ export const SvgCircle = styled.circle<SvgCircleProps>`
   stroke-width: 2px;
   stroke: black;
   fill: none;
-  animation: ${countdown} ${props => props.duration || '6'}s linear infinite
-    forwards;
+  animation: ${countdown} ${(props): number => props.duration || 6}s linear
+    infinite forwards;
 `

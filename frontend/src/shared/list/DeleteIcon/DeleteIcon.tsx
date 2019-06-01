@@ -33,10 +33,12 @@ const DeleteIcon = (props: Props): React.ReactElement => {
     <Mutation
       mutation={mutation}
       variables={variables}
-      update={(cache, data) => onUpdate(cache, data, variables)}
+      update={(cache: DataProxy, data: FetchResult): void =>
+        onUpdate(cache, data, variables)
+      }
     >
-      {perfomMutation => (
-        <Element onClick={() => handleClick(perfomMutation, title)}>
+      {(perfomMutation: () => void): JSX.Element => (
+        <Element onClick={(): void => handleClick(perfomMutation, title)}>
           <Icon title="trash" />
         </Element>
       )}

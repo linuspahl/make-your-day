@@ -11,10 +11,11 @@ export const Wrapper = styled.div<WrapperProps>`
   height: 40px;
   width: 40px;
 
-  border: 1px solid ${props => props.theme.border};
+  border: 1px solid ${(props): string => props.theme.border};
 
-  color: ${props => (props.disabled ? props.theme.border : props.theme.text)};
-  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
+  color: ${(props): string =>
+    props.disabled ? props.theme.border : props.theme.text};
+  cursor: ${(props): string => (props.disabled ? 'not-allowed' : 'pointer')};
 `
 
 export const Element = styled.input`

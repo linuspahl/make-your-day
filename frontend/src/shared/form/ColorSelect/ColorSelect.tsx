@@ -12,14 +12,16 @@ const SmallColorPreview = styled.div`
   height: 25px;
   width: 25px;
 
-  background-color: ${props => props.color};
+  background-color: ${(props): string => props.color};
 `
 
 // Create select options based on theme colors.
 const prepareOptions = (): SelectOption[] =>
-  Object.keys(categoryColors).map(key => {
-    return { value: key, title: key }
-  })
+  Object.keys(categoryColors).map(
+    (key): SelectOption => {
+      return { value: key, title: key }
+    }
+  )
 
 interface Props {
   name: string
@@ -37,7 +39,7 @@ const ColorSelect = (props: Props): React.ReactElement => {
       allowEmpty
       tabIndex={tabIndex}
       value={value}
-      renderPreview={(option: SelectOption) => (
+      renderPreview={(option: SelectOption): JSX.Element => (
         <SmallColorPreview color={String(option.value)} />
       )}
       onChange={onChange}
