@@ -1,15 +1,16 @@
 // libraries
 import * as React from 'react'
-import { Line } from 'react-chartjs-2'
+import ChartistGraph from 'react-chartist'
 // interfaces
 import { Chart } from 'store/evaluation/type'
 
 const Linechart = (props: Chart): JSX.Element => (
-  <Line
+  <ChartistGraph
     data={{
       labels: props.labels,
-      datasets: props.datasets,
+      series: props.datasets,
     }}
+    type="Line"
   />
 )
 

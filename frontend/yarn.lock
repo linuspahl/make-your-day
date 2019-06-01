@@ -923,10 +923,10 @@
     "@types/connect" "*"
     "@types/node" "*"
 
-"@types/chart.js@^2.7.49":
-  version "2.7.52"
-  resolved "https://registry.yarnpkg.com/@types/chart.js/-/chart.js-2.7.52.tgz#30a12c838fa8909ea76918afeaaf48069d18b2dc"
-  integrity sha512-h4Md9c0FYPoqHyPeo3sG+wBIDFGz6GubulKUopsmFkSSW2ieyI2phjlj+FjqzTwhrWwR9dbw/HlCW3axj+tWug==
+"@types/chartist@^0.9.46":
+  version "0.9.46"
+  resolved "https://registry.yarnpkg.com/@types/chartist/-/chartist-0.9.46.tgz#cb1a33f8062f117d3bc6c0b5dd373360c8e33da2"
+  integrity sha512-p29+DAkJRBVtuiTx5kObF6n/RipOWH0GeWVwYinljrwPMruy7BW+Ms6iHS4vIsHzb9c79x+opon3GJo75rlhcQ==
 
 "@types/clean-css@*":
   version "4.2.1"
@@ -934,6 +934,13 @@
   integrity sha512-A1HQhQ0hkvqqByJMgg+Wiv9p9XdoYEzuwm11SVo1mX2/4PSdhjcrUlilJQoqLscIheC51t1D5g+EFWCXZ2VTQQ==
   dependencies:
     "@types/node" "*"
+
+"@types/compression-webpack-plugin@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/compression-webpack-plugin/-/compression-webpack-plugin-2.0.0.tgz#a20a1c8467d99730fe54d782d2bcdd4dd883afcb"
+  integrity sha512-UPaWgei0nx3HafALKSVb3UYrDxoLnS7reeBF10gXHGkGf0aQe6Qkdb8J3XsCewhoPiW6JUrr7gG4HZ2acfMPsQ==
+  dependencies:
+    "@types/webpack" "*"
 
 "@types/connect-history-api-fallback@*":
   version "1.3.2"
@@ -1107,13 +1114,6 @@
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/@types/range-parser/-/range-parser-1.2.3.tgz#7ee330ba7caafb98090bece86a5ee44115904c2c"
   integrity sha512-ewFXqrQHlFsgc09MK5jP5iR7vumV/BYayNC6PgJO2LPe8vrnNFyjQjSppfEngITi0qvfKtzFvgKymGheFM9UOA==
-
-"@types/react-chartjs-2@^2.5.7":
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/@types/react-chartjs-2/-/react-chartjs-2-2.5.7.tgz#b77406f6eb6a9f38438966fb27d8cfb1bb7425d3"
-  integrity sha512-waqYqiNULIVUqaKO7MGUpFmWrVtH7gVPOzqwV4y4zgUyu/JiDwC005PpveO442HKnby9kLgp3t1SB2sld+ACLw==
-  dependencies:
-    react-chartjs-2 "*"
 
 "@types/react-dom@^16.8.2":
   version "16.8.4"
@@ -2202,7 +2202,7 @@ cacache@^10.0.4:
     unique-filename "^1.1.0"
     y18n "^4.0.0"
 
-cacache@^11.3.2:
+cacache@^11.2.0, cacache@^11.3.2:
   version "11.3.2"
   resolved "https://registry.yarnpkg.com/cacache/-/cacache-11.3.2.tgz#2d81e308e3d258ca38125b676b98b2ac9ce69bfa"
   integrity sha512-E0zP4EPGDOaT2chM08Als91eYnf8Z+eH1awwwVsngUmgppfM5jjJ8l3z5vO5p5w/I3LsiXawb1sW0VY65pQABg==
@@ -2296,28 +2296,10 @@ chardet@^0.7.0:
   resolved "https://registry.yarnpkg.com/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
-chart.js@^2.7.3:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-2.8.0.tgz#b703b10d0f4ec5079eaefdcd6ca32dc8f826e0e9"
-  integrity sha512-Di3wUL4BFvqI5FB5K26aQ+hvWh8wnP9A3DWGvXHVkO13D3DSnaSsdZx29cXlEsYKVkn1E2az+ZYFS4t0zi8x0w==
-  dependencies:
-    chartjs-color "^2.1.0"
-    moment "^2.10.2"
-
-chartjs-color-string@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/chartjs-color-string/-/chartjs-color-string-0.6.0.tgz#1df096621c0e70720a64f4135ea171d051402f71"
-  integrity sha512-TIB5OKn1hPJvO7JcteW4WY/63v6KwEdt6udfnDE9iCAZgy+V4SrbSxoIbTw/xkUIapjEI4ExGtD0+6D3KyFd7A==
-  dependencies:
-    color-name "^1.0.0"
-
-chartjs-color@^2.1.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/chartjs-color/-/chartjs-color-2.3.0.tgz#0e7e1e8dba37eae8415fd3db38bf572007dd958f"
-  integrity sha512-hEvVheqczsoHD+fZ+tfPUE+1+RbV6b+eksp2LwAhwRTVXEjCSEavvk+Hg3H6SZfGlPh/UfmWKGIvZbtobOEm3g==
-  dependencies:
-    chartjs-color-string "^0.6.0"
-    color-convert "^0.5.3"
+chartist@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/chartist/-/chartist-0.11.2.tgz#cd8aed966a81cc950d280b91224f97e39cf602d1"
+  integrity sha512-k81nArypp1eG/ecvWzzVsTJeHhGULsqocbX+Kh/kJbAosqp3hvoHMzjJ/ibLHqbDGurQFeZGJHF7uYQbVvy3NQ==
 
 check-types@^7.3.0:
   version "7.4.0"
@@ -2424,11 +2406,6 @@ collection-visit@^1.0.0:
     map-visit "^1.0.0"
     object-visit "^1.0.0"
 
-color-convert@^0.5.3:
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-0.5.3.tgz#bdb6c69ce660fadffe0b0007cc447e1b9f7282bd"
-  integrity sha1-vbbGnOZg+t/+CwAHzER+G59ygr0=
-
 color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
@@ -2440,11 +2417,6 @@ color-name@1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
   integrity sha1-p9BVi9icQveV3UIyj3QIMcpTvCU=
-
-color-name@^1.0.0:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
-  integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
 combined-stream@^1.0.6, combined-stream@~1.0.6:
   version "1.0.8"
@@ -2484,6 +2456,18 @@ compressible@~2.0.16:
   integrity sha512-BGHeLCK1GV7j1bSmQQAi26X+GgWcTjLr/0tzSvMCl3LH1w1IJ4PFSPoV5316b30cneTziC+B1a+3OjoSUcQYmw==
   dependencies:
     mime-db ">= 1.40.0 < 2"
+
+compression-webpack-plugin@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/compression-webpack-plugin/-/compression-webpack-plugin-2.0.0.tgz#46476350c1eb27f783dccc79ac2f709baa2cffbc"
+  integrity sha512-bDgd7oTUZC8EkRx8j0sjyCfeiO+e5sFcfgaFcjVhfQf5lLya7oY2BczxcJ7IUuVjz5m6fy8IECFmVFew3xLk8Q==
+  dependencies:
+    cacache "^11.2.0"
+    find-cache-dir "^2.0.0"
+    neo-async "^2.5.0"
+    schema-utils "^1.0.0"
+    serialize-javascript "^1.4.0"
+    webpack-sources "^1.0.1"
 
 compression@^1.7.4:
   version "1.7.4"
@@ -5290,7 +5274,7 @@ lodash.unescape@4.0.1:
   resolved "https://registry.yarnpkg.com/lodash.unescape/-/lodash.unescape-4.0.1.tgz#bf2249886ce514cda112fae9218cdc065211fc9c"
   integrity sha1-vyJJiGzlFM2hEvrpIYzcBlIR/Jw=
 
-lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5:
+lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.3, lodash@^4.17.5:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
@@ -5598,11 +5582,6 @@ mkdirp@0.5.x, mkdirp@0.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
-
-moment@^2.10.2:
-  version "2.24.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
-  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -6606,12 +6585,11 @@ react-apollo@^2.5.6:
     ts-invariant "^0.4.2"
     tslib "^1.9.3"
 
-react-chartjs-2@*, react-chartjs-2@^2.7.4:
-  version "2.7.6"
-  resolved "https://registry.yarnpkg.com/react-chartjs-2/-/react-chartjs-2-2.7.6.tgz#b8cd29bed00bf55b9e8172b06466b4ecf2b86bfb"
-  integrity sha512-xDr0jhgt/o26atftXxTVsepz+QYZI2GNKBYpxtLvYgwffLUm18a9n562reUJAHvuwKsy2v+qMlK5HyjFtSW0mg==
+react-chartist@^0.13.3:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/react-chartist/-/react-chartist-0.13.3.tgz#2a6f677bab45b3474c828b74ef244fc4fca08d0b"
+  integrity sha512-lHA2JKy6S81/4KNhr1kXXXVyfeSOPVaxLX9Ohf31ntOj7XNGu5392qIvss+zfUWUuj5XCO1fy7w2fUCCUXkjBA==
   dependencies:
-    lodash "^4.17.4"
     prop-types "^15.5.8"
 
 react-dom@^16.7.0:
@@ -8293,7 +8271,7 @@ webpack-merge@^4.1.5:
   dependencies:
     lodash "^4.17.5"
 
-webpack-sources@^1.3.0:
+webpack-sources@^1.0.1, webpack-sources@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-1.3.0.tgz#2a28dcb9f1f45fe960d8f1493252b5ee6530fa85"
   integrity sha512-OiVgSrbGu7NEnEvQJJgdSFPl2qWKkWq5lHMhgiToIiN9w34EBnjYzSYs+VbL5KoYiLNtFFa7BZIKxRED3I32pA==

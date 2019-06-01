@@ -1,15 +1,16 @@
 // libraries
 import * as React from 'react'
-import { Bar } from 'react-chartjs-2'
+import ChartistGraph from 'react-chartist'
 // interfaces
 import { Chart } from 'store/evaluation/type'
 
 const Barchart = (props: Chart): JSX.Element => (
-  <Bar
+  <ChartistGraph
     data={{
       labels: props.labels,
-      datasets: props.datasets,
+      series: props.datasets,
     }}
+    type="Bar"
   />
 )
 
