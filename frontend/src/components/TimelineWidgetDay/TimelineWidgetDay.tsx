@@ -6,7 +6,7 @@ import CategorySummary from 'shared/CategorySummary/CategorySummary'
 import { Day, Shortcut, Categories } from './styles'
 // interface
 import { Category } from 'store/category/type'
-import moment from 'moment'
+import dayjs from 'dayjs'
 
 interface CategoryEntry extends Category {
   recordAmountSum: number
@@ -21,7 +21,7 @@ const TimelineWidgetDay = (props: Props): JSX.Element => {
   const { categories = [], date, history } = props
   return (
     <Day key={date} onClick={(): void => history.push(`/timeline/${date}`)}>
-      <Shortcut>{moment(date).format('dd')}</Shortcut>
+      <Shortcut>{dayjs(date).format('dd')}</Shortcut>
       <Categories>
         {categories.map(
           (category): JSX.Element => (

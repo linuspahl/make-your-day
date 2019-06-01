@@ -1,6 +1,6 @@
 // libraries
 import * as React from 'react'
-import moment = require('moment')
+import dayjs from 'dayjs'
 // components
 import Barchart from 'shared/chart/Barchart/Barchart'
 import Linechart from 'shared/chart/Linechart/Linechart'
@@ -10,7 +10,7 @@ import { Evaluation } from 'store/evaluation/type'
 
 const formatLabels = (labels: string[] = []): string[] => {
   return labels.map(
-    (label): string => moment(label, 'YYYY-MM-DD').format('dd DD.')
+    (label): string => dayjs(label, 'YYYY-MM-DD').format('dd DD.')
   )
 }
 

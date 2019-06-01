@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 import { Query } from 'react-apollo'
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { sortBy } from 'lodash'
 // utils
 import { formatUnixDate, getDateString } from 'utils/utils'
@@ -107,8 +107,8 @@ export default class TimelineWidget extends React.Component {
     for (let index = 0; index <= 6; index++) {
       // Define a new date and set the date based on the index
       // E.g. today - 0 results in days, today - 1 will result in yesterdays date, etc.
-      const day = moment().subtract(index, 'days')
-      const dayDate = moment(day).format('YYYY-MM-DD')
+      const day = dayjs().subtract(index, 'day')
+      const dayDate = dayjs(day).format('YYYY-MM-DD')
       timeline[dayDate] = {
         categories: {},
         date: dayDate,
