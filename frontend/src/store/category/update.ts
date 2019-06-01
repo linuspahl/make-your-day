@@ -76,7 +76,7 @@ export const deleteCategory = (
         getCategories: CategoryFull[]
       } = cache.readQuery({ query: GetCategories })
       const updatedCategories = categoriesQuery.getCategories.filter(
-        category => {
+        (category): boolean => {
           return category.id !== variables.id
         }
       )

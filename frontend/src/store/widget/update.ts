@@ -40,9 +40,11 @@ export const deleteWidget = (
         getWidgets: Widget[]
       } = cache.readQuery({ query: GetWidgetsOverview })
 
-      const updatedWidgets = widgetsQuery.getWidgets.filter(widget => {
-        return widget.id !== variables.id
-      })
+      const updatedWidgets = widgetsQuery.getWidgets.filter(
+        (widget): boolean => {
+          return widget.id !== variables.id
+        }
+      )
 
       cache.writeQuery({
         query: GetWidgets,

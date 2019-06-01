@@ -41,7 +41,7 @@ export const deleteEvaluation = (
       } = cache.readQuery({ query: GetEvaluations })
 
       const updatedEvaluations = evaluationsQuery.getEvaluations.filter(
-        evaluation => {
+        (evaluation): boolean => {
           return evaluation.id !== variables.id
         }
       )

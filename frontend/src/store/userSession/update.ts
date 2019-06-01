@@ -22,7 +22,7 @@ export const deleteUserSession = (
 
       if (userSessionsQuery.getUserSessions) {
         const updatedUserSessions = userSessionsQuery.getUserSessions.filter(
-          userSessions => {
+          (userSessions): boolean => {
             return userSessions.id !== variables.id
           }
         )

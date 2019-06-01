@@ -40,9 +40,11 @@ export const deleteRecord = (
       const recordsQuery: { getRecords: Record[] } = cache.readQuery({
         query: GetRecords,
       })
-      const updatedRecords = recordsQuery.getRecords.filter(records => {
-        return records.id !== variables.id
-      })
+      const updatedRecords = recordsQuery.getRecords.filter(
+        (records): boolean => {
+          return records.id !== variables.id
+        }
+      )
 
       cache.writeQuery({
         query: GetRecords,
