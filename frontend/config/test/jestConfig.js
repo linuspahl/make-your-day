@@ -4,6 +4,7 @@
 
 module.exports = {
   rootDir: '../../',
+  coverageDirectory: '<rootDir>/config/test/coverage',
   transform: {
     '.(ts|tsx)': 'ts-jest',
   },
