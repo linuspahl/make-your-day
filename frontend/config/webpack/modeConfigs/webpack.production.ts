@@ -7,7 +7,7 @@ import { Configuration } from 'webpack'
 // to minify the app in an elegant way (compared with the minify plugin)
 // * optimization - uglify - another useful minifyer
 
-const prodConfig = () => ({
+const prodConfig = (): Configuration => ({
   mode: 'production',
   module: {
     rules: [

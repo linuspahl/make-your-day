@@ -8,7 +8,7 @@ import * as getGqlTransformer from 'ts-transform-graphql-tag'
 import { Configuration, ProgressPlugin } from 'webpack'
 import presetConfig from './presets/loadPresets'
 import merge from 'webpack-merge'
-
+import { WebpackConfigParams } from 'types/types'
 // * entry - configure entry point of the application
 // * output
 // - path - directory of the output, defined in prod and dev conf
@@ -16,10 +16,11 @@ import merge from 'webpack-merge'
 // * plugins - HtmlWebpackPlugin - needed to create the index.html with a script tag for the created JS bundle
 // * resolve / modules - will make import paths shorter
 
-const modeConfig = env => require(`./${env}`).default()
+const modeConfig = (mode: WebpackConfigParams['mode']): Configuration =>
+  require(`./modeConfigs/webpack.${mode}`).default()
 
 const commonConfigutation = (
-  { mode, presets } = { mode: 'production', presets: [] }
+  { mode, presets }: WebpackConfigParams = { mode: 'production', presets: [] }
 ): Configuration => {
   return merge(
     {
@@ -35,7 +36,7 @@ const commonConfigutation = (
               loader: 'awesome-typescript-loader',
               options: {
                 presets: ['@babel/typescript', '@babel/react', '@babel/env'],
-                getCustomTransformers: () => ({
+                getCustomTransformers: (): object => ({
                   before: [getGqlTransformer.getTransformer()],
                 }),
               },

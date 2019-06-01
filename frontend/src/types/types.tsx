@@ -1,12 +1,4 @@
-export interface InputEvent {
-  target: {
-    checked?: boolean
-    name: string
-    type?: string
-    value?: string | number
-  }
-}
-
+// App types
 export interface LocalStorage {
   [key: string]: string | boolean | Date | number
   authToken?: string
@@ -29,6 +21,16 @@ export interface LocalStorageCreate {
   userSessionId?: string
 }
 
+// Form types
+export interface InputEvent {
+  target: {
+    checked?: boolean
+    name: string
+    type?: string
+    value?: string | number
+  }
+}
+
 export interface SelectOption {
   title: string
   value: number | string
@@ -47,4 +49,13 @@ export interface NotificationCreate {
 
 export interface Form {
   mode?: 'create'
+}
+
+// Webpack
+type WebpackPresets = 'analyze'
+type WebpackModes = 'production' | 'development'
+
+export interface WebpackConfigParams {
+  mode: WebpackModes
+  presets: WebpackPresets[]
 }
