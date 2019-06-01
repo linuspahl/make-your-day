@@ -23,7 +23,11 @@ const PublicRoute = ({
   // we will redirect him to to root route, the dashboard
   if (userSession && userSession.token) return <Redirect to="/" />
   return (
-    <Route render={() => <Component userSession={userSession} {...rest} />} />
+    <Route
+      render={(): JSX.Element => (
+        <Component userSession={userSession} {...rest} />
+      )}
+    />
   )
 }
 

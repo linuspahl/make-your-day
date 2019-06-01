@@ -4,8 +4,8 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
 import NotificationBanner from './NotificationBanner'
 
-describe('NotificationBanner should', () => {
-  test('render without crashing', () => {
+describe('NotificationBanner should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(<NotificationBanner />)
   })
 })

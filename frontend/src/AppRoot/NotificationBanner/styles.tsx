@@ -36,12 +36,12 @@ export const Alert = styled.div<AlertProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: ${props => props.theme.layerIndex.notificationBanner};
+  z-index: ${(props): string => props.theme.layerIndex.notificationBanner};
 
   border-radius: 0 0 5px 5px;
   padding: 10px 25px;
 
-  background-color: ${props => {
+  background-color: ${(props): string => {
     if (props.role === 'error') return '#ff6060'
     if (props.role === 'success') return '#9dff8d'
     return 'white'
@@ -50,7 +50,7 @@ export const Alert = styled.div<AlertProps>`
   font-size: 20px;
   color: #000;
 
-  animation: ${moveIn} ${props => props.durationAnimation}s,
-    ${moveOut} ${props => props.durationAnimation}s linear
-      ${props => props.durationVisible - props.durationAnimation}s;
+  animation: ${moveIn} ${(props): number => props.durationAnimation}s,
+    ${moveOut} ${(props): number => props.durationAnimation}s linear
+      ${(props): number => props.durationVisible - props.durationAnimation}s;
 `

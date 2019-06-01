@@ -13,10 +13,10 @@ import { NotificationCreate } from 'types/types'
 export default (
   clearLocalStorage: () => void,
   createNotificationBanner: (notification: NotificationCreate) => void
-) =>
+): ApolloClient<object> =>
   new ApolloClient({
     uri: `${config.apiHost}:${config.apiPort}/graphql`,
-    request: async operation => {
+    request: async (operation): Promise<void> => {
       const token = localStorage.getItem('authToken') || null
       operation.setContext({
         headers: {
@@ -24,12 +24,12 @@ export default (
         },
       })
     },
-    onError: error => {
+    onError: (error): void => {
       // When an auth error occures, e.g. when session expires,
       // we want to logout user
       if (error && error.graphQLErrors) {
         const authErrors = error.graphQLErrors.filter(
-          error => error.extensions.code === 'UNAUTHENTICATED'
+          (error): boolean => error.extensions.code === 'UNAUTHENTICATED'
         )
         if (authErrors && authErrors.length !== 0) {
           // First we clear the localStorage / userSession

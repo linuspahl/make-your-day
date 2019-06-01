@@ -51,7 +51,7 @@ export default class NotificationBanner extends React.Component<{}, State> {
             durationAnimation={this.closeAnimationDuration}
           >
             {notification.message}
-            <CircleTimer clickAction={() => this.closeNotification()}>
+            <CircleTimer clickAction={(): void => this.closeNotification()}>
               <CloseIcon />
             </CircleTimer>
           </Alert>
@@ -68,7 +68,7 @@ export default class NotificationBanner extends React.Component<{}, State> {
     }
     // Create timeout to trigger the close
     this.closeCountDown = window.setTimeout(
-      () => this.closeNotification(),
+      (): void => this.closeNotification(),
       this.visibilityDuration * 1000
     )
   }

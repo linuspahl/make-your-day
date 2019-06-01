@@ -5,13 +5,13 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 import Routes from './Routes'
 import { userSession } from 'store/userSession/fixtures'
 
-describe('Routes should', () => {
-  test('render without crashing', () => {
+describe('Routes should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Routes
-        createNotificationBanner={() => {}}
-        clearLocalStorage={() => {}}
-        updateLocalStorage={() => {}}
+        createNotificationBanner={(): void => {}}
+        clearLocalStorage={(): void => {}}
+        updateLocalStorage={(): void => {}}
         userSession={userSession}
         userSettings={{ nightMode: false }}
       />

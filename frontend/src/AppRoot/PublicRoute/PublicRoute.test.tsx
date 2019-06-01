@@ -6,15 +6,15 @@ import PublicRoute from './PublicRoute'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
-describe('PublicRoute should', () => {
-  test('render without crashing', () => {
+describe('PublicRoute should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <PublicRoute
-        createNotificationBanner={() => {}}
-        updateLocalStorage={() => {}}
+        createNotificationBanner={(): void => {}}
+        updateLocalStorage={(): void => {}}
         userSession={userSession}
         path="/"
-        component={() => <div>Content</div>}
+        component={(): JSX.Element => <div>Content</div>}
       />
     )
   })

@@ -6,13 +6,13 @@ import PrivateRoute from './PrivateRoute'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
-describe('PrivateRoute should', () => {
-  test('render without crashing', () => {
+describe('PrivateRoute should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <PrivateRoute
-        clearLocalStorage={() => {}}
-        component={() => <div>Content</div>}
-        createNotificationBanner={() => {}}
+        clearLocalStorage={(): void => {}}
+        component={(): JSX.Element => <div>Content</div>}
+        createNotificationBanner={(): void => {}}
         path="/"
         userSession={userSession}
       />

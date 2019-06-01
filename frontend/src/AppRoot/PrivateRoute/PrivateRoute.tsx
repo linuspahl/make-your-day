@@ -30,7 +30,7 @@ const PrivateRoute = ({
     <Route
       path={path}
       exact={exact}
-      render={() => (
+      render={(): JSX.Element => (
         <Component userSession={userSession} rootPath={path} {...rest} />
       )}
     />
