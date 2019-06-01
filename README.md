@@ -228,6 +228,7 @@ This makes debugging easier, e.g. with the React Devtools
 - webpack-merge - Allows us to split the webpack config in multiple files
 - html-webpack-plugin - The plugin will generate an HTML5 file for you that includes all your webpack bundles in the body using script tags.
 - copy-webpack-plugin - Needed to copy e.g. public files like the favicon
+- compression-webpack-plugin - Used to compress bundle with gzip
 - babel-loader - allows transpliling JavaScript files using Babel and webpack
 - @babel/preset-react - preset needed to transform the react code.
 - babel-plugin-styled-components - will create readable names for the styled components.
