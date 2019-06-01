@@ -7,16 +7,16 @@ import Settings from './Settings'
 import { userSession } from 'store/userSession/fixtures'
 import { userSetting } from 'store/userSetting/fixtures'
 
-describe('Settings should', () => {
-  test('render without crashing', () => {
+describe('Settings should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Settings
-        updateLocalStorage={() => {}}
+        updateLocalStorage={(): void => {}}
         userSession={userSession}
         userSettings={{ nightmode: userSetting }}
         rootPath="/"
-        createNotificationBanner={() => {}}
-        clearLocalStorage={() => {}}
+        createNotificationBanner={(): void => {}}
+        clearLocalStorage={(): void => {}}
       />
     )
   })

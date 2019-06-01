@@ -6,8 +6,8 @@ import Timeline from './Timeline'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
-describe('Timeline should', () => {
-  test('render without crashing', () => {
+describe('Timeline should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Timeline rootPath="/" userSession={userSession} />
     )

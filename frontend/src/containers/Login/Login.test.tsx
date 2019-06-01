@@ -6,12 +6,12 @@ import Login from './Login'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
-describe('Login should', () => {
-  test('render without crashing', () => {
+describe('Login should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Login
-        updateLocalStorage={() => {}}
-        createNotificationBanner={() => {}}
+        updateLocalStorage={(): void => {}}
+        createNotificationBanner={(): void => {}}
         rootPath="/"
         userSession={userSession}
       />

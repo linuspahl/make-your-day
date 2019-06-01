@@ -6,11 +6,11 @@ import Evaluations from './Evaluations'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
-describe('Evaluations should', () => {
-  test('render without crashing', () => {
+describe('Evaluations should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Evaluations
-        createNotificationBanner={() => {}}
+        createNotificationBanner={(): void => {}}
         rootPath="/"
         userSession={userSession}
       />

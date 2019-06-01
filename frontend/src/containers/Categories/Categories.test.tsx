@@ -6,11 +6,11 @@ import Categories from './Categories'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
-describe('Categories should', () => {
-  test('render without crashing', () => {
+describe('Categories should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Categories
-        createNotificationBanner={() => {}}
+        createNotificationBanner={(): void => {}}
         rootPath="/"
         userSession={userSession}
       />

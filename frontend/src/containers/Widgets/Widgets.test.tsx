@@ -5,11 +5,11 @@ import * as ShallowRenderer from 'react-test-renderer/shallow'
 import Widgets from './Widgets'
 import { userSession } from 'store/userSession/fixtures'
 
-describe('Widgets should', () => {
-  test('render without crashing', () => {
+describe('Widgets should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Widgets
-        createNotificationBanner={() => {}}
+        createNotificationBanner={(): void => {}}
         rootPath="/"
         userSession={userSession}
       />

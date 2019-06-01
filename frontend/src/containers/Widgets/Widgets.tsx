@@ -25,12 +25,12 @@ const Widgets = (props: Props): React.ReactElement => {
         <Route
           exact
           path={rootPath}
-          render={() => <WidgetOverview rootPath={rootPath} />}
+          render={(): JSX.Element => <WidgetOverview rootPath={rootPath} />}
         />
         <Route
           exact
           path={`${rootPath}/create`}
-          render={() => (
+          render={(): JSX.Element => (
             <WidgetCreate
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}
@@ -40,7 +40,7 @@ const Widgets = (props: Props): React.ReactElement => {
         <Route
           exact
           path={`${rootPath}/edit/:id`}
-          render={() => (
+          render={(): JSX.Element => (
             <WidgetEdit
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}

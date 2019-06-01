@@ -18,7 +18,11 @@ const Timeline = (props: Props): React.ReactElement => {
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
       <ContentBox>
-        <Route exact path={`${rootPath}/:date`} render={() => <DayEdit />} />
+        <Route
+          exact
+          path={`${rootPath}/:date`}
+          render={(): JSX.Element => <DayEdit />}
+        />
       </ContentBox>
     </PageLayout>
   )

@@ -27,7 +27,7 @@ const Settings = (props: Props): React.ReactElement => {
         <Route
           exact
           path={props.rootPath}
-          render={() => (
+          render={(): JSX.Element => (
             <UserSettingsOverview
               clearLocalStorage={props.clearLocalStorage}
               createNotificationBanner={props.createNotificationBanner}
@@ -41,7 +41,7 @@ const Settings = (props: Props): React.ReactElement => {
         <Route
           exact
           path={`${props.rootPath}/sessions`}
-          render={() => (
+          render={(): JSX.Element => (
             <UserSessionsOverview
               clearLocalStorage={props.clearLocalStorage}
               createNotificationBanner={props.createNotificationBanner}

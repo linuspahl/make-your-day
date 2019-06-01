@@ -2,6 +2,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Query } from 'react-apollo'
+import { ApolloError } from 'apollo-boost'
 // components
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 import DashboardWidgets from 'components/DashboardWidgets/DashboardWidgets'
@@ -21,7 +22,7 @@ export const Layout = styled.div`
   display: grid;
   grid-template-rows: calc(50vh - 35px) 70px calc(50vh - 35px);
 
-  @media (min-width: ${props =>
+  @media (min-width: ${(props): string =>
       props.theme.mediaQuery.tablet}) and (orientation: landscape) {
     grid-template-columns: calc(50vw - 35px) 70px calc(50vw - 35px);
     grid-template-rows: none;
@@ -43,7 +44,15 @@ const Dashboard = (props: Props): React.ReactElement => (
     <FadeTransition fullHeight fullWidth>
       <Layout role="main">
         <Query query={GetWidgets}>
-          {({ loading, error, data }) => {
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getWidgets: Widget[] }
+          }): JSX.Element => {
             if (error)
               return (
                 <ErrorMessage
@@ -54,10 +63,10 @@ const Dashboard = (props: Props): React.ReactElement => (
 
             const widgets: Widget[] = data.getWidgets || []
             let widgetsDashboardTop = widgets.filter(
-              widget => widget.position === 'dashboard-top'
+              (widget): boolean => widget.position === 'dashboard-top'
             )
             let widgetsDashboardBottom = widgets.filter(
-              widget => widget.position === 'dashboard-bottom'
+              (widget): boolean => widget.position === 'dashboard-bottom'
             )
 
             return (

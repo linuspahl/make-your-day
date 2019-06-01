@@ -27,13 +27,13 @@ const Evaluations = (props: Props): React.ReactElement => {
           exact
           path={rootPath}
           public
-          render={() => <EvaluationOverview rootPath={rootPath} />}
+          render={(): JSX.Element => <EvaluationOverview rootPath={rootPath} />}
         />
         <Route
           exact
           path={`${rootPath}/create`}
           public
-          render={() => (
+          render={(): JSX.Element => (
             <EvaluationCreate
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}
@@ -44,7 +44,7 @@ const Evaluations = (props: Props): React.ReactElement => {
           exact
           path={`${rootPath}/edit/:id`}
           public
-          render={() => (
+          render={(): JSX.Element => (
             <EvaluationEdit
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}
@@ -55,7 +55,7 @@ const Evaluations = (props: Props): React.ReactElement => {
           exact
           path={`${rootPath}/view/:id`}
           public
-          render={() => (
+          render={(): JSX.Element => (
             <EvaluationResult
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}

@@ -6,11 +6,11 @@ import Dashboard from './Dashboard'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
-describe('Dashboard should', () => {
-  test('render without crashing', () => {
+describe('Dashboard should', (): void => {
+  test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Dashboard
-        createNotificationBanner={() => {}}
+        createNotificationBanner={(): void => {}}
         rootPath="/"
         userSession={userSession}
       />

@@ -30,12 +30,12 @@ const Categories = (props: Props): React.ReactElement => {
         <Route
           exact
           path={rootPath}
-          render={() => <CategoryOverview rootPath={rootPath} />}
+          render={(): JSX.Element => <CategoryOverview rootPath={rootPath} />}
         />
         <Route
           exact
           path={`${rootPath}/create`}
-          render={() => (
+          render={(): JSX.Element => (
             <CategoryCreate
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}
@@ -45,7 +45,7 @@ const Categories = (props: Props): React.ReactElement => {
         <Route
           exact
           path={`${rootPath}/edit/:id`}
-          render={() => (
+          render={(): JSX.Element => (
             <CategoryEdit
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}
@@ -55,26 +55,28 @@ const Categories = (props: Props): React.ReactElement => {
         <Route
           exact
           path={`${rootPath}/:categoryId/records/create`}
-          render={() => (
+          render={(): JSX.Element => (
             <RecordCreate createNotificationBanner={createNotificationBanner} />
           )}
         />
         <Route
           exact
           path={`${rootPath}/:categoryId/records/:id/edit`}
-          render={() => (
+          render={(): JSX.Element => (
             <RecordUpdate createNotificationBanner={createNotificationBanner} />
           )}
         />
         <Route
           exact
           path={`${rootPath}/:id/subcategories`}
-          render={() => <SubcategoryOverview rootPath={rootPath} />}
+          render={(): JSX.Element => (
+            <SubcategoryOverview rootPath={rootPath} />
+          )}
         />
         <Route
           exact
           path={`${rootPath}/:id/subcategories/create`}
-          render={() => (
+          render={(): JSX.Element => (
             <SubcategoryCreate
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}
@@ -84,7 +86,7 @@ const Categories = (props: Props): React.ReactElement => {
         <Route
           exact
           path={`${rootPath}/:categoryId/subcategories/:id/edit`}
-          render={() => (
+          render={(): JSX.Element => (
             <SubcategoryEdit
               createNotificationBanner={createNotificationBanner}
               rootPath={rootPath}
