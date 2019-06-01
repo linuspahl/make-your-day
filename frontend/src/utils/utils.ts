@@ -96,14 +96,16 @@ export const generateUrlParams = (params: {
 }): string => {
   let paramsString = ''
   if (params) {
-    Object.keys(params).forEach(key => {
-      const value = params[key]
-      let paramsSeparater = '&'
-      if (!paramsString) {
-        paramsSeparater = `?`
+    Object.keys(params).forEach(
+      (key): void => {
+        const value = params[key]
+        let paramsSeparater = '&'
+        if (!paramsString) {
+          paramsSeparater = `?`
+        }
+        paramsString = paramsString.concat(`${paramsSeparater}${key}=${value}`)
       }
-      paramsString = paramsString.concat(`${paramsSeparater}${key}=${value}`)
-    })
+    )
   }
   return paramsString
 }
@@ -155,13 +157,15 @@ export const updateLocalStorage = (
 
   // Create a clean app store without undefined values
   const updatedStore: { [key: string]: string | number | boolean } = {}
-  Object.keys(newStore).forEach((key: string) => {
-    // format to int / boolean and update specified  app state
-    const value = formatAppStateValue(key, newStore[key])
-    updatedStore[key] = value
-    // format value to string and update LocalStorage
-    localStorage.setItem(key, String(value))
-  })
+  Object.keys(newStore).forEach(
+    (key: string): void => {
+      // format to int / boolean and update specified  app state
+      const value = formatAppStateValue(key, newStore[key])
+      updatedStore[key] = value
+      // format value to string and update LocalStorage
+      localStorage.setItem(key, String(value))
+    }
+  )
   setState(updatedStore)
 }
 
@@ -170,7 +174,10 @@ export const getLocalStorage = (
   stateKeys: string[] = []
 ): { [key: string]: string } =>
   stateKeys.reduce(
-    (result: { [key: string]: string | number | boolean }, key: string) => {
+    (
+      result: { [key: string]: string | number | boolean },
+      key: string
+    ): object => {
       const value = localStorage.getItem(key)
       result[key] = formatAppStateValue(key, value)
       return result
