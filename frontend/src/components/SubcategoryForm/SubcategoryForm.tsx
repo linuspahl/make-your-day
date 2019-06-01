@@ -46,7 +46,7 @@ export default class SubcategoryForm extends React.Component<
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { mode, rootPath } = this.props
     const { title } = this.state
     return (

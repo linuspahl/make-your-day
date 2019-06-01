@@ -15,7 +15,7 @@ interface Props {
   message?: string
 }
 
-const NoResult = (props: Props): React.ReactElement => (
+const NoResult = (props: Props): JSX.Element => (
   <Element>{props.message || 'Kein Eintrag vorhanden'}</Element>
 )
 

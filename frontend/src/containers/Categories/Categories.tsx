@@ -22,7 +22,7 @@ interface Props {
   userSession: UserSession
 }
 
-const Categories = (props: Props): React.ReactElement => {
+const Categories = (props: Props): JSX.Element => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>

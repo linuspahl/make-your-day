@@ -7,8 +7,6 @@ interface Props {
   children: string
 }
 
-const H2 = (props: Props): React.ReactElement => (
-  <Element>{props.children}</Element>
-)
+const H2 = (props: Props): JSX.Element => <Element>{props.children}</Element>
 
 export default H2

@@ -14,7 +14,7 @@ interface Props {
   to?: string
 }
 
-const CategorySummary = (props: Props): React.ReactElement => {
+const CategorySummary = (props: Props): JSX.Element => {
   const {
     category: { color, icon, hasUnit, unit, title },
     displayTitle,

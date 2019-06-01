@@ -7,7 +7,7 @@ interface Props {
   clickAction?: () => void
 }
 
-const CircleTimer = (props: Props): React.ReactElement => {
+const CircleTimer = (props: Props): JSX.Element => {
   const hasClickAction = typeof props.clickAction === 'function'
   return (
     <Layout onClick={(): void => hasClickAction && props.clickAction()}>

@@ -16,7 +16,7 @@ interface Props {
   toggleAction: () => void
 }
 
-const Navigation = (props: Props): React.ReactElement => {
+const Navigation = (props: Props): JSX.Element => {
   const { toggleAction, rootPath } = props
   const items = [
     { path: '/', title: 'Dashboard' },

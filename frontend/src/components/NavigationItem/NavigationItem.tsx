@@ -9,7 +9,7 @@ interface Props {
   toggleAction: () => void
 }
 
-const NavigationItem = (props: Props): React.ReactElement => {
+const NavigationItem = (props: Props): JSX.Element => {
   const {
     route: { title, path },
     rootPath,

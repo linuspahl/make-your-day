@@ -35,7 +35,7 @@ interface Props {
   userSession: UserSession
 }
 
-const Dashboard = (props: Props): React.ReactElement => (
+const Dashboard = (props: Props): JSX.Element => (
   <PageLayout
     userSession={props.userSession}
     rootPath={props.rootPath}

@@ -18,7 +18,7 @@ interface Props {
   userSession: UserSession
 }
 
-const Evaluations = (props: Props): React.ReactElement => {
+const Evaluations = (props: Props): JSX.Element => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>

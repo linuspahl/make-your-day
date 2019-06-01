@@ -15,7 +15,7 @@ interface Props {
   updateLocalStorage: (localStorage: LocalStorage) => void
 }
 
-const UserSettingDelete = (props: Props): React.ReactElement => (
+const UserSettingDelete = (props: Props): JSX.Element => (
   <Mutation
     mutation={DeleteUserSetting}
     variables={{ settingId: props.setting.id }}

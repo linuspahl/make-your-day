@@ -10,7 +10,7 @@ interface Props {
   message: string
 }
 
-const ErrorMessage = (props: Props): React.ReactElement => {
+const ErrorMessage = (props: Props): JSX.Element => {
   const { error, message } = props
   if (error) logError(error)
   return <Layout>{message}</Layout>

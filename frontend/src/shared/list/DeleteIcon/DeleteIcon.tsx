@@ -25,7 +25,7 @@ const handleClick = (action: () => void, title: string): void => {
   }
 }
 
-const DeleteIcon = (props: Props): React.ReactElement => {
+const DeleteIcon = (props: Props): JSX.Element => {
   const { id, mutation, onUpdate, title } = props
   const variables = { id }
 

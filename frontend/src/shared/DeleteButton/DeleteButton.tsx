@@ -29,7 +29,7 @@ interface Props {
   title: string
 }
 
-const DeleteButton = (props: Props): React.ReactElement => {
+const DeleteButton = (props: Props): JSX.Element => {
   const { id, mutation, onUpdate, title, onDelete } = props
   const variables = { id }
 

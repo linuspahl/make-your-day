@@ -15,7 +15,7 @@ interface Props {
   value: boolean
 }
 
-const Checkbox = (props: Props): React.ReactElement => {
+const Checkbox = (props: Props): JSX.Element => {
   const { value, onChange, name, disabled, tabIndex } = props
   return (
     <Wrapper disabled={disabled}>

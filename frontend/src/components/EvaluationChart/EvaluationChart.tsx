@@ -18,7 +18,7 @@ interface Props {
   evaluation: Evaluation
 }
 
-const EvaluationChart = (props: Props): React.ReactElement => {
+const EvaluationChart = (props: Props): JSX.Element => {
   const {
     evaluation: {
       type,

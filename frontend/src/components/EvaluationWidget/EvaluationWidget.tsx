@@ -35,7 +35,7 @@ interface Props {
 }
 
 export default class EvaluationWidget extends React.Component<Props> {
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { evaluation } = this.props
 
     return (

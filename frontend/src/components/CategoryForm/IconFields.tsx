@@ -18,7 +18,7 @@ interface Props {
   title: Category['title']
 }
 
-const IconFields = (props: Props): React.ReactElement => {
+const IconFields = (props: Props): JSX.Element => {
   const { color, icon, title, handleInputChange } = props
   return (
     <div>

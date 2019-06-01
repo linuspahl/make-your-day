@@ -32,7 +32,7 @@ class SubcategoryEdit extends React.Component<Props> {
     this.handleError = this.handleError.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { match, rootPath } = this.props
     const categoryId = extractIdFromUrl(match)
 

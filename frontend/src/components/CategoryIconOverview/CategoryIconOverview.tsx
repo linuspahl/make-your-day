@@ -22,9 +22,7 @@ interface LoadingPlaceholderProps {
   context?: 'horizontal-scroll'
 }
 
-const LoadingPlaceholder = (
-  props: LoadingPlaceholderProps
-): React.ReactElement => (
+const LoadingPlaceholder = (props: LoadingPlaceholderProps): JSX.Element => (
   <PlaceholderGroup>
     {fill(Array(3), null).map(
       (value, key): JSX.Element => (
@@ -41,7 +39,7 @@ interface Props {
   params?: { [key: string]: string }
 }
 
-const CategoryIconOverview = (props: Props): React.ReactElement => (
+const CategoryIconOverview = (props: Props): JSX.Element => (
   <Layout context={props.context}>
     <Query query={GetCategoriesIcon}>
       {({

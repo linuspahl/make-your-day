@@ -34,7 +34,7 @@ class EvaluationEdit extends React.Component<Props> {
     this.handleError = this.handleError.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { match, rootPath } = this.props
     const evaluationId = extractIdFromUrl(match)
 

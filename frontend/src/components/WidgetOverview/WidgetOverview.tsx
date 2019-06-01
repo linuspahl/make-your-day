@@ -56,7 +56,7 @@ interface Props {
   rootPath: string
 }
 
-const WidgetOverview = (props: Props): React.ReactElement => {
+const WidgetOverview = (props: Props): JSX.Element => {
   const { rootPath } = props
 
   return (

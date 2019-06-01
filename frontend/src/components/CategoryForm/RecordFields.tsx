@@ -28,7 +28,7 @@ interface Props {
   unit?: Category['unit']
 }
 
-const RecordFields = (props: Props): React.ReactElement => {
+const RecordFields = (props: Props): JSX.Element => {
   const {
     handleInputChange,
     hasDescription,

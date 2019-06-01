@@ -13,7 +13,7 @@ const DayPlaceholer = styled(Day)`
   cursor: default;
 `
 
-const TimelineWidgetDayPlaceholder = (): React.ReactElement => (
+const TimelineWidgetDayPlaceholder = (): JSX.Element => (
   <DayPlaceholer>
     <ShortcutLoading />
     <Categories>

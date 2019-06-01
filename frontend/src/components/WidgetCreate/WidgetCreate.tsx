@@ -33,7 +33,7 @@ class WidgetCreate extends React.Component<Props> {
     this.hanldeError = this.hanldeError.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { rootPath } = this.props
     return (
       <FadeTransition fullWidth>

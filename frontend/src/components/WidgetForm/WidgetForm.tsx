@@ -78,7 +78,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
       handleInputChange(event, this.setState.bind(this))
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { mode, rootPath, evaluations } = this.props
     const { title, type, position, evaluationId } = this.state
 

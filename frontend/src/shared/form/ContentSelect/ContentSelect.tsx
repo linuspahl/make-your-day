@@ -61,7 +61,7 @@ export default class ContentSelect extends React.Component<Props, State> {
     this.onBlur = this.onBlur.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const {
       title,
       value,

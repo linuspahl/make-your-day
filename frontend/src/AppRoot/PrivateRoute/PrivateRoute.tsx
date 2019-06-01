@@ -22,7 +22,7 @@ const PrivateRoute = ({
   path,
   userSession,
   ...rest
-}: Props): React.ReactElement => {
+}: Props): JSX.Element => {
   // If user is not logged in and tries to access a private route,
   // we will redirect him to the login page
   if (!userSession || !userSession.token) return <Redirect to="/login" />

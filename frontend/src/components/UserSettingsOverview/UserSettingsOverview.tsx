@@ -31,7 +31,7 @@ interface Props {
 }
 
 class UserSettingsOverview extends React.Component<Props> {
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     return (
       <FadeTransition>
         <H1 context="page">Einstellungen</H1>

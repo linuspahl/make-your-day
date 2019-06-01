@@ -25,7 +25,7 @@ import {
 import { NotificationCreate } from 'types/types'
 import { Widget as WidgetType } from 'store/widget/type'
 
-const LoadingPlaceholder = (): React.ReactElement => (
+const LoadingPlaceholder = (): JSX.Element => (
   <PlaceholderWrapper>
     <PlaceholderGroup>
       <EditorWidgetPlaceholder />
@@ -39,7 +39,7 @@ interface Props {
   widgets: WidgetType[]
 }
 
-const DashboardWidgets = (props: Props): React.ReactElement => {
+const DashboardWidgets = (props: Props): JSX.Element => {
   const { createNotificationBanner, widgets = [], loading } = props
 
   if (loading) return <LoadingPlaceholder />

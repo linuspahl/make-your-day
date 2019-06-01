@@ -29,7 +29,7 @@ interface Props {
   userSession: UserSession
 }
 
-const UserSessionOverview = (props: Props): React.ReactElement => (
+const UserSessionOverview = (props: Props): JSX.Element => (
   <FadeTransition>
     <H1 context="page">Angemeldete Geräte</H1>
 

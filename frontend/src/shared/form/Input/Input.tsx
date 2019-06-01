@@ -16,7 +16,7 @@ interface Props {
   value: string
 }
 
-const Input = (props: Props): React.ReactElement => {
+const Input = (props: Props): JSX.Element => {
   const {
     disabled,
     name,

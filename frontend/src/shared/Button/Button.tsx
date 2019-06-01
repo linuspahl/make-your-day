@@ -13,7 +13,7 @@ interface Props {
   type?: 'submit'
 }
 
-const Button = (props: Props): React.ReactElement => {
+const Button = (props: Props): JSX.Element => {
   const { clickAction, children, type, context, to } = props
   const hasClickAction = typeof clickAction === 'function'
   const isLink = Boolean(to)

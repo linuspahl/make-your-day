@@ -4,7 +4,7 @@ import { Bar } from 'react-chartjs-2'
 // interfaces
 import { Chart } from 'store/evaluation/type'
 
-const Barchart = (props: Chart): React.ReactElement => (
+const Barchart = (props: Chart): JSX.Element => (
   <Bar
     data={{
       labels: props.labels,

@@ -8,7 +8,7 @@ interface Props {
   justify?: string
 }
 
-const GridCell = (props: Props): React.ReactElement => (
+const GridCell = (props: Props): JSX.Element => (
   <Element justify={props.justify}>{props.children}</Element>
 )
 

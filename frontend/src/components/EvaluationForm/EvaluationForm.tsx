@@ -89,7 +89,7 @@ export default class EvaluationForm extends React.Component<
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { mode, rootPath, categories = [] } = this.props
     const { title, type, groupSubcategories, period, categoryId } = this.state
     const selectedCategory = categories.find(

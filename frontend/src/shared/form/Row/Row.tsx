@@ -11,7 +11,7 @@ export interface Props {
   onClick?: () => void
 }
 
-const Row = (props: Props): React.ReactElement => (
+const Row = (props: Props): JSX.Element => (
   <Layout
     disabled={props.disabled}
     className={props.className}

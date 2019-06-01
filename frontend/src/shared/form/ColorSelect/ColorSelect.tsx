@@ -30,7 +30,7 @@ interface Props {
   value: string
 }
 
-const ColorSelect = (props: Props): React.ReactElement => {
+const ColorSelect = (props: Props): JSX.Element => {
   const { value, onChange, name, tabIndex } = props
   const colors = prepareOptions() // will return an empty array, if there should be no colors
 

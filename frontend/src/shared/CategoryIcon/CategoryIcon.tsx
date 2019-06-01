@@ -14,7 +14,7 @@ interface Props {
   to?: string
 }
 
-const CategoryIcon = (props: Props): React.ReactElement => {
+const CategoryIcon = (props: Props): JSX.Element => {
   const { ariaLabel, icon, color, title, to, size } = props
   const isLink = Boolean(to)
   return (

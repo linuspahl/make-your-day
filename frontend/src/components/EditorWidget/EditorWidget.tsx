@@ -52,7 +52,7 @@ export default class Widget extends React.Component<Props, WidgetType> {
     this.editor.content.innerHTML = this.props.widget.value
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     return (
       <Mutation mutation={UpdateWidget} onError={this.handleError}>
         {(

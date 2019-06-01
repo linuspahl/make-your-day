@@ -31,7 +31,7 @@ interface Props {
   children: React.ReactNode
 }
 
-const PlaceholderGroup = (props: Props): React.ReactElement => (
+const PlaceholderGroup = (props: Props): JSX.Element => (
   <Element>{props.children}</Element>
 )
 

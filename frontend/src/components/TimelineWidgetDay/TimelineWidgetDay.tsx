@@ -17,7 +17,7 @@ interface Props extends RouteComponentProps {
   date: string
 }
 
-const TimelineWidgetDay = (props: Props): React.ReactElement => {
+const TimelineWidgetDay = (props: Props): JSX.Element => {
   const { categories = [], date, history } = props
   return (
     <Day key={date} onClick={(): void => history.push(`/timeline/${date}`)}>

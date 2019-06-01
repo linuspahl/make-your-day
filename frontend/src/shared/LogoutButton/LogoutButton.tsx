@@ -48,7 +48,7 @@ interface Props {
   createNotificationBanner: (notification: Notification) => void
 }
 
-const LogoutButton = (props: Props): React.ReactElement => {
+const LogoutButton = (props: Props): JSX.Element => {
   const { userSessionId, clearLocalStorage, createNotificationBanner } = props
   const variables = { id: userSessionId }
 

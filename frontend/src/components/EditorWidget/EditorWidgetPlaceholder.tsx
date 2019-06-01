@@ -9,6 +9,6 @@ const Element = styled.div`
   background-color: ${(props): string => props.theme.border};
 `
 
-const EditorWidgetPlaceholder = (): React.ReactElement => <Element />
+const EditorWidgetPlaceholder = (): JSX.Element => <Element />
 
 export default EditorWidgetPlaceholder

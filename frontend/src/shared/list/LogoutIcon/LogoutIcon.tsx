@@ -47,7 +47,7 @@ interface Props {
   userSessionId: number
 }
 
-const LogoutIcon = (props: Props): React.ReactElement => {
+const LogoutIcon = (props: Props): JSX.Element => {
   const { userSessionId, clearLocalStorage, createNotificationBanner } = props
   const variables = { id: userSessionId }
 

@@ -10,7 +10,7 @@ interface Props {
   title: string
 }
 
-const Icon = (props: Props): React.ReactElement => (
+const Icon = (props: Props): JSX.Element => (
   <i className={`la la-${props.title}`} />
 )
 

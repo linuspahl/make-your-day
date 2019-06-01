@@ -29,7 +29,7 @@ interface Props extends RouteComponentProps {
 }
 
 class CategoryEdit extends React.Component<Props> {
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { rootPath, match } = this.props
     const categoryId = extractIdFromUrl(match)
 

@@ -28,7 +28,7 @@ interface DayEntry {
   date: string
 }
 
-const LoadingPlaceholder = (): React.ReactElement => (
+const LoadingPlaceholder = (): JSX.Element => (
   <PlaceholderGroup>
     {fill(Array(3), null).map(
       (value, key): JSX.Element => {
@@ -45,7 +45,7 @@ export default class TimelineWidget extends React.Component {
     this.prepareTimeline = this.prepareTimeline.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const createdAt = new Date()
     // Change it so that it is 7 days in the past.
     createdAt.setDate(createdAt.getDate() - 7)

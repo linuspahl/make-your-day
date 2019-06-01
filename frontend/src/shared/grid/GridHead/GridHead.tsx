@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode[]
 }
 
-const GridHead = (props: Props): React.ReactElement => (
+const GridHead = (props: Props): JSX.Element => (
   <Element columnAmount={props.children.length}>{props.children}</Element>
 )
 

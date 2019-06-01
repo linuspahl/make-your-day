@@ -17,7 +17,7 @@ interface Props {
   updateLocalStorage: (localStorage: LocalStorage) => void
 }
 
-const UserSettingCreate = (props: Props): React.ReactElement => (
+const UserSettingCreate = (props: Props): JSX.Element => (
   <Mutation
     mutation={CreateUserSetting}
     variables={{ settingId: props.setting.id }}

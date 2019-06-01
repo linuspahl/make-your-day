@@ -20,7 +20,7 @@ interface Props {
   userSettings: { [key: string]: UserSetting }
 }
 
-const Settings = (props: Props): React.ReactElement => {
+const Settings = (props: Props): JSX.Element => {
   return (
     <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
       <ContentBox role="main">

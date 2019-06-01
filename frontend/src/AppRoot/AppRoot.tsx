@@ -48,7 +48,7 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
     this.createNotificationBanner = this.createNotificationBanner.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const {
       authToken,
       expiresAt,

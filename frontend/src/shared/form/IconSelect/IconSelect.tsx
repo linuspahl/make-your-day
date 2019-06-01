@@ -16,7 +16,7 @@ interface Props {
   value: string
 }
 
-const IconSelect = (props: Props): React.ReactElement => {
+const IconSelect = (props: Props): JSX.Element => {
   const { value, onChange, name, tabIndex, disabled } = props
 
   return (

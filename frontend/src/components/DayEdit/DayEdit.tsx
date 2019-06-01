@@ -43,7 +43,7 @@ interface Props extends RouteComponentProps {
 }
 
 class Timeline extends React.Component<Props> {
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const {
       match: {
         params: { date },

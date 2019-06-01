@@ -72,7 +72,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     }
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const {
       mode,
       rootPath,

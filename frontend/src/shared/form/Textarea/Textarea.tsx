@@ -18,7 +18,7 @@ interface Props {
   value: string
 }
 
-const Textarea = (props: Props): React.ReactElement => {
+const Textarea = (props: Props): JSX.Element => {
   const {
     className,
     disabled,

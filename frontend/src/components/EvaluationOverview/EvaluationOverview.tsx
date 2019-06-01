@@ -29,7 +29,7 @@ interface Props {
   rootPath: string
 }
 
-const EvaluationOverview = (props: Props): React.ReactElement => {
+const EvaluationOverview = (props: Props): JSX.Element => {
   const { rootPath } = props
 
   return (

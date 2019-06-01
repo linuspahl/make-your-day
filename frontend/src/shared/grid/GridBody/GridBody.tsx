@@ -8,7 +8,7 @@ interface Props {
   columnAmount: number
 }
 
-const GridBody = (props: Props): React.ReactElement => (
+const GridBody = (props: Props): JSX.Element => (
   <Element columnAmount={props.columnAmount}>{props.children}</Element>
 )
 

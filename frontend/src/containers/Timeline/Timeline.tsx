@@ -13,7 +13,7 @@ interface Props {
   userSession: UserSession
 }
 
-const Timeline = (props: Props): React.ReactElement => {
+const Timeline = (props: Props): JSX.Element => {
   const { userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>

@@ -40,7 +40,7 @@ export default class PageLayout extends React.Component<Props, State> {
     document.removeEventListener('keydown', this.detectKeydown, false)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { userSession, children, rootPath, noPadding } = this.props
     const { isNavVisible } = this.state
 

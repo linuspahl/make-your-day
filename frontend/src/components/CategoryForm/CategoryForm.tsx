@@ -52,7 +52,7 @@ export default class CategoryForm extends React.Component<
     this.changeState = this.changeState.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { mode, rootPath } = this.props
     const {
       color,

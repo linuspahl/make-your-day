@@ -27,7 +27,7 @@ interface Props {
   to: string
 }
 
-const ActionIcon = (props: Props): React.ReactElement => (
+const ActionIcon = (props: Props): JSX.Element => (
   <Wrapper to={props.to} aria-label={props.ariaLabel}>
     <Icon title={props.icon} />
   </Wrapper>

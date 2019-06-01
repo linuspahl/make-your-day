@@ -7,7 +7,7 @@ interface Props {
   size?: number
 }
 
-const CategoryIconPlaceholder = (props: Props): React.ReactElement => (
+const CategoryIconPlaceholder = (props: Props): JSX.Element => (
   <Circle size={props.size} />
 )
 

@@ -13,7 +13,7 @@ const CategoryLoading = styled(Category)<Props>`
   min-height: 30px;
 `
 
-const CategorySummaryPlaceholder = (props: Props): React.ReactElement => (
+const CategorySummaryPlaceholder = (props: Props): JSX.Element => (
   <CategoryLoading size={props.size} />
 )
 

@@ -7,7 +7,7 @@ interface Props {
   children: React.ReactNode
 }
 
-const H1 = (props: Props): React.ReactElement => (
+const H1 = (props: Props): JSX.Element => (
   <Element context={props.context}>{props.children}</Element>
 )
 

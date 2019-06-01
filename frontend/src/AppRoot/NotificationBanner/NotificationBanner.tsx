@@ -40,7 +40,7 @@ export default class NotificationBanner extends React.Component<{}, State> {
     this.closeNotification = this.closeNotification.bind(this)
   }
 
-  public render(): React.ReactElement {
+  public render(): JSX.Element {
     const { notification } = this.state
     return (
       <React.Fragment>
