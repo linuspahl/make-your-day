@@ -29,8 +29,8 @@ interface Props {
   name: string
   onChange: (event: InputEvent) => void
   options: SelectOption[]
-  renderPreview?: (option: SelectOption) => React.ReactChild
-  renderFooter?: () => React.ReactChild
+  renderPreview?: (option: SelectOption) => JSX.Element
+  renderFooter?: () => JSX.Element
   tabIndex: number
   title: string
   value: string | number
