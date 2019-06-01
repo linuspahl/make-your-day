@@ -63,7 +63,7 @@ const layerIndex = {
   notificationBanner: 30,
 }
 
-export default (userSettings: { [key: string]: boolean }) => {
+export default (userSettings: { [key: string]: boolean }): object => {
   let colors = defaultTheme
   if (userSettings.nightMode) {
     // if nightmode is active, we will just change some specific colors
