@@ -1,5 +1,7 @@
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 import { Configuration } from 'webpack'
+import path from 'path'
+
 // Webpack settings only needed for production
 //
 // * mode - will tell webpack to use its built-in optimizations
@@ -9,6 +11,9 @@ import { Configuration } from 'webpack'
 
 const prodConfig = (): Configuration => ({
   mode: 'production',
+  output: {
+    path: path.resolve(__dirname, '../../../', 'productionBuild'),
+  },
   module: {
     rules: [
       {

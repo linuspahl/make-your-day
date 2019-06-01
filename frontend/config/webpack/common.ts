@@ -9,6 +9,7 @@ import { Configuration, ProgressPlugin } from 'webpack'
 import presetConfig from './presets/loadPresets'
 import merge from 'webpack-merge'
 import { WebpackConfigParams } from 'types/types'
+
 // * entry - configure entry point of the application
 // * output
 // - path - directory of the output, defined in prod and dev conf

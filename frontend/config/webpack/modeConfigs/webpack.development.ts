@@ -17,7 +17,7 @@ interface Configuration extends WebpackConfiguration {
 const devConfig = (): Configuration => ({
   mode: 'development',
   output: {
-    path: path.resolve(__dirname, 'devBuild'),
+    path: path.resolve(__dirname, '../../../', 'developmentBuild'),
   },
   devServer: {
     historyApiFallback: true,
