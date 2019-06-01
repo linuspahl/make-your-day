@@ -242,8 +242,6 @@ This makes debugging easier, e.g. with the React Devtools
 - eslint-plugin-react - for react specific eslint rules
 - eslint-plugin-jest - for jest specific eslint rules
 - jest - to test the js code.
-- babel-jest - to transform our code inside of the test environment.
-- jest-transform-graphql - Needed to combine graphql-tag loader with Jest
 - react-test-renderer - Needed for the components tests. A faster alternative to ReactDOM.
 - graphql - JavaScript reference implementation for GraphQL
 - apollo-provider - provides query and mutation components for react
