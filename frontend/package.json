@@ -8,9 +8,9 @@
   "private": false,
   "scripts": {
     "start": "webpack-dev-server --env.mode development --config config/webpack/common.ts",
-    "build": "webpack --progress --verbose --env.mode production --config config/webpack/common.ts",
+    "build": "webpack --progress --verbose --env.mode production --env.presets compress --config config/webpack/common.ts",
     "analyzeDev": "yarn start --env.presets analyze",
-    "analyzeProd": "yarn build --env.presets analyze compress",
+    "analyzeProd": "yarn build --env.presets analyze",
     "preCommit": "yarn lint && yarn checkTypes && yarn test",
     "lint": "yarn run eslint src config --debug --ext .js,.ts,.tsx",
     "checkTypes": "yarn run tsc",
