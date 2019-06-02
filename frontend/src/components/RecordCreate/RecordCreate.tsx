@@ -95,7 +95,9 @@ class RecordCreate extends React.Component<Props> {
                     category={category}
                     params={{
                       createdAt: createdAtParam,
-                      categoryId: parseInt(subCategoryIdParam, 10),
+                      categoryId: subCategoryIdParam
+                        ? parseInt(subCategoryIdParam, 10)
+                        : categoryId,
                     }}
                     mode="create"
                     rootPath={'/'}
