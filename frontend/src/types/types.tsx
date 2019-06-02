@@ -1,4 +1,53 @@
 // App types
+export interface Theme {
+  primary: string
+  primaryActive: string
+  secondary: string
+  secondaryActive: string
+  delete: string
+  appBg: string
+  text: string
+  border: string
+  boxShadow: string
+  contentBoxBg: string
+  white: string
+  active: string
+  timelineDay: string
+
+  category: CategoryColors
+  categoryText: CategoryColors
+  settings: { [key: string]: boolean }
+  mediaQuery: { tablet: string }
+  layerIndex: LayerIndexes
+}
+
+interface CategoryColors {
+  navy: string
+  blue: string
+  aqua: string
+  teal: string
+  olive: string
+  green: string
+  lime: string
+  yellow: string
+  orange: string
+  red: string
+  maroon: string
+  fuchsia: string
+  purple: string
+  black: string
+  gray: string
+  silver: string
+}
+
+interface LayerIndexes {
+  protrudeContent: number
+  modal: number
+  modalContent: number
+  navigation: number
+  notificationBanner: number
+}
+
 export interface LocalStorage {
   [key: string]: string | boolean | Date | number
   authToken?: string

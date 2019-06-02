@@ -13,7 +13,7 @@ export const formatUnixDate = (unixDate: string): Date => {
   return new Date(unixDateInt)
 }
 
-// This function will add a yero for every number less than ten
+// This function will add a zero for every number less than ten
 // It's needed for the date string and will always return a string
 const formatDatePartial = (dateNumber: number): string => {
   if (dateNumber < 10) {

@@ -3,8 +3,9 @@
 
 import { merge } from 'lodash'
 import { categoryTextColors, categoryColors } from './params'
+import { Theme } from 'types/types'
 
-const defaultTheme = {
+export const defaultTheme = {
   // Primary  color, mostly used by buttons
   primary: '#a5d7ff',
   primaryActive: '#8cccff',
@@ -37,7 +38,7 @@ const mediaQuery = {
 }
 
 // set of colors which will be used for the night mode
-const nightModeTheme = {
+export const nightModeTheme = {
   primary: '#525252',
   primaryActive: '#313131',
   secondary: '#8e8e8e',
@@ -63,7 +64,7 @@ const layerIndex = {
   notificationBanner: 30,
 }
 
-export default (userSettings: { [key: string]: boolean }): object => {
+export default (userSettings: { [key: string]: boolean } = {}): Theme => {
   let colors = defaultTheme
   if (userSettings.nightMode) {
     // if nightmode is active, we will just change some specific colors
