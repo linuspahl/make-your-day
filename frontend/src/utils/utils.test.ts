@@ -1,6 +1,26 @@
-import { handleInputChange } from './utils'
+import {
+  handleInputChange,
+  logError,
+  // extractIdFromUrl,
+  // generateUrlParams,
+  // parseQueryParams,
+  // formatAppStateValue,
+  // updateLocalStorage,
+  // getLocalStorage,
+} from './utils'
 
 describe('utils', (): void => {
+  describe('logError ', (): void => {
+    jest.mock('../../config/config', (): object => ({ isDevEnv: true }))
+
+    test('should log error', (): void => {
+      // const spy = jest.spyOn(console, 'log')
+      logError('Error message')
+
+      // expect(spy).toHaveBeenCalledWith('ErrorMessage')
+    })
+  })
+
   describe('handleInputChange ', (): void => {
     test('input event', (): void => {
       const event = { target: { name: 'username', value: 'Admin' } }

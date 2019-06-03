@@ -6,39 +6,6 @@ import { ApolloError } from 'apollo-boost'
 // interfaces
 import { LocalStorageCreate, InputEvent, LocalStorage } from 'types/types'
 
-// This function will convert a unix date to a YYYY-MM-DD string
-export const formatUnixDate = (unixDate: string): Date => {
-  // Expects unix date string like '1549395636726'
-  const unixDateInt = parseInt(unixDate, 10)
-  return new Date(unixDateInt)
-}
-
-// This function will add a zero for every number less than ten
-// It's needed for the date string and will always return a string
-const formatDatePartial = (dateNumber: number): string => {
-  if (dateNumber < 10) {
-    return `0${dateNumber}`
-  }
-
-  return `${dateNumber}`
-}
-
-export const getDateString = (dateParam: Date): string => {
-  // Expects a JS date object
-  // Returns a string with the format like 'YYYY-M-D'
-  const date = new Date(dateParam)
-
-  // Get number of the day and month
-  const monthNr = date.getMonth() + 1
-  const dayNr = date.getDate()
-
-  // Convert day and month to string
-  const month = formatDatePartial(monthNr)
-  const day = formatDatePartial(dayNr)
-
-  return `${date.getFullYear()}-${month}-${day}`
-}
-
 // Utility form function - will updade the form state on input change.
 // Used in every input.
 export const handleInputChange = (

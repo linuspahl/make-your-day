@@ -2,10 +2,7 @@
 import * as React from 'react'
 import { Query } from 'react-apollo'
 import dayjs from 'dayjs'
-import { sortBy } from 'lodash'
-// utils
-import { formatUnixDate, getDateString } from 'utils/utils'
-import { fill } from 'lodash'
+import { sortBy, fill } from 'lodash'
 // components
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
@@ -46,19 +43,15 @@ export default class TimelineWidget extends React.Component {
   }
 
   public render(): JSX.Element {
+    // We want to fetch all posts of the last seven days.
     const createdAt = new Date()
-    // Change it so that it is 7 days in the past.
     createdAt.setDate(createdAt.getDate() - 7)
+    const createdAtFrom = dayjs(createdAt).format('YYYY-MM-DD')
 
     return (
       <Outer>
         <Layout>
-          <Query
-            query={GetRecords}
-            variables={{
-              createdAtFrom: getDateString(createdAt),
-            }}
-          >
+          <Query query={GetRecords} variables={{ createdAtFrom }}>
             {({
               loading,
               error,
@@ -121,8 +114,8 @@ export default class TimelineWidget extends React.Component {
         const category = recordCategory.parent || recordCategory
         const categoryKey = `${category.id}`
         // get createdAt date and format to string
-        const createdAtDate = formatUnixDate(record.createdAt)
-        const createdAtDay = getDateString(createdAtDate)
+        const recordCreatedAtUnix = parseInt(record.createdAt)
+        const createdAtDay = dayjs(recordCreatedAtUnix).format('YYYY-MM-DD')
 
         if (timeline[createdAtDay]) {
           // Check if an entry for the category exists

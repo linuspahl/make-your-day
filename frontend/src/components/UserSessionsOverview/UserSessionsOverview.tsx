@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { Query } from 'react-apollo'
 // utils
-import { getDateString, formatUnixDate } from 'utils/utils'
+import dayjs from 'dayjs'
 // components
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 import LogoutIcon from 'shared/list/LogoutIcon/LogoutIcon'
@@ -69,9 +69,10 @@ const UserSessionOverview = (props: Props): JSX.Element => (
                 (userSession: UserSession): JSX.Element => {
                   const isCurrentSession =
                     userSession.expiresAt === props.userSession.expiresAt
-                  const expiresAtDate = getDateString(
-                    formatUnixDate(userSession.expiresAt)
+                  const expiresAtDate = dayjs(userSession.expiresAt).format(
+                    'YYYY-MM-DD'
                   )
+
                   return (
                     <React.Fragment key={userSession.id}>
                       <div>{userSession.device}</div>
