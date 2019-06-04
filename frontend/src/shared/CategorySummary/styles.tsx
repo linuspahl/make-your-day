@@ -19,7 +19,8 @@ export const Category = styled.div<CategoryProps>`
 
   background-color: ${(props): string =>
     props.color ? props.theme.category[props.color] : props.theme.border};
-  color: ${(props): string => props.theme.categoryText[props.color]};
+  color: ${(props): string =>
+    props.color ? props.theme.categoryText[props.color] : props.theme.text};
   font-size: 12px;
 
   &:last-child {

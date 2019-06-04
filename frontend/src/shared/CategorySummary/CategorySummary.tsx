@@ -28,14 +28,14 @@ const CategorySummary = (props: Props): JSX.Element => {
       // Button is a Link
       to={isLink ? to : null}
       as={isLink ? Link : null}
+      data-testid="CategorySummary"
     >
       <IconWrapper>
         {icon && <Icon title={icon} />}
         {!icon && title && title.substring(0, 1)}
       </IconWrapper>
       {title !== displayTitle && <CategoryTitle>{displayTitle}</CategoryTitle>}
-      {amount}
-      {hasUnit ? unit : '×'}
+      {`${amount}${hasUnit ? unit : '×'}`}
     </Category>
   )
 }
