@@ -11,7 +11,7 @@ interface Props {
 }
 
 const Icon = (props: Props): JSX.Element => (
-  <i className={`la la-${props.title}`} />
+  <i className={`la la-${props.title}`} data-testid="Icon" />
 )
 
 export default Icon
