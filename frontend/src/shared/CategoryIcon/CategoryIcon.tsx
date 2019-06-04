@@ -25,6 +25,7 @@ const CategoryIcon = (props: Props): JSX.Element => {
       to={isLink ? to : null}
       as={isLink ? Link : null}
       aria-label={ariaLabel || `Kategorieicon ${title}`}
+      data-testid="CategoryIcon"
     >
       {icon && <Icon title={icon} />}
       {!icon && title && title.substring(0, 1)}
