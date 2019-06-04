@@ -20,7 +20,10 @@ import { RecordCreate } from 'store/record/type'
 interface Props {
   category: CategoryFull
   initialData?: RecordCreate
-  params?: { createdAt?: string }
+  params?: {
+    createdAt?: RecordCreate['createdAt']
+    categoryId: RecordCreate['categoryId']
+  }
   mode?: FormType['mode']
   rootPath: string
   submitAction: (record: RecordCreate) => void
