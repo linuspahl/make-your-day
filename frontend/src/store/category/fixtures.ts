@@ -18,5 +18,5 @@ export const category: CategoryFull = {
   id: 1,
   title: 'title',
   type: 'string',
-  unit: 'string',
+  unit: '€',
 }
