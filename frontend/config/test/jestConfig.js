@@ -3,6 +3,7 @@
 // This part could be placed in the package.json under a 'jest' tag, as well, but we prefer a seperate config file.
 
 const jestDir = '<rootDir>/config/test'
+
 module.exports = {
   rootDir: '../../',
   setupFilesAfterEnv: [`${jestDir}/utils/configureBeforeTests.ts`],
@@ -14,6 +15,11 @@ module.exports = {
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$': `${jestDir}/utils/fileMock`,
   },
-  moduleDirectories: ['./src', './node_modules', './config'],
+  moduleDirectories: [
+    './src',
+    './node_modules',
+    './config',
+    './config/test/utils',
+  ],
   moduleFileExtensions: ['ts', 'tsx', 'js'],
 }

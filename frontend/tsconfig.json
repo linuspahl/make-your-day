@@ -15,7 +15,8 @@
       "types/*": ["src/types/*"],
       "utils/*": ["src/utils/*"],
       "theme": ["config/theme"],
-      "config": ["config/config"]
+      "config": ["config/config"],
+      "testUtils": ["config/test/utils/testUtils"]
     },
     "module": "commonjs",
     "noImplicitAny": true,
