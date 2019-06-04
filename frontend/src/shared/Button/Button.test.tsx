@@ -2,7 +2,6 @@
 import * as React from 'react'
 import colorTheme from 'theme'
 import { cleanup, render, renderWithAppRoot, fireEvent } from 'testUtils'
-import 'jest-styled-components'
 // components
 import Button from './Button'
 
