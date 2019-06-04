@@ -14,7 +14,10 @@ interface Props {
 const CloseIcon = (props: Props): JSX.Element => {
   const hasClickAction = typeof props.closeAction === 'function'
   return (
-    <Element onClick={(): void => hasClickAction && props.closeAction()}>
+    <Element
+      onClick={(): void => hasClickAction && props.closeAction()}
+      data-testid="CloseIcon"
+    >
       <Icon title="times" />
     </Element>
   )
