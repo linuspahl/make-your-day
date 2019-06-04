@@ -2,7 +2,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 // helper
-import { categoryColors } from '../../../../config/params'
+import { categoryColors } from 'params'
 // components
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 // interfaces

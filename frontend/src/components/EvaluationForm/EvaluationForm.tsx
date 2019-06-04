@@ -3,10 +3,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 // utils
 import { handleInputChange } from 'utils/utils'
-import {
-  evaluationTypeOptions,
-  evaluationPeriodOptions,
-} from '../../../config/params'
+import { evaluationTypeOptions, evaluationPeriodOptions } from 'params'
 // components
 import Checkbox from 'shared/form/Checkbox/Checkbox'
 import ActionRow from 'shared/form/ActionRow/ActionRow'

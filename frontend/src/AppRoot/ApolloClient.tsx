@@ -4,7 +4,7 @@
 // We need to define a fetch polyfill to test the apollo client correctly
 import 'cross-fetch/polyfill'
 // config
-import config from '../../config/config'
+import config from 'config'
 // libraries
 import ApolloClient from 'apollo-boost'
 // interfaces

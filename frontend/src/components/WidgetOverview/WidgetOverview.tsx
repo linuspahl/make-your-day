@@ -3,7 +3,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { Query } from 'react-apollo'
 // utils
-import { widgetPositionOptions } from '../../../config/params'
+import { widgetPositionOptions } from 'params'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'

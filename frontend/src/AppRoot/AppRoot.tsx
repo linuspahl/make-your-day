@@ -9,7 +9,7 @@ import { ApolloProvider } from 'react-apollo'
 import { getLocalStorage, updateLocalStorage } from 'utils/utils'
 import { ThemeProvider } from 'styled-components'
 // theme
-import colorTheme from '../../config/theme'
+import colorTheme from 'theme'
 // components
 import Routes from './Routes/Routes'
 import NotificationBanner from './NotificationBanner/NotificationBanner'

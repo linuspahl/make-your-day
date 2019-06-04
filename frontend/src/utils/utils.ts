@@ -1,6 +1,6 @@
 // Utility file for all multiplate needed helper functions
 
-import config from '../../config/config'
+import config from 'config'
 // libraries
 import { ApolloError } from 'apollo-boost'
 // interfaces

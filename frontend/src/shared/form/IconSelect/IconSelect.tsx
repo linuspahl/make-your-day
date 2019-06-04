@@ -6,7 +6,7 @@ import Icon from 'shared/Icon/Icon'
 // interfaces
 import { InputEvent } from 'types/types'
 
-import { categoryIcons } from '../../../../config/params'
+import { categoryIcons } from 'params'
 
 interface Props {
   disabled?: boolean

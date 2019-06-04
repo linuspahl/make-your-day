@@ -11,7 +11,7 @@ import {
 
 describe('utils', (): void => {
   describe('logError ', (): void => {
-    jest.mock('../../config/config', (): object => ({ isDevEnv: true }))
+    jest.mock('config', (): object => ({ isDevEnv: true }))
 
     test('should log error', (): void => {
       // const spy = jest.spyOn(console, 'log')

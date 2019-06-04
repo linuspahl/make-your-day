@@ -6,7 +6,7 @@ import { handleInputChange } from 'utils/utils'
 import {
   widgetTypeOptions,
   widgetPositionOptions,
-} from '../../../config/params'
+} from 'params'
 // components
 import Row from 'shared/form/Row/Row'
 import ActionRow from 'shared/form/ActionRow/ActionRow'

@@ -8,7 +8,7 @@ import Checkbox from 'shared/form/Checkbox/Checkbox'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import H2 from 'shared/H2/H2'
 // params
-import { categoryTypeOptions } from '../../../config/params'
+import { categoryTypeOptions } from 'params'
 // interface
 import { Category } from 'store/category/type'
 import { Form, InputEvent } from 'types/types'

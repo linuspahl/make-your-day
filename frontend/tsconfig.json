@@ -16,7 +16,8 @@
       "utils/*": ["src/utils/*"],
       "theme": ["config/theme"],
       "config": ["config/config"],
-      "testUtils": ["config/test/utils/testUtils"]
+      "testUtils": ["config/test/utils/testUtils"],
+      "params": ["config/params"]
     },
     "module": "commonjs",
     "noImplicitAny": true,
