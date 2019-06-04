@@ -25,7 +25,7 @@ describe('Button should', (): void => {
     expect(getByText(children).nodeName).toBe('A')
   })
 
-  test('work as with a click event, when clickAction is provided', (): void => {
+  test('work with a click event, when clickAction is provided', (): void => {
     const onClickEvent = jest.fn()
     const { getByText } = renderWithAppRoot(
       <Button clickAction={onClickEvent}>{children}</Button>
