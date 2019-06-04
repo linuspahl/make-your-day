@@ -13,7 +13,9 @@
       "containers/*": ["src/containers/*"],
       "store/*": ["src/store/*"],
       "types/*": ["src/types/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "theme": ["config/theme"],
+      "config": ["config/config"]
     },
     "module": "commonjs",
     "noImplicitAny": true,
