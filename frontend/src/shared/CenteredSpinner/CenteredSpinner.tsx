@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Layout, Spinner, DoubleBouncer1, DoubleBouncer2 } from './styles'
 
 const CenteredSpinner = (): JSX.Element => (
-  <Layout>
+  <Layout data-testid="CenteredSpinner">
     <Spinner>
       <DoubleBouncer1 />
       <DoubleBouncer2 />
