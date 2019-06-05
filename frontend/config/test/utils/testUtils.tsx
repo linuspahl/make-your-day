@@ -19,13 +19,21 @@ interface WrappedComponent extends RenderResult {
   history: MemoryHistory<any>
 }
 
+// Custom render utils
 function renderWithAppRoot(
   component: JSX.Element,
-  { route = '/', ...renderOptions } = {}
+  {
+    route = '/',
+    themeProps = {},
+    ...renderOptions
+  }: {
+    route?: string
+    themeProps?: { [key: string]: boolean }
+  } = {}
 ): WrappedComponent {
   const history = createMemoryHistory({ initialEntries: [route] })
   const utils = render(
-    <ThemeProvider theme={colorTheme()}>
+    <ThemeProvider theme={colorTheme(themeProps)}>
       <Router history={history}>{component}</Router>
     </ThemeProvider>,
     renderOptions
@@ -34,4 +42,7 @@ function renderWithAppRoot(
   return { ...utils, history }
 }
 
-export { render, cleanup, renderWithAppRoot, fireEvent }
+// Custom fireEvent option (because we use them so many times)
+const leftClickOption = { button: 0 }
+
+export { render, cleanup, renderWithAppRoot, fireEvent, leftClickOption }
