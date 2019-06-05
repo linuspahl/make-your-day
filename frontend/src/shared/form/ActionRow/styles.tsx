@@ -1,6 +1,7 @@
 // libraries
-import Row from 'shared/form/Row/Row'
 import styled from 'styled-components'
+// components
+import Row from 'shared/form/Row/Row'
 
 interface LayoutProps {
   amountChildren: number
