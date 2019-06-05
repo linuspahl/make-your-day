@@ -1,11 +1,20 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+import { render, cleanup } from 'testUtils'
 // components
 import H1 from './H1'
 
 describe('H1 should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(<H1>Content</H1>)
+  const children = 'My special H1 content!'
+  afterEach(cleanup)
+
+  test('display content', (): void => {
+    const { getByText } = render(<H1>{children}</H1>)
+    expect(getByText(children)).toBeInTheDocument()
+  })
+
+  test('have different margin when used with page context', (): void => {
+    const { getByText } = render(<H1 context="page">{children}</H1>)
+    expect(getByText(children)).toHaveStyleRule('margin-bottom', '60px')
   })
 })
