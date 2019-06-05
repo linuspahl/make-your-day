@@ -61,6 +61,12 @@ export default class ContentSelect extends React.Component<Props, State> {
     this.onBlur = this.onBlur.bind(this)
   }
 
+  public componentWillUnmount(): void {
+    // If the component unmounts, we wnat to be 100% sure,
+    // to remove the event listener, to avoid memory leaks
+    this.onBlur()
+  }
+
   public render(): JSX.Element {
     const {
       title,
@@ -88,6 +94,7 @@ export default class ContentSelect extends React.Component<Props, State> {
           onClick={(): void => (!disabled ? this.toggleSelect() : null)}
           onFocus={disabled ? null : this.onFocus}
           onBlur={disabled ? null : this.onBlur}
+          data-testid="ContentSelect-selection"
         >
           {value && currentOption ? currentOption.title : 'Keine Auswahl'}
           <ArrowIcon>
@@ -96,7 +103,7 @@ export default class ContentSelect extends React.Component<Props, State> {
         </Select>
         {isOpen && (
           <Modal headline={title} toggleAction={this.toggleSelect}>
-            <Options>
+            <Options data-testid="ContentSelect-options">
               {sortedOptions.map(
                 (option): JSX.Element => {
                   const isSelected = option.value === value
@@ -147,13 +154,13 @@ export default class ContentSelect extends React.Component<Props, State> {
     const { keyCode } = event
     const sortedOptions = this.sortedOptions
 
-    // Disable tab navigation, when select is open and close select instead
+    // Disable tab navigation (keyCode 9), when select is open and close select instead
     if (keyCode === 9 && isOpen) {
       event.preventDefault()
       this.toggleSelect()
     }
 
-    // Detect space and enter key and toggle select
+    // Detect space (keyCode 13) and enter key (keyCode 32) and toggle select
     if (keyCode === 13 || keyCode === 32) {
       // We need to prevent the default window scrolling for the space key
       // And the default form submit for the enter key
@@ -161,7 +168,7 @@ export default class ContentSelect extends React.Component<Props, State> {
       this.toggleSelect()
     }
 
-    // Detect arrow up and arrow down key
+    // Detect arrow up (keyCode 40) and arrow down key (keyCode 38)
     if (keyCode === 40 || keyCode === 38) {
       // We need to prevent the default window scrolling for the arrow keys
       event.preventDefault()
@@ -171,7 +178,7 @@ export default class ContentSelect extends React.Component<Props, State> {
         (option): boolean => option.value === value
       )
 
-      // On arrow down select next option
+      // On arrow down (keyCode 40) select next option
       if (keyCode === 40) {
         const nextOption = sortedOptions[currentIndex + 1]
         if (nextOption) {
@@ -179,7 +186,7 @@ export default class ContentSelect extends React.Component<Props, State> {
         }
       }
 
-      // On arrow up select previous option
+      // On arrow up select (keyCode 38) previous option
       if (keyCode === 38) {
         const prevOption = sortedOptions[currentIndex - 1]
         if (prevOption) {
