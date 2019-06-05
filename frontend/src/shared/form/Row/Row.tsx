@@ -13,8 +13,9 @@ export interface Props {
 
 const Row = (props: Props): JSX.Element => (
   <Layout
-    disabled={props.disabled}
     className={props.className}
+    data-testid="Row"
+    disabled={props.disabled}
     htmlFor={props.htmlFor}
     onClick={props.onClick}
   >
