@@ -24,6 +24,6 @@ export const Layout = styled.div<LayoutProps>`
     props.disabled &&
     `
       color: #b5b5b5;
-       cursor: not-allowed;
+      cursor: not-allowed;
     `};
 `
