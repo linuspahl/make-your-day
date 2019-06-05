@@ -18,7 +18,7 @@ interface Props {
 const Checkbox = (props: Props): JSX.Element => {
   const { value, onChange, name, disabled, tabIndex } = props
   return (
-    <Wrapper disabled={disabled}>
+    <Wrapper disabled={disabled} data-testid="Checkbox">
       {value && (
         <Checkmark>
           <Icon title="check" />

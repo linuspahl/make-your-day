@@ -1,19 +1,48 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+import { renderWithAppRoot, cleanup } from 'testUtils'
+import colorTheme from 'theme'
 // components
 import Checkbox from './Checkbox'
 
 describe('Checkbox should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
+  const theme = colorTheme()
+  afterEach(cleanup)
+
+  test('show a checkmark icon, when check', (): void => {
+    const { getByTestId } = renderWithAppRoot(
       <Checkbox
-        value={false}
+        name="newsletter"
         onChange={(): void => {}}
-        name="Name"
-        disabled={false}
-        tabIndex={1}
+        tabIndex={0}
+        value={true}
       />
     )
+    expect(getByTestId('Icon')).toBeInTheDocument()
+  })
+
+  test('show a checkmark icon, when check', (): void => {
+    const { queryByTestId } = renderWithAppRoot(
+      <Checkbox
+        name="newsletter"
+        onChange={(): void => {}}
+        tabIndex={0}
+        value={false}
+      />
+    )
+    expect(queryByTestId('Icon')).not.toBeInTheDocument()
+  })
+
+  test('should look disabled, when disabled is provided', (): void => {
+    const { queryByTestId } = renderWithAppRoot(
+      <Checkbox
+        disabled
+        name="newsletter"
+        onChange={(): void => {}}
+        tabIndex={0}
+        value={false}
+      />
+    )
+    expect(queryByTestId('Checkbox')).toHaveStyleRule('color', theme.border)
   })
 })
