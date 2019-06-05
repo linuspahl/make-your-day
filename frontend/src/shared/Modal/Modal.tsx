@@ -23,7 +23,7 @@ export default class Modal extends React.Component<Props> {
   public render(): React.ReactNode {
     const { toggleAction, children, headline } = this.props
     return (
-      <Wrapper>
+      <Wrapper data-testid="Modal">
         <FadeTransition fullHeight>
           <Offset onClick={(): void => toggleAction()} />
           <ContentWrapper>
