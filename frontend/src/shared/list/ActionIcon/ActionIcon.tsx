@@ -28,8 +28,9 @@ interface Props {
 }
 
 const ActionIcon = (props: Props): JSX.Element => (
-  <Wrapper to={props.to} aria-label={props.ariaLabel}>
+  <Wrapper to={props.to} aria-label={props.ariaLabel} data-testid="ActionIcon">
     <Icon title={props.icon} />
   </Wrapper>
 )
+
 export default ActionIcon
