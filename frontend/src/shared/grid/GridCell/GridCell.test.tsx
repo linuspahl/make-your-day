@@ -1,5 +1,6 @@
 // libraries
 import * as React from 'react'
+// utils
 import { render } from 'testUtils'
 // components
 import GridCell from './GridCell'

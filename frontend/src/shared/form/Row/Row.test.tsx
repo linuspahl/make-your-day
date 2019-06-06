@@ -1,5 +1,6 @@
 // libraries
 import * as React from 'react'
+// utils
 import { render, cleanup } from 'testUtils'
 // components
 import Row from './Row'

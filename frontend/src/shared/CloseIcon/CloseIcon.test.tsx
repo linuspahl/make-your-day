@@ -1,6 +1,7 @@
 // libraries
 import * as React from 'react'
-import { render, fireEvent, cleanup } from 'testUtils'
+// utils
+import { render, fireEvent, cleanup, leftClickOption } from 'testUtils'
 // components
 import CloseIcon from './CloseIcon'
 
@@ -15,11 +16,8 @@ describe('CloseIcon should', (): void => {
   test('work with a click event, when clickAction is provided', (): void => {
     const onClickEvent = jest.fn()
     const { getByTestId } = render(<CloseIcon closeAction={onClickEvent} />)
-
     expect(getByTestId('CloseIcon')).toBeInTheDocument()
-    const leftClick = { button: 0 }
-    fireEvent.click(getByTestId('CloseIcon'), leftClick)
-
+    fireEvent.click(getByTestId('CloseIcon'), leftClickOption)
     expect(onClickEvent).toBeCalledTimes(1)
   })
 })

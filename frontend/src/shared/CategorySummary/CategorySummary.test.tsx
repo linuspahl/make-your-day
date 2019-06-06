@@ -1,8 +1,9 @@
 // libraries
 import * as React from 'react'
+// utils
+import colorTheme from 'theme'
 import { cleanup, renderWithAppRoot } from 'testUtils'
 import { categoryColors, categoryTextColors } from 'params'
-import colorTheme from 'theme'
 // components
 import CategorySummary from './CategorySummary'
 // fixtures

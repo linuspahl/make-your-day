@@ -1,5 +1,7 @@
 // libraries
 import * as React from 'react'
+// utils
+import { categoryIcons } from 'params'
 import {
   render,
   renderWithAppRoot,
@@ -7,7 +9,6 @@ import {
   leftClickOption,
   cleanup,
 } from 'testUtils'
-import { categoryIcons } from 'params'
 // components
 import IconSelect from './IconSelect'
 

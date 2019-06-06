@@ -1,5 +1,6 @@
 // libraries
 import * as React from 'react'
+// utils
 import { cleanup, renderWithAppRoot } from 'testUtils'
 import { categoryColors, categoryTextColors } from 'params'
 // components
@@ -48,7 +49,6 @@ describe('CategoryIcon should', (): void => {
     const { getByTestId } = renderWithAppRoot(
       <CategoryIcon title="Title" icon={'IconName'} size={20} />
     )
-
     expect(getByTestId('CategoryIcon')).toHaveStyleRule('font-size', '10px')
   })
 })

@@ -1,6 +1,11 @@
 // libraries
 import * as React from 'react'
-import { renderWithAppRoot, cleanup, fireEvent } from 'testUtils'
+import {
+  renderWithAppRoot,
+  cleanup,
+  fireEvent,
+  leftClickOption,
+} from 'testUtils'
 // components
 import CircleTimer from './CircleTimer'
 
@@ -21,9 +26,7 @@ describe('CircleTimer should', (): void => {
     const { getByText } = renderWithAppRoot(
       <CircleTimer clickAction={onClickEvent}>{children}</CircleTimer>
     )
-
-    const leftClick = { button: 0 }
-    fireEvent.click(getByText(`${children}`), leftClick)
+    fireEvent.click(getByText(`${children}`), leftClickOption)
 
     expect(onClickEvent).toBeCalledTimes(1)
   })

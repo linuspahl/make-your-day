@@ -1,7 +1,14 @@
 // libraries
 import * as React from 'react'
+// utils
 import colorTheme from 'theme'
-import { cleanup, render, renderWithAppRoot, fireEvent } from 'testUtils'
+import {
+  cleanup,
+  render,
+  renderWithAppRoot,
+  fireEvent,
+  leftClickOption,
+} from 'testUtils'
 // components
 import Button from './Button'
 
@@ -30,10 +37,7 @@ describe('Button should', (): void => {
     const { getByText } = renderWithAppRoot(
       <Button clickAction={onClickEvent}>{children}</Button>
     )
-
-    const leftClick = { button: 0 }
-    fireEvent.click(getByText(children), leftClick)
-
+    fireEvent.click(getByText(children), leftClickOption)
     expect(onClickEvent).toBeCalledTimes(1)
   })
 

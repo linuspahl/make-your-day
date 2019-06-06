@@ -1,5 +1,6 @@
 // libraries
 import * as React from 'react'
+// utils
 import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import Textarea from './Textarea'

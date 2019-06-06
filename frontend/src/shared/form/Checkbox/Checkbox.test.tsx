@@ -1,5 +1,6 @@
 // libraries
 import * as React from 'react'
+// utils
 import { renderWithAppRoot, cleanup } from 'testUtils'
 import colorTheme from 'theme'
 // components
