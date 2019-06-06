@@ -47,6 +47,13 @@ You should use `react-test-render/shallow` for this.
 When testing a component with many props multiple props,
 extract them to an object and just modify the related prop for each test.
 
+Fixures
+For a lot tests we are using fixtures. All fixtures are stored in the store directory.
+We try to use as less "hardcoded" data in the tests as possible.
+E.g. when testing a Mutation component, you need to provide an id for the specific entry, you want to update delete.
+And zou will have to compare the result against some data. Try to use the same fixture for the input (id) and output (mutation result).
+This way we are very flexible when it comes to editing the fixtures.
+
 #### Linting
 
 We are using Eslint for the linting.
