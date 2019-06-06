@@ -1,13 +1,13 @@
 // libraries
 import styled from 'styled-components'
 
-interface ListItemProps {
+interface ElementProps {
   spaceBetween?: boolean
   clickable: boolean
   children: React.ReactNode
 }
 
-export const ListItem = styled.li<ListItemProps>`
+export const Element = styled.li<ElementProps>`
   display: flex;
   align-items: center;
   justify-content: ${(props): string =>

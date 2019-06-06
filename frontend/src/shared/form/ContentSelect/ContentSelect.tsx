@@ -112,7 +112,7 @@ export default class ContentSelect extends React.Component<Props, State> {
                     <Option
                       isSelected={isSelected}
                       key={option.value}
-                      onClick={(): void => this.onOptionClick(option.value)}
+                      clickAction={(): void => this.onOptionClick(option.value)}
                     >
                       <React.Fragment>
                         {hasPreview && (

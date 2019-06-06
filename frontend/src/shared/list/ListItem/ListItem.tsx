@@ -1,31 +1,31 @@
 // libraries
 import * as React from 'react'
 // compoenents
-import { ListItem } from './styles'
+import { Element } from './styles'
 
 export interface Props {
   children: React.ReactNode
   className?: string
-  onClick?: () => void
+  clickAction?: () => void
   onFocus?: () => void
   spaceBetween?: boolean
   tabIndex?: number
 }
 
-const LogoutIcon = (props: Props): JSX.Element => {
-  const clickable = typeof props.onClick === 'function'
+const ListItem = (props: Props): JSX.Element => {
+  const clickable = typeof props.clickAction === 'function'
   return (
-    <ListItem
+    <Element
       className={props.className}
       clickable={clickable}
-      onClick={props.onClick}
+      onClick={props.clickAction}
       onFocus={props.onFocus}
       spaceBetween={props.spaceBetween}
       tabIndex={props.tabIndex}
     >
       {props.children}
-    </ListItem>
+    </Element>
   )
 }
 
-export default LogoutIcon
+export default ListItem
