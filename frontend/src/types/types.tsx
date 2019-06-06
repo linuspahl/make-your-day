@@ -21,7 +21,8 @@ export interface Theme {
   layerIndex: LayerIndexes
 }
 
-interface CategoryColors {
+export interface CategoryColors {
+  [key: string]: string
   navy: string
   blue: string
   aqua: string

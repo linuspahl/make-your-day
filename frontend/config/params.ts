@@ -1,4 +1,5 @@
 // File for all static content, that is not related to the config
+import { CategoryColors } from 'types/types'
 
 export const weekDayLabels: { [key: string]: string } = {
   0: 'So',
@@ -10,7 +11,7 @@ export const weekDayLabels: { [key: string]: string } = {
   6: 'Sa',
 }
 
-export const categoryColors = {
+export const categoryColors: CategoryColors = {
   navy: '#001f3f',
   blue: '#0074D9',
   aqua: '#7FDBFF',
@@ -29,7 +30,7 @@ export const categoryColors = {
   silver: '#DDDDDD',
 }
 
-export const categoryTextColors = {
+export const categoryTextColors: CategoryColors = {
   navy: '#80bfff',
   blue: '#b3dbff',
   aqua: '#004966',
