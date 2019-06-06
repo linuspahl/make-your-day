@@ -4,11 +4,12 @@ import * as React from 'react'
 import { Element } from './styles'
 
 interface Props {
-  children: React.ReactNode[]
+  children: React.ReactNode | React.ReactNodeArray
 }
 
-const GridHead = (props: Props): JSX.Element => (
-  <Element columnAmount={props.children.length}>{props.children}</Element>
-)
+const GridHead = (props: Props): JSX.Element => {
+  const amountChildren = React.Children.toArray(props.children).length
+  return <Element columnAmount={amountChildren}>{props.children}</Element>
+}
 
 export default GridHead
