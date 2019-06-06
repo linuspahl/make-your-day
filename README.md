@@ -38,11 +38,14 @@ Web app (Node + React) to extend my knowledge about the used technologies. This 
 
 #### Testing
 
-We are using Jest for unit and snapshot tests. You can run all tests with `yarn test`.
+We are using Jest and @testing-library/react for unit tests. You can run all tests with `yarn test`.
 Before each commit, you should check the code coverage with `yarn test --coverage`
 You'll find the test suit setup in `config/test`.
 A common component test case is to check if the component renders correctly.
 You should use `react-test-render/shallow` for this.
+
+When testing a component with many props multiple props,
+extract them to an object and just modify the related prop for each test.
 
 #### Linting
 
