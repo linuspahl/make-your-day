@@ -1,13 +1,41 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+import {
+  renderWithAppRoot,
+  cleanup,
+  fireEvent,
+  leftClickOption,
+} from 'testUtils'
 // components
 import ListItem from './ListItem'
 
 describe('ListItem should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <ListItem tabIndex={1}>Content</ListItem>
+  const children = 'My special ListItem content!'
+  afterEach(cleanup)
+
+  test('display content', (): void => {
+    const { getByText } = renderWithAppRoot(<ListItem>{children}</ListItem>)
+    expect(getByText(children)).toBeInTheDocument()
+  })
+
+  test('align content with space-between, when property spaceBetween is provided', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <ListItem spaceBetween>{children}</ListItem>
     )
+    expect(getByText(children)).toHaveStyleRule(
+      'justify-content',
+      'space-between'
+    )
+  })
+
+  test('work with a click event, when clickAction is provided', (): void => {
+    const onClickEvent = jest.fn()
+    const { getByText } = renderWithAppRoot(
+      <ListItem clickAction={onClickEvent}>{children}</ListItem>
+    )
+
+    fireEvent.click(getByText(`${children}`), leftClickOption)
+
+    expect(onClickEvent).toBeCalledTimes(1)
   })
 })
