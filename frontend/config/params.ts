@@ -1,5 +1,5 @@
 // File for all static content, that is not related to the config
-import { CategoryColors } from 'types/types'
+import { CategoryColors, SelectOption } from 'types/types'
 
 export const weekDayLabels: { [key: string]: string } = {
   0: 'So',
@@ -49,13 +49,13 @@ export const categoryTextColors: CategoryColors = {
   silver: '#000',
 }
 
-export const categoryTypeOptions = [
+export const categoryTypeOptions: SelectOption[] = [
   { value: 'journal', title: 'Journal' },
   { value: 'list', title: 'Liste' },
   { value: 'counter', title: 'Zähler' },
 ]
 
-export const categoryIcons = [
+export const categoryIcons: SelectOption[] = [
   { value: 'glass', title: 'Glass' },
   { value: 'car', title: 'Auto' },
   { value: 'archive', title: 'Box' },
@@ -73,24 +73,24 @@ export const categoryIcons = [
   { value: 'money', title: 'Geld' },
 ]
 
-export const widgetTypeOptions = [
+export const widgetTypeOptions: SelectOption[] = [
   { value: 'evaluation', title: 'Auswertung' },
   { value: 'textarea', title: 'Freitext' },
   { value: 'timeline', title: 'Timeline' },
 ]
 
-export const widgetPositionOptions = [
+export const widgetPositionOptions: SelectOption[] = [
   { value: 'dashboard-top', title: 'Dashboard oben' },
   { value: 'dashboard-bottom', title: 'Dashboard unten' },
 ]
 
-export const evaluationTypeOptions = [
+export const evaluationTypeOptions: SelectOption[] = [
   { value: 'linechart', title: 'Liniendiagram' },
   { value: 'barchart', title: 'Balkendiagram' },
   { value: 'piechart', title: 'Kuchendiagram' },
 ]
 
-export const evaluationPeriodOptions = [
+export const evaluationPeriodOptions: SelectOption[] = [
   { value: 'day', title: 'Dieser Tag' },
   { value: 'week', title: 'Diese Woche' },
   { value: 'month', title: 'Dieser Monat' },
