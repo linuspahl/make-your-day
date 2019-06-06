@@ -13,7 +13,8 @@ import ColorSelect from './ColorSelect'
 
 describe('ColorSelect should', (): void => {
   afterEach(cleanup)
-  test('render show provides value as current selection', (): void => {
+
+  test('show provides color name as current selected option', (): void => {
     const { getByText } = render(
       <ColorSelect
         name="ColorInput"

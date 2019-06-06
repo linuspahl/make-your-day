@@ -15,7 +15,6 @@ describe('ActionRow should', (): void => {
 
   test('align content centered, when it has one child', (): void => {
     const { getByTestId } = renderWithAppRoot(<ActionRow>{children}</ActionRow>)
-
     expect(getByTestId('Row')).toHaveStyleRule('justify-content', 'center')
   })
 
@@ -26,7 +25,6 @@ describe('ActionRow should', (): void => {
         <span>{children}</span>
       </ActionRow>
     )
-
     expect(getByTestId('Row')).toHaveStyleRule(
       'justify-content',
       'space-between'

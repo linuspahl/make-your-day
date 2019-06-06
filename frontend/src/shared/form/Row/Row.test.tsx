@@ -14,7 +14,7 @@ describe('Row should', (): void => {
     expect(getByText(children)).toBeInTheDocument()
   })
 
-  test('should look disabled, when disabled is provided', (): void => {
+  test('look disabled, when disabled is provided', (): void => {
     const { getByText } = render(<Row disabled>{children}</Row>)
     expect(getByText(children)).toHaveStyleRule('cursor', 'not-allowed')
   })

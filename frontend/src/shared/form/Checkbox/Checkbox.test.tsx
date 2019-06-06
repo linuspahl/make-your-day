@@ -33,7 +33,7 @@ describe('Checkbox should', (): void => {
     expect(queryByTestId('Icon')).not.toBeInTheDocument()
   })
 
-  test('should look disabled, when disabled is provided', (): void => {
+  test('look disabled, when disabled is provided', (): void => {
     const { queryByTestId } = renderWithAppRoot(
       <Checkbox
         disabled
