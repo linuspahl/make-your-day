@@ -3,10 +3,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 // utils
 import { handleInputChange } from 'utils/utils'
-import {
-  widgetTypeOptions,
-  widgetPositionOptions,
-} from 'params'
+import { widgetTypeOptions, widgetPositionOptions } from 'params'
 // components
 import Row from 'shared/form/Row/Row'
 import ActionRow from 'shared/form/ActionRow/ActionRow'

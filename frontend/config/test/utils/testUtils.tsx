@@ -16,7 +16,7 @@ import { ThemeProvider } from 'styled-components'
 import colorTheme from 'theme'
 
 interface WrappedComponent extends RenderResult {
-  history: MemoryHistory<any>
+  history: MemoryHistory
 }
 
 // Custom render utils
