@@ -12,7 +12,7 @@ const SmallColorPreview = styled.div`
   height: 25px;
   width: 25px;
 
-  background-color: ${(props): string => props.color};
+  background-color: ${(props): string => props.theme.category[props.color]};
 `
 
 // Create select options based on theme colors.
@@ -33,7 +33,6 @@ interface Props {
 const ColorSelect = (props: Props): JSX.Element => {
   const { value, onChange, name, tabIndex } = props
   const colors = prepareOptions() // will return an empty array, if there should be no colors
-
   return (
     <ContentSelect
       allowEmpty
