@@ -32,6 +32,7 @@ const Textarea = (props: Props): JSX.Element => {
   } = props
   return (
     <Element
+      data-testid="Textarea"
       className={className}
       disabled={disabled}
       name={name}
