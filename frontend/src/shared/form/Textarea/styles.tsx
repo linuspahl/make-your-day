@@ -27,6 +27,7 @@ export const Element = styled.textarea<ElementProps>`
   background-color: transparent;
   color: ${(props): string => props.theme.text};
 
+  cursor: ${(props): string => (props.disabled ? 'not-allowed' : 'text')};
   box-shadow: none;
   appearance: none;
 `
