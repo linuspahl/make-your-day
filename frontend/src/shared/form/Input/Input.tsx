@@ -29,6 +29,7 @@ const Input = (props: Props): JSX.Element => {
   } = props
   return (
     <Element
+      data-testid="Input"
       disabled={disabled}
       name={name}
       onChange={onChange}

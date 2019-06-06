@@ -1,13 +1,46 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import Input from './Input'
 
 describe('Input should', (): void => {
+  afterEach(cleanup)
+
   test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <Input name="Name" onChange={(): void => {}} tabIndex={1} value="value" />
+    const { getByTestId } = renderWithAppRoot(
+      <Input
+        name="username"
+        onChange={(): void => {}}
+        tabIndex={-1}
+        value="My secial username"
+      />
     )
+    expect(getByTestId('Input')).toBeInTheDocument()
+  })
+
+  test('have an empty string as value, if provided value is null', (): void => {
+    const { getByTestId } = renderWithAppRoot(
+      <Input
+        name="username"
+        onChange={(): void => {}}
+        tabIndex={-1}
+        value={null}
+      />
+    )
+    expect(getByTestId('Input')).toHaveAttribute('value', '')
+  })
+
+  test('look disabled, when disabled is provided', (): void => {
+    const { getByTestId } = renderWithAppRoot(
+      <Input
+        name="username"
+        onChange={(): void => {}}
+        tabIndex={-1}
+        value="My secial username"
+        disabled
+      />
+    )
+    expect(getByTestId('Input')).toHaveStyleRule('cursor', 'not-allowed')
   })
 })
