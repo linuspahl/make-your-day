@@ -6,6 +6,7 @@ import { Chart } from 'store/evaluation/type'
 
 const Barchart = (props: Chart): JSX.Element => (
   <ChartistGraph
+    data-testid="Barchart"
     data={{
       labels: props.labels,
       series: props.datasets,

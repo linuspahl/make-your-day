@@ -1,6 +1,7 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot } from 'testUtils'
 // components
 import Linechart from './Linechart'
 // fixtures
@@ -8,6 +9,7 @@ import { chart as chartFixture } from 'store/evaluation/fixtures'
 
 describe('Linechart should', (): void => {
   test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(<Linechart {...chartFixture} />)
+    const { container } = renderWithAppRoot(<Linechart {...chartFixture} />)
+    expect(container.getElementsByClassName('ct-chart').length).toBe(1)
   })
 })
