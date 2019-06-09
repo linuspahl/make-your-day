@@ -1,13 +1,13 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot } from 'testUtils'
 // components
 import CategoryIconPlaceholder from './CategoryIconPlaceholder'
 
 describe('CategoryIconPlaceholder should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <CategoryIconPlaceholder size={10} />
-    )
+  test('render without chrashing', (): void => {
+    const { getByTestId } = renderWithAppRoot(<CategoryIconPlaceholder />)
+    expect(getByTestId('CategoryIconPlaceholder')).toBeInTheDocument()
   })
 })
