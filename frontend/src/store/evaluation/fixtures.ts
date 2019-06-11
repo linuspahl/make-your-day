@@ -1,5 +1,6 @@
 // interfaces
 import { Chart as ChartType, Evaluation } from 'store/evaluation/type'
+import { GetEvaluations } from 'store/evaluation/query'
 // fixtures
 import { category } from 'store/category/fixtures'
 
@@ -32,4 +33,24 @@ export const chart: ChartType = {
       backgroundColor: 'red',
     },
   ],
+}
+
+// Api stubs
+const getEvaluationsRequest = {
+  request: {
+    query: GetEvaluations,
+  },
+}
+export const getEvaluationsSuccess = {
+  ...getEvaluationsRequest,
+  result: {
+    data: {
+      getEvaluations: [evaluation],
+    },
+  },
+}
+
+export const getEvaluationsError = {
+  ...getEvaluationsRequest,
+  error: new Error('getWidgets failed'),
 }
