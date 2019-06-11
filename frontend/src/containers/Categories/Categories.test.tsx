@@ -1,19 +1,109 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import Categories from './Categories'
 // fixtures
+import { category } from 'store/category/fixtures'
+import { record } from 'store/record/fixtures'
 import { userSession } from 'store/userSession/fixtures'
 
 describe('Categories should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
+  beforeEach(cleanup)
+  test('render category overview route', (): void => {
+    const { getByText } = renderWithAppRoot(
       <Categories
         createNotificationBanner={(): void => {}}
-        rootPath="/"
+        rootPath="/categories"
         userSession={userSession}
-      />
+      />,
+      { route: '/categories' }
     )
+    expect(getByText('Kategorien verwalten')).toBeInTheDocument()
+  })
+
+  test('render category create route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Categories
+        createNotificationBanner={(): void => {}}
+        rootPath="/categories"
+        userSession={userSession}
+      />,
+      { route: '/categories/create' }
+    )
+    expect(getByText('Kategorie erstellen')).toBeInTheDocument()
+  })
+
+  test('render category edit route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Categories
+        createNotificationBanner={(): void => {}}
+        rootPath="/categories"
+        userSession={userSession}
+      />,
+      { route: `/categories/edit/${category.id}` }
+    )
+    expect(getByText('Kategorie bearbeiten')).toBeInTheDocument()
+  })
+
+  test('category record create route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Categories
+        createNotificationBanner={(): void => {}}
+        rootPath="/categories"
+        userSession={userSession}
+      />,
+      { route: `/categories/${category.id}/records/create` }
+    )
+    expect(getByText('Eintrag erstellen')).toBeInTheDocument()
+  })
+
+  test('category record edit route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Categories
+        createNotificationBanner={(): void => {}}
+        rootPath="/categories"
+        userSession={userSession}
+      />,
+      { route: `/categories/${category.id}/records/${record.id}/edit` }
+    )
+    expect(getByText('Eintrag bearbeiten')).toBeInTheDocument()
+  })
+
+  test('category subcategory overview route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Categories
+        createNotificationBanner={(): void => {}}
+        rootPath="/categories"
+        userSession={userSession}
+      />,
+      { route: `/categories/${category.id}/subcategories` }
+    )
+    expect(getByText('Subkategorien verwalten')).toBeInTheDocument()
+  })
+
+  test('category subcategory create route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Categories
+        createNotificationBanner={(): void => {}}
+        rootPath="/categories"
+        userSession={userSession}
+      />,
+      { route: `/categories/${category.id}/subcategories/create` }
+    )
+    expect(getByText('Subkategorie erstellen')).toBeInTheDocument()
+  })
+
+  test('category subcategory edit route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Categories
+        createNotificationBanner={(): void => {}}
+        rootPath="/categories"
+        userSession={userSession}
+      />,
+      { route: `/categories/${category.id}/subcategories/1/edit` }
+    )
+    expect(getByText('Subkategorie bearbeiten')).toBeInTheDocument()
   })
 })
