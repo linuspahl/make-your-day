@@ -6,11 +6,13 @@
 import React from 'react'
 import { Router } from 'react-router-dom'
 import { createMemoryHistory, MemoryHistory } from 'history'
+import { MockedProvider, MockedResponse } from 'react-apollo/test-utils'
 import {
-  render,
   cleanup,
-  RenderResult,
   fireEvent,
+  render,
+  RenderResult,
+  wait,
 } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import colorTheme from 'theme'
@@ -25,17 +27,21 @@ function renderWithAppRoot(
   {
     route = '/',
     themeProps = {},
+    mocks = [],
     ...renderOptions
   }: {
     route?: string
     themeProps?: { [key: string]: boolean }
+    mocks?: readonly MockedResponse[]
   } = {}
 ): WrappedComponent {
   const history = createMemoryHistory({ initialEntries: [route] })
   const utils = render(
-    <ThemeProvider theme={colorTheme(themeProps)}>
-      <Router history={history}>{component}</Router>
-    </ThemeProvider>,
+    <MockedProvider mocks={mocks} addTypename={false}>
+      <ThemeProvider theme={colorTheme(themeProps)}>
+        <Router history={history}>{component}</Router>
+      </ThemeProvider>
+    </MockedProvider>,
     renderOptions
   )
 
@@ -45,4 +51,4 @@ function renderWithAppRoot(
 // Custom fireEvent option (because we use them so many times)
 const leftClickOption = { button: 0 }
 
-export { render, cleanup, renderWithAppRoot, fireEvent, leftClickOption }
+export { render, cleanup, renderWithAppRoot, fireEvent, leftClickOption, wait }
