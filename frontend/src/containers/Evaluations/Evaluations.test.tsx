@@ -1,19 +1,61 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import Evaluations from './Evaluations'
 // fixtures
+import { evaluation } from 'store/evaluation/fixtures'
 import { userSession } from 'store/userSession/fixtures'
 
 describe('Evaluations should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
+  beforeEach(cleanup)
+
+  test('render evaluation overview route', (): void => {
+    const { getByText } = renderWithAppRoot(
       <Evaluations
         createNotificationBanner={(): void => {}}
-        rootPath="/"
+        rootPath="/evaluations"
         userSession={userSession}
-      />
+      />,
+      { route: '/evaluations' }
     )
+    expect(getByText('Auswertungen verwalten')).toBeInTheDocument()
+  })
+
+  test('render evaluation create route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Evaluations
+        createNotificationBanner={(): void => {}}
+        rootPath="/evaluations"
+        userSession={userSession}
+      />,
+      { route: '/evaluations/create' }
+    )
+    expect(getByText('Auswertung erstellen')).toBeInTheDocument()
+  })
+
+  test('render evaluation edit route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Evaluations
+        createNotificationBanner={(): void => {}}
+        rootPath="/evaluations"
+        userSession={userSession}
+      />,
+      { route: `/evaluations/edit/${evaluation.id}` }
+    )
+    expect(getByText('Auswertung bearbeiten')).toBeInTheDocument()
+  })
+
+  test('render evaluation view route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Evaluations
+        createNotificationBanner={(): void => {}}
+        rootPath="/evaluations"
+        userSession={userSession}
+      />,
+      { route: `/evaluations/view/${evaluation.id}` }
+    )
+    expect(getByText('Ergebnis Auswertung')).toBeInTheDocument()
   })
 })
