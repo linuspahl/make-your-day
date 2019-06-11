@@ -1,6 +1,6 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+import { renderWithAppRoot } from 'testUtils'
 // components
 import PageNotFound from './PageNotFound'
 // fixtures
@@ -8,8 +8,9 @@ import { userSession } from 'store/userSession/fixtures'
 
 describe('PageNotFound should', (): void => {
   test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <PageNotFound userSession={userSession} rootPath="/" />
+    const { getByText } = renderWithAppRoot(
+      <PageNotFound userSession={userSession} rootPath="/PageNotFound" />
     )
+    expect(getByText('Seite nicht gefunden')).toBeInTheDocument()
   })
 })
