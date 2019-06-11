@@ -26,7 +26,7 @@ const handleCompleted = (
     // Inform user about success
     createNotificationBanner({
       type: 'success',
-      message: `Erfolgreich abgemeldet`,
+      message: 'Erfolgreich abgemeldet',
     })
   }
 }
@@ -38,7 +38,7 @@ const handleError = (
   clearLocalStorage()
   createNotificationBanner({
     type: 'error',
-    message: 'Sitzung konnte auf dem Sevrer nicht gelöscht werden',
+    message: 'Sitzung konnte auf dem Server nicht gelöscht werden',
   })
 }
 
