@@ -13,7 +13,7 @@ interface Props {
   tabIndex: number
   step?: string
   type?: string
-  value: string
+  value: string | number
 }
 
 const Input = (props: Props): JSX.Element => {
