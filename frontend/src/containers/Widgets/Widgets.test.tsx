@@ -1,18 +1,48 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import Widgets from './Widgets'
+// fixtures
+import { widget } from 'store/widget/fixtures'
 import { userSession } from 'store/userSession/fixtures'
 
 describe('Widgets should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
+  beforeEach(cleanup)
+  test('render widget overview route', (): void => {
+    const { getByText } = renderWithAppRoot(
       <Widgets
         createNotificationBanner={(): void => {}}
-        rootPath="/"
+        rootPath="/widgets"
         userSession={userSession}
-      />
+      />,
+      { route: '/widgets' }
     )
+    expect(getByText('Widgets verwalten')).toBeInTheDocument()
+  })
+
+  test('render widget overview route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Widgets
+        createNotificationBanner={(): void => {}}
+        rootPath="/widgets"
+        userSession={userSession}
+      />,
+      { route: '/widgets/create' }
+    )
+    expect(getByText('Widget erstellen')).toBeInTheDocument()
+  })
+
+  test('render widget overview route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Widgets
+        createNotificationBanner={(): void => {}}
+        rootPath="/widgets"
+        userSession={userSession}
+      />,
+      { route: `/widgets/edit/${widget.id}` }
+    )
+    expect(getByText('Widget bearbeiten')).toBeInTheDocument()
   })
 })
