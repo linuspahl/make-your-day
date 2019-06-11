@@ -20,14 +20,12 @@ const handleCompleted = (
   createNotificationBanner: (notification: NotificationCreate) => void,
   clearLocalStorage: () => void
 ): void => {
-  if (data.deleteUserSession) {
-    clearLocalStorage()
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Erfolgreich abgemeldet`,
-    })
-  }
+  clearLocalStorage()
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Erfolgreich abgemeldet`,
+  })
 }
 
 const handleError = (
@@ -37,7 +35,7 @@ const handleError = (
   clearLocalStorage()
   createNotificationBanner({
     type: 'error',
-    message: 'Sitzung konnte nicht in der Datenbank gelöscht werden',
+    message: 'Sitzung konnte auf dem Server nicht gelöscht werden',
   })
 }
 
