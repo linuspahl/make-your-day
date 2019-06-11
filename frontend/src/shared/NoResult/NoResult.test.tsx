@@ -1,11 +1,19 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { render } from 'testUtils'
 // components
 import NoResult from './NoResult'
 
 describe('NoResult should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(<NoResult />)
+  test('display content', (): void => {
+    const message = 'My special NoResult content!'
+    const { getByText } = render(<NoResult message={message} />)
+    expect(getByText(message)).toBeInTheDocument()
+  })
+
+  test('display default text, if no message is defined', (): void => {
+    const { getByText } = render(<NoResult />)
+    expect(getByText('Kein Eintrag vorhanden')).toBeInTheDocument()
   })
 })
