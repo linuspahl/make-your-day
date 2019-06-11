@@ -1,15 +1,18 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot } from 'testUtils'
 // components
 import Timeline from './Timeline'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 
 describe('Timeline should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <Timeline rootPath="/" userSession={userSession} />
+  test('render timeline day edit route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Timeline rootPath="/timeline" userSession={userSession} />,
+      { route: '/timeline/2010-12-20' }
     )
+    expect(getByText('Einträge 2010-12-20')).toBeInTheDocument()
   })
 })
