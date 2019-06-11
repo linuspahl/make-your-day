@@ -1,11 +1,14 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { render } from 'testUtils'
 // components
 import H2 from './H2'
 
 describe('H2 should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(<H2>Content</H2>)
+  test('display content', (): void => {
+    const children = 'My special H2 content!'
+    const { getByText } = render(<H2>{children}</H2>)
+    expect(getByText(children)).toBeInTheDocument()
   })
 })
