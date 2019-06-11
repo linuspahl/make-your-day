@@ -1,6 +1,7 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import Settings from './Settings'
 // fixtures
@@ -8,16 +9,35 @@ import { userSession } from 'store/userSession/fixtures'
 import { userSetting } from 'store/userSetting/fixtures'
 
 describe('Settings should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
+  afterEach(cleanup)
+
+  test('render settings overview route', (): void => {
+    const { getByText } = renderWithAppRoot(
       <Settings
-        updateLocalStorage={(): void => {}}
+        rootPath="/settings"
         userSession={userSession}
-        userSettings={{ nightmode: userSetting }}
-        rootPath="/"
-        createNotificationBanner={(): void => {}}
         clearLocalStorage={(): void => {}}
-      />
+        createNotificationBanner={(): void => {}}
+        updateLocalStorage={(): void => {}}
+        userSettings={{ nightMode: userSetting }}
+      />,
+      { route: '/settings' }
     )
+    expect(getByText('Einstellungen')).toBeInTheDocument()
+  })
+
+  test('render sessions overview route', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Settings
+        rootPath="/settings"
+        userSession={userSession}
+        clearLocalStorage={(): void => {}}
+        createNotificationBanner={(): void => {}}
+        updateLocalStorage={(): void => {}}
+        userSettings={{ nightMode: userSetting }}
+      />,
+      { route: '/settings/sessions' }
+    )
+    expect(getByText('Angemeldete Geräte')).toBeInTheDocument()
   })
 })
