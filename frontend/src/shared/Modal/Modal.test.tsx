@@ -1,7 +1,12 @@
 // libraries
 import * as React from 'react'
 // utils
-import { renderWithAppRoot, cleanup, fireEvent } from 'testUtils'
+import {
+  renderWithAppRoot,
+  cleanup,
+  fireEvent,
+  leftClickOption,
+} from 'testUtils'
 // components
 import Modal from './Modal'
 
@@ -27,11 +32,11 @@ describe('Modal should', (): void => {
   })
 
   test('close by click on offset area', (): void => {
-    const toggleActionEvent = (): void => {}
+    const toggleActionEvent = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <Modal toggleAction={toggleActionEvent}>{children}</Modal>
     )
-    fireEvent.click(getByTestId('Modal-offset'))
-    expect(toggleActionEvent).toBeCalledTimes(1)
+    fireEvent.click(getByTestId('Modal-offset'), leftClickOption)
+    expect(toggleActionEvent).toBeCalled()
   })
 })
