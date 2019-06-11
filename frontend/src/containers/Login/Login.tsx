@@ -22,7 +22,6 @@ const Layout = (props: Props): JSX.Element => (
     <ContentBox>
       <FadeTransition>
         <H1 context="page">Anmeldung</H1>
-
         <LoginForm
           updateLocalStorage={props.updateLocalStorage}
           createNotificationBanner={props.createNotificationBanner}

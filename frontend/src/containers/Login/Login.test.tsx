@@ -1,6 +1,7 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot } from 'testUtils'
 // components
 import Login from './Login'
 // fixtures
@@ -8,13 +9,15 @@ import { userSession } from 'store/userSession/fixtures'
 
 describe('Login should', (): void => {
   test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
+    // libraries
+    const { getByText } = renderWithAppRoot(
       <Login
         updateLocalStorage={(): void => {}}
         createNotificationBanner={(): void => {}}
-        rootPath="/"
         userSession={userSession}
+        rootPath="/login"
       />
     )
+    expect(getByText('Anmeldung')).toBeInTheDocument()
   })
 })
