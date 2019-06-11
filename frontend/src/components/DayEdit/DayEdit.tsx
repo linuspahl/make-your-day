@@ -42,7 +42,7 @@ interface Props extends RouteComponentProps {
   }
 }
 
-class Timeline extends React.Component<Props> {
+class DayEdit extends React.Component<Props> {
   public render(): JSX.Element {
     const {
       match: {
@@ -52,7 +52,7 @@ class Timeline extends React.Component<Props> {
 
     return (
       <FadeTransition>
-        <H1 context="page">Einträge {date}</H1>
+        <H1 context="page">{`Einträge ${date}`}</H1>
         <NewRecordSection>
           <H2>Neu erstellen</H2>
           <CategoryIconOverview params={{ createdAt: date }} />
@@ -124,10 +124,9 @@ class Timeline extends React.Component<Props> {
     records.forEach(
       (record): void => {
         const category = record.category.parent || record.category
-
         const categoryKey = `${category.id}`
-
         let categoryEnry = categories[categoryKey]
+
         if (categoryEnry) {
           categoryEnry = {
             ...category,
@@ -146,4 +145,4 @@ class Timeline extends React.Component<Props> {
   }
 }
 
-export default withRouter(Timeline)
+export default withRouter(DayEdit)
