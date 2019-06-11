@@ -142,7 +142,7 @@ export default class TimelineWidget extends React.Component {
 
   private getRecordAmount(record: Record, category: Category): number {
     if (category.hasUnit && category.type !== 'counter') {
-      return parseInt(record.amount, 10)
+      return record.amount
     }
     return 1
   }
