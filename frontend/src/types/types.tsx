@@ -52,7 +52,7 @@ interface LayerIndexes {
 export interface LocalStorage {
   [key: string]: string | boolean | Date | number
   authToken?: string
-  expiresAt?: string
+  expiresAt?: number
   leftHandMode?: boolean
   nightMode?: boolean
   showAppBgImage?: boolean
