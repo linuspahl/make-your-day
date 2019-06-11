@@ -1,13 +1,16 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { render } from 'testUtils'
 // components
 import PlaceholderGroup from './PlaceholderGroup'
 
 describe('PlaceholderGroup should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <PlaceholderGroup>Content</PlaceholderGroup>
+  test('display content', (): void => {
+    const children = 'My special PlaceholderGroup content!'
+    const { getByText } = render(
+      <PlaceholderGroup>{children}</PlaceholderGroup>
     )
+    expect(getByText(children)).toBeInTheDocument()
   })
 })
