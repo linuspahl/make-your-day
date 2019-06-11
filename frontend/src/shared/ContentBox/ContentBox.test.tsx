@@ -1,11 +1,14 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { render } from 'testUtils'
 // components
 import ContentBox from './ContentBox'
 
 describe('ContentBox should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(<ContentBox>Content</ContentBox>)
+  test('display content', (): void => {
+    const children = 'My special ContentBox content!'
+    const { getByText } = render(<ContentBox>{children}</ContentBox>)
+    expect(getByText(children)).toBeInTheDocument()
   })
 })
