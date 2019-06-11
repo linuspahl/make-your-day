@@ -1,17 +1,15 @@
 // libraries
 import * as React from 'react'
-import { MockedProvider } from 'react-apollo/test-utils'
 // utils
 import {
-  renderWithAppRoot,
+  cleanup,
   fireEvent,
   leftClickOption,
-  cleanup,
+  renderWithAppRoot,
+  wait,
 } from 'testUtils'
 // components
 import LogoutButton from './LogoutButton'
-// graphql
-import { wait } from '@testing-library/react'
 // fixtures
 import {
   deleteUserSessionSuccess,
@@ -26,13 +24,12 @@ describe('LogoutButton should', (): void => {
 
   test('render without crashing', (): void => {
     const { getByText } = renderWithAppRoot(
-      <MockedProvider mocks={[deleteUserSessionSuccess]} addTypename={false}>
-        <LogoutButton
-          userSessionId={userSessionId}
-          clearLocalStorage={(): void => {}}
-          createNotificationBanner={(): void => {}}
-        />
-      </MockedProvider>
+      <LogoutButton
+        userSessionId={userSessionId}
+        clearLocalStorage={(): void => {}}
+        createNotificationBanner={(): void => {}}
+      />,
+      { mocks: [deleteUserSessionSuccess] }
     )
     expect(getByText('Abmelden')).toBeInTheDocument()
   })
@@ -43,13 +40,12 @@ describe('LogoutButton should', (): void => {
     const createNotificationBannerEvent = jest.fn()
     const clearLocalStorageEvent = jest.fn()
     const { getByText } = renderWithAppRoot(
-      <MockedProvider mocks={[deleteUserSessionSuccess]} addTypename={false}>
-        <LogoutButton
-          userSessionId={userSessionId}
-          clearLocalStorage={clearLocalStorageEvent}
-          createNotificationBanner={createNotificationBannerEvent}
-        />
-      </MockedProvider>
+      <LogoutButton
+        userSessionId={userSessionId}
+        clearLocalStorage={clearLocalStorageEvent}
+        createNotificationBanner={createNotificationBannerEvent}
+      />,
+      { mocks: [deleteUserSessionSuccess] }
     )
     fireEvent.click(getByText('Abmelden'), leftClickOption)
     // Wait for the Mutation component
@@ -68,13 +64,12 @@ describe('LogoutButton should', (): void => {
     const createNotificationBannerEvent = jest.fn()
     const clearLocalStorageEvent = jest.fn()
     const { getByText } = renderWithAppRoot(
-      <MockedProvider mocks={[deleteUserSessionError]} addTypename={false}>
-        <LogoutButton
-          userSessionId={userSessionId}
-          clearLocalStorage={clearLocalStorageEvent}
-          createNotificationBanner={createNotificationBannerEvent}
-        />
-      </MockedProvider>
+      <LogoutButton
+        userSessionId={userSessionId}
+        clearLocalStorage={clearLocalStorageEvent}
+        createNotificationBanner={createNotificationBannerEvent}
+      />,
+      { mocks: [deleteUserSessionError] }
     )
     fireEvent.click(getByText('Abmelden'), leftClickOption)
     // Wait for the Mutation component
