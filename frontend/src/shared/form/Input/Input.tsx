@@ -7,11 +7,12 @@ import { InputEvent } from 'types/types'
 
 interface Props {
   disabled?: boolean
+  id?: string
   name: string
   onChange: (event: InputEvent) => void
   required?: boolean
-  tabIndex: number
   step?: string
+  tabIndex: number
   type?: string
   value: string | number
 }
@@ -19,6 +20,7 @@ interface Props {
 const Input = (props: Props): JSX.Element => {
   const {
     disabled,
+    id,
     name,
     onChange,
     required,
@@ -31,6 +33,7 @@ const Input = (props: Props): JSX.Element => {
     <Element
       data-testid="Input"
       disabled={disabled}
+      id={id}
       name={name}
       onChange={onChange}
       required={required}
