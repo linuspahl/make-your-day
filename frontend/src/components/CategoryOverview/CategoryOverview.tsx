@@ -2,6 +2,7 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Query } from 'react-apollo'
+import { ApolloError } from 'apollo-boost'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
@@ -18,8 +19,7 @@ import { GetCategories } from 'store/category/query'
 import { DeleteCategory } from 'store/category/mutation'
 import { deleteCategory } from 'store/category/update'
 // interfaces
-import { Category, CategoryPlain } from 'store/category/type'
-import { ApolloError } from 'apollo-boost'
+import { CategoryPlain } from 'store/category/type'
 
 const List = styled.ul`
   margin-top: 25px;
@@ -43,17 +43,18 @@ const CategoryOverview = (props: Props): JSX.Element => {
           data,
         }: {
           loading: boolean
-          data: { getCategories: Category[] }
+          data: { getCategories: CategoryPlain[] }
           error?: ApolloError
         }): JSX.Element[] | JSX.Element => {
           if (loading) return <CenteredSpinner />
-          if (error)
+          if (error) {
             return (
               <ErrorMessage
                 error={error}
                 message="Kategorien konnten nicht geladen werden"
               />
             )
+          }
           if (data.getCategories.length === 0) return <NoResult />
           return (
             <List>
