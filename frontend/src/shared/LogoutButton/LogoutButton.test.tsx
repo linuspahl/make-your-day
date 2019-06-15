@@ -37,48 +37,48 @@ describe('LogoutButton should', (): void => {
   test('show success notification and clear localstorage on successful logout', async (): Promise<
     void
   > => {
-    const createNotificationBannerEvent = jest.fn()
-    const clearLocalStorageEvent = jest.fn()
+    const createNotificationBannerStub = jest.fn()
+    const clearLocalStorageStub = jest.fn()
     const { getByText } = renderWithAppRoot(
       <LogoutButton
         userSessionId={userSessionId}
-        clearLocalStorage={clearLocalStorageEvent}
-        createNotificationBanner={createNotificationBannerEvent}
+        clearLocalStorage={clearLocalStorageStub}
+        createNotificationBanner={createNotificationBannerStub}
       />,
       { mocks: [deleteUserSessionSuccess] }
     )
     fireEvent.click(getByText('Abmelden'), leftClickOption)
     // Wait for the Mutation component
     await wait()
-    expect(createNotificationBannerEvent).toBeCalledTimes(1)
-    expect(createNotificationBannerEvent).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       type: 'success',
       message: `Erfolgreich abgemeldet`,
     })
-    expect(clearLocalStorageEvent).toBeCalledTimes(1)
+    expect(clearLocalStorageStub).toBeCalledTimes(1)
   })
 
   test('show error notification and clear localstorage on unsuccessful logout', async (): Promise<
     void
   > => {
-    const createNotificationBannerEvent = jest.fn()
-    const clearLocalStorageEvent = jest.fn()
+    const createNotificationBannerStub = jest.fn()
+    const clearLocalStorageStub = jest.fn()
     const { getByText } = renderWithAppRoot(
       <LogoutButton
         userSessionId={userSessionId}
-        clearLocalStorage={clearLocalStorageEvent}
-        createNotificationBanner={createNotificationBannerEvent}
+        clearLocalStorage={clearLocalStorageStub}
+        createNotificationBanner={createNotificationBannerStub}
       />,
       { mocks: [deleteUserSessionError] }
     )
     fireEvent.click(getByText('Abmelden'), leftClickOption)
     // Wait for the Mutation component
     await wait()
-    expect(createNotificationBannerEvent).toBeCalledTimes(1)
-    expect(createNotificationBannerEvent).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       type: 'error',
       message: 'Sitzung konnte auf dem Server nicht gelöscht werden',
     })
-    expect(clearLocalStorageEvent).toBeCalledTimes(1)
+    expect(clearLocalStorageStub).toBeCalledTimes(1)
   })
 })
