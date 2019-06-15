@@ -2,7 +2,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
-import { handleInputChange } from 'utils/utils'
+import { handleInputChange, logError } from 'utils/utils'
+import { ApolloError } from 'apollo-boost'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
@@ -51,9 +52,10 @@ export default class LoginForm extends React.Component<Props, State> {
       >
         {(loginUser: () => void): JSX.Element => (
           <Form onSubmit={(event): void => this.handleSubmit(event, loginUser)}>
-            <Row>
+            <Row htmlFor="username">
               Username
               <Input
+                id="username"
                 name="username"
                 onChange={this.handleInputChange}
                 required
@@ -61,9 +63,10 @@ export default class LoginForm extends React.Component<Props, State> {
                 value={username}
               />
             </Row>
-            <Row>
+            <Row htmlFor="password">
               Password
               <Input
+                id="password"
                 name="password"
                 onChange={this.handleInputChange}
                 required
@@ -142,10 +145,11 @@ export default class LoginForm extends React.Component<Props, State> {
     )
   }
 
-  private handleError(): void {
+  private handleError(error?: ApolloError): void {
     this.props.createNotificationBanner({
       type: 'error',
       message: 'Anmeldung fehlgeschlagen',
     })
+    logError(error)
   }
 }
