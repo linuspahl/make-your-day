@@ -1,3 +1,9 @@
+export interface Subcategory {
+  id: number
+  title: string
+  parentId: number
+}
+
 export interface CategoryFull {
   color?: string
   hasDescription: boolean
@@ -8,7 +14,7 @@ export interface CategoryFull {
   id: number
   parent?: Category
   parentId?: number
-  subcategories?: [Category?]
+  subcategories?: [Subcategory?]
   title: string
   type: string
   unit?: string
