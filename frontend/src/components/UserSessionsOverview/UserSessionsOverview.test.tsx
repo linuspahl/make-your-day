@@ -1,19 +1,29 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { renderWithAppRoot, wait, cleanup } from 'testUtils'
 // components
 import UserSessionsOverview from './UserSessionsOverview'
 // fixtures
-import { userSession } from 'store/userSession/fixtures'
+import { userSession, getUserSessionsSuccess } from 'store/userSession/fixtures'
 
 describe('UserSessionsOverview should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <UserSessionsOverview
-        clearLocalStorage={(): void => {}}
-        createNotificationBanner={(): void => {}}
-        userSession={userSession}
-      />
+  const propsFixture = {
+    clearLocalStorage: (): void => {},
+    createNotificationBanner: (): void => {},
+    currentUserSession: userSession,
+  }
+  afterEach(cleanup)
+
+  test('list fetched userSessions', async (): Promise<void> => {
+    const { getAllByText } = renderWithAppRoot(
+      <UserSessionsOverview {...propsFixture} />,
+      {
+        mocks: [getUserSessionsSuccess],
+      }
     )
+    // Wait for the Query component
+    await wait()
+    expect(getAllByText(userSession.device)).toHaveLength(2)
   })
 })

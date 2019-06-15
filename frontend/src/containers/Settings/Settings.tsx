@@ -45,7 +45,7 @@ const Settings = (props: Props): JSX.Element => {
             <UserSessionsOverview
               clearLocalStorage={props.clearLocalStorage}
               createNotificationBanner={props.createNotificationBanner}
-              userSession={props.userSession}
+              currentUserSession={props.userSession}
             />
           )}
         />
