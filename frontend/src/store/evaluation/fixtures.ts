@@ -1,16 +1,24 @@
 // interfaces
-import { Chart as ChartType, Evaluation } from 'store/evaluation/type'
+import {
+  Chart as ChartType,
+  Evaluation,
+  EvaluationCreate,
+} from 'store/evaluation/type'
 import { GetEvaluations } from 'store/evaluation/query'
 // fixtures
 import { category } from 'store/category/fixtures'
 
-export const evaluation: Evaluation = {
-  id: 1,
+export const evaluationCreate: EvaluationCreate = {
   title: 'Title',
   categoryId: 1,
   groupSubcategories: false,
-  type: 'barchart',
-  period: 'lastDay',
+  type: 'linechart',
+  period: 'day',
+}
+
+export const evaluation: Evaluation = {
+  ...evaluationCreate,
+  id: 1,
   category: category,
   result: {
     datasets: [
