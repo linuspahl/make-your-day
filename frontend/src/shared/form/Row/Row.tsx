@@ -18,6 +18,7 @@ const Row = (props: Props): JSX.Element => (
     disabled={props.disabled}
     htmlFor={props.htmlFor}
     onClick={props.onClick}
+    as={props.htmlFor ? 'label' : 'div'}
   >
     {props.children}
   </Layout>
