@@ -1,6 +1,14 @@
 // File for all static content, that is not related to the config
 import { CategoryColors, SelectOption } from 'types/types'
 
+export const navigationItems = [
+  { path: '/', title: 'Dashboard' },
+  { path: '/categories', title: 'Kategorien verwalten' },
+  { path: '/widgets', title: 'Widgets verwalten' },
+  { path: '/evaluations', title: 'Auswertungen verwalten' },
+  { path: '/settings', title: 'Einstellungen' },
+]
+
 export const weekDayLabels: { [key: string]: string } = {
   0: 'So',
   1: 'Mo',
@@ -74,8 +82,8 @@ export const categoryIcons: SelectOption[] = [
 ]
 
 export const widgetTypeOptions: SelectOption[] = [
-  { value: 'evaluation', title: 'Auswertung' },
   { value: 'textarea', title: 'Freitext' },
+  { value: 'evaluation', title: 'Auswertung' },
   { value: 'timeline', title: 'Timeline' },
 ]
 

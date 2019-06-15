@@ -1,17 +1,36 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import {
+  cleanup,
+  fireEvent,
+  leftClickOption,
+  renderWithAppRoot,
+} from 'testUtils'
 // components
 import NavigationItem from './NavigationItem'
 
 describe('NavigationItem should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <NavigationItem
-        rootPath="/"
-        route={{ title: 'Dashboard', path: '/' }}
-        toggleAction={(): void => {}}
-      />
+  const propsFixture = {
+    toggleAction: (): void => {},
+    rootPath: '/',
+    route: { title: 'Dashboard', path: '/' },
+  }
+  afterEach(cleanup)
+
+  test('show provided route title', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <NavigationItem {...propsFixture} />
     )
+    expect(getByText('Dashboard')).toBeInTheDocument()
+  })
+
+  test('shoud trigger toggle action on click', (): void => {
+    const onClickStub = jest.fn()
+    const { getByText } = renderWithAppRoot(
+      <NavigationItem {...propsFixture} toggleAction={onClickStub} />
+    )
+    fireEvent.click(getByText('Dashboard'), leftClickOption)
+    expect(onClickStub).toBeCalledTimes(1)
   })
 })
