@@ -10,8 +10,10 @@ import { MockedProvider, MockedResponse } from 'react-apollo/test-utils'
 import {
   cleanup,
   fireEvent,
+  Matcher,
   render,
   RenderResult,
+  SelectorMatcherOptions,
   wait,
 } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
@@ -51,4 +53,13 @@ function renderWithAppRoot(
 // Custom fireEvent option (because we use them so many times)
 const leftClickOption = { button: 0 }
 
-export { render, cleanup, renderWithAppRoot, fireEvent, leftClickOption, wait }
+export {
+  cleanup,
+  fireEvent,
+  leftClickOption,
+  Matcher,
+  render,
+  renderWithAppRoot,
+  SelectorMatcherOptions,
+  wait,
+}
