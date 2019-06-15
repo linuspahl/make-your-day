@@ -3,7 +3,6 @@ import * as React from 'react'
 // utils
 import { categoryIcons } from 'params'
 import {
-  render,
   renderWithAppRoot,
   fireEvent,
   leftClickOption,
@@ -14,20 +13,6 @@ import IconSelect from './IconSelect'
 
 describe('IconSelect should', (): void => {
   afterEach(cleanup)
-
-  test('show icon name of provided icon as current select option', (): void => {
-    const currentIconOption = categoryIcons[0]
-    const { getByText } = render(
-      <IconSelect
-        name="ColorInput"
-        tabIndex={-1}
-        onChange={(): void => {}}
-        value={String(currentIconOption.value)}
-      />
-    )
-
-    expect(getByText(currentIconOption.title)).toBeInTheDocument()
-  })
 
   test('render select option preview with correct color', (): void => {
     // We don't hardcode colors here and are using an index on the
@@ -44,7 +29,7 @@ describe('IconSelect should', (): void => {
     )
 
     // To get an select option by text, we need to open the modal
-    fireEvent.click(getByTestId('ContentSelect-selection'), leftClickOption)
+    fireEvent.mouseDown(getByTestId('ContentSelect-selection'), leftClickOption)
 
     // and we need to query the select by a different color,
     // to make use of the getByText function

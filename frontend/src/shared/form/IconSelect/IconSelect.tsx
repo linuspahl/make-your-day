@@ -10,6 +10,7 @@ import { categoryIcons } from 'params'
 
 interface Props {
   disabled?: boolean
+  id?: string
   name: string
   onChange: (event: InputEvent) => void
   tabIndex: number
@@ -17,12 +18,13 @@ interface Props {
 }
 
 const IconSelect = (props: Props): JSX.Element => {
-  const { value, onChange, name, tabIndex, disabled } = props
+  const { value, onChange, name, tabIndex, disabled, id } = props
 
   return (
     <ContentSelect
       allowEmpty
       disabled={disabled}
+      id={id}
       name={name}
       onChange={onChange}
       options={categoryIcons}

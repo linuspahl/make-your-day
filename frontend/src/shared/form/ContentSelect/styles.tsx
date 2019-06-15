@@ -2,14 +2,14 @@
 import styled from 'styled-components'
 // components
 import ListItem from 'shared/list/ListItem/ListItem'
+import Input from 'shared/form/Input/Input'
 
 export const Layout = styled.div`
   width: 100%;
-
-  border: 1px solid ${(props): string => props.theme.border};
+  position: relative;
 `
 
-export const Select = styled.div`
+export const Select = styled(Input)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,16 +20,25 @@ export const Select = styled.div`
   padding-left: 10px;
   line-height: 40px;
 
-  cursor: pointer;
+  z-index: ${(props): string => props.theme.layerIndex.protrudeContent};
+  caret-color: transparent;
+  cursor: default;
+  &::selection {
+    background-color: transparent;
+  }
 `
 
 export const ArrowIcon = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
 
   width: 40px;
   height: 100%;
+
+  top: 0;
+  right: 0;
 
   font-size: 24px;
 

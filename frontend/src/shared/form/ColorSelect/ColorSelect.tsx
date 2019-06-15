@@ -24,6 +24,7 @@ const prepareOptions = (): SelectOption[] =>
   )
 
 interface Props {
+  id?: string
   name: string
   onChange: (event: InputEvent) => void
   tabIndex: number
@@ -31,20 +32,21 @@ interface Props {
 }
 
 const ColorSelect = (props: Props): JSX.Element => {
-  const { value, onChange, name, tabIndex } = props
+  const { value, onChange, name, tabIndex, id } = props
   const colors = prepareOptions() // will return an empty array, if there should be no colors
   return (
     <ContentSelect
       allowEmpty
-      tabIndex={tabIndex}
-      value={value}
+      id={id}
+      name={name}
+      onChange={onChange}
+      options={colors}
       renderPreview={(option: SelectOption): JSX.Element => (
         <SmallColorPreview color={String(option.value)} />
       )}
-      onChange={onChange}
-      name={name}
-      options={colors}
+      tabIndex={tabIndex}
       title="Farbe"
+      value={value}
     />
   )
 }

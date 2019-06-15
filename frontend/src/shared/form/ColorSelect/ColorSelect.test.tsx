@@ -15,19 +15,6 @@ import ColorSelect from './ColorSelect'
 describe('ColorSelect should', (): void => {
   afterEach(cleanup)
 
-  test('show provides color name as current selected option', (): void => {
-    const { getByText } = render(
-      <ColorSelect
-        name="ColorInput"
-        tabIndex={-1}
-        onChange={(): void => {}}
-        value={Object.keys(categoryColors)[0]}
-      />
-    )
-
-    expect(getByText(Object.keys(categoryColors)[0])).toBeInTheDocument()
-  })
-
   test('render select option preview with correct color', (): void => {
     // We don't hardcode colors here and are using an index on the
     // categoryColors params, to be more flexible.
@@ -41,7 +28,7 @@ describe('ColorSelect should', (): void => {
     )
 
     // To get an select option by text, we need to open the modal
-    fireEvent.click(getByTestId('ContentSelect-selection'), leftClickOption)
+    fireEvent.mouseDown(getByTestId('ContentSelect-selection'), leftClickOption)
 
     // and we need to query the select by a different color,
     // to make use of the getByText function
