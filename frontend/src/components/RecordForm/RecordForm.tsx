@@ -13,7 +13,7 @@ import Textarea from 'shared/form/Textarea/Textarea'
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 // interfaces
-import { CategoryFull } from 'store/category/type'
+import { CategoryFull, Subcategory } from 'store/category/type'
 import { Form as FormType, InputEvent, SelectOption } from 'types/types'
 import { RecordCreate } from 'store/record/type'
 
@@ -206,7 +206,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
   }
 
   private prepareSubcategories(
-    subcategories: CategoryFull[] = []
+    subcategories: Subcategory[] = []
   ): SelectOption[] {
     return subcategories.map(
       (subcategory): SelectOption => {
