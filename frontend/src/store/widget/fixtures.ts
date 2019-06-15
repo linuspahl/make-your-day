@@ -1,28 +1,37 @@
 // graphql
-import { Widget } from 'store/widget/type'
-// graphql
-import { GetWidgets, GetWidget } from 'store/widget/query'
+import { Widget, WidgetCreate } from 'store/widget/type'
+import { GetWidgetsOverview, GetWidget } from 'store/widget/query'
+
+export const widgetCreate: WidgetCreate = {
+  title: 'Notiz',
+  type: 'textarea',
+  position: 'dashboard-top',
+}
 
 export const widget: Widget = {
-  id: 1,
-  title: 'Notiz',
-  value: 'Inhalt Notiz',
-  type: 'timeline',
-  position: 'dashboard-bottom',
+  ...widgetCreate,
   evaluation: null,
+  value: 'Inhalt Notiz',
+  id: 1,
+}
+
+export const widget2: Widget = {
+  ...widget,
+  id: 2,
+  title: 'Notiz 2',
 }
 
 // Api stubs
 const getWidgetsRequest = {
   request: {
-    query: GetWidgets,
+    query: GetWidgetsOverview,
   },
 }
 export const getWidgetsSuccess = {
   ...getWidgetsRequest,
   result: {
     data: {
-      getWidgets: [widget],
+      getWidgets: [widget, widget2],
     },
   },
 }
