@@ -16,7 +16,7 @@ import {
 interface Props {
   children: React.ReactNode
   headline?: string
-  toggleAction: () => void
+  toggleAction: (event: React.MouseEvent<HTMLElement>) => void
 }
 
 export default class Modal extends React.Component<Props> {
@@ -26,7 +26,9 @@ export default class Modal extends React.Component<Props> {
       <Wrapper data-testid="Modal">
         <FadeTransition fullHeight>
           <Offset
-            onClick={(): void => toggleAction()}
+            onClick={(event: React.MouseEvent<HTMLElement>): void =>
+              toggleAction(event)
+            }
             data-testid="Modal-offset"
           />
           <ContentWrapper>

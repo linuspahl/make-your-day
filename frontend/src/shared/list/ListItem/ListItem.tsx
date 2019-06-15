@@ -6,7 +6,7 @@ import { Element } from './styles'
 export interface Props {
   children: React.ReactNode
   className?: string
-  clickAction?: () => void
+  clickAction?: (event: React.MouseEvent<HTMLElement>) => void
   onFocus?: () => void
   spaceBetween?: boolean
   tabIndex?: number
