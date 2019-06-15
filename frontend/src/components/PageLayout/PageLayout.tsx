@@ -59,7 +59,6 @@ export default class PageLayout extends React.Component<Props, State> {
 
   private toggleNavigation(): void {
     const isNavVisible = this.state.isNavVisible
-
     this.setState({
       isNavVisible: !isNavVisible,
     })
