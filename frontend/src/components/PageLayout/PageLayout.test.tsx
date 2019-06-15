@@ -4,24 +4,27 @@ import * as React from 'react'
 import { renderWithAppRoot, cleanup, fireEvent } from 'testUtils'
 // components
 import PageLayout from './PageLayout'
+// fixtures
 import { userSession } from 'store/userSession/fixtures'
 
 describe('PageLayout should', (): void => {
   const children = 'My special page content;'
+  const propsFixture = {
+    rootPath: '/',
+    userSession,
+  }
   afterEach(cleanup)
 
   test('display content', (): void => {
     const { getByText } = renderWithAppRoot(
-      <PageLayout rootPath="/">{children}</PageLayout>
+      <PageLayout {...propsFixture}>{children}</PageLayout>
     )
     expect(getByText(children)).toBeInTheDocument()
   })
 
   test('toggle navigation when using alt key)', (): void => {
     const { getByText } = renderWithAppRoot(
-      <PageLayout rootPath="/" userSession={userSession}>
-        {children}
-      </PageLayout>
+      <PageLayout {...propsFixture}>{children}</PageLayout>
     )
     fireEvent.keyDown(getByText(children), { key: 'Alt', keyCode: 18 })
     expect(getByText('Dashboard')).toBeInTheDocument()
@@ -32,9 +35,7 @@ describe('PageLayout should', (): void => {
 
   test('toggle navigation when using two finger gesture)', (): void => {
     const { getByText } = renderWithAppRoot(
-      <PageLayout rootPath="/" userSession={userSession}>
-        {children}
-      </PageLayout>
+      <PageLayout {...propsFixture}>{children}</PageLayout>
     )
     fireEvent.touchStart(getByText(children), {
       type: 'touchstart',
@@ -51,7 +52,7 @@ describe('PageLayout should', (): void => {
 
   test('render without padding, if prop is provided)', (): void => {
     const { getByText } = renderWithAppRoot(
-      <PageLayout rootPath="/" noPadding>
+      <PageLayout {...propsFixture} noPadding>
         {children}
       </PageLayout>
     )
@@ -60,7 +61,7 @@ describe('PageLayout should', (): void => {
 
   test('show background image, if user enabled the option', (): void => {
     const { getByText } = renderWithAppRoot(
-      <PageLayout rootPath="/">{children}</PageLayout>,
+      <PageLayout {...propsFixture}>{children}</PageLayout>,
       { themeProps: { showAppBgImage: true } }
     )
     expect(getByText(children)).toHaveStyleRule(
@@ -71,7 +72,7 @@ describe('PageLayout should', (): void => {
 
   test('show background image, if user enabled the option and the night mode option', (): void => {
     const { getByText } = renderWithAppRoot(
-      <PageLayout rootPath="/">{children}</PageLayout>,
+      <PageLayout {...propsFixture}>{children}</PageLayout>,
       { themeProps: { showAppBgImage: true, nightMode: true } }
     )
     expect(getByText(children)).toHaveStyleRule(
