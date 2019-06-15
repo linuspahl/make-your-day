@@ -6,7 +6,7 @@ import { render, cleanup } from 'testUtils'
 import Row from './Row'
 
 describe('Row should', (): void => {
-  beforeEach(cleanup)
+  afterEach(cleanup)
 
   const children = 'My special Row content!'
   test('display content', (): void => {
