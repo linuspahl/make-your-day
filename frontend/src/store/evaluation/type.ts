@@ -25,6 +25,7 @@ export interface EvaluationCreate {
 }
 
 export type EvaluationPeriod =
+  | 'day'
   | 'week'
   | 'month'
   | 'year'
