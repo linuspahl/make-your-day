@@ -37,6 +37,8 @@ const EvaluationChart = (props: Props): JSX.Element => {
   if (type === 'piechart') {
     return <Piechart labels={labels} datasets={datasets} />
   }
+
+  return <span>Austerungstyp ist nicht definiert</span>
 }
 
 export default EvaluationChart
