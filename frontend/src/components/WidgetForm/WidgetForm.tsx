@@ -78,7 +78,6 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
   public render(): JSX.Element {
     const { mode, rootPath, evaluations } = this.props
     const { title, type, position, evaluationId } = this.state
-
     const evaluationOptions = generateEvaluationOptions(evaluations)
     const disabledFields = {
       type: mode !== 'create',
@@ -88,9 +87,10 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
 
     return (
       <Form onSubmit={(event): void => this.handleSubmit(event)}>
-        <Row>
+        <Row htmlFor="title">
           Name
           <Input
+            id="title"
             name="title"
             onChange={this.handleInputChange}
             required
@@ -98,10 +98,11 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
             value={title}
           />
         </Row>
-        <Row disabled={disabledFields['type']}>
+        <Row disabled={disabledFields['type']} htmlFor="type">
           Art
           <ContentSelect
             disabled={disabledFields['type']}
+            id="type"
             name="type"
             onChange={this.handleInputChange}
             options={widgetTypeOptions}
@@ -110,10 +111,11 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
             value={type}
           />
         </Row>
-        <Row disabled={disabledFields['evaluationId']}>
-          Auswertung
+        <Row disabled={disabledFields['evaluationId']} htmlFor="evaluationId">
+          Verknüpfte Auswertung
           <ContentSelect
             disabled={disabledFields['evaluationId']}
+            id="evaluationId"
             name="evaluationId"
             onChange={this.handleInputChange}
             options={evaluationOptions}
@@ -122,9 +124,10 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
             value={evaluationId}
           />
         </Row>
-        <Row>
+        <Row htmlFor="position">
           Position
           <ContentSelect
+            id="position"
             name="position"
             onChange={this.handleInputChange}
             options={widgetPositionOptions}

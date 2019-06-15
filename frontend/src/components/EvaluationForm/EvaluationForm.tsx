@@ -12,7 +12,7 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import Row from 'shared/form/Row/Row'
 import Input from 'shared/form/Input/Input'
 // interfaces
-import { CategoryFull } from 'store/category/type'
+import { CategoryFull, Subcategory } from 'store/category/type'
 import { EvaluationCreate } from 'store/evaluation/type'
 import { Form as FormType, SelectOption, InputEvent } from 'types/types'
 
@@ -34,9 +34,10 @@ const generateCategoryOptions = (
           title: category.title,
         },
       ]
+
       if (category.subcategories) {
         category.subcategories.forEach(
-          (subcategory: CategoryFull): void => {
+          (subcategory: Subcategory): void => {
             categoryOptions = [
               ...categoryOptions,
               {
@@ -99,9 +100,10 @@ export default class EvaluationForm extends React.Component<
 
     return (
       <Form onSubmit={(event): void => this.handleSubmit(event)}>
-        <Row>
+        <Row htmlFor="title">
           Name
           <Input
+            id="title"
             name="title"
             onChange={this.handleInputChange}
             required
@@ -109,30 +111,34 @@ export default class EvaluationForm extends React.Component<
             value={title}
           />
         </Row>
-        <Row>
+        <Row htmlFor="categoryId">
           Kategorie / Unterkategorie
           <ContentSelect
+            id="categoryId"
             name="categoryId"
             onChange={this.handleInputChange}
             options={categoryOptions}
             tabIndex={1}
             title="Kategorie / Unterkategorie"
-            value={categoryId}
+            type="number"
+            value={Number(categoryId)}
           />
         </Row>
-        <Row>
+        <Row htmlFor="groupSubcategories">
           Gruppiere Unterkategorien
           <Checkbox
             disabled={disabledFields['groupSubcategories']}
+            id="groupSubcategories"
             name="groupSubcategories"
             onChange={this.handleInputChange}
             tabIndex={1}
             value={groupSubcategories}
           />
         </Row>
-        <Row>
+        <Row htmlFor="type">
           Art
           <ContentSelect
+            id="type"
             name="type"
             onChange={this.handleInputChange}
             options={evaluationTypeOptions}
@@ -141,9 +147,10 @@ export default class EvaluationForm extends React.Component<
             value={type}
           />
         </Row>
-        <Row>
+        <Row htmlFor="period">
           Zeitraum
           <ContentSelect
+            id="period"
             name="period"
             onChange={this.handleInputChange}
             options={evaluationPeriodOptions}
