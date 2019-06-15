@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 // utils
-import { renderWithAppRoot, cleanup, fireEvent, wait } from 'testUtils'
+import { renderWithAppRoot, cleanup, fireEvent } from 'testUtils'
 // components
 import PageLayout from './PageLayout'
 import { userSession } from 'store/userSession/fixtures'
