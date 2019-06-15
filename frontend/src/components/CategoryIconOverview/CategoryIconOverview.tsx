@@ -16,7 +16,7 @@ import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 // graphql
 import { GetCategoriesIcon } from 'store/category/query'
 // interfaces
-import { Category } from 'store/category/type'
+import { Category, CategoryPlain } from 'store/category/type'
 
 interface LoadingPlaceholderProps {
   context?: 'horizontal-scroll'
@@ -49,7 +49,7 @@ const CategoryIconOverview = (props: Props): JSX.Element => (
       }: {
         loading: boolean
         error?: ApolloError
-        data: { getCategories: Category[] }
+        data: { getCategories: CategoryPlain[] }
       }): JSX.Element | JSX.Element[] => {
         if (loading) return <LoadingPlaceholder context={props.context} />
 
