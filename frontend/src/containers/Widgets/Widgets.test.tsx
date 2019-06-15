@@ -9,40 +9,31 @@ import { widget } from 'store/widget/fixtures'
 import { userSession } from 'store/userSession/fixtures'
 
 describe('Widgets should', (): void => {
-  beforeEach(cleanup)
+  const propsFixture = {
+    createNotificationBanner: (): void => {},
+    rootPath: '/widgets',
+    userSession,
+  }
+  afterEach(cleanup)
+
   test('render widget overview route', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <Widgets
-        createNotificationBanner={(): void => {}}
-        rootPath="/widgets"
-        userSession={userSession}
-      />,
-      { route: '/widgets' }
-    )
+    const { getByText } = renderWithAppRoot(<Widgets {...propsFixture} />, {
+      route: '/widgets',
+    })
     expect(getByText('Widgets verwalten')).toBeInTheDocument()
   })
 
   test('render widget overview route', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <Widgets
-        createNotificationBanner={(): void => {}}
-        rootPath="/widgets"
-        userSession={userSession}
-      />,
-      { route: '/widgets/create' }
-    )
+    const { getByText } = renderWithAppRoot(<Widgets {...propsFixture} />, {
+      route: '/widgets/create',
+    })
     expect(getByText('Widget erstellen')).toBeInTheDocument()
   })
 
   test('render widget overview route', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <Widgets
-        createNotificationBanner={(): void => {}}
-        rootPath="/widgets"
-        userSession={userSession}
-      />,
-      { route: `/widgets/edit/${widget.id}` }
-    )
+    const { getByText } = renderWithAppRoot(<Widgets {...propsFixture} />, {
+      route: `/widgets/edit/${widget.id}`,
+    })
     expect(getByText('Widget bearbeiten')).toBeInTheDocument()
   })
 })

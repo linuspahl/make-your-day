@@ -1,38 +1,42 @@
 // libraries
 import * as React from 'react'
 // utils
-import { renderWithAppRoot, wait } from 'testUtils'
+import { renderWithAppRoot, wait, cleanup } from 'testUtils'
 // components
 import Dashboard from './Dashboard'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
-import { getWidgetsSuccess, getWidgetsError } from 'store/widget/fixtures'
+import {
+  getWidgetsError,
+  getWidgetsSuccess,
+  widget,
+} from 'store/widget/fixtures'
 
 describe('Dashboard should', (): void => {
+  const propsFixture = {
+    createNotificationBanner: (): void => {},
+    rootPath: '/dashboard',
+    userSession,
+  }
+  document.execCommand = (): boolean => true
+  afterEach(cleanup)
+
   test('render dashboard and fetch widgets', async (): Promise<void> => {
-    const { getByText } = renderWithAppRoot(
-      <Dashboard
-        createNotificationBanner={(): void => {}}
-        rootPath="/dashboard"
-        userSession={userSession}
-      />,
-      { route: '/dashboard', mocks: [getWidgetsSuccess] }
-    )
+    const { getByText } = renderWithAppRoot(<Dashboard {...propsFixture} />, {
+      route: '/dashboard',
+      mocks: [getWidgetsSuccess],
+    })
     await wait()
-    expect(getByText('Notiz')).toBeInTheDocument()
+    expect(getByText(widget.value)).toBeInTheDocument()
   })
 
   test('render dashboard and show error message on widgets fetch error', async (): Promise<
     void
   > => {
-    const { getByText } = renderWithAppRoot(
-      <Dashboard
-        createNotificationBanner={(): void => {}}
-        rootPath="/dashboard"
-        userSession={userSession}
-      />,
-      { route: '/dashboard', mocks: [getWidgetsError] }
-    )
+    const { getByText } = renderWithAppRoot(<Dashboard {...propsFixture} />, {
+      route: '/dashboard',
+      mocks: [getWidgetsError],
+    })
     await wait()
     expect(
       getByText('Widgets konnten nicht geladen werden')

@@ -9,35 +9,27 @@ import { userSession } from 'store/userSession/fixtures'
 import { userSetting } from 'store/userSetting/fixtures'
 
 describe('Settings should', (): void => {
+  const propsFixture = {
+    rootPath: '/settings',
+    clearLocalStorage: (): void => {},
+    createNotificationBanner: (): void => {},
+    updateLocalStorage: (): void => {},
+    userSettings: { nightMode: userSetting },
+    userSession,
+  }
   afterEach(cleanup)
 
   test('render settings overview route', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <Settings
-        rootPath="/settings"
-        userSession={userSession}
-        clearLocalStorage={(): void => {}}
-        createNotificationBanner={(): void => {}}
-        updateLocalStorage={(): void => {}}
-        userSettings={{ nightMode: userSetting }}
-      />,
-      { route: '/settings' }
-    )
+    const { getByText } = renderWithAppRoot(<Settings {...propsFixture} />, {
+      route: '/settings',
+    })
     expect(getByText('Einstellungen')).toBeInTheDocument()
   })
 
   test('render sessions overview route', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <Settings
-        rootPath="/settings"
-        userSession={userSession}
-        clearLocalStorage={(): void => {}}
-        createNotificationBanner={(): void => {}}
-        updateLocalStorage={(): void => {}}
-        userSettings={{ nightMode: userSetting }}
-      />,
-      { route: '/settings/sessions' }
-    )
+    const { getByText } = renderWithAppRoot(<Settings {...propsFixture} />, {
+      route: '/settings/sessions',
+    })
     expect(getByText('Angemeldete Geräte')).toBeInTheDocument()
   })
 })
