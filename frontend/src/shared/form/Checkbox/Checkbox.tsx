@@ -9,6 +9,7 @@ import { MutationOptions } from 'react-apollo'
 
 interface Props {
   disabled?: boolean
+  id?: string
   name: string
   onChange: (event: InputEvent | MutationOptions) => void
   tabIndex: number
@@ -16,7 +17,7 @@ interface Props {
 }
 
 const Checkbox = (props: Props): JSX.Element => {
-  const { value, onChange, name, disabled, tabIndex } = props
+  const { value, onChange, id, name, disabled, tabIndex } = props
   return (
     <Wrapper disabled={disabled} data-testid="Checkbox">
       {value && (
@@ -27,6 +28,7 @@ const Checkbox = (props: Props): JSX.Element => {
       <Element
         checked={value || false}
         disabled={disabled}
+        id={id}
         name={name}
         onChange={onChange}
         tabIndex={tabIndex}
