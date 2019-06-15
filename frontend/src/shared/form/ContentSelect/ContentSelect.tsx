@@ -26,13 +26,15 @@ import {
 interface Props {
   allowEmpty?: boolean
   disabled?: boolean
+  id?: string
   name: string
   onChange: (event: InputEvent) => void
   options: SelectOption[]
-  renderPreview?: (option: SelectOption) => JSX.Element
   renderFooter?: () => JSX.Element
+  renderPreview?: (option: SelectOption) => JSX.Element
   tabIndex: number
   title: string
+  type?: string
   value: string | number
 }
 
@@ -42,12 +44,14 @@ interface State {
 
 export default class ContentSelect extends React.Component<Props, State> {
   private sortedOptions: SelectOption[]
+  private select: React.RefObject<HTMLInputElement>
 
   public constructor(props: Props) {
     super(props)
 
     // isOpen represents if the select dropdown is open
     this.state = { isOpen: false }
+    this.select = React.createRef()
 
     // Since we need to sort the options and don't want to do it multiple times
     // we store them in a class variable
@@ -69,13 +73,15 @@ export default class ContentSelect extends React.Component<Props, State> {
 
   public render(): JSX.Element {
     const {
-      title,
-      value,
-      renderPreview,
-      renderFooter,
-      tabIndex,
-      name,
       disabled,
+      id,
+      name,
+      renderFooter,
+      renderPreview,
+      tabIndex,
+      title,
+      type,
+      value,
     } = this.props
 
     const { isOpen } = this.state
@@ -89,18 +95,28 @@ export default class ContentSelect extends React.Component<Props, State> {
     return (
       <Layout>
         <Select
-          id={name}
-          tabIndex={disabled ? -1 : tabIndex}
-          onClick={(): void => (!disabled ? this.toggleSelect() : null)}
-          onFocus={disabled ? null : this.onFocus}
+          type={type || 'text'}
+          dataTestid="ContentSelect-selection"
+          id={id}
+          initRef={this.select}
+          name={name}
           onBlur={disabled ? null : this.onBlur}
-          data-testid="ContentSelect-selection"
+          onChange={(): void => {}}
+          onFocus={disabled ? null : this.onFocus}
+          onMouseDown={(event: React.MouseEvent<HTMLInputElement>): void =>
+            !disabled && !isOpen ? this.toggleSelect(event) : null
+          }
+          tabIndex={disabled ? -1 : tabIndex}
+          placeholder="Keine Auswahl"
+          value={value && currentOption ? currentOption.title : null}
+        />
+        <ArrowIcon
+          onMouseDown={(event: React.MouseEvent<HTMLInputElement>): void =>
+            !disabled && !isOpen ? this.toggleSelect(event) : null
+          }
         >
-          {value && currentOption ? currentOption.title : 'Keine Auswahl'}
-          <ArrowIcon>
-            <Icon title="angle-down" />
-          </ArrowIcon>
-        </Select>
+          <Icon title="angle-down" />
+        </ArrowIcon>
         {isOpen && (
           <Modal headline={title} toggleAction={this.toggleSelect}>
             <Options data-testid="ContentSelect-options">
@@ -112,7 +128,9 @@ export default class ContentSelect extends React.Component<Props, State> {
                     <Option
                       isSelected={isSelected}
                       key={option.value}
-                      clickAction={(): void => this.onOptionClick(option.value)}
+                      clickAction={(
+                        event: React.MouseEvent<HTMLElement>
+                      ): void => this.onOptionClick(event, option.value)}
                     >
                       <React.Fragment>
                         {hasPreview && (
@@ -133,7 +151,14 @@ export default class ContentSelect extends React.Component<Props, State> {
   }
 
   // Toggle select dropdown
-  private toggleSelect(): void {
+  private toggleSelect(
+    event:
+      | React.MouseEvent<HTMLInputElement>
+      | React.MouseEvent<HTMLElement>
+      | KeyboardEvent
+  ): void {
+    event.preventDefault()
+    this.select.current.focus()
     this.setState({ isOpen: !this.state.isOpen })
   }
 
@@ -157,7 +182,7 @@ export default class ContentSelect extends React.Component<Props, State> {
     // Disable tab navigation (keyCode 9), when select is open and close select instead
     if (keyCode === 9 && isOpen) {
       event.preventDefault()
-      this.toggleSelect()
+      this.toggleSelect(event)
     }
 
     // Detect space (keyCode 13) and enter key (keyCode 32) and toggle select
@@ -165,7 +190,7 @@ export default class ContentSelect extends React.Component<Props, State> {
       // We need to prevent the default window scrolling for the space key
       // And the default form submit for the enter key
       event.preventDefault()
-      this.toggleSelect()
+      this.toggleSelect(event)
     }
 
     // Detect arrow up (keyCode 40) and arrow down key (keyCode 38)
@@ -207,9 +232,13 @@ export default class ContentSelect extends React.Component<Props, State> {
   }
 
   // When user clicks on option, update the form ond close the select
-  private onOptionClick(value: string | number): void {
+  private onOptionClick(
+    event: React.MouseEvent<HTMLElement>,
+    value: string | number
+  ): void {
+    event.preventDefault()
     this.changeValue(value)
-    this.toggleSelect()
+    this.toggleSelect(event)
   }
 
   private prepareOptions(): SelectOption[] {

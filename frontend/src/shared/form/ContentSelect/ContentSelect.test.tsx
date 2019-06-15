@@ -11,7 +11,7 @@ import {
 import ContentSelect from './ContentSelect'
 
 describe('ContentSelect should', (): void => {
-  const exampleProps = {
+  const propsFixture = {
     onChange: (): void => {},
     title: 'Title',
     value: 'special-value-1',
@@ -30,13 +30,13 @@ describe('ContentSelect should', (): void => {
 
   // Should display dynamic content correctly
   test('display title of selected option', (): void => {
-    const { getByText } = renderWithAppRoot(<ContentSelect {...exampleProps} />)
+    const { getByText } = renderWithAppRoot(<ContentSelect {...propsFixture} />)
     expect(getByText('special-title-1')).toBeInTheDocument()
   })
 
   test('display info if nothing got selected', (): void => {
     const { getByText } = renderWithAppRoot(
-      <ContentSelect {...exampleProps} value={null} />
+      <ContentSelect {...propsFixture} value={null} />
     )
     expect(getByText('Keine Auswahl')).toBeInTheDocument()
   })
@@ -45,47 +45,47 @@ describe('ContentSelect should', (): void => {
     // Make sure the value prop is defined,
     // otherwise the test will always return ture, because of the placeholder
     const { getByText } = renderWithAppRoot(
-      <ContentSelect {...exampleProps} value="special-titie-1" allowEmpty />
+      <ContentSelect {...propsFixture} value="special-titie-1" allowEmpty />
     )
     expect(getByText('Keine Auswahl')).toBeInTheDocument()
   })
 
-  test('display a footer in the modal', (): void => {
+  test.only('display a footer in the modal', (): void => {
     const footerContent = 'My special Footer content!'
     const { getByText, getByTestId } = renderWithAppRoot(
       <ContentSelect
-        {...exampleProps}
+        {...propsFixture}
         renderFooter={(): JSX.Element => <span>{footerContent}</span>}
       />
     )
-    fireEvent.click(getByTestId('ContentSelect-selection'), leftClickOption)
+    fireEvent.mouseDown(getByTestId('ContentSelect-selection'), leftClickOption)
     expect(getByText(footerContent)).toBeInTheDocument()
   })
 
   // Should behave correctly onClick
   test('open option modal, by click on current selection', (): void => {
     const { getByTestId } = renderWithAppRoot(
-      <ContentSelect {...exampleProps} />
+      <ContentSelect {...propsFixture} />
     )
-    fireEvent.click(getByTestId('ContentSelect-selection'), leftClickOption)
+    fireEvent.mouseDown(getByTestId('ContentSelect-selection'), leftClickOption)
     expect(getByTestId('Modal')).toBeInTheDocument()
   })
 
   test('not open option modal, when disabled is provided', (): void => {
     const { getByTestId, queryByTestId } = renderWithAppRoot(
-      <ContentSelect {...exampleProps} disabled />
+      <ContentSelect {...propsFixture} disabled />
     )
-    fireEvent.click(getByTestId('ContentSelect-selection'), leftClickOption)
+    fireEvent.mouseDown(getByTestId('ContentSelect-selection'), leftClickOption)
     expect(queryByTestId('Modal')).not.toBeInTheDocument()
   })
 
   test('should change option when user clicks on option in list', (): void => {
     const handleInputChange = jest.fn()
     const { getByTestId } = renderWithAppRoot(
-      <ContentSelect {...exampleProps} onChange={handleInputChange} />
+      <ContentSelect {...propsFixture} onChange={handleInputChange} />
     )
     // Open modal
-    fireEvent.click(getByTestId('ContentSelect-selection'), leftClickOption)
+    fireEvent.mouseDown(getByTestId('ContentSelect-selection'), leftClickOption)
     expect(getByTestId('Modal')).toBeInTheDocument()
     // Click on option
     const firstOption = getByTestId('ContentSelect-options').firstElementChild
@@ -100,7 +100,7 @@ describe('ContentSelect should', (): void => {
   // Should behave correctly on keypress
   test('should close modal when using tab key', (): void => {
     const { queryByTestId, getByTestId } = renderWithAppRoot(
-      <ContentSelect {...exampleProps} />
+      <ContentSelect {...propsFixture} />
     )
 
     // Focus the input, to trigger keydown event listener
@@ -108,7 +108,7 @@ describe('ContentSelect should', (): void => {
     const currentOption = getByTestId('ContentSelect-selection')
     currentOption.focus()
     // Open modal
-    fireEvent.click(currentOption, leftClickOption)
+    fireEvent.mouseDown(currentOption, leftClickOption)
     expect(getByTestId('Modal')).toBeInTheDocument()
 
     fireEvent.keyDown(currentOption, {
@@ -122,7 +122,7 @@ describe('ContentSelect should', (): void => {
 
   test('should close modal when using enter key', (): void => {
     const { queryByTestId, getByTestId } = renderWithAppRoot(
-      <ContentSelect {...exampleProps} />
+      <ContentSelect {...propsFixture} />
     )
 
     // Focus the input, to trigger keydown event listener
@@ -145,7 +145,7 @@ describe('ContentSelect should', (): void => {
   test('should select the next option, when usign arrow down key', (): void => {
     const handleInputChange = jest.fn()
     const { getByTestId } = renderWithAppRoot(
-      <ContentSelect {...exampleProps} onChange={handleInputChange} />
+      <ContentSelect {...propsFixture} onChange={handleInputChange} />
     )
 
     // Focus the input, to trigger keydown event listener
@@ -169,7 +169,7 @@ describe('ContentSelect should', (): void => {
     const handleInputChange = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <ContentSelect
-        {...exampleProps}
+        {...propsFixture}
         onChange={handleInputChange}
         value="special-value-2"
       />
@@ -193,7 +193,7 @@ describe('ContentSelect should', (): void => {
     const handleInputChange = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <ContentSelect
-        {...exampleProps}
+        {...propsFixture}
         onChange={handleInputChange}
         value="special-value-1"
       />
@@ -219,7 +219,7 @@ describe('ContentSelect should', (): void => {
     const handleInputChange = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <ContentSelect
-        {...exampleProps}
+        {...propsFixture}
         onChange={handleInputChange}
         value="special-value-2"
       />
