@@ -1,13 +1,22 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import { navigationItems } from 'params'
+import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import Navigation from './Navigation'
 
 describe('Navigation should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <Navigation rootPath="/" toggleAction={(): void => {}} />
+  afterEach(cleanup)
+
+  test('list navigation items', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <Navigation toggleAction={(): void => {}} rootPath="/" />
+    )
+    navigationItems.forEach(
+      (navItem): void => {
+        expect(getByText(navItem.title)).toBeInTheDocument()
+      }
     )
   })
 })

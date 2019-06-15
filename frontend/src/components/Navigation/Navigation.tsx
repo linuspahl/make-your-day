@@ -1,3 +1,5 @@
+// params
+import { navigationItems } from 'params'
 // libraries
 import * as React from 'react'
 import styled from 'styled-components'
@@ -18,19 +20,12 @@ interface Props {
 
 const Navigation = (props: Props): JSX.Element => {
   const { toggleAction, rootPath } = props
-  const items = [
-    { path: '/', title: 'Dashboard' },
-    { path: '/categories', title: 'Kategorien verwalten' },
-    { path: '/widgets', title: 'Widgets verwalten' },
-    { path: '/evaluations', title: 'Auswertungen verwalten' },
-    { path: '/settings', title: 'Einstellungen' },
-  ]
 
   return (
     <IndexLayer>
       <Modal headline="Menü" toggleAction={toggleAction}>
         <ul>
-          {items.map(
+          {navigationItems.map(
             (route): JSX.Element => (
               <NavigationItem
                 toggleAction={toggleAction}
