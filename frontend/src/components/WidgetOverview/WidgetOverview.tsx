@@ -30,7 +30,7 @@ const List = styled.ul`
 `
 
 const sortWidgetsByPosition = (
-  widgets: Widget[] = []
+  widgets: Widget[]
 ): {
   [key: string]: Widget[]
 } => {
