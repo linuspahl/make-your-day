@@ -9,6 +9,16 @@ export const navigationItems = [
   { path: '/settings', title: 'Einstellungen' },
 ]
 
+export const localStorageKeys = [
+  'authToken',
+  'expiresAt',
+  'leftHandMode',
+  'nightMode',
+  'showAppBgImage',
+  'userId',
+  'userSessionId',
+]
+
 export const weekDayLabels: { [key: string]: string } = {
   0: 'So',
   1: 'Mo',
