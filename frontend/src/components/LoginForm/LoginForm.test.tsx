@@ -75,7 +75,6 @@ describe('LoginForm should', (): void => {
     expect(updateLocalStorageStub).toBeCalledWith({
       authToken: userSession.token,
       userId: userSession.userId,
-      userRole: userSession.role,
       userSessionId: userSession.id,
       expiresAt: userSession.expiresAt,
       nightmode: true,
