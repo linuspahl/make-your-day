@@ -1,20 +1,17 @@
 // libraries
 import * as React from 'react'
 import styled from 'styled-components'
-import { Query } from 'react-apollo'
 // utils
 import { widgetPositionOptions } from 'params'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
-import H2 from 'shared/H2/H2'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import H1 from 'shared/H1/H1'
+import H2 from 'shared/H2/H2'
 import ListItem from 'shared/list/ListItem/ListItem'
-import NoResult from 'shared/NoResult/NoResult'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 // graphql
 import { GetWidgetsOverview } from 'store/widget/query'
 import { DeleteWidget } from 'store/widget/mutation'
@@ -22,7 +19,6 @@ import { deleteWidget } from 'store/widget/update'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 // interfaces
 import { Widget } from 'store/widget/type'
-import { ApolloError } from 'apollo-boost'
 
 const List = styled.ul`
   margin-top: 10px;
@@ -62,66 +58,42 @@ const WidgetOverview = (props: Props): JSX.Element => {
   return (
     <FadeTransition fullWidth>
       <H1 context="page">Widgets verwalten</H1>
-
-      <Query query={GetWidgetsOverview}>
-        {({
-          loading,
-          error,
-          data,
-        }: {
-          loading: boolean
-          error?: ApolloError
-          data: { getWidgets: Widget[] }
-        }): JSX.Element | JSX.Element[] => {
-          if (loading) return <CenteredSpinner />
-          if (error)
-            return (
-              <ErrorMessage
-                error={error}
-                message="Widgets konnten nicht geladen werden"
-              />
-            )
-          if (data.getWidgets.length === 0) return <NoResult />
-
-          const widgetsByPosition = sortWidgetsByPosition(data.getWidgets)
-
-          return Object.keys(widgetsByPosition).map(
-            (position): JSX.Element => {
-              const positionOption = widgetPositionOptions.find(
-                (option): boolean => option.value === position
-              )
-              return (
-                <div key={position}>
-                  <H2>{positionOption.title}</H2>
-                  <List>
-                    {widgetsByPosition[position].map(
-                      (widget): JSX.Element => (
-                        <ListItem key={widget.id} spaceBetween>
-                          {widget.title}
-                          <div>
-                            <ActionIcon
-                              ariaLabel={`Widget ${widget.title} bearbeiten`}
-                              to={`${rootPath}/edit/${widget.id}`}
-                              icon="edit"
+      <QueryStateHandler
+        errorMessage="Widgets konnten nicht geladen werden"
+        query={GetWidgetsOverview}
+        queryName="getWidgets"
+      >
+        {(widgets: Widget[]): JSX.Element => {
+          const widgetsByPosition = sortWidgetsByPosition(widgets)
+          return (
+            <React.Fragment>
+              {Object.keys(widgetsByPosition).map(
+                (position): JSX.Element => {
+                  const positionOption = widgetPositionOptions.find(
+                    (option): boolean => option.value === position
+                  )
+                  return (
+                    <div key={position}>
+                      <H2>{positionOption.title}</H2>
+                      <List>
+                        {widgetsByPosition[position].map(
+                          (widget): JSX.Element => (
+                            <WidgetListItem
+                              key={widget.id}
+                              rootPath={rootPath}
+                              widget={widget}
                             />
-                            <DeleteIcon
-                              ariaLabel={`Widget ${widget.title} löschen`}
-                              id={widget.id}
-                              mutation={DeleteWidget}
-                              onUpdate={deleteWidget}
-                              title={widget.title}
-                            />
-                          </div>
-                        </ListItem>
-                      )
-                    )}
-                  </List>
-                </div>
-              )
-            }
+                          )
+                        )}
+                      </List>
+                    </div>
+                  )
+                }
+              )}
+            </React.Fragment>
           )
         }}
-      </Query>
+      </QueryStateHandler>
 
       <ActionRow>
         <Button context="primary" to={`${rootPath}/create`}>
@@ -132,4 +104,32 @@ const WidgetOverview = (props: Props): JSX.Element => {
   )
 }
 
+const WidgetListItem = (props: {
+  widget: Widget
+  rootPath: string
+}): JSX.Element => {
+  const {
+    widget: { title, id },
+    rootPath,
+  } = props
+  return (
+    <ListItem spaceBetween>
+      {title}
+      <div>
+        <ActionIcon
+          ariaLabel={`Widget ${title} bearbeiten`}
+          to={`${rootPath}/edit/${id}`}
+          icon="edit"
+        />
+        <DeleteIcon
+          ariaLabel={`Widget ${title} löschen`}
+          id={id}
+          mutation={DeleteWidget}
+          onUpdate={deleteWidget}
+          title={title}
+        />
+      </div>
+    </ListItem>
+  )
+}
 export default WidgetOverview
