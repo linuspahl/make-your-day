@@ -10,7 +10,6 @@ export const userSession: UserSession = {
   userId: 1,
   token: 'TOKEN1',
   device: 'Mac',
-  role: 'Admin',
   expiresAt: 1560248192861, // unix date with ms
   createdAt: 1560248190861,
 }
