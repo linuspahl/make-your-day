@@ -1,7 +1,7 @@
 export interface Subcategory {
   id: number
   title: string
-  parentId: number
+  parentId?: number
 }
 
 export interface CategoryFull {
