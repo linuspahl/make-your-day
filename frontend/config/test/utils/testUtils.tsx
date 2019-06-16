@@ -24,6 +24,23 @@ interface WrappedComponent extends RenderResult {
 }
 
 // Custom render utils
+function renderWithApolloProvier(
+  component: JSX.Element,
+  {
+    mocks = [],
+    ...renderOptions
+  }: {
+    mocks?: readonly MockedResponse[]
+  } = {}
+): RenderResult {
+  return render(
+    <MockedProvider mocks={mocks} addTypename={false}>
+      {component}
+    </MockedProvider>,
+    renderOptions
+  )
+}
+
 function renderWithAppRoot(
   component: JSX.Element,
   {
@@ -38,13 +55,11 @@ function renderWithAppRoot(
   } = {}
 ): WrappedComponent {
   const history = createMemoryHistory({ initialEntries: [route] })
-  const utils = render(
-    <MockedProvider mocks={mocks} addTypename={false}>
-      <ThemeProvider theme={colorTheme(themeProps)}>
-        <Router history={history}>{component}</Router>
-      </ThemeProvider>
-    </MockedProvider>,
-    renderOptions
+  const utils = renderWithApolloProvier(
+    <ThemeProvider theme={colorTheme(themeProps)}>
+      <Router history={history}>{component}</Router>
+    </ThemeProvider>,
+    { ...renderOptions, mocks }
   )
 
   return { ...utils, history }
@@ -60,6 +75,7 @@ export {
   Matcher,
   render,
   renderWithAppRoot,
+  renderWithApolloProvier,
   SelectorMatcherOptions,
   wait,
 }
