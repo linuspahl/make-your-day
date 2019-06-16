@@ -214,7 +214,7 @@ describe('ContentSelect should', (): void => {
   })
 
   test('should select the previous option, when usign arrow down key', (): void => {
-    // it would be cleaner to combine this test with the previuos one, but
+    // it would be cleaner to combine this test with the previous one, but
     // currently the @testing-library/
     const handleInputChange = jest.fn()
     const { getByTestId } = renderWithAppRoot(
