@@ -76,7 +76,7 @@ const ListItem = (props: {
   const { userSession, isCurrentSession } = props
   const expiresAtDate = dayjs(userSession.expiresAt).format('YYYY-MM-DD')
   return (
-    <React.Fragment key={userSession.id}>
+    <React.Fragment>
       <div>{userSession.device}</div>
       <div>{expiresAtDate}</div>
       <GridCell justify="flex-end">
