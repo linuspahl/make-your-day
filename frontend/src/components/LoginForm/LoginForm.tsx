@@ -104,7 +104,7 @@ export default class LoginForm extends React.Component<Props, State> {
     }
   }): void {
     const {
-      loginUser: { userSession, id: userId, role: userRole, userSettings = [] },
+      loginUser: { userSession, id: userId, userSettings = [] },
     } = data
     const { updateLocalStorage } = this.props
     const settings = this.formatUserSettings(userSettings)
@@ -114,7 +114,6 @@ export default class LoginForm extends React.Component<Props, State> {
       updateLocalStorage({
         authToken: userSession.token,
         userId,
-        userRole,
         userSessionId: userSession.id,
         expiresAt: userSession.expiresAt,
         ...settings,
