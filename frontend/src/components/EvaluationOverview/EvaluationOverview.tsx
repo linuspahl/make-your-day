@@ -1,19 +1,15 @@
 // libraries
 import * as React from 'react'
 import styled from 'styled-components'
-import { Query } from 'react-apollo'
-import { ApolloError } from 'apollo-boost'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
-import NoResult from 'shared/NoResult/NoResult'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 // graphql
 import { GetEvaluations } from 'store/evaluation/query'
 import { DeleteEvaluation } from 'store/evaluation/mutation'
@@ -36,57 +32,27 @@ const EvaluationOverview = (props: Props): JSX.Element => {
     <FadeTransition fullWidth>
       <H1 context="page">Auswertungen verwalten</H1>
 
-      <Query query={GetEvaluations}>
-        {({
-          loading,
-          error,
-          data,
-        }: {
-          loading: boolean
-          error?: ApolloError
-          data: { getEvaluations: Evaluation[] }
-        }): JSX.Element => {
-          if (loading) return <CenteredSpinner />
-          if (error)
-            return (
-              <ErrorMessage
-                error={error}
-                message="Auswertungen konnten nicht geladen werden"
-              />
-            )
-          if (data.getEvaluations.length === 0) return <NoResult />
+      <QueryStateHandler
+        errorMessage="Andere Sitzungen konnten nicht geladen werden"
+        query={GetEvaluations}
+        queryName="getEvaluations"
+      >
+        {(evaluations: Evaluation[]): JSX.Element => {
           return (
             <List>
-              {data.getEvaluations.map(
+              {evaluations.map(
                 (evaluation: Evaluation): JSX.Element => (
-                  <ListItem key={evaluation.id} spaceBetween>
-                    {evaluation.title}
-                    <div>
-                      <ActionIcon
-                        ariaLabel={`Auswertung ${evaluation.title} anzeigen`}
-                        to={`${rootPath}/view/${evaluation.id}`}
-                        icon="bar-chart"
-                      />
-                      <ActionIcon
-                        ariaLabel={`Auswertung ${evaluation.title} bearbeiten`}
-                        to={`${rootPath}/edit/${evaluation.id}`}
-                        icon="edit"
-                      />
-                      <DeleteIcon
-                        ariaLabel={`Auswertung ${evaluation.title} löschen`}
-                        id={evaluation.id}
-                        mutation={DeleteEvaluation}
-                        onUpdate={deleteEvaluation}
-                        title={evaluation.title}
-                      />
-                    </div>
-                  </ListItem>
+                  <EvaluationListItem
+                    key={evaluation.id}
+                    evaluation={evaluation}
+                    rootPath={rootPath}
+                  />
                 )
               )}
             </List>
           )
         }}
-      </Query>
+      </QueryStateHandler>
 
       <ActionRow>
         <Button context="primary" to={`${rootPath}/create`}>
@@ -94,6 +60,40 @@ const EvaluationOverview = (props: Props): JSX.Element => {
         </Button>
       </ActionRow>
     </FadeTransition>
+  )
+}
+
+const EvaluationListItem = (props: {
+  evaluation: Evaluation
+  rootPath: string
+}): JSX.Element => {
+  const {
+    evaluation: { id, title },
+    rootPath,
+  } = props
+  return (
+    <ListItem spaceBetween>
+      {title}
+      <div>
+        <ActionIcon
+          ariaLabel={`Auswertung ${title} anzeigen`}
+          to={`${rootPath}/view/${id}`}
+          icon="bar-chart"
+        />
+        <ActionIcon
+          ariaLabel={`Auswertung ${title} bearbeiten`}
+          to={`${rootPath}/edit/${id}`}
+          icon="edit"
+        />
+        <DeleteIcon
+          ariaLabel={`Auswertung ${title} löschen`}
+          id={id}
+          mutation={DeleteEvaluation}
+          onUpdate={deleteEvaluation}
+          title={title}
+        />
+      </div>
+    </ListItem>
   )
 }
 
