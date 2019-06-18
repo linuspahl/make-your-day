@@ -14,7 +14,7 @@
     "preCommit": "yarn lint && yarn checkTypes && yarn test",
     "lint": "yarn run eslint src config --debug --ext .js,.ts,.tsx",
     "checkTypes": "yarn run tsc",
-    "test": "jest --config config/test/jestConfig.js"
+    "test": "jest --config config/test/jestConfig.js --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
@@ -50,6 +50,7 @@
     "jest": "^24.8.0",
     "jest-dom": "^3.4.0",
     "jest-styled-components": "^6.3.1",
+    "mockdate": "^2.0.3",
     "prettier": "^1.16.4",
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
