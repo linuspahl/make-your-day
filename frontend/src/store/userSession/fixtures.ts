@@ -22,7 +22,50 @@ export const userSession2: UserSession = {
   createdAt: 1560248190845,
 }
 
-// Api stubs
+// # Api stubs
+
+// ## deleteUserSession
+const deleteUserSessionRequest = {
+  request: {
+    query: DeleteUserSession,
+    variables: {
+      id: 1,
+    },
+  },
+}
+export const deleteUserSessionSuccess = {
+  ...deleteUserSessionRequest,
+  result: {
+    data: {
+      deleteUserSession: { id: 1 },
+    },
+  },
+}
+export const deleteUserSessionError = {
+  ...deleteUserSessionRequest,
+  error: new Error('deleteUserSession failed'),
+}
+
+// ## getUserSessions
+const getUserSessionsRequest = {
+  request: {
+    query: GetUserSessions,
+  },
+}
+export const getUserSessionsSuccess = {
+  ...getUserSessionsRequest,
+  result: {
+    data: {
+      getUserSessions: [userSession, userSession2],
+    },
+  },
+}
+export const getUserSessionsError = {
+  ...getUserSessionsRequest,
+  error: new Error('getUserSessions failed'),
+}
+
+// ## loginUser
 const loginUserRequest = {
   request: {
     query: LoginUser,
@@ -59,49 +102,7 @@ export const loginUserSuccess = {
     },
   },
 }
-
 export const loginUserError = {
   ...loginUserRequest,
   error: new Error('loginUser failed'),
-}
-
-const getUserSessionsRequest = {
-  request: {
-    query: GetUserSessions,
-  },
-}
-export const getUserSessionsSuccess = {
-  ...getUserSessionsRequest,
-  result: {
-    data: {
-      getUserSessions: [userSession, userSession2],
-    },
-  },
-}
-
-export const getUserSessionsError = {
-  ...getUserSessionsRequest,
-  error: new Error('getUserSessions failed'),
-}
-
-const deleteUserSessionRequest = {
-  request: {
-    query: DeleteUserSession,
-    variables: {
-      id: 1,
-    },
-  },
-}
-export const deleteUserSessionSuccess = {
-  ...deleteUserSessionRequest,
-  result: {
-    data: {
-      deleteUserSession: { id: 1 },
-    },
-  },
-}
-
-export const deleteUserSessionError = {
-  ...deleteUserSessionRequest,
-  error: new Error('deleteUserSession failed'),
 }
