@@ -1,24 +1,14 @@
 // libraries
 import * as React from 'react'
 // utils
-import { renderWithAppRoot, cleanup, wait } from 'testUtils'
+import { renderWithAppRoot, cleanup, wait, mockWindow } from 'testUtils'
 // components
 import EvaluationChart from './EvaluationChart'
 // fixtures
 import { evaluation } from 'store/evaluation/fixtures'
 
 describe('EvaluationChart should', (): void => {
-  window.matchMedia = jest.fn().mockImplementation(
-    (query: string): object => {
-      return {
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-      }
-    }
-  )
+  mockWindow()
   afterEach(cleanup)
 
   test('render Barchart', async (): Promise<void> => {
