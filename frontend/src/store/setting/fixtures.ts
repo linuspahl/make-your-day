@@ -10,7 +10,9 @@ export const setting: Setting = {
   defaultValue: 'false',
 }
 
-// Api stubs
+// # Api stubs
+
+// ## getSettings
 const getSettingsRequest = {
   request: {
     query: GetSettings,
@@ -24,7 +26,6 @@ export const getSettingsSuccess = {
     },
   },
 }
-
 export const getSettingsError = {
   ...getSettingsRequest,
   error: new Error('getSettings failed'),

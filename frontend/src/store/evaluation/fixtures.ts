@@ -4,7 +4,7 @@ import {
   Evaluation,
   EvaluationCreate,
 } from 'store/evaluation/type'
-import { GetEvaluations } from 'store/evaluation/query'
+import { GetEvaluations, GetEvaluation } from 'store/evaluation/query'
 // fixtures
 import { category } from 'store/category/fixtures'
 
@@ -18,8 +18,8 @@ export const evaluationCreate: EvaluationCreate = {
 
 export const evaluation: Evaluation = {
   ...evaluationCreate,
+  category,
   id: 1,
-  category: category,
   result: {
     datasets: [
       {
@@ -43,7 +43,29 @@ export const chart: ChartType = {
   ],
 }
 
-// Api stubs
+// # Api stubs
+
+// ## getEvaluation
+const getEvaluationRequest = {
+  request: {
+    query: GetEvaluation,
+    variables: { id: 1 },
+  },
+}
+export const getEvaluationSuccess = {
+  ...getEvaluationRequest,
+  result: {
+    data: {
+      getEvaluation: evaluation,
+    },
+  },
+}
+export const getEvaluationError = {
+  ...getEvaluationRequest,
+  error: new Error('getEvaluation failed'),
+}
+
+// ## getEvaluations
 const getEvaluationsRequest = {
   request: {
     query: GetEvaluations,
@@ -57,8 +79,7 @@ export const getEvaluationsSuccess = {
     },
   },
 }
-
 export const getEvaluationsError = {
   ...getEvaluationsRequest,
-  error: new Error('getWidgets failed'),
+  error: new Error('getEvaluations failed'),
 }
