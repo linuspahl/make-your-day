@@ -1,96 +1,41 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Query } from 'react-apollo'
 // utils
-import { extractIdFromUrl, logError } from 'utils/utils'
+import { extractIdFromUrl } from 'utils/utils'
 // components
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import NoResult from 'shared/NoResult/NoResult'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 import EvaluationChart from 'components/EvaluationChart/EvaluationChart'
 // graphql
 import { GetEvaluation } from 'store/evaluation/query'
 import { Evaluation } from 'store/evaluation/type'
-import { NotificationCreate } from 'types/types'
-import { ApolloError } from 'apollo-boost'
 
 interface Props extends RouteComponentProps {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
-class EvaluationEdit extends React.Component<Props> {
-  public constructor(props: Props) {
-    super(props)
+const EvaluationResult = (props: Props): JSX.Element => {
+  const { match } = props
+  const evaluationId = extractIdFromUrl(match)
 
-    this.handleCompleted = this.handleCompleted.bind(this)
-    this.handleError = this.handleError.bind(this)
-  }
+  return (
+    <FadeTransition fullWidth>
+      <H1 context="page">Ergebnis Auswertung</H1>
 
-  public render(): JSX.Element {
-    const { match } = this.props
-    const evaluationId = extractIdFromUrl(match)
-
-    return (
-      <FadeTransition fullWidth>
-        <H1 context="page">Ergebnis Auswertung</H1>
-
-        <Query query={GetEvaluation} variables={{ id: evaluationId }}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getEvaluation: Evaluation }
-          }): JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Auswertung konnte nicht geladen werden"
-                />
-              )
-            const evaluation = data.getEvaluation
-            if (!evaluation.id) return <NoResult />
-            return <EvaluationChart evaluation={evaluation} />
-          }}
-        </Query>
-      </FadeTransition>
-    )
-  }
-
-  // Form submit function
-  private handleCompleted(data: { updateEvaluation: Evaluation }): void {
-    const { history, rootPath, createNotificationBanner } = this.props
-    const {
-      updateEvaluation: { title },
-    } = data
-
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Auswertung ${title} erfolgreich bearbeitet`,
-    })
-
-    // Go to the evaluations overview
-    history.push(rootPath)
-  }
-
-  // Form error function
-  private handleError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
-    createNotificationBanner({
-      type: 'error',
-      message: 'Bearbeitung der Auswertung fehlgeschlagen',
-    })
-    logError(error)
-  }
+      <QueryStateHandler
+        errorMessage="Auswertung konnte nicht geladen werden"
+        query={GetEvaluation}
+        queryName="getEvaluation"
+        variables={{ id: evaluationId }}
+      >
+        {(evaluation: Evaluation): JSX.Element => {
+          return <EvaluationChart evaluation={evaluation} />
+        }}
+      </QueryStateHandler>
+    </FadeTransition>
+  )
 }
 
-export default withRouter(EvaluationEdit)
+export default withRouter(EvaluationResult)

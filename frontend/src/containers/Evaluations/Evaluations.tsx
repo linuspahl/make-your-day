@@ -55,12 +55,7 @@ const Evaluations = (props: Props): JSX.Element => {
           exact
           path={`${rootPath}/view/:id`}
           public
-          render={(): JSX.Element => (
-            <EvaluationResult
-              createNotificationBanner={createNotificationBanner}
-              rootPath={rootPath}
-            />
-          )}
+          render={(): JSX.Element => <EvaluationResult rootPath={rootPath} />}
         />
       </ContentBox>
     </PageLayout>
