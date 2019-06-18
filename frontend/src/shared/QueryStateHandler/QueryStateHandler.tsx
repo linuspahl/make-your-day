@@ -10,15 +10,28 @@ import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 
 interface Props {
-  children: (result?: object[]) => JSX.Element
+  children: (result?: object[] | object) => JSX.Element
+  // errorMessage: What to display, if the query fails?
   errorMessage?: string
+  // query: grqphql query from store, like `GetCategories`
   query: DocumentNode
+  // queryName: name of the actual query function, used inside of the provided query definition
+  // like `getCategories`
   queryName: string
+  // variables: If you need to run the query with specific variables
   variables?: object
+  loadingPlaceholder?: JSX.Element
 }
 
 const QueryStateHandler = (props: Props): JSX.Element => {
-  const { errorMessage, children, query, variables, queryName } = props
+  const {
+    children,
+    errorMessage,
+    loadingPlaceholder,
+    query,
+    queryName,
+    variables,
+  } = props
 
   return (
     <Query query={query} variables={variables}>
@@ -31,13 +44,14 @@ const QueryStateHandler = (props: Props): JSX.Element => {
         error?: ApolloError
         data: { [key: string]: object[] }
       }): JSX.Element => {
+        console.log(loading, error, data)
         if (loading) {
-          return <CenteredSpinner />
+          return loadingPlaceholder ? loadingPlaceholder : <CenteredSpinner />
         }
         if (error) {
           return <ErrorMessage error={error} message={errorMessage} />
         }
-        if (data[queryName].length === 0) {
+        if (!data[queryName] || data[queryName].length === 0) {
           return <NoResult />
         }
         return children(data[queryName])
