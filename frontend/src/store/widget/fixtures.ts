@@ -1,6 +1,8 @@
 // graphql
-import { Widget, WidgetCreate } from 'store/widget/type'
 import { GetWidgetsOverview, GetWidget, GetWidgets } from 'store/widget/query'
+import { UpdateWidget, CreateWidget } from 'store/widget/mutation'
+// interfaces
+import { Widget, WidgetCreate } from 'store/widget/type'
 
 export const widgetCreate: WidgetCreate = {
   title: 'Notiz 1',
@@ -22,7 +24,48 @@ export const widget2: Widget = {
   value: 'Inhalt Notiz 2',
 }
 
-// Api stubs
+// # Api stubs
+
+// ## createWidget
+const createWidgetRequest = {
+  request: {
+    query: CreateWidget,
+    variables: widgetCreate,
+  },
+}
+export const createWidgetSuccess = {
+  ...createWidgetRequest,
+  result: {
+    data: {
+      createWidget: widget,
+    },
+  },
+}
+export const createWidgetError = {
+  ...createWidgetRequest,
+  error: new Error('createWidget failed'),
+}
+
+// ## getWidget
+const getWidgetRequest = {
+  request: {
+    query: GetWidget,
+  },
+}
+export const getWidgetSuccess = {
+  ...getWidgetRequest,
+  result: {
+    data: {
+      getWidget: widget,
+    },
+  },
+}
+export const getWidgetError = {
+  ...getWidgetRequest,
+  error: new Error('getWidget failed'),
+}
+
+// ## getWidgets
 const getWidgetsRequest = {
   request: {
     query: GetWidgets,
@@ -41,6 +84,7 @@ export const getWidgetsError = {
   error: new Error('getWidgets failed'),
 }
 
+// ## getWidgetsOverview
 const getWidgetsOverviewRequest = {
   request: {
     query: GetWidgetsOverview,
@@ -59,29 +103,22 @@ export const getWidgetsOverviewError = {
   error: new Error('getWidgetsOverview failed'),
 }
 
-const getWidgetRequest = {
+// ## updateWidget
+const updateWidgetRequest = {
   request: {
-    query: GetWidget,
+    query: UpdateWidget,
+    variables: widget,
   },
 }
-export const getWidgetSuccess = {
-  ...getWidgetRequest,
-  result: {
-    data: {
-      getWidget: widget,
-    },
-  },
-}
-export const getWidgetError = {
-  ...getWidgetRequest,
-  error: new Error('getWidgets failed'),
-}
-
 export const updateWidgetSuccess = {
-  ...getWidgetRequest,
+  ...updateWidgetRequest,
   result: {
     data: {
-      updateWidget: widget,
+      updateWidget: { ...widget, value: 'New widget value' },
     },
   },
+}
+export const updateWidgetError = {
+  ...updateWidgetRequest,
+  error: new Error('updateWidget failed'),
 }
