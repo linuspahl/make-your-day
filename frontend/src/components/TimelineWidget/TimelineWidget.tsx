@@ -1,10 +1,8 @@
 // libraries
 import * as React from 'react'
-import { Query } from 'react-apollo'
 import dayjs from 'dayjs'
 import { sortBy, fill } from 'lodash'
 // components
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import { Layout, Outer } from './styles'
 // graphql
@@ -14,7 +12,7 @@ import TimelineWidgetDayPlaceholder from 'components/TimelineWidgetDay/TimelineW
 // interfaces
 import { Record } from 'store/record/type'
 import { Category } from 'store/category/type'
-import { ApolloError } from 'apollo-boost'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface CategoryEntry extends Category {
   recordAmountSum: number
@@ -25,7 +23,7 @@ interface DayEntry {
   date: string
 }
 
-const LoadingPlaceholder = (): JSX.Element => (
+const LoadingPlaceholder = (
   <PlaceholderGroup>
     {fill(Array(3), null).map(
       (value, key): JSX.Element => {
@@ -38,7 +36,6 @@ const LoadingPlaceholder = (): JSX.Element => (
 export default class TimelineWidget extends React.Component {
   public constructor(props: {}) {
     super(props)
-
     this.prepareTimeline = this.prepareTimeline.bind(this)
   }
 
@@ -46,50 +43,40 @@ export default class TimelineWidget extends React.Component {
     // We want to fetch all posts of the last seven days.
     const createdAt = new Date()
     createdAt.setDate(createdAt.getDate() - 7)
-    const createdAtFrom = dayjs(createdAt).format('YYYY-MM-DD')
 
     return (
       <Outer>
         <Layout>
-          <Query query={GetRecords} variables={{ createdAtFrom }}>
-            {({
-              loading,
-              error,
-              data,
-            }: {
-              loading: boolean
-              error?: ApolloError
-              data: { getRecords: Record[] }
-            }): JSX.Element | JSX.Element[] => {
-              if (loading) return <LoadingPlaceholder />
+          <QueryStateHandler
+            errorMessage="Einträge konnten nicht geladen werden"
+            queryName="getRecords"
+            query={GetRecords}
+            loadingPlaceholder={LoadingPlaceholder}
+          >
+            {(records: Record[]): JSX.Element => {
+              const timeline = this.prepareTimeline(records)
 
-              if (error)
-                return (
-                  <ErrorMessage
-                    error={error}
-                    message="Einträge konnten nicht geladen werden"
-                  />
-                )
-
-              const timeline = this.prepareTimeline(data.getRecords)
-
-              return sortBy(Object.values(timeline), 'date').map(
-                (day): JSX.Element => (
-                  <TimelineWidgetDay
-                    categories={Object.values(day.categories)}
-                    date={day.date}
-                    key={day.date}
-                  />
-                )
+              return (
+                <React.Fragment>
+                  {sortBy(Object.values(timeline), 'date').map(
+                    (day: DayEntry): JSX.Element => (
+                      <TimelineWidgetDay
+                        categories={Object.values(day.categories)}
+                        date={day.date}
+                        key={day.date}
+                      />
+                    )
+                  )}
+                </React.Fragment>
               )
             }}
-          </Query>
+          </QueryStateHandler>
         </Layout>
       </Outer>
     )
   }
 
-  private prepareTimeline(records: Record[] = []): { [key: string]: DayEntry } {
+  private prepareTimeline(records: Record[]): { [key: string]: DayEntry } {
     // The timeline object has an array of records as input
     // for each day with a record, we'll create an entry
     // Based on the day we will group all related records by category
@@ -116,7 +103,7 @@ export default class TimelineWidget extends React.Component {
         // get createdAt date and format to string
         const recordCreatedAtUnix = parseInt(record.createdAt)
         const createdAtDay = dayjs(recordCreatedAtUnix).format('YYYY-MM-DD')
-
+        console.log(createdAtDay)
         if (timeline[createdAtDay]) {
           // Check if an entry for the category exists
           let categoryEnry = timeline[createdAtDay].categories[categoryKey]
