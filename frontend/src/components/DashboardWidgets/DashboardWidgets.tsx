@@ -26,7 +26,7 @@ import { NotificationCreate } from 'types/types'
 import { Widget as WidgetType } from 'store/widget/type'
 
 const LoadingPlaceholder = (): JSX.Element => (
-  <PlaceholderWrapper>
+  <PlaceholderWrapper data-testid="DashboardWidgetsPlaceholder">
     <PlaceholderGroup>
       <EditorWidgetPlaceholder />
     </PlaceholderGroup>
@@ -54,7 +54,6 @@ const DashboardWidgets = (props: Props): JSX.Element => {
         </NewWidgetBox>
       </PlaceholderWrapper>
     )
-
   return (
     <Layout>
       {sortBy(widgets, 'id').map(
