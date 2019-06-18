@@ -1,13 +1,64 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import {
+  renderWithAppRoot,
+  fireEvent,
+  leftClickOption,
+  wait,
+  cleanup,
+} from 'testUtils'
 // components
 import WidgetCreate from './WidgetCreate'
+import { initWidgetForm } from 'components/WidgetForm/WidgetForm.test'
+// fixtures
+import { createWidgetSuccess, createWidgetError } from 'store/widget/fixtures'
+import { getEvaluationsSuccess } from 'store/evaluation/fixtures'
 
 describe('WidgetCreate should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
-      <WidgetCreate rootPath="/" createNotificationBanner={(): void => {}} />
+  afterEach(cleanup)
+
+  test('show notification banner on successful create ', async (): Promise<
+    void
+  > => {
+    const createNotificationBannerStub = jest.fn()
+    const { getByLabelText, getByText } = renderWithAppRoot(
+      <WidgetCreate
+        rootPath="/widget/create"
+        createNotificationBanner={createNotificationBannerStub}
+      />,
+      { mocks: [getEvaluationsSuccess, createWidgetSuccess] }
     )
+
+    initWidgetForm(getByLabelText, getByText)
+    fireEvent.click(getByText('Erstellen'), leftClickOption)
+    await wait()
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
+      message: 'Widget Notiz 1 erfolgreich erstellt',
+      type: 'success',
+    })
+  })
+
+  test('show notification banner on unsuccessful create', async (): Promise<
+    void
+  > => {
+    const createNotificationBannerStub = jest.fn()
+    const { getByLabelText, getByText } = renderWithAppRoot(
+      <WidgetCreate
+        rootPath="/widget/create"
+        createNotificationBanner={createNotificationBannerStub}
+      />,
+      { mocks: [getEvaluationsSuccess, createWidgetError] }
+    )
+    await wait()
+    initWidgetForm(getByLabelText, getByText)
+    fireEvent.click(getByText('Erstellen'), leftClickOption)
+    await wait()
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
+      message: 'Erstellung des Widgets fehlgeschlagen',
+      type: 'error',
+    })
   })
 })

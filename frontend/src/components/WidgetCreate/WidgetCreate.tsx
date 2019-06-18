@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
-import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Mutation, Query } from 'react-apollo'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 // utils
 import { logError } from 'utils/utils'
@@ -9,15 +9,14 @@ import { logError } from 'utils/utils'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 // graphql
 import { addWidget } from 'store/widget/update'
 import { CreateWidget } from 'store/widget/mutation'
 import { GetEvaluations } from 'store/evaluation/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
-import { Widget, WidgetCreate as WidgetCreateType } from 'store/widget/type'
+import { WidgetCreate as WidgetCreateType, Widget } from 'store/widget/type'
 import { Evaluation } from 'store/evaluation/type'
 
 interface Props extends RouteComponentProps {
@@ -38,52 +37,37 @@ class WidgetCreate extends React.Component<Props> {
     return (
       <FadeTransition fullWidth>
         <H1 context="page">Widget erstellen</H1>
-        <Query query={GetEvaluations}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getEvaluations: Evaluation[] }
-          }): JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Kategorien konnten nicht geladen werden"
+        <QueryStateHandler
+          query={GetEvaluations}
+          queryName="getEvaluations"
+          errorMessage="Kategorien konnten nicht geladen werden"
+        >
+          {(evaluations: Evaluation[]): JSX.Element => (
+            <Mutation
+              mutation={CreateWidget}
+              onCompleted={this.handleCompleted}
+              onError={this.hanldeError}
+              update={addWidget}
+            >
+              {(
+                createWidget: ({
+                  variables,
+                }: {
+                  variables: WidgetCreateType
+                }) => void
+              ): JSX.Element => (
+                <WidgetForm
+                  mode="create"
+                  evaluations={evaluations}
+                  rootPath={rootPath}
+                  submitAction={(variables: WidgetCreateType): void =>
+                    createWidget({ variables })
+                  }
                 />
-              )
-
-            return (
-              <Mutation
-                mutation={CreateWidget}
-                onCompleted={this.handleCompleted}
-                onError={this.hanldeError}
-                update={addWidget}
-              >
-                {(
-                  createWidget: ({
-                    variables,
-                  }: {
-                    variables: WidgetCreateType
-                  }) => void
-                ): JSX.Element => (
-                  <WidgetForm
-                    mode="create"
-                    evaluations={data.getEvaluations}
-                    rootPath={rootPath}
-                    submitAction={(variables: WidgetCreateType): void =>
-                      createWidget({ variables })
-                    }
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
+              )}
+            </Mutation>
+          )}
+        </QueryStateHandler>
       </FadeTransition>
     )
   }
