@@ -14,7 +14,7 @@ const DayPlaceholer = styled(Day)`
 `
 
 const TimelineWidgetDayPlaceholder = (): JSX.Element => (
-  <DayPlaceholer>
+  <DayPlaceholer data-testid="TimelineWidgetDayPlaceholder">
     <ShortcutLoading />
     <Categories>
       <CategorySummaryPlaceholder />
