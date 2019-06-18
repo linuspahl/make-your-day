@@ -44,7 +44,6 @@ const QueryStateHandler = (props: Props): JSX.Element => {
         error?: ApolloError
         data: { [key: string]: object[] }
       }): JSX.Element => {
-        console.log(loading, error, data)
         if (loading) {
           return loadingPlaceholder ? loadingPlaceholder : <CenteredSpinner />
         }

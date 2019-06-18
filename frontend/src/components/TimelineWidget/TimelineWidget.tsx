@@ -103,7 +103,6 @@ export default class TimelineWidget extends React.Component {
         // get createdAt date and format to string
         const recordCreatedAtUnix = parseInt(record.createdAt)
         const createdAtDay = dayjs(recordCreatedAtUnix).format('YYYY-MM-DD')
-        console.log(createdAtDay)
         if (timeline[createdAtDay]) {
           // Check if an entry for the category exists
           let categoryEnry = timeline[createdAtDay].categories[categoryKey]

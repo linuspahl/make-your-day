@@ -55,8 +55,6 @@ class UserSettingsOverview extends React.Component<Props> {
                       userSettings[setting.type].value
                         ? userSettings[setting.type].value
                         : false
-
-                    console.log(setting)
                     return (
                       <Row key={setting.id} htmlFor={setting.type}>
                         {setting.title}{' '}
