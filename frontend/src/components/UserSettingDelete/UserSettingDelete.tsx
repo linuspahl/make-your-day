@@ -21,16 +21,17 @@ const UserSettingDelete = (props: Props): JSX.Element => (
     variables={{ settingId: props.setting.id }}
     onCompleted={(): void =>
       props.updateLocalStorage({
-        [props.setting.type]: JSON.parse(props.setting.defaultValue),
+        [props.setting.type]: false,
       })
     }
   >
     {(perfomMutation: () => void): JSX.Element => (
       <Checkbox
-        value={true}
-        onChange={perfomMutation}
+        id={userSetting.setting.type}
         name={userSetting.setting.title}
+        onChange={perfomMutation}
         tabIndex={1}
+        value={false}
       />
     )}
   </Mutation>
