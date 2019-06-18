@@ -1,12 +1,9 @@
 // libraries
 import * as React from 'react'
 import { Link } from 'react-router-dom'
-import { Query } from 'react-apollo'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import LogoutButton from 'shared/LogoutButton/LogoutButton'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import Row from 'shared/form/Row/Row'
@@ -19,7 +16,7 @@ import { UserSetting } from 'store/userSetting/type'
 import { Setting } from 'store/setting/type'
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate, LocalStorage } from 'types/types'
-import { ApolloError } from 'apollo-boost'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props {
   clearLocalStorage: () => void
@@ -32,62 +29,64 @@ interface Props {
 
 class UserSettingsOverview extends React.Component<Props> {
   public render(): JSX.Element {
+    const {
+      clearLocalStorage,
+      createNotificationBanner,
+      rootPath,
+      updateLocalStorage,
+      userSession,
+      userSettings,
+    } = this.props
     return (
       <FadeTransition>
         <H1 context="page">Einstellungen</H1>
-        <Query query={GetSettings}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getSettings: Setting[] }
-          }): JSX.Element | JSX.Element[] => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Angemeldete Geräte konnten nicht geladen werden"
-                />
-              )
-            // We are getting the userSettings as props
-            // Because we are just using booleans for the settings value so far, we are able to use checkboxes only
-            return data.getSettings.map(
-              (setting: Setting): JSX.Element => {
-                const isSelected = this.props.userSettings[setting.type]
-                return (
-                  <Row key={setting.id}>
-                    {setting.title}{' '}
-                    {isSelected ? (
-                      <UserSettingDelete
-                        setting={setting}
-                        updateLocalStorage={this.props.updateLocalStorage}
-                      />
-                    ) : (
-                      <UserSettingCreate
-                        setting={setting}
-                        updateLocalStorage={this.props.updateLocalStorage}
-                      />
-                    )}
-                  </Row>
-                )
-              }
+        <QueryStateHandler
+          errorMessage="Angemeldete Geräte konnten nicht geladen werden"
+          query={GetSettings}
+          queryName="getSettings"
+        >
+          {(settings: Setting[]): JSX.Element => {
+            return (
+              <React.Fragment>
+                {settings.map(
+                  (setting: Setting): JSX.Element => {
+                    const isSelected =
+                      userSettings[setting.type] &&
+                      userSettings[setting.type].value
+                        ? userSettings[setting.type].value
+                        : false
+
+                    console.log(setting)
+                    return (
+                      <Row key={setting.id} htmlFor={setting.type}>
+                        {setting.title}{' '}
+                        {isSelected ? (
+                          <UserSettingDelete
+                            setting={setting}
+                            updateLocalStorage={updateLocalStorage}
+                          />
+                        ) : (
+                          <UserSettingCreate
+                            setting={setting}
+                            updateLocalStorage={updateLocalStorage}
+                          />
+                        )}
+                      </Row>
+                    )
+                  }
+                )}
+              </React.Fragment>
             )
           }}
-        </Query>
+        </QueryStateHandler>
         <Row>
-          <Link to={`${this.props.rootPath}/sessions`}>
-            Angmeldete Geräte verwalten
-          </Link>
+          <Link to={`${rootPath}/sessions`}>Angmeldete Geräte verwalten</Link>
         </Row>
         <ActionRow>
           <LogoutButton
-            clearLocalStorage={this.props.clearLocalStorage}
-            createNotificationBanner={this.props.createNotificationBanner}
-            userSessionId={this.props.userSession.id}
+            clearLocalStorage={clearLocalStorage}
+            createNotificationBanner={createNotificationBanner}
+            userSessionId={userSession.id}
           />
         </ActionRow>
       </FadeTransition>
