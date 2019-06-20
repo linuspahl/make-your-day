@@ -1,16 +1,15 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Mutation, Query } from 'react-apollo'
+import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 // utils
 import { logError } from 'utils/utils'
 // components
 import EvaluationForm from 'components/EvaluationForm/EvaluationForm'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import H1 from 'shared/H1/H1'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 // graphql
 import { addEvaluation } from 'store/evaluation/update'
 import { CreateEvaluation } from 'store/evaluation/mutation'
@@ -41,52 +40,37 @@ class EvaluationCreate extends React.Component<Props> {
     return (
       <FadeTransition fullWidth>
         <H1 context="page">Auswertung erstellen</H1>
-        <Query query={GetCategoriesWithChildren}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            data: { getCategories: Category[] }
-            error?: ApolloError
-          }): JSX.Element[] | JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Kategorien konnten nicht geladen werden"
+        <QueryStateHandler
+          errorMessage="Kategorien konnten nicht geladen werden"
+          query={GetCategoriesWithChildren}
+          queryName="getCategories"
+        >
+          {(categories: Category[]): JSX.Element => (
+            <Mutation
+              mutation={CreateEvaluation}
+              onCompleted={this.handleCompleted}
+              onError={this.handleError}
+              update={addEvaluation}
+            >
+              {(
+                createEvaluation: ({
+                  variables,
+                }: {
+                  variables: EvaluationCreateType
+                }) => void
+              ): JSX.Element => (
+                <EvaluationForm
+                  categories={categories}
+                  mode="create"
+                  rootPath={rootPath}
+                  submitAction={(variables): void =>
+                    createEvaluation({ variables })
+                  }
                 />
-              )
-
-            return (
-              <Mutation
-                mutation={CreateEvaluation}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-                update={addEvaluation}
-              >
-                {(
-                  createEvaluation: ({
-                    variables,
-                  }: {
-                    variables: EvaluationCreateType
-                  }) => void
-                ): JSX.Element => (
-                  <EvaluationForm
-                    categories={data.getCategories}
-                    mode="create"
-                    rootPath={rootPath}
-                    submitAction={(variables): void =>
-                      createEvaluation({ variables })
-                    }
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
+              )}
+            </Mutation>
+          )}
+        </QueryStateHandler>
       </FadeTransition>
     )
   }
