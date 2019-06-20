@@ -41,7 +41,7 @@ describe('EditorWidget should', (): void => {
 
   test('update editor without error', async (): Promise<void> => {
     const createNotificationBannerStub = jest.fn()
-    const { container, getByTestId } = renderWithAppRoot(
+    const { container } = renderWithAppRoot(
       <EditorWidget
         createNotificationBanner={createNotificationBannerStub}
         widget={widget}
