@@ -9,11 +9,14 @@ import {
   Subcategory,
 } from 'store/category/type'
 // graphql
-import { CreateCategory } from 'store/category/mutation'
+import { CreateCategory, CreateSubcategory } from 'store/category/mutation'
 import {
   GetCategories,
   GetCategoriesIcon,
   GetCategoryPlainWithChildren,
+  GetCategoriesWithChildren,
+  GetCategoryWithChildren,
+  GetCategory,
 } from 'store/category/query'
 
 export const categoryPlain: CategoryPlain = {
@@ -42,7 +45,7 @@ export const subcategoryCreate: SubcategoryCreate = {
 
 export const subcategory: Subcategory = {
   ...subcategoryCreate,
-  id: 10,
+  id: 11,
   parentId: 1,
 }
 
@@ -73,6 +76,86 @@ export const createCategorySuccess = {
 export const createCategoryError = {
   ...createCategoryRequest,
   error: new Error('createCategory failed'),
+}
+
+// ## createSubcategory
+const createSubcategoryRequest = {
+  request: {
+    query: CreateSubcategory,
+    variables: categoryCreate,
+  },
+}
+export const createSubcategorySuccess = {
+  ...createSubcategoryRequest,
+  result: {
+    data: {
+      createSubcategory: category,
+    },
+  },
+}
+export const createSubcategoryError = {
+  ...createSubcategoryRequest,
+  error: new Error('createSubcategory failed'),
+}
+
+// ## getCategory
+const getCategoryRequest = {
+  request: {
+    query: GetCategory,
+    variables: { id: category.id },
+  },
+}
+export const getCategorySuccess = {
+  ...getCategoryRequest,
+  result: {
+    data: {
+      getCategory: category,
+    },
+  },
+}
+export const getCategoryError = {
+  ...createCategoryRequest,
+  error: new Error('getCategory failed'),
+}
+
+// ## getCategoryWithChildren
+const getCategoryWithChildrenRequest = {
+  request: {
+    query: GetCategoryWithChildren,
+    variables: { id: category.id },
+  },
+}
+export const getCategoryWithChildrenSuccess = {
+  ...getCategoryWithChildrenRequest,
+  result: {
+    data: {
+      getCategory: category,
+    },
+  },
+}
+export const getCategoryWithChildrenError = {
+  ...createCategoryRequest,
+  error: new Error('getCategoryWithChildren failed'),
+}
+
+// ## getCategoryPlainWithChildren
+const getCategoryPlainWithChildrenRequest = {
+  request: {
+    query: GetCategoryPlainWithChildren,
+    variables: { id: category.id },
+  },
+}
+export const getCategoryPlainWithChildrenSuccess = {
+  ...getCategoryPlainWithChildrenRequest,
+  result: {
+    data: {
+      getCategory: category,
+    },
+  },
+}
+export const getCategoryPlainWithChildrenError = {
+  ...createCategoryRequest,
+  error: new Error('getCategoryPlainWithChildren failed'),
 }
 
 // ## getCategories
@@ -113,22 +196,21 @@ export const getCategoriesIconError = {
   error: new Error('getCategoriesIcon failed'),
 }
 
-// ## getCategoryPlainWithChildren
-const getCategoryPlainWithChildrenRequest = {
+// ## getCategoriesWithChildren
+const getCategoriesWithChildrenRequest = {
   request: {
-    query: GetCategoryPlainWithChildren,
-    variables: { id: category.id },
+    query: GetCategoriesWithChildren,
   },
 }
-export const getCategoryPlainWithChildrenSuccess = {
-  ...getCategoryPlainWithChildrenRequest,
+export const getCategoriesWithChildrenSuccess = {
+  ...getCategoriesWithChildrenRequest,
   result: {
     data: {
-      getCategory: category,
+      getCategories: [category],
     },
   },
 }
-export const getCategoryPlainWithChildrenError = {
+export const getCategoriesWithChildrenError = {
   ...createCategoryRequest,
-  error: new Error('getCategoryPlainWithChildren failed'),
+  error: new Error('getCategoriesWithChildren failed'),
 }
