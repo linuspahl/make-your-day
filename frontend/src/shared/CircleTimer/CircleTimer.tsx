@@ -10,7 +10,10 @@ interface Props {
 const CircleTimer = (props: Props): JSX.Element => {
   const hasClickAction = typeof props.clickAction === 'function'
   return (
-    <Layout onClick={(): void => hasClickAction && props.clickAction()}>
+    <Layout
+      onClick={(): void => hasClickAction && props.clickAction()}
+      data-testid="CircleTimer"
+    >
       {props.children}
       <SvgWrapper>
         <SvgCircle r="18" cx="20" cy="20" />
