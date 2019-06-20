@@ -113,4 +113,15 @@ describe('CategoryForm should', (): void => {
       type: categoryTypeOptions[2].value,
     })
   })
+
+  test('use edit button as default submit button', (): void => {
+    const { getByText } = renderWithAppRoot(
+      <CategoryForm
+        {...componentProps}
+        initialData={categoryCreate}
+        submitAction={(): void => {}}
+      />
+    )
+    expect(getByText('Bearbeiten')).toBeInTheDocument()
+  })
 })
