@@ -6,11 +6,8 @@ import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
 // components
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import NoResult from 'shared/NoResult/NoResult'
 import RecordForm from 'components/RecordForm/RecordForm'
 // graphql
 import { CreateRecord } from 'store/record/mutation'
@@ -20,6 +17,7 @@ import { addRecord } from 'store/record/update'
 import { RecordCreate as RecordCreateType } from 'store/record/type'
 import { Category } from 'store/category/type'
 import { NotificationCreate } from 'types/types'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -46,70 +44,54 @@ class RecordCreate extends React.Component<Props> {
     // but clicked on the link to create another subcategory
     const queryParams: {
       createdAt?: string
-      subCategoryId?: string
+      subcategoryId?: string
     } = parseQueryParams(search)
     const {
       createdAt: createdAtParam,
-      subCategoryId: subCategoryIdParam,
+      subcategoryId: subcategoryIdParam,
     } = queryParams
 
     return (
       <FadeTransition>
         <H1>Eintrag erstellen</H1>
-        <Query query={GetCategoryWithChildren} variables={{ id: categoryId }}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getCategory: Category }
-          }): JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Kategorie konnte nicht geladen werden"
+        <QueryStateHandler
+          errorMessage="Kategorie konnte nicht geladen werden"
+          query={GetCategoryWithChildren}
+          queryName="getCategory"
+          variables={{ id: categoryId }}
+        >
+          {(category: Category): JSX.Element => (
+            <Mutation
+              mutation={CreateRecord}
+              onCompleted={this.handleCompleted}
+              onError={this.handleError}
+              update={addRecord}
+            >
+              {(
+                createRecord: ({
+                  variables,
+                }: {
+                  variables: RecordCreateType
+                }) => void
+              ): JSX.Element => (
+                <RecordForm
+                  category={category}
+                  params={{
+                    createdAt: createdAtParam,
+                    subcategoryId: subcategoryIdParam
+                      ? parseInt(subcategoryIdParam)
+                      : null,
+                  }}
+                  mode="create"
+                  rootPath={'/'}
+                  submitAction={(variables: RecordCreateType): void =>
+                    createRecord({ variables })
+                  }
                 />
-              )
-            const category = data.getCategory
-            if (!category) return <NoResult />
-
-            return (
-              <Mutation
-                mutation={CreateRecord}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-                update={addRecord}
-              >
-                {(
-                  createRecord: ({
-                    variables,
-                  }: {
-                    variables: RecordCreateType
-                  }) => void
-                ): JSX.Element => (
-                  <RecordForm
-                    category={category}
-                    params={{
-                      createdAt: createdAtParam,
-                      categoryId: subCategoryIdParam
-                        ? parseInt(subCategoryIdParam, 10)
-                        : categoryId,
-                    }}
-                    mode="create"
-                    rootPath={'/'}
-                    submitAction={(variables: RecordCreateType): void =>
-                      createRecord({ variables })
-                    }
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
+              )}
+            </Mutation>
+          )}
+        </QueryStateHandler>
       </FadeTransition>
     )
   }
