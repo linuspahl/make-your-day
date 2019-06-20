@@ -22,7 +22,7 @@
     "noImplicitAny": true,
     "outDir": "./dist/",
     "sourceMap": true,
-    "target": "es5",
+    "target": "esnext",
     "types": ["react", "jest", "node"]
   },
   "exclude": ["node_modules", "dist"],
