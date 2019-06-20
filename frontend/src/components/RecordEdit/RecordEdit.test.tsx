@@ -2,14 +2,14 @@
 import * as React from 'react'
 import * as ShallowRenderer from 'react-test-renderer/shallow'
 // components
-import RecordUpdate from './RecordEdit'
+import RecordEdit from './RecordEdit'
 
-describe('RecordUpdate should', (): void => {
+describe('RecordEdit should', (): void => {
   test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <RecordUpdate createNotificationBanner={(): void => {}}>
+      <RecordEdit createNotificationBanner={(): void => {}}>
         Page content
-      </RecordUpdate>
+      </RecordEdit>
     )
   })
 })

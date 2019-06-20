@@ -106,9 +106,10 @@ class RecordEdit extends React.Component<Props> {
                             category={category}
                             rootPath={'/'}
                             initialData={record}
-                            submitAction={(variables: RecordCreate): void =>
+                            submitAction={(variables: RecordCreate): void => {
+                              variables
                               updateRecord({ variables })
-                            }
+                            }}
                           />
                         )}
                       </Mutation>
