@@ -5,11 +5,9 @@ import {
   cleanup,
   fireEvent,
   leftClickOption,
-  Matcher,
   renderWithAppRoot,
-  SelectorMatcherOptions,
-  wait,
 } from 'testUtils'
+import initSubcategoryForm from 'components/SubcategoryForm/__tests__/initSubcategoryForm'
 // fixtures
 import { subcategoryCreate, category } from 'store/category/fixtures'
 // components
@@ -17,19 +15,6 @@ import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
 
 const componentProps = {
   rootPath: `/category/${category.id}/subcategory/create`,
-}
-
-export const initSubcategoryForm = async (
-  getByLabelText: (
-    text: Matcher,
-    options?: SelectorMatcherOptions
-  ) => HTMLElement
-): Promise<void> => {
-  // fill form
-  fireEvent.change(getByLabelText('Name'), {
-    target: { value: category.subcategories[0].title },
-  })
-  await wait()
 }
 
 describe('SubcategoryForm should', (): void => {
