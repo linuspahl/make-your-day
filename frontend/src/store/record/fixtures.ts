@@ -1,20 +1,46 @@
 // graphql
-import { Record } from 'store/record/type'
+import { Record, RecordCreate } from 'store/record/type'
 import { GetRecords } from 'store/record/query'
 // fixtures
 import { category } from 'store/category/fixtures'
+// graphql
+import { CreateRecord } from 'store/record/mutation'
 
-export const record: Record = {
-  id: 1,
+export const createRecord: RecordCreate = {
   title: 'Einrag',
   amount: 10,
-  createdAt: '1560151144',
   categoryId: category.id,
-  category: category,
   description: null,
 }
 
+export const record: Record = {
+  ...createRecord,
+  category,
+  createdAt: '1560151144',
+  id: 1,
+}
+
 // # Api stubs
+
+// ## createRecord
+const createRecordRequest = {
+  request: {
+    query: CreateRecord,
+    variables: createRecord,
+  },
+}
+export const createRecordSuccess = {
+  ...createRecordRequest,
+  result: {
+    data: {
+      createRecord: record,
+    },
+  },
+}
+export const createRecordError = {
+  ...createRecordRequest,
+  error: new Error('createRecord failed'),
+}
 
 // ## getRecords
 const getRecordsRequest = {

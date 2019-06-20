@@ -5,6 +5,7 @@ import {
   EvaluationCreate,
 } from 'store/evaluation/type'
 import { GetEvaluations, GetEvaluation } from 'store/evaluation/query'
+import { CreateEvaluation } from 'store/evaluation/mutation'
 // fixtures
 import { category } from 'store/category/fixtures'
 
@@ -45,11 +46,30 @@ export const chart: ChartType = {
 
 // # Api stubs
 
-// ## getEvaluation
+// ## createEvaluation
+const createEvaluationRequest = {
+  request: {
+    query: CreateEvaluation,
+    variables: evaluationCreate,
+  },
+}
+export const createEvaluationSuccess = {
+  ...createEvaluationRequest,
+  result: {
+    data: {
+      createEvaluation: evaluation,
+    },
+  },
+}
+export const createEvaluationError = {
+  ...createEvaluationRequest,
+  error: new Error('createEvaluation failed'),
+}
+
+// ## getEvaluations
 const getEvaluationRequest = {
   request: {
     query: GetEvaluation,
-    variables: { id: 1 },
   },
 }
 export const getEvaluationSuccess = {
