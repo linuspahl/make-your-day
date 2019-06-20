@@ -36,7 +36,18 @@ const commonConfigutation = (
             use: {
               loader: 'awesome-typescript-loader',
               options: {
-                presets: ['@babel/typescript', '@babel/react', '@babel/env'],
+                useBabel: true,
+                babelOptions: {
+                  babelrc: false /* Important line */,
+                  presets: [
+                    [
+                      '@babel/preset-env',
+                      { targets: 'last 2 versions, ie 11' },
+                    ],
+                  ],
+                },
+                babelCore: '@babel/core',
+                presets: ['@babel/typescript', '@babel/react'],
                 getCustomTransformers: (): object => ({
                   before: [getGqlTransformer.getTransformer()],
                 }),
