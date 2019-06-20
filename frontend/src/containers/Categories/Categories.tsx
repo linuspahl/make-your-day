@@ -8,7 +8,7 @@ import CategoryOverview from 'components/CategoryOverview/CategoryOverview'
 import CategoryEdit from 'components/CategoryEdit/CategoryEdit'
 import CategoryCreate from 'components/CategoryCreate/CategoryCreate'
 import RecordCreate from 'components/RecordCreate/RecordCreate'
-import RecordUpdate from 'components/RecordUpdate/RecordEdit'
+import RecordEdit from 'components/RecordEdit/RecordEdit'
 import SubcategoryOverview from 'components/SubcategoryOverview/SubcategoryOverview'
 import SubcategoryCreate from 'components/SubcategoryCreate/SubcategoryCreate'
 import SubcategoryEdit from 'components/SubcategoryEdit/SubcategoryEdit'
@@ -63,7 +63,7 @@ const Categories = (props: Props): JSX.Element => {
           exact
           path={`${rootPath}/:categoryId/records/:id/edit`}
           render={(): JSX.Element => (
-            <RecordUpdate createNotificationBanner={createNotificationBanner} />
+            <RecordEdit createNotificationBanner={createNotificationBanner} />
           )}
         />
         <Route
