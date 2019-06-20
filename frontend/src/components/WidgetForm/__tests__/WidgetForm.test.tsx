@@ -5,40 +5,17 @@ import {
   cleanup,
   fireEvent,
   leftClickOption,
-  Matcher,
   renderWithAppRoot,
-  SelectorMatcherOptions,
-  wait,
 } from 'testUtils'
-import { widgetPositionOptions, widgetTypeOptions } from 'params'
+import initWidgetForm from 'components/WidgetForm/__tests__/initWidgetForm'
 // components
-import WidgetForm from './WidgetForm'
+import WidgetForm from 'components/WidgetForm/WidgetForm'
 // fixtures
 import { widgetCreate } from 'store/widget/fixtures'
 import { evaluation } from 'store/evaluation/fixtures'
 
 const componentProps = {
   rootPath: '/widget/create',
-}
-
-export const initWidgetForm = async (
-  getByLabelText: (
-    text: Matcher,
-    options?: SelectorMatcherOptions
-  ) => HTMLElement,
-  getByText: (text: Matcher, options?: SelectorMatcherOptions) => HTMLElement
-): Promise<void> => {
-  // fill form
-  fireEvent.change(getByLabelText('Name'), {
-    target: { value: widgetCreate.title },
-  })
-  fireEvent.mouseDown(getByLabelText('Art'), leftClickOption)
-  fireEvent.click(getByText(widgetTypeOptions[0].title), leftClickOption)
-
-  fireEvent.mouseDown(getByLabelText('Position'), leftClickOption)
-  fireEvent.click(getByText(widgetPositionOptions[0].title), leftClickOption)
-
-  await wait()
 }
 
 describe('WidgetForm should', (): void => {

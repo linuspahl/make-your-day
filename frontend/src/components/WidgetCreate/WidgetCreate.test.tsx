@@ -8,9 +8,9 @@ import {
   wait,
   cleanup,
 } from 'testUtils'
+import initWidgetForm from 'components/WidgetForm/__tests__/initWidgetForm'
 // components
 import WidgetCreate from './WidgetCreate'
-import { initWidgetForm } from 'components/WidgetForm/WidgetForm.test'
 // fixtures
 import { createWidgetSuccess, createWidgetError } from 'store/widget/fixtures'
 import { getEvaluationsSuccess } from 'store/evaluation/fixtures'
@@ -29,7 +29,7 @@ describe('WidgetCreate should', (): void => {
       />,
       { mocks: [getEvaluationsSuccess, createWidgetSuccess] }
     )
-
+    await wait()
     initWidgetForm(getByLabelText, getByText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
