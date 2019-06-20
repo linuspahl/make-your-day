@@ -1,11 +1,5 @@
 // utils
-import {
-  fireEvent,
-  leftClickOption,
-  Matcher,
-  SelectorMatcherOptions,
-  wait,
-} from 'testUtils'
+import { fireEvent, Matcher, SelectorMatcherOptions, wait } from 'testUtils'
 // fixtures
 import { createRecord, record } from 'store/record/fixtures'
 

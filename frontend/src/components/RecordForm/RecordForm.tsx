@@ -22,7 +22,7 @@ interface Props {
   initialData?: RecordCreate
   params?: {
     createdAt?: RecordCreate['createdAt']
-    categoryId: RecordCreate['categoryId']
+    subcategoryId: RecordCreate['categoryId']
   }
   mode?: FormType['mode']
   rootPath: string
@@ -31,31 +31,50 @@ interface Props {
 
 export default class RecordForm extends React.Component<Props, RecordCreate> {
   public constructor(props: Props) {
+    const {
+      category,
+      mode,
+      params = { subcategoryId: null, createdAt: null },
+      initialData,
+    } = props
     super(props)
 
-    let initialCategoryId: number = props.category.id
+    let initialCategoryId: number =
+      mode === 'create'
+        ? params.subcategoryId || category.id
+        : initialData && initialData.categoryId
+        ? initialData.categoryId
+        : null
+
     if (
-      props.category.hasSubcategories &&
-      props.category.subcategories.length >= 1
+      mode === 'create' &&
+      initialCategoryId === category.id &&
+      category.hasSubcategories &&
+      category.subcategories.length >= 1
     ) {
-      initialCategoryId = props.category.subcategories[0].id
+      initialCategoryId = category.subcategories[0].id
     }
 
     // initial form values
     this.state = {
       amount: null,
       categoryId: initialCategoryId,
-      createdAt: null,
+      createdAt: mode === 'create' ? params.createdAt || null : null,
       description: null,
       title: null,
     }
+
+    // create
+    // categoryID Param
+    // categoryId can be overwritten by subcategoryid
+    //
 
     // overwrite initial values, with form props.
     // The initial data represents the full entry, used for the edit mode.
     // The params prop represents the url query params.
     // Beacuse of this usage the initialData has more priority than the query params.
     if (props.initialData || props.params) {
-      this.state = { ...this.state, ...props.params, ...props.initialData }
+      this.state = { ...this.state, ...props.initialData }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -126,9 +145,10 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
           {categoryTitle}
         </Category>
         {hasTitle && (
-          <Row>
-            Titel
+          <Row htmlFor="title">
+            Name
             <Input
+              id="title"
               name="title"
               onChange={this.handleInputChange}
               required
@@ -138,10 +158,11 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
           </Row>
         )}
         {hasSubcategories && (
-          <Row>
+          <Row htmlFor="categoryId">
             <React.Fragment>
               Unterkategorie
               <ContentSelect
+                id="categoryId"
                 name="categoryId"
                 onChange={this.handleInputChange}
                 options={subcategoryOptions}
@@ -160,9 +181,10 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
           </Row>
         )}
         {hasDescription && (
-          <Row>
+          <Row htmlFor="description">
             Beschreibung
             <Textarea
+              id="description"
               name="description"
               onChange={this.handleInputChange}
               value={description}
@@ -171,9 +193,10 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
           </Row>
         )}
         {hasUnit && (
-          <Row>
-            Anzahl ({unit})
+          <Row htmlFor="amount">
+            {`Anzahl (${unit})`}
             <Input
+              id="amount"
               name="amount"
               onChange={this.handleInputChange}
               required
