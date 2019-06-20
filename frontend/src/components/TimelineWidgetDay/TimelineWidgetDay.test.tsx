@@ -9,7 +9,6 @@ import {
   cleanup,
   fireEvent,
   leftClickOption,
-  wait,
 } from 'testUtils'
 
 describe('TimelineWidgetDay should', (): void => {

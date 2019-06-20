@@ -40,7 +40,7 @@ export default gql`
   }
 
   type Record {
-    amount: String
+    amount: Float
     category: Category!
     createdAt: String!
     description: String
@@ -138,7 +138,7 @@ export default gql`
       createdAt: String
       title: String
       description: String
-      amount: String
+      amount: Float
       categoryId: Int!
     ): Record!
     createUserSetting(settingId: Int!, value: String): UserSetting!
@@ -178,7 +178,7 @@ export default gql`
       id: Int!
       title: String
       description: String
-      amount: String
+      amount: Float
       categoryId: Int!
     ): Record!
     # Delete
