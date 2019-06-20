@@ -91,8 +91,6 @@ export default class NotificationBanner extends React.Component<{}, State> {
     // Deletes the state notification entry.
     this.setState({ notification: null })
     // And clears the timeout, that triggered this close action
-    if (this.closeCountDown) {
-      clearTimeout(this.closeCountDown)
-    }
+    clearTimeout(this.closeCountDown)
   }
 }

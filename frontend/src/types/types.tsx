@@ -89,12 +89,12 @@ export interface SelectOption {
 export interface Notification {
   createdAt: Date
   message: string
-  type: 'error' | 'success'
+  type?: 'error' | 'success'
 }
 
 export interface NotificationCreate {
   message: Notification['message']
-  type: Notification['type']
+  type?: Notification['type']
 }
 
 export interface Form {
