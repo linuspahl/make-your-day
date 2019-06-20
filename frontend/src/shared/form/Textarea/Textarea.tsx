@@ -9,6 +9,7 @@ interface Props {
   className?: string
   defaultValue?: string
   disabled?: boolean
+  id?: string
   name: string
   onBlur?: () => void
   onChange: (event: InputEvent) => void
@@ -22,9 +23,10 @@ const Textarea = (props: Props): JSX.Element => {
   const {
     className,
     disabled,
+    id,
     name,
-    onChange,
     onBlur,
+    onChange,
     placeholder,
     required,
     type,
@@ -32,9 +34,10 @@ const Textarea = (props: Props): JSX.Element => {
   } = props
   return (
     <Element
-      data-testid="Textarea"
       className={className}
+      data-testid="Textarea"
       disabled={disabled}
+      id={id}
       name={name}
       onBlur={onBlur}
       onChange={onChange}
