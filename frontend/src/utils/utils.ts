@@ -14,7 +14,11 @@ export const handleInputChange = (
 ): void => {
   const { target } = event
   const { name } = target
-  const value = target.type === 'checkbox' ? target.checked : target.value
+  let value = target.type == 'checkbox' ? target.checked : target.value
+
+  if (event.target.type == 'number') {
+    value = Number(value)
+  }
 
   changeState({
     [name]: value,
