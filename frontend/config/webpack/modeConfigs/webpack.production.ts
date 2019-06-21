@@ -1,7 +1,6 @@
-import UglifyJsPlugin from 'uglifyjs-webpack-plugin'
 import { Configuration } from 'webpack'
 import path from 'path'
-
+import TerserPlugin from 'terser-webpack-plugin'
 // Webpack settings only needed for production
 //
 // * mode - will tell webpack to use its built-in optimizations
@@ -14,22 +13,13 @@ const prodConfig = (): Configuration => ({
   output: {
     path: path.resolve(__dirname, '../../../', 'productionBuild'),
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/react', 'minify'],
-          },
-        },
-      },
-    ],
-  },
   optimization: {
-    minimizer: [new UglifyJsPlugin()],
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+      }),
+    ],
   },
 })
 
