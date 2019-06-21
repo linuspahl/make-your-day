@@ -17,10 +17,6 @@
     "test": "jest --config config/test/jestConfig.js --coverage"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@babel/preset-env": "^7.4.4",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
     "@testing-library/react": "^8.0.1",
     "@types/compression-webpack-plugin": "^2.0.0",
     "@types/copy-webpack-plugin": "^4.4.3",
@@ -34,8 +30,6 @@
     "@typescript-eslint/eslint-plugin": "^1.5.0",
     "@typescript-eslint/parser": "^1.5.0",
     "awesome-typescript-loader": "^5.2.1",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.0.1",
     "compression-webpack-plugin": "^2.0.0",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.0",
