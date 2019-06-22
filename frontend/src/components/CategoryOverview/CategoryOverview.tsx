@@ -33,7 +33,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
       <H1 context="page">Kategorien verwalten</H1>
 
       <QueryStateHandler
-        errorMessage="Andere Sitzungen konnten nicht geladen werden"
+        errorMessage="Kategorien konnten nicht geladen werden"
         query={GetCategories}
         queryName="getCategories"
       >
