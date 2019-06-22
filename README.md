@@ -225,10 +225,6 @@ This makes debugging easier, e.g. with the React Devtools
 - prettier - Code formatter, can be combined with eslint, by using eslint-plugin-prettier and eslint-config-prettier. https://prettier.io/docs/en/eslint.html
 - eslint-plugin-prettier - Runs Prettier as an ESLint rule and reports differences as individual ESLint issues.
 - eslint-config-prettier - Turns off all rules that are unnecessary or might conflict with Prettier.
-- @babel/core - will create browser friendly javascript
-- babel-core@7.0.0-bridge.0 - bridge for babel 7, needed for jest
-- @babel/preset-env - preset that allows us to use the latest JavaScript without needing to manage which syntax transforms are needed by your target environment.
-- babel-eslint - allows us to lint all valid Babel code.
 
 ### Frontend
 
@@ -239,10 +235,6 @@ This makes debugging easier, e.g. with the React Devtools
 - html-webpack-plugin - The plugin will generate an HTML5 file for you that includes all your webpack bundles in the body using script tags.
 - copy-webpack-plugin - Needed to copy e.g. public files like the favicon
 - compression-webpack-plugin - Used to compress bundle with gzip
-- babel-loader - allows transpliling JavaScript files using Babel and webpack
-- @babel/preset-react - preset needed to transform the react code.
-- babel-plugin-styled-components - will create readable names for the styled components.
-- @babel/polyfill - This will emulate a full ES2015+ environment. This means you can use new built-ins like Promise.
 - uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code.
 - typescript - to type js code
 - ts-transform-graphql-tag - needed to import gql type definitions.
@@ -266,6 +258,9 @@ This makes debugging easier, e.g. with the React Devtools
 ### Backend
 
 - @babel/node - CLI that works exactly the same as the Node.js CLI, with the added benefit of compiling with Babel presets and plugins before running it.
+- @babel/core - will create browser friendly javascript
+- @babel/preset-env - preset that allows us to use the latest JavaScript without needing to manage which syntax transforms are needed by your target environment.
+- babel-eslint - allows us to lint all valid Babel code.
 - nodemon - will restart babel-node on code changes
 - dotenv - allows us to store sensetive or envoronment specific data in an env file. The file is included in the gitignore.
 - express - Node.js web application framework that provides a set of features for web and mobile applications.
