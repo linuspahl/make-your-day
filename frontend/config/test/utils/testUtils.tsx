@@ -4,7 +4,7 @@
 
 // libraries
 import React from 'react'
-import { Router } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { MockedProvider, MockedResponse } from 'react-apollo/test-utils'
 import {
@@ -41,23 +41,48 @@ function renderWithApolloProvier(
   )
 }
 
+function renderWithRoute(
+  component: JSX.Element,
+  mockWrappingRoute: boolean,
+  routePath: string
+): JSX.Element {
+  if (mockWrappingRoute) {
+    return (
+      <Route exact path={routePath} render={(): JSX.Element => component} />
+    )
+  }
+  return component
+}
+
 function renderWithAppRoot(
   component: JSX.Element,
   {
     route = '/',
     themeProps = {},
     mocks = [],
+    mockWrappingRoute = false,
+    routePath = null,
     ...renderOptions
   }: {
+    // Is your component using a <Route> component and you want to
+    // test something inside this route?
+    // use the route prop with e.g. `/widgets/create`
     route?: string
+    // Is your component no useing a Route, but withRouter?
+    // use routePath (e.g. `/widgets/edit/:id`)
+    // in combination with route (e.g. `/widgets/edit/1`)
+    routePath?: string
     themeProps?: { [key: string]: boolean }
+    mockWrappingRoute?: boolean
     mocks?: readonly MockedResponse[]
   } = {}
 ): WrappedComponent {
   const history = createMemoryHistory({ initialEntries: [route] })
   const utils = renderWithApolloProvier(
     <ThemeProvider theme={colorTheme(themeProps)}>
-      <Router history={history}>{component}</Router>
+      <Router history={history}>
+        {renderWithRoute(component, mockWrappingRoute, routePath)}
+      </Router>
     </ThemeProvider>,
     { ...renderOptions, mocks }
   )
