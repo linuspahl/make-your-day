@@ -7,19 +7,17 @@ import { DataProxy } from 'apollo-cache'
 // utils
 import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
 // components
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import NoResult from 'shared/NoResult/NoResult'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 // graphql
 import { addSubcategory } from 'store/category/update'
 import { CreateSubcategory } from 'store/category/mutation'
 import { GetCategory } from 'store/category/query'
 // interfaces
-import { CategoryFull, CategoryCreate, Category } from 'store/category/type'
+import { CategoryCreate, Category } from 'store/category/type'
 import { NotificationCreate } from 'types/types'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -41,58 +39,40 @@ class SubcategoryCreate extends React.Component<Props> {
     return (
       <FadeTransition>
         <H1 context="page">Subkategorie erstellen</H1>
-
-        <Query query={GetCategory} variables={{ id: categoryId }}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getCategory: Category }
-          }): JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Subkategorie konnten nicht geladen werden"
+        <QueryStateHandler
+          errorMessage="Kategorie konnten nicht geladen werden"
+          query={GetCategory}
+          queryName="getCategory"
+          variables={{ id: categoryId }}
+        >
+          {(parentCategory: Category): JSX.Element => (
+            <Mutation
+              mutation={CreateSubcategory}
+              onCompleted={this.handleCompleted}
+              onError={this.handleError}
+              update={(cache: DataProxy, data: FetchResult): void =>
+                addSubcategory(cache, data, { id: categoryId })
+              }
+            >
+              {(
+                createSubcategory: ({
+                  variables,
+                }: {
+                  variables: CategoryCreate
+                }) => void
+              ): JSX.Element => (
+                <SubcategoryForm
+                  mode="create"
+                  rootPath={rootPath}
+                  submitAction={(variables: CategoryCreate): void =>
+                    createSubcategory({ variables })
+                  }
+                  parentCategory={parentCategory}
                 />
-              )
-
-            const parentCategory: CategoryFull = data.getCategory
-            if (!parentCategory) return <NoResult />
-
-            return (
-              <Mutation
-                mutation={CreateSubcategory}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-                update={(cache: DataProxy, data: FetchResult): void =>
-                  addSubcategory(cache, data, { id: categoryId })
-                }
-              >
-                {(
-                  createSubcategory: ({
-                    variables,
-                  }: {
-                    variables: CategoryCreate
-                  }) => void
-                ): JSX.Element => (
-                  <SubcategoryForm
-                    mode="create"
-                    rootPath={rootPath}
-                    submitAction={(variables: CategoryCreate): void =>
-                      createSubcategory({ variables })
-                    }
-                    parentCategory={parentCategory}
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
+              )}
+            </Mutation>
+          )}
+        </QueryStateHandler>
       </FadeTransition>
     )
   }
