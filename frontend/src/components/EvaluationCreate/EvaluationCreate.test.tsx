@@ -1,16 +1,74 @@
 // libraries
 import * as React from 'react'
-import * as ShallowRenderer from 'react-test-renderer/shallow'
+// utils
+import initEvaluationForm from 'components/EvaluationForm/__tests__/initEvaluationForm'
+import {
+  renderWithAppRoot,
+  fireEvent,
+  leftClickOption,
+  wait,
+  cleanup,
+} from 'testUtils'
 // components
 import EvaluationCreate from './EvaluationCreate'
+// fixtures
+import {
+  createEvaluationSuccess,
+  createEvaluationError,
+  evaluation,
+} from 'store/evaluation/fixtures'
+
+import { getCategoriesWithChildrenSuccess } from 'store/category/fixtures'
 
 describe('EvaluationCreate should', (): void => {
-  test('render without crashing', (): void => {
-    ShallowRenderer.createRenderer().render(
+  const propsFixture = {
+    rootPath: '/evaluation/create',
+  }
+  afterEach(cleanup)
+
+  test('show notification banner on successful create ', async (): Promise<
+    void
+  > => {
+    const createNotificationBannerStub = jest.fn()
+    const { getByLabelText, getByText } = renderWithAppRoot(
       <EvaluationCreate
-        rootPath="/"
-        createNotificationBanner={(): void => {}}
-      />
+        {...propsFixture}
+        createNotificationBanner={createNotificationBannerStub}
+      />,
+      { mocks: [createEvaluationSuccess, getCategoriesWithChildrenSuccess] }
     )
+    await wait()
+    initEvaluationForm(getByLabelText, getByText)
+    fireEvent.click(getByText('Erstellen'), leftClickOption)
+    await wait()
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
+      message: `Auswertung ${evaluation.title} erfolgreich erstellt`,
+      type: 'success',
+    })
+  })
+
+  test('show notification banner on unsuccessful create', async (): Promise<
+    void
+  > => {
+    const createNotificationBannerStub = jest.fn()
+    const { getByLabelText, getByText } = renderWithAppRoot(
+      <EvaluationCreate
+        {...propsFixture}
+        createNotificationBanner={createNotificationBannerStub}
+      />,
+      {
+        mocks: [createEvaluationError, getCategoriesWithChildrenSuccess],
+      }
+    )
+    await wait()
+    initEvaluationForm(getByLabelText, getByText)
+    fireEvent.click(getByText('Erstellen'), leftClickOption)
+    await wait()
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
+      message: 'Erstellung der Auswertung fehlgeschlagen',
+      type: 'error',
+    })
   })
 })
