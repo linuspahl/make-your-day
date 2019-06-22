@@ -21,12 +21,14 @@ interface Props {
   // variables: If you need to run the query with specific variables
   variables?: object
   loadingPlaceholder?: JSX.Element
+  ignoreEmptyResult?: boolean
 }
 
 const QueryStateHandler = (props: Props): JSX.Element => {
   const {
     children,
     errorMessage,
+    ignoreEmptyResult,
     loadingPlaceholder,
     query,
     queryName,
@@ -50,7 +52,10 @@ const QueryStateHandler = (props: Props): JSX.Element => {
         if (error) {
           return <ErrorMessage error={error} message={errorMessage} />
         }
-        if (!data[queryName] || data[queryName].length === 0) {
+        if (
+          (!ignoreEmptyResult && !data[queryName]) ||
+          data[queryName].length === 0
+        ) {
           return <NoResult />
         }
         return children(data[queryName])
