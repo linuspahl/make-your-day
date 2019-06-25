@@ -6,11 +6,9 @@ import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import NoResult from 'shared/NoResult/NoResult'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
 // graphql
 import { UpdateWidget } from 'store/widget/mutation'
@@ -41,76 +39,42 @@ class WidgetEdit extends React.Component<Props> {
     return (
       <FadeTransition fullWidth>
         <H1 context="page">Widget bearbeiten</H1>
-
-        <Query query={GetEvaluations}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getEvaluations: Evaluation[] }
-          }): JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Kategorien konnten nicht geladen werden"
-                />
-              )
-
-            const evaluations = data.getEvaluations
-            return (
-              <Query query={GetWidget} variables={{ id: widgetId }}>
-                {({
-                  loading,
-                  error,
-                  data,
-                }: {
-                  loading: boolean
-                  error?: ApolloError
-                  data: { getWidget: Widget }
-                }): JSX.Element => {
-                  if (loading) return <CenteredSpinner />
-                  if (error)
-                    return (
-                      <ErrorMessage
-                        error={error}
-                        message="Widget konnte nicht geladen werden"
-                      />
-                    )
-                  if (!data.getWidget.id) return <NoResult />
-                  return (
-                    <Mutation
-                      mutation={UpdateWidget}
-                      onCompleted={this.handleCompleted}
-                      onError={this.handleError}
-                    >
-                      {(
-                        updateUser: ({
-                          variables,
-                        }: {
-                          variables: Widget
-                        }) => void
-                      ): JSX.Element => (
-                        <WidgetForm
-                          evaluations={evaluations}
-                          initialData={data.getWidget}
-                          rootPath={rootPath}
-                          submitAction={(variables: Widget): void =>
-                            updateUser({ variables })
-                          }
-                        />
-                      )}
-                    </Mutation>
-                  )
-                }}
-              </Query>
-            )
-          }}
-        </Query>
+        <QueryStateHandler
+          query={GetEvaluations}
+          queryName="getEvaluations"
+          errorMessage="Kategorien konnten nicht geladen werden"
+          ignoreEmptyResult
+        >
+          {(evaluations?: Evaluation[]): JSX.Element => (
+            <QueryStateHandler
+              errorMessage="Widget konnte nicht geladen werden"
+              query={GetWidget}
+              queryName="getWidget"
+              variables={{ id: widgetId }}
+            >
+              {(widget: Widget): JSX.Element => (
+                <Mutation
+                  mutation={UpdateWidget}
+                  onCompleted={this.handleCompleted}
+                  onError={this.handleError}
+                >
+                  {(
+                    updateUser: ({ variables }: { variables: Widget }) => void
+                  ): JSX.Element => (
+                    <WidgetForm
+                      evaluations={evaluations}
+                      initialData={widget}
+                      rootPath={rootPath}
+                      submitAction={(variables: Widget): void =>
+                        updateUser({ variables })
+                      }
+                    />
+                  )}
+                </Mutation>
+              )}
+            </QueryStateHandler>
+          )}
+        </QueryStateHandler>
       </FadeTransition>
     )
   }
@@ -137,7 +101,7 @@ class WidgetEdit extends React.Component<Props> {
     const { createNotificationBanner } = this.props
     createNotificationBanner({
       type: 'error',
-      message: 'Bearbeitung der Widget fehlgeschlagen',
+      message: 'Bearbeitung des Widgets fehlgeschlagen',
     })
     logError(error)
   }
