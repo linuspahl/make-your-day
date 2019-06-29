@@ -21,6 +21,7 @@ const devConfig = (): Configuration => ({
   },
   devServer: {
     historyApiFallback: true,
+    https: true,
   },
 })
 
