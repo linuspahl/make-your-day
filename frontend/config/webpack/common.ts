@@ -12,8 +12,9 @@ import { WebpackConfigParams } from 'types/types'
 
 // * entry - configure entry point of the application
 // * output
-// - path - directory of the output, defined in prod and dev conf
 // - publicPath - needed to resolve bundle in sub routes
+// - chunkFilename / filename = structure how to generate file names. The hash is required, this way we can use a long max-age for the cache.
+// If the file cahnges, the hash in the name changes and the files gets fetch freshly.
 // * plugins - HtmlWebpackPlugin - needed to create the index.html with a script tag for the created JS bundle
 // * resolve / modules - will make import paths shorter
 
@@ -28,8 +29,8 @@ const commonConfigutation = (
       entry: ['./src/index.tsx'],
       output: {
         publicPath: '/',
-        filename: '[name].[hash].bundle.js',
-        chunkFilename: '[name].bundle.js',
+        filename: '[name].[hash].js',
+        chunkFilename: '[name].[hash].bundle.js',
       },
       module: {
         rules: [
