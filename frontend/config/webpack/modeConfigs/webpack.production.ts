@@ -1,9 +1,6 @@
-// Webpack settings only needed for production
-
-/* eslint-disable @typescript-eslint/no-var-requires */
-var path = require('path')
-var TerserPlugin = require('terser-webpack-plugin')
-
+import { Configuration } from 'webpack'
+import path from 'path'
+import TerserPlugin from 'terser-webpack-plugin'
 // Webpack settings only needed for production
 //
 // * mode - will tell webpack to use its built-in optimizations
@@ -11,7 +8,7 @@ var TerserPlugin = require('terser-webpack-plugin')
 // to minify the app in an elegant way (compared with the minify plugin)
 // * optimization - uglify - another useful minifyer
 
-const prodConfig = () => ({
+const prodConfig = (): Configuration => ({
   mode: 'production',
   output: {
     path: path.resolve(__dirname, '../../../', 'productionBuild'),
@@ -26,4 +23,4 @@ const prodConfig = () => ({
   },
 })
 
-module.exports = prodConfig
+export default prodConfig

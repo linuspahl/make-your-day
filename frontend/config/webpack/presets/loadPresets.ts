@@ -2,18 +2,20 @@
 // you can add any webpack configuration and load it as a preset
 // e.g. webpack-bundle-analyzer can be used with `--env.presets analyze`
 
-/* eslint-disable @typescript-eslint/no-var-requires */
-
 // libraries
-var merge = require('webpack-merge')
+import merge from 'webpack-merge'
+import { Configuration } from 'webpack'
+// interfaces
+import { WebpackConfigParams } from 'types/types'
 
-const applyPresets = env => {
+const applyPresets = (env: WebpackConfigParams): Configuration => {
   const { presets } = env
   const mergedPresets = [].concat(...[presets])
   const mergedConfigs = mergedPresets.map(
-    presetName => presetName && require(`./webpack.${presetName}`)
+    (presetName: WebpackConfigParams['mode']): Configuration =>
+      presetName && require(`./webpack.${presetName}`).default()
   )
   return merge({}, ...mergedConfigs)
 }
 
-module.exports = applyPresets
+export default applyPresets

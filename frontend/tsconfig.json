@@ -18,11 +18,12 @@
       "testUtils": ["config/test/utils/testUtils"],
       "params": ["config/params"]
     },
-    "module": "commonjs",
+    "module": "esnext",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "outDir": "./dist/",
     "sourceMap": true,
-    "target": "esnext",
+    "target": "es5",
     "types": ["react", "jest", "node"]
   },
   "exclude": ["node_modules", "dist"],
