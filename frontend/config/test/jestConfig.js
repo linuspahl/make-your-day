@@ -22,4 +22,7 @@ module.exports = {
     './config/test/utils',
   ],
   moduleFileExtensions: ['ts', 'tsx', 'js'],
+  globals: {
+    CURRENT_ENV: 'jest',
+  },
 }

@@ -1,14 +1,18 @@
-// Webpack base config
+// # Webpack base config
+// ## Typescript
+// In a perfect world, all our webpack configuration files would be written in typescript.
+// https://webpack.js.org/configuration/configuration-languages/#typescript
+// The problem is, this only works if the tsconfig module is set to commonjs.
+// Due to our dynamic imports, we need to set the module to esnext.
 
-import HtmlWebPackPlugin from 'html-webpack-plugin'
-import DotenvPlugin from 'dotenv-webpack'
-import CopyPlugin from 'copy-webpack-plugin'
-import moduleResolvers from '../moduleResolvers'
-import * as getGqlTransformer from 'ts-transform-graphql-tag'
-import { Configuration, ProgressPlugin } from 'webpack'
-import presetConfig from './presets/loadPresets'
-import merge from 'webpack-merge'
-import { WebpackConfigParams } from 'types/types'
+/* eslint-disable @typescript-eslint/no-var-requires */
+var HtmlWebPackPlugin = require('html-webpack-plugin')
+var DotenvPlugin = require('dotenv-webpack')
+var CopyPlugin = require('copy-webpack-plugin')
+var getTransformer = require('ts-transform-graphql-tag').getTransformer
+var { ProgressPlugin } = require('webpack')
+var presetConfig = require('./presets/loadPresets')
+var merge = require('webpack-merge')
 
 // * entry - configure entry point of the application
 // * output
@@ -16,18 +20,17 @@ import { WebpackConfigParams } from 'types/types'
 // - publicPath - needed to resolve bundle in sub routes
 // * plugins - HtmlWebpackPlugin - needed to create the index.html with a script tag for the created JS bundle
 // * resolve / modules - will make import paths shorter
-
-const modeConfig = (mode: WebpackConfigParams['mode']): Configuration =>
-  require(`./modeConfigs/webpack.${mode}`).default()
-
+const modeConfig = mode => require(`./modeConfigs/webpack.${mode}`)
 const commonConfigutation = (
-  { mode, presets }: WebpackConfigParams = { mode: 'production', presets: [] }
-): Configuration => {
+  { mode, presets } = { mode: 'production', presets: [] }
+) => {
   return merge(
     {
       entry: ['./src/index.tsx'],
       output: {
         publicPath: '/',
+        filename: '[name].[hash].bundle.js',
+        chunkFilename: '[name].bundle.js',
       },
       module: {
         rules: [
@@ -36,8 +39,8 @@ const commonConfigutation = (
             use: {
               loader: 'awesome-typescript-loader',
               options: {
-                getCustomTransformers: (): object => ({
-                  before: [getGqlTransformer.getTransformer()],
+                getCustomTransformers: () => ({
+                  before: [getTransformer()],
                 }),
               },
             },
@@ -72,7 +75,7 @@ const commonConfigutation = (
         new ProgressPlugin(),
       ],
       resolve: {
-        modules: moduleResolvers,
+        modules: ['./src', './node_modules', './config'],
         extensions: ['.mjs', '.js', '.ts', '.tsx'],
       },
     },
@@ -81,4 +84,4 @@ const commonConfigutation = (
   )
 }
 
-export default commonConfigutation
+module.exports = commonConfigutation
