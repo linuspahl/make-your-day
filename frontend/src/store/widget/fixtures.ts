@@ -3,6 +3,7 @@ import { GetWidgetsOverview, GetWidget, GetWidgets } from 'store/widget/query'
 import { UpdateWidget, CreateWidget } from 'store/widget/mutation'
 // interfaces
 import { Widget, WidgetCreate } from 'store/widget/type'
+import { DocumentNode } from 'graphql'
 
 export const widgetCreate: WidgetCreate = {
   title: 'Notiz 1',
@@ -50,13 +51,21 @@ export const createWidgetError = {
 const getWidgetRequest = {
   request: {
     query: GetWidget,
+    variables: { id: widget.id },
   },
 }
 export const getWidgetSuccess = {
   ...getWidgetRequest,
   result: {
     data: {
-      getWidget: widget,
+      getWidget: {
+        evaluationId: widget.evaluationId,
+        id: widget.id,
+        position: widget.position,
+        title: widget.title,
+        type: widget.type,
+        value: widget.value,
+      },
     },
   },
 }
@@ -104,17 +113,31 @@ export const getWidgetsOverviewError = {
 }
 
 // ## updateWidget
-const updateWidgetRequest = {
+// So far this is the only case where we are typing the fixture.
+// This is a workaround, because otherwise typscript would have a problmen with evaluationId: null
+const updateWidgetRequest: {
+  request: {
+    query: DocumentNode
+    variables: Widget
+  }
+} = {
   request: {
     query: UpdateWidget,
-    variables: widget,
+    variables: {
+      title: 'New Name',
+      type: 'textarea',
+      position: 'dashboard-top',
+      evaluationId: null,
+      id: 1,
+      value: 'Inhalt Notiz 1',
+    },
   },
 }
 export const updateWidgetSuccess = {
   ...updateWidgetRequest,
   result: {
     data: {
-      updateWidget: { ...widget, value: 'New widget value' },
+      updateWidget: { ...widget, title: 'New Name' },
     },
   },
 }
