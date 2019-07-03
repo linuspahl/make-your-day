@@ -66,10 +66,11 @@ export const createEvaluationError = {
   error: new Error('createEvaluation failed'),
 }
 
-// ## getEvaluations
+// ## getEvaluation
 const getEvaluationRequest = {
   request: {
     query: GetEvaluation,
+    variables: { id: evaluation.id },
   },
 }
 export const getEvaluationSuccess = {
@@ -80,6 +81,7 @@ export const getEvaluationSuccess = {
     },
   },
 }
+
 export const getEvaluationError = {
   ...getEvaluationRequest,
   error: new Error('getEvaluation failed'),
