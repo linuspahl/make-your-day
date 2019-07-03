@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Query, Mutation } from 'react-apollo'
+import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
@@ -45,35 +45,37 @@ class WidgetEdit extends React.Component<Props> {
           errorMessage="Kategorien konnten nicht geladen werden"
           ignoreEmptyResult
         >
-          {(evaluations?: Evaluation[]): JSX.Element => (
-            <QueryStateHandler
-              errorMessage="Widget konnte nicht geladen werden"
-              query={GetWidget}
-              queryName="getWidget"
-              variables={{ id: widgetId }}
-            >
-              {(widget: Widget): JSX.Element => (
-                <Mutation
-                  mutation={UpdateWidget}
-                  onCompleted={this.handleCompleted}
-                  onError={this.handleError}
-                >
-                  {(
-                    updateUser: ({ variables }: { variables: Widget }) => void
-                  ): JSX.Element => (
-                    <WidgetForm
-                      evaluations={evaluations}
-                      initialData={widget}
-                      rootPath={rootPath}
-                      submitAction={(variables: Widget): void =>
-                        updateUser({ variables })
-                      }
-                    />
-                  )}
-                </Mutation>
-              )}
-            </QueryStateHandler>
-          )}
+          {(evaluations?: Evaluation[]): JSX.Element => {
+            return (
+              <QueryStateHandler
+                errorMessage="Widget konnte nicht geladen werden"
+                query={GetWidget}
+                queryName="getWidget"
+                variables={{ id: widgetId }}
+              >
+                {(widget: Widget): JSX.Element => (
+                  <Mutation
+                    mutation={UpdateWidget}
+                    onCompleted={this.handleCompleted}
+                    onError={this.handleError}
+                  >
+                    {(
+                      updateUser: ({ variables }: { variables: Widget }) => void
+                    ): JSX.Element => (
+                      <WidgetForm
+                        evaluations={evaluations}
+                        initialData={widget}
+                        rootPath={rootPath}
+                        submitAction={(variables: Widget): void =>
+                          updateUser({ variables })
+                        }
+                      />
+                    )}
+                  </Mutation>
+                )}
+              </QueryStateHandler>
+            )
+          }}
         </QueryStateHandler>
       </FadeTransition>
     )

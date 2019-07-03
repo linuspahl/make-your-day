@@ -8,13 +8,11 @@ import {
   wait,
   cleanup,
 } from 'testUtils'
-import initWidgetForm from 'components/WidgetForm/__tests__/initWidgetForm'
 // components
 import WidgetEdit from './WidgetEdit'
 // fixtures
 import {
   updateWidgetSuccess,
-  createWidgetError,
   widget,
   getWidgetSuccess,
   updateWidgetError,
@@ -22,22 +20,26 @@ import {
 import { getEvaluationsSuccess } from 'store/evaluation/fixtures'
 
 describe('WidgetEdit should', (): void => {
+  const propsFixtures = { rootPath: '/widgets' }
+  const renderUtilsProps = {
+    mockWrappingRoute: true,
+    route: `/widgets/edit/${widget.id}`,
+    routePath: '/widgets/edit/:id',
+  }
   afterEach(cleanup)
 
   test('show notification banner on successful edit ', async (): Promise<
     void
   > => {
     const createNotificationBannerStub = jest.fn()
-    const { getByLabelText, getByText } = renderWithAppRoot(
+    const { getByText, getByLabelText } = renderWithAppRoot(
       <WidgetEdit
-        rootPath="/widgets"
+        {...propsFixtures}
         createNotificationBanner={createNotificationBannerStub}
       />,
       {
-        route: `/widgets/edit/${widget.id}`,
-        routePath: '/widgets/edit/:id',
-        mockWrappingRoute: true,
-        mocks: [getEvaluationsSuccess, updateWidgetSuccess, getWidgetSuccess],
+        ...renderUtilsProps,
+        mocks: [getEvaluationsSuccess, getWidgetSuccess, updateWidgetSuccess],
       }
     )
     // wait for getEvaluations
@@ -61,16 +63,14 @@ describe('WidgetEdit should', (): void => {
     void
   > => {
     const createNotificationBannerStub = jest.fn()
-    const { getByLabelText, getByText } = renderWithAppRoot(
+    const { getByText, getByLabelText } = renderWithAppRoot(
       <WidgetEdit
-        rootPath="/widgets"
+        {...propsFixtures}
         createNotificationBanner={createNotificationBannerStub}
       />,
       {
-        route: `/widgets/edit/${widget.id}`,
-        routePath: '/widgets/edit/:id',
-        mockWrappingRoute: true,
-        mocks: [getEvaluationsSuccess, updateWidgetError, getWidgetSuccess],
+        ...renderUtilsProps,
+        mocks: [getEvaluationsSuccess, getWidgetSuccess, updateWidgetError],
       }
     )
     // wait for getEvaluations
@@ -81,6 +81,7 @@ describe('WidgetEdit should', (): void => {
       target: { value: 'New Name' },
     })
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
+    // wait for updateWidget
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)
     expect(createNotificationBannerStub).toBeCalledWith({
