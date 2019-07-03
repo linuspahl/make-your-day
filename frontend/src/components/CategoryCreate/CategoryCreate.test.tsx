@@ -45,6 +45,37 @@ describe('CategoryCreate should', (): void => {
     })
   })
 
+  test('redirect to categories overview, if created category hasSubcategories prop is false ', async (): Promise<
+    void
+  > => {
+    const createNotificationBannerStub = jest.fn()
+    const { getByLabelText, getByText } = renderWithAppRoot(
+      <CategoryCreate
+        {...propsFixture}
+        createNotificationBanner={createNotificationBannerStub}
+      />,
+      {
+        mocks: [
+          {
+            ...createCategorySuccess,
+            result: {
+              data: {
+                createCategory: {
+                  ...createCategorySuccess.result.data.createCategory,
+                  hasSubcategories: false,
+                },
+              },
+            },
+          },
+        ],
+      }
+    )
+    initCategoryForm(getByLabelText, getByText)
+    fireEvent.click(getByText('Erstellen'), leftClickOption)
+    await wait()
+    // TODO: Test if got redirected to '/categories', currently not possible
+  })
+
   test('show notification banner on unsuccessful create', async (): Promise<
     void
   > => {

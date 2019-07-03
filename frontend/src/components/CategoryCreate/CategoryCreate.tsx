@@ -13,11 +13,11 @@ import H1 from 'shared/H1/H1'
 import { addCategory } from 'store/category/update'
 import { CreateCategory } from 'store/category/mutation'
 // interface
+import { NotificationCreate } from 'types/types'
 import {
   Category,
   CategoryCreate as CategoryCreateType,
 } from 'store/category/type'
-import { NotificationCreate } from 'types/types'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
