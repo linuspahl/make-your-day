@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Mutation, Query } from 'react-apollo'
+import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
