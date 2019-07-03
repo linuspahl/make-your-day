@@ -1,23 +1,21 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Query, Mutation } from 'react-apollo'
+import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
 import CategoryForm from 'components/CategoryForm/CategoryForm'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { UpdateCategory } from 'store/category/mutation'
 import { GetCategory } from 'store/category/query'
 // interfaces
 import { CategoryCreate, Category } from 'store/category/type'
 import { NotificationCreate } from 'types/types'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -40,50 +38,36 @@ class CategoryEdit extends React.Component<Props> {
       <FadeTransition fullWidth>
         <H1 context="page">Kategorie bearbeiten</H1>
 
-        <Query query={GetCategory} variables={{ id: categoryId }}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            data: { getCategory: Category }
-            error?: ApolloError
-          }): JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Kategorie konnte nicht geladen werden"
+        <QueryStateHandler
+          errorMessage="Kategorie konnte nicht geladen werden"
+          query={GetCategory}
+          queryName="getCategory"
+          variables={{ id: categoryId }}
+        >
+          {(category: Category): JSX.Element => (
+            <Mutation
+              mutation={UpdateCategory}
+              onCompleted={this.handleCompleted}
+              onError={this.handleError}
+            >
+              {(
+                updateCategory: ({
+                  variables,
+                }: {
+                  variables: CategoryCreate
+                }) => void
+              ): JSX.Element => (
+                <CategoryForm
+                  initialData={category}
+                  rootPath={rootPath}
+                  submitAction={(variables: CategoryCreate): void =>
+                    updateCategory({ variables })
+                  }
                 />
-              )
-            if (!data.getCategory.id) return <NoResult />
-            return (
-              <Mutation
-                mutation={UpdateCategory}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-              >
-                {(
-                  updateCategory: ({
-                    variables,
-                  }: {
-                    variables: CategoryCreate
-                  }) => void
-                ): JSX.Element => (
-                  <CategoryForm
-                    initialData={data.getCategory}
-                    rootPath={rootPath}
-                    submitAction={(variables: CategoryCreate): void =>
-                      updateCategory({ variables })
-                    }
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
+              )}
+            </Mutation>
+          )}
+        </QueryStateHandler>
       </FadeTransition>
     )
   }
