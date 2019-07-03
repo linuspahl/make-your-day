@@ -58,14 +58,7 @@ export const getWidgetSuccess = {
   ...getWidgetRequest,
   result: {
     data: {
-      getWidget: {
-        evaluationId: widget.evaluationId,
-        id: widget.id,
-        position: widget.position,
-        title: widget.title,
-        type: widget.type,
-        value: widget.value,
-      },
+      getWidget: { ...widget, evaluationId: 1 },
     },
   },
 }
@@ -125,11 +118,11 @@ const updateWidgetRequest: {
     query: UpdateWidget,
     variables: {
       title: 'New Name',
-      type: 'textarea',
-      position: 'dashboard-top',
-      evaluationId: null,
-      id: 1,
-      value: 'Inhalt Notiz 1',
+      type: widget.type,
+      position: widget.position,
+      evaluationId: 1,
+      id: widget.id,
+      value: widget.value,
     },
   },
 }
@@ -137,7 +130,10 @@ export const updateWidgetSuccess = {
   ...updateWidgetRequest,
   result: {
     data: {
-      updateWidget: { ...widget, title: 'New Name' },
+      updateWidget: {
+        ...widget,
+        title: 'New Name',
+      },
     },
   },
 }
