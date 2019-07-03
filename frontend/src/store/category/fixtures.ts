@@ -9,7 +9,11 @@ import {
   Subcategory,
 } from 'store/category/type'
 // graphql
-import { CreateCategory, CreateSubcategory } from 'store/category/mutation'
+import {
+  CreateCategory,
+  CreateSubcategory,
+  UpdateCategory,
+} from 'store/category/mutation'
 import {
   GetCategories,
   GetCategoriesIcon,
@@ -82,14 +86,14 @@ export const createCategoryError = {
 const createSubcategoryRequest = {
   request: {
     query: CreateSubcategory,
-    variables: categoryCreate,
+    variables: subcategoryCreate,
   },
 }
 export const createSubcategorySuccess = {
   ...createSubcategoryRequest,
   result: {
     data: {
-      createSubcategory: category,
+      createSubcategory: subcategory,
     },
   },
 }
@@ -105,11 +109,15 @@ const getCategoryRequest = {
     variables: { id: category.id },
   },
 }
+
 export const getCategorySuccess = {
   ...getCategoryRequest,
   result: {
     data: {
-      getCategory: category,
+      getCategory: {
+        ...categoryCreate,
+        id: 1,
+      },
     },
   },
 }
@@ -213,4 +221,30 @@ export const getCategoriesWithChildrenSuccess = {
 export const getCategoriesWithChildrenError = {
   ...createCategoryRequest,
   error: new Error('getCategoriesWithChildren failed'),
+}
+
+// ## updateCategory
+const updateCategoryRequest = {
+  request: {
+    query: UpdateCategory,
+    variables: {
+      ...categoryCreate,
+      id: 1,
+    },
+  },
+}
+export const updateCategorySuccess = {
+  ...updateCategoryRequest,
+  result: {
+    data: {
+      updateCategory: {
+        ...categoryCreate,
+        id: 1,
+      },
+    },
+  },
+}
+export const updateCategoryError = {
+  ...updateCategoryRequest,
+  error: new Error('updateWidget failed'),
 }
