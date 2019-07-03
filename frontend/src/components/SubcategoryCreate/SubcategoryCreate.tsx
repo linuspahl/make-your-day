@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Mutation, Query, FetchResult } from 'react-apollo'
+import { Mutation, FetchResult } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 import { DataProxy } from 'apollo-cache'
 // utils
