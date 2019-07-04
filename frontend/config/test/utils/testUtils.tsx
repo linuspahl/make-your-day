@@ -7,6 +7,7 @@ import React from 'react'
 import { Router, Route } from 'react-router-dom'
 import { createMemoryHistory, MemoryHistory } from 'history'
 import { MockedProvider, MockedResponse } from 'react-apollo/test-utils'
+import { ThemeProvider } from 'styled-components'
 import {
   cleanup,
   fireEvent,
@@ -16,7 +17,6 @@ import {
   SelectorMatcherOptions,
   wait,
 } from '@testing-library/react'
-import { ThemeProvider } from 'styled-components'
 // utils
 import colorTheme from 'theme'
 
