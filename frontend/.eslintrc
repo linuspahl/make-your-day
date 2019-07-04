@@ -1,16 +1,16 @@
 {
   "env": {
-    "es6": true,
-    "browser": true,
+    "es6": true, // needed to use es6 code
+    "browser": true, // needed to use e.g. `setTimeout`
     "node": true,
     "jest": true
   },
   "plugins": ["@typescript-eslint", "jest", "prettier", "react"],
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "prettier",
+    "eslint:recommended", // default rules, like 'no unused var'
+    "plugin:@typescript-eslint/recommended", // rules we need to lint typescript
+    "plugin:react/recommended", // rules we need to lint react
+    "prettier", // integration woth prettier, this part needs to be at the end
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
@@ -22,10 +22,11 @@
   },
   "settings": {
     "react": {
-      "version": "detect"
+      "version": "detect" // eslint needs to know the react version. WIth detect, it will detect it automatically
     }
   },
   "rules": {
+    // turn on errors for missing imports
     "react/prop-types": "off",
     "prettier/prettier": [
       "error",
