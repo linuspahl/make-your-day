@@ -19,7 +19,7 @@ const Form = styled.form`
 interface Props {
   initialData?: SubcategoryCreate
   mode?: FormType['mode']
-  parentCategory: CategoryFull
+  parentCategoryId: number
   rootPath: string
   submitAction: (category: SubcategoryCreate) => void
 }
@@ -34,7 +34,7 @@ export default class SubcategoryForm extends React.Component<
     // overview of all form values
     // initial state create mode
     this.state = {
-      parentId: props.parentCategory.id,
+      parentId: props.parentCategoryId,
       title: null,
     }
 

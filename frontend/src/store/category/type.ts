@@ -67,3 +67,7 @@ export interface SubcategoryCreate {
   parentId?: CategoryFull['parentId']
   title: Category['title']
 }
+
+export interface SubcategoryUpdate {
+  title: Category['title']
+}

@@ -1,23 +1,21 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { Query, Mutation } from 'react-apollo'
+import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import NoResult from 'shared/NoResult/NoResult'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
 // graphql
 import { UpdateSubcategory } from 'store/category/mutation'
-import { GetCategory } from 'store/category/query'
+import { GetSubcategory } from 'store/category/query'
 // interface
 import { NotificationCreate } from 'types/types'
-import { Category } from 'store/category/type'
+import { Category, Subcategory, SubcategoryUpdate } from 'store/category/type'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -39,54 +37,42 @@ class SubcategoryEdit extends React.Component<Props> {
     return (
       <FadeTransition>
         <H1 context="page">Subkategorie bearbeiten</H1>
-
-        <Query query={GetCategory} variables={{ id: categoryId }}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getCategory: Category }
-          }): JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Subkategorie konnte nicht geladen werden"
+        <QueryStateHandler
+          query={GetSubcategory}
+          variables={{ id: categoryId }}
+          queryName="getCategory"
+          errorMessage="Subkategorie konnte nicht geladen werden"
+        >
+          {(subcategory: Subcategory): JSX.Element => (
+            <Mutation
+              mutation={UpdateSubcategory}
+              onCompleted={this.handleCompleted}
+              onError={this.handleError}
+            >
+              {(
+                updateCategory: ({
+                  variables,
+                }: {
+                  variables: Subcategory
+                }) => void
+              ): JSX.Element => (
+                <SubcategoryForm
+                  initialData={{
+                    parentId: subcategory.parentId,
+                    title: subcategory.title,
+                  }}
+                  rootPath={rootPath}
+                  parentCategoryId={subcategory.parentId}
+                  submitAction={(variables: SubcategoryUpdate): void => {
+                    updateCategory({
+                      variables: { id: subcategory.id, title: variables.title },
+                    })
+                  }}
                 />
-              )
-            if (!data.getCategory.id) return <NoResult />
-            return (
-              <Mutation
-                mutation={UpdateSubcategory}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-              >
-                {(
-                  updateCategory: ({
-                    variables,
-                  }: {
-                    variables: Category
-                  }) => void
-                ): JSX.Element => (
-                  <SubcategoryForm
-                    initialData={data.getCategory}
-                    rootPath={rootPath}
-                    parentCategory={data.getCategory}
-                    submitAction={(variables: Category): void =>
-                      updateCategory({
-                        variables: { id: data.getCategory.id, ...variables },
-                      })
-                    }
-                  />
-                )}
-              </Mutation>
-            )
-          }}
-        </Query>
+              )}
+            </Mutation>
+          )}
+        </QueryStateHandler>
       </FadeTransition>
     )
   }

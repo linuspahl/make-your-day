@@ -13,6 +13,7 @@ import {
   CreateCategory,
   CreateSubcategory,
   UpdateCategory,
+  UpdateSubcategory,
 } from 'store/category/mutation'
 import {
   GetCategories,
@@ -21,6 +22,7 @@ import {
   GetCategoriesWithChildren,
   GetCategoryWithChildren,
   GetCategory,
+  GetSubcategory,
 } from 'store/category/query'
 
 export const categoryPlain: CategoryPlain = {
@@ -50,7 +52,6 @@ export const subcategoryCreate: SubcategoryCreate = {
 export const subcategory: Subcategory = {
   ...subcategoryCreate,
   id: 11,
-  parentId: 1,
 }
 
 export const category: CategoryFull = {
@@ -109,7 +110,6 @@ const getCategoryRequest = {
     variables: { id: category.id },
   },
 }
-
 export const getCategorySuccess = {
   ...getCategoryRequest,
   result: {
@@ -164,6 +164,22 @@ export const getCategoryPlainWithChildrenSuccess = {
 export const getCategoryPlainWithChildrenError = {
   ...createCategoryRequest,
   error: new Error('getCategoryPlainWithChildren failed'),
+}
+
+// ## getSubcategory
+const getSubcategoryRequest = {
+  request: {
+    query: GetSubcategory,
+    variables: { id: subcategory.id },
+  },
+}
+export const getSubcategorySuccess = {
+  ...getSubcategoryRequest,
+  result: {
+    data: {
+      getCategory: subcategory,
+    },
+  },
 }
 
 // ## getCategories
@@ -247,4 +263,27 @@ export const updateCategorySuccess = {
 export const updateCategoryError = {
   ...updateCategoryRequest,
   error: new Error('updateWidget failed'),
+}
+
+// ## updateSubcategory
+const updateSubcategoryRequest = {
+  request: {
+    query: UpdateSubcategory,
+    variables: { id: subcategory.id, title: 'New Name' },
+  },
+}
+export const updateSubcategorySuccess = {
+  ...updateSubcategoryRequest,
+  result: {
+    data: {
+      updateCategory: {
+        ...subcategory,
+        title: 'New Name',
+      },
+    },
+  },
+}
+export const updateSubcategoryError = {
+  ...updateSubcategoryRequest,
+  error: new Error('updateSubcategory failed'),
 }

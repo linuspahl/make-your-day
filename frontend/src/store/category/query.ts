@@ -88,3 +88,13 @@ export const GetCategoryPlainWithChildren = gql`
     }
   }
 `
+
+export const GetSubcategory = gql`
+  query GetCategory($id: Int!) {
+    getCategory(id: $id) {
+      id
+      title
+      parentId
+    }
+  }
+`

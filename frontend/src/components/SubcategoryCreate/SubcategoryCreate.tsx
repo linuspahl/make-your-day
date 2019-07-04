@@ -67,7 +67,7 @@ class SubcategoryCreate extends React.Component<Props> {
                   submitAction={(variables: CategoryCreate): void =>
                     createSubcategory({ variables })
                   }
-                  parentCategory={parentCategory}
+                  parentCategoryId={parentCategory.id}
                 />
               )}
             </Mutation>

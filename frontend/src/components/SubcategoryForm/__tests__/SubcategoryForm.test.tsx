@@ -9,7 +9,11 @@ import {
 } from 'testUtils'
 import initSubcategoryForm from 'components/SubcategoryForm/__tests__/initSubcategoryForm'
 // fixtures
-import { subcategoryCreate, category } from 'store/category/fixtures'
+import {
+  subcategoryCreate,
+  category,
+  subcategory,
+} from 'store/category/fixtures'
 // components
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
 
@@ -27,7 +31,7 @@ describe('SubcategoryForm should', (): void => {
         {...componentProps}
         mode="create"
         submitAction={submitActionStub}
-        parentCategory={category}
+        parentCategoryId={subcategory.parentId}
       />
     )
     initSubcategoryForm(getByLabelText)
@@ -45,7 +49,7 @@ describe('SubcategoryForm should', (): void => {
         initialData={subcategoryCreate}
         mode="create"
         submitAction={submitActionStub}
-        parentCategory={category}
+        parentCategoryId={subcategory.parentId}
       />
     )
     // Submit form
@@ -59,7 +63,7 @@ describe('SubcategoryForm should', (): void => {
       <SubcategoryForm
         {...componentProps}
         submitAction={(): void => {}}
-        parentCategory={category}
+        parentCategoryId={subcategory.parentId}
       />
     )
     expect(getByText('Bearbeiten')).toBeInTheDocument()
