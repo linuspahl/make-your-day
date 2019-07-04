@@ -13,7 +13,7 @@ import Row from 'shared/form/Row/Row'
 import Input from 'shared/form/Input/Input'
 // interfaces
 import { CategoryFull, Subcategory } from 'store/category/type'
-import { EvaluationCreate } from 'store/evaluation/type'
+import { EvaluationCreate, EvaluationUpdate } from 'store/evaluation/type'
 import { Form as FormType, SelectOption, InputEvent } from 'types/types'
 
 const Form = styled.form`
@@ -56,7 +56,7 @@ const generateCategoryOptions = (
 
 interface Props {
   categories: CategoryFull[]
-  initialData?: EvaluationCreate
+  initialData?: EvaluationCreate | EvaluationUpdate
   mode?: FormType['mode']
   rootPath: string
   submitAction: (evaluation: EvaluationCreate) => void
