@@ -349,6 +349,17 @@ This makes debugging easier, e.g. with the React Devtools
 - graphql - JavaScript reference implementation for GraphQL
 - apollo-server - GraphQL Server
 
-```
+## Editor Plugins
 
-```
+Recommended source-code editor plugins for the development. Available for most editors, but in every case for VS Code.
+
+Library specific
+
+- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components) - For syntax highlighting and more for styled-components. Checkout it's feature list.
+- [GraphQL for VSCode](https://marketplace.visualstudio.com/items?itemName=kumar-harsh.graphql-for-vscode) - Syntax highlighting and more for GraphQL schemas.
+
+Development experience
+
+- [Path Intellisens](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense) - Visual Studio Code plugin that autocompletes filenames.
+- [Import Cost](https://marketplace.visualstudio.com/items?itemName=wix.vscode-import-cost) - will display inline in the editor the size of the imported package
+- [Bracket Pair Colorizer 2](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2) - As the name says, colored bracket, just super useful.
