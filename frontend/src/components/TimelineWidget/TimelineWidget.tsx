@@ -25,7 +25,7 @@ interface DayEntry {
 
 const LoadingPlaceholder = (
   <PlaceholderGroup>
-    {fill(Array(3), null).map(
+    {fill(Array(7), null).map(
       (value, key): JSX.Element => {
         return <TimelineWidgetDayPlaceholder key={key} />
       }
