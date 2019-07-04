@@ -1,6 +1,5 @@
 // libraries
 import * as React from 'react'
-import { Query } from 'react-apollo'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 // utils
 import { sortBy } from 'lodash'
@@ -16,17 +15,14 @@ import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 import CategorySummary from 'shared/CategorySummary/CategorySummary'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 import H1 from 'shared/H1/H1'
 import H2 from 'shared/H2/H2'
-import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { GetRecords } from 'store/record/query'
 import { Record as RecordType } from 'store/record/type'
 import { CategoryFull } from 'store/category/type'
-import { ApolloError } from 'apollo-boost'
 
 // needed for prepareCategories function
 interface CategoryEnry extends CategoryFull {
@@ -49,7 +45,6 @@ class DayEdit extends React.Component<Props> {
         params: { date },
       },
     } = this.props
-
     return (
       <FadeTransition>
         <H1 context="page">{`Einträge ${date}`}</H1>
@@ -59,56 +54,46 @@ class DayEdit extends React.Component<Props> {
         </NewRecordSection>
         <H2>Bestehende bearbeiten</H2>
         <Records>
-          <Query query={GetRecords} variables={{ createdAt: date }}>
-            {({
-              loading,
-              error,
-              data,
-            }: {
-              loading: boolean
-              data: { getRecords: RecordType[] }
-              error?: ApolloError
-            }): JSX.Element | JSX.Element[] => {
-              if (loading) return <CenteredSpinner />
-              if (error)
-                return (
-                  <ErrorMessage
-                    error={error}
-                    message="Einträge konnten nicht geladen werden"
-                  />
-                )
-              if (data.getRecords.length === 0) return <NoResult />
-
-              const categories = this.prepareCategories(data.getRecords)
-
-              return Object.values(categories).map(
-                (category): JSX.Element => {
-                  return (
-                    <Category key={category.id}>
-                      <CategoryTitle>{category.title}</CategoryTitle>
-                      <CategoryRecords>
-                        {sortBy(category.records, 'category.id').map(
-                          (record: RecordType): React.ReactNode => (
-                            <CategorySummary
-                              amount={
-                                category.hasUnit ? Number(record.amount) : 1
-                              }
-                              category={category}
-                              displayTitle={record.category.title}
-                              key={record.id}
-                              to={`/categories/${category.id}/records/${
-                                record.id
-                              }/edit`}
-                            />
-                          )
-                        )}
-                      </CategoryRecords>
-                    </Category>
-                  )
-                }
+          <QueryStateHandler
+            errorMessage="Einträge konnten nicht geladen werden"
+            queryName="getRecords"
+            variables={{ createdAt: date }}
+            query={GetRecords}
+          >
+            {(records: RecordType[]): JSX.Element => {
+              const categories = this.prepareCategories(records)
+              return (
+                <React.Fragment>
+                  {Object.values(categories).map(
+                    (category): JSX.Element => {
+                      return (
+                        <Category key={category.id}>
+                          <CategoryTitle>{category.title}</CategoryTitle>
+                          <CategoryRecords>
+                            {sortBy(category.records, 'category.id').map(
+                              (record: RecordType): React.ReactNode => (
+                                <CategorySummary
+                                  amount={
+                                    category.hasUnit ? Number(record.amount) : 1
+                                  }
+                                  category={category}
+                                  displayTitle={record.category.title}
+                                  key={record.id}
+                                  to={`/categories/${category.id}/records/${
+                                    record.id
+                                  }/edit`}
+                                />
+                              )
+                            )}
+                          </CategoryRecords>
+                        </Category>
+                      )
+                    }
+                  )}
+                </React.Fragment>
               )
             }}
-          </Query>
+          </QueryStateHandler>
         </Records>
         <ActionRow>
           <Button to="/" context="secondary">
