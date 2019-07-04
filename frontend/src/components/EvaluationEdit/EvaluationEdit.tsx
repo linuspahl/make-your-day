@@ -2,7 +2,7 @@
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { ApolloError } from 'apollo-boost'
-import { Query, Mutation } from 'react-apollo'
+import { Mutation } from 'react-apollo'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
@@ -70,7 +70,6 @@ class EvaluationEdit extends React.Component<Props> {
                       initialData={evaluation}
                       rootPath={rootPath}
                       submitAction={(variables: EvaluationUpdate): void => {
-                        console.log(variables)
                         updateUser({ variables })
                       }}
                     />
