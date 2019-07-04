@@ -4,8 +4,12 @@ import {
   Evaluation,
   EvaluationCreate,
 } from 'store/evaluation/type'
-import { GetEvaluations, GetEvaluation } from 'store/evaluation/query'
-import { CreateEvaluation } from 'store/evaluation/mutation'
+import {
+  GetEvaluations,
+  GetEvaluation,
+  GetEvaluationUpdate,
+} from 'store/evaluation/query'
+import { CreateEvaluation, UpdateEvaluation } from 'store/evaluation/mutation'
 // fixtures
 import { category } from 'store/category/fixtures'
 
@@ -77,14 +81,50 @@ export const getEvaluationSuccess = {
   ...getEvaluationRequest,
   result: {
     data: {
-      getEvaluation: evaluation,
+      getEvaluation: {
+        id: evaluation.id,
+        title: evaluation.title,
+        categoryId: evaluation.categoryId,
+        groupSubcategories: evaluation.groupSubcategories,
+        type: evaluation.type,
+        period: evaluation.period,
+        category: {
+          title: 'title',
+        },
+        result: {
+          labels: ['w3123'],
+          datasets: {
+            label: 'label',
+            data: [1, 2],
+            backgroundColor: 'red',
+          },
+        },
+      },
     },
   },
 }
 
-export const getEvaluationError = {
-  ...getEvaluationRequest,
-  error: new Error('getEvaluation failed'),
+// getEvaluationUpdateSuccess
+const getEvaluationUpdateRequest = {
+  request: {
+    query: GetEvaluationUpdate,
+    variables: { id: evaluation.id },
+  },
+}
+export const getEvaluationUpdateSuccess = {
+  ...getEvaluationUpdateRequest,
+  result: {
+    data: {
+      getEvaluation: {
+        id: evaluation.id,
+        title: evaluation.title,
+        categoryId: evaluation.categoryId,
+        groupSubcategories: evaluation.groupSubcategories,
+        type: evaluation.type,
+        period: evaluation.period,
+      },
+    },
+  },
 }
 
 // ## getEvaluations
@@ -104,4 +144,38 @@ export const getEvaluationsSuccess = {
 export const getEvaluationsError = {
   ...getEvaluationsRequest,
   error: new Error('getEvaluations failed'),
+}
+
+// ## updateEvaluation
+const updateEvaluationRequest = {
+  request: {
+    query: UpdateEvaluation,
+    variables: {
+      id: evaluation.id,
+      title: 'New Title',
+      categoryId: evaluation.categoryId,
+      type: evaluation.type,
+      period: evaluation.period,
+      groupSubcategories: evaluation.groupSubcategories,
+    },
+  },
+}
+export const updateEvaluationSuccess = {
+  ...updateEvaluationRequest,
+  result: {
+    data: {
+      updateEvaluation: {
+        id: evaluation.id,
+        title: 'New Title',
+        categoryId: evaluation.categoryId,
+        type: evaluation.type,
+        period: evaluation.period,
+        groupSubcategories: evaluation.groupSubcategories,
+      },
+    },
+  },
+}
+export const updateEvaluationError = {
+  ...updateEvaluationRequest,
+  error: new Error('updateEvaluation failed'),
 }

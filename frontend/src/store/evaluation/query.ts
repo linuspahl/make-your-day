@@ -33,3 +33,16 @@ export const GetEvaluation = gql`
     }
   }
 `
+
+export const GetEvaluationUpdate = gql`
+  query GetEvaluationPlain($id: Int!) {
+    getEvaluation(id: $id) {
+      id
+      title
+      categoryId
+      groupSubcategories
+      type
+      period
+    }
+  }
+`

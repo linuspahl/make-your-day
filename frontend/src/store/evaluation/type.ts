@@ -24,6 +24,10 @@ export interface EvaluationCreate {
   type: 'barchart' | 'linechart' | 'piechart'
 }
 
+export interface EvaluationUpdate extends EvaluationCreate {
+  id: number
+}
+
 export type EvaluationPeriod =
   | 'day'
   | 'week'
