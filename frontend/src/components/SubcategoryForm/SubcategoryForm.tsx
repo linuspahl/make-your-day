@@ -9,7 +9,7 @@ import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Input from 'shared/form/Input/Input'
 import Button from 'shared/Button/Button'
 // interfaces
-import { SubcategoryCreate, CategoryFull } from 'store/category/type'
+import { SubcategoryCreate } from 'store/category/type'
 import { Form as FormType, InputEvent } from 'types/types'
 
 const Form = styled.form`
