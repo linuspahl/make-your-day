@@ -22,7 +22,7 @@ import { getCategoriesWithChildrenSuccess } from 'store/category/fixtures'
 
 describe('EvaluationCreate should', (): void => {
   const propsFixture = {
-    rootPath: '/evaluation/create',
+    rootPath: '/evaluations',
   }
   afterEach(cleanup)
 
