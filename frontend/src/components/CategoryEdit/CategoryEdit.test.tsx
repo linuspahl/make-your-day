@@ -46,7 +46,7 @@ describe('CategoryEdit should', (): void => {
     // Wait for getCategory
     await wait()
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
-    // wait for updateCategory
+    // Wait for updateCategory
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)
     expect(createNotificationBannerStub).toBeCalledWith({
@@ -72,7 +72,7 @@ describe('CategoryEdit should', (): void => {
     // Wait for getCategory
     await wait()
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
-    // wait for updateCategory
+    // Wait for updateCategory
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)
     expect(createNotificationBannerStub).toBeCalledWith({

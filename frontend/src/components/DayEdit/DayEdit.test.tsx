@@ -23,7 +23,7 @@ describe('DayEdit should', (): void => {
       routePath: `/timeline/:date`,
       mockWrappingRoute: true,
     })
-    // wait for getRecords
+    // Wait for getRecords
     await wait()
   })
 })

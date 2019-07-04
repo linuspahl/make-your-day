@@ -20,9 +20,9 @@ describe('EvaluationResult should', (): void => {
         routePath: '/evaluations/view/:id',
       }
     )
-    // wait for getEvaluation
+    // Wait for getEvaluation
     await wait()
-    // wait for chart to render
+    // Wait for chart to render
     await wait()
     expect(container.getElementsByClassName('ct-chart-line')).toHaveLength(1)
   })

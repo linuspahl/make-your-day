@@ -42,15 +42,15 @@ describe('WidgetEdit should', (): void => {
         mocks: [getEvaluationsSuccess, getWidgetSuccess, updateWidgetSuccess],
       }
     )
-    // wait for getEvaluations
+    // Wait for getEvaluations
     await wait()
-    // wait for getWidget
+    // Wait for getWidget
     await wait()
     fireEvent.change(getByLabelText('Name'), {
       target: { value: 'New Name' },
     })
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
-    // wait for updateWidget
+    // Wait for updateWidget
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)
     expect(createNotificationBannerStub).toBeCalledWith({
@@ -73,15 +73,15 @@ describe('WidgetEdit should', (): void => {
         mocks: [getEvaluationsSuccess, getWidgetSuccess, updateWidgetError],
       }
     )
-    // wait for getEvaluations
+    // Wait for getEvaluations
     await wait()
-    // wait for getWidget
+    // Wait for getWidget
     await wait()
     fireEvent.change(getByLabelText('Name'), {
       target: { value: 'New Name' },
     })
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
-    // wait for updateWidget
+    // Wait for updateWidget
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)
     expect(createNotificationBannerStub).toBeCalledWith({
