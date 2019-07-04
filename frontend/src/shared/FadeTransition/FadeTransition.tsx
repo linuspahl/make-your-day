@@ -10,16 +10,24 @@ interface Props {
   fullWidth?: boolean
 }
 
-const FadeTransition = (props: Props): JSX.Element => (
-  <Transition in unmountOnExit timeout={0}>
-    {(): JSX.Element => {
-      return (
-        <Wrapper fullHeight={props.fullHeight} fullWidth={props.fullWidth}>
-          {props.children}
-        </Wrapper>
-      )
-    }}
-  </Transition>
-)
+const FadeTransition = (props: Props): JSX.Element => {
+  const duration = 500
+  return (
+    <Transition in appear timeout={10} className="fadeTransition">
+      {(state: 'entering' | 'entered' | 'exiting' | 'exited'): JSX.Element => {
+        return (
+          <Wrapper
+            fullHeight={props.fullHeight}
+            fullWidth={props.fullWidth}
+            state={state}
+            duration={duration}
+          >
+            {props.children}
+          </Wrapper>
+        )
+      }}
+    </Transition>
+  )
+}
 
 export default FadeTransition
