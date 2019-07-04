@@ -9,7 +9,7 @@ import Loadable from 'react-loadable'
 // components
 import PublicRoute from '../PublicRoute/PublicRoute'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
+import LoadableCenteredSpinner from 'shared/CenteredSpinner/LoadableCenteredSpinner'
 // interfaces
 import { NotificationCreate, LocalStorageCreate } from 'types/types'
 import { UserSession } from 'store/userSession/type'
@@ -29,7 +29,7 @@ const Routes = (props: Props): JSX.Element => (
         component={Loadable({
           loader: (): Promise<any> =>
             import(/* webpackChunkName: "Login" */ 'containers/Login/Login'),
-          loading: CenteredSpinner,
+          loading: LoadableCenteredSpinner,
         })}
         createNotificationBanner={props.createNotificationBanner}
         userSession={props.userSession}
@@ -42,7 +42,7 @@ const Routes = (props: Props): JSX.Element => (
             import(
               /* webpackChunkName: "Dashboard" */ 'containers/Dashboard/Dashboard'
             ),
-          loading: CenteredSpinner,
+          loading: LoadableCenteredSpinner,
         })}
         createNotificationBanner={props.createNotificationBanner}
         exact
@@ -57,7 +57,7 @@ const Routes = (props: Props): JSX.Element => (
             import(
               /* webpackChunkName: "Settings" */ 'containers/Settings/Settings'
             ),
-          loading: CenteredSpinner,
+          loading: LoadableCenteredSpinner,
         })}
         userSession={props.userSession}
         path="/settings"
@@ -70,7 +70,7 @@ const Routes = (props: Props): JSX.Element => (
             import(
               /* webpackChunkName: "Categories" */ 'containers/Categories/Categories'
             ),
-          loading: CenteredSpinner,
+          loading: LoadableCenteredSpinner,
         })}
         createNotificationBanner={props.createNotificationBanner}
         userSession={props.userSession}
@@ -82,7 +82,7 @@ const Routes = (props: Props): JSX.Element => (
             import(
               /* webpackChunkName: "Widgets" */ 'containers/Widgets/Widgets'
             ),
-          loading: CenteredSpinner,
+          loading: LoadableCenteredSpinner,
         })}
         createNotificationBanner={props.createNotificationBanner}
         userSession={props.userSession}
@@ -94,7 +94,7 @@ const Routes = (props: Props): JSX.Element => (
             import(
               /* webpackChunkName: "Evaluations" */ 'containers/Evaluations/Evaluations'
             ),
-          loading: CenteredSpinner,
+          loading: LoadableCenteredSpinner,
         })}
         createNotificationBanner={props.createNotificationBanner}
         userSession={props.userSession}
@@ -106,7 +106,7 @@ const Routes = (props: Props): JSX.Element => (
             import(
               /* webpackChunkName: "Timeline" */ 'containers/Timeline/Timeline'
             ),
-          loading: CenteredSpinner,
+          loading: LoadableCenteredSpinner,
         })}
         userSession={props.userSession}
         path="/timeline"
@@ -118,7 +118,7 @@ const Routes = (props: Props): JSX.Element => (
             import(
               /* webpackChunkName: "PageNotFound" */ 'containers/PageNotFound/PageNotFound'
             ),
-          loading: CenteredSpinner,
+          loading: LoadableCenteredSpinner,
         })}
       />
     </Switch>
