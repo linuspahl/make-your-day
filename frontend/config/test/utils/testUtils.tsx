@@ -17,6 +17,7 @@ import {
   wait,
 } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
+// utils
 import colorTheme from 'theme'
 
 interface WrappedComponent extends RenderResult {
