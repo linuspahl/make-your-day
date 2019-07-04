@@ -7,19 +7,17 @@ import { Query, Mutation } from 'react-apollo'
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
 import EvaluationForm from 'components/EvaluationForm/EvaluationForm'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import NoResult from 'shared/NoResult/NoResult'
 // graphql
 import { UpdateEvaluation } from 'store/evaluation/mutation'
-import { GetEvaluation } from 'store/evaluation/query'
+import { GetEvaluationUpdate } from 'store/evaluation/query'
 import { GetCategoriesWithChildren } from 'store/category/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
-import { Evaluation, EvaluationCreate } from 'store/evaluation/type'
+import { Evaluation, EvaluationUpdate } from 'store/evaluation/type'
 import { CategoryFull } from 'store/category/type'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -42,75 +40,46 @@ class EvaluationEdit extends React.Component<Props> {
       <FadeTransition fullWidth>
         <H1 context="page">Auswertung bearbeiten</H1>
 
-        <Query query={GetCategoriesWithChildren}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getCategories: CategoryFull[] }
-          }): JSX.Element => {
-            if (loading) return <CenteredSpinner />
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Kategorien konnten nicht geladen werden"
-                />
-              )
-            const categories = data.getCategories
-
-            return (
-              <Query query={GetEvaluation} variables={{ id: evaluationId }}>
-                {({
-                  loading,
-                  error,
-                  data,
-                }: {
-                  loading: boolean
-                  error?: ApolloError
-                  data: { getEvaluation: Evaluation }
-                }): JSX.Element => {
-                  if (loading) return <CenteredSpinner />
-                  if (error)
-                    return (
-                      <ErrorMessage
-                        error={error}
-                        message="Auswertung konnte nicht geladen werden"
-                      />
-                    )
-                  if (!data.getEvaluation.id) return <NoResult />
-                  return (
-                    <Mutation
-                      mutation={UpdateEvaluation}
-                      onCompleted={this.handleCompleted}
-                      onError={this.handleError}
-                    >
-                      {(
-                        updateUser: ({
-                          variables,
-                        }: {
-                          variables: EvaluationCreate
-                        }) => void
-                      ): JSX.Element => (
-                        <EvaluationForm
-                          categories={categories}
-                          initialData={data.getEvaluation}
-                          rootPath={rootPath}
-                          submitAction={(variables: EvaluationCreate): void =>
-                            updateUser({ variables })
-                          }
-                        />
-                      )}
-                    </Mutation>
-                  )
-                }}
-              </Query>
-            )
-          }}
-        </Query>
+        <QueryStateHandler
+          query={GetCategoriesWithChildren}
+          queryName="getCategories"
+          errorMessage="Kategorien konnten nicht geladen werden"
+        >
+          {(categories: CategoryFull[]): JSX.Element => (
+            <QueryStateHandler
+              query={GetEvaluationUpdate}
+              variables={{ id: evaluationId }}
+              errorMessage="Auswertung konnte nicht geladen werden"
+              queryName="getEvaluation"
+            >
+              {(evaluation: Evaluation): JSX.Element => (
+                <Mutation
+                  mutation={UpdateEvaluation}
+                  onCompleted={this.handleCompleted}
+                  onError={this.handleError}
+                >
+                  {(
+                    updateUser: ({
+                      variables,
+                    }: {
+                      variables: EvaluationUpdate
+                    }) => void
+                  ): JSX.Element => (
+                    <EvaluationForm
+                      categories={categories}
+                      initialData={evaluation}
+                      rootPath={rootPath}
+                      submitAction={(variables: EvaluationUpdate): void => {
+                        console.log(variables)
+                        updateUser({ variables })
+                      }}
+                    />
+                  )}
+                </Mutation>
+              )}
+            </QueryStateHandler>
+          )}
+        </QueryStateHandler>
       </FadeTransition>
     )
   }
