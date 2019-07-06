@@ -1,3 +1,6 @@
+// libraries
+import { DocumentNode } from 'graphql'
+
 // App types
 export interface Theme {
   primary: string
@@ -108,4 +111,10 @@ type WebpackModes = 'production' | 'development'
 export interface WebpackConfigParams {
   mode: WebpackModes
   presets: WebpackPresets[]
+}
+
+// Tests
+export interface ApiStub {
+  request: { query: DocumentNode; variables: object }
+  result: { data: { [queryName: string]: object } }
 }
