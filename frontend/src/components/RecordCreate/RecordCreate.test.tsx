@@ -30,15 +30,20 @@ describe('RecordCreate should', (): void => {
     void
   > => {
     const createNotificationBannerStub = jest.fn()
-    const { getByLabelText, getByText } = renderWithAppRoot(
+    const { queryByLabelText, getByText } = renderWithAppRoot(
       <RecordCreate
         {...propsFixture}
         createNotificationBanner={createNotificationBannerStub}
       />,
-      { mocks: [createRecordSuccess, getCategoryWithChildrenSuccess] }
+      {
+        mocks: [createRecordSuccess, getCategoryWithChildrenSuccess],
+        route: `/categories/${record.categoryId}/records/create`,
+        routePath: '/categories/:categoryId/records/create',
+        mockWrappingRoute: true,
+      }
     )
     await wait()
-    initRecordForm(getByLabelText)
+    initRecordForm(queryByLabelText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)
@@ -52,17 +57,20 @@ describe('RecordCreate should', (): void => {
     void
   > => {
     const createNotificationBannerStub = jest.fn()
-    const { getByLabelText, getByText } = renderWithAppRoot(
+    const { queryByLabelText, getByText } = renderWithAppRoot(
       <RecordCreate
         {...propsFixture}
         createNotificationBanner={createNotificationBannerStub}
       />,
       {
+        route: `/categories/${record.categoryId}/records/create`,
+        routePath: '/categories/:categoryId/records/create',
+        mockWrappingRoute: true,
         mocks: [createRecordError, getCategoryWithChildrenSuccess],
       }
     )
     await wait()
-    initRecordForm(getByLabelText)
+    initRecordForm(queryByLabelText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)

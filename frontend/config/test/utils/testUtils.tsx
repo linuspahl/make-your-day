@@ -19,6 +19,8 @@ import {
 } from '@testing-library/react'
 // utils
 import colorTheme from 'theme'
+// interfaces
+import { ApiStub } from 'types/types'
 
 interface WrappedComponent extends RenderResult {
   history: MemoryHistory
@@ -109,7 +111,37 @@ const mockWindow = (): void => {
 // Custom fireEvent option (because we use them so many times)
 const leftClickOption = { button: 0 }
 
+const adjustApiStub = (
+  apiStub: ApiStub,
+  options: {
+    variables?: object
+    result?: object
+  } = {}
+): ApiStub => {
+  let adjustedStub = Object.assign({}, apiStub)
+  if (options.variables) {
+    adjustedStub = {
+      ...adjustedStub,
+      request: { ...adjustedStub.request, variables: options.variables },
+    }
+  }
+
+  if (options.result) {
+    const queryName = Object.keys(adjustedStub.result.data)[0] // e.g getWidget
+    adjustedStub = {
+      ...adjustedStub,
+      result: {
+        ...adjustedStub.result,
+        data: { [queryName]: options.result },
+      },
+    }
+  }
+
+  return adjustedStub
+}
+
 export {
+  adjustApiStub,
   cleanup,
   fireEvent,
   leftClickOption,
