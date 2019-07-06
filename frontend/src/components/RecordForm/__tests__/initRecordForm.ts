@@ -1,23 +1,33 @@
 // utils
 import { fireEvent, Matcher, SelectorMatcherOptions, wait } from 'testUtils'
 // fixtures
-import { createRecord, record } from 'store/record/fixtures'
+import { recordCreate, record } from 'store/record/fixtures'
 
 export default async function initRecordForm(
-  getByLabelText: (
+  queryByLabelText: (
     text: Matcher,
     options?: SelectorMatcherOptions
   ) => HTMLElement
 ): Promise<void> {
   // fill form
-  fireEvent.change(getByLabelText('Name'), {
-    target: { value: createRecord.title },
-  })
-  fireEvent.change(getByLabelText('Beschreibung'), {
-    target: { value: createRecord.description },
-  })
-  fireEvent.change(getByLabelText(`Anzahl (${record.category.unit})`), {
-    target: { value: createRecord.amount },
-  })
+  const nameInput = queryByLabelText('Name')
+  const descriptionInput = queryByLabelText('Beschreibung')
+  const amountInput = queryByLabelText(`Anzahl (${record.category.unit})`)
+
+  if (nameInput) {
+    fireEvent.change(nameInput, {
+      target: { value: recordCreate.title },
+    })
+  }
+  if (descriptionInput) {
+    fireEvent.change(descriptionInput, {
+      target: { value: recordCreate.description },
+    })
+  }
+  if (amountInput) {
+    fireEvent.change(amountInput, {
+      target: { value: recordCreate.amount },
+    })
+  }
   await wait()
 }
