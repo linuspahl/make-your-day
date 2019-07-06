@@ -10,7 +10,7 @@ export const addEvaluation = (cache: DataProxy, result: FetchResult): void => {
     data: { createEvaluation },
   } = result
   // Only add a new entry to the store, when there are already entries defined.
-  // Otherwise the the overview list will not get fetched
+  // Otherwise the overview list will not get fetched
   try {
     const evaluations: {
       getEvaluations: Evaluation[]

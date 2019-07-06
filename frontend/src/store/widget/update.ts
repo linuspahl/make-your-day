@@ -7,7 +7,7 @@ import { Widget } from 'store/widget/type'
 
 export const addWidget = (cache: DataProxy, result: FetchResult): void => {
   // Only add a new entry to the store, when there are already entries defined.
-  // Otherwise the the overview list will not get fetched
+  // Otherwise the overview list will not get fetched
   try {
     const widgets: {
       getWidgets: Widget[]
