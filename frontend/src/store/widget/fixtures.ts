@@ -117,23 +117,21 @@ const updateWidgetRequest: {
   request: {
     query: UpdateWidget,
     variables: {
-      title: 'New Name',
+      title: widget.title,
       type: widget.type,
       position: widget.position,
       evaluationId: 1,
       id: widget.id,
-      value: widget.value,
+      value: 'Inhalt Notiz 1',
     },
   },
 }
+
 export const updateWidgetSuccess = {
   ...updateWidgetRequest,
   result: {
     data: {
-      updateWidget: {
-        ...widget,
-        title: 'New Name',
-      },
+      updateWidget: widget,
     },
   },
 }
