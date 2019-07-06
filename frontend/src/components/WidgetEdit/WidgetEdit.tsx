@@ -42,7 +42,7 @@ class WidgetEdit extends React.Component<Props> {
         <QueryStateHandler
           query={GetEvaluations}
           queryName="getEvaluations"
-          errorMessage="Kategorien konnten nicht geladen werden"
+          errorMessage="Auswertungen konnten nicht geladen werden"
           ignoreEmptyResult
         >
           {(evaluations?: Evaluation[]): JSX.Element => {
