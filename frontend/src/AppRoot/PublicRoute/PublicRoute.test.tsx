@@ -26,7 +26,7 @@ describe('PublicRoute should', (): void => {
   })
 
   test('redirect, when no userSession is provided', (): void => {
-    const { getByText } = renderWithAppRoot(
+    const { queryByText } = renderWithAppRoot(
       <Switch>
         <PublicRoute
           component={(): JSX.Element => <div>{children}</div>}
@@ -37,6 +37,6 @@ describe('PublicRoute should', (): void => {
       </Switch>,
       { route: '/dashboard' }
     )
-    expect(getByText(children)).not.toBeInTheDocument()
+    expect(queryByText(children)).not.toBeInTheDocument()
   })
 })
