@@ -1,4 +1,6 @@
-export default (category, args, { models }) =>
-  models.Category.findOne({
-    where: { id: category.parentId },
-  })
+export default (category, args, { loaders }) => {
+  if (category.parentId) {
+    return loaders.category.load(category.parentId)
+  }
+  return null
+}
