@@ -8,13 +8,13 @@ import { gql } from 'apollo-server-express'
 export default gql`
   # model representations
   type User {
-    id: Int!
+    id: ID!
     username: String!
     role: String!
   }
 
   type Login {
-    id: Int!
+    id: ID!
     username: String!
     token: String
     role: String!
@@ -29,8 +29,8 @@ export default gql`
     hasTitle: Boolean
     hasUnit: Boolean
     icon: String
-    id: Int!
-    parentId: Int
+    id: ID!
+    parentId: ID
     parent: Category
     title: String
     type: String!
@@ -44,16 +44,16 @@ export default gql`
     category: Category!
     createdAt: String!
     description: String
-    id: Int!
+    id: ID!
     title: String
     user: User!
   }
 
   type Evaluation {
-    id: Int!
+    id: ID!
     title: String!
     user: User!
-    categoryId: Int!
+    categoryId: ID!
     category: Category!
     groupSubcategories: Boolean!
     type: String!
@@ -73,28 +73,28 @@ export default gql`
   }
 
   type Setting {
-    id: Int!
+    id: ID!
     title: String!
     type: String!
     defaultValue: String!
   }
 
   type UserSetting {
-    id: Int!
+    id: ID!
     value: String
     user: User!
     setting: Setting!
   }
 
   type UserSession {
-    id: Int!
+    id: ID!
     device: String!
     expiresAt: String!
     createdAt: String!
   }
 
   type UserSessionCreate {
-    id: Int!
+    id: ID!
     device: String!
     expiresAt: String!
     createdAt: String!
@@ -102,9 +102,9 @@ export default gql`
   }
 
   type Widget {
-    id: Int!
+    id: ID!
     evaluation: Evaluation
-    evaluationId: Int
+    evaluationId: ID
     user: User!
     title: String!
     type: String!
@@ -117,7 +117,7 @@ export default gql`
     # Create
     createEvaluation(
       title: String!
-      categoryId: Int!
+      categoryId: ID!
       groupSubcategories: Boolean
       type: String!
       period: String
@@ -133,27 +133,27 @@ export default gql`
       type: String!
       unit: String
     ): Category!
-    createSubcategory(title: String!, parentId: Int!): Category!
+    createSubcategory(title: String!, parentId: ID!): Category!
     createRecord(
       createdAt: String
       title: String
       description: String
       amount: Float
-      categoryId: Int!
+      categoryId: ID!
     ): Record!
-    createUserSetting(settingId: Int!, value: String): UserSetting!
+    createUserSetting(settingId: ID!, value: String): UserSetting!
     createWidget(
       title: String!
       type: String!
       value: String
-      evaluationId: Int
+      evaluationId: ID
       position: String!
     ): Widget!
     # Update
     updateEvaluation(
-      id: Int!
+      id: ID!
       title: String!
-      categoryId: Int!
+      categoryId: ID!
       groupSubcategories: Boolean
       type: String!
       period: String
@@ -163,39 +163,39 @@ export default gql`
       hasDescription: Boolean
       hasTitle: Boolean
       icon: String
-      id: Int!
+      id: ID!
       title: String
       unit: String
     ): Category!
     updateWidget(
-      id: Int!
+      id: ID!
       title: String!
       type: String!
       value: String
       position: String!
     ): Widget!
     updateRecord(
-      id: Int!
+      id: ID!
       title: String
       description: String
       amount: Float
-      categoryId: Int!
+      categoryId: ID!
     ): Record!
     # Delete
-    deleteUserSetting(settingId: Int!): Boolean
-    deleteUserSession(id: Int!): Boolean
-    deleteCategory(id: Int!): Boolean
-    deleteWidget(id: Int!): Boolean
-    deleteRecord(id: Int!): Boolean
-    deleteEvaluation(id: Int!): Boolean
+    deleteUserSetting(settingId: ID!): Boolean
+    deleteUserSession(id: ID!): Boolean
+    deleteCategory(id: ID!): Boolean
+    deleteWidget(id: ID!): Boolean
+    deleteRecord(id: ID!): Boolean
+    deleteEvaluation(id: ID!): Boolean
   }
 
   type Query {
     getCategories(parentsOnly: Boolean): [Category]!
-    getCategory(id: Int!): Category!
+    getCategory(id: ID!): Category!
     getEvaluations: [Evaluation]!
-    getEvaluation(id: Int!): Evaluation!
-    getRecord(id: Int!): Record!
+    getEvaluation(id: ID!): Evaluation!
+    getRecord(id: ID!): Record!
     getRecords(
       createdAt: String
       createdAtFrom: String
@@ -203,7 +203,7 @@ export default gql`
     ): [Record]!
     getSettings: [Setting]!
     getUserSessions: [UserSession]!
-    getWidget(id: Int!): Widget!
+    getWidget(id: ID!): Widget!
     getWidgets: [Widget]!
   }
 `
