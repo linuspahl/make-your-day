@@ -1,4 +1,2 @@
-export default (evaluation, args, { models }) =>
-  models.Category.findOne({
-    where: { id: evaluation.categoryId },
-  })
+export default (evaluation, args, { loaders }) =>
+  loaders.category.load(evaluation.categoryId)

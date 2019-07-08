@@ -1,7 +1,5 @@
-export default (parent, args, { models, currentUser }) =>
-  models.Category.findOne({
-    where: { id: args.parentId, userId: currentUser.id },
-  }).then(
+export default (parent, args, { models, loaders, currentUser }) =>
+  loaders.category.load(args.parentId).then(
     category =>
       category &&
       models.Category.create({

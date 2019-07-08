@@ -17,10 +17,11 @@ export default new ApolloServer({
       },
     } = req
     const token = authorization !== 'null' ? authorization : null
+    const currentUser = token ? await models.User.findByToken(token) : null
     return {
       models,
-      currentUser: token ? await models.User.findByToken(token) : null,
-      loaders: loaders(models),
+      currentUser,
+      loaders: loaders(models, currentUser),
     }
   },
   playground: {
