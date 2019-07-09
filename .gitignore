@@ -9,3 +9,6 @@ node_modules
 
 # Avoid macOS finder files
 .DS_Store
+
+# VS Code
+.vscode/settings.json
