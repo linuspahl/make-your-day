@@ -1,7 +1,7 @@
 // utils
 import { fireEvent, Matcher, SelectorMatcherOptions, wait } from 'testUtils'
 // fixtures
-import { recordCreate, record } from 'store/record/fixtures'
+import { createRecord, record } from 'store/record/fixtures'
 
 export default async function initRecordForm(
   queryByLabelText: (
@@ -16,17 +16,17 @@ export default async function initRecordForm(
 
   if (nameInput) {
     fireEvent.change(nameInput, {
-      target: { value: recordCreate.title },
+      target: { value: createRecord.title },
     })
   }
   if (descriptionInput) {
     fireEvent.change(descriptionInput, {
-      target: { value: recordCreate.description },
+      target: { value: createRecord.description },
     })
   }
   if (amountInput) {
     fireEvent.change(amountInput, {
-      target: { value: recordCreate.amount },
+      target: { value: createRecord.amount },
     })
   }
   await wait()

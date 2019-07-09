@@ -13,7 +13,7 @@ import {
 import RecordForm from 'components/RecordForm/RecordForm'
 // fixtures
 import { category } from 'store/category/fixtures'
-import { recordCreate, record } from 'store/record/fixtures'
+import { createRecord, record } from 'store/record/fixtures'
 
 const componentProps = {
   rootPath: `/category/${record.category.id}/record/create`,
@@ -52,7 +52,7 @@ describe('RecordForm should', (): void => {
     await wait()
     expect(submitActionStub).toBeCalledTimes(1)
     expect(submitActionStub).toBeCalledWith({
-      ...recordCreate,
+      ...createRecord,
       createdAt: record.createdAt,
     })
   })
