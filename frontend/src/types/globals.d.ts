@@ -3,7 +3,7 @@ declare module '*.jpg' {
   export = fileName
 }
 
-// We are using jest-dom/extend-expect for our test suit
+// We are using @testing-library/jest-dom/extend-expect for our test suit
 // When using this library in every tests,
 // typescript will extend the types correctly
 // When using it with setupFilesAfterEnv (like we do)
