@@ -29,7 +29,7 @@ export const Layout = styled(Box)<LayoutProps>`
       }) and (orientation: landscape) {
         flex-direction: column;
 
-        height: auto;
+        height: 100%;
         padding: 20px 10px;
 
         white-space: normal;

@@ -6,14 +6,15 @@ import { ApolloError } from 'apollo-boost'
 // components
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 import DashboardWidgets from 'components/DashboardWidgets/DashboardWidgets'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import PageLayout from 'components/PageLayout/PageLayout'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import { GetWidgets } from 'store/widget/query'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
 // interfaces
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate } from 'types/types'
 import { Widget } from 'store/widget/type'
+// graphql
+import { GetWidgets } from 'store/widget/query'
 
 export const Layout = styled.div`
   height: 100%;
@@ -41,7 +42,6 @@ const Dashboard = (props: Props): JSX.Element => (
     rootPath={props.rootPath}
     noPadding
   >
-    <FadeTransition fullHeight fullWidth>
       <Layout role="main">
         <Query query={GetWidgets}>
           {({
@@ -71,23 +71,28 @@ const Dashboard = (props: Props): JSX.Element => (
 
             return (
               <React.Fragment>
-                <DashboardWidgets
-                  createNotificationBanner={props.createNotificationBanner}
-                  loading={loading}
-                  widgets={widgetsDashboardTop}
-                />
-                <CategoryIconOverview context="horizontal-scroll" />
-                <DashboardWidgets
-                  createNotificationBanner={props.createNotificationBanner}
-                  loading={loading}
-                  widgets={widgetsDashboardBottom}
-                />
+                <FadeTransition delay={100} fullHeight fullWidth>
+                  <DashboardWidgets
+                    createNotificationBanner={props.createNotificationBanner}
+                    loading={loading}
+                    widgets={widgetsDashboardTop}
+                  />
+                </FadeTransition>
+                <FadeTransition delay={300} fullHeight fullWidth>
+                  <CategoryIconOverview context="horizontal-scroll" />
+                </FadeTransition>
+                <FadeTransition delay={600} fullHeight fullWidth>
+                  <DashboardWidgets
+                    createNotificationBanner={props.createNotificationBanner}
+                    loading={loading}
+                    widgets={widgetsDashboardBottom}
+                  />
+                </FadeTransition>
               </React.Fragment>
             )
           }}
         </Query>
       </Layout>
-    </FadeTransition>
   </PageLayout>
 )
 

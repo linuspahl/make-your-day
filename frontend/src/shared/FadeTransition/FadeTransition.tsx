@@ -8,12 +8,14 @@ interface Props {
   children: React.ReactNode
   fullHeight?: boolean
   fullWidth?: boolean
+  delay?: number
 }
 
 const FadeTransition = (props: Props): JSX.Element => {
   const duration = 500
+  const delay = props.delay || 0;
   return (
-    <Transition in appear timeout={10} className="fadeTransition">
+    <Transition in appear timeout={0} className="fadeTransition">
       {(state: 'entering' | 'entered' | 'exiting' | 'exited'): JSX.Element => {
         return (
           <Wrapper
@@ -21,6 +23,7 @@ const FadeTransition = (props: Props): JSX.Element => {
             fullWidth={props.fullWidth}
             state={state}
             duration={duration}
+            delay={delay}
           >
             {props.children}
           </Wrapper>
