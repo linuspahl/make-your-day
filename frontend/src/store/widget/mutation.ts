@@ -7,7 +7,7 @@ export const CreateWidget = gql`
     $type: String!
     $value: String
     $position: String!
-    $evaluationId: Int
+    $evaluationId: ID
   ) {
     createWidget(
       value: $value
@@ -26,7 +26,7 @@ export const CreateWidget = gql`
 
 export const UpdateWidget = gql`
   mutation UpdateWidget(
-    $id: Int!
+    $id: ID!
     $title: String!
     $type: String!
     $value: String
@@ -49,7 +49,7 @@ export const UpdateWidget = gql`
 `
 
 export const DeleteWidget = gql`
-  mutation DeleteWidget($id: Int!) {
+  mutation DeleteWidget($id: ID!) {
     deleteWidget(id: $id)
   }
 `

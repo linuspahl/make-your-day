@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 export const CreateRecord = gql`
   mutation CreateRecord(
     $amount: Float
-    $categoryId: Int!
+    $categoryId: ID!
     $description: String
     $title: String
     $createdAt: String
@@ -36,9 +36,9 @@ export const CreateRecord = gql`
 
 export const UpdateRecord = gql`
   mutation UpdateRecord(
-    $id: Int!
+    $id: ID!
     $amount: Float
-    $categoryId: Int!
+    $categoryId: ID!
     $description: String
     $title: String
   ) {
@@ -67,7 +67,7 @@ export const UpdateRecord = gql`
 `
 
 export const DeleteRecord = gql`
-  mutation DeleteRecord($id: Int!) {
+  mutation DeleteRecord($id: ID!) {
     deleteRecord(id: $id)
   }
 `

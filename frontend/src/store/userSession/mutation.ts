@@ -25,7 +25,7 @@ export const LoginUser = gql`
 `
 
 export const DeleteUserSession = gql`
-  mutation DeleteUserSession($id: Int!) {
+  mutation DeleteUserSession($id: ID!) {
     deleteUserSession(id: $id)
   }
 `

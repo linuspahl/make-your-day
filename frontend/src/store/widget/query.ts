@@ -2,7 +2,7 @@
 import gql from 'graphql-tag'
 
 export const GetWidget = gql`
-  query GetWidget($id: Int!) {
+  query GetWidget($id: ID!) {
     getWidget(id: $id) {
       evaluationId
       id

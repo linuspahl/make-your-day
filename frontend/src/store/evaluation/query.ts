@@ -11,7 +11,7 @@ export const GetEvaluations = gql`
 `
 
 export const GetEvaluation = gql`
-  query GetEvaluation($id: Int!) {
+  query GetEvaluation($id: ID!) {
     getEvaluation(id: $id) {
       id
       title
@@ -35,7 +35,7 @@ export const GetEvaluation = gql`
 `
 
 export const GetEvaluationUpdate = gql`
-  query GetEvaluationPlain($id: Int!) {
+  query GetEvaluationPlain($id: ID!) {
     getEvaluation(id: $id) {
       id
       title

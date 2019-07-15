@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 export const CreateEvaluation = gql`
   mutation CreateEvaluation(
     $title: String!
-    $categoryId: Int!
+    $categoryId: ID!
     $type: String!
     $period: String!
     $groupSubcategories: Boolean
@@ -28,9 +28,9 @@ export const CreateEvaluation = gql`
 
 export const UpdateEvaluation = gql`
   mutation UpdateEvaluation(
-    $id: Int!
+    $id: ID!
     $title: String!
-    $categoryId: Int!
+    $categoryId: ID!
     $type: String!
     $period: String!
     $groupSubcategories: Boolean
@@ -54,7 +54,7 @@ export const UpdateEvaluation = gql`
 `
 
 export const DeleteEvaluation = gql`
-  mutation DeleteEvaluation($id: Int!) {
+  mutation DeleteEvaluation($id: ID!) {
     deleteEvaluation(id: $id)
   }
 `

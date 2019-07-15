@@ -40,7 +40,7 @@ export const GetRecords = gql`
 `
 
 export const GetRecord = gql`
-  query GetRecord($id: Int!) {
+  query GetRecord($id: ID!) {
     getRecord(id: $id) {
       id
       title

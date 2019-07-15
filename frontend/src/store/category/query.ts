@@ -38,7 +38,7 @@ export const GetCategoriesIcon = gql`
   }
 `
 export const GetCategory = gql`
-  query GetCategory($id: Int!) {
+  query GetCategory($id: ID!) {
     getCategory(id: $id) {
       color
       hasDescription
@@ -55,7 +55,7 @@ export const GetCategory = gql`
 `
 
 export const GetCategoryWithChildren = gql`
-  query GetCategoryWithChildren($id: Int!) {
+  query GetCategoryWithChildren($id: ID!) {
     getCategory(id: $id) {
       color
       hasDescription
@@ -76,7 +76,7 @@ export const GetCategoryWithChildren = gql`
 `
 
 export const GetCategoryPlainWithChildren = gql`
-  query GetCategoryPlainWithChildren($id: Int!) {
+  query GetCategoryPlainWithChildren($id: ID!) {
     getCategory(id: $id) {
       hasSubcategories
       id
@@ -90,7 +90,7 @@ export const GetCategoryPlainWithChildren = gql`
 `
 
 export const GetSubcategory = gql`
-  query GetCategory($id: Int!) {
+  query GetCategory($id: ID!) {
     getCategory(id: $id) {
       id
       title
