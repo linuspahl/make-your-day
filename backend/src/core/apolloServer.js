@@ -11,7 +11,6 @@ export default new ApolloServer({
   typeDefs,
   resolvers,
   context: async req => {
-    console.log('NEW REQUEST!!!!!')
     const {
       req: {
         headers: { authorization },
