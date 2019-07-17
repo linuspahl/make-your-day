@@ -39,6 +39,9 @@ const commonConfigutation = (
             use: {
               loader: 'awesome-typescript-loader',
               options: {
+                useCache: true,
+                cacheDirectory: './config/webpack/.atl-cache',
+                forceIsolatedModules: true,
                 getCustomTransformers: (): object => ({
                   before: [getGqlTransformer.getTransformer()],
                 }),

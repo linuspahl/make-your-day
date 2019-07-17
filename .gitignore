@@ -4,7 +4,7 @@
 # Should not be a part of the project, because it contains sensitiv and env specific data
 .env
 
-# Node modules needs to be fresh installed for every machine
+# Node modules needs to be freshly installed for every machine
 node_modules
 
 # Avoid macOS finder files
@@ -12,3 +12,6 @@ node_modules
 
 # VS Code
 .vscode/settings.json
+
+# TypeScript loader cache
+.atl-cache/
