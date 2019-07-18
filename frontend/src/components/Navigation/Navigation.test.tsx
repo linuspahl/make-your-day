@@ -13,10 +13,8 @@ describe('Navigation should', (): void => {
     const { getByText } = renderWithAppRoot(
       <Navigation toggleAction={(): void => {}} rootPath="/" />
     )
-    navigationItems.forEach(
-      (navItem): void => {
-        expect(getByText(navItem.title)).toBeInTheDocument()
-      }
-    )
+    navigationItems.forEach((navItem): void => {
+      expect(getByText(navItem.title)).toBeInTheDocument()
+    })
   })
 })

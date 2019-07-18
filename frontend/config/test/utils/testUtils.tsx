@@ -95,17 +95,15 @@ function renderWithAppRoot(
 
 // Custom mock functions
 const mockWindow = (): void => {
-  window.matchMedia = jest.fn().mockImplementation(
-    (query: string): object => {
-      return {
-        matches: false,
-        media: query,
-        onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-      }
+  window.matchMedia = jest.fn().mockImplementation((query: string): object => {
+    return {
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(),
+      removeListener: jest.fn(),
     }
-  )
+  })
 }
 
 // Custom fireEvent option (because we use them so many times)

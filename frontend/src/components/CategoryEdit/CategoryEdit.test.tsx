@@ -22,9 +22,7 @@ describe('CategoryEdit should', (): void => {
   const renderUtilsProps = {
     mocks: [getCategorySuccess, updateCategorySuccess],
     mockWrappingRoute: true,
-    route: `/categories/edit/${
-      updateCategorySuccess.result.data.updateCategory.id
-    }`,
+    route: `/categories/edit/${updateCategorySuccess.result.data.updateCategory.id}`,
     routePath: '/categories/edit/:id',
   }
   const propsFixture = {

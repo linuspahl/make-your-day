@@ -79,9 +79,7 @@ class DayEdit extends React.Component<Props> {
                                   category={category}
                                   displayTitle={record.category.title}
                                   key={record.id}
-                                  to={`/categories/${category.id}/records/${
-                                    record.id
-                                  }/edit`}
+                                  to={`/categories/${category.id}/records/${record.id}/edit`}
                                 />
                               )
                             )}
@@ -106,26 +104,24 @@ class DayEdit extends React.Component<Props> {
 
   private prepareCategories(records: RecordType[] = []): CategoryEnry[] {
     const categories: { [key: string]: CategoryEnry } = {}
-    records.forEach(
-      (record): void => {
-        const category = record.category.parent || record.category
-        const categoryKey = `${category.id}`
-        let categoryEnry = categories[categoryKey]
+    records.forEach((record): void => {
+      const category = record.category.parent || record.category
+      const categoryKey = `${category.id}`
+      let categoryEnry = categories[categoryKey]
 
-        if (categoryEnry) {
-          categoryEnry = {
-            ...category,
-            records: [...categoryEnry.records, record],
-          }
-        } else {
-          categoryEnry = {
-            ...category,
-            records: [record],
-          }
+      if (categoryEnry) {
+        categoryEnry = {
+          ...category,
+          records: [...categoryEnry.records, record],
         }
-        categories[categoryKey] = categoryEnry
+      } else {
+        categoryEnry = {
+          ...category,
+          records: [record],
+        }
       }
-    )
+      categories[categoryKey] = categoryEnry
+    })
     return Object.values(categories)
   }
 }

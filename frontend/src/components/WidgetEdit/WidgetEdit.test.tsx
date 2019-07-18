@@ -42,12 +42,10 @@ describe('WidgetEdit should', (): void => {
     evaluationId: 1,
   }
 
-  afterEach(
-    (): void => {
-      cleanup()
-      propsFixtures.createNotificationBanner = jest.fn()
-    }
-  )
+  afterEach((): void => {
+    cleanup()
+    propsFixtures.createNotificationBanner = jest.fn()
+  })
 
   test('show notification banner on successful edit ', async (): Promise<
     void

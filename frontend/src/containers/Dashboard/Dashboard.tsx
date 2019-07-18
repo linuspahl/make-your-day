@@ -42,57 +42,57 @@ const Dashboard = (props: Props): JSX.Element => (
     rootPath={props.rootPath}
     noPadding
   >
-      <Layout role="main">
-        <Query query={GetWidgets}>
-          {({
-            loading,
-            error,
-            data,
-          }: {
-            loading: boolean
-            error?: ApolloError
-            data: { getWidgets: Widget[] }
-          }): JSX.Element => {
-            if (error)
-              return (
-                <ErrorMessage
-                  error={error}
-                  message="Widgets konnten nicht geladen werden"
-                />
-              )
-
-            const widgets: Widget[] = data.getWidgets || []
-            let widgetsDashboardTop = widgets.filter(
-              (widget): boolean => widget.position === 'dashboard-top'
-            )
-            let widgetsDashboardBottom = widgets.filter(
-              (widget): boolean => widget.position === 'dashboard-bottom'
-            )
-
+    <Layout role="main">
+      <Query query={GetWidgets}>
+        {({
+          loading,
+          error,
+          data,
+        }: {
+          loading: boolean
+          error?: ApolloError
+          data: { getWidgets: Widget[] }
+        }): JSX.Element => {
+          if (error)
             return (
-              <React.Fragment>
-                <FadeTransition delay={100} fullHeight fullWidth>
-                  <DashboardWidgets
-                    createNotificationBanner={props.createNotificationBanner}
-                    loading={loading}
-                    widgets={widgetsDashboardTop}
-                  />
-                </FadeTransition>
-                <FadeTransition delay={300} fullHeight fullWidth>
-                  <CategoryIconOverview context="horizontal-scroll" />
-                </FadeTransition>
-                <FadeTransition delay={600} fullHeight fullWidth>
-                  <DashboardWidgets
-                    createNotificationBanner={props.createNotificationBanner}
-                    loading={loading}
-                    widgets={widgetsDashboardBottom}
-                  />
-                </FadeTransition>
-              </React.Fragment>
+              <ErrorMessage
+                error={error}
+                message="Widgets konnten nicht geladen werden"
+              />
             )
-          }}
-        </Query>
-      </Layout>
+
+          const widgets: Widget[] = data.getWidgets || []
+          let widgetsDashboardTop = widgets.filter(
+            (widget): boolean => widget.position === 'dashboard-top'
+          )
+          let widgetsDashboardBottom = widgets.filter(
+            (widget): boolean => widget.position === 'dashboard-bottom'
+          )
+
+          return (
+            <React.Fragment>
+              <FadeTransition delay={100} fullHeight fullWidth>
+                <DashboardWidgets
+                  createNotificationBanner={props.createNotificationBanner}
+                  loading={loading}
+                  widgets={widgetsDashboardTop}
+                />
+              </FadeTransition>
+              <FadeTransition delay={300} fullHeight fullWidth>
+                <CategoryIconOverview context="horizontal-scroll" />
+              </FadeTransition>
+              <FadeTransition delay={600} fullHeight fullWidth>
+                <DashboardWidgets
+                  createNotificationBanner={props.createNotificationBanner}
+                  loading={loading}
+                  widgets={widgetsDashboardBottom}
+                />
+              </FadeTransition>
+            </React.Fragment>
+          )
+        }}
+      </Query>
+    </Layout>
   </PageLayout>
 )
 

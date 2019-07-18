@@ -9,11 +9,9 @@ import TimelineWidget from './TimelineWidget'
 import { getRecordsSuccess, record } from 'store/record/fixtures'
 
 describe('TimelineWidget should', (): void => {
-  beforeEach(
-    (): void => {
-      MockDate.set(new Date(parseInt(record.createdAt)))
-    }
-  )
+  beforeEach((): void => {
+    MockDate.set(new Date(parseInt(record.createdAt)))
+  })
   afterEach(cleanup)
 
   test('display timeline day', async (): Promise<void> => {

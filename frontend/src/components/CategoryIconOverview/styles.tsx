@@ -24,9 +24,7 @@ export const Layout = styled(Box)<LayoutProps>`
       white-space: nowrap;
       z-index: ${props.theme.layerIndex.protrudeContent}
 
-      @media (min-width: ${
-        props.theme.mediaQuery.tablet
-      }) and (orientation: landscape) {
+      @media (min-width: ${props.theme.mediaQuery.tablet}) and (orientation: landscape) {
         flex-direction: column;
 
         height: 100%;
@@ -59,9 +57,7 @@ export const IconWrapper = styled.div<IconWrapperProps>`
   ${(props): string =>
     props.context === 'horizontal-scroll'
       ? `
-      @media (min-width: ${
-        props.theme.mediaQuery.tablet
-      }) and (orientation: landscape) {
+      @media (min-width: ${props.theme.mediaQuery.tablet}) and (orientation: landscape) {
         margin-right: 0;
         margin-bottom: 10px;
         &:last-child {

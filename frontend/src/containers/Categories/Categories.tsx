@@ -3,7 +3,6 @@ import * as React from 'react'
 import { Route } from 'react-router-dom'
 // components
 import PageLayout from 'components/PageLayout/PageLayout'
-import ContentBox from 'shared/ContentBox/ContentBox'
 import CategoryOverview from 'components/CategoryOverview/CategoryOverview'
 import CategoryEdit from 'components/CategoryEdit/CategoryEdit'
 import CategoryCreate from 'components/CategoryCreate/CategoryCreate'
@@ -68,9 +67,7 @@ const Categories = (props: Props): JSX.Element => {
       <Route
         exact
         path={`${rootPath}/:id/subcategories`}
-        render={(): JSX.Element => (
-          <SubcategoryOverview rootPath={rootPath} />
-        )}
+        render={(): JSX.Element => <SubcategoryOverview rootPath={rootPath} />}
       />
       <Route
         exact

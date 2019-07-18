@@ -32,17 +32,15 @@ const generateEvaluationOptions = (
 ): SelectOption[] => {
   let evaluationOptions: SelectOption[] = []
 
-  evaluations.forEach(
-    (evaluation): void => {
-      evaluationOptions = [
-        ...evaluationOptions,
-        {
-          value: evaluation.id,
-          title: evaluation.title,
-        },
-      ]
-    }
-  )
+  evaluations.forEach((evaluation): void => {
+    evaluationOptions = [
+      ...evaluationOptions,
+      {
+        value: evaluation.id,
+        title: evaluation.title,
+      },
+    ]
+  })
 
   return evaluationOptions
 }

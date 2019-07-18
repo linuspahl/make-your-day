@@ -13,7 +13,7 @@ export const Wrapper = styled.div<WrapperProps>`
   opacity: 0;
   will-change: opacity;
   transition: opacity ${(props): number => props.duration}ms ease-in;
-  transition-delay: ${props => props.delay}ms;
+  transition-delay: ${(props): number => props.delay}ms;
   ${(props): string => {
     switch (props.state) {
       case 'entered':

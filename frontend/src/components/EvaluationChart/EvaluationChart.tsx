@@ -9,8 +9,8 @@ import Piechart from 'shared/chart/Piechart/Piechart'
 import { Evaluation } from 'store/evaluation/type'
 
 const formatLabels = (labels: string[] = []): string[] => {
-  return labels.map(
-    (label): string => dayjs(label, 'YYYY-MM-DD').format('dd DD.')
+  return labels.map((label): string =>
+    dayjs(label, 'YYYY-MM-DD').format('dd DD.')
   )
 }
 

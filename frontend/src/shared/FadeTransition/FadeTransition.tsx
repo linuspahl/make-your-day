@@ -13,7 +13,7 @@ interface Props {
 
 const FadeTransition = (props: Props): JSX.Element => {
   const duration = 500
-  const delay = props.delay || 0;
+  const delay = props.delay || 0
   return (
     <Transition in appear timeout={0} className="fadeTransition">
       {(state: 'entering' | 'entered' | 'exiting' | 'exited'): JSX.Element => {

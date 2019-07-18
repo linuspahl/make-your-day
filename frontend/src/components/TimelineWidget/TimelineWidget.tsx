@@ -95,33 +95,31 @@ export default class TimelineWidget extends React.Component {
       }
     }
 
-    records.forEach(
-      (record): void => {
-        const { category: recordCategory } = record
-        const category = recordCategory.parent || recordCategory
-        const categoryKey = `${category.id}`
-        // get createdAt date and format to string
-        const recordCreatedAtUnix = parseInt(record.createdAt)
-        const createdAtDay = dayjs(recordCreatedAtUnix).format('YYYY-MM-DD')
-        if (timeline[createdAtDay]) {
-          // Check if an entry for the category exists
-          let categoryEnry = timeline[createdAtDay].categories[categoryKey]
-          if (!categoryEnry) {
-            // If no entry exists, create one and set the amount of the record
-            categoryEnry = {
-              ...category,
-              recordAmountSum: this.getRecordAmount(record, category),
-            }
-          } else {
-            // Otherwise only sum up the record amount
-            categoryEnry.recordAmountSum =
-              categoryEnry.recordAmountSum +
-              this.getRecordAmount(record, category)
+    records.forEach((record): void => {
+      const { category: recordCategory } = record
+      const category = recordCategory.parent || recordCategory
+      const categoryKey = `${category.id}`
+      // get createdAt date and format to string
+      const recordCreatedAtUnix = parseInt(record.createdAt)
+      const createdAtDay = dayjs(recordCreatedAtUnix).format('YYYY-MM-DD')
+      if (timeline[createdAtDay]) {
+        // Check if an entry for the category exists
+        let categoryEnry = timeline[createdAtDay].categories[categoryKey]
+        if (!categoryEnry) {
+          // If no entry exists, create one and set the amount of the record
+          categoryEnry = {
+            ...category,
+            recordAmountSum: this.getRecordAmount(record, category),
           }
-          timeline[createdAtDay].categories[categoryKey] = categoryEnry
+        } else {
+          // Otherwise only sum up the record amount
+          categoryEnry.recordAmountSum =
+            categoryEnry.recordAmountSum +
+            this.getRecordAmount(record, category)
         }
+        timeline[createdAtDay].categories[categoryKey] = categoryEnry
       }
-    )
+    })
 
     return timeline
   }

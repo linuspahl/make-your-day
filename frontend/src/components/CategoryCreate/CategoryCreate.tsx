@@ -18,7 +18,7 @@ import {
   Category,
   CategoryCreate as CategoryCreateType,
 } from 'store/category/type'
-import ContentBox from 'shared/ContentBox/ContentBox';
+import ContentBox from 'shared/ContentBox/ContentBox'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void

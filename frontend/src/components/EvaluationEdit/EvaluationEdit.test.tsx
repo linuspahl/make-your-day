@@ -30,12 +30,10 @@ describe('EvaluationEdit should', (): void => {
     rootPath: '/evaluations',
     createNotificationBanner: jest.fn(),
   }
-  afterEach(
-    (): void => {
-      cleanup()
-      propsFixture.createNotificationBanner = jest.fn()
-    }
-  )
+  afterEach((): void => {
+    cleanup()
+    propsFixture.createNotificationBanner = jest.fn()
+  })
 
   test('show notification banner on successful create ', async (): Promise<
     void

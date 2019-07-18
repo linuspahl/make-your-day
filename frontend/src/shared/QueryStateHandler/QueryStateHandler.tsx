@@ -48,7 +48,13 @@ const QueryStateHandler = (props: Props): JSX.Element => {
         data: { [key: string]: object[] }
       }): JSX.Element => {
         if (loading) {
-          return loadingPlaceholder ? loadingPlaceholder : <LoadingSpinner hasDelay><CenteredSpinner /></LoadingSpinner>
+          return loadingPlaceholder ? (
+            loadingPlaceholder
+          ) : (
+            <LoadingSpinner hasDelay>
+              <CenteredSpinner />
+            </LoadingSpinner>
+          )
         }
         if (error) {
           return <ErrorMessage error={error} message={errorMessage} />

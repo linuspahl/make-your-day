@@ -68,9 +68,7 @@ describe('SubcategoryCreate should', (): void => {
       />,
       {
         ...renderUtilsProps,
-        route: `/category/${
-          category.id
-        }/subcategories/create?source=createRecord`,
+        route: `/category/${category.id}/subcategories/create?source=createRecord`,
         mocks: [getCategorySuccess, createSubcategorySuccess],
       }
     )

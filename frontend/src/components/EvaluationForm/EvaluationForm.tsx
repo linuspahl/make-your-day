@@ -25,31 +25,27 @@ const generateCategoryOptions = (
 ): SelectOption[] => {
   let categoryOptions: SelectOption[] = []
 
-  categories.forEach(
-    (category): void => {
-      categoryOptions = [
-        ...categoryOptions,
-        {
-          value: category.id,
-          title: category.title,
-        },
-      ]
+  categories.forEach((category): void => {
+    categoryOptions = [
+      ...categoryOptions,
+      {
+        value: category.id,
+        title: category.title,
+      },
+    ]
 
-      if (category.subcategories) {
-        category.subcategories.forEach(
-          (subcategory: Subcategory): void => {
-            categoryOptions = [
-              ...categoryOptions,
-              {
-                value: subcategory.id,
-                title: `${category.title} -> ${subcategory.title}`,
-              },
-            ]
-          }
-        )
-      }
+    if (category.subcategories) {
+      category.subcategories.forEach((subcategory: Subcategory): void => {
+        categoryOptions = [
+          ...categoryOptions,
+          {
+            value: subcategory.id,
+            title: `${category.title} -> ${subcategory.title}`,
+          },
+        ]
+      })
     }
-  )
+  })
 
   return categoryOptions
 }

@@ -6,7 +6,7 @@ import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
-import ContentBox from 'shared/ContentBox/ContentBox';
+import ContentBox from 'shared/ContentBox/ContentBox'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
