@@ -10,6 +10,7 @@ import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
 import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
+import ContentBox from 'shared/ContentBox/ContentBox'
 // graphql
 import { addWidget } from 'store/widget/update'
 import { CreateWidget } from 'store/widget/mutation'
@@ -35,40 +36,42 @@ class WidgetCreate extends React.Component<Props> {
   public render(): JSX.Element {
     const { rootPath } = this.props
     return (
-      <FadeTransition fullWidth>
-        <H1 context="page">Widget erstellen</H1>
-        <QueryStateHandler
-          query={GetEvaluations}
-          queryName="getEvaluations"
-          errorMessage="Kategorien konnten nicht geladen werden"
-        >
-          {(evaluations: Evaluation[]): JSX.Element => (
-            <Mutation
-              mutation={CreateWidget}
-              onCompleted={this.handleCompleted}
-              onError={this.hanldeError}
-              update={addWidget}
-            >
-              {(
-                createWidget: ({
-                  variables,
-                }: {
-                  variables: WidgetCreateType
-                }) => void
-              ): JSX.Element => (
-                <WidgetForm
-                  mode="create"
-                  evaluations={evaluations}
-                  rootPath={rootPath}
-                  submitAction={(variables: WidgetCreateType): void =>
-                    createWidget({ variables })
-                  }
-                />
-              )}
-            </Mutation>
-          )}
-        </QueryStateHandler>
-      </FadeTransition>
+      <QueryStateHandler
+        query={GetEvaluations}
+        queryName="getEvaluations"
+        errorMessage="Kategorien konnten nicht geladen werden"
+      >
+        {(evaluations: Evaluation[]): JSX.Element => (
+          <FadeTransition fullWidth>
+            <ContentBox role="main">
+              <H1 context="page">Widget erstellen</H1>
+              <Mutation
+                mutation={CreateWidget}
+                onCompleted={this.handleCompleted}
+                onError={this.hanldeError}
+                update={addWidget}
+              >
+                {(
+                  createWidget: ({
+                    variables,
+                  }: {
+                    variables: WidgetCreateType
+                  }) => void
+                ): JSX.Element => (
+                  <WidgetForm
+                    mode="create"
+                    evaluations={evaluations}
+                    rootPath={rootPath}
+                    submitAction={(variables: WidgetCreateType): void =>
+                      createWidget({ variables })
+                    }
+                  />
+                )}
+              </Mutation>
+            </ContentBox>
+          </FadeTransition>
+        )}
+      </QueryStateHandler>
     )
   }
 

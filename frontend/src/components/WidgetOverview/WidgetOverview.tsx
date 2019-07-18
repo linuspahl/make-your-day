@@ -8,6 +8,7 @@ import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
+import ContentBox from 'shared/ContentBox/ContentBox'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 import H1 from 'shared/H1/H1'
 import H2 from 'shared/H2/H2'
@@ -55,17 +56,17 @@ const WidgetOverview = (props: Props): JSX.Element => {
   const { rootPath } = props
 
   return (
-    <FadeTransition fullWidth>
-      <H1 context="page">Widgets verwalten</H1>
-      <QueryStateHandler
-        errorMessage="Widgets konnten nicht geladen werden"
-        query={GetWidgetsOverview}
-        queryName="getWidgets"
-      >
-        {(widgets: Widget[]): JSX.Element => {
-          const widgetsByPosition = sortWidgetsByPosition(widgets)
-          return (
-            <React.Fragment>
+    <QueryStateHandler
+      errorMessage="Widgets konnten nicht geladen werden"
+      query={GetWidgetsOverview}
+      queryName="getWidgets"
+    >
+      {(widgets: Widget[]): JSX.Element => {
+        const widgetsByPosition = sortWidgetsByPosition(widgets)
+        return (
+          <FadeTransition fullWidth>
+            <ContentBox role="main">
+              <H1 context="page">Widgets verwalten</H1>
               {Object.keys(widgetsByPosition).map(
                 (position): JSX.Element => {
                   const positionOption = widgetPositionOptions.find(
@@ -89,17 +90,16 @@ const WidgetOverview = (props: Props): JSX.Element => {
                   )
                 }
               )}
-            </React.Fragment>
-          )
-        }}
-      </QueryStateHandler>
-
-      <ActionRow>
-        <Button context="primary" to={`${rootPath}/create`}>
-          Widget erstellen
-        </Button>
-      </ActionRow>
-    </FadeTransition>
+              <ActionRow>
+                <Button context="primary" to={`${rootPath}/create`}>
+                  Widget erstellen
+                </Button>
+              </ActionRow>
+            </ContentBox>
+          </FadeTransition>
+        )
+      }}
+    </QueryStateHandler>
   )
 }
 

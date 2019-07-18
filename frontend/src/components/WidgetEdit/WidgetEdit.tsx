@@ -6,9 +6,10 @@ import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
+import ContentBox from 'shared/ContentBox/ContentBox'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
+import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
 // graphql
 import { UpdateWidget } from 'store/widget/mutation'
@@ -38,45 +39,51 @@ class WidgetEdit extends React.Component<Props> {
 
     return (
       <FadeTransition fullWidth>
-        <H1 context="page">Widget bearbeiten</H1>
-        <QueryStateHandler
-          query={GetEvaluations}
-          queryName="getEvaluations"
-          errorMessage="Auswertungen konnten nicht geladen werden"
-          ignoreEmptyResult
-        >
-          {(evaluations?: Evaluation[]): JSX.Element => {
-            return (
-              <QueryStateHandler
-                errorMessage="Widget konnte nicht geladen werden"
-                query={GetWidget}
-                queryName="getWidget"
-                variables={{ id: widgetId }}
-              >
-                {(widget: Widget): JSX.Element => (
-                  <Mutation
-                    mutation={UpdateWidget}
-                    onCompleted={this.handleCompleted}
-                    onError={this.handleError}
-                  >
-                    {(
-                      updateUser: ({ variables }: { variables: Widget }) => void
-                    ): JSX.Element => (
-                      <WidgetForm
-                        evaluations={evaluations}
-                        initialData={widget}
-                        rootPath={rootPath}
-                        submitAction={(variables: Widget): void =>
-                          updateUser({ variables })
-                        }
-                      />
-                    )}
-                  </Mutation>
-                )}
-              </QueryStateHandler>
-            )
-          }}
-        </QueryStateHandler>
+        <ContentBox role="main">
+          <H1 context="page">Widget bearbeiten</H1>
+          <QueryStateHandler
+            query={GetEvaluations}
+            queryName="getEvaluations"
+            errorMessage="Auswertungen konnten nicht geladen werden"
+            ignoreEmptyResult
+          >
+            {(evaluations?: Evaluation[]): JSX.Element => {
+              return (
+                <QueryStateHandler
+                  errorMessage="Widget konnte nicht geladen werden"
+                  query={GetWidget}
+                  queryName="getWidget"
+                  variables={{ id: widgetId }}
+                >
+                  {(widget: Widget): JSX.Element => (
+                    <Mutation
+                      mutation={UpdateWidget}
+                      onCompleted={this.handleCompleted}
+                      onError={this.handleError}
+                    >
+                      {(
+                        updateUser: ({
+                          variables,
+                        }: {
+                          variables: Widget
+                        }) => void
+                      ): JSX.Element => (
+                        <WidgetForm
+                          evaluations={evaluations}
+                          initialData={widget}
+                          rootPath={rootPath}
+                          submitAction={(variables: Widget): void =>
+                            updateUser({ variables })
+                          }
+                        />
+                      )}
+                    </Mutation>
+                  )}
+                </QueryStateHandler>
+              )
+            }}
+          </QueryStateHandler>
+        </ContentBox>
       </FadeTransition>
     )
   }
