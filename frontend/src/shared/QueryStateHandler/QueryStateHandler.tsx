@@ -5,6 +5,7 @@ import * as React from 'react'
 import { ApolloError, DocumentNode } from 'apollo-boost'
 import { Query } from 'react-apollo'
 // components
+import LoadingSpinner from 'shared/LoadingSpinner/LoadingSpinner'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
@@ -47,7 +48,7 @@ const QueryStateHandler = (props: Props): JSX.Element => {
         data: { [key: string]: object[] }
       }): JSX.Element => {
         if (loading) {
-          return loadingPlaceholder ? loadingPlaceholder : <CenteredSpinner />
+          return loadingPlaceholder ? loadingPlaceholder : <LoadingSpinner hasDelay><CenteredSpinner /></LoadingSpinner>
         }
         if (error) {
           return <ErrorMessage error={error} message={errorMessage} />
