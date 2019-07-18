@@ -26,74 +26,72 @@ const Categories = (props: Props): JSX.Element => {
   const { createNotificationBanner, userSession, rootPath } = props
   return (
     <PageLayout userSession={userSession} rootPath={rootPath}>
-      <ContentBox role="main">
-        <Route
-          exact
-          path={rootPath}
-          render={(): JSX.Element => <CategoryOverview rootPath={rootPath} />}
-        />
-        <Route
-          exact
-          path={`${rootPath}/create`}
-          render={(): JSX.Element => (
-            <CategoryCreate
-              createNotificationBanner={createNotificationBanner}
-              rootPath={rootPath}
-            />
-          )}
-        />
-        <Route
-          exact
-          path={`${rootPath}/edit/:id`}
-          render={(): JSX.Element => (
-            <CategoryEdit
-              createNotificationBanner={createNotificationBanner}
-              rootPath={rootPath}
-            />
-          )}
-        />
-        <Route
-          exact
-          path={`${rootPath}/:categoryId/records/create`}
-          render={(): JSX.Element => (
-            <RecordCreate createNotificationBanner={createNotificationBanner} />
-          )}
-        />
-        <Route
-          exact
-          path={`${rootPath}/:categoryId/records/:id/edit`}
-          render={(): JSX.Element => (
-            <RecordEdit createNotificationBanner={createNotificationBanner} />
-          )}
-        />
-        <Route
-          exact
-          path={`${rootPath}/:id/subcategories`}
-          render={(): JSX.Element => (
-            <SubcategoryOverview rootPath={rootPath} />
-          )}
-        />
-        <Route
-          exact
-          path={`${rootPath}/:id/subcategories/create`}
-          render={(): JSX.Element => (
-            <SubcategoryCreate
-              createNotificationBanner={createNotificationBanner}
-              rootPath={rootPath}
-            />
-          )}
-        />
-        <Route
-          exact
-          path={`${rootPath}/:categoryId/subcategories/:id/edit`}
-          render={(): JSX.Element => (
-            <SubcategoryEdit
-              createNotificationBanner={createNotificationBanner}
-              rootPath={rootPath}
-            />
-          )}
-        />
-      </ContentBox>
+      <Route
+        exact
+        path={rootPath}
+        render={(): JSX.Element => <CategoryOverview rootPath={rootPath} />}
+      />
+      <Route
+        exact
+        path={`${rootPath}/create`}
+        render={(): JSX.Element => (
+          <CategoryCreate
+            createNotificationBanner={createNotificationBanner}
+            rootPath={rootPath}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={`${rootPath}/edit/:id`}
+        render={(): JSX.Element => (
+          <CategoryEdit
+            createNotificationBanner={createNotificationBanner}
+            rootPath={rootPath}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={`${rootPath}/:categoryId/records/create`}
+        render={(): JSX.Element => (
+          <RecordCreate createNotificationBanner={createNotificationBanner} />
+        )}
+      />
+      <Route
+        exact
+        path={`${rootPath}/:categoryId/records/:id/edit`}
+        render={(): JSX.Element => (
+          <RecordEdit createNotificationBanner={createNotificationBanner} />
+        )}
+      />
+      <Route
+        exact
+        path={`${rootPath}/:id/subcategories`}
+        render={(): JSX.Element => (
+          <SubcategoryOverview rootPath={rootPath} />
+        )}
+      />
+      <Route
+        exact
+        path={`${rootPath}/:id/subcategories/create`}
+        render={(): JSX.Element => (
+          <SubcategoryCreate
+            createNotificationBanner={createNotificationBanner}
+            rootPath={rootPath}
+          />
+        )}
+      />
+      <Route
+        exact
+        path={`${rootPath}/:categoryId/subcategories/:id/edit`}
+        render={(): JSX.Element => (
+          <SubcategoryEdit
+            createNotificationBanner={createNotificationBanner}
+            rootPath={rootPath}
+          />
+        )}
+      />
     </PageLayout>
   )
 }

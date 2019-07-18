@@ -18,6 +18,7 @@ import {
   Category,
   CategoryCreate as CategoryCreateType,
 } from 'store/category/type'
+import ContentBox from 'shared/ContentBox/ContentBox';
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -36,29 +37,31 @@ class CategoryCreate extends React.Component<Props> {
     const { rootPath } = this.props
     return (
       <FadeTransition fullWidth>
-        <H1 context="page">Kategorie erstellen</H1>
-        <Mutation
-          mutation={CreateCategory}
-          onCompleted={this.handleCompleted}
-          onError={this.handleError}
-          update={addCategory}
-        >
-          {(
-            createCategory: ({
-              variables,
-            }: {
-              variables: CategoryCreateType
-            }) => void
-          ): JSX.Element => (
-            <CategoryForm
-              mode="create"
-              rootPath={rootPath}
-              submitAction={(variables: CategoryCreateType): void =>
-                createCategory({ variables })
-              }
-            />
-          )}
-        </Mutation>
+        <ContentBox role="main">
+          <H1 context="page">Kategorie erstellen</H1>
+          <Mutation
+            mutation={CreateCategory}
+            onCompleted={this.handleCompleted}
+            onError={this.handleError}
+            update={addCategory}
+          >
+            {(
+              createCategory: ({
+                variables,
+              }: {
+                variables: CategoryCreateType
+              }) => void
+            ): JSX.Element => (
+              <CategoryForm
+                mode="create"
+                rootPath={rootPath}
+                submitAction={(variables: CategoryCreateType): void =>
+                  createCategory({ variables })
+                }
+              />
+            )}
+          </Mutation>
+        </ContentBox>
       </FadeTransition>
     )
   }

@@ -8,6 +8,7 @@ import { extractIdFromUrl, logError } from 'utils/utils'
 // components
 import CategoryForm from 'components/CategoryForm/CategoryForm'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import ContentBox from 'shared/ContentBox/ContentBox';
 import H1 from 'shared/H1/H1'
 // graphql
 import { UpdateCategory } from 'store/category/mutation'
@@ -35,40 +36,43 @@ class CategoryEdit extends React.Component<Props> {
     const categoryId = extractIdFromUrl(match)
 
     return (
-      <FadeTransition fullWidth>
-        <H1 context="page">Kategorie bearbeiten</H1>
-
-        <QueryStateHandler
-          errorMessage="Kategorie konnte nicht geladen werden"
-          query={GetCategory}
-          queryName="getCategory"
-          variables={{ id: categoryId }}
-        >
-          {(category: Category): JSX.Element => (
-            <Mutation
-              mutation={UpdateCategory}
-              onCompleted={this.handleCompleted}
-              onError={this.handleError}
-            >
-              {(
-                updateCategory: ({
-                  variables,
-                }: {
-                  variables: CategoryCreate
-                }) => void
-              ): JSX.Element => (
-                <CategoryForm
-                  initialData={category}
-                  rootPath={rootPath}
-                  submitAction={(variables: CategoryCreate): void =>
-                    updateCategory({ variables })
-                  }
-                />
-              )}
-            </Mutation>
-          )}
-        </QueryStateHandler>
-      </FadeTransition>
+      <QueryStateHandler
+        errorMessage="Kategorie konnte nicht geladen werden"
+        query={GetCategory}
+        queryName="getCategory"
+        variables={{ id: categoryId }}
+      >
+        {(category: Category): JSX.Element => (
+          <FadeTransition fullWidth>
+            <ContentBox role="main">
+              <H1 context="page">Kategorie bearbeiten</H1>
+            
+              <Mutation
+                mutation={UpdateCategory}
+                onCompleted={this.handleCompleted}
+                onError={this.handleError}
+              >
+                {(
+                  updateCategory: ({
+                    variables,
+                  }: {
+                    variables: CategoryCreate
+                  }) => void
+                ): JSX.Element => (
+                  <CategoryForm
+                    initialData={category}
+                    rootPath={rootPath}
+                    submitAction={(variables: CategoryCreate): void =>
+                      updateCategory({ variables })
+                    }
+                  />
+                )}
+              </Mutation>
+            </ContentBox>
+          </FadeTransition>
+        )}
+      </QueryStateHandler>
+      
     )
   }
 
