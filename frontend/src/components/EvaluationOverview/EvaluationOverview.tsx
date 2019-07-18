@@ -3,6 +3,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
+import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
@@ -74,7 +75,7 @@ const EvaluationListItem = (props: {
   return (
     <ListItem spaceBetween>
       {title}
-      <div>
+      <ActionIconWrapper>
         <ActionIcon
           ariaLabel={`Auswertung ${title} anzeigen`}
           to={`${rootPath}/view/${id}`}
@@ -92,7 +93,7 @@ const EvaluationListItem = (props: {
           onUpdate={deleteEvaluation}
           title={title}
         />
-      </div>
+      </ActionIconWrapper>
     </ListItem>
   )
 }

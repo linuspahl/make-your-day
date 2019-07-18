@@ -3,8 +3,10 @@ import * as React from 'react'
 import styled from 'styled-components'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
+import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
+import ContentBox from 'shared/ContentBox/ContentBox';
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
@@ -29,37 +31,37 @@ const CategoryOverview = (props: Props): JSX.Element => {
   const { rootPath } = props
 
   return (
-    <FadeTransition fullWidth>
-      <H1 context="page">Kategorien verwalten</H1>
-
-      <QueryStateHandler
-        errorMessage="Kategorien konnten nicht geladen werden"
-        query={GetCategories}
-        queryName="getCategories"
-      >
-        {(categories: CategoryPlain[]): JSX.Element => {
-          return (
-            <List>
-              {categories.map(
-                (category: CategoryPlain): JSX.Element => (
-                  <CategoryListItem
-                    category={category}
-                    key={category.id}
-                    rootPath={rootPath}
-                  />
-                )
-              )}
-            </List>
-          )
-        }}
-      </QueryStateHandler>
-
-      <ActionRow>
-        <Button context="primary" to={`${rootPath}/create`}>
-          Kategorie erstellen
-        </Button>
-      </ActionRow>
-    </FadeTransition>
+    <QueryStateHandler
+      errorMessage="Kategorien konnten nicht geladen werden"
+      query={GetCategories}
+      queryName="getCategories"
+    >
+      {(categories: CategoryPlain[]): JSX.Element => {
+        return (
+          <FadeTransition fullWidth>
+            <ContentBox role="main">
+              <H1 context="page">Kategorien verwalten</H1>
+              <List>
+                {categories.map(
+                  (category: CategoryPlain): JSX.Element => (
+                    <CategoryListItem
+                      category={category}
+                      key={category.id}
+                      rootPath={rootPath}
+                    />
+                  )
+                )}
+              </List>
+              <ActionRow>
+                <Button context="primary" to={`${rootPath}/create`}>
+                  Kategorie erstellen
+                </Button>
+              </ActionRow>
+            </ContentBox>
+          </FadeTransition>
+        )
+      }}
+    </QueryStateHandler>
   )
 }
 
@@ -74,7 +76,7 @@ const CategoryListItem = (props: {
   return (
     <ListItem spaceBetween>
       {title}
-      <div>
+      <ActionIconWrapper>
         {hasSubcategories && (
           <ActionIcon
             to={`${rootPath}/${id}/subcategories`}
@@ -94,7 +96,7 @@ const CategoryListItem = (props: {
           onUpdate={deleteCategory}
           title={title}
         />
-      </div>
+      </ActionIconWrapper>
     </ListItem>
   )
 }

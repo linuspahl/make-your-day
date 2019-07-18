@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { widgetPositionOptions } from 'params'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
+import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
@@ -36,14 +37,12 @@ const sortWidgetsByPosition = (
     [key: string]: Widget[]
   } = {}
 
-  widgets.forEach(
-    (widget): void => {
-      if (!positions[widget.position]) {
-        positions[widget.position] = []
-      }
-      positions[widget.position] = [...positions[widget.position], widget]
+  widgets.forEach((widget): void => {
+    if (!positions[widget.position]) {
+      positions[widget.position] = []
     }
-  )
+    positions[widget.position] = [...positions[widget.position], widget]
+  })
 
   return positions
 }
@@ -115,7 +114,7 @@ const WidgetListItem = (props: {
   return (
     <ListItem spaceBetween>
       {title}
-      <div>
+      <ActionIconWrapper>
         <ActionIcon
           ariaLabel={`Widget ${title} bearbeiten`}
           to={`${rootPath}/edit/${id}`}
@@ -128,7 +127,7 @@ const WidgetListItem = (props: {
           onUpdate={deleteWidget}
           title={title}
         />
-      </div>
+      </ActionIconWrapper>
     </ListItem>
   )
 }

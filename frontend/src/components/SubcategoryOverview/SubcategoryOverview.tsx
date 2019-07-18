@@ -7,6 +7,7 @@ import { Query } from 'react-apollo'
 import { extractIdFromUrl } from 'utils/utils'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
+import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
@@ -70,15 +71,13 @@ class CategoryEdit extends React.Component<Props> {
                   (subcategory: Subcategory): JSX.Element => (
                     <ListItem key={subcategory.id} spaceBetween>
                       {subcategory.title}
-                      <ActionIcon
-                        ariaLabel={`Subkategorie ${
-                          subcategory.title
-                        } bearbeiten`}
-                        to={`${rootPath}/${categoryId}/subcategories/${
-                          subcategory.id
-                        }/edit`}
-                        icon="edit"
-                      />
+                      <ActionIconWrapper>
+                        <ActionIcon
+                          ariaLabel={`Subkategorie ${subcategory.title} bearbeiten`}
+                          to={`${rootPath}/${categoryId}/subcategories/${subcategory.id}/edit`}
+                          icon="edit"
+                        />
+                      </ActionIconWrapper>
                     </ListItem>
                   )
                 )}
