@@ -7,10 +7,9 @@ import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
 import { GetEvaluations } from 'store/evaluation/query'
 import { DeleteEvaluation } from 'store/evaluation/mutation'
@@ -30,37 +29,46 @@ const EvaluationOverview = (props: Props): JSX.Element => {
   const { rootPath } = props
 
   return (
-    <FadeTransition fullWidth>
-      <H1 context="page">Auswertungen verwalten</H1>
-
-      <QueryStateHandler
-        errorMessage="Andere Sitzungen konnten nicht geladen werden"
-        query={GetEvaluations}
-        queryName="getEvaluations"
-      >
-        {(evaluations: Evaluation[]): JSX.Element => {
-          return (
-            <List>
-              {evaluations.map(
-                (evaluation: Evaluation): JSX.Element => (
-                  <EvaluationListItem
-                    key={evaluation.id}
-                    evaluation={evaluation}
-                    rootPath={rootPath}
-                  />
-                )
-              )}
-            </List>
-          )
-        }}
-      </QueryStateHandler>
-
-      <ActionRow>
-        <Button context="primary" to={`${rootPath}/create`}>
-          Auswertung erstellen
-        </Button>
-      </ActionRow>
-    </FadeTransition>
+    <PageQueryHandler
+      errorMessages={{
+        getEvaluations: 'Andere Sitzungen konnten nicht geladen werden',
+      }}
+      query={GetEvaluations}
+      queryNames={['getEvaluations']}
+    >
+      {({
+        data: { getEvaluations: evaluations },
+        status: { getEvaluations: evaluationsQueryStatus },
+      }: {
+        data: { getEvaluations: Evaluation[] }
+        status?: { getEvaluations: JSX.Element }
+      }): JSX.Element => {
+        return (
+          <React.Fragment>
+            <H1 context="page">Auswertungen verwalten</H1>
+            {evaluationsQueryStatus}
+            {!evaluationsQueryStatus && evaluations && (
+              <List>
+                {evaluations.map(
+                  (evaluation: Evaluation): JSX.Element => (
+                    <EvaluationListItem
+                      key={evaluation.id}
+                      evaluation={evaluation}
+                      rootPath={rootPath}
+                    />
+                  )
+                )}
+              </List>
+            )}
+            <ActionRow>
+              <Button context="primary" to={`${rootPath}/create`}>
+                Auswertung erstellen
+              </Button>
+            </ActionRow>
+          </React.Fragment>
+        )
+      }}
+    </PageQueryHandler>
   )
 }
 

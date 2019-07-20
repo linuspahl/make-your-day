@@ -14,11 +14,31 @@ import EvaluationEdit from './EvaluationEdit'
 import {
   updateEvaluationError,
   evaluation,
-  getEvaluationUpdateSuccess,
   updateEvaluationSuccess,
 } from 'store/evaluation/fixtures'
+// fixtures
+import { category } from 'store/category/fixtures'
+import { pageQuery } from "./EvaluationEdit"
 
-import { getCategoriesWithChildrenSuccess } from 'store/category/fixtures'
+const pageQueryRequest = {
+  request: {
+    query: pageQuery,
+    variables: {evaluationId: evaluation.id}
+  },
+}
+export const pageQuerySuccess = {
+  ...pageQueryRequest,
+  result: {
+    data: {
+      getCategories: [category],
+      getEvaluation: evaluation
+    },
+  },
+}
+export const pageQueryError = {
+  ...pageQueryRequest,
+  error: new Error('pageQuery failed'),
+}
 
 describe('EvaluationEdit should', (): void => {
   const renderUtilsProps = {
@@ -44,14 +64,13 @@ describe('EvaluationEdit should', (): void => {
         ...renderUtilsProps,
         mocks: [
           updateEvaluationSuccess,
-          getEvaluationUpdateSuccess,
-          getCategoriesWithChildrenSuccess,
+          pageQuerySuccess,
         ],
       }
     )
-    // Wait for getEvaluation
+    // Wait for getCategoriesWithChildren and getEvaluation
     await wait()
-    // Wait for getCategoriesWithChildren
+
     await wait()
     fireEvent.change(getByLabelText('Name'), {
       target: { value: 'New Title' },
@@ -74,14 +93,11 @@ describe('EvaluationEdit should', (): void => {
         ...renderUtilsProps,
         mocks: [
           updateEvaluationError,
-          getEvaluationUpdateSuccess,
-          getCategoriesWithChildrenSuccess,
+          pageQuerySuccess,
         ],
       }
     )
-    // Wait for getEvaluation
-    await wait()
-    // Wait for getCategoriesWithChildren
+    // Wait for getEvaluation and getCategoriesWithChildren
     await wait()
     fireEvent.change(getByLabelText('Name'), {
       target: { value: 'New Title' },

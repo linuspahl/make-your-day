@@ -4,10 +4,9 @@ import { withRouter, RouteComponentProps } from 'react-router-dom'
 // utils
 import { extractIdFromUrl } from 'utils/utils'
 // components
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import H1 from 'shared/H1/H1'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 import EvaluationChart from 'components/EvaluationChart/EvaluationChart'
+import H1 from 'shared/H1/H1'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
 import { GetEvaluation } from 'store/evaluation/query'
 import { Evaluation } from 'store/evaluation/type'
@@ -21,20 +20,30 @@ const EvaluationResult = (props: Props): JSX.Element => {
   const evaluationId = extractIdFromUrl(match)
 
   return (
-    <FadeTransition fullWidth>
-      <H1 context="page">Ergebnis Auswertung</H1>
-
-      <QueryStateHandler
-        errorMessage="Auswertung konnte nicht geladen werden"
-        query={GetEvaluation}
-        queryName="getEvaluation"
-        variables={{ id: evaluationId }}
-      >
-        {(evaluation: Evaluation): JSX.Element => {
-          return <EvaluationChart evaluation={evaluation} />
-        }}
-      </QueryStateHandler>
-    </FadeTransition>
+    <PageQueryHandler
+      errorMessages={{
+        getEvaluation: 'Auswertung konnte nicht geladen werden',
+      }}
+      query={GetEvaluation}
+      variables={{ id: evaluationId }}
+      queryNames={['getEvaluations']}
+    >
+      {({
+        data: { getEvaluation: evaluation },
+        status: { getEvaluation: evaluationQueryStatus },
+      }: {
+        data: { getEvaluation?: Evaluation }
+        status: { getEvaluation: JSX.Element }
+      }): JSX.Element => (
+        <React.Fragment>
+          <H1 context="page">Ergebnis Auswertung</H1>
+          {evaluationQueryStatus}
+          {!evaluationQueryStatus && evaluation && (
+            <EvaluationChart evaluation={evaluation} />
+          )}
+        </React.Fragment>
+      )}
+    </PageQueryHandler>
   )
 }
 

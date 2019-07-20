@@ -1,27 +1,51 @@
 // libraries
 import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
-import { ApolloError } from 'apollo-boost'
+import { ApolloError, gql } from 'apollo-boost'
 import { Mutation } from 'react-apollo'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
 import EvaluationForm from 'components/EvaluationForm/EvaluationForm'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
 import { UpdateEvaluation } from 'store/evaluation/mutation'
-import { GetEvaluationUpdate } from 'store/evaluation/query'
-import { GetCategoriesWithChildren } from 'store/category/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
 import { Evaluation, EvaluationUpdate } from 'store/evaluation/type'
 import { CategoryFull } from 'store/category/type'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
+
+export const pageQuery = gql`
+  query ($evaluationId: ID!) {
+    getCategories {
+      id
+      title
+      hasSubcategories
+      subcategories {
+        id
+        title
+      }
+    }
+    getEvaluation(id: $evaluationId) {
+      id
+      title
+      categoryId
+      groupSubcategories
+      type
+      period
+    }
+  }
+`
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
+}
+
+interface PageQueryResult {
+  data: { getCategories: CategoryFull[]; getEvaluation: Evaluation }
+  status?: { getCategories: JSX.Element; getEvaluation: JSX.Element }
 }
 
 class EvaluationEdit extends React.Component<Props> {
@@ -37,49 +61,49 @@ class EvaluationEdit extends React.Component<Props> {
     const evaluationId = extractIdFromUrl(match)
 
     return (
-      <FadeTransition fullWidth>
-        <H1 context="page">Auswertung bearbeiten</H1>
-
-        <QueryStateHandler
-          query={GetCategoriesWithChildren}
-          queryName="getCategories"
-          errorMessage="Kategorien konnten nicht geladen werden"
-        >
-          {(categories: CategoryFull[]): JSX.Element => (
-            <QueryStateHandler
-              query={GetEvaluationUpdate}
-              variables={{ id: evaluationId }}
-              errorMessage="Auswertung konnte nicht geladen werden"
-              queryName="getEvaluation"
-            >
-              {(evaluation: Evaluation): JSX.Element => (
-                <Mutation
-                  mutation={UpdateEvaluation}
-                  onCompleted={this.handleCompleted}
-                  onError={this.handleError}
-                >
-                  {(
-                    updateUser: ({
-                      variables,
-                    }: {
-                      variables: EvaluationUpdate
-                    }) => void
-                  ): JSX.Element => (
-                    <EvaluationForm
-                      categories={categories}
-                      initialData={evaluation}
-                      rootPath={rootPath}
-                      submitAction={(variables: EvaluationUpdate): void => {
-                        updateUser({ variables })
-                      }}
-                    />
-                  )}
-                </Mutation>
-              )}
-            </QueryStateHandler>
-          )}
-        </QueryStateHandler>
-      </FadeTransition>
+      <PageQueryHandler
+        query={pageQuery}
+        variables={{ evaluationId }}
+        queryNames={['getCategories', 'getEvaluation']}
+        errorMessages={{
+          getCategories: 'Kategorien konnten nicht geladen werden',
+          getEvaluation: 'Auswertung konnten nicht geladen werden',
+        }}
+      >
+        {({
+          data: { getCategories: categories, getEvaluation: evaluation },
+          status: { getEvaluation: evaluationQueryStatus },
+        }: PageQueryResult): JSX.Element => (
+          <React.Fragment>
+            <H1 context="page">Auswertung bearbeiten</H1>
+            {evaluationQueryStatus}
+            {!evaluationQueryStatus && evaluation && (
+              <Mutation
+                mutation={UpdateEvaluation}
+                onCompleted={this.handleCompleted}
+                onError={this.handleError}
+              >
+                {(
+                  updateUser: ({
+                    variables,
+                  }: {
+                    variables: EvaluationUpdate
+                  }) => void
+                ): JSX.Element => (
+                  <EvaluationForm
+                    categories={categories}
+                    initialData={evaluation}
+                    rootPath={rootPath}
+                    submitAction={(variables: EvaluationUpdate): void => {
+                      updateUser({ variables })
+                    }}
+                  />
+                )}
+              </Mutation>
+            )}
+          </React.Fragment>
+        )}
+      </PageQueryHandler>
     )
   }
 
@@ -96,7 +120,7 @@ class EvaluationEdit extends React.Component<Props> {
       message: `Auswertung ${title} erfolgreich bearbeitet`,
     })
 
-    // Go to the evaluations overview
+    // Go to the categories overview
     history.push(rootPath)
   }
 

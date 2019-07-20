@@ -7,9 +7,8 @@ import { ApolloError } from 'apollo-boost'
 import { logError } from 'utils/utils'
 // components
 import EvaluationForm from 'components/EvaluationForm/EvaluationForm'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
 import { addEvaluation } from 'store/evaluation/update'
 import { CreateEvaluation } from 'store/evaluation/mutation'
@@ -38,14 +37,20 @@ class EvaluationCreate extends React.Component<Props> {
   public render(): JSX.Element {
     const { rootPath } = this.props
     return (
-      <FadeTransition fullWidth>
-        <H1 context="page">Auswertung erstellen</H1>
-        <QueryStateHandler
-          errorMessage="Kategorien konnten nicht geladen werden"
-          query={GetCategoriesWithChildren}
-          queryName="getCategories"
-        >
-          {(categories: Category[]): JSX.Element => (
+      <PageQueryHandler
+        errorMessages={{
+          getCategories: 'Kategorien konnten nicht geladen werden',
+        }}
+        query={GetCategoriesWithChildren}
+        queryNames={['getCategories']}
+      >
+        {({
+          data: { getCategories: categories },
+        }: {
+          data: { getCategories: Category[] }
+        }): JSX.Element => (
+          <React.Fragment>
+            <H1 context="page">Auswertung erstellen</H1>
             <Mutation
               mutation={CreateEvaluation}
               onCompleted={this.handleCompleted}
@@ -69,9 +74,9 @@ class EvaluationCreate extends React.Component<Props> {
                 />
               )}
             </Mutation>
-          )}
-        </QueryStateHandler>
-      </FadeTransition>
+          </React.Fragment>
+        )}
+      </PageQueryHandler>
     )
   }
 
