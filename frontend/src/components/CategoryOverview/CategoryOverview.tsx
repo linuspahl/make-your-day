@@ -6,12 +6,10 @@ import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
-import ContentBox from 'shared/ContentBox/ContentBox'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
 import { GetCategories } from 'store/category/query'
 import { DeleteCategory } from 'store/category/mutation'
@@ -27,20 +25,31 @@ interface Props {
   rootPath: string
 }
 
+interface PageQueryResult {
+  data: { getCategories: CategoryPlain[] }
+  status: { getCategories: JSX.Element }
+}
+
 const CategoryOverview = (props: Props): JSX.Element => {
   const { rootPath } = props
 
   return (
-    <QueryStateHandler
-      errorMessage="Kategorien konnten nicht geladen werden"
+    <PageQueryHandler
+      errorMessages={{
+        getCategories: 'Kategorien konnten nicht geladen werden',
+      }}
       query={GetCategories}
-      queryName="getCategories"
+      queryNames={['getCategories']}
     >
-      {(categories: CategoryPlain[]): JSX.Element => {
+      {({
+        data: { getCategories: categories },
+        status: { getCategories: categoriesQueryStatus },
+      }: PageQueryResult): JSX.Element => {
         return (
-          <FadeTransition fullWidth>
-            <ContentBox role="main">
-              <H1 context="page">Kategorien verwalten</H1>
+          <React.Fragment>
+            <H1 context="page">Kategorien verwalten</H1>
+            {categoriesQueryStatus}
+            {!categoriesQueryStatus && categories && (
               <List>
                 {categories.map(
                   (category: CategoryPlain): JSX.Element => (
@@ -52,16 +61,16 @@ const CategoryOverview = (props: Props): JSX.Element => {
                   )
                 )}
               </List>
-              <ActionRow>
-                <Button context="primary" to={`${rootPath}/create`}>
-                  Kategorie erstellen
-                </Button>
-              </ActionRow>
-            </ContentBox>
-          </FadeTransition>
+            )}
+            <ActionRow>
+              <Button context="primary" to={`${rootPath}/create`}>
+                Kategorie erstellen
+              </Button>
+            </ActionRow>
+          </React.Fragment>
         )
       }}
-    </QueryStateHandler>
+    </PageQueryHandler>
   )
 }
 

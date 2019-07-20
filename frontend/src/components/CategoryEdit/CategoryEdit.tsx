@@ -6,9 +6,8 @@ import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import CategoryForm from 'components/CategoryForm/CategoryForm'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import ContentBox from 'shared/ContentBox/ContentBox'
 import H1 from 'shared/H1/H1'
 // graphql
 import { UpdateCategory } from 'store/category/mutation'
@@ -16,11 +15,14 @@ import { GetCategory } from 'store/category/query'
 // interfaces
 import { CategoryCreate, Category } from 'store/category/type'
 import { NotificationCreate } from 'types/types'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
+}
+interface PageQueryResult {
+  data: { getCategory: Category }
+  status: { getCategory: JSX.Element }
 }
 
 class CategoryEdit extends React.Component<Props> {
@@ -36,17 +38,20 @@ class CategoryEdit extends React.Component<Props> {
     const categoryId = extractIdFromUrl(match)
 
     return (
-      <QueryStateHandler
-        errorMessage="Kategorie konnte nicht geladen werden"
+      <PageQueryHandler
+        errorMessages={{ getCategory: 'Kategorie konnte nicht geladen werden' }}
         query={GetCategory}
-        queryName="getCategory"
+        queryNames={['getCategory']}
         variables={{ id: categoryId }}
       >
-        {(category: Category): JSX.Element => (
-          <FadeTransition fullWidth>
-            <ContentBox role="main">
-              <H1 context="page">Kategorie bearbeiten</H1>
-
+        {({
+          data: { getCategory: category },
+          status: { getCategory: categoryQueryStatus },
+        }: PageQueryResult): JSX.Element => (
+          <React.Fragment>
+            <H1 context="page">Kategorie bearbeiten</H1>
+            {categoryQueryStatus}
+            {!categoryQueryStatus && category && (
               <Mutation
                 mutation={UpdateCategory}
                 onCompleted={this.handleCompleted}
@@ -68,10 +73,10 @@ class CategoryEdit extends React.Component<Props> {
                   />
                 )}
               </Mutation>
-            </ContentBox>
-          </FadeTransition>
+            )}
+          </React.Fragment>
         )}
-      </QueryStateHandler>
+      </PageQueryHandler>
     )
   }
 
