@@ -38,7 +38,7 @@ export const UpdateRecord = gql`
   mutation UpdateRecord(
     $id: ID!
     $amount: Float
-    $categoryId: ID!
+    $categoryId: ID
     $description: String
     $title: String
   ) {

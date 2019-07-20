@@ -1,6 +1,20 @@
 // libraries
 import gql from 'graphql-tag'
 
+
+// fragments
+export const WidgetFields = gql`
+  fragment WidgetFields on Widget {
+    evaluationId
+    id
+    position
+    title
+    type
+    value
+  }
+`
+
+// queries
 export const GetWidget = gql`
   query GetWidget($id: ID!) {
     getWidget(id: $id) {

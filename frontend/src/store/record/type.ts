@@ -18,3 +18,11 @@ export interface RecordCreate {
   description?: string
   categoryId: number
 }
+
+export interface RecordEdit {
+  id: number
+  title: string
+  amount?: number
+  description?: string
+  categoryId?: number
+}
