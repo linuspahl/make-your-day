@@ -25,7 +25,9 @@ const EvaluationChart = (props: Props): JSX.Element => {
       result: { labels, datasets },
     },
   } = props
+
   const formatedLabels = formatLabels(labels)
+
   if (type === 'barchart') {
     return <Barchart labels={formatedLabels} datasets={datasets} />
   }

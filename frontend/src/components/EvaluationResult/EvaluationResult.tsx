@@ -18,7 +18,6 @@ interface Props extends RouteComponentProps {
 const EvaluationResult = (props: Props): JSX.Element => {
   const { match } = props
   const evaluationId = extractIdFromUrl(match)
-
   return (
     <PageQueryHandler
       errorMessages={{

@@ -39,7 +39,7 @@ const generateCategoryOptions = (
         categoryOptions = [
           ...categoryOptions,
           {
-            value: subcategory.id,
+            value: `${category.id}_${subcategory.id}`,
             title: `${category.title} -> ${subcategory.title}`,
           },
         ]
@@ -87,7 +87,7 @@ export default class EvaluationForm extends React.Component<
     const { mode, rootPath, categories = [] } = this.props
     const { title, type, groupSubcategories, period, categoryId } = this.state
     const selectedCategory = categories.find(
-      (category): boolean => category.id === categoryId
+      (category): boolean => category.id == categoryId
     )
     const categoryOptions = generateCategoryOptions(categories)
     const disabledFields = {
@@ -116,7 +116,6 @@ export default class EvaluationForm extends React.Component<
             options={categoryOptions}
             tabIndex={1}
             title="Kategorie / Unterkategorie"
-            type="number"
             value={Number(categoryId)}
           />
         </Row>

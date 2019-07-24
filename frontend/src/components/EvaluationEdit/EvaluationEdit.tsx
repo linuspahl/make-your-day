@@ -17,7 +17,15 @@ import { Evaluation, EvaluationUpdate } from 'store/evaluation/type'
 import { CategoryFull } from 'store/category/type'
 
 export const pageQuery = gql`
-  query ($evaluationId: ID!) {
+  query($evaluationId: ID!) {
+    getEvaluation(id: $evaluationId) {
+      id
+      title
+      categoryId
+      groupSubcategories
+      type
+      period
+    }
     getCategories {
       id
       title
@@ -26,14 +34,6 @@ export const pageQuery = gql`
         id
         title
       }
-    }
-    getEvaluation(id: $evaluationId) {
-      id
-      title
-      categoryId
-      groupSubcategories
-      type
-      period
     }
   }
 `

@@ -18,12 +18,12 @@ import {
 } from 'store/evaluation/fixtures'
 // fixtures
 import { category } from 'store/category/fixtures'
-import { pageQuery } from "./EvaluationEdit"
+import { pageQuery } from './EvaluationEdit'
 
 const pageQueryRequest = {
   request: {
     query: pageQuery,
-    variables: {evaluationId: evaluation.id}
+    variables: { evaluationId: evaluation.id },
   },
 }
 export const pageQuerySuccess = {
@@ -31,7 +31,7 @@ export const pageQuerySuccess = {
   result: {
     data: {
       getCategories: [category],
-      getEvaluation: evaluation
+      getEvaluation: evaluation,
     },
   },
 }
@@ -62,15 +62,10 @@ describe('EvaluationEdit should', (): void => {
       <EvaluationEdit {...propsFixture} />,
       {
         ...renderUtilsProps,
-        mocks: [
-          updateEvaluationSuccess,
-          pageQuerySuccess,
-        ],
+        mocks: [updateEvaluationSuccess, pageQuerySuccess],
       }
     )
-    // Wait for getCategoriesWithChildren and getEvaluation
-    await wait()
-
+    // Wait for pageQuery
     await wait()
     fireEvent.change(getByLabelText('Name'), {
       target: { value: 'New Title' },
@@ -91,13 +86,10 @@ describe('EvaluationEdit should', (): void => {
       <EvaluationEdit {...propsFixture} />,
       {
         ...renderUtilsProps,
-        mocks: [
-          updateEvaluationError,
-          pageQuerySuccess,
-        ],
+        mocks: [updateEvaluationError, pageQuerySuccess],
       }
     )
-    // Wait for getEvaluation and getCategoriesWithChildren
+    // Wait for pageQuery
     await wait()
     fireEvent.change(getByLabelText('Name'), {
       target: { value: 'New Title' },

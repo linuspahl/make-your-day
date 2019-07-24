@@ -38,20 +38,6 @@ describe('EvaluationChart should', (): void => {
     expect(container.getElementsByClassName('ct-chart-pie')).toHaveLength(1)
   })
 
-  test('not crash when evaluation has no result', async (): Promise<void> => {
-    const { container } = renderWithAppRoot(
-      <EvaluationChart
-        evaluation={{
-          ...evaluation,
-          result: { labels: undefined, datasets: undefined },
-        }}
-      />
-    )
-    // Wait for chart library to finish render
-    await wait()
-    expect(container.getElementsByClassName('ct-chart-line')).toHaveLength(1)
-  })
-
   test('not crash when evaluation has no matching type', async (): Promise<
     void
   > => {

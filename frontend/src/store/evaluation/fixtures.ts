@@ -93,11 +93,13 @@ export const getEvaluationSuccess = {
         },
         result: {
           labels: ['w3123'],
-          datasets: {
-            label: 'label',
-            data: [1, 2],
-            backgroundColor: 'red',
-          },
+          datasets: [
+            {
+              label: 'Titel Kategorie',
+              data: [1, 2],
+              backgroundColor: 'red',
+            },
+          ],
         },
       },
     },
