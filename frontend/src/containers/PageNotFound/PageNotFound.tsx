@@ -25,8 +25,8 @@ export const Layout = styled.div`
 
 const PageNotFound = (props: Props): JSX.Element => (
   <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
-    <ContentBox>
-      <FadeTransition>
+    <FadeTransition fullWidth>
+      <ContentBox role="main">
         <H1 context="page">Seite nicht gefunden</H1>
         <ErrorMessage
           message="Die angegeben Adresse konnte nicht"
@@ -37,8 +37,8 @@ const PageNotFound = (props: Props): JSX.Element => (
             Zur Startseite
           </Button>
         </ActionRow>
-      </FadeTransition>
-    </ContentBox>
+      </ContentBox>
+    </FadeTransition>
   </PageLayout>
 )
 
