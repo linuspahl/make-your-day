@@ -3,28 +3,49 @@ import * as React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
+import gql from 'graphql-tag'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
-import ContentBox from 'shared/ContentBox/ContentBox'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
 // graphql
 import { UpdateWidget } from 'store/widget/mutation'
-import { GetWidget } from 'store/widget/query'
-import { GetEvaluations } from 'store/evaluation/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
 import { Widget } from 'store/widget/type'
 import { Evaluation } from 'store/evaluation/type'
+
+export const pageQuery = gql`
+  query($widgetId: ID!) {
+    getEvaluations {
+      id
+      title
+    }
+    getWidget(id: $widgetId) {
+      evaluationId
+      id
+      position
+      title
+      type
+      value
+    }
+  }
+`
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
+interface PageQueryResult {
+  data: { getWidget: Widget; getEvaluations: Evaluation[] }
+  status?: {
+    getWidget: JSX.Element
+    getEvaluations: JSX.Element
+  }
+}
 class WidgetEdit extends React.Component<Props> {
   public constructor(props: Props) {
     super(props)
@@ -38,53 +59,47 @@ class WidgetEdit extends React.Component<Props> {
     const widgetId = extractIdFromUrl(match)
 
     return (
-      <FadeTransition fullWidth>
-        <ContentBox role="main">
-          <H1 context="page">Widget bearbeiten</H1>
-          <QueryStateHandler
-            query={GetEvaluations}
-            queryName="getEvaluations"
-            errorMessage="Auswertungen konnten nicht geladen werden"
-            ignoreEmptyResult
-          >
-            {(evaluations?: Evaluation[]): JSX.Element => {
-              return (
-                <QueryStateHandler
-                  errorMessage="Widget konnte nicht geladen werden"
-                  query={GetWidget}
-                  queryName="getWidget"
-                  variables={{ id: widgetId }}
+      <PageQueryHandler
+        query={pageQuery}
+        queryNames={['getEvaluations', 'getWidget']}
+        errorMessages={{
+          getWidget: 'Widget konnte nicht geladen werden',
+          getEvaluations: 'Auswertungen konnten nicht geladen werden',
+        }}
+        variables={{ widgetId }}
+      >
+        {({
+          data: { getWidget: widget, getEvaluations: evaluations },
+          status: { getWidget: widgetQueryStatus },
+        }: PageQueryResult): JSX.Element => {
+          return (
+            <React.Fragment>
+              <H1 context="page">Widget bearbeiten</H1>
+              {widgetQueryStatus}
+              {!widgetQueryStatus && widget && (
+                <Mutation
+                  mutation={UpdateWidget}
+                  onCompleted={this.handleCompleted}
+                  onError={this.handleError}
                 >
-                  {(widget: Widget): JSX.Element => (
-                    <Mutation
-                      mutation={UpdateWidget}
-                      onCompleted={this.handleCompleted}
-                      onError={this.handleError}
-                    >
-                      {(
-                        updateUser: ({
-                          variables,
-                        }: {
-                          variables: Widget
-                        }) => void
-                      ): JSX.Element => (
-                        <WidgetForm
-                          evaluations={evaluations}
-                          initialData={widget}
-                          rootPath={rootPath}
-                          submitAction={(variables: Widget): void =>
-                            updateUser({ variables })
-                          }
-                        />
-                      )}
-                    </Mutation>
+                  {(
+                    updateUser: ({ variables }: { variables: Widget }) => void
+                  ): JSX.Element => (
+                    <WidgetForm
+                      evaluations={evaluations}
+                      initialData={widget}
+                      rootPath={rootPath}
+                      submitAction={(variables: Widget): void =>
+                        updateUser({ variables })
+                      }
+                    />
                   )}
-                </QueryStateHandler>
-              )
-            }}
-          </QueryStateHandler>
-        </ContentBox>
-      </FadeTransition>
+                </Mutation>
+              )}
+            </React.Fragment>
+          )
+        }}
+      </PageQueryHandler>
     )
   }
 

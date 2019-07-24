@@ -6,11 +6,9 @@ import { ApolloError } from 'apollo-boost'
 // utils
 import { logError } from 'utils/utils'
 // components
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
-import ContentBox from 'shared/ContentBox/ContentBox'
 // graphql
 import { addWidget } from 'store/widget/update'
 import { CreateWidget } from 'store/widget/mutation'
@@ -25,6 +23,11 @@ interface Props extends RouteComponentProps {
   rootPath: string
 }
 
+interface PageQueryResult {
+  data?: { getEvaluations: Evaluation[] }
+  status?: { getEvaluations: JSX.Element }
+}
+
 class WidgetCreate extends React.Component<Props> {
   public constructor(props: Props) {
     super(props)
@@ -36,42 +39,50 @@ class WidgetCreate extends React.Component<Props> {
   public render(): JSX.Element {
     const { rootPath } = this.props
     return (
-      <QueryStateHandler
+      <PageQueryHandler
+        errorMessages={{
+          getEvaluations: 'Kategorien konnten nicht geladen werden',
+        }}
         query={GetEvaluations}
-        queryName="getEvaluations"
-        errorMessage="Kategorien konnten nicht geladen werden"
+        queryNames={['getEvaluations']}
       >
-        {(evaluations: Evaluation[]): JSX.Element => (
-          <FadeTransition fullWidth>
-            <ContentBox role="main">
+        {({
+          data: { getEvaluations: evaluations },
+          status: { getEvaluations: evaluationsQueryStatus },
+        }: PageQueryResult): JSX.Element => {
+          return (
+            <React.Fragment>
               <H1 context="page">Widget erstellen</H1>
-              <Mutation
-                mutation={CreateWidget}
-                onCompleted={this.handleCompleted}
-                onError={this.hanldeError}
-                update={addWidget}
-              >
-                {(
-                  createWidget: ({
-                    variables,
-                  }: {
-                    variables: WidgetCreateType
-                  }) => void
-                ): JSX.Element => (
-                  <WidgetForm
-                    mode="create"
-                    evaluations={evaluations}
-                    rootPath={rootPath}
-                    submitAction={(variables: WidgetCreateType): void =>
-                      createWidget({ variables })
-                    }
-                  />
-                )}
-              </Mutation>
-            </ContentBox>
-          </FadeTransition>
-        )}
-      </QueryStateHandler>
+              {evaluationsQueryStatus}
+              {!evaluationsQueryStatus && evaluations && (
+                <Mutation
+                  mutation={CreateWidget}
+                  onCompleted={this.handleCompleted}
+                  onError={this.hanldeError}
+                  update={addWidget}
+                >
+                  {(
+                    createWidget: ({
+                      variables,
+                    }: {
+                      variables: WidgetCreateType
+                    }) => void
+                  ): JSX.Element => (
+                    <WidgetForm
+                      mode="create"
+                      evaluations={evaluations}
+                      rootPath={rootPath}
+                      submitAction={(variables: WidgetCreateType): void =>
+                        createWidget({ variables })
+                      }
+                    />
+                  )}
+                </Mutation>
+              )}
+            </React.Fragment>
+          )
+        }}
+      </PageQueryHandler>
     )
   }
 

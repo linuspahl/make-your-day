@@ -14,11 +14,12 @@ import WidgetEdit from './WidgetEdit'
 // fixtures
 import {
   updateWidgetSuccess,
-  widget,
-  getWidgetSuccess,
+  evaluationWidget,
   updateWidgetError,
 } from 'store/widget/fixtures'
-import { getEvaluationsSuccess } from 'store/evaluation/fixtures'
+import { evaluation } from 'store/evaluation/fixtures'
+// graphql
+import { pageQuery } from './WidgetEdit'
 
 describe('WidgetEdit should', (): void => {
   const propsFixtures = {
@@ -27,18 +28,52 @@ describe('WidgetEdit should', (): void => {
   }
   const renderUtilsProps = {
     mockWrappingRoute: true,
-    route: `/widgets/edit/${widget.id}`,
+    route: `/widgets/edit/${evaluationWidget.id}`,
     routePath: '/widgets/edit/:id',
   }
-  const apiStubResult = {
-    id: widget.id,
-    title: 'New Name',
-    type: widget.type,
-    value: widget.value,
-    position: widget.position,
+
+  // API Stub adjustment
+  const pageQueryRequest = {
+    request: {
+      query: pageQuery,
+      variables: { widgetId: evaluationWidget.id },
+    },
   }
-  const apiStubVariables = {
-    ...apiStubResult,
+  const pageQuerySuccess = {
+    ...pageQueryRequest,
+    result: {
+      data: {
+        getEvaluations: [
+          {
+            id: evaluation.id,
+            title: evaluation.title,
+          },
+        ],
+        getWidget: {
+          evaluationId: evaluationWidget.evaluation.id,
+          id: evaluationWidget.id,
+          position: evaluationWidget.position,
+          title: evaluationWidget.title,
+          type: evaluationWidget.type,
+          value: evaluationWidget.value,
+        },
+      },
+    },
+  }
+  const pageQueryError = {
+    ...pageQueryRequest,
+    error: new Error('pageQuery failed'),
+  }
+
+  const updateWidgetResult = {
+    id: evaluationWidget.id,
+    title: 'New Name',
+    type: evaluationWidget.type,
+    value: evaluationWidget.value,
+    position: evaluationWidget.position,
+  }
+  const updateWidgetVariables = {
+    ...updateWidgetResult,
     evaluationId: 1,
   }
 
@@ -55,18 +90,15 @@ describe('WidgetEdit should', (): void => {
       {
         ...renderUtilsProps,
         mocks: [
-          getEvaluationsSuccess,
-          getWidgetSuccess,
+          pageQuerySuccess,
           adjustApiStub(updateWidgetSuccess, {
-            variables: apiStubVariables,
-            result: apiStubResult,
+            variables: updateWidgetVariables,
+            result: updateWidgetResult,
           }),
         ],
       }
     )
-    // Wait for getEvaluations
-    await wait()
-    // Wait for getWidget
+    // Wait for pageQuery
     await wait()
     fireEvent.change(getByLabelText('Name'), {
       target: { value: 'New Name' },
@@ -89,17 +121,14 @@ describe('WidgetEdit should', (): void => {
       {
         ...renderUtilsProps,
         mocks: [
-          getEvaluationsSuccess,
-          getWidgetSuccess,
+          pageQueryError,
           adjustApiStub(updateWidgetError, {
-            variables: apiStubVariables,
+            variables: updateWidgetVariables,
           }),
         ],
       }
     )
-    // Wait for getEvaluations
-    await wait()
-    // Wait for getWidget
+    // Wait for pageQuery
     await wait()
     fireEvent.change(getByLabelText('Name'), {
       target: { value: 'New Name' },
