@@ -7,21 +7,28 @@ import { DataProxy } from 'apollo-cache'
 // utils
 import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
 // components
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
 // graphql
 import { addSubcategory } from 'store/category/update'
 import { CreateSubcategory } from 'store/category/mutation'
 import { GetCategory } from 'store/category/query'
 // interfaces
-import { CategoryCreate, Category } from 'store/category/type'
+import {
+  SubcategoryCreate as SubcategoryCreateType,
+  Category,
+} from 'store/category/type'
 import { NotificationCreate } from 'types/types'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
+}
+
+interface PageQueryResult {
+  data: { getCategory: Category }
+  status: { getCategory: JSX.Element }
 }
 
 class SubcategoryCreate extends React.Component<Props> {
@@ -35,45 +42,52 @@ class SubcategoryCreate extends React.Component<Props> {
   public render(): JSX.Element {
     const { match, rootPath } = this.props
     const categoryId = extractIdFromUrl(match)
-
     return (
-      <FadeTransition>
-        <H1 context="page">Subkategorie erstellen</H1>
-        <QueryStateHandler
-          errorMessage="Kategorie konnten nicht geladen werden"
-          query={GetCategory}
-          queryName="getCategory"
-          variables={{ id: categoryId }}
-        >
-          {(parentCategory: Category): JSX.Element => (
-            <Mutation
-              mutation={CreateSubcategory}
-              onCompleted={this.handleCompleted}
-              onError={this.handleError}
-              update={(cache: DataProxy, data: FetchResult): void =>
-                addSubcategory(cache, data, { id: categoryId })
-              }
-            >
-              {(
-                createSubcategory: ({
-                  variables,
-                }: {
-                  variables: CategoryCreate
-                }) => void
-              ): JSX.Element => (
-                <SubcategoryForm
-                  mode="create"
-                  rootPath={rootPath}
-                  submitAction={(variables: CategoryCreate): void =>
-                    createSubcategory({ variables })
-                  }
-                  parentCategoryId={parentCategory.id}
-                />
-              )}
-            </Mutation>
-          )}
-        </QueryStateHandler>
-      </FadeTransition>
+      <PageQueryHandler
+        errorMessages={{
+          getCategory: 'Kategorie konnten nicht geladen werden',
+        }}
+        query={GetCategory}
+        queryNames={['getCategory']}
+        variables={{ id: categoryId }}
+      >
+        {({
+          data: { getCategory: parentCategory },
+          status: { getCategory: getCategoryStatus },
+        }: PageQueryResult): JSX.Element => (
+          <React.Fragment>
+            <H1 context="page">Subkategorie erstellen</H1>
+            {getCategoryStatus}
+            {!getCategoryStatus && parentCategory && (
+              <Mutation
+                mutation={CreateSubcategory}
+                onCompleted={this.handleCompleted}
+                onError={this.handleError}
+                update={(cache: DataProxy, data: FetchResult): void =>
+                  addSubcategory(cache, data, { id: categoryId })
+                }
+              >
+                {(
+                  createSubcategory: ({
+                    variables,
+                  }: {
+                    variables: SubcategoryCreateType
+                  }) => void
+                ): JSX.Element => (
+                  <SubcategoryForm
+                    mode="create"
+                    rootPath={rootPath}
+                    submitAction={(variables: SubcategoryCreateType): void =>
+                      createSubcategory({ variables })
+                    }
+                    parentCategoryId={parentCategory.id}
+                  />
+                )}
+              </Mutation>
+            )}
+          </React.Fragment>
+        )}
+      </PageQueryHandler>
     )
   }
 

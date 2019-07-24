@@ -6,20 +6,24 @@ import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
 // components
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
 import { UpdateSubcategory } from 'store/category/mutation'
 import { GetSubcategory } from 'store/category/query'
 // interface
 import { NotificationCreate } from 'types/types'
 import { Category, Subcategory, SubcategoryUpdate } from 'store/category/type'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
+}
+
+interface PageQueryResult {
+  data: { getCategory: Category }
+  status: { getCategory: JSX.Element }
 }
 
 class SubcategoryEdit extends React.Component<Props> {
@@ -35,45 +39,55 @@ class SubcategoryEdit extends React.Component<Props> {
     const categoryId = extractIdFromUrl(match)
 
     return (
-      <FadeTransition>
-        <H1 context="page">Subkategorie bearbeiten</H1>
-        <QueryStateHandler
-          query={GetSubcategory}
-          variables={{ id: categoryId }}
-          queryName="getCategory"
-          errorMessage="Subkategorie konnte nicht geladen werden"
-        >
-          {(subcategory: Subcategory): JSX.Element => (
-            <Mutation
-              mutation={UpdateSubcategory}
-              onCompleted={this.handleCompleted}
-              onError={this.handleError}
-            >
-              {(
-                updateCategory: ({
-                  variables,
-                }: {
-                  variables: Subcategory
-                }) => void
-              ): JSX.Element => (
-                <SubcategoryForm
-                  initialData={{
-                    parentId: subcategory.parentId,
-                    title: subcategory.title,
-                  }}
-                  rootPath={rootPath}
-                  parentCategoryId={subcategory.parentId}
-                  submitAction={(variables: SubcategoryUpdate): void => {
-                    updateCategory({
-                      variables: { id: subcategory.id, title: variables.title },
-                    })
-                  }}
-                />
-              )}
-            </Mutation>
-          )}
-        </QueryStateHandler>
-      </FadeTransition>
+      <PageQueryHandler
+        errorMessages={{
+          getCategory: 'Subkategorie konnte nicht geladen werden',
+        }}
+        query={GetSubcategory}
+        queryNames={['getCategory']}
+        variables={{ id: categoryId }}
+      >
+        {({
+          data: { getCategory: subcategory },
+          status: { getCategory: getCategoryStatus },
+        }: PageQueryResult): JSX.Element => (
+          <React.Fragment>
+            <H1 context="page">Subkategorie bearbeiten</H1>
+            {getCategoryStatus}
+            {!getCategoryStatus && subcategory && (
+              <Mutation
+                mutation={UpdateSubcategory}
+                onCompleted={this.handleCompleted}
+                onError={this.handleError}
+              >
+                {(
+                  updateCategory: ({
+                    variables,
+                  }: {
+                    variables: Subcategory
+                  }) => void
+                ): JSX.Element => (
+                  <SubcategoryForm
+                    initialData={{
+                      title: subcategory.title,
+                    }}
+                    rootPath={rootPath}
+                    parentCategoryId={subcategory.parentId}
+                    submitAction={(variables: SubcategoryUpdate): void => {
+                      updateCategory({
+                        variables: {
+                          id: subcategory.id,
+                          title: variables.title,
+                        },
+                      })
+                    }}
+                  />
+                )}
+              </Mutation>
+            )}
+          </React.Fragment>
+        )}
+      </PageQueryHandler>
     )
   }
 

@@ -21,7 +21,7 @@ interface Props {
   mode?: FormType['mode']
   parentCategoryId: number
   rootPath: string
-  submitAction: (category: SubcategoryCreate) => void
+  submitAction: (variables: SubcategoryCreate) => void
 }
 
 export default class SubcategoryForm extends React.Component<
