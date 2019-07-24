@@ -15,8 +15,7 @@ import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 import CategorySummary from 'shared/CategorySummary/CategorySummary'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import H1 from 'shared/H1/H1'
 import H2 from 'shared/H2/H2'
 // graphql
@@ -38,6 +37,11 @@ interface Props extends RouteComponentProps {
   }
 }
 
+interface PageQueryResult {
+  data: { getRecords: RecordType[] }
+  status: { getRecords: JSX.Element }
+}
+
 class DayEdit extends React.Component<Props> {
   public render(): JSX.Element {
     const {
@@ -46,24 +50,28 @@ class DayEdit extends React.Component<Props> {
       },
     } = this.props
     return (
-      <FadeTransition>
-        <H1 context="page">{`Einträge ${date}`}</H1>
-        <NewRecordSection>
-          <H2>Neu erstellen</H2>
-          <CategoryIconOverview params={{ createdAt: date }} />
-        </NewRecordSection>
-        <H2>Bestehende bearbeiten</H2>
-        <Records>
-          <QueryStateHandler
-            errorMessage="Einträge konnten nicht geladen werden"
-            queryName="getRecords"
-            variables={{ createdAt: date }}
-            query={GetRecords}
-          >
-            {(records: RecordType[]): JSX.Element => {
-              const categories = this.prepareCategories(records)
-              return (
-                <React.Fragment>
+      <PageQueryHandler
+        errorMessages={{ getRecords: 'Einträge konnten nicht geladen werden' }}
+        queryNames={['getRecords']}
+        variables={{ createdAt: date }}
+        query={GetRecords}
+      >
+        {({
+          data: { getRecords: records },
+          status: { getRecords: recordsQueryStatus },
+        }: PageQueryResult): JSX.Element => {
+          const categories = this.prepareCategories(records)
+          return (
+            <React.Fragment>
+              <H1 context="page">{`Einträge ${date}`}</H1>
+              <NewRecordSection>
+                <H2>Neu erstellen</H2>
+                <CategoryIconOverview params={{ createdAt: date }} />
+              </NewRecordSection>
+              <H2>Bestehende bearbeiten</H2>
+              {recordsQueryStatus}
+              {!recordsQueryStatus && records && categories && (
+                <Records>
                   {Object.values(categories).map(
                     (category): JSX.Element => {
                       return (
@@ -88,17 +96,17 @@ class DayEdit extends React.Component<Props> {
                       )
                     }
                   )}
-                </React.Fragment>
-              )
-            }}
-          </QueryStateHandler>
-        </Records>
-        <ActionRow>
-          <Button to="/" context="secondary">
-            Zum Dashboard
-          </Button>
-        </ActionRow>
-      </FadeTransition>
+                </Records>
+              )}
+              <ActionRow>
+                <Button to="/" context="secondary">
+                  Zum Dashboard
+                </Button>
+              </ActionRow>
+            </React.Fragment>
+          )
+        }}
+      </PageQueryHandler>
     )
   }
 
