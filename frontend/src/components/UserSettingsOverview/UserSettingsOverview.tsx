@@ -3,9 +3,9 @@ import * as React from 'react'
 import { Link } from 'react-router-dom'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
-import LogoutButton from 'shared/LogoutButton/LogoutButton'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
+import LogoutButton from 'shared/LogoutButton/LogoutButton'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import Row from 'shared/form/Row/Row'
 import UserSettingCreate from 'components/UserSettingCreate/UserSettingCreate'
 import UserSettingDelete from 'components/UserSettingDelete/UserSettingDelete'
@@ -16,7 +16,6 @@ import { UserSetting } from 'store/userSetting/type'
 import { Setting } from 'store/setting/type'
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate, LocalStorage } from 'types/types'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props {
   clearLocalStorage: () => void
@@ -25,6 +24,11 @@ interface Props {
   updateLocalStorage: (localStorage: LocalStorage) => void
   userSession: UserSession
   userSettings: { [key: string]: UserSetting }
+}
+
+interface PageQueryHandler {
+  data: { getSettings: Setting[] }
+  status: { getSettings: JSX.Element }
 }
 
 class UserSettingsOverview extends React.Component<Props> {
@@ -38,17 +42,24 @@ class UserSettingsOverview extends React.Component<Props> {
       userSettings,
     } = this.props
     return (
-      <FadeTransition>
-        <H1 context="page">Einstellungen</H1>
-        <QueryStateHandler
-          errorMessage="Angemeldete Geräte konnten nicht geladen werden"
-          query={GetSettings}
-          queryName="getSettings"
-        >
-          {(settings: Setting[]): JSX.Element => {
-            return (
-              <React.Fragment>
-                {settings.map(
+      <PageQueryHandler
+        errorMessages={{
+          getSettings: 'Angemeldete Geräte konnten nicht geladen werden',
+        }}
+        query={GetSettings}
+        queryNames={['getSettings']}
+      >
+        {({
+          data: { getSettings: settings },
+          status: { getSettings: settingsQueryStatus },
+        }: PageQueryHandler): JSX.Element => {
+          return (
+            <React.Fragment>
+              <H1 context="page">Einstellungen</H1>
+              {settingsQueryStatus}
+              {!settingsQueryStatus &&
+                settings &&
+                settings.map(
                   (setting: Setting): JSX.Element => {
                     const isSelected =
                       userSettings[setting.type] &&
@@ -73,21 +84,22 @@ class UserSettingsOverview extends React.Component<Props> {
                     )
                   }
                 )}
-              </React.Fragment>
-            )
-          }}
-        </QueryStateHandler>
-        <Row>
-          <Link to={`${rootPath}/sessions`}>Angmeldete Geräte verwalten</Link>
-        </Row>
-        <ActionRow>
-          <LogoutButton
-            clearLocalStorage={clearLocalStorage}
-            createNotificationBanner={createNotificationBanner}
-            userSessionId={userSession.id}
-          />
-        </ActionRow>
-      </FadeTransition>
+              <Row>
+                <Link to={`${rootPath}/sessions`}>
+                  Angmeldete Geräte verwalten
+                </Link>
+              </Row>
+              <ActionRow>
+                <LogoutButton
+                  clearLocalStorage={clearLocalStorage}
+                  createNotificationBanner={createNotificationBanner}
+                  userSessionId={userSession.id}
+                />
+              </ActionRow>
+            </React.Fragment>
+          )
+        }}
+      </PageQueryHandler>
     )
   }
 }
