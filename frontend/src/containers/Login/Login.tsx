@@ -19,15 +19,15 @@ interface Props {
 
 const Layout = (props: Props): JSX.Element => (
   <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
-    <ContentBox>
-      <FadeTransition>
+    <FadeTransition fullWidth>
+      <ContentBox role="main">
         <H1 context="page">Anmeldung</H1>
         <LoginForm
           updateLocalStorage={props.updateLocalStorage}
           createNotificationBanner={props.createNotificationBanner}
         />
-      </FadeTransition>
-    </ContentBox>
+      </ContentBox>
+    </FadeTransition>
   </PageLayout>
 )
 
