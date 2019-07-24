@@ -89,7 +89,7 @@ export default class ContentSelect extends React.Component<Props, State> {
     const hasFooter = typeof renderFooter == 'function'
     const sortedOptions = this.sortedOptions
     const currentOption = sortedOptions.find(
-      (option): boolean => option.value === value
+      (option): boolean => option.value == value
     )
 
     return (
@@ -122,7 +122,7 @@ export default class ContentSelect extends React.Component<Props, State> {
             <Options data-testid="ContentSelect-options">
               {sortedOptions.map(
                 (option): JSX.Element => {
-                  const isSelected = option.value === value
+                  const isSelected = option.value == value
 
                   return (
                     <Option
@@ -180,13 +180,13 @@ export default class ContentSelect extends React.Component<Props, State> {
     const sortedOptions = this.sortedOptions
 
     // Disable tab navigation (keyCode 9), when select is open and close select instead
-    if (keyCode === 9 && isOpen) {
+    if (keyCode == 9 && isOpen) {
       event.preventDefault()
       this.toggleSelect(event)
     }
 
     // Detect space (keyCode 13) and enter key (keyCode 32) and toggle select
-    if (keyCode === 13 || keyCode === 32) {
+    if (keyCode == 13 || keyCode == 32) {
       // We need to prevent the default window scrolling for the space key
       // And the default form submit for the enter key
       event.preventDefault()
@@ -194,17 +194,17 @@ export default class ContentSelect extends React.Component<Props, State> {
     }
 
     // Detect arrow up (keyCode 40) and arrow down key (keyCode 38)
-    if (keyCode === 40 || keyCode === 38) {
+    if (keyCode == 40 || keyCode == 38) {
       // We need to prevent the default window scrolling for the arrow keys
       event.preventDefault()
 
       // Get current option index
       const currentIndex = sortedOptions.findIndex(
-        (option): boolean => option.value === value
+        (option): boolean => option.value == value
       )
 
       // On arrow down (keyCode 40) select next option
-      if (keyCode === 40) {
+      if (keyCode == 40) {
         const nextOption = sortedOptions[currentIndex + 1]
         if (nextOption) {
           this.changeValue(nextOption.value)
@@ -212,7 +212,7 @@ export default class ContentSelect extends React.Component<Props, State> {
       }
 
       // On arrow up select (keyCode 38) previous option
-      if (keyCode === 38) {
+      if (keyCode == 38) {
         const prevOption = sortedOptions[currentIndex - 1]
         if (prevOption) {
           this.changeValue(prevOption.value)
