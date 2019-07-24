@@ -52,7 +52,6 @@ const QueryStateHandler = (props: Props): JSX.Element => {
           data: { [key: string]: object }
           status: { [key: string]: JSX.Element }
         } = { data: data || {}, status: {} }
-
         // show spinner, when loading
         if (loading) {
           return loadingPlaceholder ? (
@@ -80,8 +79,6 @@ const QueryStateHandler = (props: Props): JSX.Element => {
             result.status[queryName] = <NoResult />
           }
         })
-
-        console.log(result)
 
         return (
           <FadeTransition fullWidth>
