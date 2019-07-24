@@ -4,6 +4,8 @@ import { UpdateWidget, CreateWidget } from 'store/widget/mutation'
 // interfaces
 import { Widget, WidgetCreate } from 'store/widget/type'
 import { DocumentNode } from 'graphql'
+// fixtures
+import { evaluation } from 'store/evaluation/fixtures'
 
 export const widgetCreate: WidgetCreate = {
   title: 'Notiz 1',
@@ -14,6 +16,15 @@ export const widgetCreate: WidgetCreate = {
 export const widget: Widget = {
   ...widgetCreate,
   evaluation: null,
+  value: 'Inhalt Notiz 1',
+  id: 1,
+}
+
+export const evaluationWidget: Widget = {
+  title: 'Notiz 1',
+  type: 'evaluation',
+  position: 'dashboard-top',
+  evaluation,
   value: 'Inhalt Notiz 1',
   id: 1,
 }

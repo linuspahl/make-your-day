@@ -44,14 +44,14 @@ export const categoryCreate: CategoryCreate = {
   unit: 'h',
 }
 
+export const subcategory: Subcategory = {
+  title: 'Einkauf',
+  parentId: categoryPlain.id,
+  id: 11,
+}
 export const subcategoryCreate: SubcategoryCreate = {
   title: 'Einkauf',
-  parentId: 1,
-}
-
-export const subcategory: Subcategory = {
-  ...subcategoryCreate,
-  id: 11,
+  parentId: subcategory.parentId,
 }
 
 export const category: CategoryFull = {

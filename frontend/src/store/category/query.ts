@@ -1,20 +1,6 @@
 // libraries
 import gql from 'graphql-tag'
 
-
-// fragments
-export const CategoriesWithChildrenPure = gql`
-  fragment CategoriesWithChildrenPure on Category {
-    id
-    title
-    hasSubcategories
-    subcategories {
-      id
-      title
-    }
-  }
-`
-
 // queries
 export const GetCategories = gql`
   query GetCategories {

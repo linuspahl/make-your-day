@@ -1,7 +1,7 @@
 // libraries
 import gql from 'graphql-tag'
 
-// fragments
+// queries
 export const GetEvaluations = gql`
   query GetEvaluations {
     getEvaluations {
@@ -11,14 +11,6 @@ export const GetEvaluations = gql`
   }
 `
 
-export const EvaluationsFields = gql`
-  fragment EvaluationsFields on Evaluation {
-    id
-    title
-  }
-`
-
-// queries
 export const GetEvaluation = gql`
   query GetEvaluation($id: ID!) {
     getEvaluation(id: $id) {
