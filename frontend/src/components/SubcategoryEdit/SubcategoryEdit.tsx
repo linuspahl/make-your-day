@@ -14,7 +14,11 @@ import { UpdateSubcategory } from 'store/category/mutation'
 import { GetSubcategory } from 'store/category/query'
 // interface
 import { NotificationCreate } from 'types/types'
-import { Category, Subcategory, SubcategoryUpdate } from 'store/category/type'
+import {
+  Category,
+  Subcategory,
+  SubcategoryEdit as SubcategoryEditType,
+} from 'store/category/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -73,7 +77,7 @@ class SubcategoryEdit extends React.Component<Props> {
                     }}
                     rootPath={rootPath}
                     parentCategoryId={subcategory.parentId}
-                    submitAction={(variables: SubcategoryUpdate): void => {
+                    submitAction={(variables: SubcategoryEditType): void => {
                       updateCategory({
                         variables: {
                           id: subcategory.id,

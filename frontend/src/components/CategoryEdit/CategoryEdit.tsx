@@ -13,7 +13,11 @@ import H1 from 'shared/H1/H1'
 import { UpdateCategory } from 'store/category/mutation'
 import { GetCategory } from 'store/category/query'
 // interfaces
-import { CategoryCreate, Category } from 'store/category/type'
+import {
+  CategoryEdit as CategoryEditType,
+  Category,
+  CategoryCreate,
+} from 'store/category/type'
 import { NotificationCreate } from 'types/types'
 
 interface Props extends RouteComponentProps {
@@ -47,35 +51,67 @@ class CategoryEdit extends React.Component<Props> {
         {({
           data: { getCategory: category },
           status: { getCategory: categoryQueryStatus },
-        }: PageQueryResult): JSX.Element => (
-          <React.Fragment>
-            <H1 context="page">Kategorie bearbeiten</H1>
-            {categoryQueryStatus}
-            {!categoryQueryStatus && category && (
-              <Mutation
-                mutation={UpdateCategory}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-              >
-                {(
-                  updateCategory: ({
-                    variables,
-                  }: {
-                    variables: CategoryCreate
-                  }) => void
-                ): JSX.Element => (
-                  <CategoryForm
-                    initialData={category}
-                    rootPath={rootPath}
-                    submitAction={(variables: CategoryCreate): void =>
-                      updateCategory({ variables })
-                    }
-                  />
-                )}
-              </Mutation>
-            )}
-          </React.Fragment>
-        )}
+        }: PageQueryResult): JSX.Element => {
+          const {
+            type,
+            icon,
+            color,
+            hasDescription,
+            hasSubcategories,
+            hasTitle,
+            hasUnit,
+            title,
+            id,
+          } = category
+          return (
+            <React.Fragment>
+              <H1 context="page">Kategorie bearbeiten</H1>
+              {categoryQueryStatus}
+              {!categoryQueryStatus && category && (
+                <Mutation
+                  mutation={UpdateCategory}
+                  onCompleted={this.handleCompleted}
+                  onError={this.handleError}
+                >
+                  {(
+                    updateCategory: ({
+                      variables,
+                    }: {
+                      variables: CategoryEditType
+                    }) => void
+                  ): JSX.Element => (
+                    <CategoryForm
+                      initialData={{
+                        type,
+                        icon,
+                        color,
+                        hasDescription,
+                        hasSubcategories,
+                        hasTitle,
+                        hasUnit,
+                        title,
+                      }}
+                      rootPath={rootPath}
+                      submitAction={(variables: CategoryCreate): void =>
+                        updateCategory({
+                          variables: {
+                            color: variables.color,
+                            hasDescription: variables.hasDescription,
+                            hasTitle: variables.hasTitle,
+                            icon: variables.icon,
+                            title: variables.title,
+                            type: variables.type,
+                            id,
+                          },
+                        })
+                      }
+                    />
+                  )}
+                </Mutation>
+              )}
+            </React.Fragment>
+          )
+        }}
       </PageQueryHandler>
     )
   }

@@ -11,11 +11,11 @@ import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
-import { GetCategories } from 'store/category/query'
+import { GetCategoriesForList } from 'store/category/query'
 import { DeleteCategory } from 'store/category/mutation'
 import { deleteCategory } from 'store/category/update'
 // interfaces
-import { CategoryPlain } from 'store/category/type'
+import { CategoryForList } from 'store/category/type'
 
 const List = styled.ul`
   margin-top: 25px;
@@ -26,7 +26,7 @@ interface Props {
 }
 
 interface PageQueryResult {
-  data: { getCategories: CategoryPlain[] }
+  data: { getCategories: CategoryForList[] }
   status: { getCategories: JSX.Element }
 }
 
@@ -38,7 +38,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
       errorMessages={{
         getCategories: 'Kategorien konnten nicht geladen werden',
       }}
-      query={GetCategories}
+      query={GetCategoriesForList}
       queryNames={['getCategories']}
     >
       {({
@@ -52,7 +52,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
             {!categoriesQueryStatus && categories && (
               <List>
                 {categories.map(
-                  (category: CategoryPlain): JSX.Element => (
+                  (category: CategoryForList): JSX.Element => (
                     <CategoryListItem
                       category={category}
                       key={category.id}
@@ -75,7 +75,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
 }
 
 const CategoryListItem = (props: {
-  category: CategoryPlain
+  category: CategoryForList
   rootPath: string
 }): JSX.Element => {
   const {

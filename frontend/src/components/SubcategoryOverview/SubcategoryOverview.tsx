@@ -13,7 +13,7 @@ import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
-import { GetCategoryPlainWithChildren } from 'store/category/query'
+import { GetCategoryForListWithChildren } from 'store/category/query'
 import { Subcategory, CategoryFull } from 'store/category/type'
 
 const List = styled.ul`
@@ -39,7 +39,7 @@ class CategoryEdit extends React.Component<Props> {
         errorMessages={{
           getCategory: 'Kategorie konnten nicht geladen werden',
         }}
-        query={GetCategoryPlainWithChildren}
+        query={GetCategoryForListWithChildren}
         queryNames={['getCategory']}
         variables={{ id: categoryId }}
       >

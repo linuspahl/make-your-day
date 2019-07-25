@@ -2,8 +2,28 @@
 import gql from 'graphql-tag'
 
 // queries
+
+// getCategories - for list + with children
 export const GetCategories = gql`
-  query GetCategories {
+  query {
+    getCategories(parentsOnly: true) {
+      color
+      hasDescription
+      hasSubcategories
+      hasTitle
+      hasUnit
+      icon
+      id
+      title
+      type
+      unit
+    }
+  }
+`
+
+// getCategories - for list
+export const GetCategoriesForList = gql`
+  query {
     getCategories(parentsOnly: true) {
       id
       title
@@ -12,8 +32,9 @@ export const GetCategories = gql`
   }
 `
 
-export const GetCategoriesWithChildren = gql`
-  query GetCategoriesWithChildren {
+// getCategories - for list + with children
+export const GetCategoriesForListWithChildren = gql`
+  query {
     getCategories(parentsOnly: true) {
       id
       title
@@ -26,17 +47,7 @@ export const GetCategoriesWithChildren = gql`
   }
 `
 
-export const GetCategoriesIcon = gql`
-  query GetCategoriesIcon {
-    getCategories(parentsOnly: true) {
-      color
-      icon
-      id
-      title
-      type
-    }
-  }
-`
+// getCategory
 export const GetCategory = gql`
   query GetCategory($id: ID!) {
     getCategory(id: $id) {
@@ -54,6 +65,7 @@ export const GetCategory = gql`
   }
 `
 
+// getCategory - with children
 export const GetCategoryWithChildren = gql`
   query GetCategoryWithChildren($id: ID!) {
     getCategory(id: $id) {
@@ -75,27 +87,9 @@ export const GetCategoryWithChildren = gql`
   }
 `
 
-export const CategoryWithChildrenFields = gql`
-  fragment CategoryWithChildrenFields on Category {
-    color
-    hasDescription
-    hasSubcategories
-    hasTitle
-    hasUnit
-    icon
-    id
-    title
-    type
-    unit
-    subcategories {
-      id
-      title
-    }
-  }
-`
-
-export const GetCategoryPlainWithChildren = gql`
-  query GetCategoryPlainWithChildren($id: ID!) {
+// getCategory - for list + with children
+export const GetCategoryForListWithChildren = gql`
+  query GetCategoryForListWithChildren($id: ID!) {
     getCategory(id: $id) {
       hasSubcategories
       id

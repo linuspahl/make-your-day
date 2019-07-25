@@ -12,10 +12,10 @@ import {
 import EvaluationForm from './EvaluationForm'
 // fixtures
 import { evaluationCreate } from 'store/evaluation/fixtures'
-import { category } from 'store/category/fixtures'
+import { categoryForListWithChildren } from 'store/category/fixtures'
 
 const componentProps = {
-  categories: [category],
+  categories: [categoryForListWithChildren],
   rootPath: '/evaluation/create',
 }
 
@@ -68,9 +68,11 @@ describe('EvaluationForm should', (): void => {
       leftClickOption
     )
     // Are both subcategories and categories listed?
-    expect(getByText(category.title)).toBeInTheDocument()
+    expect(getByText(categoryForListWithChildren.title)).toBeInTheDocument()
     expect(
-      getByText(`${category.title} -> ${category.subcategories[0].title}`)
+      getByText(
+        `${categoryForListWithChildren.title} -> ${categoryForListWithChildren.subcategories[0].title}`
+      )
     ).toBeInTheDocument()
   })
 

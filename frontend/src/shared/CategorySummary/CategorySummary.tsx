@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom'
 import Icon from 'shared/Icon/Icon'
 import { Category, CategoryTitle, IconWrapper } from './styles'
 // interfaces
-import { CategoryPlain } from 'store/category/type'
+import { Category as CategoryType } from 'store/category/type'
 
 interface Props {
   amount: number
-  category: CategoryPlain
+  category: CategoryType
   displayTitle?: string
   to?: string
 }

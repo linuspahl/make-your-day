@@ -1,6 +1,7 @@
 // libraries
 import * as React from 'react'
 import styled from 'styled-components'
+import { sortBy } from 'lodash'
 // utils
 import { handleInputChange } from 'utils/utils'
 import { evaluationTypeOptions, evaluationPeriodOptions } from 'params'
@@ -12,7 +13,7 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import Row from 'shared/form/Row/Row'
 import Input from 'shared/form/Input/Input'
 // interfaces
-import { CategoryFull, Subcategory } from 'store/category/type'
+import { CategoryForListWithChildren, Subcategory } from 'store/category/type'
 import { EvaluationCreate, EvaluationUpdate } from 'store/evaluation/type'
 import { Form as FormType, SelectOption, InputEvent } from 'types/types'
 
@@ -21,11 +22,11 @@ const Form = styled.form`
 `
 
 const generateCategoryOptions = (
-  categories: CategoryFull[] = []
+  categories: CategoryForListWithChildren[] = []
 ): SelectOption[] => {
   let categoryOptions: SelectOption[] = []
 
-  categories.forEach((category): void => {
+  sortBy(categories, 'title').forEach((category): void => {
     categoryOptions = [
       ...categoryOptions,
       {
@@ -35,15 +36,17 @@ const generateCategoryOptions = (
     ]
 
     if (category.subcategories) {
-      category.subcategories.forEach((subcategory: Subcategory): void => {
-        categoryOptions = [
-          ...categoryOptions,
-          {
-            value: `${category.id}_${subcategory.id}`,
-            title: `${category.title} -> ${subcategory.title}`,
-          },
-        ]
-      })
+      sortBy(category.subcategories, 'title').forEach(
+        (subcategory: Subcategory): void => {
+          categoryOptions = [
+            ...categoryOptions,
+            {
+              value: `${category.id}_${subcategory.id}`,
+              title: `${category.title} -> ${subcategory.title}`,
+            },
+          ]
+        }
+      )
     }
   })
 
@@ -51,7 +54,7 @@ const generateCategoryOptions = (
 }
 
 interface Props {
-  categories: CategoryFull[]
+  categories: CategoryForListWithChildren[]
   initialData?: EvaluationCreate | EvaluationUpdate
   mode?: FormType['mode']
   rootPath: string
@@ -91,7 +94,10 @@ export default class EvaluationForm extends React.Component<
     )
     const categoryOptions = generateCategoryOptions(categories)
     const disabledFields = {
-      groupSubcategories: selectedCategory && !!selectedCategory.parentId,
+      groupSubcategories:
+        selectedCategory &&
+        (!selectedCategory.subcategories ||
+          selectedCategory.subcategories.length == 0),
     }
 
     return (

@@ -1,36 +1,7 @@
-export interface Subcategory {
-  id: number
-  title: string
-  parentId?: number
-}
+// Partial types
+type CategoryType = 'journal' | 'list' | 'counter'
 
-export interface CategoryFull {
-  color?: string
-  hasDescription: boolean
-  hasSubcategories: boolean
-  hasTitle: boolean
-  hasUnit: boolean
-  icon?: string
-  id: number
-  parent?: Category
-  parentId?: number
-  subcategories?: [Subcategory?]
-  title: string
-  type: string
-  unit?: string
-}
-
-export interface CategoryPlain {
-  color?: string
-  hasSubcategories: boolean
-  hasUnit: boolean
-  icon?: string
-  id: number
-  parentId?: number
-  title: string
-  unit?: string
-}
-
+// Deifintion with all fields, but without realtions
 export interface Category {
   color?: string
   hasDescription: boolean
@@ -41,33 +12,61 @@ export interface Category {
   id: number
   parentId?: number
   title: string
-  type: string
+  type: CategoryType
   unit?: string
+}
+
+// definition with all fields and all relations
+export interface CategoryFull extends Category {
+  parent?: Category
+  subcategories?: [Subcategory?]
+}
+
+// Overview / create / edit types
+export interface CategoryForList {
+  id: Category['id']
+  title: Category['title']
+  hasSubcategories: Category['hasSubcategories']
+}
+
+export interface CategoryForListWithChildren extends CategoryForList {
+  subcategories: CategoryFull['subcategories']
 }
 
 export interface CategoryCreate {
-  color?: string
+  color?: Category['color']
   hasDescription: boolean
-  hasSubcategories: boolean
-  hasTitle: boolean
-  hasUnit: boolean
-  icon?: string
-  title: string
-  type: string
-  unit?: string
+  hasSubcategories: Category['hasSubcategories']
+  hasTitle: Category['hasTitle']
+  hasUnit: Category['hasUnit']
+  icon?: Category['icon']
+  title: Category['title']
+  type: Category['type']
+  unit?: Category['unit']
 }
 
+export interface CategoryEdit {
+  id: Category['id']
+  color?: Category['color']
+  hasDescription: boolean
+  hasTitle: Category['hasTitle']
+  icon?: Category['icon']
+  title: Category['title']
+  type: Category['type']
+}
+
+// Subcategory definitions
 export interface Subcategory {
   id: Category['id']
-  parentId?: CategoryFull['parentId']
+  parentId?: Category['parentId']
   title: Category['title']
 }
 
 export interface SubcategoryCreate {
-  parentId?: CategoryFull['parentId']
+  parentId?: Category['parentId']
   title: Category['title']
 }
 
-export interface SubcategoryUpdate {
+export interface SubcategoryEdit {
   title: Category['title']
 }

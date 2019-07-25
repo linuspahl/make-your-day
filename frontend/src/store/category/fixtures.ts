@@ -2,11 +2,11 @@
 import { categoryIcons, categoryColors } from 'params'
 // interface
 import {
-  CategoryPlain,
   CategoryFull,
   CategoryCreate,
   SubcategoryCreate,
   Subcategory,
+  CategoryForListWithChildren,
 } from 'store/category/type'
 // graphql
 import {
@@ -17,21 +17,27 @@ import {
 } from 'store/category/mutation'
 import {
   GetCategories,
-  GetCategoriesIcon,
-  GetCategoryPlainWithChildren,
-  GetCategoriesWithChildren,
-  GetCategoryWithChildren,
+  GetCategoriesForList,
+  GetCategoriesForListWithChildren,
   GetCategory,
+  GetCategoryForListWithChildren,
+  GetCategoryWithChildren,
   GetSubcategory,
 } from 'store/category/query'
 
-export const categoryPlain: CategoryPlain = {
-  id: 1,
-  hasUnit: false,
-  hasSubcategories: true,
-  title: 'Ausgaben',
+// subcategory
+export const subcategory: Subcategory = {
+  title: 'Einkauf',
+  parentId: 1,
+  id: 11,
 }
 
+export const subcategoryCreate: SubcategoryCreate = {
+  title: 'Einkauf',
+  parentId: subcategory.parentId,
+}
+
+// category
 export const categoryCreate: CategoryCreate = {
   color: Object.keys(categoryColors)[0],
   hasDescription: false,
@@ -44,21 +50,18 @@ export const categoryCreate: CategoryCreate = {
   unit: 'h',
 }
 
-export const subcategory: Subcategory = {
-  title: 'Einkauf',
-  parentId: categoryPlain.id,
-  id: 11,
-}
-export const subcategoryCreate: SubcategoryCreate = {
-  title: 'Einkauf',
-  parentId: subcategory.parentId,
-}
-
 export const category: CategoryFull = {
   ...categoryCreate,
   parent: null,
   subcategories: [subcategory],
   id: 1,
+}
+
+export const categoryForListWithChildren: CategoryForListWithChildren = {
+  id: 1,
+  title: category.title,
+  hasSubcategories: true,
+  subcategories: [subcategory],
 }
 
 // # Api stubs
@@ -146,23 +149,23 @@ export const getCategoryWithChildrenError = {
   error: new Error('getCategoryWithChildren failed'),
 }
 
-// ## getCategoryPlainWithChildren
-const getCategoryPlainWithChildrenRequest = {
+// ## getCategoryForListWithChildren
+const getCategoryForListWithChildrenRequest = {
   request: {
-    query: GetCategoryPlainWithChildren,
+    query: GetCategoryForListWithChildren,
     variables: { id: category.id },
   },
 }
-export const getCategoryPlainWithChildrenSuccess = {
-  ...getCategoryPlainWithChildrenRequest,
+export const getCategoryForListWithChildrenSuccess = {
+  ...getCategoryForListWithChildrenRequest,
   result: {
     data: {
       getCategory: category,
     },
   },
 }
-export const getCategoryPlainWithChildrenError = {
-  ...createCategoryRequest,
+export const getCategoryForListWithChildrenError = {
+  ...getCategoryForListWithChildrenRequest,
   error: new Error('getCategoryPlainWithChildren failed'),
 }
 
@@ -185,7 +188,7 @@ export const getSubcategorySuccess = {
 // ## getCategories
 const getCategoriesRequest = {
   request: {
-    query: GetCategories,
+    query: GetCategoriesForList,
   },
 }
 export const getCategoriesSuccess = {
@@ -201,42 +204,42 @@ export const getCategoriesError = {
   error: new Error('getCategories failed'),
 }
 
-// ## getCategoriesIcon
-const getCategoriesIconRequest = {
+// ## getCategoriesForList
+const getCategoriesForListRequest = {
   request: {
-    query: GetCategoriesIcon,
+    query: GetCategories,
   },
 }
-export const getCategoriesIconSuccess = {
-  ...getCategoriesIconRequest,
+export const getCategoriesForListSuccess = {
+  ...getCategoriesForListRequest,
   result: {
     data: {
       getCategories: [category],
     },
   },
 }
-export const getCategoriesIconError = {
+export const getCategoriesForListError = {
   ...createCategoryRequest,
-  error: new Error('getCategoriesIcon failed'),
+  error: new Error('getCategoriesForList failed'),
 }
 
-// ## getCategoriesWithChildren
-const getCategoriesWithChildrenRequest = {
+// ## getCategoriesForListWithChildren
+const getCategoriesForListWithChildrenRequest = {
   request: {
-    query: GetCategoriesWithChildren,
+    query: GetCategoriesForListWithChildren,
   },
 }
-export const getCategoriesWithChildrenSuccess = {
-  ...getCategoriesWithChildrenRequest,
+export const getCategoriesForListWithChildrenSuccess = {
+  ...getCategoriesForListWithChildrenRequest,
   result: {
     data: {
       getCategories: [category],
     },
   },
 }
-export const getCategoriesWithChildrenError = {
+export const getCategoriesForListWithChildrenError = {
   ...createCategoryRequest,
-  error: new Error('getCategoriesWithChildren failed'),
+  error: new Error('getCategoriesForListWithChildren failed'),
 }
 
 // ## updateCategory
@@ -244,8 +247,13 @@ const updateCategoryRequest = {
   request: {
     query: UpdateCategory,
     variables: {
-      ...categoryCreate,
-      id: 1,
+      color: category.color,
+      hasDescription: category.hasDescription,
+      hasTitle: category.hasTitle,
+      icon: category.icon,
+      title: category.title,
+      type: category.type,
+      id: category.id,
     },
   },
 }

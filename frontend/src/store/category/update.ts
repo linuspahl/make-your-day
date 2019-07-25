@@ -3,11 +3,11 @@ import { DataProxy } from 'apollo-cache'
 import { FetchResult } from 'react-apollo'
 // graphql
 import {
-  GetCategories,
-  GetCategoryPlainWithChildren,
+  GetCategoriesForList,
+  GetCategoryForListWithChildren,
 } from 'store/category/query'
 // interfaces
-import { CategoryFull, Category } from 'store/category/type'
+import { CategoryFull, Category, Subcategory } from 'store/category/type'
 
 export const addCategory = (cache: DataProxy, result: FetchResult): void => {
   const {
@@ -16,14 +16,17 @@ export const addCategory = (cache: DataProxy, result: FetchResult): void => {
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the overview list will not get fetched.
   try {
-    const categories: { getCategories: Category[] } = cache.readQuery({
-      query: GetCategories,
+    const categories: { GetCategoriesForList: Category[] } = cache.readQuery({
+      query: GetCategoriesForList,
     })
 
     cache.writeQuery({
-      query: GetCategories,
+      query: GetCategoriesForList,
       data: {
-        getCategories: [...categories.getCategories, createCategory],
+        GetCategoriesForList: [
+          ...categories.GetCategoriesForList,
+          createCategory,
+        ],
       },
     })
   } catch {}
@@ -37,8 +40,8 @@ export const addSubcategory = (
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the overview list will not get fetched
   try {
-    const categories: { getCategory: CategoryFull } = cache.readQuery({
-      query: GetCategoryPlainWithChildren,
+    const category: { getCategory: CategoryFull } = cache.readQuery({
+      query: GetCategoryForListWithChildren,
       variables,
     })
     const {
@@ -46,12 +49,12 @@ export const addSubcategory = (
     } = result
 
     cache.writeQuery({
-      query: GetCategoryPlainWithChildren,
+      query: GetCategoryForListWithChildren,
       data: {
         getCategory: {
-          ...categories.getCategory,
-          subcategories: [
-            ...categories.getCategory.subcategories,
+          ...category.getCategory,
+          subcategory: [
+            ...category.getCategory.subcategories,
             createSubcategory,
           ],
         },
@@ -73,18 +76,18 @@ export const deleteCategory = (
   try {
     if (deleteCategory) {
       const categoriesQuery: {
-        getCategories: CategoryFull[]
-      } = cache.readQuery({ query: GetCategories })
-      const updatedCategories = categoriesQuery.getCategories.filter(
+        GetCategoriesForList: CategoryFull[]
+      } = cache.readQuery({ query: GetCategoriesForList })
+      const updatedCategories = categoriesQuery.GetCategoriesForList.filter(
         (category): boolean => {
           return category.id !== variables.id
         }
       )
 
       cache.writeQuery({
-        query: GetCategories,
+        query: GetCategoriesForList,
         data: {
-          getCategories: [...updatedCategories],
+          GetCategoriesForList: [...updatedCategories],
         },
       })
     }

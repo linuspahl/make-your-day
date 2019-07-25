@@ -7,18 +7,18 @@ import SubcategoryOverview from './SubcategoryOverview'
 // fixtrues
 import {
   subcategory,
-  getCategoryPlainWithChildrenSuccess,
+  getCategoryForListWithChildrenSuccess,
 } from 'store/category/fixtures'
 
 describe('SubcategoryOverview should', (): void => {
   test('display content', async (): Promise<void> => {
     const categoryId =
-      getCategoryPlainWithChildrenSuccess.result.data.getCategory.id
+      getCategoryForListWithChildrenSuccess.result.data.getCategory.id
 
     const { getByText } = renderWithAppRoot(
       <SubcategoryOverview rootPath={`category/${categoryId}/subcategories`} />,
       {
-        mocks: [getCategoryPlainWithChildrenSuccess],
+        mocks: [getCategoryForListWithChildrenSuccess],
         mockWrappingRoute: true,
         route: `category/${categoryId}/subcategories`,
         routePath: 'category/:id/subcategories',
