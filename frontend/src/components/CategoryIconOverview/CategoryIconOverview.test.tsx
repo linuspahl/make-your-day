@@ -5,14 +5,14 @@ import CategoryIconOverview from './CategoryIconOverview'
 import { renderWithAppRoot, wait } from 'testUtils'
 // fixtures
 import {
-  getCategoriesIconError,
-  getCategoriesIconSuccess,
+  getCategoriesForListError,
+  getCategoriesForListSuccess,
 } from 'store/category/fixtures'
 
 describe('CategoryIconOverview should', (): void => {
   test('list fetched categories', async (): Promise<void> => {
     const { getAllByTestId } = renderWithAppRoot(<CategoryIconOverview />, {
-      mocks: [getCategoriesIconSuccess],
+      mocks: [getCategoriesForListSuccess],
     })
     // Wait for the Query component
     await wait()
@@ -21,7 +21,7 @@ describe('CategoryIconOverview should', (): void => {
 
   test('show info, when category fetching fails', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(<CategoryIconOverview />, {
-      mocks: [getCategoriesIconError],
+      mocks: [getCategoriesForListError],
     })
     // Wait for the Query component
     await wait()
@@ -42,7 +42,7 @@ describe('CategoryIconOverview should', (): void => {
     const { getByText } = renderWithAppRoot(<CategoryIconOverview />, {
       mocks: [
         {
-          ...getCategoriesIconSuccess,
+          ...getCategoriesForListSuccess,
           result: { data: { getCategories: [] } },
         },
       ],
@@ -57,7 +57,7 @@ describe('CategoryIconOverview should', (): void => {
     const { container } = renderWithAppRoot(
       <CategoryIconOverview context="horizontal-scroll" />,
       {
-        mocks: [getCategoriesIconSuccess],
+        mocks: [getCategoriesForListSuccess],
       }
     )
     expect(container.firstChild).toHaveStyleRule('display', 'flex')
