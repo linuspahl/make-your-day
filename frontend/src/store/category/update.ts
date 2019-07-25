@@ -7,7 +7,7 @@ import {
   GetCategoryForListWithChildren,
 } from 'store/category/query'
 // interfaces
-import { CategoryFull, Category, Subcategory } from 'store/category/type'
+import { CategoryFull, Category, CategoryForList } from 'store/category/type'
 
 export const addCategory = (cache: DataProxy, result: FetchResult): void => {
   const {
@@ -76,9 +76,10 @@ export const deleteCategory = (
   try {
     if (deleteCategory) {
       const categoriesQuery: {
-        GetCategoriesForList: CategoryFull[]
+        getCategories: CategoryForList[]
       } = cache.readQuery({ query: GetCategoriesForList })
-      const updatedCategories = categoriesQuery.GetCategoriesForList.filter(
+
+      const updatedCategories = categoriesQuery.getCategories.filter(
         (category): boolean => {
           return category.id !== variables.id
         }
@@ -87,7 +88,7 @@ export const deleteCategory = (
       cache.writeQuery({
         query: GetCategoriesForList,
         data: {
-          GetCategoriesForList: [...updatedCategories],
+          getCategories: [...updatedCategories],
         },
       })
     }
