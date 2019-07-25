@@ -14,7 +14,7 @@ import WidgetEdit from './WidgetEdit'
 // fixtures
 import {
   updateWidgetSuccess,
-  evaluationWidget,
+  widget,
   updateWidgetError,
 } from 'store/widget/fixtures'
 import { evaluation } from 'store/evaluation/fixtures'
@@ -28,7 +28,7 @@ describe('WidgetEdit should', (): void => {
   }
   const renderUtilsProps = {
     mockWrappingRoute: true,
-    route: `/widgets/edit/${evaluationWidget.id}`,
+    route: `/widgets/edit/${widget.id}`,
     routePath: '/widgets/edit/:id',
   }
 
@@ -36,7 +36,7 @@ describe('WidgetEdit should', (): void => {
   const pageQueryRequest = {
     request: {
       query: pageQuery,
-      variables: { widgetId: evaluationWidget.id },
+      variables: { widgetId: widget.id },
     },
   }
   const pageQuerySuccess = {
@@ -50,31 +50,15 @@ describe('WidgetEdit should', (): void => {
           },
         ],
         getWidget: {
-          evaluationId: evaluationWidget.evaluation.id,
-          id: evaluationWidget.id,
-          position: evaluationWidget.position,
-          title: evaluationWidget.title,
-          type: evaluationWidget.type,
-          value: evaluationWidget.value,
+          evaluationId: widget.evaluationId,
+          id: widget.id,
+          position: widget.position,
+          title: widget.title,
+          type: widget.type,
+          value: widget.value,
         },
       },
     },
-  }
-  const pageQueryError = {
-    ...pageQueryRequest,
-    error: new Error('pageQuery failed'),
-  }
-
-  const updateWidgetResult = {
-    id: evaluationWidget.id,
-    title: 'New Name',
-    type: evaluationWidget.type,
-    value: evaluationWidget.value,
-    position: evaluationWidget.position,
-  }
-  const updateWidgetVariables = {
-    ...updateWidgetResult,
-    evaluationId: 1,
   }
 
   afterEach((): void => {
@@ -89,13 +73,7 @@ describe('WidgetEdit should', (): void => {
       <WidgetEdit {...propsFixtures} />,
       {
         ...renderUtilsProps,
-        mocks: [
-          pageQuerySuccess,
-          adjustApiStub(updateWidgetSuccess, {
-            variables: updateWidgetVariables,
-            result: updateWidgetResult,
-          }),
-        ],
+        mocks: [pageQuerySuccess, updateWidgetSuccess],
       }
     )
     // Wait for pageQuery
@@ -120,12 +98,7 @@ describe('WidgetEdit should', (): void => {
       <WidgetEdit {...propsFixtures} />,
       {
         ...renderUtilsProps,
-        mocks: [
-          pageQueryError,
-          adjustApiStub(updateWidgetError, {
-            variables: updateWidgetVariables,
-          }),
-        ],
+        mocks: [pageQuerySuccess, updateWidgetError],
       }
     )
     // Wait for pageQuery

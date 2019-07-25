@@ -33,7 +33,7 @@ describe('DashboardWidgets should', (): void => {
     expect(getByTestId('DashboardWidgetsPlaceholder')).toBeInTheDocument()
   })
 
-  test('show info, when getWidgets result is empty', (): void => {
+  test('show info, when getWidgetsWithEvaluations result is empty', (): void => {
     const { getByText } = renderWithAppRoot(
       <DashboardWidgets {...propFixtures} widgets={undefined} />
     )

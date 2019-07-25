@@ -5,13 +5,13 @@ import { renderWithAppRoot, wait } from 'testUtils'
 // components
 import WidgetOverview from './WidgetOverview'
 // fixtures
-import { widget, getWidgetsOverviewSuccess } from 'store/widget/fixtures'
+import { widget, getWidgetsForListSuccess } from 'store/widget/fixtures'
 
 describe('WidgetOverview should', (): void => {
   test('list fetched widgets', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(
       <WidgetOverview rootPath="/widgets" />,
-      { mocks: [getWidgetsOverviewSuccess] }
+      { mocks: [getWidgetsForListSuccess] }
     )
     // Wait for the Query component
     await wait()

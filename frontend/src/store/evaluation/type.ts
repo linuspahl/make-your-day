@@ -1,4 +1,4 @@
-import { CategoryPlain } from 'store/category/type'
+import { CategoryForList } from 'store/category/type'
 
 export interface EvaluationPlain {
   id: number
@@ -6,7 +6,7 @@ export interface EvaluationPlain {
 }
 
 export interface Evaluation {
-  category: CategoryPlain
+  category: CategoryForList
   categoryId: number
   groupSubcategories: boolean
   id: number

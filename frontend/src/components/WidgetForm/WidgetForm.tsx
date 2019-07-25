@@ -11,7 +11,7 @@ import Input from 'shared/form/Input/Input'
 import Button from 'shared/Button/Button'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 // interface
-import { EvaluationPlain } from 'store/evaluation/type'
+import { EvaluationForList } from 'store/evaluation/type'
 import { WidgetCreate } from 'store/widget/type'
 import { Form as FormType, SelectOption, InputEvent } from 'types/types'
 
@@ -20,7 +20,7 @@ const Form = styled.form`
 `
 
 interface Props {
-  evaluations?: EvaluationPlain[]
+  evaluations?: EvaluationForList[]
   initialData?: WidgetCreate
   mode?: FormType['mode']
   rootPath: string
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const generateEvaluationOptions = (
-  evaluations: EvaluationPlain[] = []
+  evaluations: EvaluationForList[] = []
 ): SelectOption[] => {
   let evaluationOptions: SelectOption[] = []
 

@@ -5,7 +5,6 @@ type WidgetType = 'textarea' | 'timeline' | 'evaluation'
 type WidgetPosition = 'dashboard-bottom' | 'dashboard-top'
 
 export interface Widget {
-  evaluation?: Evaluation
   evaluationId?: number
   id: number
   position: WidgetPosition
@@ -14,9 +13,27 @@ export interface Widget {
   value?: string
 }
 
+export interface WidgetFull extends Widget {
+  evaluation?: Evaluation
+}
+
+export interface WidgetForList {
+  id: Widget['id']
+  position: Widget['position']
+  title: Widget['title']
+  type: Widget['type']
+}
+
 export interface WidgetCreate {
-  evaluationId?: number
-  position: WidgetPosition
-  title: string
-  type: WidgetType
+  evaluationId?: Widget['evaluationId']
+  position: Widget['position']
+  title: Widget['title']
+  type: Widget['type']
+}
+
+export interface WidgetEdit {
+  id: Widget['id']
+  evaluationId?: Widget['evaluationId']
+  position: Widget['position']
+  title: Widget['title']
 }

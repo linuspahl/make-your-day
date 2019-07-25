@@ -1,19 +1,6 @@
 // libraries
 import gql from 'graphql-tag'
 
-
-// fragments
-export const WidgetFields = gql`
-  fragment WidgetFields on Widget {
-    evaluationId
-    id
-    position
-    title
-    type
-    value
-  }
-`
-
 // queries
 export const GetWidget = gql`
   query GetWidget($id: ID!) {
@@ -28,7 +15,18 @@ export const GetWidget = gql`
   }
 `
 
-export const GetWidgets = gql`
+export const GetWidgetsForList = gql`
+  query {
+    getWidgets {
+      id
+      title
+      type
+      position
+    }
+  }
+`
+
+export const GetWidgetsWithEvaluation = gql`
   query GetWidgets {
     getWidgets {
       id
@@ -55,17 +53,6 @@ export const GetWidgets = gql`
           }
         }
       }
-    }
-  }
-`
-
-export const GetWidgetsOverview = gql`
-  query GetWidgetsOverview {
-    getWidgets {
-      id
-      title
-      type
-      position
     }
   }
 `

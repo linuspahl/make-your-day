@@ -2,23 +2,23 @@
 import { DataProxy } from 'apollo-cache'
 import { FetchResult } from 'react-apollo'
 // graphql
-import { GetWidgets, GetWidgetsOverview } from 'store/widget/query'
-import { Widget } from 'store/widget/type'
+import { GetWidgetsForList } from 'store/widget/query'
+import { WidgetEdit } from 'store/widget/type'
 
 export const addWidget = (cache: DataProxy, result: FetchResult): void => {
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the overview list will not get fetched
   try {
     const widgets: {
-      getWidgets: Widget[]
-    } = cache.readQuery({ query: GetWidgetsOverview })
+      getWidgets: WidgetEdit[]
+    } = cache.readQuery({ query: GetWidgetsForList })
 
     const {
       data: { createWidget },
     } = result
 
     cache.writeQuery({
-      query: GetWidgets,
+      query: GetWidgetsForList,
       data: {
         getWidgets: [...widgets.getWidgets, createWidget],
       },
@@ -37,8 +37,8 @@ export const deleteWidget = (
   try {
     if (deleteWidget) {
       const widgetsQuery: {
-        getWidgets: Widget[]
-      } = cache.readQuery({ query: GetWidgetsOverview })
+        getWidgets: WidgetEdit[]
+      } = cache.readQuery({ query: GetWidgetsForList })
 
       const updatedWidgets = widgetsQuery.getWidgets.filter(
         (widget): boolean => {
@@ -47,7 +47,7 @@ export const deleteWidget = (
       )
 
       cache.writeQuery({
-        query: GetWidgets,
+        query: GetWidgetsForList,
         data: {
           getWidgets: [...updatedWidgets],
         },

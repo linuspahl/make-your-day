@@ -12,9 +12,9 @@ import FadeTransition from 'shared/FadeTransition/FadeTransition'
 // interfaces
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate } from 'types/types'
-import { Widget } from 'store/widget/type'
+import { WidgetFull } from 'store/widget/type'
 // graphql
-import { GetWidgets } from 'store/widget/query'
+import { GetWidgetsWithEvaluation } from 'store/widget/query'
 
 export const Layout = styled.div`
   height: 100%;
@@ -43,7 +43,7 @@ const Dashboard = (props: Props): JSX.Element => (
     noPadding
   >
     <Layout role="main">
-      <Query query={GetWidgets}>
+      <Query query={GetWidgetsWithEvaluation}>
         {({
           loading,
           error,
@@ -51,7 +51,7 @@ const Dashboard = (props: Props): JSX.Element => (
         }: {
           loading: boolean
           error?: ApolloError
-          data: { getWidgets: Widget[] }
+          data: { getWidgets: WidgetFull[] }
         }): JSX.Element => {
           if (error)
             return (
@@ -61,7 +61,7 @@ const Dashboard = (props: Props): JSX.Element => (
               />
             )
 
-          const widgets: Widget[] = data.getWidgets || []
+          const widgets: WidgetFull[] = data.getWidgets || []
           let widgetsDashboardTop = widgets.filter(
             (widget): boolean => widget.position === 'dashboard-top'
           )

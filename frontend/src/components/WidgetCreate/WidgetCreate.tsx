@@ -12,11 +12,11 @@ import WidgetForm from 'components/WidgetForm/WidgetForm'
 // graphql
 import { addWidget } from 'store/widget/update'
 import { CreateWidget } from 'store/widget/mutation'
-import { GetEvaluations } from 'store/evaluation/query'
+import { GetEvaluationsForList } from 'store/evaluation/query'
 // interfaces
 import { NotificationCreate } from 'types/types'
 import { WidgetCreate as WidgetCreateType, Widget } from 'store/widget/type'
-import { Evaluation } from 'store/evaluation/type'
+import { EvaluationForList } from 'store/evaluation/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -24,7 +24,7 @@ interface Props extends RouteComponentProps {
 }
 
 interface PageQueryResult {
-  data?: { getEvaluations: Evaluation[] }
+  data?: { getEvaluations: EvaluationForList[] }
   status?: { getEvaluations: JSX.Element }
 }
 
@@ -43,7 +43,7 @@ class WidgetCreate extends React.Component<Props> {
         errorMessages={{
           getEvaluations: 'Kategorien konnten nicht geladen werden',
         }}
-        query={GetEvaluations}
+        query={GetEvaluationsForList}
         queryNames={['getEvaluations']}
       >
         {({

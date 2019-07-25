@@ -1,8 +1,12 @@
 // graphql
-import { GetWidgetsOverview, GetWidget, GetWidgets } from 'store/widget/query'
+import {
+  GetWidgetsForList,
+  GetWidget,
+  GetWidgetsWithEvaluation,
+} from 'store/widget/query'
 import { UpdateWidget, CreateWidget } from 'store/widget/mutation'
 // interfaces
-import { Widget, WidgetCreate } from 'store/widget/type'
+import { Widget, WidgetFull, WidgetCreate, WidgetEdit } from 'store/widget/type'
 import { DocumentNode } from 'graphql'
 // fixtures
 import { evaluation } from 'store/evaluation/fixtures'
@@ -15,16 +19,17 @@ export const widgetCreate: WidgetCreate = {
 
 export const widget: Widget = {
   ...widgetCreate,
-  evaluation: null,
   value: 'Inhalt Notiz 1',
+  evaluationId: null,
   id: 1,
 }
 
-export const evaluationWidget: Widget = {
+export const evaluationWidget: WidgetFull = {
   title: 'Notiz 1',
   type: 'evaluation',
   position: 'dashboard-top',
   evaluation,
+  evaluationId: evaluation.id,
   value: 'Inhalt Notiz 1',
   id: 1,
 }
@@ -79,41 +84,41 @@ export const getWidgetError = {
 }
 
 // ## getWidgets
-const getWidgetsRequest = {
+const getWidgetsWithEvaluationRequest = {
   request: {
-    query: GetWidgets,
+    query: GetWidgetsWithEvaluation,
   },
 }
-export const getWidgetsSuccess = {
-  ...getWidgetsRequest,
+export const getWidgetsWithEvaluationSuccess = {
+  ...getWidgetsWithEvaluationRequest,
   result: {
     data: {
-      getWidgets: [widget, widget2],
+      getWidgetsWithEvaluation: [widget, widget2],
     },
   },
 }
-export const getWidgetsError = {
-  ...getWidgetsRequest,
+export const getWidgetsWithEvaluationError = {
+  ...getWidgetsWithEvaluationRequest,
   error: new Error('getWidgets failed'),
 }
 
-// ## getWidgetsOverview
-const getWidgetsOverviewRequest = {
+// ## getWidgetsForList
+const getWidgetsForListRequest = {
   request: {
-    query: GetWidgetsOverview,
+    query: GetWidgetsForList,
   },
 }
-export const getWidgetsOverviewSuccess = {
-  ...getWidgetsOverviewRequest,
+export const getWidgetsForListSuccess = {
+  ...getWidgetsForListRequest,
   result: {
     data: {
       getWidgets: [widget, widget2],
     },
   },
 }
-export const getWidgetsOverviewError = {
-  ...getWidgetsOverviewRequest,
-  error: new Error('getWidgetsOverview failed'),
+export const getWidgetsForListError = {
+  ...getWidgetsForListRequest,
+  error: new Error('getWidgetsForList failed'),
 }
 
 // ## updateWidget
@@ -122,18 +127,16 @@ export const getWidgetsOverviewError = {
 const updateWidgetRequest: {
   request: {
     query: DocumentNode
-    variables: Widget
+    variables: WidgetEdit
   }
 } = {
   request: {
     query: UpdateWidget,
     variables: {
-      title: widget.title,
-      type: widget.type,
+      title: 'New Name',
       position: widget.position,
-      evaluationId: 1,
+      evaluationId: null,
       id: widget.id,
-      value: 'Inhalt Notiz 1',
     },
   },
 }
@@ -142,7 +145,7 @@ export const updateWidgetSuccess = {
   ...updateWidgetRequest,
   result: {
     data: {
-      updateWidget: widget,
+      updateWidget: { ...widget, title: 'New Name' },
     },
   },
 }

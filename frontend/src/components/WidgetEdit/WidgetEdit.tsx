@@ -14,7 +14,11 @@ import WidgetForm from 'components/WidgetForm/WidgetForm'
 import { UpdateWidget } from 'store/widget/mutation'
 // interfaces
 import { NotificationCreate } from 'types/types'
-import { Widget } from 'store/widget/type'
+import {
+  Widget,
+  WidgetCreate,
+  WidgetEdit as WidgetEditType,
+} from 'store/widget/type'
 import { Evaluation } from 'store/evaluation/type'
 
 export const pageQuery = gql`
@@ -83,14 +87,25 @@ class WidgetEdit extends React.Component<Props> {
                   onError={this.handleError}
                 >
                   {(
-                    updateUser: ({ variables }: { variables: Widget }) => void
+                    updateUser: ({
+                      variables,
+                    }: {
+                      variables: WidgetEditType
+                    }) => void
                   ): JSX.Element => (
                     <WidgetForm
                       evaluations={evaluations}
                       initialData={widget}
                       rootPath={rootPath}
-                      submitAction={(variables: Widget): void =>
-                        updateUser({ variables })
+                      submitAction={(variables: WidgetCreate): void =>
+                        updateUser({
+                          variables: {
+                            id: widget.id,
+                            evaluationId: variables.evaluationId,
+                            position: variables.position,
+                            title: variables.title,
+                          },
+                        })
                       }
                     />
                   )}
@@ -104,7 +119,7 @@ class WidgetEdit extends React.Component<Props> {
   }
 
   // Form submit function
-  private handleCompleted(data: { updateWidget: Widget }): void {
+  private handleCompleted(data: { updateWidget: WidgetEditType }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateWidget: { title },

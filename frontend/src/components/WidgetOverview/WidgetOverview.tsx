@@ -14,11 +14,11 @@ import H2 from 'shared/H2/H2'
 import ListItem from 'shared/list/ListItem/ListItem'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
-import { GetWidgetsOverview } from 'store/widget/query'
+import { GetWidgetsForList } from 'store/widget/query'
 import { DeleteWidget } from 'store/widget/mutation'
 import { deleteWidget } from 'store/widget/update'
 // interfaces
-import { Widget } from 'store/widget/type'
+import { WidgetForList } from 'store/widget/type'
 
 const List = styled.ul`
   margin-top: 10px;
@@ -26,14 +26,14 @@ const List = styled.ul`
 `
 
 const sortWidgetsByPosition = (
-  widgets: Widget[]
+  widgets: WidgetForList[]
 ): {
-  [key: string]: Widget[]
+  [key: string]: WidgetForList[]
 } => {
-  // Expects common list of widgets
+  // Expects common list of WidgetForLists
   // Returns an object which has all positions as keys and an array of the related widgets as value
   const positions: {
-    [key: string]: Widget[]
+    [key: string]: WidgetForList[]
   } = {}
 
   widgets.forEach((widget): void => {
@@ -51,7 +51,7 @@ interface Props {
 }
 
 interface PageQueryResult {
-  data?: { getWidgets: Widget[] }
+  data?: { getWidgets: WidgetForList[] }
   status?: { getWidgets: JSX.Element }
 }
 
@@ -61,7 +61,7 @@ const WidgetOverview = (props: Props): JSX.Element => {
   return (
     <PageQueryHandler
       errorMessages={{ getWidgets: 'Widgets konnten nicht geladen werden' }}
-      query={GetWidgetsOverview}
+      query={GetWidgetsForList}
       queryNames={['getWidgets']}
     >
       {({
@@ -111,7 +111,7 @@ const WidgetOverview = (props: Props): JSX.Element => {
 }
 
 const WidgetListItem = (props: {
-  widget: Widget
+  widget: WidgetForList
   rootPath: string
 }): JSX.Element => {
   const {

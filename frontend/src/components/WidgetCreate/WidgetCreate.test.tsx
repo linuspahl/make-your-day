@@ -13,7 +13,7 @@ import initWidgetForm from 'components/WidgetForm/__tests__/initWidgetForm'
 import WidgetCreate from './WidgetCreate'
 // fixtures
 import { createWidgetSuccess, createWidgetError } from 'store/widget/fixtures'
-import { getEvaluationsSuccess } from 'store/evaluation/fixtures'
+import { getEvaluationsForListSuccess } from 'store/evaluation/fixtures'
 
 describe('WidgetCreate should', (): void => {
   afterEach(cleanup)
@@ -27,7 +27,7 @@ describe('WidgetCreate should', (): void => {
         rootPath="/widget/create"
         createNotificationBanner={createNotificationBannerStub}
       />,
-      { mocks: [getEvaluationsSuccess, createWidgetSuccess] }
+      { mocks: [getEvaluationsForListSuccess, createWidgetSuccess] }
     )
     await wait()
     initWidgetForm(getByLabelText, getByText)
@@ -49,7 +49,7 @@ describe('WidgetCreate should', (): void => {
         rootPath="/widget/create"
         createNotificationBanner={createNotificationBannerStub}
       />,
-      { mocks: [getEvaluationsSuccess, createWidgetError] }
+      { mocks: [getEvaluationsForListSuccess, createWidgetError] }
     )
     await wait()
     initWidgetForm(getByLabelText, getByText)

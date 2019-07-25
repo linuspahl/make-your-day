@@ -23,7 +23,7 @@ import {
 } from './styles'
 // graphql
 import { NotificationCreate } from 'types/types'
-import { Widget as WidgetType } from 'store/widget/type'
+import { WidgetFull } from 'store/widget/type'
 
 const LoadingPlaceholder = (): JSX.Element => (
   <PlaceholderWrapper data-testid="DashboardWidgetsPlaceholder">
@@ -36,7 +36,7 @@ const LoadingPlaceholder = (): JSX.Element => (
 interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
   loading: boolean
-  widgets: WidgetType[]
+  widgets: WidgetFull[]
 }
 
 const DashboardWidgets = (props: Props): JSX.Element => {

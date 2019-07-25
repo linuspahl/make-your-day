@@ -7,8 +7,8 @@ import Dashboard from './Dashboard'
 // fixtures
 import { userSession } from 'store/userSession/fixtures'
 import {
-  getWidgetsError,
-  getWidgetsSuccess,
+  getWidgetsWithEvaluationError,
+  getWidgetsWithEvaluationSuccess,
   widget,
 } from 'store/widget/fixtures'
 
@@ -24,7 +24,7 @@ describe('Dashboard should', (): void => {
   test('render dashboard and fetch widgets', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(<Dashboard {...propsFixture} />, {
       route: '/dashboard',
-      mocks: [getWidgetsSuccess],
+      mocks: [getWidgetsWithEvaluationSuccess],
     })
     await wait()
     expect(getByText(widget.value)).toBeInTheDocument()
@@ -35,7 +35,7 @@ describe('Dashboard should', (): void => {
   > => {
     const { getByText } = renderWithAppRoot(<Dashboard {...propsFixture} />, {
       route: '/dashboard',
-      mocks: [getWidgetsError],
+      mocks: [getWidgetsWithEvaluationError],
     })
     await wait()
     expect(
