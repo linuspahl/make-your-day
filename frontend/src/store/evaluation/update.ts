@@ -2,8 +2,8 @@
 import { DataProxy } from 'apollo-cache'
 import { FetchResult } from 'react-apollo'
 // graphql
-import { GetEvaluations } from 'store/evaluation/query'
-import { Evaluation } from 'store/evaluation/type'
+import { GetEvaluationsForList } from 'store/evaluation/query'
+import { EvaluationEdit } from 'store/evaluation/type'
 
 export const addEvaluation = (cache: DataProxy, result: FetchResult): void => {
   const {
@@ -13,11 +13,11 @@ export const addEvaluation = (cache: DataProxy, result: FetchResult): void => {
   // Otherwise the overview list will not get fetched
   try {
     const evaluations: {
-      getEvaluations: Evaluation[]
-    } = cache.readQuery({ query: GetEvaluations })
+      getEvaluations: EvaluationEdit[]
+    } = cache.readQuery({ query: GetEvaluationsForList })
 
     cache.writeQuery({
-      query: GetEvaluations,
+      query: GetEvaluationsForList,
       data: {
         getEvaluations: [...evaluations.getEvaluations, createEvaluation],
       },
@@ -37,8 +37,8 @@ export const deleteEvaluation = (
   try {
     if (deleteEvaluation) {
       const evaluationsQuery: {
-        getEvaluations: Evaluation[]
-      } = cache.readQuery({ query: GetEvaluations })
+        getEvaluations: EvaluationEdit[]
+      } = cache.readQuery({ query: GetEvaluationsForList })
 
       const updatedEvaluations = evaluationsQuery.getEvaluations.filter(
         (evaluation): boolean => {
@@ -47,7 +47,7 @@ export const deleteEvaluation = (
       )
 
       cache.writeQuery({
-        query: GetEvaluations,
+        query: GetEvaluationsForList,
         data: {
           getEvaluations: [...updatedEvaluations],
         },

@@ -1,33 +1,37 @@
 import { CategoryForList } from 'store/category/type'
 
-export interface EvaluationPlain {
-  id: number
-  title: string
-}
-
 export interface Evaluation {
-  category: CategoryForList
   categoryId: number
   groupSubcategories: boolean
   id: number
   period: EvaluationPeriod
-  result?: EvaluationResult
   title: string
-  type: 'barchart' | 'linechart' | 'piechart'
+  type: EvaluationType
+}
+
+export interface EvaluationFull extends Evaluation {
+  category?: CategoryForList
+  result?: EvaluationResult
+}
+
+export interface EvaluationForList {
+  id: number
+  title: string
 }
 
 export interface EvaluationCreate {
-  categoryId: number
-  groupSubcategories: boolean
-  period: EvaluationPeriod
-  title: string
-  type: 'barchart' | 'linechart' | 'piechart'
+  categoryId: Evaluation['categoryId']
+  groupSubcategories: Evaluation['groupSubcategories']
+  period: Evaluation['period']
+  title: Evaluation['title']
+  type: Evaluation['type']
 }
 
-export interface EvaluationUpdate extends EvaluationCreate {
-  id: number
+export interface EvaluationEdit extends EvaluationCreate {
+  id: Evaluation['id']
 }
 
+// partials
 export type EvaluationPeriod =
   | 'day'
   | 'week'
@@ -37,6 +41,8 @@ export type EvaluationPeriod =
   | 'lastWeek'
   | 'lastMonth'
   | 'lastYear'
+
+export type EvaluationType = 'barchart' | 'linechart' | 'piechart'
 
 export interface EvaluationResult {
   datasets: {

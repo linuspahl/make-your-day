@@ -6,7 +6,7 @@ import Barchart from 'shared/chart/Barchart/Barchart'
 import Linechart from 'shared/chart/Linechart/Linechart'
 import Piechart from 'shared/chart/Piechart/Piechart'
 // interface
-import { Evaluation } from 'store/evaluation/type'
+import { EvaluationFull } from 'store/evaluation/type'
 
 const formatLabels = (labels: string[] = []): string[] => {
   return labels.map((label): string =>
@@ -15,7 +15,7 @@ const formatLabels = (labels: string[] = []): string[] => {
 }
 
 interface Props {
-  evaluation: Evaluation
+  evaluation: EvaluationFull
 }
 
 const EvaluationChart = (props: Props): JSX.Element => {

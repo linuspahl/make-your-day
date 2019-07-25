@@ -13,8 +13,8 @@ import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import { UpdateEvaluation } from 'store/evaluation/mutation'
 // interfaces
 import { NotificationCreate } from 'types/types'
-import { Evaluation, EvaluationUpdate } from 'store/evaluation/type'
-import { CategoryFull } from 'store/category/type'
+import { EvaluationEdit as EvaluationEditType } from 'store/evaluation/type'
+import { CategoryForListWithChildren } from 'store/category/type'
 
 export const pageQuery = gql`
   query($evaluationId: ID!) {
@@ -26,6 +26,7 @@ export const pageQuery = gql`
       type
       period
     }
+    # same as GetCategoriesForListWithChildren query
     getCategories {
       id
       title
@@ -44,7 +45,10 @@ interface Props extends RouteComponentProps {
 }
 
 interface PageQueryResult {
-  data: { getCategories: CategoryFull[]; getEvaluation: Evaluation }
+  data: {
+    getCategories: CategoryForListWithChildren[]
+    getEvaluation: EvaluationEditType
+  }
   status?: { getCategories: JSX.Element; getEvaluation: JSX.Element }
 }
 
@@ -84,18 +88,18 @@ class EvaluationEdit extends React.Component<Props> {
                 onError={this.handleError}
               >
                 {(
-                  updateUser: ({
+                  updateEvaluation: ({
                     variables,
                   }: {
-                    variables: EvaluationUpdate
+                    variables: EvaluationEditType
                   }) => void
                 ): JSX.Element => (
                   <EvaluationForm
                     categories={categories}
                     initialData={evaluation}
                     rootPath={rootPath}
-                    submitAction={(variables: EvaluationUpdate): void => {
-                      updateUser({ variables })
+                    submitAction={(variables: EvaluationEditType): void => {
+                      updateEvaluation({ variables })
                     }}
                   />
                 )}
@@ -108,7 +112,9 @@ class EvaluationEdit extends React.Component<Props> {
   }
 
   // Form submit function
-  private handleCompleted(data: { updateEvaluation: Evaluation }): void {
+  private handleCompleted(data: {
+    updateEvaluation: EvaluationEditType
+  }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       updateEvaluation: { title },

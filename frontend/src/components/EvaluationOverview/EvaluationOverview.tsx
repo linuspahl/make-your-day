@@ -11,11 +11,11 @@ import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
-import { GetEvaluations } from 'store/evaluation/query'
+import { GetEvaluationsForList } from 'store/evaluation/query'
 import { DeleteEvaluation } from 'store/evaluation/mutation'
 import { deleteEvaluation } from 'store/evaluation/update'
 // interfaces
-import { Evaluation } from 'store/evaluation/type'
+import { EvaluationForList } from 'store/evaluation/type'
 
 const List = styled.ul`
   margin-top: 25px;
@@ -33,14 +33,14 @@ const EvaluationOverview = (props: Props): JSX.Element => {
       errorMessages={{
         getEvaluations: 'Andere Sitzungen konnten nicht geladen werden',
       }}
-      query={GetEvaluations}
+      query={GetEvaluationsForList}
       queryNames={['getEvaluations']}
     >
       {({
         data: { getEvaluations: evaluations },
         status: { getEvaluations: evaluationsQueryStatus },
       }: {
-        data: { getEvaluations: Evaluation[] }
+        data: { getEvaluations: EvaluationForList[] }
         status?: { getEvaluations: JSX.Element }
       }): JSX.Element => {
         return (
@@ -50,7 +50,7 @@ const EvaluationOverview = (props: Props): JSX.Element => {
             {!evaluationsQueryStatus && evaluations && (
               <List>
                 {evaluations.map(
-                  (evaluation: Evaluation): JSX.Element => (
+                  (evaluation: EvaluationForList): JSX.Element => (
                     <EvaluationListItem
                       key={evaluation.id}
                       evaluation={evaluation}
@@ -73,7 +73,7 @@ const EvaluationOverview = (props: Props): JSX.Element => {
 }
 
 const EvaluationListItem = (props: {
-  evaluation: Evaluation
+  evaluation: EvaluationForList
   rootPath: string
 }): JSX.Element => {
   const {

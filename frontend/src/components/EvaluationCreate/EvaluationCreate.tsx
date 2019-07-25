@@ -12,14 +12,14 @@ import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
 import { addEvaluation } from 'store/evaluation/update'
 import { CreateEvaluation } from 'store/evaluation/mutation'
-import { GetCategoriesWithChildren } from 'store/category/query'
+import { GetCategoriesForListWithChildren } from 'store/category/query'
 // interfaces
 import {
-  Evaluation,
+  EvaluationEdit,
   EvaluationCreate as EvaluationCreateType,
 } from 'store/evaluation/type'
 import { NotificationCreate } from 'types/types'
-import { Category } from 'store/category/type'
+import { CategoryForListWithChildren } from 'store/category/type'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -41,13 +41,13 @@ class EvaluationCreate extends React.Component<Props> {
         errorMessages={{
           getCategories: 'Kategorien konnten nicht geladen werden',
         }}
-        query={GetCategoriesWithChildren}
+        query={GetCategoriesForListWithChildren}
         queryNames={['getCategories']}
       >
         {({
           data: { getCategories: categories },
         }: {
-          data: { getCategories: Category[] }
+          data: { getCategories: CategoryForListWithChildren[] }
         }): JSX.Element => (
           <React.Fragment>
             <H1 context="page">Auswertung erstellen</H1>
@@ -81,7 +81,7 @@ class EvaluationCreate extends React.Component<Props> {
   }
 
   // Form submit function
-  private handleCompleted(data: { createEvaluation: Evaluation }): void {
+  private handleCompleted(data: { createEvaluation: EvaluationEdit }): void {
     const { history, rootPath, createNotificationBanner } = this.props
     const {
       createEvaluation: { title },

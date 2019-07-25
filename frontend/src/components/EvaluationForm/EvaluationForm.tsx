@@ -14,7 +14,7 @@ import Row from 'shared/form/Row/Row'
 import Input from 'shared/form/Input/Input'
 // interfaces
 import { CategoryForListWithChildren, Subcategory } from 'store/category/type'
-import { EvaluationCreate, EvaluationUpdate } from 'store/evaluation/type'
+import { EvaluationCreate, EvaluationEdit } from 'store/evaluation/type'
 import { Form as FormType, SelectOption, InputEvent } from 'types/types'
 
 const Form = styled.form`
@@ -41,7 +41,7 @@ const generateCategoryOptions = (
           categoryOptions = [
             ...categoryOptions,
             {
-              value: `${category.id}_${subcategory.id}`,
+              value: subcategory.id,
               title: `${category.title} -> ${subcategory.title}`,
             },
           ]
@@ -55,7 +55,7 @@ const generateCategoryOptions = (
 
 interface Props {
   categories: CategoryForListWithChildren[]
-  initialData?: EvaluationCreate | EvaluationUpdate
+  initialData?: EvaluationCreate | EvaluationEdit
   mode?: FormType['mode']
   rootPath: string
   submitAction: (evaluation: EvaluationCreate) => void

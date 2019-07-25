@@ -1,11 +1,12 @@
 // interfaces
 import {
   Chart as ChartType,
-  Evaluation,
+  EvaluationFull,
   EvaluationCreate,
+  EvaluationForList,
 } from 'store/evaluation/type'
 import {
-  GetEvaluations,
+  GetEvaluationsForList,
   GetEvaluation,
   GetEvaluationUpdate,
 } from 'store/evaluation/query'
@@ -21,7 +22,7 @@ export const evaluationCreate: EvaluationCreate = {
   period: 'day',
 }
 
-export const evaluation: Evaluation = {
+export const evaluation: EvaluationFull = {
   ...evaluationCreate,
   category,
   id: 1,
@@ -35,6 +36,11 @@ export const evaluation: Evaluation = {
     ],
     labels: ['Mo', 'Di'],
   },
+}
+
+export const evaluationForList: EvaluationForList = {
+  title: evaluation.title,
+  id: evaluation.id,
 }
 
 export const chart: ChartType = {
@@ -129,23 +135,23 @@ export const getEvaluationUpdateSuccess = {
   },
 }
 
-// ## getEvaluations
-const getEvaluationsRequest = {
+// ## getEvaluationsForList
+const getEvaluationsForListRequest = {
   request: {
-    query: GetEvaluations,
+    query: GetEvaluationsForList,
   },
 }
-export const getEvaluationsSuccess = {
-  ...getEvaluationsRequest,
+export const getEvaluationsForListSuccess = {
+  ...getEvaluationsForListRequest,
   result: {
     data: {
-      getEvaluations: [evaluation],
+      getEvaluations: [evaluationForList],
     },
   },
 }
-export const getEvaluationsError = {
-  ...getEvaluationsRequest,
-  error: new Error('getEvaluations failed'),
+export const getEvaluationsForListError = {
+  ...getEvaluationsForListRequest,
+  error: new Error('getEvaluationsForList failed'),
 }
 
 // ## updateEvaluation

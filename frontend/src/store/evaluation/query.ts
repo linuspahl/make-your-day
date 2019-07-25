@@ -2,8 +2,8 @@
 import gql from 'graphql-tag'
 
 // queries
-export const GetEvaluations = gql`
-  query GetEvaluations {
+export const GetEvaluationsForList = gql`
+  query GetEvaluationsForList {
     getEvaluations {
       id
       title

@@ -18,7 +18,7 @@ import {
   evaluation,
 } from 'store/evaluation/fixtures'
 
-import { getCategoriesWithChildrenSuccess } from 'store/category/fixtures'
+import { getCategoriesForListWithChildrenSuccess } from 'store/category/fixtures'
 
 describe('EvaluationCreate should', (): void => {
   const propsFixture = {
@@ -35,7 +35,12 @@ describe('EvaluationCreate should', (): void => {
         {...propsFixture}
         createNotificationBanner={createNotificationBannerStub}
       />,
-      { mocks: [createEvaluationSuccess, getCategoriesWithChildrenSuccess] }
+      {
+        mocks: [
+          createEvaluationSuccess,
+          getCategoriesForListWithChildrenSuccess,
+        ],
+      }
     )
     await wait()
     initEvaluationForm(getByLabelText, getByText)
@@ -58,7 +63,7 @@ describe('EvaluationCreate should', (): void => {
         createNotificationBanner={createNotificationBannerStub}
       />,
       {
-        mocks: [createEvaluationError, getCategoriesWithChildrenSuccess],
+        mocks: [createEvaluationError, getCategoriesForListWithChildrenSuccess],
       }
     )
     await wait()
