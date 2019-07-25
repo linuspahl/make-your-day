@@ -101,7 +101,7 @@ export interface NotificationCreate {
 }
 
 export interface Form {
-  mode?: 'create'
+  mode?: 'create' | 'edit'
 }
 
 // Webpack
