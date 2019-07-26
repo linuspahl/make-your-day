@@ -41,6 +41,7 @@ export default gql`
 
   type Record {
     amount: Float
+    categoryId: ID!
     category: Category!
     createdAt: String!
     description: String
@@ -170,16 +171,16 @@ export default gql`
     updateWidget(
       id: ID!
       title: String!
-      type: String!
       value: String
       position: String!
+      evaluationId: ID
     ): Widget!
     updateRecord(
       id: ID!
       title: String
       description: String
       amount: Float
-      categoryId: ID!
+      categoryId: ID
     ): Record!
     # Delete
     deleteUserSetting(settingId: ID!): Boolean
