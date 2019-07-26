@@ -40,6 +40,7 @@ class WidgetCreate extends React.Component<Props> {
     const { rootPath } = this.props
     return (
       <PageQueryHandler
+        dataTestId="WidgetCreate"
         errorMessages={{
           getEvaluations: 'Kategorien konnten nicht geladen werden',
         }}

@@ -64,6 +64,7 @@ class WidgetEdit extends React.Component<Props> {
 
     return (
       <PageQueryHandler
+        dataTestId="WidgetEdit"
         query={pageQuery}
         queryNames={['getEvaluations', 'getWidget']}
         errorMessages={{

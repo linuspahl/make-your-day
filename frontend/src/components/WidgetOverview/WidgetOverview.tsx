@@ -60,6 +60,7 @@ const WidgetOverview = (props: Props): JSX.Element => {
 
   return (
     <PageQueryHandler
+      dataTestId="WidgetOverview"
       errorMessages={{ getWidgets: 'Widgets konnten nicht geladen werden' }}
       query={GetWidgetsForList}
       queryNames={['getWidgets']}

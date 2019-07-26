@@ -17,23 +17,23 @@ describe('Widgets should', (): void => {
   afterEach(cleanup)
 
   test('render widget overview route', (): void => {
-    const { getByText } = renderWithAppRoot(<Widgets {...propsFixture} />, {
+    const { getByTestId } = renderWithAppRoot(<Widgets {...propsFixture} />, {
       route: '/widgets',
     })
-    expect(getByText('Widgets verwalten')).toBeInTheDocument()
+    expect(getByTestId('WidgetOverview')).toBeInTheDocument()
   })
 
   test('render widget overview route', (): void => {
-    const { getByText } = renderWithAppRoot(<Widgets {...propsFixture} />, {
+    const { getByTestId } = renderWithAppRoot(<Widgets {...propsFixture} />, {
       route: '/widgets/create',
     })
-    expect(getByText('Widget erstellen')).toBeInTheDocument()
+    expect(getByTestId('WidgetCreate')).toBeInTheDocument()
   })
 
   test('render widget overview route', (): void => {
-    const { getByText } = renderWithAppRoot(<Widgets {...propsFixture} />, {
+    const { getByTestId } = renderWithAppRoot(<Widgets {...propsFixture} />, {
       route: `/widgets/edit/${widget.id}`,
     })
-    expect(getByText('Widget bearbeiten')).toBeInTheDocument()
+    expect(getByTestId('WidgetEdit')).toBeInTheDocument()
   })
 })
