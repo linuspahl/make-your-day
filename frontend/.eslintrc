@@ -5,7 +5,7 @@
     "node": true,
     "jest": true
   },
-  "plugins": ["@typescript-eslint", "jest", "prettier", "react"],
+  "plugins": ["jest", "prettier", "react"],
   "extends": [
     "eslint:recommended", // default rules, like 'no unused var'
     "plugin:@typescript-eslint/recommended", // rules we need to lint typescript
