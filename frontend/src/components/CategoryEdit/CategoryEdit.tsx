@@ -90,7 +90,6 @@ class CategoryEdit extends React.Component<Props> {
                             hasTitle: variables.hasTitle,
                             icon: variables.icon,
                             title: variables.title,
-                            type: variables.type,
                             id: category.id,
                           },
                         })

@@ -52,7 +52,6 @@ export interface CategoryEdit {
   hasTitle: Category['hasTitle']
   icon?: Category['icon']
   title: Category['title']
-  type: Category['type']
 }
 
 // Subcategory definitions

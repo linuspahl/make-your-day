@@ -252,7 +252,6 @@ const updateCategoryRequest = {
       hasTitle: category.hasTitle,
       icon: category.icon,
       title: category.title,
-      type: category.type,
       id: category.id,
     },
   },
