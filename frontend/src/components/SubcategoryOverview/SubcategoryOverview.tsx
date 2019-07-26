@@ -36,6 +36,7 @@ class CategoryEdit extends React.Component<Props> {
 
     return (
       <PageQueryHandler
+        dataTestId="SubcategoryOverview"
         errorMessages={{
           getCategory: 'Kategorie konnten nicht geladen werden',
         }}

@@ -43,6 +43,7 @@ class CategoryEdit extends React.Component<Props> {
 
     return (
       <PageQueryHandler
+        dataTestId="CategoryEdit"
         errorMessages={{ getCategory: 'Kategorie konnte nicht geladen werden' }}
         query={GetCategory}
         queryNames={['getCategory']}
@@ -52,17 +53,6 @@ class CategoryEdit extends React.Component<Props> {
           data: { getCategory: category },
           status: { getCategory: categoryQueryStatus },
         }: PageQueryResult): JSX.Element => {
-          const {
-            type,
-            icon,
-            color,
-            hasDescription,
-            hasSubcategories,
-            hasTitle,
-            hasUnit,
-            title,
-            id,
-          } = category
           return (
             <React.Fragment>
               <H1 context="page">Kategorie bearbeiten</H1>
@@ -82,14 +72,14 @@ class CategoryEdit extends React.Component<Props> {
                   ): JSX.Element => (
                     <CategoryForm
                       initialData={{
-                        type,
-                        icon,
-                        color,
-                        hasDescription,
-                        hasSubcategories,
-                        hasTitle,
-                        hasUnit,
-                        title,
+                        type: null,
+                        icon: category.icon,
+                        color: category.color,
+                        hasDescription: category.hasDescription,
+                        hasSubcategories: category.hasSubcategories,
+                        hasTitle: category.hasTitle,
+                        hasUnit: category.hasUnit,
+                        title: category.title,
                       }}
                       rootPath={rootPath}
                       submitAction={(variables: CategoryCreate): void =>
@@ -101,7 +91,7 @@ class CategoryEdit extends React.Component<Props> {
                             icon: variables.icon,
                             title: variables.title,
                             type: variables.type,
-                            id,
+                            id: category.id,
                           },
                         })
                       }

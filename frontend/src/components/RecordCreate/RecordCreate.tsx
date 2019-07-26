@@ -57,6 +57,7 @@ class RecordCreate extends React.Component<Props> {
 
     return (
       <PageQueryHandler
+        dataTestId="RecordCreate"
         errorMessages={{ getCategory: 'Kategorie konnte nicht geladen werden' }}
         query={GetCategoryWithChildren}
         queryNames={['getCategory']}

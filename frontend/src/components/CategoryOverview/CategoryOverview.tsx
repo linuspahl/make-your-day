@@ -35,6 +35,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
 
   return (
     <PageQueryHandler
+      dataTestId="CategoryOverview"
       errorMessages={{
         getCategories: 'Kategorien konnten nicht geladen werden',
       }}

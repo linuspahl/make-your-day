@@ -18,10 +18,13 @@ describe('Categories should', (): void => {
   afterEach(cleanup)
 
   test('render category overview route', (): void => {
-    const { getByText } = renderWithAppRoot(<Categories {...propsFixture} />, {
-      route: '/categories',
-    })
-    expect(getByText('Kategorien verwalten')).toBeInTheDocument()
+    const { getByTestId } = renderWithAppRoot(
+      <Categories {...propsFixture} />,
+      {
+        route: '/categories',
+      }
+    )
+    expect(getByTestId('CategoryOverview')).toBeInTheDocument()
   })
 
   test('render category create route', (): void => {
@@ -31,45 +34,63 @@ describe('Categories should', (): void => {
     expect(getByText('Kategorie erstellen')).toBeInTheDocument()
   })
 
-  test('render category edit route', (): void => {
-    const { getByText } = renderWithAppRoot(<Categories {...propsFixture} />, {
-      route: `/categories/edit/${category.id}`,
-    })
-    expect(getByText('Kategorie bearbeiten')).toBeInTheDocument()
+  test.only('render category edit route', (): void => {
+    const { getByTestId } = renderWithAppRoot(
+      <Categories {...propsFixture} />,
+      {
+        route: `/categories/edit/${category.id}`,
+      }
+    )
+    expect(getByTestId('CategoryEdit')).toBeInTheDocument()
   })
 
   test('category record create route', (): void => {
-    const { getByText } = renderWithAppRoot(<Categories {...propsFixture} />, {
-      route: `/categories/${category.id}/records/create`,
-    })
-    expect(getByText('Eintrag erstellen')).toBeInTheDocument()
+    const { getByTestId } = renderWithAppRoot(
+      <Categories {...propsFixture} />,
+      {
+        route: `/categories/${category.id}/records/create`,
+      }
+    )
+    expect(getByTestId('RecordCreate')).toBeInTheDocument()
   })
 
-  test('category record edit route', (): void => {
-    const { getByText } = renderWithAppRoot(<Categories {...propsFixture} />, {
-      route: `/categories/${category.id}/records/${record.id}/edit`,
-    })
-    expect(getByText('Eintrag bearbeiten')).toBeInTheDocument()
+  test.only('category record edit route', (): void => {
+    const { getByTestId } = renderWithAppRoot(
+      <Categories {...propsFixture} />,
+      {
+        route: `/categories/${category.id}/records/${record.id}/edit`,
+      }
+    )
+    expect(getByTestId('RecordEdit')).toBeInTheDocument()
   })
 
   test('category subcategory overview route', (): void => {
-    const { getByText } = renderWithAppRoot(<Categories {...propsFixture} />, {
-      route: `/categories/${category.id}/subcategories`,
-    })
-    expect(getByText('Subkategorien verwalten')).toBeInTheDocument()
+    const { getByTestId } = renderWithAppRoot(
+      <Categories {...propsFixture} />,
+      {
+        route: `/categories/${category.id}/subcategories`,
+      }
+    )
+    expect(getByTestId('SubcategoryOverview')).toBeInTheDocument()
   })
 
   test('category subcategory create route', (): void => {
-    const { getByText } = renderWithAppRoot(<Categories {...propsFixture} />, {
-      route: `/categories/${category.id}/subcategories/create`,
-    })
-    expect(getByText('Subkategorie erstellen')).toBeInTheDocument()
+    const { getByTestId } = renderWithAppRoot(
+      <Categories {...propsFixture} />,
+      {
+        route: `/categories/${category.id}/subcategories/create`,
+      }
+    )
+    expect(getByTestId('SubcategoryCreate')).toBeInTheDocument()
   })
 
   test('category subcategory edit route', (): void => {
-    const { getByText } = renderWithAppRoot(<Categories {...propsFixture} />, {
-      route: `/categories/${category.id}/subcategories/1/edit`,
-    })
-    expect(getByText('Subkategorie bearbeiten')).toBeInTheDocument()
+    const { getByTestId } = renderWithAppRoot(
+      <Categories {...propsFixture} />,
+      {
+        route: `/categories/${category.id}/subcategories/1/edit`,
+      }
+    )
+    expect(getByTestId('SubcategoryEdit')).toBeInTheDocument()
   })
 })

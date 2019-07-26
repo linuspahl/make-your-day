@@ -81,6 +81,7 @@ class RecordEdit extends React.Component<Props> {
 
     return (
       <PageQueryHandler
+        dataTestId="RecordEdit"
         errorMessages={{
           getCategory: 'Kategorie konnte nicht geladen werden',
           getRecord: 'Eintrag konnte nicht geladen werden',

@@ -44,6 +44,7 @@ class SubcategoryCreate extends React.Component<Props> {
     const categoryId = extractIdFromUrl(match)
     return (
       <PageQueryHandler
+        dataTestId="SubcategoryCreate"
         errorMessages={{
           getCategory: 'Kategorie konnten nicht geladen werden',
         }}
