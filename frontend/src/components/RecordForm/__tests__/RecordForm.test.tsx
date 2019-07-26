@@ -124,7 +124,7 @@ describe('RecordForm should', (): void => {
     expect(submitActionStub).toBeCalledTimes(1)
     expect(submitActionStub).toBeCalledWith({
       amount: null,
-      categoryId: 11,
+      categoryId: category.id,
       createdAt: null,
       description: null,
       title: null,

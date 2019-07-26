@@ -15,7 +15,7 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 // interfaces
 import { CategoryFull, Subcategory } from 'store/category/type'
 import { Form as FormType, InputEvent, SelectOption } from 'types/types'
-import { RecordCreate } from 'store/record/type'
+import { RecordCreate, RecordEdit } from 'store/record/type'
 
 interface Props {
   category: CategoryFull
@@ -26,7 +26,7 @@ interface Props {
   }
   mode?: FormType['mode']
   rootPath: string
-  submitAction: (record: RecordCreate) => void
+  submitAction: (record: RecordCreate | RecordEdit) => void
 }
 
 export default class RecordForm extends React.Component<Props, RecordCreate> {
@@ -45,15 +45,6 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
         : initialData && initialData.categoryId
         ? initialData.categoryId
         : null
-
-    if (
-      mode === 'create' &&
-      initialCategoryId === category.id &&
-      category.hasSubcategories &&
-      category.subcategories.length >= 1
-    ) {
-      initialCategoryId = category.subcategories[0].id
-    }
 
     // initial form values
     this.state = {
@@ -169,6 +160,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
                 tabIndex={1}
                 title="Unterkategorie"
                 value={categoryId}
+                required
                 renderFooter={(): JSX.Element => (
                   <Link
                     to={`/categories/${parentCatId}/subcategories/create?source=createRecord`}

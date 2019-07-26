@@ -1,27 +1,6 @@
 // libraries
 import gql from 'graphql-tag'
 
-
-// fragments
-export const RecordFields = gql`
-  fragment RecordFields on Record {
-    id
-    title
-    amount
-    description
-    createdAt
-    category {
-      color
-      hasUnit
-      icon
-      id
-      title
-      type
-      unit
-    }
-  }
-`
-
 // queries
 export const GetRecords = gql`
   query GetRecords(

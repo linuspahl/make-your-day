@@ -11,6 +11,10 @@ export interface Record {
   category: CategoryFull
 }
 
+export interface RecordFull extends Record {
+  category: CategoryFull
+}
+
 export interface RecordCreate {
   createdAt?: string
   title: string
@@ -24,5 +28,4 @@ export interface RecordEdit {
   title: string
   amount?: number
   description?: string
-  categoryId?: number
 }

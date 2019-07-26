@@ -7,10 +7,11 @@ import { category } from 'store/category/fixtures'
 import { CreateRecord } from 'store/record/mutation'
 
 export const createRecord: RecordCreate = {
-  title: 'Einrag',
+  title: null,
   amount: 10,
   categoryId: category.id,
   description: null,
+  createdAt: null,
 }
 
 export const record: Record = {
@@ -33,7 +34,22 @@ export const createRecordSuccess = {
   ...createRecordRequest,
   result: {
     data: {
-      createRecord: record,
+      createRecord: {
+        id: record.id,
+        title: record.title,
+        amount: record.amount,
+        description: record.description,
+        createdAt: record.createdAt,
+        category: {
+          id: category.id,
+          icon: category.icon,
+          color: category.color,
+          title: category.title,
+          type: category.type,
+          hasUnit: category.hasUnit,
+          unit: category.unit,
+        },
+      },
     },
   },
 }

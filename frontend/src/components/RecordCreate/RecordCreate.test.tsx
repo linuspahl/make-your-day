@@ -48,7 +48,7 @@ describe('RecordCreate should', (): void => {
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)
     expect(createNotificationBannerStub).toBeCalledWith({
-      message: `Eintrag ${record.title} erfolgreich erstellt`,
+      message: 'Eintrag erfolgreich erstellt',
       type: 'success',
     })
   })
@@ -75,7 +75,7 @@ describe('RecordCreate should', (): void => {
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)
     expect(createNotificationBannerStub).toBeCalledWith({
-      message: 'Erstellung der Eintrag fehlgeschlagen',
+      message: 'Erstellung des Eintrags fehlgeschlagen',
       type: 'error',
     })
   })

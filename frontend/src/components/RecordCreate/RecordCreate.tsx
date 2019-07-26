@@ -6,8 +6,8 @@ import { ApolloError } from 'apollo-boost'
 // utils
 import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
 // components
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
+import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import RecordForm from 'components/RecordForm/RecordForm'
 // graphql
 import { CreateRecord } from 'store/record/mutation'
@@ -17,10 +17,14 @@ import { addRecord } from 'store/record/update'
 import { RecordCreate as RecordCreateType } from 'store/record/type'
 import { Category } from 'store/category/type'
 import { NotificationCreate } from 'types/types'
-import QueryStateHandler from 'shared/QueryStateHandler/QueryStateHandler'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
+}
+
+interface PageQueryResult {
+  data: { getCategory: Category }
+  status: { getCategory: JSX.Element }
 }
 
 class RecordCreate extends React.Component<Props> {
@@ -52,47 +56,53 @@ class RecordCreate extends React.Component<Props> {
     } = queryParams
 
     return (
-      <FadeTransition>
-        <H1>Eintrag erstellen</H1>
-        <QueryStateHandler
-          errorMessage="Kategorie konnte nicht geladen werden"
-          query={GetCategoryWithChildren}
-          queryName="getCategory"
-          variables={{ id: categoryId }}
-        >
-          {(category: Category): JSX.Element => (
-            <Mutation
-              mutation={CreateRecord}
-              onCompleted={this.handleCompleted}
-              onError={this.handleError}
-              update={addRecord}
-            >
-              {(
-                createRecord: ({
-                  variables,
-                }: {
-                  variables: RecordCreateType
-                }) => void
-              ): JSX.Element => (
-                <RecordForm
-                  category={category}
-                  params={{
-                    createdAt: createdAtParam,
-                    subcategoryId: subcategoryIdParam
-                      ? parseInt(subcategoryIdParam)
-                      : null,
-                  }}
-                  mode="create"
-                  rootPath={'/'}
-                  submitAction={(variables: RecordCreateType): void =>
-                    createRecord({ variables })
-                  }
-                />
-              )}
-            </Mutation>
-          )}
-        </QueryStateHandler>
-      </FadeTransition>
+      <PageQueryHandler
+        errorMessages={{ getCategory: 'Kategorie konnte nicht geladen werden' }}
+        query={GetCategoryWithChildren}
+        queryNames={['getCategory']}
+        variables={{ id: categoryId }}
+      >
+        {({
+          data: { getCategory: category },
+          status: { getCategory: categoryQueryResult },
+        }: PageQueryResult): JSX.Element => (
+          <React.Fragment>
+            <H1>Eintrag erstellen</H1>
+            {categoryQueryResult}
+            {!categoryQueryResult && category && (
+              <Mutation
+                mutation={CreateRecord}
+                onCompleted={this.handleCompleted}
+                onError={this.handleError}
+                update={addRecord}
+              >
+                {(
+                  createRecord: ({
+                    variables,
+                  }: {
+                    variables: RecordCreateType
+                  }) => void
+                ): JSX.Element => (
+                  <RecordForm
+                    category={category}
+                    params={{
+                      createdAt: createdAtParam,
+                      subcategoryId: subcategoryIdParam
+                        ? parseInt(subcategoryIdParam)
+                        : null,
+                    }}
+                    mode="create"
+                    rootPath={'/'}
+                    submitAction={(variables: RecordCreateType): void =>
+                      createRecord({ variables })
+                    }
+                  />
+                )}
+              </Mutation>
+            )}
+          </React.Fragment>
+        )}
+      </PageQueryHandler>
     )
   }
 
