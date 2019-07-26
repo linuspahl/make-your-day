@@ -61,7 +61,7 @@ const CategoryIconOverview = (props: Props): JSX.Element => (
             />
           )
 
-        if (data.getCategories.length === 0)
+        if (!data.getCategories || data.getCategories.length === 0)
           return (
             <NoResultWrapper>
               <Link to="/categories/create">

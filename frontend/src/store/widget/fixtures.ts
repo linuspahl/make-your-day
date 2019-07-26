@@ -93,7 +93,7 @@ export const getWidgetsWithEvaluationSuccess = {
   ...getWidgetsWithEvaluationRequest,
   result: {
     data: {
-      getWidgetsWithEvaluation: [widget, widget2],
+      getWidgets: [{ ...widget, evaluation: null }, { ...widget2, evaluation }],
     },
   },
 }
