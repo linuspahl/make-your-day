@@ -26,7 +26,7 @@ const List = styled.ul`
 `
 
 const sortWidgetsByPosition = (
-  widgets: WidgetForList[]
+  widgets: WidgetForList[] = []
 ): {
   [key: string]: WidgetForList[]
 } => {
