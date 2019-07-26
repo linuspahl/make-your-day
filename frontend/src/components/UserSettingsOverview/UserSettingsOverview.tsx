@@ -43,6 +43,7 @@ class UserSettingsOverview extends React.Component<Props> {
     } = this.props
     return (
       <PageQueryHandler
+        dataTestId="UserSettingsOverview"
         errorMessages={{
           getSettings: 'Angemeldete Geräte konnten nicht geladen werden',
         }}

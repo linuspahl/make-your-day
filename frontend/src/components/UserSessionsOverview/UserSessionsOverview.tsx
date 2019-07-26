@@ -32,6 +32,7 @@ interface PageQueryResult {
 
 const UserSessionOverview = (props: Props): JSX.Element => (
   <PageQueryHandler
+    dataTestId="UserSessionsOverview"
     errorMessages={{
       getUserSessions: 'Andere Sitzungen konnten nicht geladen werden',
     }}

@@ -20,16 +20,16 @@ describe('Settings should', (): void => {
   afterEach(cleanup)
 
   test('render settings overview route', (): void => {
-    const { getByText } = renderWithAppRoot(<Settings {...propsFixture} />, {
+    const { getByTestId } = renderWithAppRoot(<Settings {...propsFixture} />, {
       route: '/settings',
     })
-    expect(getByText('Einstellungen')).toBeInTheDocument()
+    expect(getByTestId('UserSettingsOverview')).toBeInTheDocument()
   })
 
   test('render sessions overview route', (): void => {
-    const { getByText } = renderWithAppRoot(<Settings {...propsFixture} />, {
+    const { getByTestId } = renderWithAppRoot(<Settings {...propsFixture} />, {
       route: '/settings/sessions',
     })
-    expect(getByText('Angemeldete Geräte')).toBeInTheDocument()
+    expect(getByTestId('UserSessionsOverview')).toBeInTheDocument()
   })
 })
