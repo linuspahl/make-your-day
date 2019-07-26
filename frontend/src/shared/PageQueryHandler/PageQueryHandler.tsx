@@ -59,7 +59,6 @@ const PageQueryHandler = (props: Props): JSX.Element => {
           status: { [key: string]: JSX.Element }
         } = { data: data || {}, status: {} }
         // show spinner, when loading
-        console.log(loading, error, data)
         if (loading) {
           return loadingPlaceholder ? (
             loadingPlaceholder
