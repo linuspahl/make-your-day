@@ -1,13 +1,16 @@
 // libraries
 import * as React from 'react'
 // utils
-import { renderWithAppRoot, wait } from 'testUtils'
+import { renderWithAppRoot, wait, cleanup, mockWindow } from 'testUtils'
 // components
 import Barchart from './Barchart'
 // fixtures
 import { chart as chartFixture } from 'store/evaluation/fixtures'
 
 describe('Barchart should', (): void => {
+  mockWindow()
+  afterEach(cleanup)
+
   test('render without crashing', async (): Promise<void> => {
     const { container } = renderWithAppRoot(<Barchart {...chartFixture} />)
     // Wait for chart library to finish render
