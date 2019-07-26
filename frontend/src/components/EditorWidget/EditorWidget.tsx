@@ -9,22 +9,28 @@ import { UpdateWidget } from 'store/widget/mutation'
 // components
 import { PellEditor } from './styles'
 // interfaces
-import { Widget as WidgetType } from 'store/widget/type'
+import { Widget, WidgetEdit } from 'store/widget/type'
 import { InputEvent, NotificationCreate } from 'types/types'
 
 interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
-  widget: WidgetType
+  widget: Widget
 }
 
-export default class Widget extends React.Component<Props, WidgetType> {
+interface State {
+  value: Widget['value']
+}
+
+export default class EditorWidget extends React.Component<Props, State> {
   private editorRef: HTMLDivElement
   private editor: PellElement
 
   public constructor(props: Props) {
     super(props)
 
-    this.state = props.widget
+    this.state = {
+      value: props.widget.value,
+    }
 
     this.handleError = this.handleError.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -53,15 +59,24 @@ export default class Widget extends React.Component<Props, WidgetType> {
   }
 
   public render(): JSX.Element {
+    const { widget } = this.props
+    const { value } = this.state
     return (
       <Mutation mutation={UpdateWidget} onError={this.handleError}>
         {(
-          updateWidget: ({ variables }: { variables: WidgetType }) => void
+          updateWidget: ({ variables }: { variables: WidgetEdit }) => void
         ): JSX.Element => (
           <PellEditor
             data-testid="EditorWidget"
             ref={(elementRef): HTMLDivElement => (this.editorRef = elementRef)}
-            onBlur={(): void => updateWidget({ variables: this.state })}
+            onBlur={(): void =>
+              updateWidget({
+                variables: {
+                  id: widget.id,
+                  value,
+                },
+              })
+            }
           />
         )}
       </Mutation>

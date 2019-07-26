@@ -34,6 +34,7 @@ export interface WidgetCreate {
 export interface WidgetEdit {
   id: Widget['id']
   evaluationId?: Widget['evaluationId']
-  position: Widget['position']
-  title: Widget['title']
+  position?: Widget['position']
+  title?: Widget['title']
+  value?: Widget['value']
 }

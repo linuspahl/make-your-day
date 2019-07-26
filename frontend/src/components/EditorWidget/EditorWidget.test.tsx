@@ -7,6 +7,7 @@ import {
   renderWithAppRoot,
   wait,
   cleanup,
+  adjustApiStub,
 } from 'testUtils'
 // components
 import EditorWidget from './EditorWidget'
@@ -30,7 +31,9 @@ describe('EditorWidget should', (): void => {
         createNotificationBanner={createNotificationBannerStub}
         widget={widget}
       />,
-      { mocks: [updateWidgetError] }
+      {
+        mocks: [updateWidgetError],
+      }
     )
 
     fireEvent.click(container.firstElementChild, leftClickOption)
@@ -39,14 +42,32 @@ describe('EditorWidget should', (): void => {
     expect(createNotificationBannerStub).toBeCalledTimes(1)
   })
 
-  test('update editor without error', async (): Promise<void> => {
+  test('update widget value, without showing notification banner', async (): Promise<
+    void
+  > => {
     const createNotificationBannerStub = jest.fn()
     const { container } = renderWithAppRoot(
       <EditorWidget
         createNotificationBanner={createNotificationBannerStub}
         widget={widget}
       />,
-      { mocks: [updateWidgetSuccess] }
+      {
+        mocks: [
+          adjustApiStub(updateWidgetSuccess, {
+            variables: {
+              id: widget.id,
+              value: 'Inhalt Notiz 1',
+            },
+            result: {
+              id: widget.id,
+              title: widget.title,
+              type: widget.type,
+              value: 'Inhalt Notiz 1',
+              position: widget.position,
+            },
+          }),
+        ],
+      }
     )
     fireEvent.click(container.firstElementChild, leftClickOption)
     fireEvent.blur(container.firstElementChild)
