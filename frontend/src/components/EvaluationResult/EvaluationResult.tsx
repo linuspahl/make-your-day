@@ -20,6 +20,7 @@ const EvaluationResult = (props: Props): JSX.Element => {
   const evaluationId = extractIdFromUrl(match)
   return (
     <PageQueryHandler
+      dataTestId="EvaluationResult"
       errorMessages={{
         getEvaluation: 'Auswertung konnte nicht geladen werden',
       }}

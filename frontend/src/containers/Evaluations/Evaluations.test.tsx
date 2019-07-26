@@ -17,30 +17,43 @@ describe('Evaluations should', (): void => {
   afterEach(cleanup)
 
   test('render evaluation overview route', (): void => {
-    const { getByText } = renderWithAppRoot(<Evaluations {...propsFixture} />, {
-      route: '/evaluations',
-    })
-    expect(getByText('Auswertungen verwalten')).toBeInTheDocument()
+    const { getByTestId, debug } = renderWithAppRoot(
+      <Evaluations {...propsFixture} />,
+      {
+        route: '/evaluations',
+      }
+    )
+    debug()
+    expect(getByTestId('EvaluationOverview')).toBeInTheDocument()
   })
 
   test('render evaluation create route', (): void => {
-    const { getByText } = renderWithAppRoot(<Evaluations {...propsFixture} />, {
-      route: '/evaluations/create',
-    })
-    expect(getByText('Auswertung erstellen')).toBeInTheDocument()
+    const { getByTestId } = renderWithAppRoot(
+      <Evaluations {...propsFixture} />,
+      {
+        route: '/evaluations/create',
+      }
+    )
+    expect(getByTestId('EvaluationCreate')).toBeInTheDocument()
   })
 
   test('render evaluation edit route', (): void => {
-    const { getByText } = renderWithAppRoot(<Evaluations {...propsFixture} />, {
-      route: `/evaluations/edit/${evaluation.id}`,
-    })
-    expect(getByText('Auswertung bearbeiten')).toBeInTheDocument()
+    const { getByTestId } = renderWithAppRoot(
+      <Evaluations {...propsFixture} />,
+      {
+        route: `/evaluations/edit/${evaluation.id}`,
+      }
+    )
+    expect(getByTestId('EvaluationEdit')).toBeInTheDocument()
   })
 
   test('render evaluation view route', (): void => {
-    const { getByText } = renderWithAppRoot(<Evaluations {...propsFixture} />, {
-      route: `/evaluations/view/${evaluation.id}`,
-    })
-    expect(getByText('Ergebnis Auswertung')).toBeInTheDocument()
+    const { getByTestId } = renderWithAppRoot(
+      <Evaluations {...propsFixture} />,
+      {
+        route: `/evaluations/view/${evaluation.id}`,
+      }
+    )
+    expect(getByTestId('EvaluationResult')).toBeInTheDocument()
   })
 })

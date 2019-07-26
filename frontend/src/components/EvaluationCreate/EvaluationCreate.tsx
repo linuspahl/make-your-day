@@ -38,6 +38,7 @@ class EvaluationCreate extends React.Component<Props> {
     const { rootPath } = this.props
     return (
       <PageQueryHandler
+        dataTestId="EvaluationCreate"
         errorMessages={{
           getCategories: 'Kategorien konnten nicht geladen werden',
         }}

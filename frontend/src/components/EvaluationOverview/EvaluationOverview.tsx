@@ -30,6 +30,7 @@ const EvaluationOverview = (props: Props): JSX.Element => {
 
   return (
     <PageQueryHandler
+      dataTestId="EvaluationOverview"
       errorMessages={{
         getEvaluations: 'Andere Sitzungen konnten nicht geladen werden',
       }}

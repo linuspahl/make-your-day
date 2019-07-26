@@ -66,6 +66,7 @@ class EvaluationEdit extends React.Component<Props> {
 
     return (
       <PageQueryHandler
+        dataTestId="EvaluationEdit"
         query={pageQuery}
         variables={{ evaluationId }}
         queryNames={['getCategories', 'getEvaluation']}
