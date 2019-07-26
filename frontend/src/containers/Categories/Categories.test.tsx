@@ -34,7 +34,7 @@ describe('Categories should', (): void => {
     expect(getByText('Kategorie erstellen')).toBeInTheDocument()
   })
 
-  test.only('render category edit route', (): void => {
+  test('render category edit route', (): void => {
     const { getByTestId } = renderWithAppRoot(
       <Categories {...propsFixture} />,
       {
@@ -54,7 +54,7 @@ describe('Categories should', (): void => {
     expect(getByTestId('RecordCreate')).toBeInTheDocument()
   })
 
-  test.only('category record edit route', (): void => {
+  test('category record edit route', (): void => {
     const { getByTestId } = renderWithAppRoot(
       <Categories {...propsFixture} />,
       {
