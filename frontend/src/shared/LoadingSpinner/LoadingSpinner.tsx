@@ -4,7 +4,12 @@ import * as React from 'react'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 
 interface Props {
-  hasDelay?: boolean // will add rendering delay to prevent content flashing
+  // dataTestId
+  // - allows custom test id, so far only needed to test if a route renders the correct component
+  // - only used when hasDelay is true
+  dataTestId?: string
+  // hasDelay - will add rendering delay to prevent content flashing
+  hasDelay?: boolean
 }
 
 interface State {
@@ -41,14 +46,14 @@ const LoadingSpinner = class LoadingSpinner extends React.Component<
   }
 
   public render(): JSX.Element {
-    const { hasDelay } = this.props
+    const { hasDelay, dataTestId } = this.props
     const { delayFinished } = this.state
     const shouldRender = hasDelay ? delayFinished : true
 
     if (shouldRender) {
       return <CenteredSpinner />
     }
-    return <div />
+    return <div data-testid={dataTestId} />
   }
 }
 

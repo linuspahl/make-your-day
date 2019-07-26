@@ -15,21 +15,27 @@ interface Props {
     result?: object[] | object,
     status?: { [queryNames: string]: JSX.Element }
   ) => JSX.Element
-  // errorMessage: What to display, if the query fails?
+  // dataTestId
+  // - allows custom test id, so far only needed to test
+  //   if a route renders the correct component
+  // - only used for LoadingSpinner with hasDelay={true}
+  dataTestId?: string
+  // errorMessage - What to display, if the query fails?
   errorMessages: { [key: string]: string }
-  // query: grqphql query from store, like `GetCategories`
+  // query - grqphql query from store, like `GetCategories`
   query: DocumentNode
-  // queryNames: name of the actual query function, used inside of the provided query definition
+  // queryNames - name of the actual query function, used inside of the provided query definition
   // like `getCategories`
   queryNames: string[]
-  // variables: If you need to run the query with specific variables
+  // variables - If you need to run the query with specific variables
   variables?: object
   loadingPlaceholder?: JSX.Element
 }
 
-const QueryStateHandler = (props: Props): JSX.Element => {
+const PageQueryHandler = (props: Props): JSX.Element => {
   const {
     children,
+    dataTestId,
     errorMessages,
     loadingPlaceholder,
     query,
@@ -53,11 +59,12 @@ const QueryStateHandler = (props: Props): JSX.Element => {
           status: { [key: string]: JSX.Element }
         } = { data: data || {}, status: {} }
         // show spinner, when loading
+        console.log(loading, error, data)
         if (loading) {
           return loadingPlaceholder ? (
             loadingPlaceholder
           ) : (
-            <LoadingSpinner hasDelay>
+            <LoadingSpinner hasDelay dataTestId={dataTestId}>
               <CenteredSpinner />
             </LoadingSpinner>
           )
@@ -89,4 +96,4 @@ const QueryStateHandler = (props: Props): JSX.Element => {
     </Query>
   )
 }
-export default QueryStateHandler
+export default PageQueryHandler
