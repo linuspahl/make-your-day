@@ -6,6 +6,7 @@ import { Element } from './styles'
 import { InputEvent } from 'types/types'
 
 export interface Props {
+  autocomplete?: string
   className?: string
   dataTestid?: string
   disabled?: boolean
@@ -27,6 +28,7 @@ export interface Props {
 
 const Input = (props: Props): JSX.Element => {
   const {
+    autocomplete,
     className,
     dataTestid,
     disabled,
@@ -47,6 +49,7 @@ const Input = (props: Props): JSX.Element => {
   } = props
   return (
     <Element
+      autoComplete={autocomplete}
       data-testid={dataTestid || 'Input'}
       disabled={disabled}
       id={id}

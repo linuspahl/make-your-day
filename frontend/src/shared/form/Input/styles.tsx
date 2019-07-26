@@ -1,7 +1,11 @@
 // libraries
 import styled from 'styled-components'
 
-export const Element = styled.input`
+interface ElementProps {
+  autocomplete?: string
+}
+
+export const Element = styled.input<ElementProps>`
   width: 100%;
   height: 40px;
 
