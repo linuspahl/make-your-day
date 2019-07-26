@@ -17,13 +17,12 @@ describe('Evaluations should', (): void => {
   afterEach(cleanup)
 
   test('render evaluation overview route', (): void => {
-    const { getByTestId, debug } = renderWithAppRoot(
+    const { getByTestId } = renderWithAppRoot(
       <Evaluations {...propsFixture} />,
       {
         route: '/evaluations',
       }
     )
-    debug()
     expect(getByTestId('EvaluationOverview')).toBeInTheDocument()
   })
 
