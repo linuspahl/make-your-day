@@ -50,7 +50,7 @@ describe('ContentSelect should', (): void => {
     expect(getByText('Keine Auswahl')).toBeInTheDocument()
   })
 
-  test.only('display a footer in the modal', (): void => {
+  test('display a footer in the modal', (): void => {
     const footerContent = 'My special Footer content!'
     const { getByText, getByTestId } = renderWithAppRoot(
       <ContentSelect
