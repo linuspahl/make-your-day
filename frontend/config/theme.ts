@@ -1,7 +1,6 @@
 // Theme configuration file
 // Not only for colors, more a config file for all kind of theme settings
 
-import { merge } from 'lodash'
 import { categoryTextColors, categoryColors } from './params'
 import { Theme } from 'types/types'
 
@@ -65,10 +64,10 @@ const layerIndex = {
 }
 
 export default (userSettings: { [key: string]: boolean } = {}): Theme => {
-  let colors = defaultTheme
+  let colors = { ...defaultTheme }
   if (userSettings.nightMode) {
     // if nightmode is active, we will just change some specific colors
-    colors = merge(defaultTheme, nightModeTheme)
+    colors = { ...colors, ...nightModeTheme }
   }
   return { ...colors, settings: { ...userSettings }, mediaQuery, layerIndex }
 }
