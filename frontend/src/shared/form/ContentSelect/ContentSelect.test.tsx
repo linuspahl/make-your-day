@@ -30,24 +30,12 @@ describe('ContentSelect should', (): void => {
 
   // Should display dynamic content correctly
   test('display title of selected option', (): void => {
-    const { getByText } = renderWithAppRoot(<ContentSelect {...propsFixture} />)
-    expect(getByText('special-title-1')).toBeInTheDocument()
-  })
-
-  test('display info if nothing got selected', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <ContentSelect {...propsFixture} value={null} />
+    const { getByTestId } = renderWithAppRoot(
+      <ContentSelect {...propsFixture} />
     )
-    expect(getByText('Keine Auswahl')).toBeInTheDocument()
-  })
-
-  test('display an option "no selection" if allowEmpty is provided', (): void => {
-    // Make sure the value prop is defined,
-    // otherwise the test will always return ture, because of the placeholder
-    const { getByText } = renderWithAppRoot(
-      <ContentSelect {...propsFixture} value="special-titie-1" allowEmpty />
+    expect(getByTestId('ContentSelect-selection')).toHaveValue(
+      'special-title-1'
     )
-    expect(getByText('Keine Auswahl')).toBeInTheDocument()
   })
 
   test('display a footer in the modal', (): void => {
@@ -130,7 +118,7 @@ describe('ContentSelect should', (): void => {
     const currentOption = getByTestId('ContentSelect-selection')
     currentOption.focus()
     // Open modal
-    fireEvent.click(currentOption, leftClickOption)
+    fireEvent.mouseDown(currentOption, leftClickOption)
     expect(getByTestId('Modal')).toBeInTheDocument()
 
     fireEvent.keyDown(currentOption, {
