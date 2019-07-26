@@ -115,7 +115,7 @@ export interface WebpackConfigParams {
 
 // Tests
 export interface ApiStub {
-  request: { query: DocumentNode; variables: object }
+  request: { query: DocumentNode; variables?: object }
   result?: { data: { [queryName: string]: object } }
   error?: Error
 }
