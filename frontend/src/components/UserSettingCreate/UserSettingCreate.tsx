@@ -31,7 +31,7 @@ const UserSettingCreate = (props: Props): JSX.Element => (
         name={props.setting.title}
         onChange={perfomMutation}
         tabIndex={1}
-        value={true}
+        value={false}
       />
     )}
   </Mutation>

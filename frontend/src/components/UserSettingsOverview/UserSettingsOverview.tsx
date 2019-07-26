@@ -62,11 +62,7 @@ class UserSettingsOverview extends React.Component<Props> {
                 settings &&
                 settings.map(
                   (setting: Setting): JSX.Element => {
-                    const isSelected =
-                      userSettings[setting.type] &&
-                      userSettings[setting.type].value
-                        ? userSettings[setting.type].value
-                        : false
+                    const isSelected = userSettings[setting.type]
                     return (
                       <Row key={setting.id} htmlFor={setting.type}>
                         {setting.title}{' '}

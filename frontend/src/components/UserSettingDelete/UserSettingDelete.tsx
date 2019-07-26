@@ -31,7 +31,7 @@ const UserSettingDelete = (props: Props): JSX.Element => (
         name={userSetting.setting.title}
         onChange={perfomMutation}
         tabIndex={1}
-        value={false}
+        value={true}
       />
     )}
   </Mutation>
