@@ -51,6 +51,7 @@ class DayEdit extends React.Component<Props> {
     } = this.props
     return (
       <PageQueryHandler
+        dataTestId="DayEdit"
         errorMessages={{ getRecords: 'Einträge konnten nicht geladen werden' }}
         queryNames={['getRecords']}
         variables={{ createdAt: date }}

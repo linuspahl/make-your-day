@@ -9,10 +9,10 @@ import { userSession } from 'store/userSession/fixtures'
 
 describe('Timeline should', (): void => {
   test('render timeline day edit route', (): void => {
-    const { getByText } = renderWithAppRoot(
+    const { getByTestId } = renderWithAppRoot(
       <Timeline rootPath="/timeline" userSession={userSession} />,
       { route: '/timeline/2010-12-20' }
     )
-    expect(getByText('Einträge 2010-12-20')).toBeInTheDocument()
+    expect(getByTestId('DayEdit')).toBeInTheDocument()
   })
 })
