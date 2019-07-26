@@ -1,7 +1,6 @@
 // ContentSelect component. Needed to create form selects with more content for the options than just a string.
 // This component behaves exactly like a normal html <select>, e.g. in case of form tab navigation and other key usage
-// The only disadvantage is, all form elements require a tabIndex
-// If a selection is not required, add an option with the title '-' an without any value
+// If a selection has no default value, add an option with the title '-' an without any value
 
 // libraries
 import * as React from 'react'
@@ -32,6 +31,7 @@ interface Props {
   options: SelectOption[]
   renderFooter?: () => JSX.Element
   renderPreview?: (option: SelectOption) => JSX.Element
+  required?: boolean
   tabIndex: number
   title: string
   type?: string
@@ -78,6 +78,7 @@ export default class ContentSelect extends React.Component<Props, State> {
       name,
       renderFooter,
       renderPreview,
+      required,
       tabIndex,
       title,
       type,
@@ -95,6 +96,7 @@ export default class ContentSelect extends React.Component<Props, State> {
     return (
       <Layout>
         <Select
+          autocomplete="off"
           type={type || 'text'}
           dataTestid="ContentSelect-selection"
           id={id}
@@ -106,8 +108,9 @@ export default class ContentSelect extends React.Component<Props, State> {
           onMouseDown={(event: React.MouseEvent<HTMLInputElement>): void =>
             !disabled && !isOpen ? this.toggleSelect(event) : null
           }
-          tabIndex={disabled ? -1 : tabIndex}
           placeholder="Keine Auswahl"
+          required={required}
+          tabIndex={disabled ? -1 : tabIndex}
           value={value && currentOption ? currentOption.title : null}
         />
         <ArrowIcon
