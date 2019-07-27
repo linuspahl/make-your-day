@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 `
 
 interface Props {
-  children: JSX.Element | JSX.Element[]
+  children: React.ReactNode
 }
 
 const AppBackground = (props: Props): JSX.Element => {

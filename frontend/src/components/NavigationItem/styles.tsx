@@ -23,6 +23,7 @@ export const InnerLink = styled(Link)`
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   color: inherit;
   text-decoration: none;

@@ -6,7 +6,7 @@ import { ListItem, InnerLink, RouteActive } from './styles'
 interface Props {
   rootPath: string
   route: { title: string; path: string }
-  toggleAction: () => void
+  toggleAction: (newPath: string) => void
 }
 
 const NavigationItem = (props: Props): JSX.Element => {
@@ -22,7 +22,7 @@ const NavigationItem = (props: Props): JSX.Element => {
   const isActive = rootPath === path
   return (
     <ListItem>
-      <InnerLink to={path} onClick={(): void => toggleAction()}>
+      <InnerLink to={path} onClick={(): void => toggleAction(path)}>
         {title} {isActive && <RouteActive />}
       </InnerLink>
     </ListItem>

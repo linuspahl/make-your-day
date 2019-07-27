@@ -7,9 +7,10 @@ import * as React from 'react'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import Loadable from 'react-loadable'
 // components
-import PublicRoute from '../PublicRoute/PublicRoute'
-import PrivateRoute from '../PrivateRoute/PrivateRoute'
+import InAppLayout from 'components/InAppLayout/InAppLayout'
 import LoadableCenteredSpinner from 'shared/CenteredSpinner/LoadableCenteredSpinner'
+import PrivateRoute from '../PrivateRoute/PrivateRoute'
+import PublicRoute from '../PublicRoute/PublicRoute'
 // interfaces
 import { NotificationCreate, LocalStorageCreate } from 'types/types'
 import { UserSession } from 'store/userSession/type'
@@ -36,81 +37,84 @@ const Routes = (props: Props): JSX.Element => (
         path="/login"
         updateLocalStorage={props.updateLocalStorage}
       />
-      <PrivateRoute
-        component={Loadable({
-          loader: (): Promise<any> =>
-            import(
-              /* webpackChunkName: "Dashboard" */ 'containers/Dashboard/Dashboard'
-            ),
-          loading: LoadableCenteredSpinner,
-        })}
-        createNotificationBanner={props.createNotificationBanner}
-        exact
-        userSession={props.userSession}
-        path="/"
-      />
-      <PrivateRoute
-        clearLocalStorage={props.clearLocalStorage}
-        createNotificationBanner={props.createNotificationBanner}
-        component={Loadable({
-          loader: (): Promise<any> =>
-            import(
-              /* webpackChunkName: "Settings" */ 'containers/Settings/Settings'
-            ),
-          loading: LoadableCenteredSpinner,
-        })}
-        userSession={props.userSession}
-        path="/settings"
-        updateLocalStorage={props.updateLocalStorage}
-        userSettings={props.userSettings}
-      />
-      <PrivateRoute
-        component={Loadable({
-          loader: (): Promise<any> =>
-            import(
-              /* webpackChunkName: "Categories" */ 'containers/Categories/Categories'
-            ),
-          loading: LoadableCenteredSpinner,
-        })}
-        createNotificationBanner={props.createNotificationBanner}
-        userSession={props.userSession}
-        path="/categories"
-      />
-      <PrivateRoute
-        component={Loadable({
-          loader: (): Promise<any> =>
-            import(
-              /* webpackChunkName: "Widgets" */ 'containers/Widgets/Widgets'
-            ),
-          loading: LoadableCenteredSpinner,
-        })}
-        createNotificationBanner={props.createNotificationBanner}
-        userSession={props.userSession}
-        path="/widgets"
-      />
-      <PrivateRoute
-        component={Loadable({
-          loader: (): Promise<any> =>
-            import(
-              /* webpackChunkName: "Evaluations" */ 'containers/Evaluations/Evaluations'
-            ),
-          loading: LoadableCenteredSpinner,
-        })}
-        createNotificationBanner={props.createNotificationBanner}
-        userSession={props.userSession}
-        path="/evaluations"
-      />
-      <PrivateRoute
-        component={Loadable({
-          loader: (): Promise<any> =>
-            import(
-              /* webpackChunkName: "Timeline" */ 'containers/Timeline/Timeline'
-            ),
-          loading: LoadableCenteredSpinner,
-        })}
-        userSession={props.userSession}
-        path="/timeline"
-      />
+      <InAppLayout userSession={props.userSession}>
+        <PrivateRoute
+          component={Loadable({
+            loader: (): Promise<any> =>
+              import(
+                /* webpackChunkName: "Dashboard" */ 'containers/Dashboard/Dashboard'
+              ),
+            loading: LoadableCenteredSpinner,
+          })}
+          createNotificationBanner={props.createNotificationBanner}
+          exact
+          userSession={props.userSession}
+          path="/"
+        />
+
+        <PrivateRoute
+          clearLocalStorage={props.clearLocalStorage}
+          createNotificationBanner={props.createNotificationBanner}
+          component={Loadable({
+            loader: (): Promise<any> =>
+              import(
+                /* webpackChunkName: "Settings" */ 'containers/Settings/Settings'
+              ),
+            loading: LoadableCenteredSpinner,
+          })}
+          userSession={props.userSession}
+          path="/settings"
+          updateLocalStorage={props.updateLocalStorage}
+          userSettings={props.userSettings}
+        />
+        <PrivateRoute
+          component={Loadable({
+            loader: (): Promise<any> =>
+              import(
+                /* webpackChunkName: "Categories" */ 'containers/Categories/Categories'
+              ),
+            loading: LoadableCenteredSpinner,
+          })}
+          createNotificationBanner={props.createNotificationBanner}
+          userSession={props.userSession}
+          path="/categories"
+        />
+        <PrivateRoute
+          component={Loadable({
+            loader: (): Promise<any> =>
+              import(
+                /* webpackChunkName: "Widgets" */ 'containers/Widgets/Widgets'
+              ),
+            loading: LoadableCenteredSpinner,
+          })}
+          createNotificationBanner={props.createNotificationBanner}
+          userSession={props.userSession}
+          path="/widgets"
+        />
+        <PrivateRoute
+          component={Loadable({
+            loader: (): Promise<any> =>
+              import(
+                /* webpackChunkName: "Evaluations" */ 'containers/Evaluations/Evaluations'
+              ),
+            loading: LoadableCenteredSpinner,
+          })}
+          createNotificationBanner={props.createNotificationBanner}
+          userSession={props.userSession}
+          path="/evaluations"
+        />
+        <PrivateRoute
+          component={Loadable({
+            loader: (): Promise<any> =>
+              import(
+                /* webpackChunkName: "Timeline" */ 'containers/Timeline/Timeline'
+              ),
+            loading: LoadableCenteredSpinner,
+          })}
+          userSession={props.userSession}
+          path="/timeline"
+        />
+      </InAppLayout>
       <PublicRoute
         path="*"
         component={Loadable({

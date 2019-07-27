@@ -77,6 +77,12 @@ export const parseQueryParams = (queryString: string): object => {
   return queryParams
 }
 
+export const getRootPath = (path: string = ''): string => {
+  const regexMatch = path.match(/^\/[^/]+/)
+  // When there is no reslt, we expect the current route to be '/'
+  return regexMatch ? regexMatch[0] : '/'
+}
+
 // Utility localstorage functions
 
 // format function for all existing local storage values

@@ -74,6 +74,15 @@ export interface LocalStorageCreate {
   userSessionId?: string
 }
 
+export interface NavigationState {
+  open: boolean
+  animateOnClose: boolean
+}
+
+export interface NavigationStateChange {
+  animateOnClose?: boolean
+}
+
 // Form types
 export interface InputEvent {
   target: {

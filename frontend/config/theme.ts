@@ -14,7 +14,8 @@ export const defaultTheme = {
   // Delete
   delete: '#ff6060',
   // Default app bg
-  appBg: '#e6eeff',
+  appBg:
+    'linear-gradient(-225deg, rgb(222, 243, 248) 0%, rgb(135, 167, 217) 50%, rgb(112, 133, 182) 100%)',
   // Font setting
   text: '#545454',
   // Other
@@ -61,6 +62,8 @@ const layerIndex = {
   navigation: 20,
 
   notificationBanner: 30,
+
+  bottomNavigation: 40,
 }
 
 export default (userSettings: { [key: string]: boolean } = {}): Theme => {
