@@ -1,39 +1,24 @@
 // libraries
 import styled from 'styled-components'
-// components
-import Box from 'shared/Box/Box'
 
 interface LayoutProps {
   context?: 'horizontal-scroll'
 }
 
-export const Layout = styled(Box)<LayoutProps>`
+export const Layout = styled.div<LayoutProps>`
   padding: 10px 0 5px 0;
   ${(props): string =>
     props.context === 'horizontal-scroll'
       ? `
       display: flex;
       align-items: center;
-
-      height: 100%;
-      padding: 10px 20px;
-
-      background-color: ${props.theme.contentBoxBg};
+      
+      padding: 0;
+      
       overflow-x: auto;
       overflow-y: hidden;
       white-space: nowrap;
       z-index: ${props.theme.layerIndex.protrudeContent}
-
-      @media (min-width: ${props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-        flex-direction: column;
-
-        height: 100%;
-        padding: 20px 10px;
-
-        white-space: normal;
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
     `
       : `
       border-radius: 0;
@@ -55,19 +40,11 @@ export const IconWrapper = styled.div<IconWrapperProps>`
   }
 
   ${(props): string =>
-    props.context === 'horizontal-scroll'
+    props.context !== 'horizontal-scroll'
       ? `
-      @media (min-width: ${props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-        margin-right: 0;
-        margin-bottom: 10px;
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-        `
-      : `
         margin-bottom: 5px;
-      `}
+      `
+      : ``}
 `
 
 export const NoResultWrapper = styled.div`

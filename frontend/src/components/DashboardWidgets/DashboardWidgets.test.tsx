@@ -33,20 +33,6 @@ describe('DashboardWidgets should', (): void => {
     expect(getByTestId('DashboardWidgetsPlaceholder')).toBeInTheDocument()
   })
 
-  test('show info, when getWidgetsWithEvaluations result is empty', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <DashboardWidgets {...propFixtures} widgets={undefined} />
-    )
-    expect(getByText('Noch kein Widget vorhanden')).toBeInTheDocument()
-  })
-
-  test('show info, even when no result is provided', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <DashboardWidgets {...propFixtures} widgets={[]} />
-    )
-    expect(getByText('Noch kein Widget vorhanden')).toBeInTheDocument()
-  })
-
   test('render Timeline widget', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(
       <DashboardWidgets

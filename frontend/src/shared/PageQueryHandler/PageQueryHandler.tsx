@@ -3,12 +3,13 @@ import * as React from 'react'
 import { ApolloError, DocumentNode } from 'apollo-boost'
 import { Query } from 'react-apollo'
 // components
-import LoadingSpinner from 'shared/LoadingSpinner/LoadingSpinner'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
-import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
-import NoResult from 'shared/NoResult/NoResult'
 import ContentBox from 'shared/ContentBox/ContentBox'
+import DefaultPageLayout from 'components/DefaultPageLayout/DefaultPageLayout'
+import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import LoadingSpinner from 'shared/LoadingSpinner/LoadingSpinner'
+import NoResult from 'shared/NoResult/NoResult'
 
 interface Props {
   children: (
@@ -87,8 +88,10 @@ const PageQueryHandler = (props: Props): JSX.Element => {
         })
 
         return (
-          <FadeTransition fullWidth>
-            <ContentBox role="main">{children(result)}</ContentBox>
+          <FadeTransition delay={200} fullHeight fullWidth>
+            <DefaultPageLayout>
+              <ContentBox role="main">{children(result)}</ContentBox>
+            </DefaultPageLayout>
           </FadeTransition>
         )
       }}

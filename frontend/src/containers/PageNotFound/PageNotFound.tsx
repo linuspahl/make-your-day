@@ -8,14 +8,6 @@ import ContentBox from 'shared/ContentBox/ContentBox'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-import PageLayout from 'components/PageLayout/PageLayout'
-// interfaces
-import { UserSession } from 'store/userSession/type'
-
-interface Props {
-  rootPath: string
-  userSession: UserSession
-}
 
 export const Layout = styled.div`
   height: 100%;
@@ -23,8 +15,8 @@ export const Layout = styled.div`
   grid-template-rows: 1fr 70px 1fr;
 `
 
-const PageNotFound = (props: Props): JSX.Element => (
-  <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
+const PageNotFound = (): JSX.Element => (
+  <React.Fragment>
     <FadeTransition fullWidth>
       <ContentBox role="main">
         <H1 context="page">Seite nicht gefunden</H1>
@@ -39,7 +31,7 @@ const PageNotFound = (props: Props): JSX.Element => (
         </ActionRow>
       </ContentBox>
     </FadeTransition>
-  </PageLayout>
+  </React.Fragment>
 )
 
 export default PageNotFound

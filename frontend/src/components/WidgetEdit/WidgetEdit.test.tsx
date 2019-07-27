@@ -7,7 +7,6 @@ import {
   leftClickOption,
   wait,
   cleanup,
-  adjustApiStub,
 } from 'testUtils'
 // components
 import WidgetEdit from './WidgetEdit'

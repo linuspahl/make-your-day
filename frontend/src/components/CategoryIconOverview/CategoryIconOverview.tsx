@@ -23,7 +23,7 @@ interface LoadingPlaceholderProps {
 }
 
 const LoadingPlaceholder = (props: LoadingPlaceholderProps): JSX.Element => (
-  <PlaceholderGroup>
+  <PlaceholderGroup verticalCenter>
     {fill(Array(3), null).map(
       (value, key): JSX.Element => (
         <IconWrapper key={key} context={props.context}>
@@ -51,7 +51,9 @@ const CategoryIconOverview = (props: Props): JSX.Element => (
         error?: ApolloError
         data: { getCategories: CategoryForList[] }
       }): JSX.Element | JSX.Element[] => {
-        if (loading) return <LoadingPlaceholder context={props.context} />
+        if (loading) {
+          return <LoadingPlaceholder context={props.context} />
+        }
 
         if (error)
           return (

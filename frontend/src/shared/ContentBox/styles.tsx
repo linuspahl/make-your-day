@@ -7,6 +7,5 @@ export const Element = styled(Box)`
   width: 100%;
   max-width: 420px;
 
-  padding: 40px 20px 40px 20px;
-  margin: auto;
+  padding: 40px 20px;
 `

@@ -42,3 +42,7 @@ input {
   margin: 0;
   -webkit-appearance: none;
 }
+
+svg:not(:root) {
+  overflow: visible;
+}

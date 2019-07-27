@@ -11,11 +11,21 @@ export const Layout = styled.div`
   // max-width: 100% could lead to a higher width then the "100%" we want.
   max-width: 100vw;
 
-  padding: 20px;
+  padding: 0 20px;
 
   overflow-x: auto;
   white-space: nowrap;
   scroll-snap-type: x mandatory;
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  @media (min-width: ${(props): string =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    padding: 0;
+  }
 `
 
 export const WidgetLayout = styled(Box)`
@@ -29,6 +39,15 @@ export const WidgetLayout = styled(Box)`
   margin-right: 20px;
 
   scroll-snap-align: center;
+
+  @media (min-width: ${(props): string =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    height: 40vh;
+    display: grid;
+
+    margin-right: 0;
+    margin-top: 20px;
+  }
 `
 
 export const WidgetHeader = styled.div`
@@ -53,6 +72,11 @@ export const NewWidgetWrapper = styled.div`
   height: 100%;
 
   scroll-snap-align: center;
+
+  @media (min-width: ${(props): string =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    height: 40vh;
+  }
 `
 
 export const NewWidgetBox = styled(Box)`
@@ -78,7 +102,8 @@ export const NewWidgetLink = styled(Link)`
     color: initial;
   }
 
-  @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
+  @media (min-width: ${(props): string =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
     padding: 40px 20px;
   }
 `
@@ -90,7 +115,8 @@ export const CreateWidgetIcon = styled.div`
   line-height: 76px;
   text-align: center;
 
-  @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
+  @media (min-width: ${(props): string =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
     margin-bottom: 40px;
   }
 `

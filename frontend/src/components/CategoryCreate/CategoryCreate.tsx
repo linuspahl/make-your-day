@@ -7,6 +7,8 @@ import { ApolloError } from 'apollo-boost'
 import { logError } from 'utils/utils'
 // components
 import CategoryForm from 'components/CategoryForm/CategoryForm'
+import ContentBox from 'shared/ContentBox/ContentBox'
+import DefaultPageLayout from 'components/DefaultPageLayout/DefaultPageLayout'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 // graphql
@@ -18,7 +20,6 @@ import {
   Category,
   CategoryCreate as CategoryCreateType,
 } from 'store/category/type'
-import ContentBox from 'shared/ContentBox/ContentBox'
 
 interface Props extends RouteComponentProps {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -36,32 +37,34 @@ class CategoryCreate extends React.Component<Props> {
   public render(): JSX.Element {
     const { rootPath } = this.props
     return (
-      <FadeTransition fullWidth>
-        <ContentBox role="main">
-          <H1 context="page">Kategorie erstellen</H1>
-          <Mutation
-            mutation={CreateCategory}
-            onCompleted={this.handleCompleted}
-            onError={this.handleError}
-            update={addCategory}
-          >
-            {(
-              createCategory: ({
-                variables,
-              }: {
-                variables: CategoryCreateType
-              }) => void
-            ): JSX.Element => (
-              <CategoryForm
-                mode="create"
-                rootPath={rootPath}
-                submitAction={(variables: CategoryCreateType): void =>
-                  createCategory({ variables })
-                }
-              />
-            )}
-          </Mutation>
-        </ContentBox>
+      <FadeTransition fullWidth fullHeight>
+        <DefaultPageLayout>
+          <ContentBox role="main">
+            <H1 context="page">Kategorie erstellen</H1>
+            <Mutation
+              mutation={CreateCategory}
+              onCompleted={this.handleCompleted}
+              onError={this.handleError}
+              update={addCategory}
+            >
+              {(
+                createCategory: ({
+                  variables,
+                }: {
+                  variables: CategoryCreateType
+                }) => void
+              ): JSX.Element => (
+                <CategoryForm
+                  mode="create"
+                  rootPath={rootPath}
+                  submitAction={(variables: CategoryCreateType): void =>
+                    createCategory({ variables })
+                  }
+                />
+              )}
+            </Mutation>
+          </ContentBox>
+        </DefaultPageLayout>
       </FadeTransition>
     )
   }

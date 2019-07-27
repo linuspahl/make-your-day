@@ -1,15 +1,24 @@
 // libraries
 import * as React from 'react'
+import styled from 'styled-components'
 // components
 import ContentBox from 'shared/ContentBox/ContentBox'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 import LoginForm from 'components/LoginForm/LoginForm'
-import PageLayout from 'components/PageLayout/PageLayout'
 // interfaces
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate, LocalStorage } from 'types/types'
 
+const Wrapper = styled.div`
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+`
 interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
@@ -18,7 +27,7 @@ interface Props {
 }
 
 const Layout = (props: Props): JSX.Element => (
-  <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
+  <Wrapper>
     <FadeTransition fullWidth>
       <ContentBox role="main">
         <H1 context="page">Anmeldung</H1>
@@ -28,7 +37,7 @@ const Layout = (props: Props): JSX.Element => (
         />
       </ContentBox>
     </FadeTransition>
-  </PageLayout>
+  </Wrapper>
 )
 
 export default Layout

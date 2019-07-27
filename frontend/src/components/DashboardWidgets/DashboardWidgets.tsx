@@ -1,7 +1,6 @@
 // libraries
 import * as React from 'react'
 import { sortBy } from 'lodash'
-import { Link } from 'react-router-dom'
 // components
 import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
 import NoResult from 'shared/NoResult/NoResult'
@@ -24,6 +23,7 @@ import {
 // graphql
 import { NotificationCreate } from 'types/types'
 import { WidgetFull } from 'store/widget/type'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
 
 const LoadingPlaceholder = (): JSX.Element => (
   <PlaceholderWrapper data-testid="DashboardWidgetsPlaceholder">
@@ -37,59 +37,57 @@ interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
   loading: boolean
   widgets: WidgetFull[]
+  delay?: number
 }
 
 const DashboardWidgets = (props: Props): JSX.Element => {
-  const { createNotificationBanner, widgets = [], loading } = props
+  const { createNotificationBanner, widgets = [], loading, delay } = props
 
-  if (loading) return <LoadingPlaceholder />
-
-  if (widgets.length === 0)
-    return (
-      <PlaceholderWrapper>
-        <NewWidgetBox>
-          <Link to="/widgets/create" className="defaultColor">
-            <NoResult message="Noch kein Widget vorhanden" />
-          </Link>
-        </NewWidgetBox>
-      </PlaceholderWrapper>
-    )
   return (
-    <Layout>
-      {sortBy(widgets, 'id').map(
-        (widget): JSX.Element => (
-          <WidgetLayout key={widget.id}>
-            <WidgetHeader>
-              <H2>{widget.title}</H2>
-            </WidgetHeader>
+    <FadeTransition delay={delay || 0} fullHeight fullWidth>
+      {loading && <LoadingPlaceholder />}
+      {!loading && (
+        <Layout>
+          {sortBy(widgets, 'id').map(
+            (widget): JSX.Element => (
+              <WidgetLayout key={widget.id}>
+                <WidgetHeader>
+                  <H2>{widget.title}</H2>
+                </WidgetHeader>
 
-            {widget.type === 'timeline' && <TimelineWidget key={widget.id} />}
-            {widget.type === 'evaluation' && (
-              <EvaluationWidget
-                evaluation={widget.evaluation}
-                key={widget.id}
-              />
-            )}
-            {widget.type === 'textarea' && (
-              <EditorWidget
-                createNotificationBanner={createNotificationBanner}
-                widget={widget}
-              />
-            )}
-          </WidgetLayout>
-        )
+                {widget.type === 'timeline' && (
+                  <TimelineWidget key={widget.id} />
+                )}
+                {widget.type === 'evaluation' && (
+                  <EvaluationWidget
+                    evaluation={widget.evaluation}
+                    key={widget.id}
+                  />
+                )}
+                {widget.type === 'textarea' && (
+                  <EditorWidget
+                    createNotificationBanner={createNotificationBanner}
+                    widget={widget}
+                  />
+                )}
+              </WidgetLayout>
+            )
+          )}
+          {(!widgets || widgets.length == 0) && (
+            <NewWidgetWrapper>
+              <NewWidgetBox>
+                <NewWidgetLink to="/widgets/create">
+                  <CreateWidgetIcon>
+                    <Icon title="plus" />
+                  </CreateWidgetIcon>
+                  <NoResult message="Weiteres Widget erstellen" />
+                </NewWidgetLink>
+              </NewWidgetBox>
+            </NewWidgetWrapper>
+          )}
+        </Layout>
       )}
-      <NewWidgetWrapper>
-        <NewWidgetBox>
-          <NewWidgetLink to="/widgets/create">
-            <CreateWidgetIcon>
-              <Icon title="plus" />
-            </CreateWidgetIcon>
-            <NoResult message="Weiteres Widget erstellen" />
-          </NewWidgetLink>
-        </NewWidgetBox>
-      </NewWidgetWrapper>
-    </Layout>
+    </FadeTransition>
   )
 }
 

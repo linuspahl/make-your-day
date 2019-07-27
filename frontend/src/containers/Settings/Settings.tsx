@@ -2,7 +2,6 @@
 import * as React from 'react'
 import { Route } from 'react-router-dom'
 // components
-import PageLayout from 'components/PageLayout/PageLayout'
 import UserSettingsOverview from 'components/UserSettingsOverview/UserSettingsOverview'
 import UserSessionsOverview from 'components/UserSessionsOverview/UserSessionsOverview'
 // interfaces
@@ -21,7 +20,7 @@ interface Props {
 
 const Settings = (props: Props): JSX.Element => {
   return (
-    <PageLayout userSession={props.userSession} rootPath={props.rootPath}>
+    <React.Fragment>
       <Route
         exact
         path={props.rootPath}
@@ -47,7 +46,7 @@ const Settings = (props: Props): JSX.Element => {
           />
         )}
       />
-    </PageLayout>
+    </React.Fragment>
   )
 }
 

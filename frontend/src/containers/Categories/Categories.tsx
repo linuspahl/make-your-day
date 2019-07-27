@@ -2,7 +2,6 @@
 import * as React from 'react'
 import { Route } from 'react-router-dom'
 // components
-import PageLayout from 'components/PageLayout/PageLayout'
 import CategoryOverview from 'components/CategoryOverview/CategoryOverview'
 import CategoryEdit from 'components/CategoryEdit/CategoryEdit'
 import CategoryCreate from 'components/CategoryCreate/CategoryCreate'
@@ -12,19 +11,17 @@ import SubcategoryOverview from 'components/SubcategoryOverview/SubcategoryOverv
 import SubcategoryCreate from 'components/SubcategoryCreate/SubcategoryCreate'
 import SubcategoryEdit from 'components/SubcategoryEdit/SubcategoryEdit'
 // interfaces
-import { UserSession } from 'store/userSession/type'
 import { NotificationCreate } from 'types/types'
 
 interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
-  userSession: UserSession
 }
 
 const Categories = (props: Props): JSX.Element => {
-  const { createNotificationBanner, userSession, rootPath } = props
+  const { createNotificationBanner, rootPath } = props
   return (
-    <PageLayout userSession={userSession} rootPath={rootPath}>
+    <React.Fragment>
       <Route
         exact
         path={rootPath}
@@ -89,7 +86,7 @@ const Categories = (props: Props): JSX.Element => {
           />
         )}
       />
-    </PageLayout>
+    </React.Fragment>
   )
 }
 
