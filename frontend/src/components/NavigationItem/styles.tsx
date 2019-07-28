@@ -4,8 +4,17 @@ import { Link } from 'react-router-dom'
 
 export const ListItem = styled.li`
   width: 100%;
-  height: 60px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border-bottom: 1px solid ${(props): string => props.theme.border};
+
+  color: inherit;
+  text-decoration: none;
+
+  cursor: pointer;
 
   &:active {
     background-color: ${(props): string => props.theme.active};
@@ -19,7 +28,7 @@ export const InnerLink = styled(Link)`
   width: 100%;
   height: 100%;
 
-  padding: 0px 10px;
+  padding: ${(props): string => props.theme.dimensions.padding}px 10px;
 
   display: flex;
   align-items: center;

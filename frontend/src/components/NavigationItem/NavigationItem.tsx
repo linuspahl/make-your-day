@@ -6,14 +6,12 @@ import { ListItem, InnerLink, RouteActive } from './styles'
 interface Props {
   rootPath: string
   route: { title: string; path: string }
-  toggleAction: (newPath: string) => void
 }
 
 const NavigationItem = (props: Props): JSX.Element => {
   const {
     route: { title, path },
     rootPath,
-    toggleAction,
   } = props
   // Check if current route is active.
   // rootPath allways represents the root part of a route.
@@ -22,7 +20,7 @@ const NavigationItem = (props: Props): JSX.Element => {
   const isActive = rootPath === path
   return (
     <ListItem>
-      <InnerLink to={path} onClick={(): void => toggleAction(path)}>
+      <InnerLink to={path}>
         {title} {isActive && <RouteActive />}
       </InnerLink>
     </ListItem>

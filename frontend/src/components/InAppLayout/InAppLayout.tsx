@@ -9,7 +9,7 @@ import Navigation from 'components/Navigation/Navigation'
 import BottomNavigation from 'shared/BottomNavigation/BottomNavigation'
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 // interfaces
-import { NavigationState, NavigationStateChange } from 'types/types'
+import { NavigationState } from 'types/types'
 import { UserSession } from 'store/userSession/type'
 
 interface Props extends RouteComponentProps {
@@ -44,6 +44,17 @@ class InAppLayout extends React.Component<Props, State> {
     document.removeEventListener('keydown', this.detectKeydown, false)
   }
 
+  public componentWillReceiveProps(nextProps: Props): void {
+    // If the route changes and the navigation is open, we want to close it
+    if (this.state.navigationState.open) {
+      if (nextProps.location.pathname !== this.props.location.pathname) {
+        this.toggleNavigation(false)
+      } else {
+        this.toggleNavigation()
+      }
+    }
+  }
+
   public render(): JSX.Element {
     const {
       userSession,
@@ -57,13 +68,8 @@ class InAppLayout extends React.Component<Props, State> {
         <ChildrenWrapper>{children}</ChildrenWrapper>
 
         <BottomNavigation
-          toggleNavigation={(): void => {
-            // We only want to animate the navigation close, when the route really changes
-            // this looks smother in combination with the content fade effect
-            this.toggleNavigation({
-              animateOnClose: pathname !== '/dashboard',
-            })
-          }}
+          isNavVisible={navigationState.open}
+          toggleNavigation={this.toggleNavigation}
         >
           <CategoryIconOverview context="horizontal-scroll" />
         </BottomNavigation>
@@ -73,20 +79,17 @@ class InAppLayout extends React.Component<Props, State> {
             rootPath={rootPath}
             state={navigationState}
             toggleAction={this.toggleNavigation}
-            fullPath={pathname}
           />
         )}
       </Layout>
     )
   }
 
-  private toggleNavigation(newState: NavigationStateChange): void {
-    const navigationState = this.state.navigationState
+  private toggleNavigation(animateOnClose = true): void {
     this.setState({
       navigationState: {
-        ...navigationState,
-        ...newState,
-        open: !navigationState.open,
+        animateOnClose,
+        open: !this.state.navigationState.open,
       },
     })
   }
@@ -95,7 +98,7 @@ class InAppLayout extends React.Component<Props, State> {
     // Detect when:
     // - or when the user click the alt key (desktop)
     if (event.keyCode === 18) {
-      this.toggleNavigation({ animateOnClose: true })
+      this.toggleNavigation()
     }
   }
 
@@ -103,7 +106,7 @@ class InAppLayout extends React.Component<Props, State> {
     // Detect when:
     // - user clicks with two fingers (mobile)
     if (event.type && event.touches.length === 2) {
-      this.toggleNavigation({ animateOnClose: true })
+      this.toggleNavigation()
     }
   }
 }

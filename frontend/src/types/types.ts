@@ -85,10 +85,6 @@ export interface NavigationState {
   animateOnClose: boolean
 }
 
-export interface NavigationStateChange {
-  animateOnClose?: boolean
-}
-
 // Form types
 export interface InputEvent {
   target: {

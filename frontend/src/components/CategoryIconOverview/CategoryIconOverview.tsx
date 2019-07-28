@@ -39,57 +39,60 @@ interface Props {
   params?: { [key: string]: string }
 }
 
-const CategoryIconOverview = (props: Props): JSX.Element => (
-  <Layout context={props.context}>
-    <Query query={GetCategories}>
-      {({
-        loading,
-        error,
-        data,
-      }: {
-        loading: boolean
-        error?: ApolloError
-        data: { getCategories: CategoryForList[] }
-      }): JSX.Element | JSX.Element[] => {
-        if (loading) {
-          return <LoadingPlaceholder context={props.context} />
-        }
+const CategoryIconOverview = (props: Props): JSX.Element => {
+  const { context, params } = props
+  return (
+    <Layout context={context}>
+      <Query query={GetCategories}>
+        {({
+          loading,
+          error,
+          data,
+        }: {
+          loading: boolean
+          error?: ApolloError
+          data: { getCategories: CategoryForList[] }
+        }): JSX.Element | JSX.Element[] => {
+          if (loading) {
+            return <LoadingPlaceholder context={context} />
+          }
 
-        if (error)
-          return (
-            <ErrorMessage
-              error={error}
-              message="Kategorien konnten nicht geladen werden"
-            />
-          )
-
-        if (!data.getCategories || data.getCategories.length === 0)
-          return (
-            <NoResultWrapper>
-              <Link to="/categories/create">
-                <NoResult message="Noch keine Kategorie vorhanden" />
-              </Link>
-            </NoResultWrapper>
-          )
-
-        const urlParams = generateUrlParams(props.params)
-        return data.getCategories.map(
-          (category: Category): JSX.Element => (
-            <IconWrapper key={category.id} context={props.context}>
-              <CategoryIcon
-                ariaLabel={`Erstelle Eintrag für Kategorie ${category.title}`}
-                color={category.color}
-                icon={category.icon}
-                key={category.id}
-                title={category.title}
-                to={`/categories/${category.id}/records/create${urlParams}`}
+          if (error)
+            return (
+              <ErrorMessage
+                error={error}
+                message="Kategorien konnten nicht geladen werden"
               />
-            </IconWrapper>
+            )
+
+          if (!data.getCategories || data.getCategories.length === 0)
+            return (
+              <NoResultWrapper>
+                <Link to="/categories/create">
+                  <NoResult message="Noch keine Kategorie vorhanden" />
+                </Link>
+              </NoResultWrapper>
+            )
+
+          const urlParams = generateUrlParams(params)
+          return data.getCategories.map(
+            (category: Category): JSX.Element => (
+              <IconWrapper key={category.id} context={context}>
+                <CategoryIcon
+                  ariaLabel={`Erstelle Eintrag für Kategorie ${category.title}`}
+                  color={category.color}
+                  icon={category.icon}
+                  key={category.id}
+                  title={category.title}
+                  to={`/categories/${category.id}/records/create${urlParams}`}
+                />
+              </IconWrapper>
+            )
           )
-        )
-      }}
-    </Query>
-  </Layout>
-)
+        }}
+      </Query>
+    </Layout>
+  )
+}
 
 export default CategoryIconOverview

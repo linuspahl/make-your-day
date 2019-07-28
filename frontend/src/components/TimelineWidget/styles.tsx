@@ -8,6 +8,10 @@ export const Outer = styled.div`
   height: 100%;
 
   overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    background: transparent;
+  }
 `
 
 export const Layout = styled.div`
@@ -15,8 +19,4 @@ export const Layout = styled.div`
 
   padding: ${(props): number => props.theme.dimensions.padding}px;
   margin: auto 0;
-
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `

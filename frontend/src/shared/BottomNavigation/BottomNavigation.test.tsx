@@ -16,7 +16,7 @@ describe('BottomNavigation should', (): void => {
 
   test('display content', (): void => {
     const { getByText } = renderWithAppRoot(
-      <BottomNavigation toggleNavigation={(): void => {}}>
+      <BottomNavigation toggleNavigation={(): void => {}} isNavVisible>
         {children}
       </BottomNavigation>
     )
@@ -26,7 +26,7 @@ describe('BottomNavigation should', (): void => {
   test('should call toggle navigation action', (): void => {
     const onClickEvent = jest.fn()
     const { getByTestId } = renderWithAppRoot(
-      <BottomNavigation toggleNavigation={onClickEvent}>
+      <BottomNavigation toggleNavigation={onClickEvent} isNavVisible>
         {children}
       </BottomNavigation>
     )

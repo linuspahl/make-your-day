@@ -12,10 +12,9 @@ describe('Navigation should', (): void => {
   test('list navigation items', (): void => {
     const { getByText } = renderWithAppRoot(
       <Navigation
-        toggleAction={(): void => {}}
         rootPath="/"
-        fullPath="/"
         state={{ open: true, animateOnClose: true }}
+        toggleAction={(): void => {}}
       />
     )
     navigationItems.forEach((navItem): void => {

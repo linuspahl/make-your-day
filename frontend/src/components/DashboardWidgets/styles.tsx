@@ -18,7 +18,6 @@ export const Layout = styled.div`
   scroll-snap-type: x mandatory;
 
   ::-webkit-scrollbar {
-    width: 0px;
     background: transparent;
   }
 
