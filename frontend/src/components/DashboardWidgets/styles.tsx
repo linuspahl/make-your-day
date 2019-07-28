@@ -51,7 +51,7 @@ export const WidgetLayout = styled(Box)`
 `
 
 export const WidgetHeader = styled.div`
-  padding: 5px ${(props): number => props.theme.dimensions.padding}ox;
+  padding: 5px ${(props): number => props.theme.dimensions.padding}px;
   border-bottom: 1px solid ${(props): string => props.theme.border};
 
   text-align: center;
