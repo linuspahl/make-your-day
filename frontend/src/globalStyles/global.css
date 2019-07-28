@@ -5,10 +5,8 @@ textarea,
 input,
 select,
 button {
-  font-family: "Roboto", Arial, Helvetica, sans-serif;
-  font-size: 16px;
-  letter-spacing: 0.6px;
-  line-height: 1.4;
+  font-family: inherit;
+  font-size: inherit;
   /* Better fonts for chrome  */
   -webkit-font-smoothing: antialiased;
 }

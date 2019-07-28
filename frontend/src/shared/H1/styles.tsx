@@ -6,10 +6,17 @@ interface ElementProps {
 }
 
 export const Element = styled.h1<ElementProps>`
-  font-size: 28px;
+  font-family: 'Istok Web', Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  line-height: 1.15;
   text-align: center;
   hyphens: auto;
   ${(props): string =>
     props.context === 'page' &&
     `margin-bottom: ${props.theme.dimensions.padding * 4}px;`};
+
+  @media (min-width: ${(props): string =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    font-size: 42px;
+  }
 `

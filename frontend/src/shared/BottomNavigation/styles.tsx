@@ -22,11 +22,12 @@ export const NavigationToggle = styled.div`
   width: ${(props): number => props.theme.dimensions.bottomMenu}px;
   height: ${(props): number => props.theme.dimensions.bottomMenu}px;
 
-  font-size: ${(props): number => props.theme.dimensions.bottomMenu / 2}px;
-
   display: flex;
   align-items: center;
   justify-content: center;
+
+  color: ${(props): number => props.theme.text};
+  font-size: ${(props): number => props.theme.dimensions.bottomMenu / 2}px;
 
   cursor: pointer;
 `

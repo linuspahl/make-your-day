@@ -24,6 +24,16 @@ const Wrapper = styled.div`
     background-position: 50% 50%;
     `
       : `background-image: ${props.theme.appBg}`};
+
+  /* Global styles */
+  font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+
+  @media (min-width: ${(props): string =>
+      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
+    font-size: 20px;
+  }
 `
 
 interface Props {
