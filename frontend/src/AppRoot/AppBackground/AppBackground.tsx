@@ -26,7 +26,7 @@ const Wrapper = styled.div`
       : `background-image: ${props.theme.appBg}`};
 
   /* Global styles */
-  font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+  font-family: 'Istok Web', Arial, Helvetica, sans-serif;
   font-size: 16px;
   line-height: 1.6;
 

@@ -11,6 +11,6 @@ export const Element = styled.h2`
 
   @media (min-width: ${(props): string =>
       props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-    font-size: 28px;
+    font-size: 26px;
   }
 `

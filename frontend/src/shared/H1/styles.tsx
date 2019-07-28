@@ -6,7 +6,8 @@ interface ElementProps {
 }
 
 export const Element = styled.h1<ElementProps>`
-  font-family: 'Istok Web', Arial, Helvetica, sans-serif;
+  font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+  font-weight: 300;
   font-size: 32px;
   line-height: 1.15;
   text-align: center;
