@@ -16,6 +16,9 @@ interface Props {
     result?: object[] | object,
     status?: { [queryNames: string]: JSX.Element }
   ) => JSX.Element
+
+  // childrenKey - if not set, the FadeTrasnition will may not rerender on page enter
+  childrenKey?: string
   // dataTestId
   // - allows custom test id, so far only needed to test
   //   if a route renders the correct component
@@ -38,6 +41,7 @@ const PageQueryHandler = (props: Props): JSX.Element => {
     children,
     dataTestId,
     errorMessages,
+    childrenKey,
     loadingPlaceholder,
     query,
     queryNames,
@@ -88,7 +92,7 @@ const PageQueryHandler = (props: Props): JSX.Element => {
         })
 
         return (
-          <FadeTransition delay={200} fullHeight fullWidth>
+          <FadeTransition delay={200} fullHeight fullWidth key={childrenKey}>
             <DefaultPageLayout>
               <ContentBox role="main">{children(result)}</ContentBox>
             </DefaultPageLayout>

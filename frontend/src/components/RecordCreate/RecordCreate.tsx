@@ -62,6 +62,7 @@ class RecordCreate extends React.Component<Props> {
         query={GetCategoryWithChildren}
         queryNames={['getCategory']}
         variables={{ id: categoryId }}
+        childrenKey={`category-${categoryId}`}
       >
         {({
           data: { getCategory: category },
