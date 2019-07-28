@@ -15,50 +15,68 @@ interface InnerWrapperProps {
   state: NavigationState
 }
 const InnerWrapper = styled.div<InnerWrapperProps>`
-  bottom: 0;
-  width: 100vw;
-
-  position: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  padding: 20px 20px 100px 20px;
-  box-shadow: ${(props): string => props.theme.boxShadow};
-  background-color: ${(props): string => props.theme.contentBoxBg};
-
-  text-align: center;
-
-  transition: ${(props): string =>
-    props.state.animateOnClose ? 'transform 300ms linear' : ''};
-  transform: translateX(-100vw);
-  will-change: transform;
-
-  z-index: ${(props): string => props.theme.layerIndex.navigation};
-
   ${(props): string => {
-    if (props.state.open)
-      return `
-      transform: none;
-      transition: transform 300ms linear;
+    const {
+      theme: {
+        dimensions: { padding },
+        boxShadow,
+        contentBoxBg,
+        layerIndex: { navigation: navigationIndex },
+        mediaQuery: { tablet },
+      },
+    } = props
+    return `
+      bottom: 0;
+      width: 100vw;
+
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      padding: ${padding}px ${padding}px 100px ${padding}px;
+      box-shadow: ${boxShadow};
+      background-color: ${contentBoxBg};
+
+      text-align: center;
+
+      
+      will-change: transform;
+
+      z-index: ${navigationIndex};
+
+      ${
+        props.state.open
+          ? `
+            transform: none;
+            transition: transform 300ms linear;`
+          : `
+            transition: ${
+              props.state.animateOnClose ? 'transform 300ms linear' : ''
+            };
+            transform: translateX(-100vw);
+          `
+      }
+      
+
+      @media (min-width: ${tablet}) {
+        width: 300px;
+        height: 100%;
+        
+        transform: translateX(-300px);
+
+        ${
+          props.state.open
+            ? `
+          transform: none;
+          transition: transform 300ms linear;
+        `
+            : ``
+        }}
+      }
     `
   }}
-
-  @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
-    width: 300px;
-    height: 100%;
-    
-    transform: translateX(-300px);
-
-    ${(props): string => {
-      if (props.state.open)
-        return `
-      transform: none;
-      transition: transform 300ms linear;
-    `
-    }}
-  }
 `
 
 interface Props {

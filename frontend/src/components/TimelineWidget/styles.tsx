@@ -13,7 +13,7 @@ export const Outer = styled.div`
 export const Layout = styled.div`
   width: 100%;
 
-  padding: 20px;
+  padding: ${(props): number => props.theme.dimensions.padding}px;
   margin: auto 0;
 
   ::-webkit-scrollbar {

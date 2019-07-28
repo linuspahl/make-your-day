@@ -7,8 +7,18 @@ export const Layout = styled.div`
 `
 
 export const ChildrenWrapper = styled.div`
-  height: calc(100vh - 65px);
-  width: 100%;
+  ${(props): string => {
+    const {
+      theme: {
+        dimensions: { bottomMenu },
+      },
+    } = props
+    return `
+    height: calc(
+      100vh - ${bottomMenu - bottomMenu / 4}px
+    ); 
+    width: 100%;
 
-  overflow: auto;
+    overflow: auto;`
+  }}
 `

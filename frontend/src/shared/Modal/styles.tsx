@@ -33,7 +33,7 @@ export const ContentWrapper = styled.div`
   height: 100%;
   width: 100%;
 
-  padding: 20px;
+  padding: ${(props): number => props.theme.dimensions.padding}px;
 
   z-index: ${(props): string => props.theme.layerIndex.modalContent};
 `

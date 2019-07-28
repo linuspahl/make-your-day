@@ -5,7 +5,15 @@ import styled from 'styled-components'
 const Wrapper = styled.div`
   min-height: 100%;
 
-  padding: 20px 20px 25px 20px;
+  ${(props): string => {
+    const {
+      theme: {
+        dimensions: { padding, bottomMenu },
+      },
+    } = props
+    return `padding: ${padding}px ${padding}px ${padding +
+      bottomMenu / 4}px ${padding}px;`
+  }}
 
   display: flex;
   align-items: center;

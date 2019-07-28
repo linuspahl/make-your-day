@@ -20,7 +20,7 @@ export const PellEditor = styled.div`
     height: 100%;
 
     margin: 0;
-    padding: 20px;
+    padding: ${(props): number => props.theme.dimensions.padding}px;
     border: 0;
 
     overflow-y: auto;
@@ -29,7 +29,7 @@ export const PellEditor = styled.div`
 
   .pell-button {
     padding: 8px;
-    min-width 40px;
+    min-width: 40px;
 
     border-left: 0;
     border-top: 0;

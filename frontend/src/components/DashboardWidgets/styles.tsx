@@ -11,7 +11,7 @@ export const Layout = styled.div`
   // max-width: 100% could lead to a higher width then the "100%" we want.
   max-width: 100vw;
 
-  padding: 0 20px;
+  padding: 0 ${(props): number => props.theme.dimensions.padding}px;
 
   overflow-x: auto;
   white-space: nowrap;
@@ -36,7 +36,7 @@ export const WidgetLayout = styled(Box)`
   width: 100%;
   height: 100%;
 
-  margin-right: 20px;
+  margin-right: ${(props): number => props.theme.dimensions.padding}px;
 
   scroll-snap-align: center;
 
@@ -46,12 +46,12 @@ export const WidgetLayout = styled(Box)`
     display: grid;
 
     margin-right: 0;
-    margin-top: 20px;
+    margin-top: ${(props): number => props.theme.dimensions.padding}px;
   }
 `
 
 export const WidgetHeader = styled.div`
-  padding: 5px 20px;
+  padding: 5px ${(props): number => props.theme.dimensions.padding}ox;
   border-bottom: 1px solid ${(props): string => props.theme.border};
 
   text-align: center;
@@ -59,7 +59,7 @@ export const WidgetHeader = styled.div`
 `
 
 export const PlaceholderWrapper = styled.div`
-  padding: 20px;
+  padding: ${(props): number => props.theme.dimensions.padding}px;
   width: 100%;
 `
 
@@ -104,12 +104,12 @@ export const NewWidgetLink = styled(Link)`
 
   @media (min-width: ${(props): string =>
       props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-    padding: 40px 20px;
+    padding: 40px ${(props): number => props.theme.dimensions.padding}px;
   }
 `
 
 export const CreateWidgetIcon = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: ${(props): number => props.theme.dimensions.bottomMenu};
 
   font-size: 82px;
   line-height: 76px;

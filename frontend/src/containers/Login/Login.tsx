@@ -17,7 +17,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 20px;
+  padding: ${(props): number => props.theme.dimensions.padding}px;
 `
 interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void

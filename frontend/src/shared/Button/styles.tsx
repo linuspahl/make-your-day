@@ -32,7 +32,7 @@ export const Layout = styled.button<LayoutProps>`
       align-items: center;
 
       height: 40px;
-      padding: 0 20px;
+      padding: 0 ${props.theme.dimensions.padding}px;
       border: 0;
 
       background-color: ${bgColor};

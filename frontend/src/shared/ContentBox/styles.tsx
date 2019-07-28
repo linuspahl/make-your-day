@@ -7,5 +7,6 @@ export const Element = styled(Box)`
   width: 100%;
   max-width: 420px;
 
-  padding: 40px 20px;
+  padding: ${(props): number => props.theme.dimensions.padding * 2}px
+    ${(props): number => props.theme.dimensions.padding}px;
 `

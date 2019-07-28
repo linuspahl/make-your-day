@@ -4,7 +4,6 @@ import * as React from 'react'
 import colorTheme from 'theme'
 import {
   cleanup,
-  render,
   renderWithAppRoot,
   fireEvent,
   leftClickOption,
@@ -19,7 +18,7 @@ describe('Button should', (): void => {
   const theme = colorTheme()
 
   test('display content', (): void => {
-    const { getByText } = render(<Button>{children}</Button>)
+    const { getByText } = renderWithAppRoot(<Button>{children}</Button>)
     expect(getByText(children)).toBeInTheDocument()
   })
 

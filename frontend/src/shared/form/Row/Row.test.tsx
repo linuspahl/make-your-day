@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 // utils
-import { render, cleanup } from 'testUtils'
+import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import Row from './Row'
 
@@ -10,13 +10,13 @@ describe('Row should', (): void => {
 
   const children = 'My special Row content!'
   test('display content', (): void => {
-    const { getByText } = render(<Row>{children}</Row>)
+    const { getByText } = renderWithAppRoot(<Row>{children}</Row>)
 
     expect(getByText(children)).toBeInTheDocument()
   })
 
   test('look disabled, when disabled is provided', (): void => {
-    const { getByText } = render(<Row disabled>{children}</Row>)
+    const { getByText } = renderWithAppRoot(<Row disabled>{children}</Row>)
     expect(getByText(children)).toHaveStyleRule('cursor', 'not-allowed')
   })
 })

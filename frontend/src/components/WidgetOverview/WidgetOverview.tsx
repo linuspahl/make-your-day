@@ -22,7 +22,7 @@ import { WidgetForList } from 'store/widget/type'
 
 const List = styled.ul`
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: ${(props): number => props.theme.dimensions.padding}px;
 `
 
 const sortWidgetsByPosition = (

@@ -52,7 +52,7 @@ export const Header = styled.div`
 
   height: 40px;
 
-  margin-bottom: 20px;
+  margin-bottom: ${(props): number => props.theme.dimensions.padding}px;
   padding-left: 10px;
   font-size: 20px;
 `
@@ -92,7 +92,7 @@ export const OptionPreview = styled.div`
 `
 
 export const Footer = styled.div`
-  margin-top: 20px;
+  margin-top: ${(props): number => props.theme.dimensions.padding}px;
 
   text-align: center;
 `

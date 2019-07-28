@@ -66,11 +66,23 @@ const layerIndex = {
   bottomNavigation: 40,
 }
 
+// paddings in pixel
+const dimensions = {
+  padding: 20,
+  bottomMenu: 70,
+}
+
 export default (userSettings: { [key: string]: boolean } = {}): Theme => {
   let colors = { ...defaultTheme }
   if (userSettings.nightMode) {
     // if nightmode is active, we will just change some specific colors
     colors = { ...colors, ...nightModeTheme }
   }
-  return { ...colors, settings: { ...userSettings }, mediaQuery, layerIndex }
+  return {
+    ...colors,
+    settings: { ...userSettings },
+    mediaQuery,
+    layerIndex,
+    dimensions,
+  }
 }

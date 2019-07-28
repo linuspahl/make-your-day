@@ -22,6 +22,7 @@ export interface Theme {
   settings: { [key: string]: boolean }
   mediaQuery: { tablet: string }
   layerIndex: LayerIndexes
+  dimensions: AppDimensions
 }
 
 export interface CategoryColors {
@@ -50,6 +51,11 @@ interface LayerIndexes {
   modalContent: number
   navigation: number
   notificationBanner: number
+}
+
+interface AppDimensions {
+  padding: number
+  bottomMenu: number
 }
 
 export interface LocalStorage {

@@ -13,23 +13,34 @@ import { WidgetFull } from 'store/widget/type'
 import { GetWidgetsWithEvaluation } from 'store/widget/query'
 
 export const Layout = styled.div`
-  height: 100%;
-  width: 100%;
+  ${(props): string => {
+    const {
+      theme: {
+        dimensions: { padding, bottomMenu },
+        mediaQuery: { tablet },
+      },
+    } = props
+    return `
+      height: 100%;
+      width: 100%;
+      
+      padding: ${padding}px 0 ${padding + bottomMenu / 4}px 0;  
 
-  padding: 20px 0 25px 0;
+      display: grid;
+      grid-row-gap: ${padding}px;
+      grid-template-rows:
+        calc(50% - ${padding / 2}px) calc(50% - ${padding / 2}px);
 
-  display: grid;
-  grid-row-gap: 20px;
-  grid-template-rows: calc(50% - 10px) calc(50% - 10px);
 
-  @media (min-width: ${(props): string =>
-      props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: none;
-    grid-column-gap: 20px;
+      @media (min-width: ${tablet}) and (orientation: landscape) {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: none;
+        grid-column-gap: ${padding}px;
 
-    padding: 0 20px;
-  }
+        padding: 0 ${padding}px;
+      }
+    `
+  }}
 `
 
 interface Props {

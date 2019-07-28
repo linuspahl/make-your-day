@@ -12,7 +12,7 @@ const Outer = styled.div`
   height: 100%;
   overflow-y: auto;
 
-  padding: 20px;
+  padding: ${(props): number => props.theme.dimensions.padding}px;
 `
 
 const Layout = styled.div`
