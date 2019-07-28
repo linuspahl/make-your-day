@@ -10,7 +10,7 @@ export const Outer = styled.div`
   overflow-y: auto;
 
   ::-webkit-scrollbar {
-    background: transparent;
+    display: none;
   }
 `
 

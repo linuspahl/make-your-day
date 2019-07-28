@@ -9,5 +9,7 @@ export const Element = styled.h1<ElementProps>`
   font-size: 28px;
   text-align: center;
   hyphens: auto;
-  ${(props): string => props.context === 'page' && 'margin-bottom: 60px;'};
+  ${(props): string =>
+    props.context === 'page' &&
+    `margin-bottom: ${props.theme.dimensions.padding * 4}px;`};
 `

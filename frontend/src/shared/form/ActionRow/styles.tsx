@@ -8,7 +8,8 @@ interface LayoutProps {
 }
 
 export const Layout = styled(Row)<LayoutProps>`
-  margin-top: 40px;
+  margin-top: ${(props): number => props.theme.dimensions.padding * 5}px;
+
   ${(props): string =>
     props.amountChildren === 1
       ? `
