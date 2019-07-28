@@ -22,4 +22,8 @@ export const Circle = styled.div<CircleProps>`
     props.color ? props.theme.category[props.color] : props.theme.border};
   color: ${(props): string => props.theme.categoryText[props.color]};
   font-size: ${(props): number => (props.size ? props.size / 2 : 28)}px;
+
+  &:visited {
+    color: ${(props): string => props.theme.categoryText[props.color]};
+  }
 `
