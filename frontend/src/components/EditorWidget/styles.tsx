@@ -2,10 +2,16 @@
 import styled from 'styled-components'
 
 export const PellEditor = styled.div`
+  height: 100%;
+
   display: grid;
   grid-template-rows: 40px calc(100% - 40px);
 
-  height: 100%;
+  overflow-y: auto;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 
   .pell-actionbar {
     overflow-x: auto;
@@ -23,7 +29,6 @@ export const PellEditor = styled.div`
     padding: ${(props): number => props.theme.dimensions.padding}px;
     border: 0;
 
-    overflow-y: auto;
     white-space: normal;
   }
 
