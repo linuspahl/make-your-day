@@ -10,6 +10,8 @@ const Wrapper = styled.div`
 
   transition: background-image 1s linear, background-color 1.5s linear;
 
+  color: ${(props): string => props.theme.text};
+
   ${(props): string =>
     props.theme.settings.showAppBgImage
       ? `

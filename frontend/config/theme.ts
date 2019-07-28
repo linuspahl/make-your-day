@@ -41,10 +41,10 @@ const mediaQuery = {
 export const nightModeTheme = {
   primary: '#525252',
   primaryActive: '#313131',
-  secondary: '#8e8e8e',
+  secondary: '#747474',
   secondaryActive: '#585858',
-  appBg: '#1e1e1e',
-  contentBoxBg: '#1a1a1b',
+  appBg: 'linear-gradient(to bottom, rgb(72, 85, 99), rgb(41, 50, 60))',
+  contentBoxBg: '#1e1e1e',
   timelineDay: '#596d59',
 
   text: '#fff',
