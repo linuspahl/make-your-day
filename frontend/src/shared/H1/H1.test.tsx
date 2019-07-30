@@ -16,6 +16,6 @@ describe('H1 should', (): void => {
 
   test('have different margin when used with page context', (): void => {
     const { getByText } = renderWithAppRoot(<H1 context="page">{children}</H1>)
-    expect(getByText(children)).toHaveStyleRule('margin-bottom', '60px')
+    expect(getByText(children)).toHaveStyleRule('margin-bottom', '80px')
   })
 })
