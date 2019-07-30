@@ -33,10 +33,6 @@ export const defaultTheme = {
   categoryText: categoryTextColors,
 }
 
-const mediaQuery = {
-  tablet: '800px',
-}
-
 // set of colors which will be used for the night mode
 export const nightModeTheme = {
   primary: '#525252',
@@ -49,6 +45,26 @@ export const nightModeTheme = {
 
   text: '#fff',
   border: '#545454',
+}
+
+const mediaQuery = {
+  tablet: '800px',
+}
+
+const fontSizes = {
+  mobile: {
+    small: 0.875,
+    normal: 1,
+    big: 1.5,
+    large: 2,
+  },
+  tablet: {
+    small: 1,
+    normal: 1.25,
+    big: 1.625,
+    large: 2.5,
+  },
+  // desktop
 }
 
 // Overview of all z-index used in the app
@@ -84,5 +100,6 @@ export default (userSettings: { [key: string]: boolean } = {}): Theme => {
     mediaQuery,
     layerIndex,
     dimensions,
+    fontSizes,
   }
 }

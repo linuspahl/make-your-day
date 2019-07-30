@@ -14,7 +14,6 @@ const Wrapper = styled(Link)`
   align-items: center;
   float: left;
 
-  font-size: 26px;
   color: ${(props): string => props.theme.text};
   &:active {
     background-color: ${(props): string => props.theme.active};

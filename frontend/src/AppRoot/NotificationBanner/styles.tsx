@@ -2,6 +2,8 @@
 import styled, { keyframes } from 'styled-components'
 // interfaces
 import { Notification } from 'types/types'
+// components
+import TextBig from 'shared/text/TextBig/TextBig'
 
 const moveIn = keyframes`
   0% {
@@ -29,17 +31,17 @@ interface AlertProps {
   role: Notification['type']
 }
 
-export const Alert = styled.div<AlertProps>`
-  position: fixed;
+export const Alert = styled(TextBig)<AlertProps>`
   width: 100%;
 
+  position: fixed;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: ${(props): string => props.theme.layerIndex.notificationBanner};
 
   border-radius: 0 0 5px 5px;
-  padding: 10px 25px;
+  padding: 10px 20px;
 
   background-color: ${(props): string => {
     if (props.role === 'error') return '#ff6060'
@@ -47,7 +49,6 @@ export const Alert = styled.div<AlertProps>`
     return 'white'
   }};
 
-  font-size: 20px;
   color: #000;
 
   animation: ${moveIn} ${(props): number => props.durationAnimation}s,

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 // components
 import ListItem from 'shared/list/ListItem/ListItem'
 import Input from 'shared/form/Input/Input'
+import TextBig from 'shared/text/TextBig/TextBig'
 
 export const Layout = styled.div`
   width: 100%;
@@ -28,7 +29,7 @@ export const Select = styled(Input)`
   }
 `
 
-export const ArrowIcon = styled.div`
+export const ArrowIcon = styled(TextBig)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,12 +41,10 @@ export const ArrowIcon = styled.div`
   top: 0;
   right: 0;
 
-  font-size: 24px;
-
   color: inherit;
 `
 
-export const Header = styled.div`
+export const Header = styled(TextBig)`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -54,7 +53,6 @@ export const Header = styled.div`
 
   margin-bottom: ${(props): number => props.theme.dimensions.padding}px;
   padding-left: 10px;
-  font-size: 20px;
 `
 
 export const Options = styled.div`
@@ -78,7 +76,7 @@ export const Option = styled(ListItem)<OptionProps>`
   `}
 `
 
-export const OptionPreview = styled.div`
+export const OptionPreview = styled(TextBig)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,8 +85,6 @@ export const OptionPreview = styled.div`
   width: 25px;
 
   margin-right: 10px;
-
-  font-size: 25px;
 `
 
 export const Footer = styled.div`

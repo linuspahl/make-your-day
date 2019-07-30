@@ -1,5 +1,7 @@
 // libraries
 import styled from 'styled-components'
+// components
+import TextBig from 'shared/text/TextBig/TextBig'
 
 interface WrapperProps {
   disabled?: boolean
@@ -32,7 +34,7 @@ export const Element = styled.input`
   cursor: inherit;
 `
 
-export const Checkmark = styled.div`
+export const Checkmark = styled(TextBig)`
   position: absolute;
 
   top: 0;
@@ -43,6 +45,4 @@ export const Checkmark = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  font-size: 24px;
 `

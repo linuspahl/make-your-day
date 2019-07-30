@@ -1,7 +1,9 @@
 // libraries
 import styled from 'styled-components'
+// components
+import TextBig from 'shared/text/TextBig/TextBig'
 
-export const Element = styled.div`
+export const Element = styled(TextBig)`
   width: 40px;
   height: 40px;
 
@@ -11,7 +13,6 @@ export const Element = styled.div`
 
   padding: 5px;
 
-  font-size: 20px;
   cursor: pointer;
 
   &:active {

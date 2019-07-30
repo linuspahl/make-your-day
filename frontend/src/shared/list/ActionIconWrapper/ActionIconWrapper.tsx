@@ -1,8 +1,10 @@
 // libraries
 import * as React from 'react'
 import styled from 'styled-components'
+// components
+import TextBig from 'shared/text/TextBig/TextBig'
 
-const Wrapper = styled.div`
+const Wrapper = styled(TextBig)`
   display: flex;
   align-self: start;
 `

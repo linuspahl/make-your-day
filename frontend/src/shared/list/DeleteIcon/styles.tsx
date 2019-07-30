@@ -7,10 +7,9 @@ export const Element = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  float: left;
 
-  font-size: 26px;
   color: ${(props): string => props.theme.text};
+
   &:active {
     background-color: ${(props): string => props.theme.active};
   }

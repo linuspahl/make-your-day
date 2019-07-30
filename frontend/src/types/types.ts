@@ -23,6 +23,13 @@ export interface Theme {
   mediaQuery: { tablet: string }
   layerIndex: LayerIndexes
   dimensions: AppDimensions
+  fontSizes: { mobile: AppFontSizes; tablet: AppFontSizes }
+}
+
+interface AppFontSizes {
+  normal: number
+  big: number
+  large: number
 }
 
 export interface CategoryColors {

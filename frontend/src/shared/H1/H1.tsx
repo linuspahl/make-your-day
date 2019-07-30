@@ -8,7 +8,9 @@ interface Props {
 }
 
 const H1 = (props: Props): JSX.Element => (
-  <Element context={props.context}>{props.children}</Element>
+  <Element context={props.context} as="h1">
+    {props.children}
+  </Element>
 )
 
 export default H1

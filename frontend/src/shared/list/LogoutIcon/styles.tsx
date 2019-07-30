@@ -1,8 +1,9 @@
 // libraries
-
 import styled from 'styled-components'
+// components
+import TextBig from 'shared/text/TextBig/TextBig'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(TextBig)`
   height: 40px;
   width: 40px;
 
@@ -11,7 +12,6 @@ export const Wrapper = styled.div`
   align-items: center;
   float: left;
 
-  font-size: 26px;
   color: ${(props): string => props.theme.text};
   cursor: pointer;
 
