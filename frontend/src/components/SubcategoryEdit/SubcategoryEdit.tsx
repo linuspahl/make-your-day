@@ -75,6 +75,7 @@ class SubcategoryEdit extends React.Component<Props> {
                   <SubcategoryForm
                     initialData={{
                       title: subcategory.title,
+                      color: subcategory.color,
                     }}
                     rootPath={rootPath}
                     parentCategoryId={subcategory.parentId}
@@ -83,6 +84,7 @@ class SubcategoryEdit extends React.Component<Props> {
                         variables: {
                           id: subcategory.id,
                           title: variables.title,
+                          color: variables.color,
                         },
                       })
                     }}

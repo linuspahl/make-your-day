@@ -34,7 +34,7 @@ describe('SubcategoryForm should', (): void => {
         parentCategoryId={subcategory.parentId}
       />
     )
-    initSubcategoryForm(getByLabelText)
+    initSubcategoryForm(getByLabelText, getByText)
     // Submit form
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     expect(submitActionStub).toBeCalledTimes(1)

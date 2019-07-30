@@ -105,9 +105,10 @@ export const GetCategoryForListWithChildren = gql`
 export const GetSubcategory = gql`
   query GetCategory($id: ID!) {
     getCategory(id: $id) {
+      color
       id
-      title
       parentId
+      title
     }
   }
 `

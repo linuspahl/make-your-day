@@ -46,7 +46,7 @@ describe('SubcategoryCreate should', (): void => {
     )
     // Wait for getCategory
     await wait()
-    initSubcategoryForm(getByLabelText)
+    initSubcategoryForm(getByLabelText, getByText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     // Wait for updateCategory
     await wait()
@@ -74,7 +74,7 @@ describe('SubcategoryCreate should', (): void => {
     )
     // Wait for getCategory
     await wait()
-    initSubcategoryForm(getByLabelText)
+    initSubcategoryForm(getByLabelText, getByText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     // Wait for updateCategory
     await wait()
@@ -96,7 +96,7 @@ describe('SubcategoryCreate should', (): void => {
       }
     )
     await wait()
-    initSubcategoryForm(getByLabelText)
+    initSubcategoryForm(getByLabelText, getByText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
     expect(createNotificationBannerStub).toBeCalledTimes(1)

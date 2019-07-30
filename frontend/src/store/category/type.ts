@@ -59,13 +59,16 @@ export interface Subcategory {
   id: Category['id']
   parentId?: Category['parentId']
   title: Category['title']
+  color?: Category['color']
 }
 
 export interface SubcategoryCreate {
   parentId?: Category['parentId']
   title: Category['title']
+  color?: Category['color']
 }
 
 export interface SubcategoryEdit {
   title: Category['title']
+  color?: Category['color']
 }

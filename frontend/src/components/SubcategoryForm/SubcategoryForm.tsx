@@ -11,6 +11,7 @@ import Button from 'shared/Button/Button'
 // interfaces
 import { SubcategoryCreate } from 'store/category/type'
 import { Form as FormType, InputEvent } from 'types/types'
+import ColorSelect from 'shared/form/ColorSelect/ColorSelect'
 
 const Form = styled.form`
   margin-top: 15px;
@@ -36,6 +37,7 @@ export default class SubcategoryForm extends React.Component<
     this.state = {
       parentId: props.parentCategoryId,
       title: null,
+      color: null,
     }
 
     if (props.initialData) {
@@ -48,7 +50,7 @@ export default class SubcategoryForm extends React.Component<
 
   public render(): JSX.Element {
     const { mode, rootPath } = this.props
-    const { title } = this.state
+    const { title, color } = this.state
     return (
       <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <Row htmlFor="title">
@@ -60,6 +62,16 @@ export default class SubcategoryForm extends React.Component<
             tabIndex={1}
             value={title}
             id="title"
+          />
+        </Row>
+        <Row htmlFor="color">
+          Farbe
+          <ColorSelect
+            id="color"
+            name="color"
+            onChange={this.handleInputChange}
+            tabIndex={1}
+            value={color}
           />
         </Row>
         <ActionRow>

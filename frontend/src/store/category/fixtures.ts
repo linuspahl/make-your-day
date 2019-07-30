@@ -27,14 +27,16 @@ import {
 
 // subcategory
 export const subcategory: Subcategory = {
-  title: 'Einkauf',
-  parentId: 1,
+  color: Object.keys(categoryColors)[1],
   id: 11,
+  parentId: 1,
+  title: 'Einkauf',
 }
 
 export const subcategoryCreate: SubcategoryCreate = {
-  title: 'Einkauf',
+  color: Object.keys(categoryColors)[1],
   parentId: subcategory.parentId,
+  title: 'Einkauf',
 }
 
 // category
@@ -276,7 +278,7 @@ export const updateCategoryError = {
 const updateSubcategoryRequest = {
   request: {
     query: UpdateSubcategory,
-    variables: { id: subcategory.id, title: 'New Name' },
+    variables: { id: subcategory.id, title: 'New Name', color: subcategory.color },
   },
 }
 export const updateSubcategorySuccess = {

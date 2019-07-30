@@ -39,11 +39,12 @@ export const CreateCategory = gql`
 `
 
 export const CreateSubcategory = gql`
-  mutation CreateSubcategory($parentId: ID!, $title: String!) {
-    createSubcategory(parentId: $parentId, title: $title) {
+  mutation CreateSubcategory($parentId: ID!, $title: String!, $color: String!) {
+    createSubcategory(parentId: $parentId, title: $title, color: $color) {
       id
       title
       parentId
+      color
     }
   }
 `
@@ -79,8 +80,9 @@ export const UpdateCategory = gql`
 `
 
 export const UpdateSubcategory = gql`
-  mutation UpdateSubcategory($id: ID!, $title: String!) {
-    updateCategory(id: $id, title: $title) {
+  mutation UpdateSubcategory($id: ID!, $title: String!, $color: String) {
+    updateCategory(id: $id, title: $title, color: $color) {
+      color
       id
       parentId
       title
