@@ -49,7 +49,6 @@ class WidgetCreate extends React.Component<Props> {
       >
         {({
           data: { getEvaluations: evaluations },
-          status: { getEvaluations: evaluationsQueryStatus },
         }: PageQueryResult): JSX.Element => {
           return (
             <React.Fragment>
