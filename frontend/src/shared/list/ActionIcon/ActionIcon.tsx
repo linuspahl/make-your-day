@@ -15,6 +15,7 @@ const Wrapper = styled(Link)`
   float: left;
 
   color: ${(props): string => props.theme.text};
+
   &:active {
     background-color: ${(props): string => props.theme.active};
   }

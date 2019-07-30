@@ -8,7 +8,7 @@ interface LayoutProps {
 }
 
 export const Layout = styled(Row)<LayoutProps>`
-  margin-top: ${(props): string => `${props.theme.padding * 3}rem`};
+  margin-top: ${(props): string => `${props.theme.padding * 2}rem`};
 
   ${(props): string =>
     props.amountChildren === 1
@@ -24,6 +24,6 @@ export const Layout = styled(Row)<LayoutProps>`
       : ``}
 
   @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}){
-      margin-top: ${(props): string => `${props.theme.padding * 5}rem`};
+    margin-top: ${(props): string => `${props.theme.padding * 3}rem`};
   }
 `

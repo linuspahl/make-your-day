@@ -8,15 +8,17 @@ interface ElementProps {
 }
 
 export const Element = styled.li<ElementProps>`
+  min-height: 1.5rem;
+
   display: flex;
   align-items: center;
   justify-content: ${(props): string =>
     props.spaceBetween ? 'space-between' : 'start'};
 
-  min-height: 1.5rem;
-
+  padding: ${(props): string =>
+    `${props.theme.padding / 4}rem ${props.theme.padding / 2}rem`};
   border-top: 0.0625rem solid ${(props): string => props.theme.border};
-  padding: ${(props): string => `0 ${props.theme.padding / 2}rem`};
+
   &:first-child {
     border-top: 0;
   }
@@ -29,4 +31,9 @@ export const Element = styled.li<ElementProps>`
     }
   `
       : ``}
+
+  @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
+    padding: ${(props): string =>
+      `${props.theme.padding / 4}rem ${props.theme.padding / 2}rem`};
+  }
 `
