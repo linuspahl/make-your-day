@@ -4,29 +4,45 @@ import ChartistGraph from 'react-chartist'
 // components
 import NoResult from 'shared/NoResult/NoResult'
 // interfaces
-import { Chart } from 'store/evaluation/type'
+import { EvaluationResult, ChartSeriesData } from 'store/evaluation/type'
 
-const Barchart = (props: Chart): JSX.Element => {
-  const { datasets, labels } = props
+const flattenSeries = (
+  series: EvaluationResult['series'] = []
+): ChartSeriesData[][] => {
+  let result: ChartSeriesData[][] = []
+  series.forEach((ser): void => {
+    result = [
+      ...result,
+      [
+        ...ser.data.map(
+          (category): ChartSeriesData => ({
+            value: category.value,
+            className: ser.color ? `Chart-series-${ser.color}` : null,
+          })
+        ),
+      ],
+    ]
+  })
+  return result
+}
+
+const Barchart = (props: EvaluationResult): JSX.Element => {
+  const { series, labels } = props
 
   // check if there is really a result
-  if (
-    !datasets ||
-    !datasets[0] ||
-    !datasets[0].data ||
-    datasets[0].data.length === 0
-  ) {
+  const flatSeries = flattenSeries(series)
+  if (!series || series.length === 0) {
     return <NoResult message="Bisher kein Ergebnis" />
   }
 
   return (
     <ChartistGraph
+      type="Bar"
       data-testid="Barchart"
       data={{
-        labels: labels,
-        series: [datasets[0].data],
+        labels,
+        series: flatSeries,
       }}
-      type="Bar"
     />
   )
 }

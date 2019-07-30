@@ -26,6 +26,7 @@ export interface CategoryFull extends Category {
 export interface CategoryForList {
   id: Category['id']
   title: Category['title']
+  unit?: Category['unit']
   hasSubcategories: Category['hasSubcategories']
 }
 

@@ -20,7 +20,7 @@ describe('Barchart should', (): void => {
 
   test('show message, there is no data to display', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(
-      <Barchart labels={undefined} datasets={undefined} />
+      <Barchart labels={undefined} series={undefined} />
     )
     // Wait for chart library to finish render
     await wait()

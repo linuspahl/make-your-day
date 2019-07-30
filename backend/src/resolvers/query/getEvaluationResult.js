@@ -41,14 +41,14 @@ export default (evaluation, args, { models }) => {
     where: recordConditions,
     include: [{ model: Category, where: recordCatConditions }],
   }).then(records => {
-    const { labels, datasets } = prepareEvaluationResult(
+    const { labels, series } = prepareEvaluationResult(
       evaluation,
       records,
       defaultLabels
     )
     return {
       labels,
-      datasets,
+      series,
     }
   })
 }
@@ -139,12 +139,13 @@ const prepareEvaluationResult = (evaluation, records, labels) => {
   // By default there is one dataset for the evaluation category.
   // Only when the category has subcategories and evaluation.groupSubcategories is false,
   // we will create a dataset for every subcategory
-  records.forEach(record => {
-    // A dataset has
-    // - label, name of the category
-    // - color, color defined for the category
-    // - data, array of record amounts for each day, always has the same length, as the chart labels
 
+  // A dataset has
+  // - label, name of the category
+  // - color, color defined for the category
+  // - data, array of record amounts for each day, always has the same length, as the chart labels
+
+  records.forEach(record => {
     // Initially we calculate the recordAmount
     const recordAmount = getRecordAmount(record, evaluation.category)
 
@@ -170,8 +171,7 @@ const prepareEvaluationResult = (evaluation, records, labels) => {
       if (!datasets.piechart) {
         datasets.piechart = {
           data: [],
-          backgroundColor: categoryColor || 'grey',
-          label: categoryTitle,
+          color: categoryColor || 'grey',
         }
       }
 
@@ -181,20 +181,28 @@ const prepareEvaluationResult = (evaluation, records, labels) => {
       if (categoryLabelIndex === -1) {
         labels = [...labels, categoryTitle]
         categoryLabelIndex = labels.length - 1
-        datasets.piechart.data[categoryLabelIndex] = 0
       }
 
-      datasets.piechart.data[categoryLabelIndex] =
-        datasets.piechart.data[categoryLabelIndex] + recordAmount
+      if (!datasets.piechart.data[categoryLabelIndex]) {
+        datasets.piechart.data[categoryLabelIndex] = {
+          value: recordAmount,
+          color: categoryColor || 'grey',
+          title: categoryTitle,
+        }
+      }
+      datasets.piechart.data[categoryLabelIndex] = {
+        ...datasets.piechart.data[categoryLabelIndex],
+        value: datasets.piechart.data[categoryLabelIndex].value + recordAmount,
+      }
     } else {
       // When there is no dataset for the related category defined, we will create one.
       // The data attribute, need for the records amount,
       // will be an array of zeros with an entry for evey day of the chart.
       if (!datasets[categoryId]) {
         datasets[categoryId] = {
-          data: new Array(labels.length).fill(0),
-          backgroundColor: categoryColor || 'grey',
-          label: categoryTitle,
+          title: categoryTitle,
+          data: new Array(labels.length).fill({ value: 0 }),
+          color: categoryColor || 'grey',
         }
       }
       // Because every entry in the data attribute relates to one day in the chart,
@@ -203,12 +211,23 @@ const prepareEvaluationResult = (evaluation, records, labels) => {
       const indexOfRelatedDay = labels.findIndex(date => date === createdAt)
 
       // Finally we can add the record amount to the dataset
-      datasets[categoryId].data[indexOfRelatedDay] =
-        datasets[categoryId].data[indexOfRelatedDay] + recordAmount
+      const categoryRecordAmount = {
+        ...datasets[categoryId].data[indexOfRelatedDay],
+      }
+      if (categoryRecordAmount) {
+        datasets[categoryId].data[indexOfRelatedDay] = {
+          value: categoryRecordAmount.value + recordAmount,
+        }
+      } else {
+        datasets[categoryId].data[indexOfRelatedDay] = {
+          title: null,
+          value: categoryRecordAmount.value + recordAmount,
+        }
+      }
     }
   })
 
-  return { datasets: Object.values(datasets), labels }
+  return { series: datasets ? Object.values(datasets) : [], labels }
 }
 
 // Returns the record amount based on the related category.

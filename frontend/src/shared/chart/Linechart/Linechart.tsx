@@ -4,26 +4,26 @@ import ChartistGraph from 'react-chartist'
 // components
 import NoResult from 'shared/NoResult/NoResult'
 // interfaces
-import { Chart } from 'store/evaluation/type'
+import { EvaluationResult, ChartSeries } from 'store/evaluation/type'
 
-const Linechart = (props: Chart): JSX.Element => {
-  const { datasets, labels } = props
+const Linechart = (props: EvaluationResult): JSX.Element => {
+  const { series, labels } = props
 
   // check if there is really a result
-  if (
-    !datasets ||
-    !datasets[0] ||
-    !datasets[0].data ||
-    datasets[0].data.length === 0
-  ) {
+  if (!series || series.length === 0) {
     return <NoResult message="Bisher kein Ergebnis" />
   }
 
   return (
     <ChartistGraph
       data={{
-        labels: labels,
-        series: [datasets[0].data],
+        labels,
+        series: series.map(
+          (ser): ChartSeries => ({
+            ...ser,
+            className: ser.color ? `Chart-series-${ser.color}` : null,
+          })
+        ),
       }}
       type="Line"
     />

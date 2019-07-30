@@ -20,7 +20,7 @@ describe('Piechart should', (): void => {
 
   test('show message, there is no data to display', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(
-      <Piechart labels={undefined} datasets={undefined} />
+      <Piechart labels={undefined} series={undefined} />
     )
     // Wait for chart library to finish render
     await wait()

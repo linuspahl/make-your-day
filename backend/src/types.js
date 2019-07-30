@@ -64,13 +64,19 @@ export default gql`
 
   type EvaluationResult {
     labels: [String]
-    datasets: [EvaluationResultDataset]
+    series: [EvaluationResultSeries]
   }
 
-  type EvaluationResultDataset {
-    label: String!
-    data: [Int]!
-    backgroundColor: String!
+  type EvaluationResultSeries {
+    title: String
+    color: String
+    data: [EvaluationResultEntry]!
+  }
+
+  type EvaluationResultEntry {
+    title: String
+    color: String
+    value: Int!
   }
 
   type Setting {

@@ -20,7 +20,7 @@ describe('Linechart should', (): void => {
 
   test('show message, there is no data to display', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(
-      <Linechart labels={undefined} datasets={undefined} />
+      <Linechart labels={undefined} series={undefined} />
     )
     // Wait for chart library to finish render
     await wait()

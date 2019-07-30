@@ -43,13 +43,18 @@ export const GetWidgetsWithEvaluation = gql`
         period
         category {
           title
+          unit
         }
         result {
           labels
-          datasets {
-            label
-            data
-            backgroundColor
+          series {
+            title
+            color
+            data {
+              title
+              color
+              value
+            }
           }
         }
       }

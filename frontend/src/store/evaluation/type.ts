@@ -45,19 +45,26 @@ export type EvaluationPeriod =
 export type EvaluationType = 'barchart' | 'linechart' | 'piechart'
 
 export interface EvaluationResult {
-  datasets: {
-    backgroundColor: string
-    data: number[]
-    label: string
+  series: {
+    color?: string
+    title?: string
+    data: {
+      title?: string
+      value: number
+      color?: string
+    }[]
   }[]
   labels: string[]
 }
 
 export interface Chart {
-  datasets: {
-    backgroundColor: string
-    data: number[]
-    label: string
-  }[]
+  series: ChartSeries[]
   labels: string[]
 }
+
+export interface ChartSeries {
+  className?: string
+  data: ChartSeriesData[]
+}
+
+export type ChartSeriesData = { value: number; className?: string } | number

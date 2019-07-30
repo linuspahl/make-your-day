@@ -1,9 +1,9 @@
 // interfaces
 import {
-  Chart as ChartType,
   EvaluationFull,
   EvaluationCreate,
   EvaluationForList,
+  EvaluationResult,
 } from 'store/evaluation/type'
 import {
   GetEvaluationsForList,
@@ -27,11 +27,10 @@ export const evaluation: EvaluationFull = {
   category,
   id: 1,
   result: {
-    datasets: [
+    series: [
       {
-        label: '2010-01-01',
-        data: [1, 2],
-        backgroundColor: 'red',
+        data: [{ value: 1 }, { value: 2 }],
+        color: 'red',
       },
     ],
     labels: ['Mo', 'Di'],
@@ -43,13 +42,20 @@ export const evaluationForList: EvaluationForList = {
   id: evaluation.id,
 }
 
-export const chart: ChartType = {
+export const chart: EvaluationResult = {
   labels: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
-  datasets: [
+  series: [
     {
-      label: 'Titel Kategorie',
-      data: [50, 40, 16, 0, 2, 30, 5],
-      backgroundColor: 'red',
+      data: [
+        { value: 50 },
+        { value: 40 },
+        { value: 16 },
+        { value: 0 },
+        { value: 2 },
+        { value: 30 },
+        { value: 5 },
+      ],
+      color: 'red',
     },
   ],
 }
@@ -99,11 +105,10 @@ export const getEvaluationSuccess = {
         },
         result: {
           labels: ['w3123'],
-          datasets: [
+          series: [
             {
-              label: 'Titel Kategorie',
-              data: [1, 2],
-              backgroundColor: 'red',
+              data: [{ value: 1 }, { value: 2 }],
+              color: 'red',
             },
           ],
         },
