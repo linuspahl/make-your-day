@@ -25,25 +25,34 @@ const flattenSeries = (
   })
   return result
 }
+interface Props {
+  chartLegend: JSX.Element
+  description: JSX.Element
+  series: EvaluationResult['series']
+  xAxisLabels: string[]
+}
 
-const Barchart = (props: EvaluationResult): JSX.Element => {
-  const { series, labels } = props
+const Barchart = (props: Props): JSX.Element => {
+  const { series, description, chartLegend, xAxisLabels } = props
 
   // check if there is really a result
   const flatSeries = flattenSeries(series)
-  if (!series || series.length === 0) {
+  if (!flatSeries || flatSeries.length === 0) {
     return <NoResult message="Bisher kein Ergebnis" />
   }
 
   return (
-    <ChartistGraph
-      type="Bar"
-      data-testid="Barchart"
-      data={{
-        labels,
-        series: flatSeries,
-      }}
-    />
+    <React.Fragment>
+      {chartLegend}
+      <ChartistGraph
+        data={{
+          labels: xAxisLabels,
+          series: flatSeries,
+        }}
+        type="Bar"
+      />
+      {description}
+    </React.Fragment>
   )
 }
 

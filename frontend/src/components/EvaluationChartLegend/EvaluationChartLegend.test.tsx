@@ -12,10 +12,23 @@ describe('EvaluationChartLegend should', (): void => {
 
   test('list used categories', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(
-      <EvaluationChartLegend evaluation={{ ...evaluation, type: 'barchart' }} />
+      <EvaluationChartLegend
+        evaluation={{
+          ...evaluation,
+          result: {
+            ...evaluation.result,
+            series: [
+              {
+                data: [{ value: 10 }],
+                title: 'Ausgaben',
+              },
+            ],
+          },
+        }}
+      />
     )
     // Wait for chart library to finish render
     await wait()
-    expect(getByText(evaluation.category.title)).toHaveLength(1)
+    expect(getByText('Ausgaben')).toBeInTheDocument()
   })
 })

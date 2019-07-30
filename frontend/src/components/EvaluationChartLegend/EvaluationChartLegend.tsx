@@ -35,15 +35,18 @@ function getCategories(props: Props): object[] {
   return Array.prototype.concat.apply([], seriesColorsMix)
 }
 
-const EvaluationChart = (props: Props): JSX.Element => {
+const EvaluationChartLegend = (props: Props): JSX.Element => {
   const categories = getCategories(props)
 
   return (
     <Wrapper>
       {categories.map(
-        (category: EvaluationCategory): JSX.Element => {
+        (category: EvaluationCategory, index: number): JSX.Element => {
+          // Notmally the iteration index shoud not be the key,
+          // because it loses its connection to the represented data
+          // Due to our components simplicity, it's fine here
           return (
-            <CategoryWrapper key={category.title}>
+            <CategoryWrapper key={index}>
               <ColorPreview color={category.color}></ColorPreview>
               <CategoryName>{category.title}</CategoryName>
             </CategoryWrapper>
@@ -54,4 +57,4 @@ const EvaluationChart = (props: Props): JSX.Element => {
   )
 }
 
-export default EvaluationChart
+export default EvaluationChartLegend

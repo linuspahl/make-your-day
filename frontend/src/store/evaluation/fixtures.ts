@@ -29,7 +29,11 @@ export const evaluation: EvaluationFull = {
   result: {
     series: [
       {
-        data: [{ value: 1 }, { value: 2 }],
+        title: 'Ausgaben',
+        data: [
+          { value: 10, title: null, color: null },
+          { value: 20, title: null, color: null },
+        ],
         color: 'red',
       },
     ],
@@ -101,13 +105,18 @@ export const getEvaluationSuccess = {
         type: evaluation.type,
         period: evaluation.period,
         category: {
+          unit: '€',
           title: 'title',
         },
         result: {
           labels: ['w3123'],
           series: [
             {
-              data: [{ value: 1 }, { value: 2 }],
+              title: 'Asugaben',
+              data: [
+                { value: 1, title: '', color: '' },
+                { value: 2, title: '', color: '' },
+              ],
               color: 'red',
             },
           ],

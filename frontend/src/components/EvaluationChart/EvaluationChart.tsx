@@ -9,8 +9,13 @@ import Barchart from 'shared/chart/Barchart/Barchart'
 import Linechart from 'shared/chart/Linechart/Linechart'
 import Piechart from 'shared/chart/Piechart/Piechart'
 import EvaluationChartLegend from 'components/EvaluationChartLegend/EvaluationChartLegend'
+
 // interface
-import { EvaluationFull, EvaluationResult } from 'store/evaluation/type'
+import {
+  EvaluationFull,
+  EvaluationResult,
+  Evaluation,
+} from 'store/evaluation/type'
 
 const formatLabels = (labels: string[] = []): string[] => {
   return labels.map((label): string => dayjs(label, 'YYYY-MM-DD').format('dd'))
@@ -31,47 +36,78 @@ const getSeriesColors = (
   return Array.prototype.concat.apply([], seriesColorsMix)
 }
 
+const getPeriodTitle = (period: Evaluation['period']): string => {
+  const periodOption = evaluationPeriodOptions.find(
+    (option): boolean => option.value == period
+  )
+  return periodOption ? periodOption.title : ''
+}
+
+const getDescriptionComponent = (
+  categoryUnit: string,
+  periodTitle: string
+): JSX.Element => {
+  return (
+    <Description>{`${periodTitle} - (${
+      categoryUnit ? categoryUnit : 'Anzahl'
+    })`}</Description>
+  )
+}
 interface Props {
   evaluation: EvaluationFull
 }
 
 const EvaluationChart = (props: Props): JSX.Element => {
+  const { evaluation } = props
   const {
-    evaluation: {
-      category,
-      type,
-      period,
-      result: { labels, series },
-    },
-  } = props
-  const formatedLabels = formatLabels(labels)
+    type,
+    period,
+    result: { labels, series },
+  } = evaluation
+
+  // get series colors, to create required css classes
   const seriesColors = getSeriesColors(series, type)
-  const periodOption = evaluationPeriodOptions.find(
-    (option): boolean => option.value == period
-  )
-  const unit = category.unit || 'Anzahl'
 
   if (type === 'barchart' || type === 'linechart' || type === 'piechart') {
+    const xAxisLabels = formatLabels(labels)
+    const periodTitle = getPeriodTitle(period)
+    const description = getDescriptionComponent(
+      evaluation.category.unit,
+      periodTitle
+    )
+    const chartLegend = <EvaluationChartLegend evaluation={evaluation} />
     return (
       <Wrapper seriesColors={seriesColors}>
-        <EvaluationChartLegend evaluation={props.evaluation} />
-
         {type === 'barchart' && (
-          <Barchart labels={formatedLabels} series={series} />
+          <Barchart
+            chartLegend={chartLegend}
+            description={description}
+            series={series}
+            xAxisLabels={xAxisLabels}
+          />
         )}
 
         {type === 'linechart' && (
-          <Linechart labels={formatedLabels} series={series} />
+          <Linechart
+            chartLegend={chartLegend}
+            description={description}
+            series={series}
+            xAxisLabels={xAxisLabels}
+          />
         )}
 
-        {type === 'piechart' && <Piechart labels={labels} series={series} />}
-
-        <Description>{`${periodOption.title} - ${unit}`}</Description>
+        {type === 'piechart' && (
+          <Piechart
+            description={description}
+            series={series}
+            chartLegend={chartLegend}
+          />
+        )}
       </Wrapper>
     )
   }
 
-  return <span>Austerungstyp ist nicht definiert</span>
+  return <span>{`Chart "${type}" kann nicht dargestellt werden`}</span>
 }
 
 export default EvaluationChart

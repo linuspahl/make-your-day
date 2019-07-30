@@ -44,6 +44,8 @@ describe('EvaluationChart should', (): void => {
     const { getByText } = renderWithAppRoot(
       <EvaluationChart evaluation={{ ...evaluation, type: null }} />
     )
-    expect(getByText('Austerungstyp ist nicht definiert')).toBeInTheDocument()
+    expect(
+      getByText('Chart "null" kann nicht dargestellt werden')
+    ).toBeInTheDocument()
   })
 })

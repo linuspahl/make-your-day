@@ -5,14 +5,20 @@ import { renderWithAppRoot, wait, cleanup, mockWindow } from 'testUtils'
 // components
 import Piechart from './Piechart'
 // fixtures
-import { chart as chartFixture } from 'store/evaluation/fixtures'
+import { evaluation } from 'store/evaluation/fixtures'
 
 describe('Piechart should', (): void => {
   mockWindow()
   afterEach(cleanup)
 
   test('render without crashing', async (): Promise<void> => {
-    const { container } = renderWithAppRoot(<Piechart {...chartFixture} />)
+    const { container } = renderWithAppRoot(
+      <Piechart
+        series={evaluation.result.series}
+        description={<div />}
+        chartLegend={<div />}
+      />
+    )
     // Wait for chart library to finish render
     await wait()
     expect(container.getElementsByClassName('ct-chart-pie').length).toBe(1)
@@ -20,7 +26,11 @@ describe('Piechart should', (): void => {
 
   test('show message, there is no data to display', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(
-      <Piechart labels={undefined} series={undefined} />
+      <Piechart
+        description={<div />}
+        chartLegend={<div />}
+        series={undefined}
+      />
     )
     // Wait for chart library to finish render
     await wait()

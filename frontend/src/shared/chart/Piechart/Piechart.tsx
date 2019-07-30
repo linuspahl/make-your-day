@@ -6,7 +6,7 @@ import NoResult from 'shared/NoResult/NoResult'
 // interfaces
 import { EvaluationResult, ChartSeriesData } from 'store/evaluation/type'
 
-const getSeriesData = (
+const flattenSeries = (
   series: EvaluationResult['series'] = []
 ): ChartSeriesData[] => {
   const seriesData = series.map((ser): ChartSeriesData[] => {
@@ -20,22 +20,32 @@ const getSeriesData = (
   return Array.prototype.concat.apply([], seriesData)
 }
 
-const Piechart = (props: EvaluationResult): JSX.Element => {
-  const { series, labels } = props
+interface Props {
+  chartLegend: JSX.Element
+  description: JSX.Element
+  series: EvaluationResult['series']
+}
+
+const Piechart = (props: Props): JSX.Element => {
+  const { series, chartLegend, description } = props
 
   // check if there is really a result
-  if (!series || series.length === 0) {
+  const flatSeries = flattenSeries(series)
+  if (!flatSeries || flatSeries.length === 0) {
     return <NoResult message="Bisher kein Ergebnis" />
   }
 
   return (
-    <ChartistGraph
-      data={{
-        labels,
-        series: getSeriesData(series),
-      }}
-      type="Pie"
-    />
+    <React.Fragment>
+      {chartLegend}
+      <ChartistGraph
+        data={{
+          series: flatSeries,
+        }}
+        type="Pie"
+      />
+      {description}
+    </React.Fragment>
   )
 }
 
