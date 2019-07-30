@@ -54,32 +54,30 @@ class WidgetCreate extends React.Component<Props> {
           return (
             <React.Fragment>
               <H1 context="page">Widget erstellen</H1>
-              {evaluationsQueryStatus}
-              {!evaluationsQueryStatus && evaluations && (
-                <Mutation
-                  mutation={CreateWidget}
-                  onCompleted={this.handleCompleted}
-                  onError={this.hanldeError}
-                  update={addWidget}
-                >
-                  {(
-                    createWidget: ({
-                      variables,
-                    }: {
-                      variables: WidgetCreateType
-                    }) => void
-                  ): JSX.Element => (
-                    <WidgetForm
-                      mode="create"
-                      evaluations={evaluations}
-                      rootPath={rootPath}
-                      submitAction={(variables: WidgetCreateType): void =>
-                        createWidget({ variables })
-                      }
-                    />
-                  )}
-                </Mutation>
-              )}
+
+              <Mutation
+                mutation={CreateWidget}
+                onCompleted={this.handleCompleted}
+                onError={this.hanldeError}
+                update={addWidget}
+              >
+                {(
+                  createWidget: ({
+                    variables,
+                  }: {
+                    variables: WidgetCreateType
+                  }) => void
+                ): JSX.Element => (
+                  <WidgetForm
+                    mode="create"
+                    evaluations={evaluations}
+                    rootPath={rootPath}
+                    submitAction={(variables: WidgetCreateType): void =>
+                      createWidget({ variables })
+                    }
+                  />
+                )}
+              </Mutation>
             </React.Fragment>
           )
         }}
