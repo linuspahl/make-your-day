@@ -13,7 +13,7 @@ export const Wrapper = styled.div<WrapperProps>`
   ${(props): string => {
     const {
       theme: {
-        dimensions: { padding },
+        padding,
         boxShadow,
         contentBoxBg,
         layerIndex: { navigation: navigationIndex },
@@ -30,7 +30,7 @@ export const Wrapper = styled.div<WrapperProps>`
       justify-content: center;
       align-items: center;
 
-      padding: ${padding}px ${padding}px 100px ${padding}px;
+      padding: ${padding}rem ${padding}rem 6.25rem ${padding}rem;
       box-shadow: ${boxShadow};
       background-color: ${contentBoxBg};
 
@@ -56,10 +56,10 @@ export const Wrapper = styled.div<WrapperProps>`
       
 
       @media (min-width: ${tablet}) {
-        width: 300px;
+        width: 18rem;
         height: 100%;
         
-        transform: translateX(-300px);
+        transform: translateX(-18re);
 
         ${
           props.state.open
@@ -91,9 +91,13 @@ export const Head = styled.div`
 
   position: relative;
 
-  margin-bottom: ${(props): number => props.theme.dimensions.padding * 2}px;
+  margin-bottom: ${(props): string => `${props.theme.padding}rem`};
 
   text-align: center;
+
+  @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
+    margin-bottom: ${(props): string => `${props.theme.padding * 3}rem`};
+  }
 `
 
 export const CloseIconWrapper = styled.div`

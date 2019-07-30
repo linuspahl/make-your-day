@@ -47,8 +47,8 @@ describe('CategoryIcon should', (): void => {
 
   test('should change font-size size, depending on provided size', (): void => {
     const { getByTestId } = renderWithAppRoot(
-      <CategoryIcon title="Title" icon={'IconName'} size={20} />
+      <CategoryIcon title="Title" icon={'IconName'} size={2.5} />
     )
-    expect(getByTestId('CategoryIcon')).toHaveStyleRule('font-size', '10px')
+    expect(getByTestId('CategoryIcon')).toHaveStyleRule('font-size', '1.25rem')
   })
 })

@@ -3,6 +3,7 @@ import * as React from 'react'
 import { ApolloError, DocumentNode } from 'apollo-boost'
 import { Query } from 'react-apollo'
 // components
+import { Status } from './styles'
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ContentBox from 'shared/ContentBox/ContentBox'
 import DefaultPageLayout from 'components/DefaultPageLayout/DefaultPageLayout'
@@ -78,7 +79,12 @@ const PageQueryHandler = (props: Props): JSX.Element => {
         queryNames.forEach((queryName): void => {
           if (error) {
             result.status[queryName] = (
-              <ErrorMessage error={error} message={errorMessages[queryName]} />
+              <Status>
+                <ErrorMessage
+                  error={error}
+                  message={errorMessages[queryName]}
+                />
+              </Status>
             )
           }
 
@@ -87,7 +93,11 @@ const PageQueryHandler = (props: Props): JSX.Element => {
               ? data[queryName].length === 0
               : !data || !data[queryName]
           ) {
-            result.status[queryName] = <NoResult />
+            result.status[queryName] = (
+              <Status>
+                <NoResult />
+              </Status>
+            )
           }
         })
 

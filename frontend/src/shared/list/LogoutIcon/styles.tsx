@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import TextBig from 'shared/text/TextBig/TextBig'
 
 export const Wrapper = styled(TextBig)`
-  height: 40px;
-  width: 40px;
+  height: 2.5rem;
+  width: 2.5rem;
 
   display: flex;
   justify-content: center;

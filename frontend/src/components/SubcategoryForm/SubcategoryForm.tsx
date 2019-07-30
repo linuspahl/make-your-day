@@ -14,7 +14,7 @@ import { Form as FormType, InputEvent } from 'types/types'
 import ColorSelect from 'shared/form/ColorSelect/ColorSelect'
 
 const Form = styled.form`
-  margin-top: 15px;
+  margin-top: ${(props): string => `${props.theme.padding}rem`};
 `
 
 interface Props {

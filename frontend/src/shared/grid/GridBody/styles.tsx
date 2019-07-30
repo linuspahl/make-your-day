@@ -13,8 +13,8 @@ export const Element = styled.div<ElementProps>`
     display: flex;
     align-items: center;
 
-    min-height: 40px;
+    min-height: 2.5rem;
 
-    border-top: 1px solid ${(props): string => props.theme.border};
+    border-top: 0.0625rem solid ${(props): string => props.theme.border};
   }
 `

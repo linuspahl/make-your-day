@@ -11,7 +11,7 @@ export const Layout = styled.div`
   // max-width: 100% could lead to a higher width then the "100%" we want.
   max-width: 100vw;
 
-  padding: 0 ${(props): number => props.theme.dimensions.padding}px;
+  padding: ${(props): string => `0 ${props.theme.padding}rem`};
 
   overflow-x: auto;
   white-space: nowrap;
@@ -35,7 +35,7 @@ export const WidgetLayout = styled(Box)`
   width: 100%;
   height: 100%;
 
-  margin-right: ${(props): number => props.theme.dimensions.padding}px;
+  margin-right: ${(props): string => `${props.theme.padding}rem`};
 
   scroll-snap-align: center;
 
@@ -45,20 +45,21 @@ export const WidgetLayout = styled(Box)`
     display: grid;
 
     margin-right: 0;
-    margin-top: ${(props): number => props.theme.dimensions.padding}px;
+    margin-top: ${(props): string => `${props.theme.padding}rem`};
   }
 `
 
 export const WidgetHeader = styled.div`
-  padding: 5px ${(props): number => props.theme.dimensions.padding}px;
-  border-bottom: 1px solid ${(props): string => props.theme.border};
+  padding: ${(props): string =>
+    `${props.theme.padding / 2}rem ${props.theme.padding}rem`};
+  border-bottom: 0.0625rem solid ${(props): string => props.theme.border};
 
   text-align: center;
   overflow: hidden;
 `
 
 export const PlaceholderWrapper = styled.div`
-  padding: ${(props): number => props.theme.dimensions.padding}px;
+  padding: ${(props): string => `${props.theme.padding}rem`};
   width: 100%;
 `
 
@@ -94,7 +95,7 @@ export const NewWidgetLink = styled(Link)`
   vertical-align: top;
   align-items: center;
 
-  padding: 10px;
+  padding: ${(props): string => `${props.theme.padding / 2}rem`};
 
   &:active {
     background-color: ${(props): string => props.theme.active};
@@ -103,19 +104,20 @@ export const NewWidgetLink = styled(Link)`
 
   @media (min-width: ${(props): string =>
       props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-    padding: 40px ${(props): number => props.theme.dimensions.padding}px;
+    padding: ${(props): string =>
+      `${props.theme.padding * 2}rem ${props.theme.padding}rem`};
   }
 `
 
 export const CreateWidgetIcon = styled.div`
-  margin-bottom: ${(props): number => props.theme.dimensions.bottomMenu};
+  margin-bottom: ${(props): string => `${props.theme.heights.bottomMenu}rem`};
 
-  font-size: 82px;
-  line-height: 76px;
+  font-size: 5.125rem;
+  line-height: 4.75rem;
   text-align: center;
 
   @media (min-width: ${(props): string =>
       props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-    margin-bottom: 40px;
+    margin-bottom: ${(props): string => `${props.theme.padding}rem`};
   }
 `

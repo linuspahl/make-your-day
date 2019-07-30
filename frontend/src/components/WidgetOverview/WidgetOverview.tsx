@@ -21,8 +21,8 @@ import { deleteWidget } from 'store/widget/update'
 import { WidgetForList } from 'store/widget/type'
 
 const List = styled.ul`
-  margin-top: 10px;
-  margin-bottom: ${(props): number => props.theme.dimensions.padding}px;
+  margin-top: ${(props): string => `${props.theme.padding / 2}rem`};
+  margin-bottom: ${(props): string => `${props.theme.padding}rem`};
 `
 
 const sortWidgetsByPosition = (

@@ -13,7 +13,7 @@ import { Form as FormType, InputEvent } from 'types/types'
 import { CategoryCreate } from 'store/category/type'
 
 const Form = styled.form`
-  margin-top: 15px;
+  margin-top: ${(props): string => `${props.theme.padding}rem`};
 `
 
 interface Props {

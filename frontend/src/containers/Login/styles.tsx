@@ -9,5 +9,5 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: ${(props): number => props.theme.dimensions.padding}px;
+  padding: ${(props): string => `${props.theme.padding}rem`};
 `

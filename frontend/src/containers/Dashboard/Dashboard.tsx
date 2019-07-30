@@ -16,28 +16,29 @@ export const Layout = styled.div`
   ${(props): string => {
     const {
       theme: {
-        dimensions: { padding, bottomMenu },
+        heights: { bottomMenu },
         mediaQuery: { tablet },
+        padding,
       },
     } = props
     return `
       height: 100%;
       width: 100%;
       
-      padding: ${padding}px 0 ${padding + bottomMenu / 4}px 0;  
+      padding: ${padding}rem 0 ${padding + bottomMenu / 4}rem 0;  
 
       display: grid;
-      grid-row-gap: ${padding}px;
+      grid-row-gap: ${padding}rem;
       grid-template-rows:
-        calc(50% - ${padding / 2}px) calc(50% - ${padding / 2}px);
+        calc(50% - ${padding / 2}rem) calc(50% - ${padding / 2}rem);
 
 
       @media (min-width: ${tablet}) and (orientation: landscape) {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: none;
-        grid-column-gap: ${padding}px;
+        grid-column-gap: ${padding}rem;
 
-        padding: 0 ${padding}px;
+        padding: 0 ${padding}rem;
       }
     `
   }}

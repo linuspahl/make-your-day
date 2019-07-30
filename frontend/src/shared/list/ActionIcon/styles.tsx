@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 export const Element = styled(Link)`
-  height: 40px;
-  width: 40px;
+  height: 2.5rem;
+  width: 2.5rem;
 
   display: flex;
   justify-content: center;

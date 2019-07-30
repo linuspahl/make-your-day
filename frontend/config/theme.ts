@@ -21,7 +21,8 @@ export const defaultTheme = {
   // Other
   border: '#ccc',
   // box shadow inspired by google material design
-  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
+  boxShadow:
+    '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.12), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.24)',
   contentBoxBg: '#fff',
   white: '#fff',
   active: 'rgba(0, 0, 0, 0.1)',
@@ -48,7 +49,7 @@ export const nightModeTheme = {
 }
 
 const mediaQuery = {
-  tablet: '800px',
+  tablet: '50rem',
 }
 
 const fontSizes = {
@@ -82,10 +83,11 @@ const layerIndex = {
   bottomNavigation: 40,
 }
 
+// The base padding of our app
+const padding = 1.25
 // paddings in pixel
-const dimensions = {
-  padding: 20,
-  bottomMenu: 70,
+const heights = {
+  bottomMenu: 4.375,
 }
 
 export default (userSettings: { [key: string]: boolean } = {}): Theme => {
@@ -99,7 +101,8 @@ export default (userSettings: { [key: string]: boolean } = {}): Theme => {
     settings: { ...userSettings },
     mediaQuery,
     layerIndex,
-    dimensions,
+    heights,
+    padding,
     fontSizes,
   }
 }

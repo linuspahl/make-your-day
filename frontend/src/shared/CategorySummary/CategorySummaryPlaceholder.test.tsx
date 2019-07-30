@@ -19,7 +19,7 @@ describe('CategorySummaryPlaceholder should', (): void => {
     )
     expect(getByTestId('CategorySummaryPlaceholder')).toHaveStyleRule(
       'width',
-      '60px'
+      '3.75rem'
     )
   })
 })

@@ -16,10 +16,10 @@ export const Select = styled(Input)`
   align-items: center;
 
   width: 100%;
-  height: 40px;
+  height: 2.5rem;
 
-  padding-left: 10px;
-  line-height: 40px;
+  padding-left: ${(props): string => `${props.theme.padding / 2}rem`};
+  line-height: 2.5rem;
 
   z-index: ${(props): string => props.theme.layerIndex.protrudeContent};
   caret-color: transparent;
@@ -35,7 +35,7 @@ export const ArrowIcon = styled(TextBig)`
   justify-content: center;
   position: absolute;
 
-  width: 40px;
+  width: 2.5rem;
   height: 100%;
 
   top: 0;
@@ -49,10 +49,10 @@ export const Header = styled(TextBig)`
   justify-content: space-between;
   align-items: center;
 
-  height: 40px;
+  height: 2.5rem;
 
-  margin-bottom: ${(props): number => props.theme.dimensions.padding}px;
-  padding-left: 10px;
+  margin-bottom: ${(props): string => `${props.theme.padding}rem`};
+  padding-left: ${(props): string => `${props.theme.padding / 2}rem`};
 `
 
 export const Options = styled.div`
@@ -81,14 +81,14 @@ export const OptionPreview = styled(TextBig)`
   align-items: center;
   justify-content: center;
 
-  height: 25px;
-  width: 25px;
+  height: 1.5625rem;
+  width: 1.5625rem;
 
-  margin-right: 10px;
+  margin-right: ${(props): string => `${props.theme.padding / 2}rem`};
 `
 
 export const Footer = styled.div`
-  margin-top: ${(props): number => props.theme.dimensions.padding}px;
+  margin-top: ${(props): string => `${props.theme.padding}rem`};
 
   text-align: center;
 `

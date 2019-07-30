@@ -31,8 +31,8 @@ export const Layout = styled.button<LayoutProps>`
       display: flex;
       align-items: center;
 
-      height: 40px;
-      padding: 0 ${props.theme.dimensions.padding}px;
+      height: 2.5rem;
+      padding: 0 ${props.theme.padding}rem;
       border: 0;
 
       background-color: ${bgColor};

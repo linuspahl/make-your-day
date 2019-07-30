@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-bottom: 20px;
+  margin-bottom: ${(props): string => `${props.theme.padding}rem`};
 `
 
 export const CategoryWrapper = styled.div`
@@ -16,7 +16,7 @@ export const CategoryWrapper = styled.div`
   align-items: center;
   justify-content: center;
 
-  margin-right: 20px;
+  margin-right: ${(props): string => `${props.theme.padding}rem`};
 
   &:last-child {
     margin-right: 0;
@@ -28,18 +28,18 @@ interface ColorPreviewProps {
 }
 
 export const ColorPreview = styled.div<ColorPreviewProps>`
-  height: 25px;
-  width: 6px;
+  height: 1.5rem;
+  width: 0.4rem;
 
-  margin-right: 5px;
+  margin-right: 0.3rem;
 
   background-color: ${(props): string => props.theme.category[props.color]};
 `
 
 export const CategoryName = styled.div`
-  max-width: 100px;
+  max-width: 8.125rem;
 
-  padding-top: 2px;
+  padding-top: 0.125rem;
 
   text-overflow: ellipsis;
   white-space: nowrap;

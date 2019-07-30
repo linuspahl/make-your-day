@@ -5,7 +5,8 @@ export const PellEditor = styled.div`
   height: 100%;
 
   display: grid;
-  grid-template-rows: 40px calc(100% - 40px);
+  grid-template-rows: ${(props): string =>
+    `${props.theme.padding * 2}rem calc(100% - ${props.theme.padding * 2})`}
 
   overflow-y: auto;
 
@@ -26,20 +27,20 @@ export const PellEditor = styled.div`
     height: 100%;
 
     margin: 0;
-    padding: ${(props): number => props.theme.dimensions.padding}px;
+    padding: ${(props): string => `${props.theme.padding}rem`};
     border: 0;
 
     white-space: normal;
   }
 
   .pell-button {
-    padding: 8px;
-    min-width: 40px;
+    padding: ${(props): string => `${props.theme.padding / 4}rem`};
+    min-width: ${(props): string => `${props.theme.padding * 4}rem`};
 
     border-left: 0;
     border-top: 0;
     border-bottom: 0;
-    border-right: 1px solid ${(props): string => props.theme.border};
+    border-right: 0.0625rem solid ${(props): string => props.theme.border};
 
     background-color: transparent;
     color: inherit;

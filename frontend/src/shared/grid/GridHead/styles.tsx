@@ -11,5 +11,5 @@ export const Element = styled.div<ElementProps>`
 
   width: 100%;
 
-  margin-bottom: 10px;
+  margin-bottom: ${(props): string => `${props.theme.padding / 2}rem`};
 `

@@ -40,8 +40,9 @@ export const Alert = styled(TextBig)<AlertProps>`
   align-items: center;
   z-index: ${(props): string => props.theme.layerIndex.notificationBanner};
 
-  border-radius: 0 0 5px 5px;
-  padding: 10px 20px;
+  border-radius: 0 0 0.315rem 0.315rem;
+  padding: ${(props): string =>
+    `${props.theme.padding / 2}}rem ${props.theme.padding}rem`};
 
   background-color: ${(props): string => {
     if (props.role === 'error') return '#ff6060'

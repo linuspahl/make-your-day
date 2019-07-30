@@ -1,5 +1,7 @@
 // libraries
 import styled from 'styled-components'
+// components
+import TextSmall from 'shared/text/TextSmall/TextSmall'
 
 interface WrapperProps {
   seriesColors: string[]
@@ -19,6 +21,6 @@ export const Wrapper = styled.div<WrapperProps>`
   }}
 `
 
-export const Description = styled.div`
-  margin-top: 5px;
+export const Description = styled(TextSmall)`
+  margin-top: ${(props): string => `${props.theme.padding / 4}rem`};
 `

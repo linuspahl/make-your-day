@@ -9,8 +9,8 @@ interface Props {
 }
 
 const CategoryLoading = styled(Category)<Props>`
-  width: ${(props): number => (props.size !== 'large' ? 40 : 60)}px;
-  min-height: 30px;
+  width: ${(props): string => `${props.size !== 'large' ? 2.5 : 3.75}rem`};
+  min-height: 1.875rem;
 `
 
 const CategorySummaryPlaceholder = (props: Props): JSX.Element => (

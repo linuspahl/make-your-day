@@ -14,7 +14,7 @@ import { Category } from 'store/category/type'
 import { Form, InputEvent } from 'types/types'
 
 const HeadlineRow = styled(Row)`
-  padding-top: 25px;
+  padding-top: ${(props): string => `${props.theme.padding}rem`};
 `
 
 interface Props {

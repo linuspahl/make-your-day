@@ -4,14 +4,14 @@ import styled from 'styled-components'
 import TextBig from 'shared/text/TextBig/TextBig'
 
 export const Element = styled(TextBig)`
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  padding: 5px;
+  padding: ${(props): string => `${props.theme.padding / 4}rem`};
 
   cursor: pointer;
 

@@ -13,10 +13,10 @@ export const Element = styled.li<ElementProps>`
   justify-content: ${(props): string =>
     props.spaceBetween ? 'space-between' : 'start'};
 
-  min-height: 40px;
+  min-height: 1.5rem;
 
-  border-top: 1px solid ${(props): string => props.theme.border};
-  padding: 0 10px;
+  border-top: 0.0625rem solid ${(props): string => props.theme.border};
+  padding: ${(props): string => `0 ${props.theme.padding / 2}rem`};
   &:first-child {
     border-top: 0;
   }

@@ -17,7 +17,7 @@ import { UserSession } from 'store/userSession/type'
 import { UserSetting } from 'store/userSetting/type'
 
 export const Form = styled.form`
-  margin-top: 15px;
+  margin-top: ${(props): string => `${props.theme.padding}rem`};
 `
 
 interface Props {

@@ -2,17 +2,17 @@
 import styled from 'styled-components'
 
 export const Shortcut = styled.div`
-  min-height: 40px;
-  min-width: 40px;
+  min-height: ${(props): string => `${props.theme.padding * 2}rem`};
+  min-width: ${(props): string => `${props.theme.padding * 2}rem`};
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  margin-right: 5px;
+  margin-right: ${(props): string => `${props.theme.padding / 4}rem`};
 
   border-radius: 50%;
-  border: 1px solid ${(props): string => props.theme.border};
+  border: 0.0625rem solid ${(props): string => props.theme.border};
   background-color: ${(props): string => props.theme.timelineDay};
 `
 
@@ -23,8 +23,8 @@ export const Day = styled.button`
   align-items: center;
   cursor: pointer;
 
-  padding: 5px 0;
-  border-bottom: 1px solid ${(props): string => props.theme.border};
+  padding: ${(props): string => `${props.theme.padding / 4}rem 0`};
+  border-bottom: 0.0625rem solid ${(props): string => props.theme.border};
 
   // Remove default button styles
   border-top: 0;
@@ -41,5 +41,5 @@ export const Categories = styled.div`
   display: flex;
   flex-flow: wrap;
 
-  padding: 5px;
+  padding: ${(props): string => `${props.theme.padding / 4}rem`};
 `

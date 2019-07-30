@@ -18,7 +18,7 @@ import { deleteEvaluation } from 'store/evaluation/update'
 import { EvaluationForList } from 'store/evaluation/type'
 
 const List = styled.ul`
-  margin-top: 25px;
+  margin-top: ${(props): string => `${props.theme.padding}rem`};
 `
 
 interface Props {

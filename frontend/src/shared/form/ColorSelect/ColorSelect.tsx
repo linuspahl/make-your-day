@@ -9,8 +9,8 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import { SelectOption, InputEvent } from 'types/types'
 
 const SmallColorPreview = styled.div`
-  height: 25px;
-  width: 25px;
+  height: 1.5625rem;
+  width: 1.5625rem;
 
   background-color: ${(props): string => props.theme.category[props.color]};
 `

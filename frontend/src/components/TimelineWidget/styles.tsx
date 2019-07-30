@@ -17,6 +17,6 @@ export const Outer = styled.div`
 export const Layout = styled.div`
   width: 100%;
 
-  padding: ${(props): number => props.theme.dimensions.padding}px;
+  padding: ${(props): string => `${props.theme.padding}rem`};
   margin: auto 0;
 `

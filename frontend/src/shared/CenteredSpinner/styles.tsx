@@ -21,8 +21,8 @@ export const Layout = styled.div`
 `
 
 export const Spinner = styled.div`
-  width: 60px;
-  height: 60px;
+  width: 3.75rem;
+  height: 3.75rem;
 
   position: relative;
   margin: 0 auto;

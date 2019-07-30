@@ -8,7 +8,7 @@ interface LayoutProps {
 }
 
 export const Layout = styled(Row)<LayoutProps>`
-  margin-top: ${(props): number => props.theme.dimensions.padding * 5}px;
+  margin-top: ${(props): string => `${props.theme.padding * 3}rem`};
 
   ${(props): string =>
     props.amountChildren === 1
@@ -22,4 +22,8 @@ export const Layout = styled(Row)<LayoutProps>`
       flex-direction: row-reverse;
     `
       : ``}
+
+  @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}){
+      margin-top: ${(props): string => `${props.theme.padding * 5}rem`};
+  }
 `

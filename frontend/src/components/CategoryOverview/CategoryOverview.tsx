@@ -18,7 +18,7 @@ import { deleteCategory } from 'store/category/update'
 import { CategoryForList } from 'store/category/type'
 
 const List = styled.ul`
-  margin-top: 25px;
+  margin-top: ${(props): string => `${props.theme.padding}rem`};
 `
 
 interface Props {

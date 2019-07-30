@@ -10,12 +10,12 @@ export const ChildrenWrapper = styled.div`
   ${(props): string => {
     const {
       theme: {
-        dimensions: { bottomMenu },
+        heights: { bottomMenu },
       },
     } = props
     return `
     height: calc(
-      100vh - ${bottomMenu - bottomMenu / 4}px
+      100vh - ${bottomMenu - bottomMenu / 4}rem
     ); 
     width: 100%;
 

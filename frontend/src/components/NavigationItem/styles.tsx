@@ -9,7 +9,7 @@ export const ListItem = styled.li`
   align-items: center;
   justify-content: center;
 
-  border-bottom: 1px solid ${(props): string => props.theme.border};
+  border-bottom: 0.0625rem solid ${(props): string => props.theme.border};
 
   color: inherit;
   text-decoration: none;
@@ -28,7 +28,8 @@ export const InnerLink = styled(Link)`
   width: 100%;
   height: 100%;
 
-  padding: ${(props): string => props.theme.dimensions.padding}px 10px;
+  padding: ${(props): string =>
+    `${props.theme.padding}rem ${props.theme.padding / 2}rem`};
 
   display: flex;
   align-items: center;
@@ -39,11 +40,11 @@ export const InnerLink = styled(Link)`
 `
 
 export const RouteActive = styled.div`
-  width: 8px;
-  height: 8px;
+  width: ${(props): string => `${props.theme.padding / 2}rem`};
+  height: ${(props): string => `${props.theme.padding / 2}rem`};
 
   border-radius: 50%;
-  margin-left: 10px;
+  margin-left: ${(props): string => `${props.theme.padding / 2}rem`};
 
   background-color: grey;
 `

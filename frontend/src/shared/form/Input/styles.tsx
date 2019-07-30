@@ -7,12 +7,12 @@ interface ElementProps {
 
 export const Element = styled.input<ElementProps>`
   width: 100%;
-  height: 40px;
+  height: 2.5rem;
 
-  padding: 0 10px;
-  margin-top: 3px;
+  padding: ${(props): string => `0 ${props.theme.padding / 2}rem`};
+  margin-top: ${(props): string => `${props.theme.padding / 5}rem`};
   border-radius: 0;
-  border: 1px solid ${(props): string => props.theme.border};
+  border: 0.0625rem solid ${(props): string => props.theme.border};
 
   color: ${(props): string => (props.disabled ? '#b5b5b5' : props.theme.text)};
   box-shadow: none;

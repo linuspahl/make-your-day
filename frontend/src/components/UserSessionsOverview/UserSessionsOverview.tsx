@@ -18,6 +18,7 @@ import { deleteUserSession } from 'store/userSession/update'
 // interface
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate } from 'types/types'
+import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 
 interface Props {
   clearLocalStorage: () => void
@@ -95,22 +96,24 @@ const ListItem = (props: {
       <div>{userSession.device}</div>
       <div>{expiresAtDate}</div>
       <GridCell justify="flex-end">
-        {isCurrentSession && (
-          <LogoutIcon
-            userSessionId={userSession.id}
-            clearLocalStorage={props.clearLocalStorage}
-            createNotificationBanner={props.createNotificationBanner}
-          />
-        )}
-        {!isCurrentSession && (
-          <DeleteIcon
-            ariaLabel={`Sitzung von ${userSession.device} entfernen`}
-            title="Sitzung"
-            id={userSession.id}
-            mutation={DeleteUserSession}
-            onUpdate={deleteUserSession}
-          />
-        )}
+        <ActionIconWrapper>
+          {isCurrentSession && (
+            <LogoutIcon
+              userSessionId={userSession.id}
+              clearLocalStorage={props.clearLocalStorage}
+              createNotificationBanner={props.createNotificationBanner}
+            />
+          )}
+          {!isCurrentSession && (
+            <DeleteIcon
+              ariaLabel={`Sitzung von ${userSession.device} entfernen`}
+              title="Sitzung"
+              id={userSession.id}
+              mutation={DeleteUserSession}
+              onUpdate={deleteUserSession}
+            />
+          )}
+        </ActionIconWrapper>
       </GridCell>
     </React.Fragment>
   )

@@ -1,6 +1,5 @@
 // libraries
 import * as React from 'react'
-import styled from 'styled-components'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
@@ -8,12 +7,6 @@ import ContentBox from 'shared/ContentBox/ContentBox'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-
-export const Layout = styled.div`
-  height: 100%;
-  display: grid;
-  grid-template-rows: 1fr 70px 1fr;
-`
 
 const PageNotFound = (): JSX.Element => (
   <React.Fragment>

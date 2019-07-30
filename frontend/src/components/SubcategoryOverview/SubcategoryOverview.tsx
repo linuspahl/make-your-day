@@ -17,7 +17,7 @@ import { GetCategoryForListWithChildren } from 'store/category/query'
 import { Subcategory, CategoryFull } from 'store/category/type'
 
 const List = styled.ul`
-  margin-top: 25px;
+  margin-top: ${(props): string => `${props.theme.padding}rem`};
 `
 
 interface Props extends RouteComponentProps {

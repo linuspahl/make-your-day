@@ -18,7 +18,7 @@ import { EvaluationCreate, EvaluationEdit } from 'store/evaluation/type'
 import { Form as FormType, SelectOption, InputEvent } from 'types/types'
 
 const Form = styled.form`
-  margin-top: 15px;
+  margin-top: ${(props): string => `${props.theme.padding}rem`};
 `
 
 const generateCategoryOptions = (

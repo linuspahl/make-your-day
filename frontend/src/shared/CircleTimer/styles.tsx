@@ -2,17 +2,17 @@ import styled, { keyframes } from 'styled-components'
 
 const countdown = keyframes`
   from {
-    stroke-dashoffset: 0px;
+    stroke-dashoffset: 0;
   }
   to {
-    stroke-dashoffset: 113px;
+    stroke-dashoffset: 7rem;
   }
 `
 
 export const Layout = styled.div`
   // The height/width needs to be set as min props
-  min-height: 40px;
-  min-width: 40px;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
 
   position: relative;
   display: flex;
@@ -38,10 +38,10 @@ interface SvgCircleProps {
 }
 
 export const SvgCircle = styled.circle<SvgCircleProps>`
-  stroke-dasharray: 113px;
-  stroke-dashoffset: 0px;
+  stroke-dasharray: 7rem;
+  stroke-dashoffset: 0;
   stroke-linecap: round;
-  stroke-width: 2px;
+  stroke-width: 0.125rem;
   stroke: black;
   fill: none;
   animation: ${countdown} ${(props): number => props.duration || 6}s linear

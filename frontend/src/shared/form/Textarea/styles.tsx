@@ -19,10 +19,10 @@ export const Element = styled.textarea<ElementProps>`
   min-width: 100%;
   max-height: 100%;
 
-  padding: 10px;
-  margin-top: 3px;
+  padding: ${(props): string => `${props.theme.padding / 2}rem`};
+  margin-top: ${(props): string => `${props.theme.padding / 5}rem`};
   border-radius: inherit;
-  border: 1px solid ${(props): string => props.theme.border};
+  border: 0.0625rem solid ${(props): string => props.theme.border};
 
   background-color: transparent;
   color: ${(props): string => props.theme.text};

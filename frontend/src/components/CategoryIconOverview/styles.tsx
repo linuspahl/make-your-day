@@ -6,7 +6,8 @@ interface LayoutProps {
 }
 
 export const Layout = styled.div<LayoutProps>`
-  padding: 10px 0 5px 0;
+  padding: ${(props): string =>
+    `${props.theme.padding / 2}rem 0 ${props.theme.padding / 4}rem 0`};
   ${(props): string =>
     props.context === 'horizontal-scroll'
       ? `
@@ -33,7 +34,7 @@ export const IconWrapper = styled.div<IconWrapperProps>`
   display: inline-block;
   vertical-align: middle;
 
-  margin-right: 10px;
+  margin-right: ${(props): string => `${props.theme.padding / 2}rem`};
 
   &:last-child {
     margin-right: 0;
@@ -42,7 +43,7 @@ export const IconWrapper = styled.div<IconWrapperProps>`
   ${(props): string =>
     props.context !== 'horizontal-scroll'
       ? `
-        margin-bottom: 5px;
+        margin-bottom: ${props.theme.padding / 4};
       `
       : ``}
 `

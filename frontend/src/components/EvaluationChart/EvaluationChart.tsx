@@ -48,7 +48,7 @@ const getDescriptionComponent = (
   periodTitle: string
 ): JSX.Element => {
   return (
-    <Description>{`${periodTitle} - (${
+    <Description>{`${periodTitle} (${
       categoryUnit ? categoryUnit : 'Anzahl'
     })`}</Description>
   )

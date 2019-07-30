@@ -6,9 +6,9 @@
 // libraries
 import * as React from 'react'
 // components
+import { Alert } from './styles'
 import CloseIcon from 'shared/CloseIcon/CloseIcon'
 import CircleTimer from 'shared/CircleTimer/CircleTimer'
-import { Alert } from './styles'
 // interface
 import { Notification, NotificationCreate } from 'types/types'
 

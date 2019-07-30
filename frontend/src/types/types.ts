@@ -22,8 +22,9 @@ export interface Theme {
   settings: { [key: string]: boolean }
   mediaQuery: { tablet: string }
   layerIndex: LayerIndexes
-  dimensions: AppDimensions
+  heights: AppHeights
   fontSizes: { mobile: AppFontSizes; tablet: AppFontSizes }
+  padding: number
 }
 
 interface AppFontSizes {
@@ -60,8 +61,7 @@ interface LayerIndexes {
   notificationBanner: number
 }
 
-interface AppDimensions {
-  padding: number
+interface AppHeights {
   bottomMenu: number
 }
 

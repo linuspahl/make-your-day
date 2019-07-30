@@ -10,10 +10,10 @@ interface WrapperProps {
 export const Wrapper = styled.div<WrapperProps>`
   position: relative;
 
-  height: 40px;
-  width: 40px;
+  height: 2.5rem;
+  width: 2.5rem;
 
-  border: 1px solid ${(props): string => props.theme.border};
+  border: 0.0625rem solid ${(props): string => props.theme.border};
 
   color: ${(props): string =>
     props.disabled ? props.theme.border : props.theme.text};

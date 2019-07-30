@@ -33,7 +33,7 @@ export const ContentWrapper = styled.div`
   height: 100%;
   width: 100%;
 
-  padding: ${(props): number => props.theme.dimensions.padding}px;
+  padding: ${(props): string => `${props.theme.padding}rem`};
 
   z-index: ${(props): string => props.theme.layerIndex.modalContent};
 `
@@ -41,7 +41,7 @@ export const ContentWrapper = styled.div`
 export const Head = styled.div`
   position: relative;
 
-  margin-bottom: 30px;
+  margin-bottom: ${(props): string => `${props.theme.padding * 4}rem`};
 
   text-align: center;
 `
