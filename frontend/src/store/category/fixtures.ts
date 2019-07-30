@@ -278,7 +278,11 @@ export const updateCategoryError = {
 const updateSubcategoryRequest = {
   request: {
     query: UpdateSubcategory,
-    variables: { id: subcategory.id, title: 'New Name', color: subcategory.color },
+    variables: {
+      id: subcategory.id,
+      title: 'New Name',
+      color: subcategory.color,
+    },
   },
 }
 export const updateSubcategorySuccess = {

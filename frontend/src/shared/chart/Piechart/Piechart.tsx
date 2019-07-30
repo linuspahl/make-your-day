@@ -4,13 +4,18 @@ import ChartistGraph from 'react-chartist'
 // components
 import NoResult from 'shared/NoResult/NoResult'
 // interfaces
-import { EvaluationResult, ChartSeriesData} from 'store/evaluation/type'
+import { EvaluationResult, ChartSeriesData } from 'store/evaluation/type'
 
 const getSeriesData = (
-  series: EvaluationResult['series'] = [],
+  series: EvaluationResult['series'] = []
 ): ChartSeriesData[] => {
-  const seriesData = series.map((ser): ChartSeriesData[] => {  
-    return ser.data.map((category): ChartSeriesData => ({value: category.value, className: category.color ? `Chart-series-${category.color}` : null}))
+  const seriesData = series.map((ser): ChartSeriesData[] => {
+    return ser.data.map(
+      (category): ChartSeriesData => ({
+        value: category.value,
+        className: category.color ? `Chart-series-${category.color}` : null,
+      })
+    )
   })
   return Array.prototype.concat.apply([], seriesData)
 }
