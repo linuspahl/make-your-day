@@ -6,7 +6,7 @@ export const PellEditor = styled.div`
 
   display: grid;
   grid-template-rows: ${(props): string =>
-    `${props.theme.padding * 2}rem calc(100% - ${props.theme.padding * 2})`}
+    `${props.theme.padding * 2}rem calc(100% - ${props.theme.padding * 2}rem)`};
 
   overflow-y: auto;
 
@@ -27,7 +27,8 @@ export const PellEditor = styled.div`
     height: 100%;
 
     margin: 0;
-    padding: ${(props): string => `${props.theme.padding}rem`};
+    padding: ${(props): string =>
+      `${props.theme.padding / 2}rem ${props.theme.padding}rem`};
     border: 0;
 
     white-space: normal;
@@ -35,7 +36,7 @@ export const PellEditor = styled.div`
 
   .pell-button {
     padding: ${(props): string => `${props.theme.padding / 4}rem`};
-    min-width: ${(props): string => `${props.theme.padding * 4}rem`};
+    min-width: 2.5rem;
 
     border-left: 0;
     border-top: 0;

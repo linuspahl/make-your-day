@@ -8,7 +8,7 @@ interface ElementProps {
 }
 
 export const Element = styled.li<ElementProps>`
-  min-height: 1.5rem;
+  min-height: 2.5rem;
 
   display: flex;
   align-items: center;

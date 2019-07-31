@@ -73,8 +73,8 @@ const layerIndex = {
   // E.g. needed to scroll the DashboardWidgets behind the Dashboard CategoryIconOverview
   protrudeContent: 1,
 
-  modal: 10,
-  modalContent: 11,
+  modal: 50,
+  modalContent: 51,
 
   navigation: 20,
 

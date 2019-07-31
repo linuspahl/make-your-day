@@ -29,7 +29,7 @@ export const InnerLink = styled(Link)`
   height: 100%;
 
   padding: ${(props): string =>
-    `${props.theme.padding}rem ${props.theme.padding / 2}rem`};
+    `${props.theme.padding / 1.5}rem ${props.theme.padding / 2}rem`};
 
   display: flex;
   align-items: center;

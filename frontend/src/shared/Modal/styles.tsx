@@ -41,7 +41,7 @@ export const ContentWrapper = styled.div`
 export const Head = styled.div`
   position: relative;
 
-  margin-bottom: ${(props): string => `${props.theme.padding * 4}rem`};
+  margin-bottom: ${(props): string => `${props.theme.padding}rem`};
 
   text-align: center;
 `
