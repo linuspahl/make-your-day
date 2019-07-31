@@ -6,13 +6,13 @@ import { Theme } from 'types/types'
 
 export const defaultTheme = {
   // Primary  color, mostly used by buttons
-  primary: '#a5d7ff',
-  primaryActive: '#8cccff',
+  primary: '#2e91e0',
+  primaryActive: '#257fc7',
   // Secondary color, mostly used by buttons
   secondary: '#e2e2e2',
   secondaryActive: '#cccccc',
   // Delete
-  delete: '#ff6060',
+  delete: '#ff3535',
   // Default app bg
   appBg:
     'linear-gradient(-225deg, rgb(222, 243, 248) 0%, rgb(135, 167, 217) 50%, rgb(112, 133, 182) 100%)',
