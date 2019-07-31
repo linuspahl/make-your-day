@@ -1,5 +1,6 @@
 // libraries
 import styled from 'styled-components'
+// components
 import ContentBox from 'shared/ContentBox/ContentBox'
 
 export const Wrapper = styled.div`
@@ -54,4 +55,6 @@ export const CloseIconWrapper = styled.div`
 
 export const Content = styled(ContentBox)`
   position: relative;
+
+  margin: auto;
 `
