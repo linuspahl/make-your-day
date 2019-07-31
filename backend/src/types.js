@@ -176,9 +176,9 @@ export default gql`
     ): Category!
     updateWidget(
       id: ID!
-      title: String!
+      title: String
       value: String
-      position: String!
+      position: String
       evaluationId: ID
     ): Widget!
     updateRecord(

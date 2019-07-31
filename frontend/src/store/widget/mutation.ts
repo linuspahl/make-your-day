@@ -27,9 +27,9 @@ export const CreateWidget = gql`
 export const UpdateWidget = gql`
   mutation UpdateWidget(
     $id: ID!
-    $title: String!
+    $title: String
     $value: String
-    $position: String!
+    $position: String
     $evaluationId: ID
   ) {
     updateWidget(
