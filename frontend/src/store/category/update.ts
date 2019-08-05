@@ -16,17 +16,15 @@ export const addCategory = (cache: DataProxy, result: FetchResult): void => {
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the overview list will not get fetched.
   try {
-    const categories: { GetCategoriesForList: Category[] } = cache.readQuery({
+    const categories: { getCategories: Category[] } = cache.readQuery({
       query: GetCategoriesForList,
     })
+    console.log(categories)
 
     cache.writeQuery({
       query: GetCategoriesForList,
       data: {
-        GetCategoriesForList: [
-          ...categories.GetCategoriesForList,
-          createCategory,
-        ],
+        getCategories: [...categories.getCategories, createCategory],
       },
     })
   } catch {}
