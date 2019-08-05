@@ -38,6 +38,7 @@ const ColorSelect = (props: Props): JSX.Element => {
     <ContentSelect
       allowEmpty
       id={id}
+      label="Farbe"
       name={name}
       onChange={onChange}
       options={colors}
@@ -45,7 +46,6 @@ const ColorSelect = (props: Props): JSX.Element => {
         <SmallColorPreview color={String(option.value)} />
       )}
       tabIndex={tabIndex}
-      title="Farbe"
       value={value}
     />
   )

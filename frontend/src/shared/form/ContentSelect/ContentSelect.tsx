@@ -26,6 +26,7 @@ interface Props {
   allowEmpty?: boolean
   disabled?: boolean
   id?: string
+  label: string
   name: string
   onChange: (event: InputEvent) => void
   options: SelectOption[]
@@ -33,7 +34,6 @@ interface Props {
   renderPreview?: (option: SelectOption) => JSX.Element
   required?: boolean
   tabIndex: number
-  title: string
   type?: string
   value: string | number
 }
@@ -75,12 +75,12 @@ export default class ContentSelect extends React.Component<Props, State> {
     const {
       disabled,
       id,
+      label,
       name,
       renderFooter,
       renderPreview,
       required,
       tabIndex,
-      title,
       type,
       value,
     } = this.props
@@ -96,6 +96,8 @@ export default class ContentSelect extends React.Component<Props, State> {
     return (
       <Layout>
         <Select
+          label={label}
+          disabled={disabled}
           autocomplete="off"
           type={type || 'text'}
           dataTestid="ContentSelect-selection"
@@ -108,7 +110,6 @@ export default class ContentSelect extends React.Component<Props, State> {
           onMouseDown={(event: React.MouseEvent<HTMLInputElement>): void =>
             !disabled && !isOpen ? this.toggleSelect(event) : null
           }
-          placeholder="Keine Auswahl"
           required={required}
           tabIndex={disabled ? -1 : tabIndex}
           value={value && currentOption ? currentOption.title : null}
@@ -121,7 +122,7 @@ export default class ContentSelect extends React.Component<Props, State> {
           <Icon title="angle-down" />
         </ArrowIcon>
         {isOpen && (
-          <Modal headline={title} toggleAction={this.toggleSelect}>
+          <Modal headline={label} toggleAction={this.toggleSelect}>
             <Options data-testid="ContentSelect-options">
               {sortedOptions.map(
                 (option): JSX.Element => {

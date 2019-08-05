@@ -58,15 +58,14 @@ const RecordFields = (props: Props): JSX.Element => {
         <H2>Aufbau Einträge</H2>
       </HeadlineRow>
       <Row disabled={disabledFields.type} htmlFor="type">
-        Art
         <ContentSelect
           disabled={disabledFields.type}
           id="type"
+          label="Art"
           name="type"
           onChange={handleInputChange}
           options={categoryTypeOptions}
           tabIndex={1}
-          title="Art"
           value={type}
         />
       </Row>
@@ -96,9 +95,9 @@ const RecordFields = (props: Props): JSX.Element => {
         />
       </Row>
       <Row disabled={disabledFields.unit} htmlFor="unit">
-        Einheit
         <Input
           disabled={disabledFields.unit}
+          label="Einheit"
           name="unit"
           id="unit"
           onChange={handleInputChange}

@@ -53,9 +53,9 @@ export default class LoginForm extends React.Component<Props, State> {
         {(loginUser: () => void): JSX.Element => (
           <Form onSubmit={(event): void => this.handleSubmit(event, loginUser)}>
             <Row htmlFor="username">
-              Username
               <Input
                 id="username"
+                label="Username"
                 name="username"
                 onChange={this.handleInputChange}
                 required
@@ -64,9 +64,9 @@ export default class LoginForm extends React.Component<Props, State> {
               />
             </Row>
             <Row htmlFor="password">
-              Password
               <Input
                 id="password"
+                label="Password"
                 name="password"
                 onChange={this.handleInputChange}
                 required

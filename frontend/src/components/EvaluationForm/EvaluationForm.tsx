@@ -103,9 +103,9 @@ export default class EvaluationForm extends React.Component<
     return (
       <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <Row htmlFor="title">
-          Name
           <Input
             id="title"
+            label="Name"
             name="title"
             onChange={this.handleInputChange}
             required
@@ -114,14 +114,13 @@ export default class EvaluationForm extends React.Component<
           />
         </Row>
         <Row htmlFor="categoryId">
-          Kategorie / Unterkategorie
           <ContentSelect
             id="categoryId"
+            label="Kategorie / Unterkategorie"
             name="categoryId"
             onChange={this.handleInputChange}
             options={categoryOptions}
             tabIndex={1}
-            title="Kategorie / Unterkategorie"
             value={Number(categoryId)}
           />
         </Row>
@@ -137,26 +136,24 @@ export default class EvaluationForm extends React.Component<
           />
         </Row>
         <Row htmlFor="type">
-          Art
           <ContentSelect
             id="type"
             name="type"
             onChange={this.handleInputChange}
             options={evaluationTypeOptions}
             tabIndex={1}
-            title="Art"
+            label="Art"
             value={type}
           />
         </Row>
         <Row htmlFor="period">
-          Zeitraum
           <ContentSelect
             id="period"
+            label="Zeitraum"
             name="period"
             onChange={this.handleInputChange}
             options={evaluationPeriodOptions}
             tabIndex={1}
-            title="Zeitraum"
             value={period}
           />
         </Row>

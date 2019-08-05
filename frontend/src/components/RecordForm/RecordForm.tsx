@@ -151,14 +151,13 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
         {hasSubcategories && (
           <Row htmlFor="categoryId">
             <React.Fragment>
-              Unterkategorie
               <ContentSelect
                 id="categoryId"
+                label="Unterkategorie"
                 name="categoryId"
                 onChange={this.handleInputChange}
                 options={subcategoryOptions}
                 tabIndex={1}
-                title="Unterkategorie"
                 value={categoryId}
                 required
                 renderFooter={(): JSX.Element => (

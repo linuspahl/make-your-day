@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 // components
-import { Element } from './styles'
+import { Wrapper, InputElement, InputLabel } from './styles'
 // interfaces
 import { InputEvent } from 'types/types'
 
@@ -12,13 +12,13 @@ export interface Props {
   disabled?: boolean
   id?: string
   initRef?: React.RefObject<HTMLInputElement>
+  label?: string
   name: string
   onBlur?: (event: InputEvent) => void
   onChange: (event: InputEvent) => void
   onClick?: () => void
   onFocus?: (event: InputEvent) => void
   onMouseDown?: (event: React.MouseEvent<HTMLInputElement>) => void
-  placeholder?: string
   required?: boolean
   step?: string
   tabIndex: number
@@ -34,13 +34,13 @@ const Input = (props: Props): JSX.Element => {
     disabled,
     id,
     initRef,
+    label,
     name,
     onBlur,
     onChange,
     onClick,
     onFocus,
     onMouseDown,
-    placeholder,
     required,
     step,
     tabIndex,
@@ -48,26 +48,28 @@ const Input = (props: Props): JSX.Element => {
     value,
   } = props
   return (
-    <Element
-      autoComplete={autocomplete}
-      data-testid={dataTestid || 'Input'}
-      disabled={disabled}
-      id={id}
-      name={name}
-      onBlur={onBlur}
-      onChange={onChange}
-      onClick={onClick}
-      onFocus={onFocus}
-      placeholder={placeholder}
-      required={required}
-      step={step}
-      tabIndex={tabIndex}
-      type={type || 'text'}
-      value={value || ''}
-      ref={initRef}
-      onMouseDown={onMouseDown}
-      className={className}
-    />
+    <Wrapper>
+      <InputElement
+        autoComplete={autocomplete}
+        data-testid={dataTestid || 'Input'}
+        disabled={disabled}
+        id={id}
+        name={name}
+        onBlur={onBlur}
+        onChange={onChange}
+        onClick={onClick}
+        onFocus={onFocus}
+        required={required}
+        step={step}
+        tabIndex={tabIndex}
+        type={type || 'text'}
+        value={value || ''}
+        ref={initRef}
+        onMouseDown={onMouseDown}
+        className={className}
+      />
+      {label && <InputLabel>{label}</InputLabel>}
+    </Wrapper>
   )
 }
 

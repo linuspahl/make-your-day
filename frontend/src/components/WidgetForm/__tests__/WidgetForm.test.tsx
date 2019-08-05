@@ -65,10 +65,7 @@ describe('WidgetForm should', (): void => {
     fireEvent.mouseDown(getByLabelText('Art'), leftClickOption)
     fireEvent.click(getByText('Auswertung'), leftClickOption)
 
-    fireEvent.mouseDown(
-      getByLabelText('Verknüpfte Auswertung'),
-      leftClickOption
-    )
+    fireEvent.mouseDown(getByLabelText('Auswertung'), leftClickOption)
     expect(getByText(evaluation.title)).toBeInTheDocument()
   })
 

@@ -13,8 +13,6 @@ export const Wrapper = styled.div<WrapperProps>`
   height: 2.5rem;
   width: 2.5rem;
 
-  border: 0.0625rem solid ${(props): string => props.theme.border};
-
   color: ${(props): string =>
     props.disabled ? props.theme.border : props.theme.text};
   cursor: ${(props): string => (props.disabled ? 'not-allowed' : 'pointer')};
@@ -27,11 +25,18 @@ export const Element = styled.input`
 
   background-color: transparent;
   border-radius: 0;
-  border: 0;
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 0.125rem solid ${(props): string => props.theme.border};
 
   appearance: none;
-
   cursor: inherit;
+
+  &:focus {
+    outline: none;
+    border-bottom-color: ${(props): string => props.theme.primary};
+  }
 `
 
 export const Checkmark = styled(TextBig)`

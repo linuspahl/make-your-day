@@ -54,18 +54,17 @@ export default class SubcategoryForm extends React.Component<
     return (
       <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <Row htmlFor="title">
-          Name
           <Input
+            id="title"
             name="title"
             onChange={this.handleInputChange}
             required
             tabIndex={1}
             value={title}
-            id="title"
+            label="Name"
           />
         </Row>
         <Row htmlFor="color">
-          Farbe
           <ColorSelect
             id="color"
             name="color"

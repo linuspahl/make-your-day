@@ -18,6 +18,7 @@ export const defaultTheme = {
     'linear-gradient(-225deg, rgb(222, 243, 248) 0%, rgb(135, 167, 217) 50%, rgb(112, 133, 182) 100%)',
   // Font setting
   text: '#545454',
+  info: '#ccc',
   // Other
   border: '#ccc',
   // box shadow inspired by google material design

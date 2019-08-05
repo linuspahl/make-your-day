@@ -13,7 +13,7 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 describe('ContentSelect should', (): void => {
   const propsFixture = {
     onChange: (): void => {},
-    title: 'Title',
+    label: 'Title',
     value: 'special-value-1',
     renderPreview: function renderPreview(): JSX.Element {
       return <div />

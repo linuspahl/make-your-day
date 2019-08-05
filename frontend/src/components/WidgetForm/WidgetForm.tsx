@@ -80,15 +80,14 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
     const disabledFields = {
       type: mode !== 'create',
       evaluationId: type !== 'evaluation',
-      disabledFields: type !== 'textarea',
     }
 
     return (
       <Form onSubmit={(event): void => this.handleSubmit(event)}>
         <Row htmlFor="title">
-          Name
           <Input
             id="title"
+            label="Name"
             name="title"
             onChange={this.handleInputChange}
             required
@@ -97,40 +96,39 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
           />
         </Row>
         <Row disabled={disabledFields['type']} htmlFor="type">
-          Art
           <ContentSelect
             disabled={disabledFields['type']}
             id="type"
+            label="Art"
             name="type"
             onChange={this.handleInputChange}
             options={widgetTypeOptions}
             tabIndex={1}
-            title="Art"
             value={type}
           />
         </Row>
-        <Row disabled={disabledFields['evaluationId']} htmlFor="evaluationId">
-          Verknüpfte Auswertung
-          <ContentSelect
-            disabled={disabledFields['evaluationId']}
-            id="evaluationId"
-            name="evaluationId"
-            onChange={this.handleInputChange}
-            options={evaluationOptions}
-            tabIndex={1}
-            title="Auswertung"
-            value={evaluationId}
-          />
-        </Row>
+        {type === 'evaluation' && (
+          <Row disabled={disabledFields['evaluationId']} htmlFor="evaluationId">
+            <ContentSelect
+              disabled={disabledFields['evaluationId']}
+              id="evaluationId"
+              label="Auswertung"
+              name="evaluationId"
+              onChange={this.handleInputChange}
+              options={evaluationOptions}
+              tabIndex={1}
+              value={evaluationId}
+            />
+          </Row>
+        )}
         <Row htmlFor="position">
-          Position
           <ContentSelect
             id="position"
+            label="Position"
             name="position"
             onChange={this.handleInputChange}
             options={widgetPositionOptions}
             tabIndex={1}
-            title="Position"
             value={position}
           />
         </Row>

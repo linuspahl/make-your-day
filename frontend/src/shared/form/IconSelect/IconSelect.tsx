@@ -25,6 +25,7 @@ const IconSelect = (props: Props): JSX.Element => {
       allowEmpty
       disabled={disabled}
       id={id}
+      label="Icon"
       name={name}
       onChange={onChange}
       options={categoryIcons}
@@ -32,7 +33,6 @@ const IconSelect = (props: Props): JSX.Element => {
         <Icon title={String(option.value)} />
       )}
       tabIndex={tabIndex}
-      title="Icon"
       value={value}
     />
   )

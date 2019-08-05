@@ -15,15 +15,10 @@ export const Select = styled(Input)`
   justify-content: space-between;
   align-items: center;
 
-  width: 100%;
-  height: 2.5rem;
-
-  padding-left: ${(props): string => `${props.theme.padding / 2}rem`};
-  line-height: 2.5rem;
-
   z-index: ${(props): string => props.theme.layerIndex.protrudeContent};
   caret-color: transparent;
   cursor: default;
+
   &::selection {
     background-color: transparent;
   }
@@ -36,9 +31,9 @@ export const ArrowIcon = styled(TextBig)`
   position: absolute;
 
   width: 2.5rem;
-  height: 100%;
+  height: 2.5rem;
 
-  top: 0;
+  bottom: 0;
   right: 0;
 
   color: inherit;

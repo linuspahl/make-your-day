@@ -27,11 +27,10 @@ const IconFields = (props: Props): JSX.Element => {
         <CategoryIcon color={color} icon={icon} title={title} />
       </Row>
       <Row htmlFor="title">
-        Name
         <Input
-          data-testid="NameInput"
           name="title"
           id="title"
+          label="Name"
           onChange={handleInputChange}
           required
           tabIndex={1}
@@ -39,7 +38,6 @@ const IconFields = (props: Props): JSX.Element => {
         />
       </Row>
       <Row htmlFor="color">
-        Farbe
         <ColorSelect
           id="color"
           name="color"
@@ -49,7 +47,6 @@ const IconFields = (props: Props): JSX.Element => {
         />
       </Row>
       <Row htmlFor="icon">
-        Icon
         <IconSelect
           id="icon"
           name="icon"
