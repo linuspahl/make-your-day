@@ -39,60 +39,91 @@ interface Props {
   params?: { [key: string]: string }
 }
 
-const CategoryIconOverview = (props: Props): JSX.Element => {
-  const { context, params } = props
-  return (
-    <Layout context={context}>
-      <Query query={GetCategories}>
-        {({
-          loading,
-          error,
-          data,
-        }: {
-          loading: boolean
-          error?: ApolloError
-          data: { getCategories: CategoryForList[] }
-        }): JSX.Element | JSX.Element[] => {
-          if (loading) {
-            return <LoadingPlaceholder context={context} />
-          }
+class CategoryIconOverview extends React.Component<Props> {
+  private wrapperRef: HTMLDivElement
 
-          if (error)
-            return (
-              <ErrorMessage
-                error={error}
-                message="Kategorien konnten nicht geladen werden"
-              />
-            )
+  public constructor(props: Props) {
+    super(props)
+    this.scrollOverview = this.scrollOverview.bind(this)
+  }
 
-          if (!data.getCategories || data.getCategories.length === 0)
-            return (
-              <NoResultWrapper>
-                <Link to="/categories/create">
-                  <NoResult message="Noch keine Kategorie vorhanden" />
-                </Link>
-              </NoResultWrapper>
-            )
+  public componentDidMount(): void {
+    if (this.props.context === 'horizontal-scroll') {
+      this.wrapperRef.addEventListener('wheel', this.scrollOverview)
+    }
+  }
 
-          const urlParams = generateUrlParams(params)
-          return data.getCategories.map(
-            (category: Category): JSX.Element => (
-              <IconWrapper key={category.id} context={context}>
-                <CategoryIcon
-                  ariaLabel={`Erstelle Eintrag für Kategorie ${category.title}`}
-                  color={category.color}
-                  icon={category.icon}
-                  key={category.id}
-                  title={category.title}
-                  to={`/categories/${category.id}/records/create${urlParams}`}
-                />
-              </IconWrapper>
-            )
-          )
+  public componentWillUnmount(): void {
+    if (this.props.context === 'horizontal-scroll') {
+      this.wrapperRef.removeEventListener('wheel', this.scrollOverview)
+    }
+  }
+
+  public render(): JSX.Element {
+    const { context, params } = this.props
+    return (
+      <Layout
+        context={context}
+        ref={(wrapper): void => {
+          this.wrapperRef = wrapper
         }}
-      </Query>
-    </Layout>
-  )
+      >
+        <Query query={GetCategories}>
+          {({
+            loading,
+            error,
+            data,
+          }: {
+            loading: boolean
+            error?: ApolloError
+            data: { getCategories: CategoryForList[] }
+          }): JSX.Element | JSX.Element[] => {
+            if (loading) {
+              return <LoadingPlaceholder context={context} />
+            }
+
+            if (error)
+              return (
+                <ErrorMessage
+                  error={error}
+                  message="Kategorien konnten nicht geladen werden"
+                />
+              )
+
+            if (!data.getCategories || data.getCategories.length === 0)
+              return (
+                <NoResultWrapper>
+                  <Link to="/categories/create">
+                    <NoResult message="Noch keine Kategorie vorhanden" />
+                  </Link>
+                </NoResultWrapper>
+              )
+
+            const urlParams = generateUrlParams(params)
+            return data.getCategories.map(
+              (category: Category): JSX.Element => (
+                <IconWrapper key={category.id} context={context}>
+                  <CategoryIcon
+                    ariaLabel={`Erstelle Eintrag für Kategorie ${category.title}`}
+                    color={category.color}
+                    icon={category.icon}
+                    key={category.id}
+                    title={category.title}
+                    to={`/categories/${category.id}/records/create${urlParams}`}
+                  />
+                </IconWrapper>
+              )
+            )
+          }}
+        </Query>
+      </Layout>
+    )
+  }
+
+  private scrollOverview = (event: WheelEvent): void => {
+    if (event.deltaY > 0) this.wrapperRef.scrollLeft += 25
+    else this.wrapperRef.scrollLeft -= 25
+  }
 }
 
 export default CategoryIconOverview

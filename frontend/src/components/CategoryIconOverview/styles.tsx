@@ -19,7 +19,11 @@ export const Layout = styled.div<LayoutProps>`
       overflow-x: auto;
       overflow-y: hidden;
       white-space: nowrap;
-      z-index: ${props.theme.layerIndex.protrudeContent}
+      z-index: ${props.theme.layerIndex.protrudeContent};
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
     `
       : `
       border-radius: 0;
