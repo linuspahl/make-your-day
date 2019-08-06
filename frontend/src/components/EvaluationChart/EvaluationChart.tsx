@@ -9,7 +9,6 @@ import Barchart from 'shared/chart/Barchart/Barchart'
 import Linechart from 'shared/chart/Linechart/Linechart'
 import Piechart from 'shared/chart/Piechart/Piechart'
 import EvaluationChartLegend from 'components/EvaluationChartLegend/EvaluationChartLegend'
-
 // interface
 import {
   EvaluationFull,

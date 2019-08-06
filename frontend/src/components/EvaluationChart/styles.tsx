@@ -23,4 +23,6 @@ export const Wrapper = styled.div<WrapperProps>`
 
 export const Description = styled(TextSmall)`
   margin-top: ${(props): string => `${props.theme.padding / 4}rem`};
+
+  color: ${(props): string => props.theme.info};
 `
