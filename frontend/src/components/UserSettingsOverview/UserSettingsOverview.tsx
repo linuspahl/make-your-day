@@ -7,6 +7,7 @@ import H1 from 'shared/H1/H1'
 import LogoutButton from 'shared/LogoutButton/LogoutButton'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import Row from 'shared/form/Row/Row'
+import Spacer from 'shared/Spacer/Spacer'
 import UserSettingCreate from 'components/UserSettingCreate/UserSettingCreate'
 import UserSettingDelete from 'components/UserSettingDelete/UserSettingDelete'
 // graphql
@@ -80,6 +81,7 @@ class UserSettingsOverview extends React.Component<Props> {
                     )
                   }
                 )}
+              <Spacer />
               <Row>
                 <Link to={`${rootPath}/sessions`}>
                   Angmeldete Geräte verwalten

@@ -8,6 +8,7 @@ import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
 import IconFields from './IconFields'
 import RecordFields from './RecordFields'
+import Spacer from 'shared/Spacer/Spacer'
 // interfaces
 import { Form as FormType, InputEvent } from 'types/types'
 import { CategoryCreate } from 'store/category/type'
@@ -78,6 +79,7 @@ export default class CategoryForm extends React.Component<
           icon={icon}
           title={title}
         />
+        <Spacer />
         <RecordFields
           handleInputChange={this.handleInputChange}
           hasDescription={hasDescription}
