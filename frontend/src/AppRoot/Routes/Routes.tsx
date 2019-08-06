@@ -1,6 +1,12 @@
 // This file is the heart of the app routing
 // You'll find all "base" routes here
 // Each route will render a container component
+// the component will be lazy loaded
+
+// It would be awesome to have a shared component for the redundant react lodable part
+// Due to typescript this is not so easy and for now we need to do it manually for each container
+// and we need to disble explicit any (only place were we disable this rule)
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // libraries
 import * as React from 'react'
