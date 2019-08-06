@@ -2,14 +2,15 @@
 import * as React from 'react'
 import { sortBy } from 'lodash'
 // components
-import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
-import NoResult from 'shared/NoResult/NoResult'
 import EditorWidget from 'components/EditorWidget/EditorWidget'
-import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
-import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
-import Icon from 'shared/Icon/Icon'
-import H2 from 'shared/H2/H2'
 import EditorWidgetPlaceholder from 'components/EditorWidget/EditorWidgetPlaceholder'
+import EvaluationWidget from 'components/EvaluationWidget/EvaluationWidget'
+import FadeTransition from 'shared/FadeTransition/FadeTransition'
+import H2 from 'shared/H2/H2'
+import Icon from 'shared/Icon/Icon'
+import NoResult from 'shared/NoResult/NoResult'
+import PlaceholderGroup from 'shared/PlaceholderGroup/PlaceholderGroup'
+import TimelineWidget from 'components/TimelineWidget/TimelineWidget'
 import {
   CreateWidgetIcon,
   Layout,
@@ -20,10 +21,9 @@ import {
   WidgetHeader,
   WidgetLayout,
 } from './styles'
-// graphql
+// interfaces
 import { NotificationCreate } from 'types/types'
 import { WidgetFull } from 'store/widget/type'
-import FadeTransition from 'shared/FadeTransition/FadeTransition'
 
 const LoadingPlaceholder = (): JSX.Element => (
   <PlaceholderWrapper data-testid="DashboardWidgetsPlaceholder">
