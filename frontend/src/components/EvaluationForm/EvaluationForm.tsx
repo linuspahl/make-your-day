@@ -71,11 +71,11 @@ export default class EvaluationForm extends React.Component<
     // overview of all form values
     // initial state create mode
     this.state = {
-      title: null,
-      type: null,
+      categoryId: null,
       groupSubcategories: false,
       period: null,
-      categoryId: null,
+      title: null,
+      type: null,
     }
 
     if (props.initialData) {
@@ -120,27 +120,31 @@ export default class EvaluationForm extends React.Component<
             name="categoryId"
             onChange={this.handleInputChange}
             options={categoryOptions}
+            required
             tabIndex={1}
             value={Number(categoryId)}
           />
         </Row>
-        <Row htmlFor="groupSubcategories">
-          Gruppiere Unterkategorien
-          <Checkbox
-            disabled={disabledFields['groupSubcategories']}
-            id="groupSubcategories"
-            name="groupSubcategories"
-            onChange={this.handleInputChange}
-            tabIndex={1}
-            value={groupSubcategories}
-          />
-        </Row>
+        {selectedCategory && !selectedCategory.parentId && (
+          <Row htmlFor="groupSubcategories">
+            Gruppiere Unterkategorien
+            <Checkbox
+              disabled={disabledFields['groupSubcategories']}
+              id="groupSubcategories"
+              name="groupSubcategories"
+              onChange={this.handleInputChange}
+              tabIndex={1}
+              value={groupSubcategories}
+            />
+          </Row>
+        )}
         <Row htmlFor="type">
           <ContentSelect
             id="type"
             name="type"
             onChange={this.handleInputChange}
             options={evaluationTypeOptions}
+            required
             tabIndex={1}
             label="Art"
             value={type}
@@ -153,6 +157,7 @@ export default class EvaluationForm extends React.Component<
             name="period"
             onChange={this.handleInputChange}
             options={evaluationPeriodOptions}
+            required
             tabIndex={1}
             value={period}
           />

@@ -61,6 +61,7 @@ export const category: CategoryFull = {
 
 export const categoryForListWithChildren: CategoryForListWithChildren = {
   id: 1,
+  parentId: null,
   title: category.title,
   hasSubcategories: true,
   subcategories: [subcategory],

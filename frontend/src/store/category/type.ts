@@ -32,6 +32,7 @@ export interface CategoryForList {
 
 export interface CategoryForListWithChildren extends CategoryForList {
   subcategories: CategoryFull['subcategories']
+  parentId?: Category['parentId']
 }
 
 export interface CategoryCreate {

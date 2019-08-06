@@ -39,9 +39,11 @@ export const GetCategoriesForListWithChildren = gql`
       id
       title
       hasSubcategories
+      parentId
       subcategories {
         id
         title
+        parentId
       }
     }
   }
