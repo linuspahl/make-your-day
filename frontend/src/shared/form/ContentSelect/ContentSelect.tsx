@@ -112,7 +112,7 @@ export default class ContentSelect extends React.Component<Props, State> {
           }
           required={required}
           tabIndex={disabled ? -1 : tabIndex}
-          value={value && currentOption ? currentOption.title : null}
+          value={value && currentOption ? currentOption.title : 'Bitte wählen'}
         />
         <ArrowIcon
           onMouseDown={(event: React.MouseEvent<HTMLInputElement>): void =>
