@@ -2,9 +2,10 @@
 import styled from 'styled-components'
 
 export default styled.div`
-  font-size: ${(props): number => props.theme.fontSizes.mobile.big}rem;
+  font-size: ${(props): string => `${props.theme.fontSizes.mobile.big}rem`};
+  line-height: 1.2;
 
   @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
-    font-size: ${(props): number => props.theme.fontSizes.tablet.big}rem;
+    font-size: ${(props): string => `${props.theme.fontSizes.tablet.big}rem`};
   }
 `

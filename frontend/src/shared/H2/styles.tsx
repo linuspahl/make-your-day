@@ -14,10 +14,8 @@ export const Element = styled(TextBig)`
   overflow: hidden;
 
   height: ${(props): string => `${props.theme.fontSizes.mobile.big}rem`};
-  line-height: ${(props): string => `${props.theme.fontSizes.mobile.big}rem`};
 
   @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
     height: ${(props): string => `${props.theme.fontSizes.tablet.big}rem`};
-    line-height: ${(props): string => `${props.theme.fontSizes.tablet.big}rem`};
   }
 `

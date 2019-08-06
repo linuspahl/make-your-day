@@ -10,7 +10,6 @@ interface ElementProps {
 export const Element = styled(TextLarge)<ElementProps>`
   font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
   font-weight: 300;
-  line-height: 1.15;
   text-align: center;
   hyphens: auto;
 
