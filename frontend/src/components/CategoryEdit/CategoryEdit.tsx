@@ -72,7 +72,7 @@ class CategoryEdit extends React.Component<Props> {
                   ): JSX.Element => (
                     <CategoryForm
                       initialData={{
-                        type: null,
+                        type: category.type,
                         icon: category.icon,
                         color: category.color,
                         hasDescription: category.hasDescription,
