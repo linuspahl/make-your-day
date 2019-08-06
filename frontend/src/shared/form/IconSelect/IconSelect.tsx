@@ -13,12 +13,13 @@ interface Props {
   id?: string
   name: string
   onChange: (event: InputEvent) => void
+  required?: boolean
   tabIndex: number
   value: string
 }
 
 const IconSelect = (props: Props): JSX.Element => {
-  const { value, onChange, name, tabIndex, disabled, id } = props
+  const { value, onChange, name, tabIndex, disabled, id, required } = props
 
   return (
     <ContentSelect
@@ -32,6 +33,7 @@ const IconSelect = (props: Props): JSX.Element => {
       renderPreview={(option): JSX.Element => (
         <Icon title={String(option.value)} />
       )}
+      required={required}
       tabIndex={tabIndex}
       value={value}
     />
