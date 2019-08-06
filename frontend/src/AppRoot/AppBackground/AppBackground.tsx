@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   /* Global styles */
   font-family: 'Istok Web', Arial, Helvetica, sans-serif;
   font-size: ${(props): number => props.theme.fontSizes.mobile.normal}rem;
-  line-height: 1.2;
+  line-height: 1.3;
 
   @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
     font-size: ${(props): number => props.theme.fontSizes.tablet.normal}rem;
