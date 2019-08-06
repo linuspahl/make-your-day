@@ -103,6 +103,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
             name="type"
             onChange={this.handleInputChange}
             options={widgetTypeOptions}
+            required
             tabIndex={1}
             value={type}
           />
@@ -116,6 +117,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
               name="evaluationId"
               onChange={this.handleInputChange}
               options={evaluationOptions}
+              required
               tabIndex={1}
               value={evaluationId}
             />
@@ -128,6 +130,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
             name="position"
             onChange={this.handleInputChange}
             options={widgetPositionOptions}
+            required
             tabIndex={1}
             value={position}
           />

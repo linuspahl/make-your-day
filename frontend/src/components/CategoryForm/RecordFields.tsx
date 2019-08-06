@@ -65,6 +65,7 @@ const RecordFields = (props: Props): JSX.Element => {
           name="type"
           onChange={handleInputChange}
           options={categoryTypeOptions}
+          required
           tabIndex={1}
           value={type}
         />

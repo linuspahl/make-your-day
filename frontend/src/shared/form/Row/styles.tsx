@@ -10,7 +10,8 @@ interface LayoutProps {
 }
 
 export const Layout = styled.div<LayoutProps>`
-  margin-bottom: ${(props): string => `${props.theme.padding}rem`};
+  margin-bottom: ${(props): string =>
+    `${props.theme.padding + props.theme.padding / 2}rem`};
   display: flex;
   align-items: center;
   flex-flow: wrap;
