@@ -12,9 +12,45 @@ Recommended source-code editor plugins for the development. Available for most e
 
 Library specific
 
-- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components) - For syntax highlighting and more for styled-components. Checkout it's feature list.
-- [GraphQL for VSCode](https://marketplace.visualstudio.com/items?itemName=kumar-harsh.graphql-for-vscode) - Syntax highlighting and more for GraphQL schemas.
-- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) - For a better integration of prettier, very useful in combination with formatOnSave
+- [vscode-styled-components](https://marketplace.visualstudio.com/items?itemName=jpoissonnier.vscode-styled-components)
+  For syntax highlighting and more for styled-components. Checkout it's feature list.
+- [GraphQL for VSCode](https://marketplace.visualstudio.com/items?itemName=kumar-harsh.graphql-for-vscode)
+  Syntax highlighting and more for GraphQL schemas.
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+  For a better integration of prettier.
+- [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) -
+  Integrates ESLint into VS Code. Very useful in combination with the Prettier plugin.
+  Note: You will need to create in the projects root a .vscode directory with a settings.json.
+  This file should contain the following code to formatOnSave
+
+  ```
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        { "language": "typescript", "autoFix": true },
+        { "language": "typescriptreact", "autoFix": true }
+    ],
+    "[javascript]": {
+        "editor.formatOnSave": false
+    },
+    "[javascriptreact]": {
+        "editor.formatOnSave": false
+    },
+    "[typescript]": {
+        "editor.formatOnSave": false
+    },
+  ```
+
+  and the following code to tell eslint the path of the eslintrc's. We need to do this, because there is bug with eslint 6. https://github.com/microsoft/vscode-eslint/issues/696
+  Without this setting, vscode-eslint would only work if you open the frontend or backend directory directly with VSCode.
+
+  ```
+      "eslint.workingDirectories": [
+          { "directory": "./frontend", "changeProcessCWD": true },
+          { "directory": "./backend", "changeProcessCWD": true }
+      ],
+  ```
 
 Development experience
 
