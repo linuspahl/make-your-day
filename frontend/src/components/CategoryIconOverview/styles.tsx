@@ -43,7 +43,7 @@ export const IconWrapper = styled.div<IconWrapperProps>`
   ${(props): string =>
     props.context !== 'horizontal-scroll'
       ? `
-        margin-bottom: ${props.theme.padding / 4};
+        margin-bottom: ${props.theme.padding / 4}rem;
       `
       : ``}
 `
