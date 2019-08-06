@@ -236,7 +236,7 @@ export const getCategoriesForListWithChildrenSuccess = {
   ...getCategoriesForListWithChildrenRequest,
   result: {
     data: {
-      getCategories: [category],
+      getCategories: [categoryForListWithChildren],
     },
   },
 }
