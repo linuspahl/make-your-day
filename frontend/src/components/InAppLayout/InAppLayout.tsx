@@ -35,13 +35,13 @@ class InAppLayout extends React.Component<Props, State> {
   }
 
   public componentDidMount(): void {
-    document.addEventListener('touchstart', this.detectTouchstart, false)
-    document.addEventListener('keydown', this.detectKeydown, false)
+    document.addEventListener('touchstart', this.detectTouchstart)
+    document.addEventListener('keydown', this.detectKeydown)
   }
 
   public componentWillUnmount(): void {
-    document.removeEventListener('touchstart', this.detectTouchstart, false)
-    document.removeEventListener('keydown', this.detectKeydown, false)
+    document.removeEventListener('touchstart', this.detectTouchstart)
+    document.removeEventListener('keydown', this.detectKeydown)
   }
 
   public componentWillReceiveProps(nextProps: Props): void {

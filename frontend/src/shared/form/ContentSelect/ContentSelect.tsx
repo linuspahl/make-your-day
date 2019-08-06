@@ -227,12 +227,12 @@ export default class ContentSelect extends React.Component<Props, State> {
 
   // onFocus will be triggered, when the user selects / focus the component
   private onFocus(): void {
-    document.addEventListener('keydown', this.detectKeydown, false)
+    document.addEventListener('keydown', this.detectKeydown)
   }
 
   // onBlur will be triggered, when the user deselects / loses the focus of the component
   private onBlur(): void {
-    document.removeEventListener('keydown', this.detectKeydown, false)
+    document.removeEventListener('keydown', this.detectKeydown)
   }
 
   // When user clicks on option, update the form ond close the select

@@ -68,7 +68,9 @@ export default class EditorWidget extends React.Component<Props, State> {
         ): JSX.Element => (
           <PellEditor
             data-testid="EditorWidget"
-            ref={(elementRef): HTMLDivElement => (this.editorRef = elementRef)}
+            ref={(elementRef): void => {
+              this.editorRef = elementRef
+            }}
             onBlur={(): void =>
               updateWidget({
                 variables: {
