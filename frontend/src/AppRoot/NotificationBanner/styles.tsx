@@ -42,7 +42,7 @@ export const Alert = styled(TextBig)<AlertProps>`
 
   border-radius: 0 0 0.315rem 0.315rem;
   padding: ${(props): string =>
-    `${props.theme.padding / 2}}rem ${props.theme.padding}rem`};
+    `${props.theme.padding / 2}rem ${props.theme.padding}rem`};
 
   background-color: ${(props): string => {
     if (props.role === 'error') return '#ff6060'

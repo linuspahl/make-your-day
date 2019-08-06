@@ -16,7 +16,6 @@ export const Circle = styled.div<CircleProps>`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  border: ${(props): string => `0.0625rem solid ${props.theme.border}`};
 
   background-color: ${(props): string =>
     props.color ? props.theme.category[props.color] : props.theme.border};
