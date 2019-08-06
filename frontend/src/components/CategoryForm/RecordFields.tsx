@@ -73,8 +73,8 @@ const RecordFields = (props: Props): JSX.Element => {
         disabled={disabledFields.hasSubcategories}
         htmlFor="hasSubcategories"
       >
-        Auswahl Unterkategorie
         <Checkbox
+          label="Auswahl Unterkategorie"
           disabled={disabledFields.hasSubcategories}
           id="hasSubcategories"
           name="hasSubcategories"
@@ -84,9 +84,9 @@ const RecordFields = (props: Props): JSX.Element => {
         />
       </Row>
       <Row disabled={disabledFields.hasUnit} htmlFor="hasUnit">
-        Haben Einheit
         <Checkbox
           disabled={disabledFields.hasUnit}
+          label="Haben Einheit"
           name="hasUnit"
           id="hasUnit"
           onChange={handleInputChange}
@@ -107,9 +107,9 @@ const RecordFields = (props: Props): JSX.Element => {
         />
       </Row>
       <Row disabled={disabledFields.hasTitle} htmlFor="hasTitle">
-        Haben Titel
         <Checkbox
           disabled={disabledFields.hasTitle}
+          label="Haben Titel"
           name="hasTitle"
           id="hasTitle"
           onChange={handleInputChange}
@@ -118,9 +118,9 @@ const RecordFields = (props: Props): JSX.Element => {
         />
       </Row>
       <Row disabled={disabledFields.hasDescription} htmlFor="hasDescription">
-        Haben Beschreibung
         <Checkbox
           disabled={disabledFields.hasDescription}
+          label="Haben Beschreibung"
           name="hasDescription"
           id="hasDescription"
           onChange={handleInputChange}

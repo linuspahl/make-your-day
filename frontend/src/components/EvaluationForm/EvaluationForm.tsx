@@ -127,10 +127,10 @@ export default class EvaluationForm extends React.Component<
         </Row>
         {selectedCategory && !selectedCategory.parentId && (
           <Row htmlFor="groupSubcategories">
-            Gruppiere Unterkategorien
             <Checkbox
               disabled={disabledFields['groupSubcategories']}
               id="groupSubcategories"
+              label="Gruppiere Unterkategorien"
               name="groupSubcategories"
               onChange={this.handleInputChange}
               tabIndex={1}

@@ -3,11 +3,16 @@ import styled from 'styled-components'
 // components
 import TextBig from 'shared/text/TextBig/TextBig'
 
-interface WrapperProps {
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+interface CheckboxWrapperProps {
   disabled?: boolean
+  hasLabel: boolean
 }
 
-export const Wrapper = styled.div<WrapperProps>`
+export const CheckboxWrapper = styled.div<CheckboxWrapperProps>`
   position: relative;
 
   height: 2.5rem;
@@ -16,6 +21,12 @@ export const Wrapper = styled.div<WrapperProps>`
   color: ${(props): string =>
     props.disabled ? props.theme.border : props.theme.text};
   cursor: ${(props): string => (props.disabled ? 'not-allowed' : 'pointer')};
+
+  ${(props): string =>
+    props.hasLabel &&
+    `
+      margin-right: ${props.theme.padding / 2}rem;
+  `}
 `
 
 export const Element = styled.input`

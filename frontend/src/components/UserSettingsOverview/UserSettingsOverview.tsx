@@ -65,7 +65,6 @@ class UserSettingsOverview extends React.Component<Props> {
                     const isSelected = userSettings[setting.type]
                     return (
                       <Row key={setting.id} htmlFor={setting.type}>
-                        {setting.title}{' '}
                         {isSelected ? (
                           <UserSettingDelete
                             setting={setting}

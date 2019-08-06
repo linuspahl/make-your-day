@@ -1,25 +1,20 @@
 // libraries
 import * as React from 'react'
 // components
-import { Wrapper, Checkmark, Element } from './styles'
+import { Wrapper, CheckboxWrapper, Checkmark, Element } from './styles'
 import Icon from 'shared/Icon/Icon'
 // interfaces
 import { InputEvent } from 'types/types'
 import { MutationOptions } from 'react-apollo'
 
-interface Props {
-  disabled?: boolean
-  id?: string
-  name: string
-  onChange: (event: InputEvent | MutationOptions) => void
-  tabIndex: number
-  value: boolean
-}
-
-const Checkbox = (props: Props): JSX.Element => {
-  const { value, onChange, id, name, disabled, tabIndex } = props
+const renderCheckbox = (props: Props): JSX.Element => {
+  const { value, onChange, id, name, disabled, tabIndex, label } = props
   return (
-    <Wrapper disabled={disabled} data-testid="Checkbox">
+    <CheckboxWrapper
+      disabled={disabled}
+      data-testid="Checkbox"
+      hasLabel={!!label}
+    >
       {value && (
         <Checkmark>
           <Icon title="check" />
@@ -34,7 +29,30 @@ const Checkbox = (props: Props): JSX.Element => {
         tabIndex={tabIndex}
         type="checkbox"
       />
+    </CheckboxWrapper>
+  )
+}
+
+interface Props {
+  disabled?: boolean
+  id?: string
+  // label - will normally be used, optional for better modularity
+  label?: string
+  name: string
+  onChange: (event: InputEvent | MutationOptions) => void
+  tabIndex: number
+  value: boolean
+}
+
+const Checkbox = (props: Props): JSX.Element => {
+  const { label } = props
+  return label ? (
+    <Wrapper>
+      {renderCheckbox(props)}
+      {label}
     </Wrapper>
+  ) : (
+    renderCheckbox(props)
   )
 }
 
