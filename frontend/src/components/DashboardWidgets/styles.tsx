@@ -7,8 +7,8 @@ import Box from 'shared/Box/Box'
 export const Layout = styled.div`
   width: 100%;
   height: 100%;
-  // The max-width is needed to make sure, the Widget has always the correct width.
-  // max-width: 100% could lead to a higher width then the "100%" we want.
+  /* The max-width is needed to make sure, the Widget has always the correct width.
+  max-width: 100% could lead to a higher width then the "100%" we want. */
   max-width: 100vw;
 
   padding: ${(props): string => `0 ${props.theme.padding}rem`};
