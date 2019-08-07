@@ -1,0 +1,39 @@
+# Example deploy script for AWS
+# Can be useful for other services too.
+version: 1.0
+backend:
+  phases:
+    preBuild:
+      commands:
+        - cd backend
+        - yarn install
+    build:
+      commands:
+        - yarn stopProd
+        - yarn migrate
+        - yarn startProd
+  artifacts:
+    baseDirectory: backend
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - backend/node_modules/**/*
+
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd frontend
+        - yarn install
+    build:
+      commands:
+        - cd frontend
+        - yarn build
+  artifacts:
+    baseDirectory: frontend/productionBuild
+    files:
+      - "**/*"
+  cache:
+    paths:
+      - frontend/node_modules/**/*
