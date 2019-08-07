@@ -42,7 +42,6 @@ interface Props {
 
 const DashboardWidgets = (props: Props): JSX.Element => {
   const { createNotificationBanner, widgets = [], loading, delay } = props
-
   return (
     <FadeTransition delay={delay || 0} fullHeight fullWidth>
       {loading && <LoadingPlaceholder />}
@@ -55,14 +54,9 @@ const DashboardWidgets = (props: Props): JSX.Element => {
                   <H2>{widget.title}</H2>
                 </WidgetHeader>
 
-                {widget.type === 'timeline' && (
-                  <TimelineWidget key={widget.id} />
-                )}
+                {widget.type === 'timeline' && <TimelineWidget />}
                 {widget.type === 'evaluation' && (
-                  <EvaluationWidget
-                    evaluation={widget.evaluation}
-                    key={widget.id}
-                  />
+                  <EvaluationWidget evaluation={widget.evaluation} />
                 )}
                 {widget.type === 'textarea' && (
                   <EditorWidget
