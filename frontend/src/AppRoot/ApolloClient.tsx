@@ -10,12 +10,21 @@ import ApolloClient from 'apollo-boost'
 // interfaces
 import { NotificationCreate } from 'types/types'
 
+function getApiUrl(): string {
+  let url = config.apiHost
+  if (config.apiPort) {
+    url += `:${config.apiPort}`
+  }
+  // Append graphql route
+  return `${url}/graphql`
+}
+
 export default (
   clearLocalStorage: () => void,
   createNotificationBanner: (notification: NotificationCreate) => void
 ): ApolloClient<object> =>
   new ApolloClient({
-    uri: `${config.apiHost}:${config.apiPort}/graphql`,
+    uri: getApiUrl,
     request: async (operation): Promise<void> => {
       const token = localStorage.getItem('authToken') || null
       operation.setContext({
