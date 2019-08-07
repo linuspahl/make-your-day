@@ -51,7 +51,7 @@ export const addSubcategory = (
       data: {
         getCategory: {
           ...category.getCategory,
-          subcategory: [
+          subcategories: [
             ...category.getCategory.subcategories,
             createSubcategory,
           ],
