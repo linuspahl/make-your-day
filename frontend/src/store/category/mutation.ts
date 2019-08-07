@@ -39,7 +39,7 @@ export const CreateCategory = gql`
 `
 
 export const CreateSubcategory = gql`
-  mutation CreateSubcategory($parentId: ID!, $title: String!, $color: String!) {
+  mutation CreateSubcategory($parentId: ID!, $title: String!, $color: String) {
     createSubcategory(parentId: $parentId, title: $title, color: $color) {
       id
       title

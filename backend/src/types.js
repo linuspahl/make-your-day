@@ -140,7 +140,7 @@ export default gql`
       type: String!
       unit: String
     ): Category!
-    createSubcategory(title: String!, parentId: ID!): Category!
+    createSubcategory(title: String!, color: String, parentId: ID!): Category!
     createRecord(
       createdAt: String
       title: String
