@@ -125,7 +125,7 @@ class RecordEdit extends React.Component<Props> {
                           variables: {
                             amount: variables.amount,
                             description: variables.description,
-                            id: Number(variables.id),
+                            id: variables.id,
                             title: variables.title,
                           },
                         })

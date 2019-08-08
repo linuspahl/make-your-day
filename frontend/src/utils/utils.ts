@@ -38,11 +38,10 @@ export const logError = (error: ApolloError | string): void => {
 export const extractIdFromUrl = (
   match: { params: { [key: string]: string } },
   attribute: string = 'id'
-): number => {
+): string => {
   const { params } = match
   const id = params[attribute]
-
-  return id ? parseInt(id, 10) : null
+  return id
 }
 
 export const generateUrlParams = (params: {

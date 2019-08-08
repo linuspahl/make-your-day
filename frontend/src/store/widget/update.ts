@@ -29,7 +29,7 @@ export const addWidget = (cache: DataProxy, result: FetchResult): void => {
 export const deleteWidget = (
   cache: DataProxy,
   result: FetchResult,
-  variables: { id: number }
+  variables: { id: string }
 ): void => {
   const {
     data: { deleteWidget },

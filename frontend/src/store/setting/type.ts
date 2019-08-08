@@ -1,6 +1,6 @@
 export interface Setting {
   defaultValue: string
-  id: number
+  id: string
   title: string
   type: 'nightMode' | 'leftHandMode' | 'showAppBgImage'
 }

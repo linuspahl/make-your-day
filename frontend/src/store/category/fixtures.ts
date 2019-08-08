@@ -28,8 +28,8 @@ import {
 // subcategory
 export const subcategory: Subcategory = {
   color: Object.keys(categoryColors)[1],
-  id: 11,
-  parentId: 1,
+  id: '11',
+  parentId: '1',
   title: 'Einkauf',
 }
 
@@ -56,11 +56,11 @@ export const category: CategoryFull = {
   ...categoryCreate,
   parent: null,
   subcategories: [subcategory],
-  id: 1,
+  id: '1',
 }
 
 export const categoryForListWithChildren: CategoryForListWithChildren = {
-  id: 1,
+  id: '1',
   parentId: null,
   title: category.title,
   hasSubcategories: true,
@@ -122,7 +122,7 @@ export const getCategorySuccess = {
     data: {
       getCategory: {
         ...categoryCreate,
-        id: 1,
+        id: '1',
       },
     },
   },
@@ -265,7 +265,7 @@ export const updateCategorySuccess = {
     data: {
       updateCategory: {
         ...categoryCreate,
-        id: 1,
+        id: '1',
       },
     },
   },

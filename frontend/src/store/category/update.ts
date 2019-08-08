@@ -19,7 +19,6 @@ export const addCategory = (cache: DataProxy, result: FetchResult): void => {
     const categories: { getCategories: Category[] } = cache.readQuery({
       query: GetCategoriesForList,
     })
-    console.log(categories)
 
     cache.writeQuery({
       query: GetCategoriesForList,
@@ -33,7 +32,7 @@ export const addCategory = (cache: DataProxy, result: FetchResult): void => {
 export const addSubcategory = (
   cache: DataProxy,
   result: FetchResult,
-  variables: { id: number }
+  variables: { id: string }
 ): void => {
   // Only add a new entry to the store, when there are already entries defined.
   // Otherwise the overview list will not get fetched
@@ -90,5 +89,41 @@ export const deleteCategory = (
         },
       })
     }
+  } catch {}
+}
+
+export const deleteSubcategory = (
+  cache: DataProxy,
+  result: FetchResult,
+  variables: { id: string },
+  parentCategoryId: string
+): void => {
+  // Only add a new entry to the store, when there are already entries defined.
+  // Otherwise the overview list will not get fetched
+  try {
+    const category: { getCategory: CategoryFull } = cache.readQuery({
+      query: GetCategoryForListWithChildren,
+      variables: { id: parentCategoryId },
+    })
+    const {
+      data: { deleteCategory },
+    } = result
+
+    const updatedSubcategories = category.getCategory.subcategories.filter(
+      (category): boolean => {
+        return category.id !== variables.id
+      }
+    )
+
+    cache.writeQuery({
+      query: GetCategoryForListWithChildren,
+      data: {
+        getCategory: {
+          ...category.getCategory,
+          subcategories: updatedSubcategories,
+        },
+      },
+      variables,
+    })
   } catch {}
 }

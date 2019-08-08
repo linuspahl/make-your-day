@@ -2,7 +2,7 @@ export interface UserSession {
   createdAt?: number
   device?: string
   expiresAt: number
-  id: number
+  id: string
   token: string
-  userId: number
+  userId: string
 }

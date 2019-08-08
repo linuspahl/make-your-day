@@ -4,7 +4,7 @@ import { Setting } from 'store/setting/type'
 import { GetSettings } from 'store/setting/query'
 
 export const setting: Setting = {
-  id: 1,
+  id: '1',
   title: 'Nachtmodus',
   type: 'nightMode',
   defaultValue: 'false',

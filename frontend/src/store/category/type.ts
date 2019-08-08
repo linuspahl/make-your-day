@@ -9,8 +9,8 @@ export interface Category {
   hasTitle: boolean
   hasUnit: boolean
   icon?: string
-  id: number
-  parentId?: number
+  id: string
+  parentId?: string
   title: string
   type: CategoryType
   unit?: string

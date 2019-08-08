@@ -9,12 +9,17 @@ import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'
+import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 import H1 from 'shared/H1/H1'
 import ListItem from 'shared/list/ListItem/ListItem'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
 import { GetCategoryForListWithChildren } from 'store/category/query'
 import { Subcategory, CategoryFull } from 'store/category/type'
+import { DeleteCategory } from 'store/category/mutation'
+import { deleteSubcategory } from 'store/category/update'
+import { DataProxy } from 'apollo-cache'
+import { FetchResult } from 'apollo-link'
 
 const List = styled.ul`
   margin-top: ${(props): string => `${props.theme.padding}rem`};
@@ -63,6 +68,23 @@ class CategoryEdit extends React.Component<Props> {
                             ariaLabel={`Subkategorie ${subcategory.title} bearbeiten`}
                             to={`${rootPath}/${categoryId}/subcategories/${subcategory.id}/edit`}
                             icon="edit"
+                          />
+                          <DeleteIcon
+                            ariaLabel={`Subkategorie ${subcategory.title} löschen`}
+                            id={subcategory.id}
+                            mutation={DeleteCategory}
+                            onUpdate={(
+                              cache: DataProxy,
+                              data: FetchResult
+                            ): void =>
+                              deleteSubcategory(
+                                cache,
+                                data,
+                                { id: subcategory.id },
+                                category.id
+                              )
+                            }
+                            title={subcategory.title}
                           />
                         </ActionIconWrapper>
                       </ListItem>

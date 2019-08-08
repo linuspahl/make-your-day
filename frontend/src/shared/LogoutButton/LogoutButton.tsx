@@ -43,7 +43,7 @@ const handleError = (
 }
 
 interface Props {
-  userSessionId: number
+  userSessionId: string
   clearLocalStorage: () => void
   createNotificationBanner: (notification: Notification) => void
 }

@@ -72,8 +72,8 @@ export interface LocalStorage {
   leftHandMode?: boolean
   nightMode?: boolean
   showAppBgImage?: boolean
-  userId?: number
-  userSessionId?: number
+  userId?: string
+  userSessionId?: string
 }
 
 export interface LocalStorageCreate {

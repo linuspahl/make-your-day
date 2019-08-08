@@ -5,8 +5,8 @@ type WidgetType = 'textarea' | 'timeline' | 'evaluation'
 type WidgetPosition = 'dashboard-bottom' | 'dashboard-top'
 
 export interface Widget {
-  evaluationId?: number
-  id: number
+  evaluationId?: string
+  id: string
   position: WidgetPosition
   title: string
   type: WidgetType

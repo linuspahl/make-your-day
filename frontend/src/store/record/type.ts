@@ -2,12 +2,12 @@
 import { CategoryFull } from 'store/category/type'
 
 export interface Record {
-  id: number
+  id: string
   title: string
   amount?: number
   description?: string
   createdAt: string
-  categoryId: number
+  categoryId: string
   category: CategoryFull
 }
 
@@ -20,11 +20,11 @@ export interface RecordCreate {
   title: string
   amount?: number
   description?: string
-  categoryId: number
+  categoryId: string
 }
 
 export interface RecordEdit {
-  id: number
+  id: string
   title: string
   amount?: number
   description?: string

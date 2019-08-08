@@ -18,12 +18,12 @@ const handleClick = (
 }
 
 interface Props {
-  id: number
+  id: string
   mutation: DocumentNode
   onUpdate: (
     cache: DataProxy,
     data: FetchResult,
-    variables: { id: number }
+    variables: { id: string }
   ) => void
   onDelete: () => void
   title: string

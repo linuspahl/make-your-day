@@ -29,7 +29,7 @@ export const addRecord = (cache: DataProxy, result: FetchResult): void => {
 export const deleteRecord = (
   cache: DataProxy,
   result: FetchResult,
-  variables: { id: number }
+  variables: { id: string }
 ): void => {
   const {
     data: { deleteRecord },

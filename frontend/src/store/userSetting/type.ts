@@ -2,7 +2,7 @@
 import { Setting } from 'store/setting/type'
 
 export interface UserSetting {
-  id: number
+  id: string
   setting: Setting
   value: string
 }

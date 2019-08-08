@@ -9,12 +9,12 @@ import Icon from 'shared/Icon/Icon'
 
 interface Props {
   ariaLabel: string
-  id: number
+  id: string
   mutation: DocumentNode
   onUpdate: (
     cache: DataProxy,
     data: FetchResult,
-    variables: { id: number }
+    variables: { id: string }
   ) => void
   title: string
 }

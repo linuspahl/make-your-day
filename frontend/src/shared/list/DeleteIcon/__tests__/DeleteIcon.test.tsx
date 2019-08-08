@@ -41,7 +41,7 @@ describe('DeleteIcon should', (): void => {
     const onUpdateStub = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <DeleteIcon
-        id={1}
+        id={'1'}
         mutation={DeleteUserSession}
         title="Lösche Sitzing"
         ariaLabel="Lösche Sitzung"
@@ -63,7 +63,7 @@ describe('DeleteIcon should', (): void => {
     const onUpdateStub = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <DeleteIcon
-        id={1}
+        id={'1'}
         mutation={DeleteUserSession}
         title="Lösche Sitzing"
         ariaLabel="Lösche Sitzung"

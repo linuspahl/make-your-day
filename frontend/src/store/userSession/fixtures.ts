@@ -6,8 +6,8 @@ import { DeleteUserSession } from 'store/userSession/mutation'
 import { GetUserSessions } from 'store/userSession/query'
 
 export const userSession: UserSession = {
-  id: 1,
-  userId: 1,
+  id: '1',
+  userId: '1',
   token: 'TOKEN1',
   device: 'Mac',
   expiresAt: 1560248192861, // unix date with ms
@@ -16,7 +16,7 @@ export const userSession: UserSession = {
 
 export const userSession2: UserSession = {
   ...userSession,
-  id: 2,
+  id: '2',
   token: 'TOKEN2',
   expiresAt: 1560248192845, // unix date with ms
   createdAt: 1560248190845,
@@ -29,7 +29,7 @@ const deleteUserSessionRequest = {
   request: {
     query: DeleteUserSession,
     variables: {
-      id: 1,
+      id: '1',
     },
   },
 }
@@ -37,7 +37,7 @@ export const deleteUserSessionSuccess = {
   ...deleteUserSessionRequest,
   result: {
     data: {
-      deleteUserSession: { id: 1 },
+      deleteUserSession: { id: '1' },
     },
   },
 }

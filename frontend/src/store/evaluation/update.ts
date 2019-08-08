@@ -28,7 +28,7 @@ export const addEvaluation = (cache: DataProxy, result: FetchResult): void => {
 export const deleteEvaluation = (
   cache: DataProxy,
   result: FetchResult,
-  variables: { id: number }
+  variables: { id: string }
 ): void => {
   const {
     data: { deleteEvaluation },

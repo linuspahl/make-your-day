@@ -16,7 +16,7 @@ import { category } from 'store/category/fixtures'
 
 export const evaluationCreate: EvaluationCreate = {
   title: 'Title',
-  categoryId: 1,
+  categoryId: '1',
   groupSubcategories: false,
   type: 'linechart',
   period: 'day',
@@ -25,7 +25,7 @@ export const evaluationCreate: EvaluationCreate = {
 export const evaluation: EvaluationFull = {
   ...evaluationCreate,
   category,
-  id: 1,
+  id: '1',
   result: {
     series: [
       {

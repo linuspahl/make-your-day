@@ -18,7 +18,7 @@ export const record: Record = {
   ...createRecord,
   category,
   createdAt: '1560151144',
-  id: 1,
+  id: '1',
 }
 
 // # Api stubs

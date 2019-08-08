@@ -82,16 +82,21 @@ const {arrayOfItems = []} = this.props;
 
 ```
 
-### Frontend
+## Frontend
 
-- React components naming convention:
-  Use `Component/Component.js` instead of `Component/index.js`. It looks redundant at first, but will help a lot when switching between components, during the development.
+### React components naming convention
+
+Use `Component/Component.js` instead of `Component/index.js`. It looks redundant at first, but will help a lot when switching between components, during the development.
+
+### Structuring imports
+
 - We try to structure the imports. The definition of an import type is very subjective, but we are trying to seperate the imports by:
   // libraries - all dependencies installed with yarn
   // components - all components in the `src` directory
   // interfaces - all TypeScript interfaces
   // graphql - all actions in the `store` driectory like grapqhl queries and mutations
-- Example React component structur:
+
+### Example React component structur:
 
 ```
 
@@ -121,8 +126,9 @@ exampleStateChange() {}
 
 ```
 
-- Component module export:
-  When the component is just a function, make sure you still use a named export like
+### Component module export:
+
+When the component is just a function, make sure you still use a named export like
 
 ```
 
@@ -141,7 +147,12 @@ export default props => {}
 
 This makes debugging easier, e.g. with the React Devtools
 
-- Accessibility
-  Most common best practices are easy to check with e.g. the browser extension axe.
-  But still always check if tab navigation works.
-  Each page should have one main landmark. (role="main")
+### Type definitions
+
+We need to type all id's as strings, because the defined GraphQL type ID will relate to a string, even our id's are currently just numbers.
+
+### Accessibility
+
+Most common best practices are easy to check with e.g. the browser extension axe.
+But still always check if tab navigation works.
+Each page should have one main landmark. (role="main")

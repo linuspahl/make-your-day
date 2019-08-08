@@ -82,9 +82,7 @@ class DayEdit extends React.Component<Props> {
                             {sortBy(category.records, 'category.id').map(
                               (record: RecordType): React.ReactNode => (
                                 <CategorySummary
-                                  amount={
-                                    category.hasUnit ? Number(record.amount) : 1
-                                  }
+                                  amount={category.hasUnit ? record.amount : 1}
                                   category={category}
                                   displayTitle={record.category.title}
                                   key={record.id}

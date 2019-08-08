@@ -42,7 +42,7 @@ const handleError = (
 interface Props {
   clearLocalStorage: () => void
   createNotificationBanner: (notification: NotificationCreate) => void
-  userSessionId: number
+  userSessionId: string
 }
 
 const LogoutIcon = (props: Props): JSX.Element => {

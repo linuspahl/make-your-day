@@ -20,7 +20,7 @@ const Form = styled.form`
 interface Props {
   initialData?: SubcategoryCreate
   mode?: FormType['mode']
-  parentCategoryId: number
+  parentCategoryId: string
   rootPath: string
   submitAction: (variables: SubcategoryCreate) => void
 }

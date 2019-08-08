@@ -43,7 +43,7 @@ describe('DeleteButton should', (): void => {
     const onDeleteStub = jest.fn()
     const { getByText } = renderWithAppRoot(
       <DeleteButton
-        id={1}
+        id={'1'}
         mutation={DeleteUserSession}
         onDelete={onDeleteStub}
         onUpdate={onUpdateStub}
@@ -66,7 +66,7 @@ describe('DeleteButton should', (): void => {
     const onDeleteStub = jest.fn()
     const { getByText } = renderWithAppRoot(
       <DeleteButton
-        id={1}
+        id={'1'}
         mutation={DeleteUserSession}
         title="Lösche Sitzing"
         onUpdate={onUpdateStub}

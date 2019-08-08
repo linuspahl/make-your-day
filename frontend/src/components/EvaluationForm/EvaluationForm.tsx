@@ -122,7 +122,7 @@ export default class EvaluationForm extends React.Component<
             options={categoryOptions}
             required
             tabIndex={1}
-            value={Number(categoryId)}
+            value={categoryId}
           />
         </Row>
         {selectedCategory && !selectedCategory.parentId && (

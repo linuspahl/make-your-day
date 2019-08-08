@@ -21,7 +21,7 @@ export const widget: Widget = {
   ...widgetCreate,
   value: 'Inhalt Notiz 1',
   evaluationId: null,
-  id: 1,
+  id: '1',
 }
 
 export const evaluationWidget: WidgetFull = {
@@ -31,12 +31,12 @@ export const evaluationWidget: WidgetFull = {
   evaluation,
   evaluationId: evaluation.id,
   value: 'Inhalt Notiz 1',
-  id: 1,
+  id: '1',
 }
 
 export const widget2: Widget = {
   ...widget,
-  id: 2,
+  id: '2',
   title: 'Notiz 2',
   value: 'Inhalt Notiz 2',
 }
@@ -74,7 +74,7 @@ export const getWidgetSuccess = {
   ...getWidgetRequest,
   result: {
     data: {
-      getWidget: { ...widget, evaluationId: 1 },
+      getWidget: { ...widget, evaluationId: '1' },
     },
   },
 }

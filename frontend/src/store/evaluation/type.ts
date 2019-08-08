@@ -1,9 +1,9 @@
 import { CategoryForList } from 'store/category/type'
 
 export interface Evaluation {
-  categoryId: number
+  categoryId: string
   groupSubcategories: boolean
-  id: number
+  id: string
   period: EvaluationPeriod
   title: string
   type: EvaluationType
@@ -15,7 +15,7 @@ export interface EvaluationFull extends Evaluation {
 }
 
 export interface EvaluationForList {
-  id: number
+  id: string
   title: string
 }
 

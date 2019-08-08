@@ -97,7 +97,7 @@ export default class LoginForm extends React.Component<Props, State> {
 
   private handleCompleted(data: {
     loginUser: {
-      id: number
+      id: string
       role: string
       userSession: UserSession
       userSettings: UserSetting[]

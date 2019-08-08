@@ -9,7 +9,7 @@ import {
 import { setting } from 'store/setting/fixtures'
 
 export const userSetting: UserSetting = {
-  id: 1,
+  id: '1',
   value: 'true',
   setting,
 }

@@ -8,7 +8,7 @@ import { UserSession } from 'store/userSession/type'
 export const deleteUserSession = (
   cache: DataProxy,
   result: FetchResult,
-  variables: { id: number }
+  variables: { id: string }
 ): void => {
   const {
     data: { deleteUserSession },

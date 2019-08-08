@@ -39,7 +39,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     } = props
     super(props)
 
-    let initialCategoryId: number =
+    let initialCategoryId: string =
       mode === 'create'
         ? params.subcategoryId || category.id
         : initialData && initialData.categoryId
