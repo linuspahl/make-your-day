@@ -95,7 +95,7 @@ export const NewWidgetLink = styled(Link)`
   vertical-align: top;
   align-items: center;
 
-  padding: ${(props): string => `${props.theme.padding / 2}rem`};
+  padding: ${(props): string => `${props.theme.padding}rem`};
 
   &:active {
     background-color: ${(props): string => props.theme.active};
@@ -110,14 +110,15 @@ export const NewWidgetLink = styled(Link)`
 `
 
 export const CreateWidgetIcon = styled.div`
-  margin-bottom: ${(props): string => `${props.theme.heights.bottomMenu}rem`};
+  margin-bottom: ${(props): string => `${props.theme.padding}rem`};
 
   font-size: 5.125rem;
   line-height: 4.75rem;
   text-align: center;
+  color: ${(props): string => `${props.theme.info}`};
 
   @media (min-width: ${(props): string =>
       props.theme.mediaQuery.tablet}) and (orientation: landscape) {
-    margin-bottom: ${(props): string => `${props.theme.padding}rem`};
+    margin-bottom: ${(props): string => `${props.theme.padding * 2}rem`};
   }
 `
