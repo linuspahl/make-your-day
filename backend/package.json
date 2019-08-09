@@ -16,11 +16,13 @@
     "migrate": "yarn sequelize db:migrate",
     "migrateDown": "yarn sequelize db:migrate:undo",
     "seed": "yarn sequelize db:seed:all",
+    "createMocks": "yarn sequelize db:seed:all --seeders-path mocks",
     "lint": "eslint config migrations seeders src"
   },
   "devDependencies": {
     "@babel/core": "^7.5.4",
     "@babel/node": "^7.5.0",
+    "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.5.4",
     "babel-eslint": "^10.0.2",
     "eslint": "^6.0.1",

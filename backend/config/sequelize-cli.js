@@ -1,5 +1,6 @@
 // We need babel-register to import the es5 config
 require('@babel/register')
+require('@babel/polyfill')
 
 // Config file for sequelize cli usage
 // Gets included in the yarn sequelize script

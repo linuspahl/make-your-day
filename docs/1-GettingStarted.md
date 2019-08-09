@@ -22,6 +22,8 @@ Provides all information needed to start the development for frontend and backen
 - Run `cp ./config/.env.sample ./config/.env` add the required attributes in the created file
 - Run `yarn migrate` to run all migrations and create the database tables.
 - Run `yarn seed`. This will, amongst other things, create an initial user with the credentials:
+- When you want some example database content, run `yarn createmocks`.
+  This will create example data for all entities.
 
 ```
   username: Admin
