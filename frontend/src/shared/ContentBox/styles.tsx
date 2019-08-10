@@ -3,9 +3,14 @@ import styled from 'styled-components'
 // components
 import Box from 'shared/Box/Box'
 
-export const Element = styled(Box)`
+interface ElementProps {
+  context?: 'page'
+}
+
+export const Element = styled(Box)<ElementProps>`
   width: 100%;
-  max-width: 30rem;
+  max-width: ${(props): string =>
+    `${props.theme.context == 'page' ? '30rem' : '100%'}`};
 
   padding: ${(props): string => `${props.theme.padding}rem`};
 

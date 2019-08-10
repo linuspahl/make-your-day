@@ -104,7 +104,9 @@ const PageQueryHandler = (props: Props): JSX.Element => {
         return (
           <FadeTransition delay={200} fullHeight fullWidth key={childrenKey}>
             <DefaultPageLayout>
-              <ContentBox role="main">{children(result)}</ContentBox>
+              <ContentBox role="main" context="page">
+                {children(result)}
+              </ContentBox>
             </DefaultPageLayout>
           </FadeTransition>
         )
