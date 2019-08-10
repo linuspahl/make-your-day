@@ -50,7 +50,7 @@ export const nightModeTheme = {
 }
 
 const mediaQuery = {
-  tablet: '50rem',
+  tablet: '30rem',
 }
 
 const fontSizes = {
