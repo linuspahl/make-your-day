@@ -1,14 +1,11 @@
 // libraries
 import * as React from 'react'
 // components
-import { Layout, Spinner, DoubleBouncer1, DoubleBouncer2 } from './styles'
+import { Layout, Spinner } from './styles'
 
 const CenteredSpinner = (): JSX.Element => (
   <Layout data-testid="CenteredSpinner">
-    <Spinner>
-      <DoubleBouncer1 />
-      <DoubleBouncer2 />
-    </Spinner>
+    <Spinner />
   </Layout>
 )
 

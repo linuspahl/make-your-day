@@ -1,14 +1,15 @@
 // libraries
 import styled, { keyframes } from 'styled-components'
 
-const bounce = keyframes`
-	0%, 100% {
-		transform: scale(0.0);
-		-webkit-transform: scale(0.0);
-	} 50% {
-		transform: scale(1.0);
-		-webkit-transform: scale(1.0);
-}
+const pulse = keyframes`
+ 0% {
+    transform: scale(0);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
 `
 
 export const Layout = styled.div`
@@ -21,28 +22,29 @@ export const Layout = styled.div`
 `
 
 export const Spinner = styled.div`
-  width: 3.75rem;
-  height: 3.75rem;
-
-  position: relative;
-  margin: 0 auto;
-`
-
-export const DoubleBouncer1 = styled.div`
-  width: 100%;
-  height: 100%;
-
-  top: 0;
-  left: 0;
-  position: absolute;
+  height: 7rem;
+  width: 7rem;
 
   border-radius: 50%;
-  background-color: ${(props): string => props.theme.border};
-  opacity: 0.6;
+  background: ${(props): string => `${props.theme.white}`};
 
-  animation: ${bounce} 2s infinite ease-in-out;
-`
+  animation: ${pulse} 1.5s ease-out infinite;
+  opacity: 0.7;
 
-export const DoubleBouncer2 = styled(DoubleBouncer1)`
-  animation-delay: -1s;
+  &:after,
+  &:before {
+    background: ${(props): string => `${props.theme.primary}`};
+
+    content: '';
+    animation: ${pulse} 1.5s ease-out infinite;
+  }
+
+  &:after {
+    height: 7rem;
+    width: 7rem;
+
+    display: block;
+
+    border-radius: 50%;
+  }
 `
