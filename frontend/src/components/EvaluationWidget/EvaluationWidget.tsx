@@ -16,15 +16,14 @@ const Outer = styled.div`
 `
 
 const Layout = styled.div`
-  height: 100%;
   width: 100%;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  // Workaroung to prevent horizontal scrolling,
-  // if chart stops resizing on small screens
+  /* Workaroung to prevent horizontal scrolling,
+  if chart stops resizing on small screens */
   canvas {
     max-width: 100%;
   }
