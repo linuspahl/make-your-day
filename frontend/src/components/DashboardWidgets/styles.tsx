@@ -29,7 +29,7 @@ export const Layout = styled.div`
 
 export const WidgetLayout = styled(Box)`
   display: inline-grid;
-  grid-template-rows: min-content 1fr;
+  grid-template-rows: min-content minmax(1rem, 1fr);
   vertical-align: top;
 
   width: 100%;

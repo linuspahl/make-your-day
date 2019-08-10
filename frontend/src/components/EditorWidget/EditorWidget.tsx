@@ -1,16 +1,16 @@
 // libraries
 import * as React from 'react'
 import { Mutation } from 'react-apollo'
-import { handleInputChange, logError } from 'utils/utils'
+import { logError } from 'utils/utils'
 import { ApolloError } from 'apollo-boost'
-import { init } from 'pell'
-// graphql
-import { UpdateWidget } from 'store/widget/mutation'
 // components
-import { PellEditor } from './styles'
+import Editor from 'components/Editor/Editor'
+import Modal from 'shared/Modal/Modal'
 // interfaces
 import { Widget, WidgetEdit } from 'store/widget/type'
-import { InputEvent, NotificationCreate } from 'types/types'
+import { NotificationCreate } from 'types/types'
+// graphql
+import { UpdateWidget } from 'store/widget/mutation'
 
 interface Props {
   createNotificationBanner: (notification: NotificationCreate) => void
@@ -19,74 +19,82 @@ interface Props {
 
 interface State {
   value: Widget['value']
+  isEditorFullScreen: boolean
 }
 
-export default class EditorWidget extends React.Component<Props, State> {
-  private editorRef: HTMLDivElement
-  private editor: PellElement
-
+class EditorWidget extends React.Component<Props, State> {
   public constructor(props: Props) {
     super(props)
 
     this.state = {
       value: props.widget.value,
+      isEditorFullScreen: false,
     }
 
     this.handleError = this.handleError.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
-
-  public componentDidMount(): void {
-    this.editor = init({
-      element: this.editorRef,
-      onChange: (value: string): void => this.setState({ value }),
-      actions: [
-        'bold',
-        'italic',
-        'underline',
-        'strikethrough',
-        'heading1',
-        'heading2',
-        'paragraph',
-        'ulist',
-        'code',
-        'line',
-        'link',
-        'image',
-      ],
-    })
-    this.editor.content.innerHTML = this.props.widget.value
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   public render(): JSX.Element {
     const { widget } = this.props
-    const { value } = this.state
+    const { isEditorFullScreen, value } = this.state
+
     return (
       <Mutation mutation={UpdateWidget} onError={this.handleError}>
         {(
           updateWidget: ({ variables }: { variables: WidgetEdit }) => void
         ): JSX.Element => (
-          <PellEditor
-            data-testid="EditorWidget"
-            ref={(elementRef): void => {
-              this.editorRef = elementRef
-            }}
-            onBlur={(): void =>
-              updateWidget({
-                variables: {
-                  id: widget.id,
-                  value,
-                },
-              })
-            }
-          />
+          <React.Fragment>
+            {this.renderEditor(
+              widget,
+              value,
+              updateWidget,
+              false,
+              this.toggleModal
+            )}
+            {isEditorFullScreen && (
+              <Modal
+                headline={widget.title}
+                toggleAction={(): void => this.toggleModal()}
+              >
+                {this.renderEditor(widget, value, updateWidget, true)}
+              </Modal>
+            )}
+          </React.Fragment>
         )}
       </Mutation>
     )
   }
 
-  private handleInputChange(event: InputEvent): void {
-    handleInputChange(event, this.setState.bind(this))
+  private renderEditor = (
+    widget: Widget,
+    value: Widget['value'],
+    updateWidget: ({ variables }: { variables: WidgetEdit }) => void,
+    fullScreenType?: boolean,
+    onClick?: () => void
+  ): JSX.Element => {
+    return (
+      <Editor
+        fullScreenType={fullScreenType}
+        key={`${widget.id}-${fullScreenType ? 'fullscreen' : 'preview'}`}
+        onClick={onClick}
+        onChange={(value: string): void => this.setState({ value })}
+        onBlur={(): void =>
+          updateWidget({
+            variables: {
+              id: widget.id,
+              value,
+            },
+          })
+        }
+        value={value}
+      />
+    )
+  }
+
+  private toggleModal(): void {
+    const { isEditorFullScreen } = this.state
+    this.setState({ isEditorFullScreen: !isEditorFullScreen })
   }
 
   // Form error function
@@ -99,3 +107,5 @@ export default class EditorWidget extends React.Component<Props, State> {
     logError(error)
   }
 }
+
+export default EditorWidget

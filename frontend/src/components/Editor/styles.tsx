@@ -6,9 +6,7 @@ export const PellEditor = styled.div`
 
   display: grid;
   grid-template-rows: ${(props): string =>
-    `${props.theme.padding * 2}rem calc(100% - ${props.theme.padding * 2}rem)`};
-
-  overflow-y: auto;
+    `${props.theme.padding * 2}rem minmax(1rem, 1fr)`};
 
   ::-webkit-scrollbar {
     display: none;
@@ -32,6 +30,7 @@ export const PellEditor = styled.div`
     border: 0;
 
     white-space: normal;
+    overflow-y: auto;
   }
 
   .pell-button {

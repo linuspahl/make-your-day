@@ -54,6 +54,11 @@ export const CloseIconWrapper = styled.div`
 `
 
 export const Content = styled(ContentBox)`
+  max-height: ${(props): string =>
+    `calc(100vh - ${props.theme.padding * 2}rem)`};
+
+  display: grid;
+  grid-template-rows: max-content minmax(1rem, 1fr);
   position: relative;
 
   margin: auto;
