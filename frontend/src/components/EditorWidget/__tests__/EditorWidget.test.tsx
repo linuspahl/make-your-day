@@ -2,12 +2,14 @@
 import * as React from 'react'
 // utils
 import {
+  adjustApiStub,
+  cleanup,
   fireEvent,
   leftClickOption,
+  mockDocument,
+  mockWindow,
   renderWithAppRoot,
   wait,
-  cleanup,
-  adjustApiStub,
 } from 'testUtils'
 // components
 import EditorWidget from 'components/EditorWidget/EditorWidget'
@@ -19,7 +21,8 @@ import {
 } from 'store/widget/fixtures'
 
 describe('EditorWidget should', (): void => {
-  document.execCommand = (): boolean => true
+  mockDocument()
+  mockWindow()
   afterEach(cleanup)
 
   test('show notification banner if updating edit failed', async (): Promise<

@@ -1,7 +1,7 @@
 // libraries
 import * as React from 'react'
 // utils
-import { renderWithAppRoot, wait, cleanup } from 'testUtils'
+import { renderWithAppRoot, wait, cleanup, mockDocument } from 'testUtils'
 // components
 import Dashboard from 'containers/Dashboard/Dashboard'
 // fixtures
@@ -18,7 +18,7 @@ describe('Dashboard should', (): void => {
     rootPath: '/dashboard',
     userSession,
   }
-  document.execCommand = (): boolean => true
+  mockDocument()
   afterEach(cleanup)
 
   test('render dashboard and fetch widgets', async (): Promise<void> => {

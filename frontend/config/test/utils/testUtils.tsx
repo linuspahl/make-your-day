@@ -104,6 +104,19 @@ const mockWindow = (): void => {
       removeListener: jest.fn(),
     }
   })
+  window.getSelection = jest.fn().mockImplementation((): {
+    removeAllRanges: () => void
+    addSelection: () => void
+  } => {
+    return {
+      removeAllRanges: (): void => {},
+      addSelection: (): void => {},
+    }
+  })
+}
+
+const mockDocument = (): void => {
+  document.execCommand = (): boolean => true
 }
 
 // Custom fireEvent option (because we use them so many times)
@@ -144,6 +157,7 @@ export {
   fireEvent,
   leftClickOption,
   Matcher,
+  mockDocument,
   mockWindow,
   render,
   renderWithApolloProvier,

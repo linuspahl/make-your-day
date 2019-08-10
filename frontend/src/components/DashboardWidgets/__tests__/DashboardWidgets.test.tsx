@@ -1,7 +1,13 @@
 // libraries
 import * as React from 'react'
 // utils
-import { renderWithAppRoot, cleanup, wait, mockWindow } from 'testUtils'
+import {
+  renderWithAppRoot,
+  cleanup,
+  wait,
+  mockWindow,
+  mockDocument,
+} from 'testUtils'
 // components
 import DashboardWidgets from 'components/DashboardWidgets/DashboardWidgets'
 // fixtures
@@ -15,7 +21,7 @@ describe('DashboardWidgets should', (): void => {
     loading: false,
     widgets: [widget],
   }
-  document.execCommand = (): boolean => true
+  mockDocument()
   mockWindow()
   afterEach(cleanup)
 
