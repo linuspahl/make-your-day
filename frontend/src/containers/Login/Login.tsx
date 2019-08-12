@@ -20,7 +20,7 @@ interface Props {
 const Layout = (props: Props): JSX.Element => (
   <FadeTransition fullWidth fullHeight>
     <Wrapper>
-      <ContentBox role="main">
+      <ContentBox role="main" context="page">
         <H1 context="page">Anmeldung</H1>
         <LoginForm
           updateLocalStorage={props.updateLocalStorage}

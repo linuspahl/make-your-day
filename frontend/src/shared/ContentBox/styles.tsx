@@ -10,7 +10,7 @@ interface ElementProps {
 export const Element = styled(Box)<ElementProps>`
   width: 100%;
   max-width: ${(props): string =>
-    `${props.theme.context == 'page' ? '30rem' : '100%'}`};
+    `${props.context == 'page' ? '30rem' : '100%'}`};
 
   padding: ${(props): string => `${props.theme.padding}rem`};
 
