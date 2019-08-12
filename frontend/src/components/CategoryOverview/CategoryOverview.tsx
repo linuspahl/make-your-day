@@ -1,6 +1,5 @@
 // libraries
-import React from 'react'
-import styled from 'styled-components'
+import * as React from 'react'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
@@ -16,10 +15,6 @@ import { DeleteCategory } from 'store/category/mutation'
 import { deleteCategory } from 'store/category/update'
 // interfaces
 import { CategoryForList } from 'store/category/type'
-
-const List = styled.ul`
-  margin-top: ${(props): string => `${props.theme.padding}rem`};
-`
 
 interface Props {
   rootPath: string
@@ -51,7 +46,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
             <H1 context="page">Kategorien verwalten</H1>
             {categoriesQueryStatus}
             {!categoriesQueryStatus && categories && (
-              <List>
+              <ul>
                 {categories.map(
                   (category: CategoryForList): JSX.Element => (
                     <CategoryListItem
@@ -61,7 +56,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
                     />
                   )
                 )}
-              </List>
+              </ul>
             )}
             <ActionRow>
               <Button context="primary" to={`${rootPath}/create`}>

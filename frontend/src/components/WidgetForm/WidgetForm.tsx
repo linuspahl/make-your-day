@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import styled from 'styled-components'
 // utils
 import { handleInputChange } from 'utils/utils'
 import { widgetTypeOptions, widgetPositionOptions } from 'params'
@@ -14,10 +13,6 @@ import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import { EvaluationForList } from 'store/evaluation/type'
 import { WidgetCreate } from 'store/widget/type'
 import { Form as FormType, SelectOption, InputEvent } from 'types/types'
-
-const Form = styled.form`
-  margin-top: ${(props): string => `${props.theme.padding}rem`};
-`
 
 interface Props {
   evaluations?: EvaluationForList[]
@@ -83,7 +78,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
     }
 
     return (
-      <Form onSubmit={(event): void => this.handleSubmit(event)}>
+      <form onSubmit={(event): void => this.handleSubmit(event)}>
         <Row htmlFor="title">
           <Input
             id="title"
@@ -143,7 +138,7 @@ export default class WidgetForm extends React.Component<Props, WidgetCreate> {
             {mode === 'create' ? 'Erstellen' : 'Bearbeiten'}
           </Button>
         </ActionRow>
-      </Form>
+      </form>
     )
   }
 }

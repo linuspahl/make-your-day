@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import styled from 'styled-components'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 // utils
 import { extractIdFromUrl } from 'utils/utils'
@@ -20,10 +19,6 @@ import { DeleteCategory } from 'store/category/mutation'
 import { deleteSubcategory } from 'store/category/update'
 import { DataProxy } from 'apollo-cache'
 import { FetchResult } from 'apollo-link'
-
-const List = styled.ul`
-  margin-top: ${(props): string => `${props.theme.padding}rem`};
-`
 
 interface Props extends RouteComponentProps {
   rootPath: string
@@ -58,7 +53,7 @@ class CategoryEdit extends React.Component<Props> {
               <H1 context="page">Subkategorien verwalten</H1>
               {categoryQueryStatus}
               {!categoryQueryStatus && category && category.subcategories && (
-                <List>
+                <ul>
                   {category.subcategories.map(
                     (subcategory: Subcategory): JSX.Element => (
                       <ListItem key={subcategory.id} spaceBetween>
@@ -90,7 +85,7 @@ class CategoryEdit extends React.Component<Props> {
                       </ListItem>
                     )
                   )}
-                </List>
+                </ul>
               )}
               <ActionRow>
                 <Button

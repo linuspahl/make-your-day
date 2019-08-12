@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import styled from 'styled-components'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
@@ -16,10 +15,6 @@ import { DeleteEvaluation } from 'store/evaluation/mutation'
 import { deleteEvaluation } from 'store/evaluation/update'
 // interfaces
 import { EvaluationForList } from 'store/evaluation/type'
-
-const List = styled.ul`
-  margin-top: ${(props): string => `${props.theme.padding}rem`};
-`
 
 interface Props {
   rootPath: string
@@ -49,7 +44,7 @@ const EvaluationOverview = (props: Props): JSX.Element => {
             <H1 context="page">Auswertungen verwalten</H1>
             {evaluationsQueryStatus}
             {!evaluationsQueryStatus && evaluations && (
-              <List>
+              <ul>
                 {evaluations.map(
                   (evaluation: EvaluationForList): JSX.Element => (
                     <EvaluationListItem
@@ -59,7 +54,7 @@ const EvaluationOverview = (props: Props): JSX.Element => {
                     />
                   )
                 )}
-              </List>
+              </ul>
             )}
             <ActionRow>
               <Button context="primary" to={`${rootPath}/create`}>

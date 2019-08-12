@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import styled from 'styled-components'
 import { Mutation } from 'react-apollo'
 import { handleInputChange, logError } from 'utils/utils'
 import { ApolloError } from 'apollo-boost'
@@ -15,10 +14,6 @@ import { LoginUser } from 'store/userSession/mutation'
 import { LocalStorage, InputEvent, NotificationCreate } from 'types/types'
 import { UserSession } from 'store/userSession/type'
 import { UserSetting } from 'store/userSetting/type'
-
-export const Form = styled.form`
-  margin-top: ${(props): string => `${props.theme.padding}rem`};
-`
 
 interface Props {
   createNotificationBanner: (norification: NotificationCreate) => void
@@ -51,7 +46,7 @@ export default class LoginForm extends React.Component<Props, State> {
         onError={this.handleError}
       >
         {(loginUser: () => void): JSX.Element => (
-          <Form onSubmit={(event): void => this.handleSubmit(event, loginUser)}>
+          <form onSubmit={(event): void => this.handleSubmit(event, loginUser)}>
             <Row htmlFor="username">
               <Input
                 id="username"
@@ -80,7 +75,7 @@ export default class LoginForm extends React.Component<Props, State> {
                 Anmelden
               </Button>
             </ActionRow>
-          </Form>
+          </form>
         )}
       </Mutation>
     )

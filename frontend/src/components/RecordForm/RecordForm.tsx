@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 // utils
 import { handleInputChange } from 'utils/utils'
 // components
-import { Form, CategoryIconWrapper, Category } from './styles'
+import { CategoryIconWrapper, Category } from './styles'
 import Row from 'shared/form/Row/Row'
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Input from 'shared/form/Input/Input'
@@ -128,7 +128,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     }
 
     return (
-      <Form onSubmit={(event): void => this.handleSubmit(event)}>
+      <form onSubmit={(event): void => this.handleSubmit(event)}>
         <Category>
           <CategoryIconWrapper>
             <CategoryIcon icon={icon} color={color} title={categoryTitle} />
@@ -206,7 +206,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
             {mode === 'create' ? 'Erstellen' : 'Bearbeiten'}
           </Button>
         </ActionRow>
-      </Form>
+      </form>
     )
   }
 

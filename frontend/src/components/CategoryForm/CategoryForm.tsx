@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import styled from 'styled-components'
 // utils
 import { handleInputChange } from 'utils/utils'
 // components
@@ -12,10 +11,6 @@ import Spacer from 'shared/Spacer/Spacer'
 // interfaces
 import { Form as FormType, InputEvent } from 'types/types'
 import { CategoryCreate } from 'store/category/type'
-
-const Form = styled.form`
-  margin-top: ${(props): string => `${props.theme.padding}rem`};
-`
 
 interface Props {
   initialData?: CategoryCreate
@@ -68,7 +63,7 @@ export default class CategoryForm extends React.Component<
     } = this.state
 
     return (
-      <Form
+      <form
         onSubmit={(event): void => {
           this.handleSubmit(event)
         }}
@@ -98,7 +93,7 @@ export default class CategoryForm extends React.Component<
             {mode === 'create' ? 'Erstellen' : 'Bearbeiten'}
           </Button>
         </ActionRow>
-      </Form>
+      </form>
     )
   }
 

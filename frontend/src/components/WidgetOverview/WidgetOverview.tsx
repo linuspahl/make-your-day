@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import styled from 'styled-components'
 // utils
 import { widgetPositionOptions } from 'params'
 // components
@@ -11,6 +10,7 @@ import Button from 'shared/Button/Button'
 import DeleteIcon from 'shared/list/DeleteIcon/DeleteIcon'
 import H1 from 'shared/H1/H1'
 import H2 from 'shared/H2/H2'
+import Spacer from 'shared/Spacer/Spacer'
 import ListItem from 'shared/list/ListItem/ListItem'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 // graphql
@@ -19,11 +19,6 @@ import { DeleteWidget } from 'store/widget/mutation'
 import { deleteWidget } from 'store/widget/update'
 // interfaces
 import { WidgetForList } from 'store/widget/type'
-
-const List = styled.ul`
-  margin-top: ${(props): string => `${props.theme.padding / 2}rem`};
-  margin-bottom: ${(props): string => `${props.theme.padding}rem`};
-`
 
 const sortWidgetsByPosition = (
   widgets: WidgetForList[] = []
@@ -77,14 +72,14 @@ const WidgetOverview = (props: Props): JSX.Element => {
             {!widgetsQueryStatus &&
               widgets &&
               Object.keys(widgetsByPosition).map(
-                (position): JSX.Element => {
+                (position, index): JSX.Element => {
                   const positionOption = widgetPositionOptions.find(
                     (option): boolean => option.value === position
                   )
                   return (
                     <div key={position}>
                       <H2>{positionOption.title}</H2>
-                      <List>
+                      <ul>
                         {widgetsByPosition[position].map(
                           (widget): JSX.Element => (
                             <WidgetListItem
@@ -94,7 +89,10 @@ const WidgetOverview = (props: Props): JSX.Element => {
                             />
                           )
                         )}
-                      </List>
+                      </ul>
+                      {index < Object.keys(widgetsByPosition).length && (
+                        <Spacer />
+                      )}
                     </div>
                   )
                 }

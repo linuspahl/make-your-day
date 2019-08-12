@@ -1,10 +1,6 @@
 // libraries
 import styled from 'styled-components'
 
-export const Form = styled.form`
-  margin-top: ${(props): string => `${props.theme.padding}rem`};
-`
-
 export const Category = styled.div`
   display: flex;
   align-items: center;
