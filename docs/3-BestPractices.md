@@ -96,6 +96,25 @@ Use `Component/Component.js` instead of `Component/index.js`. It looks redundant
   // interfaces - all TypeScript interfaces
   // graphql - all actions in the `store` driectory like grapqhl queries and mutations
 
+### Strucuring styles
+
+Sometimes it is dificult to structure css correctly. You will not allways be able to group all attributes by context. We still try to follow this structure:
+
+```
+    const Box = styled`
+        1. height, width, positining like bottom, top..
+        2. display, display related props like aling-items, grid-temlapte-rows...
+        3. margin, padding, border
+        4. font related props like color, text-align, font-size
+        5. background related & box-shadow props
+        6. animation and transition related props
+        7. other like z-index
+        8. Media queries
+    `
+```
+
+Try to separate the sections with a free line, do note use comments like for the module imports. Sometimes you'll have like just four attributes (all related to a different group) seperated by four free lines, which looks a bit strange, but we still try to follow the above rules.
+
 ### Example React component structur:
 
 ```
