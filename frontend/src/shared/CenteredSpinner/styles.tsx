@@ -26,6 +26,7 @@ export const Spinner = styled.div`
   width: 7rem;
 
   border-radius: 50%;
+
   background: ${(props): string => `${props.theme.white}`};
 
   animation: ${pulse} 1.5s ease-out infinite;

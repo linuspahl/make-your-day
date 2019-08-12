@@ -17,10 +17,11 @@ export const Circle = styled.div<CircleProps>`
   justify-content: center;
   border-radius: 50%;
 
-  background-color: ${(props): string =>
-    props.color ? props.theme.category[props.color] : props.theme.border};
   color: ${(props): string => props.theme.categoryText[props.color]};
   font-size: ${(props): string => `${props.size ? props.size / 2 : 1.75}rem`};
+
+  background-color: ${(props): string =>
+    props.color ? props.theme.category[props.color] : props.theme.border};
 
   box-shadow: 0 0.1875rem 0.0625rem -0.125rem rgba(0, 0, 0, 0.2),
     0 0.125rem 0.125rem 0 rgba(0, 0, 0, 0.14),

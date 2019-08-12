@@ -10,9 +10,9 @@ export const Shortcut = styled.div`
   justify-content: center;
 
   margin-right: ${(props): string => `${props.theme.padding / 4}rem`};
-
-  border-radius: 50%;
   border: 0.0625rem solid ${(props): string => props.theme.border};
+  border-radius: 50%;
+
   background-color: ${(props): string => props.theme.timelineDay};
 `
 
@@ -21,16 +21,17 @@ export const Day = styled.button`
 
   display: flex;
   align-items: center;
-  cursor: pointer;
 
+  /* Remove default button styles */
   padding: ${(props): string => `${props.theme.padding / 4}rem 0`};
   border-bottom: 0.0625rem solid ${(props): string => props.theme.border};
-
-  // Remove default button styles
   border-top: 0;
   border-left: 0;
   border-right: 0;
+
   background-color: transparent;
+
+  cursor: pointer;
 
   &:last-child {
     border-bottom: 0;

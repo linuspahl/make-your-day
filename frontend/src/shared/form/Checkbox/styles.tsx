@@ -13,13 +13,14 @@ interface CheckboxWrapperProps {
 }
 
 export const CheckboxWrapper = styled.div<CheckboxWrapperProps>`
-  position: relative;
-
   height: 2.5rem;
   width: 2.5rem;
 
+  position: relative;
+
   color: ${(props): string =>
     props.disabled ? props.theme.border : props.theme.text};
+
   cursor: ${(props): string => (props.disabled ? 'not-allowed' : 'pointer')};
 
   ${(props): string =>
@@ -30,16 +31,18 @@ export const CheckboxWrapper = styled.div<CheckboxWrapperProps>`
 `
 
 export const Element = styled.input`
-  position: relative;
   height: 100%;
   width: 100%;
 
-  background-color: transparent;
+  position: relative;
+
   border-radius: 0;
   border-top: 0;
   border-right: 0;
   border-left: 0;
   border-bottom: 0.125rem solid ${(props): string => props.theme.border};
+
+  background-color: transparent;
 
   appearance: none;
   cursor: inherit;

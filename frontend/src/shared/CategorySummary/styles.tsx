@@ -19,11 +19,12 @@ export const Category = styled(TextSmall)<CategoryProps>`
   border-radius: 2.5rem;
   border: 0.0625rem solid ${(props): string => props.theme.border};
 
-  background-color: ${(props): string =>
-    props.color ? props.theme.category[props.color] : props.theme.border};
   color: ${(props): string =>
     props.color ? props.theme.categoryText[props.color] : props.theme.text};
   font-size: ${(props): string => `${props.theme.fontSizes.mobile.small}rem`};
+
+  background-color: ${(props): string =>
+    props.color ? props.theme.category[props.color] : props.theme.border};
 
   &:last-child {
     margin-right: 0;
@@ -35,9 +36,9 @@ export const Category = styled(TextSmall)<CategoryProps>`
 `
 
 export const IconWrapper = styled.div`
-  // min-width is needed for a stutter free loading
-  // needed because of the font icon
-  // should have width of the font-size
+  /* min-width is needed for a stutter free loading
+  needed because of the font icon
+  should have width of the font-size */
   min-width: ${(props): string => `${props.theme.fontSizes.mobile.normal}rem`};
 
   margin-right: ${(props): string => `${props.theme.padding / 5}rem`};
@@ -50,8 +51,11 @@ export const IconWrapper = styled.div`
 
 export const CategoryTitle = styled.div`
   max-width: 3.125rem;
+
+  margin-right: ${(props): string => `${props.theme.padding / 5}rem`};
+
   text-overflow: ellipsis;
   white-space: nowrap;
+
   overflow: hidden;
-  margin-right: ${(props): string => `${props.theme.padding / 5}rem`};
 `

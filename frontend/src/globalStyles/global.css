@@ -1,6 +1,14 @@
 /* Global styles, needed to unify common elements */
 
-body,
+body {
+  /* The global font-size is defind in the AppRoot component,
+  because it refers to the dynamic theme */
+  font-family: "Istok Web", Arial, Helvetica, sans-serif;
+  line-height: 1.3;
+  /* Better fonts for chrome  */
+  -webkit-font-smoothing: antialiased;
+}
+
 textarea,
 input,
 select,

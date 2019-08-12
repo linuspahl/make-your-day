@@ -109,21 +109,23 @@ export const deleteSubcategory = (
       data: { deleteCategory },
     } = result
 
-    const updatedSubcategories = category.getCategory.subcategories.filter(
-      (category): boolean => {
-        return category.id !== variables.id
-      }
-    )
+    if (deleteCategory) {
+      const updatedSubcategories = category.getCategory.subcategories.filter(
+        (category): boolean => {
+          return category.id !== variables.id
+        }
+      )
 
-    cache.writeQuery({
-      query: GetCategoryForListWithChildren,
-      data: {
-        getCategory: {
-          ...category.getCategory,
-          subcategories: updatedSubcategories,
+      cache.writeQuery({
+        query: GetCategoryForListWithChildren,
+        data: {
+          getCategory: {
+            ...category.getCategory,
+            subcategories: updatedSubcategories,
+          },
         },
-      },
-      variables,
-    })
+        variables,
+      })
+    }
   } catch {}
 }

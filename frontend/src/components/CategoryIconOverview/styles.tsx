@@ -27,6 +27,7 @@ export const Layout = styled.div<LayoutProps>`
     `
       : `
       border-radius: 0;
+      
       box-shadow: none;
     `}
 `

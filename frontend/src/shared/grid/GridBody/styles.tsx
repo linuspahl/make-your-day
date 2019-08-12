@@ -6,14 +6,16 @@ interface ElementProps {
 }
 
 export const Element = styled.div<ElementProps>`
+  width: 100%;
+
   display: grid;
   grid-template-columns: repeat(${(props): number => props.columnAmount}, 1fr);
-  width: 100%;
+
   > div {
+    min-height: 2.5rem;
+
     display: flex;
     align-items: center;
-
-    min-height: 2.5rem;
 
     border-top: 0.0625rem solid ${(props): string => props.theme.border};
   }

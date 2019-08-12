@@ -21,8 +21,8 @@ export const Wrapper = styled.div<WrapperProps>`
       },
     } = props
     return `
-      bottom: 0;
       width: 100vw;
+      bottom: 0;
 
       position: fixed;
       display: flex;
@@ -31,14 +31,14 @@ export const Wrapper = styled.div<WrapperProps>`
       align-items: center;
 
       padding: ${padding}rem ${padding}rem 6.25rem ${padding}rem;
-      box-shadow: ${boxShadow};
-      background-color: ${contentBoxBg};
-
+      
       text-align: center;
 
-      
+      background-color: ${contentBoxBg};
+
       will-change: transform;
 
+      box-shadow: ${boxShadow};
       z-index: ${navigationIndex};
 
       ${

@@ -10,6 +10,7 @@ export const Element = styled(TextBig)`
   font-size: ${(props): string => `${props.theme.fontSizes.mobile.big}rem`};
   font-weight: 300;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
+
+  overflow: hidden;
 `

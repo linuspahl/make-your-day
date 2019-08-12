@@ -17,6 +17,7 @@ export const Element = styled(TextLarge)<ElementProps>`
     props.context === 'page' &&
     `
       margin-bottom: ${props.theme.padding * 3}rem;
+      
       @media (min-width: ${props.theme.mediaQuery.tablet}) {
         margin-bottom: ${props.theme.padding * 4}rem;
     `};

@@ -7,6 +7,7 @@ import TextBig from 'shared/text/TextBig/TextBig'
 
 export const Layout = styled.div`
   width: 100%;
+
   position: relative;
 `
 
@@ -25,26 +26,25 @@ export const Select = styled(Input)`
 `
 
 export const ArrowIcon = styled(TextBig)`
+  width: 2.5rem;
+  height: 2.5rem;
+  bottom: 0;
+  right: 0;
+
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
 
-  width: 2.5rem;
-  height: 2.5rem;
-
-  bottom: 0;
-  right: 0;
-
   color: inherit;
 `
 
 export const Header = styled(TextBig)`
+  height: 2.5rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  height: 2.5rem;
 
   margin-bottom: ${(props): string => `${props.theme.padding}rem`};
   padding-left: ${(props): string => `${props.theme.padding / 2}rem`};
@@ -64,7 +64,9 @@ interface OptionProps {
 export const Option = styled(ListItem)<OptionProps>`
   ${(props): string => `
     background-color: ${props.isSelected ? props.theme.active : 'none'};
+
     cursor: pointer;
+
     &:active {
       background-color: ${props.theme.active};
     }
@@ -72,12 +74,12 @@ export const Option = styled(ListItem)<OptionProps>`
 `
 
 export const OptionPreview = styled(TextBig)`
+  height: 1.5625rem;
+  width: 1.5625rem;
+
   display: flex;
   align-items: center;
   justify-content: center;
-
-  height: 1.5625rem;
-  width: 1.5625rem;
 
   margin-right: ${(props): string => `${props.theme.padding / 2}rem`};
 `

@@ -42,8 +42,9 @@ export const PellEditor = styled.div`
     border-bottom: 0;
     border-right: 0.0625rem solid ${(props): string => props.theme.border};
 
-    background-color: transparent;
     color: inherit;
+
+    background-color: transparent;
 
     &:last-child {
       border-right: 0;

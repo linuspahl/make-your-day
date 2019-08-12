@@ -10,10 +10,12 @@ interface WrapperProps {
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  opacity: 0;
   will-change: opacity;
   transition: opacity ${(props): number => props.duration}ms ease-in;
   transition-delay: ${(props): number => props.delay}ms;
+
+  opacity: 0;
+  
   ${(props): string => {
     switch (props.state) {
       case 'entered':

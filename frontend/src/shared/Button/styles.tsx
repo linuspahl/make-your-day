@@ -9,15 +9,16 @@ interface LayoutProps {
 }
 
 export const Layout = styled.button<LayoutProps>`
-  user-select: none;
+  border-radius: 0.25rem;
 
   box-shadow: 0 0.1875rem 0.0625rem -0.125rem rgba(0, 0, 0, 0.2),
     0 0.125rem 0.125rem 0 rgba(0, 0, 0, 0.14),
     0 0.0625rem 0.3125rem 0 rgba(0, 0, 0, 0.12);
-  border-radius: 0.25rem;
 
   will-change: transform, opacity;
   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  user-select: none;
 
   ${(props): string => {
     let bgColor = `#fff`
@@ -39,15 +40,18 @@ export const Layout = styled.button<LayoutProps>`
     }
 
     return `
+      height: 2.5rem;
+
       display: flex;
       align-items: center;
 
-      height: 2.5rem;
       padding: 0 ${props.theme.padding}rem;
       border: 0;
+      
+      color: ${color};
 
       background-color: ${bgColor};
-      color: ${color};
+      
       cursor: pointer;
 
       &:visited, &:focus {

@@ -4,9 +4,9 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   width: 100%;
 
-  margin-top: ${(props): string => props.theme.fontSizes.mobile.normal}rem;
-
   position: relative;
+
+  margin-top: ${(props): string => props.theme.fontSizes.mobile.normal}rem;
 
   @media (min-width: ${(props): string => props.theme.mediaQuery.tablet}) {
     margin-top: calc(
@@ -31,10 +31,13 @@ export const InputElement = styled.input<InputElementProps>`
   border-bottom: 0.125rem solid ${(props): string => props.theme.border};
 
   color: ${(props): string => (props.disabled ? '#b5b5b5' : props.theme.text)};
-  box-shadow: none;
-  appearance: none;
+
   background-color: transparent;
+  box-shadow: none;
+
   transition: all 0.4s;
+
+  appearance: none;
   cursor: ${(props): string => (props.disabled ? 'not-allowed' : 'text')};
 
   &:focus {
@@ -57,15 +60,16 @@ export const InputElement = styled.input<InputElementProps>`
 
 export const InputLabel = styled.label`
   width: 100%;
-  padding: 4px 0;
   top: 0;
   left: 0;
-
-  color: ${(props): string => props.theme.info};
 
   position: absolute;
   display: flex;
   align-items: center;
+
+  padding: 4px 0;
+
+  color: ${(props): string => props.theme.info};
 
   transition: all 0.4s;
   pointer-events: none;

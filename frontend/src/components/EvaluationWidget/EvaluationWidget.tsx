@@ -10,9 +10,10 @@ import { Evaluation } from 'store/evaluation/type'
 const Outer = styled.div`
   width: 100%;
   height: 100%;
-  overflow-y: auto;
 
   padding: ${(props): string => `${props.theme.padding}rem`};
+
+  overflow-y: auto;
 `
 
 const Layout = styled.div`

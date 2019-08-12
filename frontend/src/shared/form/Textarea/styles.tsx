@@ -14,7 +14,6 @@ interface ElementProps {
 
 export const Element = styled.textarea<ElementProps>`
   width: 100%;
-
   max-width: 100%;
   min-width: 100%;
   max-height: 100%;
@@ -25,6 +24,7 @@ export const Element = styled.textarea<ElementProps>`
   border: 0.0625rem solid ${(props): string => props.theme.border};
 
   background-color: transparent;
+
   color: ${(props): string => props.theme.text};
 
   cursor: ${(props): string => (props.disabled ? 'not-allowed' : 'text')};

@@ -11,9 +11,9 @@ import { ThemeProvider } from 'styled-components'
 // theme
 import colorTheme from 'theme'
 // components
+import { AppWrapper } from './styles'
 import Routes from './Routes/Routes'
 import NotificationBanner from './NotificationBanner/NotificationBanner'
-import AppBackground from './AppBackground/AppBackground'
 // interfaces
 import {
   LocalStorage,
@@ -92,7 +92,7 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
     return (
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={colorTheme(userSettings)}>
-          <AppBackground>
+          <AppWrapper>
             {/*
                 We are using the NotificationBanner above all routes,
                 this way the notifications won't unmount on route changes
@@ -105,7 +105,7 @@ export default class AppRoot extends React.Component<{}, LocalStorage> {
               updateLocalStorage={this.updateLocalStorage}
               userSettings={userSettings}
             />
-          </AppBackground>
+          </AppWrapper>
         </ThemeProvider>
       </ApolloProvider>
     )
