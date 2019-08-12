@@ -4,7 +4,7 @@
 // This is more flexible then creating a prop for every possible styling attribute
 
 // libraries
-import * as React from 'react'
+import React from 'react'
 
 interface Props {
   title: string

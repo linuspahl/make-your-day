@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // utils
 import initCategoryForm from 'components/CategoryForm/__tests__/initCategoryForm'
 import {

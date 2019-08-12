@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
 import { renderWithAppRoot, wait } from 'testUtils'

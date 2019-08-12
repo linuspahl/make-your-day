@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'

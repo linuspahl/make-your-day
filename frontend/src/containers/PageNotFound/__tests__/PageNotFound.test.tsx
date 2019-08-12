@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { renderWithAppRoot } from 'testUtils'
 // components
 import PageNotFound from 'containers/PageNotFound/PageNotFound'

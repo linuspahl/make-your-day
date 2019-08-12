@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { sortBy } from 'lodash'
 // components
 import EditorWidget from 'components/EditorWidget/EditorWidget'

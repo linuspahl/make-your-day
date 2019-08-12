@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { Mutation, FetchResult } from 'react-apollo'
 import { DataProxy } from 'apollo-cache'
 import { DocumentNode } from 'graphql'

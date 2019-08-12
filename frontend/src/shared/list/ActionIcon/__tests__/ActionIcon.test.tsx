@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { renderWithAppRoot, cleanup } from 'testUtils'
 // components
 import ActionIcon from 'shared/list/ActionIcon/ActionIcon'

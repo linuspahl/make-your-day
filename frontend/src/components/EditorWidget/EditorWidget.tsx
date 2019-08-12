@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { Mutation } from 'react-apollo'
 import { logError } from 'utils/utils'
 import { ApolloError } from 'apollo-boost'

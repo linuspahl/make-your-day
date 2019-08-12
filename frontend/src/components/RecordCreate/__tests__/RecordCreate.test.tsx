@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // utils
 import initRecordForm from 'components/RecordForm/__tests__/initRecordForm'
 import {

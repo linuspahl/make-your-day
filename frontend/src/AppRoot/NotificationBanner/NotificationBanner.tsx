@@ -4,7 +4,7 @@
 // outside of this component
 
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import { Alert } from './styles'
 import CloseIcon from 'shared/CloseIcon/CloseIcon'

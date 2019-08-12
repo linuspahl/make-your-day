@@ -9,7 +9,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import Loadable from 'react-loadable'
 // components

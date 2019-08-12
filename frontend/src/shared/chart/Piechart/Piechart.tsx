@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import ChartistGraph from 'react-chartist'
 // components
 import NoResult from 'shared/NoResult/NoResult'

@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // utils
 import initEvaluationForm from 'components/EvaluationForm/__tests__/initEvaluationForm'
 import {

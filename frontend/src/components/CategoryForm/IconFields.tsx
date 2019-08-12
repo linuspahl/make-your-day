@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import H2 from 'shared/H2/H2'
 import Row from 'shared/form/Row/Row'

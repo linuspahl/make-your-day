@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import CloseIcon from 'shared/CloseIcon/CloseIcon'

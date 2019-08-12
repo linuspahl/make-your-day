@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { ApolloError } from 'apollo-boost'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'

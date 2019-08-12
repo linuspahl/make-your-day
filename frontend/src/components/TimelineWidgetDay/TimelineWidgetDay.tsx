@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 // components
 import CategorySummary from 'shared/CategorySummary/CategorySummary'

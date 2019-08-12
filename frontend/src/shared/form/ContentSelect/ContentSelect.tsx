@@ -3,7 +3,7 @@
 // If a selection has no default value, add an option with the title '-' an without any value
 
 // libraries
-import * as React from 'react'
+import React from 'react'
 // utils
 import { sortBy } from 'lodash'
 // components

@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import UserSettingsOverview from 'components/UserSettingsOverview/UserSettingsOverview'
 import {

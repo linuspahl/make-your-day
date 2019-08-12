@@ -1,7 +1,7 @@
 // params
 import { navigationItems } from 'params'
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import { Wrapper, Offset, CloseIconWrapper, Head } from './styles'
 import CloseIcon from 'shared/CloseIcon/CloseIcon'

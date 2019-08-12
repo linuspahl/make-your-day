@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import styled from 'styled-components'
 // components
 import TextBig from 'shared/text/TextBig/TextBig'

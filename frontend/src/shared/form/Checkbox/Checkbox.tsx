@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import { Wrapper, CheckboxWrapper, Checkmark, Element } from './styles'
 import Icon from 'shared/Icon/Icon'

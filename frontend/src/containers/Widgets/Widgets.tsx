@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { Route } from 'react-router-dom'
 // components
 import WidgetCreate from 'components/WidgetCreate/WidgetCreate'

@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { ApolloError, gql } from 'apollo-boost'
 import { Mutation } from 'react-apollo'

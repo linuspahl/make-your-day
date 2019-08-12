@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
 import Icon from 'shared/Icon/Icon'

@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // utils
 import { navigationItems } from 'params'
 import { renderWithAppRoot, cleanup } from 'testUtils'

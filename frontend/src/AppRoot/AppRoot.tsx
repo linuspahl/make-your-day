@@ -3,7 +3,7 @@
 // like the theme and apollo provider and the routes
 
 // libraries
-import * as React from 'react'
+import React from 'react'
 import createApolloClient from './ApolloClient'
 import { ApolloProvider } from 'react-apollo'
 import { getLocalStorage, updateLocalStorage } from 'utils/utils'

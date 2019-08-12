@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import styled from 'styled-components'
 // components
 import { Day, Shortcut, Categories } from './styles'

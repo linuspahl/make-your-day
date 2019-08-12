@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 // interfaces
 import { UserSession } from 'store/userSession/type'

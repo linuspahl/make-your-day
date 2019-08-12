@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 import MockDate from 'mockdate'
 // utils
 import { renderWithAppRoot, wait, cleanup } from 'testUtils'

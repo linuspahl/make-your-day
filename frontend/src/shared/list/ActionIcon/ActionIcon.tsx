@@ -1,5 +1,5 @@
 // libraried
-import * as React from 'react'
+import React from 'react'
 // components
 import { Wrapper } from './styles'
 import Icon from 'shared/Icon/Icon'

@@ -2,7 +2,7 @@
 // The app and all its fundamental parts, like middlewares, the router, etc. are capsuled in a seperate components
 
 // libraries
-import * as React from 'react'
+import React from 'react'
 import { render } from 'react-dom'
 
 // components

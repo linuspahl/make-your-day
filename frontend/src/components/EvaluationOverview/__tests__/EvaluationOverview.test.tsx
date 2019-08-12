@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import EvaluationOverview from 'components/EvaluationOverview/EvaluationOverview'
 import { renderWithAppRoot, wait } from 'testUtils'

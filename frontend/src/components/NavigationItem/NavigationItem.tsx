@@ -1,5 +1,5 @@
 // libraries
-import * as React from 'react'
+import React from 'react'
 // components
 import { ListItem, InnerLink, RouteActive } from './styles'
 
