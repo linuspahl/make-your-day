@@ -64,7 +64,7 @@ Development experience
   The package manager should be the only global dependency.
   This will make the setup easier and reduce potential errors.
   It will affect e.g. the setup of the VS Code node debugging.
-- All vcs commits should start with the affected project parts (FE or BE, or both).
+- All vcs commits should start with the affected project parts (DOC, FE, BE, or combined).
   E.g: FE: Setup yarn package.json
 - To prevent most "Cannot read property 'foo' of undefined" Errors, you should always define an empty array as default value, e.g. for parameters:
 

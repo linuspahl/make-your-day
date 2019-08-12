@@ -10,32 +10,63 @@
 
 ## Frontend
 
+### webpack
+
 - webpack - Will bundle the react app, allows us to split the code
 - webpack-cli - Allows us to use webpack with the cli. Needed to run webpack as a yarn script
 - webpack-dev-server - Only needed for development, will watch for changes and automatically create a new bundle
 - webpack-merge - Allows us to split the webpack config in multiple files
 - html-webpack-plugin - The plugin will generate an HTML5 file for you that includes all your webpack bundles in the body using script tags.
 - copy-webpack-plugin - Needed to copy e.g. public files like the favicon
+- dotenv-webpack - allows to use .env vars in the webpack config
 - compression-webpack-plugin - Used to compress bundle with gzip
 - uglifyjs-webpack-plugin / babel-preset-minify - will minify the JS Code.
+- style-loader - allows import of stylesheets
+- css-loader - interprets @import and url() like import/require() and will resolve them.
+- file-loader - webpack file loader, needed to import e.g. webfonts
+- terser-webpack-plugin - minification plugin for js
+- ts-transform-graphql-tag - Compiles GraphQL tagged template strings using graphql-tag in TypeScript files.
+- webpack-bundle-analyzer - will show information about the bundle size, when enabled as preset
+
+### typescript
+
 - typescript - to type js code
 - ts-transform-graphql-tag - needed to import gql type definitions.
 - ts-jest - TypeScript preprocessor with source map support for Jest that lets you use Jest to test projects written in TypeScript.
 - @types/\* - types for specified libs, needed for TypeScript usage
 - awesome-typescript-loader - helps Webpack compile your TypeScript code using the TypeScript’s standard configuration file.
 - soucrce-map-loader - uses any sourcemap outputs from TypeScript to inform webpack when generating its own sourcemaps. This will allow you to debug your final output file as if you were debugging your original TypeScript source code.
+
+### testing
+
 - eslint-plugin-react - for react specific eslint rules
 - eslint-plugin-jest - for jest specific eslint rules
+- eslint-plugin-prettier - for prettier specific linting rules
 - jest - to test the js code.
+- jest-styled-components - to test styled components with react.
 - react-test-renderer - Needed for the components tests. A faster alternative to ReactDOM.
+- mockdate - to mock the current date inside of tests
+
+### graphql
+
 - graphql - JavaScript reference implementation for GraphQL
 - apollo-provider - provides query and mutation components for react
 - apollo-boost - provides usefull tools when working with apollo
-- cross-fetch - needed to test apollo client with yarn
+- cross-fetch - needed to test apollo client with jest
+
+### react
+
 - react-router-dom - DOM bindings for React Router.
-- style-loader - allows import of stylesheets
-- css-loader - interprets @import and url() like import/require() and will resolve them.
-- file-loader - webpack file loader, needed to import e.g. webfonts
+- react-loadable - needed for codesplitting, enables dynamic imports.
+- react-transition-group - simple components for on page load transitions
+- styled-components - our way to combine css + js, ued for all components with style.
+
+### other
+
+- chartist - A lightweight chart lib for highly customizable responsive charts
+- react-chartist - the bridge for an easy usage of chartist
+- dayjs - lightweight lib to format dates
+- pell - lightweight editor
 
 ## Backend
 
