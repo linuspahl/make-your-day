@@ -10,6 +10,7 @@ import merge from 'webpack-merge'
 // interfaces
 import { WebpackConfigParams } from 'types/types'
 // helper
+import moduleResolvers from '../moduleResolvers'
 import presetConfig from './presets/loadPresets'
 
 // * entry - configure entry point of the application
