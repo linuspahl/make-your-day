@@ -16,12 +16,13 @@ import {
 interface Props {
   children: React.ReactNode
   headline?: string
+  context?: 'page'
   toggleAction: (event: React.MouseEvent<HTMLElement>) => void
 }
 
 export default class Modal extends React.Component<Props> {
   public render(): React.ReactNode {
-    const { toggleAction, children, headline } = this.props
+    const { toggleAction, children, headline, context } = this.props
     return (
       <Wrapper data-testid="Modal">
         <FadeTransition fullHeight>
@@ -32,7 +33,7 @@ export default class Modal extends React.Component<Props> {
             data-testid="Modal-offset"
           />
           <ContentWrapper>
-            <Content>
+            <Content context={context}>
               <Head>
                 {headline && <H1>{headline}</H1>}
                 <CloseIconWrapper>

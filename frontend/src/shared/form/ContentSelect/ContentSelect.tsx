@@ -122,7 +122,11 @@ export default class ContentSelect extends React.Component<Props, State> {
           <Icon title="angle-down" />
         </ArrowIcon>
         {isOpen && (
-          <Modal headline={label} toggleAction={this.toggleSelect}>
+          <Modal
+            headline={label}
+            toggleAction={this.toggleSelect}
+            context="page"
+          >
             <Options data-testid="ContentSelect-options">
               {sortedOptions.map(
                 (option): JSX.Element => {
