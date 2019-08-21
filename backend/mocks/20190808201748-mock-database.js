@@ -278,13 +278,6 @@ function generateRecords(
       {
         categoryId: subcategories[3].id,
         userId: initialUserId,
-        amount: 2,
-        createdAt: now,
-        updatedAt: now,
-      },
-      {
-        categoryId: subcategories[3].id,
-        userId: initialUserId,
         amount: 1.5,
         createdAt: fourDaysAgo,
         updatedAt: fourDaysAgo,
@@ -293,14 +286,7 @@ function generateRecords(
       {
         categoryId: subcategories[4].id,
         userId: initialUserId,
-        amount: 3,
-        createdAt: oneDayAgo,
-        updatedAt: oneDayAgo,
-      },
-      {
-        categoryId: subcategories[4].id,
-        userId: initialUserId,
-        amount: 2,
+        amount: 0,
         createdAt: sixDaysAgo,
         updatedAt: sixDaysAgo,
       },
