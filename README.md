@@ -14,8 +14,8 @@ You will find everything about:
 
 This app is not super complex, but in the context of the frontend, it is a great example for some best practices, like how to write reusable components, how to write tests, how to type a React App, etc.
 
-My main focus is on frontend, the backend is very fundamental.
-It is providing some basic functinality, but I will may replace the core with [postgraphile](https://www.graphile.org/postgraphile/).
+My main focus is on the frontend, the backend is very fundamental.
+It is providing some basic functionality, but I will may replace the core with [postgraphile](https://www.graphile.org/postgraphile/).
 
 ## What is this app doing?
 
