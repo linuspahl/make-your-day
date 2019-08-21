@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import { Link } from 'react-router-dom'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import H1 from 'shared/H1/H1'
@@ -10,6 +9,7 @@ import Row from 'shared/form/Row/Row'
 import Spacer from 'shared/Spacer/Spacer'
 import UserSettingCreate from 'components/UserSettingCreate/UserSettingCreate'
 import UserSettingDelete from 'components/UserSettingDelete/UserSettingDelete'
+import Link from 'shared/Link/Link'
 // graphql
 import { GetSettings } from 'store/setting/query'
 // interface

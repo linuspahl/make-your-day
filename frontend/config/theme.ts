@@ -19,6 +19,7 @@ export const defaultTheme = {
   // Font setting
   text: '#545454',
   info: '#ccc',
+  link: '#1997e4',
   // Other
   border: '#ccc',
   success: '#cdffbe',

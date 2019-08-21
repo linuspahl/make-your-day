@@ -1,6 +1,5 @@
 // libraries
 import React from 'react'
-import { Link } from 'react-router-dom'
 // utils
 import { handleInputChange } from 'utils/utils'
 // components
@@ -12,6 +11,7 @@ import Button from 'shared/Button/Button'
 import Textarea from 'shared/form/Textarea/Textarea'
 import CategoryIcon from 'shared/CategoryIcon/CategoryIcon'
 import ContentSelect from 'shared/form/ContentSelect/ContentSelect'
+import Link from 'shared/Link/Link'
 // interfaces
 import { CategoryFull, Subcategory } from 'store/category/type'
 import { Form as FormType, InputEvent, SelectOption } from 'types/types'

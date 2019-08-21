@@ -40,10 +40,6 @@ a {
   text-decoration: none;
 }
 
-a:visited {
-  color: inherit;
-}
-
 b {
   font-weight: bold;
 }
