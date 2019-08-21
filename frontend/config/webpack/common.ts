@@ -1,14 +1,16 @@
 // Webpack base config
 
-import HtmlWebPackPlugin from 'html-webpack-plugin'
-import DotenvPlugin from 'dotenv-webpack'
-import CopyPlugin from 'copy-webpack-plugin'
-import moduleResolvers from '../moduleResolvers'
-import * as getGqlTransformer from 'ts-transform-graphql-tag'
+// libraries
 import { Configuration, ProgressPlugin } from 'webpack'
-import presetConfig from './presets/loadPresets'
+import * as getGqlTransformer from 'ts-transform-graphql-tag'
+import CopyPlugin from 'copy-webpack-plugin'
+import DotenvPlugin from 'dotenv-webpack'
+import HtmlWebPackPlugin from 'html-webpack-plugin'
 import merge from 'webpack-merge'
+// interfaces
 import { WebpackConfigParams } from 'types/types'
+// helper
+import presetConfig from './presets/loadPresets'
 
 // * entry - configure entry point of the application
 // * output
