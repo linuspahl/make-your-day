@@ -79,7 +79,7 @@ const commonConfigutation = (
       ],
       resolve: {
         modules: moduleResolvers,
-        extensions: ['.mjs', '.js', '.ts', '.tsx'],
+        extensions: ['.js', '.ts', '.tsx'],
       },
     },
     modeConfig(mode),
