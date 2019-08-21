@@ -15,14 +15,8 @@ interface Props {
 
 const visibleActions = [
   'bold',
-  'italic',
   'underline',
   'strikethrough',
-  'heading1',
-  'heading2',
-  'paragraph',
-  'ulist',
-  'code',
   'line',
   'link',
   'image',
