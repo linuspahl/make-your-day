@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 
 export const PellEditor = styled.div`
+  min-height: 20vh;
   height: 100%;
 
   display: grid;
