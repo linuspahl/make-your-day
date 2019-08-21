@@ -21,6 +21,8 @@ export const defaultTheme = {
   info: '#ccc',
   // Other
   border: '#ccc',
+  success: '#cdffbe',
+  error: '#ff9a9a',
   // box shadow inspired by google material design
   boxShadow:
     '0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.12), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.24)',
@@ -47,6 +49,8 @@ export const nightModeTheme = {
 
   text: '#fff',
   border: '#545454',
+  success: '#1b7103',
+  error: '#921515',
 }
 
 const mediaQuery = {

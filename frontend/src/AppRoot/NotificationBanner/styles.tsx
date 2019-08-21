@@ -45,12 +45,12 @@ export const Alert = styled(TextBig)<AlertProps>`
     `${props.theme.padding / 2}rem ${props.theme.padding}rem`};
 
   background-color: ${(props): string => {
-    if (props.role === 'error') return '#ff6060'
-    if (props.role === 'success') return '#9dff8d'
+    if (props.role === 'error') return props.theme.error
+    if (props.role === 'success') return props.theme.success
     return 'white'
   }};
 
-  color: #000;
+  color: ${(props): string => props.theme.text};
 
   animation: ${moveIn} ${(props): number => props.durationAnimation}s,
     ${moveOut} ${(props): number => props.durationAnimation}s linear
