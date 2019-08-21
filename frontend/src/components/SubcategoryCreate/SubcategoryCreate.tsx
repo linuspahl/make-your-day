@@ -42,6 +42,8 @@ class SubcategoryCreate extends React.Component<Props> {
   public render(): JSX.Element {
     const { match, rootPath } = this.props
     const categoryId = extractIdFromUrl(match)
+    const parentCategoryId = extractIdFromUrl(match, 'categoryId')
+
     return (
       <PageQueryHandler
         dataTestId="SubcategoryCreate"
@@ -77,7 +79,7 @@ class SubcategoryCreate extends React.Component<Props> {
                 ): JSX.Element => (
                   <SubcategoryForm
                     mode="create"
-                    rootPath={rootPath}
+                    rootPath={`${rootPath}/${parentCategoryId}/subcategories`}
                     submitAction={(variables: SubcategoryCreateType): void =>
                       createSubcategory({ variables })
                     }

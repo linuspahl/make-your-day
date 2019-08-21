@@ -41,6 +41,7 @@ class SubcategoryEdit extends React.Component<Props> {
   public render(): JSX.Element {
     const { match, rootPath } = this.props
     const categoryId = extractIdFromUrl(match)
+    const parentCategoryId = extractIdFromUrl(match, 'categoryId')
 
     return (
       <PageQueryHandler
@@ -77,7 +78,7 @@ class SubcategoryEdit extends React.Component<Props> {
                       title: subcategory.title,
                       color: subcategory.color,
                     }}
-                    rootPath={rootPath}
+                    rootPath={`${rootPath}/${parentCategoryId}/subcategories`}
                     parentCategoryId={subcategory.parentId}
                     submitAction={(variables: SubcategoryEditType): void => {
                       updateCategory({
