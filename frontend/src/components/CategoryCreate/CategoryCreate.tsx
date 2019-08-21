@@ -39,7 +39,7 @@ class CategoryCreate extends React.Component<Props> {
     return (
       <FadeTransition fullWidth fullHeight>
         <DefaultPageLayout>
-          <ContentBox role="main">
+          <ContentBox role="main" context="page">
             <H1 context="page">Kategorie erstellen</H1>
             <Mutation
               mutation={CreateCategory}
