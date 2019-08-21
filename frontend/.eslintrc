@@ -10,7 +10,7 @@
     "eslint:recommended", // default rules, like 'no unused var'
     "plugin:@typescript-eslint/recommended", // rules we need to lint typescript
     "plugin:react/recommended", // rules we need to lint react
-    "prettier", // integration woth prettier, this part needs to be at the end
+    "prettier", // integration with prettier, this part needs to be at the end
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
@@ -26,8 +26,7 @@
     }
   },
   "rules": {
-    // turn on errors for missing imports
-    "react/prop-types": "off",
+    "react/prop-types": "off", // turn on errors for missing imports
     "prettier/prettier": [
       "error",
       {
