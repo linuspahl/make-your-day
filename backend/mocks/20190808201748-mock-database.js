@@ -286,7 +286,7 @@ function generateRecords(
       {
         categoryId: subcategories[4].id,
         userId: initialUserId,
-        amount: 0,
+        amount: 1,
         createdAt: sixDaysAgo,
         updatedAt: sixDaysAgo,
       },
