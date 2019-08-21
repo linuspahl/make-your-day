@@ -104,17 +104,12 @@ export const widgetPositionOptions: SelectOption[] = [
 
 export const evaluationTypeOptions: SelectOption[] = [
   { value: 'linechart', title: 'Liniendiagram' },
-  { value: 'barchart', title: 'Balkendiagram' },
   { value: 'piechart', title: 'Kuchendiagram' },
 ]
 
 export const evaluationPeriodOptions: SelectOption[] = [
   { value: 'day', title: 'Dieser Tag' },
   { value: 'week', title: 'Diese Woche' },
-  { value: 'month', title: 'Dieser Monat' },
-  { value: 'year', title: 'Dieses Jahr' },
   { value: 'lastDay', title: 'Vergange 24 Stunden' },
   { value: 'lastWeek', title: 'Vergange 7 Tage' },
-  { value: 'lastMonth', title: 'Vergangene 30 Tage' },
-  { value: 'lastYear', title: 'Vergangene 365 Tage' },
 ]
