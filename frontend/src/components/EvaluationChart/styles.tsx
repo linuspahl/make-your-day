@@ -10,6 +10,10 @@ interface WrapperProps {
 export const Wrapper = styled.div<WrapperProps>`
   text-align: center;
 
+  .ct-label {
+    fill: ${(props): string => props.theme.text};
+  }
+
   ${(props): string => {
     let result = props.seriesColors.map(
       (color): string => `
