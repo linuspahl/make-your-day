@@ -7,7 +7,7 @@ import Sequelize from 'sequelize'
 
 // Get database config
 const {
-  db: { name, user, password, host, timezone },
+  db: { name, user, password, host, port, timezone },
 } = config
 
 // Setup sequelize operation aliases.
@@ -23,6 +23,7 @@ const operatorsAliases = {
 }
 
 export default new Sequelize(name, user, password, {
+  port,
   host,
   dialect: 'postgres',
   operatorsAliases,

@@ -8,7 +8,7 @@ const config = require('./config')
 
 const {
   default: {
-    db: { user, password, name, host },
+    db: { user, password, name, host, port },
   },
 } = config
 
@@ -18,6 +18,7 @@ module.exports = {
     password: password,
     database: name,
     host: host,
+    port: port,
     dialect: 'postgres',
   },
 }
