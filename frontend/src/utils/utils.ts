@@ -84,58 +84,77 @@ export const getRootPath = (path: string = ''): string => {
 
 // Utility localstorage functions
 
-// format function for all existing local storage values
-const formatAppStateValue = (
-  key: string,
-  value: string
-): string | number | boolean => {
-  switch (key) {
-    // Numbers
-    case 'userId':
-    case 'userSessionId':
-      return parseInt(value, 10)
-    // Booleans
-    case 'nightMode':
-    case 'leftHandMode':
-    case 'showAppBgImage':
-      return value ? JSON.parse(value) : false
-    default:
-      return value || null
+export class LocalStorageProvider {
+  public static get = (
+    stateKeys: string[] = []
+  ): {
+    [key: string]: string
+  } => {
+    return stateKeys.reduce(
+      (
+        result: { [key: string]: string | number | boolean },
+        key: string
+      ): object => {
+        const value = localStorage.getItem(key)
+        result[key] = LocalStorageProvider.formatLocalStorageItem(key, value)
+        return result
+      },
+      {}
+    )
+  }
+
+  public static update = (
+    newStore: LocalStorageCreate,
+    setState: (state: LocalStorage) => void
+  ): void => {
+    // We prefere to use SCREAMING_SNAKE_CASE notation for local store DataTransferItemList, but LocalStorageProvider.case it is easier to use the camelCase notation
+    // This way we don't need to map the different notations
+
+    // Create a clean app store without undefined values
+    const updatedStore: { [key: string]: string | number | boolean } = {}
+    Object.keys(newStore).forEach((key: string): void => {
+      // format to int / boolean and update specified  app state
+      const value = LocalStorageProvider.formatLocalStorageItem(
+        key,
+        newStore[key]
+      )
+      updatedStore[key] = value
+      // format value to string and update LocalStorage
+      localStorage.setItem(key, String(value))
+    })
+    setState(updatedStore)
+  }
+
+  public static clear = (
+    updateAppState: (defaultLocalStorage: LocalStorage) => void
+  ): void => {
+    localStorage.clear()
+    updateAppState({
+      authToken: null,
+      expiresAt: null,
+      leftHandMode: false,
+      nightMode: false,
+      showAppBgImage: false,
+      userId: null,
+    })
+  }
+
+  private static formatLocalStorageItem = (
+    key: string,
+    value: string
+  ): string | number | boolean => {
+    switch (key) {
+      // Numbers
+      case 'userId':
+      case 'userSessionId':
+        return parseInt(value, 10)
+      // Booleans
+      case 'nightMode':
+      case 'leftHandMode':
+      case 'showAppBgImage':
+        return value ? JSON.parse(value) : false
+      default:
+        return value || null
+    }
   }
 }
-
-// Update local storage needed when setting e.g. user settings like the darkmode
-export const updateLocalStorage = (
-  newStore: LocalStorageCreate,
-  setState: (state: LocalStorage) => void
-): void => {
-  // We prefere to use SCREAMING_SNAKE_CASE notation for local store DataTransferItemList, but in this case it is easier to use the camelCase notation
-  // This way we don't need to map the different notations
-
-  // Create a clean app store without undefined values
-  const updatedStore: { [key: string]: string | number | boolean } = {}
-  Object.keys(newStore).forEach((key: string): void => {
-    // format to int / boolean and update specified  app state
-    const value = formatAppStateValue(key, newStore[key])
-    updatedStore[key] = value
-    // format value to string and update LocalStorage
-    localStorage.setItem(key, String(value))
-  })
-  setState(updatedStore)
-}
-
-// get localstorage values by provided keys
-export const getLocalStorage = (
-  stateKeys: string[] = []
-): { [key: string]: string } =>
-  stateKeys.reduce(
-    (
-      result: { [key: string]: string | number | boolean },
-      key: string
-    ): object => {
-      const value = localStorage.getItem(key)
-      result[key] = formatAppStateValue(key, value)
-      return result
-    },
-    {}
-  )
