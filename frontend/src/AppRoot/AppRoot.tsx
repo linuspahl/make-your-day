@@ -8,6 +8,8 @@ import createApolloClient from './ApolloClient'
 import { ApolloProvider } from 'react-apollo'
 import { LocalStorageProvider } from 'utils/utils'
 import { ThemeProvider } from 'styled-components'
+// utils
+import AppContext from 'contexts/AppContext'
 // theme
 import colorTheme from 'theme'
 // components
@@ -72,27 +74,36 @@ const AppRoot = (): JSX.Element => {
     createNotificationBanner
   )
 
+  const appContext = {
+    createNotificationBanner,
+    clearBrowserStorage,
+    userSession,
+    userSettings,
+  }
+
   return (
-    <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={colorTheme(userSettings)}>
-        <AppWrapper>
-          {/*
+    <AppContext.Provider value={appContext}>
+      <ApolloProvider client={apolloClient}>
+        <ThemeProvider theme={colorTheme(userSettings)}>
+          <AppWrapper>
+            {/*
               We are using the NotificationBanner above all routes,
               this way the notifications won't unmount on route changes
             */}
-          <NotificationBanner ref={notificationBanner} />
-          <Routes
-            clearLocalStorage={clearBrowserStorage}
-            createNotificationBanner={createNotificationBanner}
-            userSession={userSession}
-            updateLocalStorage={(nextStore): void =>
-              LocalStorageProvider.update(nextStore, setBrowserStorage)
-            }
-            userSettings={userSettings}
-          />
-        </AppWrapper>
-      </ThemeProvider>
-    </ApolloProvider>
+            <NotificationBanner ref={notificationBanner} />
+            <Routes
+              clearLocalStorage={clearBrowserStorage}
+              createNotificationBanner={createNotificationBanner}
+              userSession={userSession}
+              updateLocalStorage={(nextStore): void =>
+                LocalStorageProvider.update(nextStore, setBrowserStorage)
+              }
+              userSettings={userSettings}
+            />
+          </AppWrapper>
+        </ThemeProvider>
+      </ApolloProvider>
+    </AppContext.Provider>
   )
 }
 

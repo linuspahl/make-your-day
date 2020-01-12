@@ -7,7 +7,7 @@ import UserSessionsOverview from 'components/UserSessionsOverview/UserSessionsOv
 // interfaces
 import { UserSession } from 'store/userSession/type'
 import { NotificationCreate, LocalStorage } from 'types/types'
-import { UserSetting } from 'store/userSetting/type'
+import { UserSettings } from 'store/userSetting/type'
 
 interface Props {
   clearLocalStorage: () => void
@@ -15,7 +15,7 @@ interface Props {
   rootPath: string
   updateLocalStorage: (localStorage: LocalStorage) => void
   userSession: UserSession
-  userSettings: { [key: string]: UserSetting }
+  userSettings: UserSettings
 }
 
 const Settings = (props: Props): JSX.Element => {

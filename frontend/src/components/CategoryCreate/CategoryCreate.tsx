@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
@@ -11,67 +11,27 @@ import ContentBox from 'shared/ContentBox/ContentBox'
 import DefaultPageLayout from 'components/DefaultPageLayout/DefaultPageLayout'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
-// graphql
-import { addCategory } from 'store/category/update'
-import { CreateCategory } from 'store/category/mutation'
-// interface
+// interfaces
 import { NotificationCreate } from 'types/types'
 import {
   Category,
   CategoryCreate as CategoryCreateType,
 } from 'store/category/type'
+// graphql
+import { addCategory } from 'store/category/update'
+import { CreateCategory } from 'store/category/mutation'
+import AppContext from 'contexts/AppContext'
 
 interface Props extends RouteComponentProps {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
-class CategoryCreate extends React.Component<Props> {
-  public constructor(props: Props) {
-    super(props)
-
-    this.handleCompleted = this.handleCompleted.bind(this)
-    this.handleError = this.handleError.bind(this)
-  }
-
-  public render(): JSX.Element {
-    const { rootPath } = this.props
-    return (
-      <FadeTransition fullWidth fullHeight>
-        <DefaultPageLayout>
-          <ContentBox role="main" context="page">
-            <H1 context="page">Kategorie erstellen</H1>
-            <Mutation
-              mutation={CreateCategory}
-              onCompleted={this.handleCompleted}
-              onError={this.handleError}
-              update={addCategory}
-            >
-              {(
-                createCategory: ({
-                  variables,
-                }: {
-                  variables: CategoryCreateType
-                }) => void
-              ): JSX.Element => (
-                <CategoryForm
-                  mode="create"
-                  rootPath={rootPath}
-                  submitAction={(variables: CategoryCreateType): void =>
-                    createCategory({ variables })
-                  }
-                />
-              )}
-            </Mutation>
-          </ContentBox>
-        </DefaultPageLayout>
-      </FadeTransition>
-    )
-  }
-
-  // Form submit function
-  private handleCompleted(data: { createCategory: Category }): void {
-    const { history, rootPath, createNotificationBanner } = this.props
+const handleCompleted = (
+  props: Props,
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((data: { createCategory: Category }) => void) => {
+  const { rootPath, history } = props
+  return (data): void => {
     const {
       createCategory: { id, title, hasSubcategories },
     } = data
@@ -89,16 +49,56 @@ class CategoryCreate extends React.Component<Props> {
       history.push(rootPath)
     }
   }
+}
 
-  // Form error function
-  private handleError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
+const handleError = (
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((error: ApolloError) => void) => {
+  return (error): void => {
     createNotificationBanner({
       type: 'error',
       message: 'Erstellung der Kategorie fehlgeschlagen',
     })
     logError(error)
   }
+}
+
+export const CategoryCreate = (props: Props): JSX.Element => {
+  const { rootPath } = props
+  const { createNotificationBanner } = useContext(AppContext)
+  const onCompleted = handleCompleted(props, createNotificationBanner)
+  const onError = handleError(createNotificationBanner)
+  return (
+    <FadeTransition fullWidth fullHeight>
+      <DefaultPageLayout>
+        <ContentBox role="main" context="page">
+          <H1 context="page">Kategorie erstellen</H1>
+          <Mutation
+            mutation={CreateCategory}
+            onCompleted={onCompleted}
+            onError={onError}
+            update={addCategory}
+          >
+            {(
+              createCategory: ({
+                variables,
+              }: {
+                variables: CategoryCreateType
+              }) => void
+            ): JSX.Element => (
+              <CategoryForm
+                mode="create"
+                rootPath={rootPath}
+                submitAction={(variables: CategoryCreateType): void =>
+                  createCategory({ variables })
+                }
+              />
+            )}
+          </Mutation>
+        </ContentBox>
+      </DefaultPageLayout>
+    </FadeTransition>
+  )
 }
 
 export default withRouter(CategoryCreate)

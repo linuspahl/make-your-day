@@ -13,9 +13,9 @@ import Link from 'shared/Link/Link'
 // graphql
 import { GetSettings } from 'store/setting/query'
 // interface
-import { UserSetting } from 'store/userSetting/type'
 import { Setting } from 'store/setting/type'
 import { UserSession } from 'store/userSession/type'
+import { UserSettings } from 'store/userSetting/type'
 import { NotificationCreate, LocalStorage } from 'types/types'
 
 interface Props {
@@ -24,7 +24,7 @@ interface Props {
   rootPath: string
   updateLocalStorage: (localStorage: LocalStorage) => void
   userSession: UserSession
-  userSettings: { [key: string]: UserSetting }
+  userSettings: UserSettings
 }
 
 interface PageQueryHandler {
