@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { ApolloError } from 'apollo-boost'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
@@ -12,6 +12,8 @@ import DeleteButton from 'shared/DeleteButton/DeleteButton'
 import H1 from 'shared/H1/H1'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import RecordForm from 'components/RecordForm/RecordForm'
+// contexts
+import AppContext from 'contexts/AppContext'
 // graphql
 import { UpdateRecord, DeleteRecord } from 'store/record/mutation'
 import { addRecord, deleteRecord } from 'store/record/update'
@@ -20,9 +22,6 @@ import { NotificationCreate } from 'types/types'
 import { CategoryFull } from 'store/category/type'
 import { Record, RecordEdit as RecordEditType } from 'store/record/type'
 
-interface Props extends RouteComponentProps {
-  createNotificationBanner: (notification: NotificationCreate) => void
-}
 interface PageQueryResult {
   data: { getCategory: CategoryFull; getRecord: Record }
   status: { getCategory: JSX.Element; getRecord: JSX.Element }
@@ -65,114 +64,113 @@ const pageQuery = gql`
     }
   }
 `
+// Form submit function
+const handleCompleted = (
+  props: RouteComponentProps,
+  createNotificationBanner: (notification: NotificationCreate) => void
+): void => {
+  const { history } = props
 
-class RecordEdit extends React.Component<Props> {
-  public constructor(props: Props) {
-    super(props)
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Eintrag erfolgreich bearbeitet`,
+  })
 
-    this.handleCompleted = this.handleCompleted.bind(this)
-    this.handleError = this.handleError.bind(this)
-  }
+  // Go to the dashboard
+  history.push('/')
+}
 
-  public render(): JSX.Element {
-    const { match, history } = this.props
-    const categoryId = extractIdFromUrl(match, 'categoryId')
-    const recordId = extractIdFromUrl(match, 'id')
-
-    return (
-      <PageQueryHandler
-        dataTestId="RecordEdit"
-        errorMessages={{
-          getCategory: 'Kategorie konnte nicht geladen werden',
-          getRecord: 'Eintrag konnte nicht geladen werden',
-        }}
-        query={pageQuery}
-        queryNames={['getCategory', 'getRecord']}
-        variables={{ categoryId, recordId }}
-      >
-        {({
-          data: { getCategory: category, getRecord: record },
-          status: {
-            getCategory: categoryQueryStatus,
-            getRecord: recordQueryStatus,
-          },
-        }: PageQueryResult): JSX.Element => (
-          <React.Fragment>
-            <H1>Eintrag bearbeiten</H1>
-            {recordQueryStatus}
-            {categoryQueryStatus}
-            {!recordQueryStatus && !categoryQueryStatus && category && record && (
-              <React.Fragment>
-                <Mutation
-                  mutation={UpdateRecord}
-                  onCompleted={this.handleCompleted}
-                  onError={this.handleError}
-                  update={addRecord}
-                >
-                  {(
-                    updateRecord: ({
-                      variables,
-                    }: {
-                      variables: RecordEditType
-                    }) => void
-                  ): JSX.Element => (
-                    <RecordForm
-                      initialData={record}
-                      category={category}
-                      rootPath={'/'}
-                      submitAction={(variables: RecordEditType): void => {
-                        updateRecord({
-                          variables: {
-                            amount: variables.amount,
-                            description: variables.description,
-                            id: variables.id,
-                            title: variables.title,
-                          },
-                        })
-                      }}
-                    />
-                  )}
-                </Mutation>
-                <ActionRow>
-                  <DeleteButton
-                    id={record.id}
-                    mutation={DeleteRecord}
-                    onUpdate={deleteRecord}
-                    title={record.title}
-                    onDelete={(): void => history.push('/')}
-                  />
-                </ActionRow>
-              </React.Fragment>
-            )}
-          </React.Fragment>
-        )}
-      </PageQueryHandler>
-    )
-  }
-
-  // Form submit function
-  private handleCompleted(): void {
-    const { history, createNotificationBanner } = this.props
-
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Eintrag erfolgreich bearbeitet`,
-    })
-
-    // Go to the dashboard
-    history.push('/')
-  }
-
-  // Form error function
-  private handleError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
+// Form error function
+const handleError = (
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((error: ApolloError) => void) => {
+  return (error): void => {
     createNotificationBanner({
       type: 'error',
       message: 'Bearbeitung des Eintrags fehlgeschlagen',
     })
     logError(error)
   }
+}
+
+const RecordEdit = (props: RouteComponentProps): JSX.Element => {
+  const { match, history } = props
+  const { createNotificationBanner } = useContext(AppContext)
+  const categoryId = extractIdFromUrl(match, 'categoryId')
+  const recordId = extractIdFromUrl(match, 'id')
+  const onCompleted = (): void =>
+    handleCompleted(props, createNotificationBanner)
+  const onError = handleError(createNotificationBanner)
+  return (
+    <PageQueryHandler
+      dataTestId="RecordEdit"
+      errorMessages={{
+        getCategory: 'Kategorie konnte nicht geladen werden',
+        getRecord: 'Eintrag konnte nicht geladen werden',
+      }}
+      query={pageQuery}
+      queryNames={['getCategory', 'getRecord']}
+      variables={{ categoryId, recordId }}
+    >
+      {({
+        data: { getCategory: category, getRecord: record },
+        status: {
+          getCategory: categoryQueryStatus,
+          getRecord: recordQueryStatus,
+        },
+      }: PageQueryResult): JSX.Element => (
+        <React.Fragment>
+          <H1>Eintrag bearbeiten</H1>
+          {recordQueryStatus}
+          {categoryQueryStatus}
+          {!recordQueryStatus && !categoryQueryStatus && category && record && (
+            <React.Fragment>
+              <Mutation
+                mutation={UpdateRecord}
+                onCompleted={onCompleted}
+                onError={onError}
+                update={addRecord}
+              >
+                {(
+                  updateRecord: ({
+                    variables,
+                  }: {
+                    variables: RecordEditType
+                  }) => void
+                ): JSX.Element => (
+                  <RecordForm
+                    initialData={record}
+                    category={category}
+                    rootPath={'/'}
+                    submitAction={(variables: RecordEditType): void => {
+                      updateRecord({
+                        variables: {
+                          amount: variables.amount,
+                          description: variables.description,
+                          id: variables.id,
+                          title: variables.title,
+                        },
+                      })
+                    }}
+                  />
+                )}
+              </Mutation>
+              <ActionRow>
+                <DeleteButton
+                  id={record.id}
+                  mutation={DeleteRecord}
+                  onUpdate={deleteRecord}
+                  title={record.title}
+                  onDelete={(): void => history.push('/')}
+                />
+              </ActionRow>
+            </React.Fragment>
+          )}
+        </React.Fragment>
+      )}
+    </PageQueryHandler>
+  )
 }
 
 export default withRouter(RecordEdit)
