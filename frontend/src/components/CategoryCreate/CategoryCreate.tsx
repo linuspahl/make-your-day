@@ -11,6 +11,8 @@ import ContentBox from 'shared/ContentBox/ContentBox'
 import DefaultPageLayout from 'components/DefaultPageLayout/DefaultPageLayout'
 import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
+// contexts
+import AppContext from 'contexts/AppContext'
 // interfaces
 import { NotificationCreate } from 'types/types'
 import {
@@ -20,7 +22,6 @@ import {
 // graphql
 import { addCategory } from 'store/category/update'
 import { CreateCategory } from 'store/category/mutation'
-import AppContext from 'contexts/AppContext'
 
 interface Props extends RouteComponentProps {
   rootPath: string
