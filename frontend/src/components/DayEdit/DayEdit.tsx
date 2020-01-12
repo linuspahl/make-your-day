@@ -80,7 +80,7 @@ class DayEdit extends React.Component<Props> {
                           <CategoryTitle>{category.title}</CategoryTitle>
                           <CategoryRecords>
                             {sortBy(category.records, 'category.id').map(
-                              (record: RecordType): React.ReactNode => (
+                              (record: RecordType): JSX.Element => (
                                 <CategorySummary
                                   amount={category.hasUnit ? record.amount : 1}
                                   category={category}

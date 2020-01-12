@@ -21,7 +21,7 @@ interface Props {
 }
 
 export default class Modal extends React.Component<Props> {
-  public render(): React.ReactNode {
+  public render(): JSX.Element {
     const { toggleAction, children, headline, context } = this.props
     return (
       <Wrapper data-testid="Modal">
