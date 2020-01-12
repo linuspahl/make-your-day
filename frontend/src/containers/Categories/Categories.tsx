@@ -55,22 +55,12 @@ const Categories = (props: Props): JSX.Element => {
       <Route
         exact
         path={`${rootPath}/:id/subcategories/create`}
-        render={(): JSX.Element => (
-          <SubcategoryCreate
-            createNotificationBanner={createNotificationBanner}
-            rootPath={rootPath}
-          />
-        )}
+        render={(): JSX.Element => <SubcategoryCreate rootPath={rootPath} />}
       />
       <Route
         exact
         path={`${rootPath}/:categoryId/subcategories/:id/edit`}
-        render={(): JSX.Element => (
-          <SubcategoryEdit
-            createNotificationBanner={createNotificationBanner}
-            rootPath={rootPath}
-          />
-        )}
+        render={(): JSX.Element => <SubcategoryEdit rootPath={rootPath} />}
       />
     </React.Fragment>
   )

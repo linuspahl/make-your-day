@@ -10,6 +10,8 @@ import {
 } from 'testUtils'
 // components
 import SubcategoryEdit from 'components/SubcategoryEdit/SubcategoryEdit'
+// contexts
+import AppContext from 'contexts/AppContext'
 // fixtures
 import {
   updateSubcategorySuccess,
@@ -34,12 +36,11 @@ describe('SubcategoryEdit should', (): void => {
   test('show notification banner on successful create ', async (): Promise<
     void
   > => {
-    const createNotificationBannerStub = jest.fn()
+    const createNotificationBanner = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <SubcategoryEdit
-        {...propFixtures}
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <AppContext.Provider value={{ createNotificationBanner }}>
+        <SubcategoryEdit {...propFixtures} />
+      </AppContext.Provider>,
       {
         ...renderUtilsProps,
         mocks: [getSubcategorySuccess, updateSubcategorySuccess],
@@ -53,8 +54,8 @@ describe('SubcategoryEdit should', (): void => {
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
     // Wait for updateCategory
     await wait()
-    expect(createNotificationBannerStub).toBeCalledTimes(1)
-    expect(createNotificationBannerStub).toBeCalledWith({
+    expect(createNotificationBanner).toBeCalledTimes(1)
+    expect(createNotificationBanner).toBeCalledWith({
       message: `Subkategorie New Name erfolgreich bearbeitet`,
       type: 'success',
     })
@@ -63,12 +64,11 @@ describe('SubcategoryEdit should', (): void => {
   test('show notification banner on successful create ', async (): Promise<
     void
   > => {
-    const createNotificationBannerStub = jest.fn()
+    const createNotificationBanner = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <SubcategoryEdit
-        {...propFixtures}
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <AppContext.Provider value={{ createNotificationBanner }}>
+        <SubcategoryEdit {...propFixtures} />
+      </AppContext.Provider>,
       {
         ...renderUtilsProps,
         mocks: [getSubcategorySuccess, updateSubcategoryError],
@@ -82,8 +82,8 @@ describe('SubcategoryEdit should', (): void => {
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
     // Wait for updateCategory
     await wait()
-    expect(createNotificationBannerStub).toBeCalledTimes(1)
-    expect(createNotificationBannerStub).toBeCalledWith({
+    expect(createNotificationBanner).toBeCalledTimes(1)
+    expect(createNotificationBanner).toBeCalledWith({
       message: `Bearbeitung der Subkategorie fehlgeschlagen`,
       type: 'error',
     })

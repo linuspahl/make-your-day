@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
@@ -9,6 +9,8 @@ import { extractIdFromUrl, logError } from 'utils/utils'
 import H1 from 'shared/H1/H1'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
+// contexts
+import AppContext from 'contexts/AppContext'
 // graphql
 import { UpdateSubcategory } from 'store/category/mutation'
 import { GetSubcategory } from 'store/category/query'
@@ -21,7 +23,6 @@ import {
 } from 'store/category/type'
 
 interface Props extends RouteComponentProps {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
@@ -30,78 +31,12 @@ interface PageQueryResult {
   status: { getCategory: JSX.Element }
 }
 
-class SubcategoryEdit extends React.Component<Props> {
-  public constructor(props: Props) {
-    super(props)
-
-    this.handleCompleted = this.handleCompleted.bind(this)
-    this.handleError = this.handleError.bind(this)
-  }
-
-  public render(): JSX.Element {
-    const { match, rootPath } = this.props
-    const categoryId = extractIdFromUrl(match)
-    const parentCategoryId = extractIdFromUrl(match, 'categoryId')
-
-    return (
-      <PageQueryHandler
-        dataTestId="SubcategoryEdit"
-        errorMessages={{
-          getCategory: 'Subkategorie konnte nicht geladen werden',
-        }}
-        query={GetSubcategory}
-        queryNames={['getCategory']}
-        variables={{ id: categoryId }}
-      >
-        {({
-          data: { getCategory: subcategory },
-          status: { getCategory: getCategoryStatus },
-        }: PageQueryResult): JSX.Element => (
-          <React.Fragment>
-            <H1 context="page">Subkategorie bearbeiten</H1>
-            {getCategoryStatus}
-            {!getCategoryStatus && subcategory && (
-              <Mutation
-                mutation={UpdateSubcategory}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-              >
-                {(
-                  updateCategory: ({
-                    variables,
-                  }: {
-                    variables: Subcategory
-                  }) => void
-                ): JSX.Element => (
-                  <SubcategoryForm
-                    initialData={{
-                      title: subcategory.title,
-                      color: subcategory.color,
-                    }}
-                    rootPath={`${rootPath}/${parentCategoryId}/subcategories`}
-                    parentCategoryId={subcategory.parentId}
-                    submitAction={(variables: SubcategoryEditType): void => {
-                      updateCategory({
-                        variables: {
-                          id: subcategory.id,
-                          title: variables.title,
-                          color: variables.color,
-                        },
-                      })
-                    }}
-                  />
-                )}
-              </Mutation>
-            )}
-          </React.Fragment>
-        )}
-      </PageQueryHandler>
-    )
-  }
-
-  // Form submit function
-  private handleCompleted(data: { updateCategory: Category }): void {
-    const { history, rootPath, createNotificationBanner } = this.props
+const handleCompleted = (
+  props: Props,
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((data: { updateCategory: Category }) => void) => {
+  const { rootPath, history } = props
+  return (data): void => {
     const {
       updateCategory: { parentId, title },
     } = data
@@ -115,16 +50,81 @@ class SubcategoryEdit extends React.Component<Props> {
     // Go to the subcategories overview
     history.push(`${rootPath}/${parentId}/subcategories`)
   }
+}
 
-  // Form error function
-  private handleError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
+const handleError = (
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((error: ApolloError) => void) => {
+  return (error): void => {
     createNotificationBanner({
       type: 'error',
       message: 'Bearbeitung der Subkategorie fehlgeschlagen',
     })
     logError(error)
   }
+}
+
+const SubcategoryEdit = (props: Props): JSX.Element => {
+  const { match, rootPath } = props
+  const { createNotificationBanner } = useContext(AppContext)
+  const categoryId = extractIdFromUrl(match)
+  const parentCategoryId = extractIdFromUrl(match, 'categoryId')
+  const onCompleted = handleCompleted(props, createNotificationBanner)
+  const onError = handleError(createNotificationBanner)
+  return (
+    <PageQueryHandler
+      dataTestId="SubcategoryEdit"
+      errorMessages={{
+        getCategory: 'Subkategorie konnte nicht geladen werden',
+      }}
+      query={GetSubcategory}
+      queryNames={['getCategory']}
+      variables={{ id: categoryId }}
+    >
+      {({
+        data: { getCategory: subcategory },
+        status: { getCategory: getCategoryStatus },
+      }: PageQueryResult): JSX.Element => (
+        <React.Fragment>
+          <H1 context="page">Subkategorie bearbeiten</H1>
+          {getCategoryStatus}
+          {!getCategoryStatus && subcategory && (
+            <Mutation
+              mutation={UpdateSubcategory}
+              onCompleted={onCompleted}
+              onError={onError}
+            >
+              {(
+                updateCategory: ({
+                  variables,
+                }: {
+                  variables: Subcategory
+                }) => void
+              ): JSX.Element => (
+                <SubcategoryForm
+                  initialData={{
+                    title: subcategory.title,
+                    color: subcategory.color,
+                  }}
+                  rootPath={`${rootPath}/${parentCategoryId}/subcategories`}
+                  parentCategoryId={subcategory.parentId}
+                  submitAction={(variables: SubcategoryEditType): void => {
+                    updateCategory({
+                      variables: {
+                        id: subcategory.id,
+                        title: variables.title,
+                        color: variables.color,
+                      },
+                    })
+                  }}
+                />
+              )}
+            </Mutation>
+          )}
+        </React.Fragment>
+      )}
+    </PageQueryHandler>
+  )
 }
 
 export default withRouter(SubcategoryEdit)

@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation, FetchResult } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
@@ -10,6 +10,8 @@ import { extractIdFromUrl, logError, parseQueryParams } from 'utils/utils'
 import H1 from 'shared/H1/H1'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import SubcategoryForm from 'components/SubcategoryForm/SubcategoryForm'
+// contexts
+import AppContext from 'contexts/AppContext'
 // graphql
 import { addSubcategory } from 'store/category/update'
 import { CreateSubcategory } from 'store/category/mutation'
@@ -22,86 +24,23 @@ import {
 import { NotificationCreate } from 'types/types'
 
 interface Props extends RouteComponentProps {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
-
 interface PageQueryResult {
   data: { getCategory: Category }
   status: { getCategory: JSX.Element }
 }
 
-class SubcategoryCreate extends React.Component<Props> {
-  public constructor(props: Props) {
-    super(props)
-
-    this.handleCompleted = this.handleCompleted.bind(this)
-    this.handleError = this.handleError.bind(this)
-  }
-
-  public render(): JSX.Element {
-    const { match, rootPath } = this.props
-    const categoryId = extractIdFromUrl(match)
-    const parentCategoryId = extractIdFromUrl(match, 'categoryId')
-
-    return (
-      <PageQueryHandler
-        dataTestId="SubcategoryCreate"
-        errorMessages={{
-          getCategory: 'Kategorie konnten nicht geladen werden',
-        }}
-        query={GetCategory}
-        queryNames={['getCategory']}
-        variables={{ id: categoryId }}
-      >
-        {({
-          data: { getCategory: parentCategory },
-          status: { getCategory: getCategoryStatus },
-        }: PageQueryResult): JSX.Element => (
-          <React.Fragment>
-            <H1 context="page">Subkategorie erstellen</H1>
-            {getCategoryStatus}
-            {!getCategoryStatus && parentCategory && (
-              <Mutation
-                mutation={CreateSubcategory}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-                update={(cache: DataProxy, data: FetchResult): void =>
-                  addSubcategory(cache, data, { id: categoryId })
-                }
-              >
-                {(
-                  createSubcategory: ({
-                    variables,
-                  }: {
-                    variables: SubcategoryCreateType
-                  }) => void
-                ): JSX.Element => (
-                  <SubcategoryForm
-                    mode="create"
-                    rootPath={`${rootPath}/${parentCategoryId}/subcategories`}
-                    submitAction={(variables: SubcategoryCreateType): void =>
-                      createSubcategory({ variables })
-                    }
-                    parentCategoryId={parentCategory.id}
-                  />
-                )}
-              </Mutation>
-            )}
-          </React.Fragment>
-        )}
-      </PageQueryHandler>
-    )
-  }
-
-  // Form submit function
-  private handleCompleted(data: { createSubcategory: Category }): void {
+const handleCompleted = (
+  props: Props,
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((data: { createSubcategory: Category }) => void) => {
+  return (data): void => {
     const {
-      createNotificationBanner,
       history,
       location: { search },
       rootPath,
-    } = this.props
+    } = props
     const queryParams: { source?: string } = parseQueryParams(search)
     const { source } = queryParams
     const {
@@ -122,16 +61,75 @@ class SubcategoryCreate extends React.Component<Props> {
       history.push(`${rootPath}/${parentId}/subcategories`)
     }
   }
+}
 
-  // Form error function
-  private handleError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
+const handleError = (
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((error: ApolloError) => void) => {
+  return (error): void => {
     createNotificationBanner({
       type: 'error',
       message: 'Erstellung der Subkategorie fehlgeschlagen',
     })
     logError(error)
   }
+}
+
+const SubcategoryCreate = (props: Props): JSX.Element => {
+  const { match, rootPath } = props
+  const { createNotificationBanner } = useContext(AppContext)
+  const categoryId = extractIdFromUrl(match)
+  const parentCategoryId = extractIdFromUrl(match, 'categoryId')
+  const onCompleted = handleCompleted(props, createNotificationBanner)
+  const onError = handleError(createNotificationBanner)
+  return (
+    <PageQueryHandler
+      dataTestId="SubcategoryCreate"
+      errorMessages={{
+        getCategory: 'Kategorie konnten nicht geladen werden',
+      }}
+      query={GetCategory}
+      queryNames={['getCategory']}
+      variables={{ id: categoryId }}
+    >
+      {({
+        data: { getCategory: parentCategory },
+        status: { getCategory: getCategoryStatus },
+      }: PageQueryResult): JSX.Element => (
+        <React.Fragment>
+          <H1 context="page">Subkategorie erstellen</H1>
+          {getCategoryStatus}
+          {!getCategoryStatus && parentCategory && (
+            <Mutation
+              mutation={CreateSubcategory}
+              onCompleted={onCompleted}
+              onError={onError}
+              update={(cache: DataProxy, data: FetchResult): void =>
+                addSubcategory(cache, data, { id: categoryId })
+              }
+            >
+              {(
+                createSubcategory: ({
+                  variables,
+                }: {
+                  variables: SubcategoryCreateType
+                }) => void
+              ): JSX.Element => (
+                <SubcategoryForm
+                  mode="create"
+                  rootPath={`${rootPath}/${parentCategoryId}/subcategories`}
+                  submitAction={(variables: SubcategoryCreateType): void =>
+                    createSubcategory({ variables })
+                  }
+                  parentCategoryId={parentCategory.id}
+                />
+              )}
+            </Mutation>
+          )}
+        </React.Fragment>
+      )}
+    </PageQueryHandler>
+  )
 }
 
 export default withRouter(SubcategoryCreate)

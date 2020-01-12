@@ -11,6 +11,8 @@ import {
 import initSubcategoryForm from 'components/SubcategoryForm/__tests__/initSubcategoryForm'
 // components
 import SubcategoryCreate from 'components/SubcategoryCreate/SubcategoryCreate'
+// contexts
+import AppContext from 'contexts/AppContext'
 // fixtures
 import {
   createSubcategorySuccess,
@@ -33,12 +35,11 @@ describe('SubcategoryCreate should', (): void => {
   test('show notification banner on successful create ', async (): Promise<
     void
   > => {
-    const createNotificationBannerStub = jest.fn()
+    const createNotificationBanner = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <SubcategoryCreate
-        {...propFixtures}
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <AppContext.Provider value={{ createNotificationBanner }}>
+        <SubcategoryCreate {...propFixtures} />
+      </AppContext.Provider>,
       {
         ...renderUtilsProps,
         mocks: [getCategorySuccess, createSubcategorySuccess],
@@ -50,8 +51,8 @@ describe('SubcategoryCreate should', (): void => {
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     // Wait for updateCategory
     await wait()
-    expect(createNotificationBannerStub).toBeCalledTimes(1)
-    expect(createNotificationBannerStub).toBeCalledWith({
+    expect(createNotificationBanner).toBeCalledTimes(1)
+    expect(createNotificationBanner).toBeCalledWith({
       message: `Subkategorie ${subcategory.title} erfolgreich erstellt`,
       type: 'success',
     })
@@ -60,12 +61,11 @@ describe('SubcategoryCreate should', (): void => {
   test('should redirect to redord create form, on successful create ', async (): Promise<
     void
   > => {
-    const createNotificationBannerStub = jest.fn()
+    const createNotificationBanner = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <SubcategoryCreate
-        rootPath="/categories"
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <AppContext.Provider value={{ createNotificationBanner }}>
+        <SubcategoryCreate {...propFixtures} rootPath="/categories" />
+      </AppContext.Provider>,
       {
         ...renderUtilsProps,
         route: `/category/${category.id}/subcategories/create?source=createRecord`,
@@ -84,12 +84,11 @@ describe('SubcategoryCreate should', (): void => {
   test('show notification banner on unsuccessful create', async (): Promise<
     void
   > => {
-    const createNotificationBannerStub = jest.fn()
+    const createNotificationBanner = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <SubcategoryCreate
-        rootPath="/subcategories/create"
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <AppContext.Provider value={{ createNotificationBanner }}>
+        <SubcategoryCreate rootPath="/subcategories/create" />
+      </AppContext.Provider>,
       {
         ...renderUtilsProps,
         mocks: [getCategorySuccess, createSubcategoryError],
@@ -99,8 +98,8 @@ describe('SubcategoryCreate should', (): void => {
     initSubcategoryForm(getByLabelText, getByText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
-    expect(createNotificationBannerStub).toBeCalledTimes(1)
-    expect(createNotificationBannerStub).toBeCalledWith({
+    expect(createNotificationBanner).toBeCalledTimes(1)
+    expect(createNotificationBanner).toBeCalledWith({
       message: 'Erstellung der Subkategorie fehlgeschlagen',
       type: 'error',
     })
