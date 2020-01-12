@@ -11,6 +11,8 @@ import {
 } from 'testUtils'
 // components
 import RecordCreate from 'components/RecordCreate/RecordCreate'
+// contexts
+import AppContext from 'contexts/AppContext'
 // fixtures
 import {
   createRecordSuccess,
@@ -29,12 +31,11 @@ describe('RecordCreate should', (): void => {
   test('show notification banner on successful create ', async (): Promise<
     void
   > => {
-    const createNotificationBannerStub = jest.fn()
+    const createNotificationBanner = jest.fn()
     const { queryByLabelText, getByText } = renderWithAppRoot(
-      <RecordCreate
-        {...propsFixture}
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <AppContext.Provider value={{ createNotificationBanner }}>
+        <RecordCreate {...propsFixture} />
+      </AppContext.Provider>,
       {
         mocks: [createRecordSuccess, getCategoryWithChildrenSuccess],
         route: `/categories/${record.categoryId}/records/create`,
@@ -46,8 +47,8 @@ describe('RecordCreate should', (): void => {
     initRecordForm(queryByLabelText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
-    expect(createNotificationBannerStub).toBeCalledTimes(1)
-    expect(createNotificationBannerStub).toBeCalledWith({
+    expect(createNotificationBanner).toBeCalledTimes(1)
+    expect(createNotificationBanner).toBeCalledWith({
       message: 'Eintrag erfolgreich erstellt',
       type: 'success',
     })
@@ -56,12 +57,11 @@ describe('RecordCreate should', (): void => {
   test('show notification banner on unsuccessful create', async (): Promise<
     void
   > => {
-    const createNotificationBannerStub = jest.fn()
+    const createNotificationBanner = jest.fn()
     const { queryByLabelText, getByText } = renderWithAppRoot(
-      <RecordCreate
-        {...propsFixture}
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <AppContext.Provider value={{ createNotificationBanner }}>
+        <RecordCreate {...propsFixture} />
+      </AppContext.Provider>,
       {
         route: `/categories/${record.categoryId}/records/create`,
         routePath: '/categories/:categoryId/records/create',
@@ -73,8 +73,8 @@ describe('RecordCreate should', (): void => {
     initRecordForm(queryByLabelText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
-    expect(createNotificationBannerStub).toBeCalledTimes(1)
-    expect(createNotificationBannerStub).toBeCalledWith({
+    expect(createNotificationBanner).toBeCalledTimes(1)
+    expect(createNotificationBanner).toBeCalledWith({
       message: 'Erstellung des Eintrags fehlgeschlagen',
       type: 'error',
     })

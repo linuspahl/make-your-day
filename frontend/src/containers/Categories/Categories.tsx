@@ -40,9 +40,7 @@ const Categories = (props: Props): JSX.Element => {
       <Route
         exact
         path={`${rootPath}/:categoryId/records/create`}
-        render={(): JSX.Element => (
-          <RecordCreate createNotificationBanner={createNotificationBanner} />
-        )}
+        render={(): JSX.Element => <RecordCreate />}
       />
       <Route
         exact
