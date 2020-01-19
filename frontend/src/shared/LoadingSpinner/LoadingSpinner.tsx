@@ -12,7 +12,10 @@ interface Props {
   hasDelay?: boolean
 }
 
-const LoadingSpinner = ({ hasDelay, dataTestId }: Props): JSX.Element => {
+const LoadingSpinner = ({
+  hasDelay = true,
+  dataTestId,
+}: Props): JSX.Element => {
   const [delayFinished, setDelayFinished] = useState(false)
   const shouldRender = hasDelay ? delayFinished : true
   useEffect((): (() => void) => {
