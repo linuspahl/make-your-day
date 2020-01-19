@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 // components
 import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 
@@ -12,49 +12,19 @@ interface Props {
   hasDelay?: boolean
 }
 
-interface State {
-  delayFinished: boolean
-}
+const LoadingSpinner = ({ hasDelay, dataTestId }: Props): JSX.Element => {
+  const [delayFinished, setDelayFinished] = useState(false)
+  const shouldRender = hasDelay ? delayFinished : true
+  useEffect((): (() => void) => {
+    const delayTimeout =
+      hasDelay && window.setTimeout((): void => setDelayFinished(true), 20000)
+    return (): void => hasDelay && clearTimeout(delayTimeout)
+  }, [])
 
-const LoadingSpinner = class LoadingSpinner extends React.Component<
-  Props,
-  State
-> {
-  private delayTimeout?: number
-
-  public constructor(props: Props) {
-    super(props)
-    this.state = {
-      delayFinished: false,
-    }
-    this.delayTimeout = 0
+  if (shouldRender) {
+    return <CenteredSpinner />
   }
-
-  public componentDidMount(): void {
-    this.delayTimeout = window.setTimeout((): void => {
-      this.setState({
-        delayFinished: true,
-      })
-    }, 200)
-  }
-
-  public componentWillUnmount(): void {
-    if (this.delayTimeout) {
-      clearTimeout(this.delayTimeout)
-      this.delayTimeout = 0
-    }
-  }
-
-  public render(): JSX.Element {
-    const { hasDelay, dataTestId } = this.props
-    const { delayFinished } = this.state
-    const shouldRender = hasDelay ? delayFinished : true
-
-    if (shouldRender) {
-      return <CenteredSpinner />
-    }
-    return <div data-testid={dataTestId} />
-  }
+  return <div data-testid={dataTestId} />
 }
 
 export default LoadingSpinner

@@ -51,9 +51,7 @@ const QueryStateHandler = (props: Props): JSX.Element => {
           return loadingPlaceholder ? (
             loadingPlaceholder
           ) : (
-            <LoadingSpinner hasDelay>
-              <CenteredSpinner />
-            </LoadingSpinner>
+            <LoadingSpinner hasDelay />
           )
         }
         if (error) {

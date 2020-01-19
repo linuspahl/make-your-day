@@ -69,9 +69,7 @@ const PageQueryHandler = (props: Props): JSX.Element => {
           return loadingPlaceholder ? (
             loadingPlaceholder
           ) : (
-            <LoadingSpinner hasDelay dataTestId={dataTestId}>
-              <CenteredSpinner />
-            </LoadingSpinner>
+            <LoadingSpinner hasDelay dataTestId={dataTestId} />
           )
         }
 
