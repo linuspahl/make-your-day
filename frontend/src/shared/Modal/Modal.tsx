@@ -20,31 +20,33 @@ interface Props {
   toggleAction: (event: React.MouseEvent<HTMLElement>) => void
 }
 
-export default class Modal extends React.Component<Props> {
-  public render(): JSX.Element {
-    const { toggleAction, children, headline, context } = this.props
-    return (
-      <Wrapper data-testid="Modal">
-        <FadeTransition fullHeight>
-          <Offset
-            onClick={(event: React.MouseEvent<HTMLElement>): void =>
-              toggleAction(event)
-            }
-            data-testid="Modal-offset"
-          />
-          <ContentWrapper>
-            <Content context={context}>
-              <Head>
-                {headline && <H1>{headline}</H1>}
-                <CloseIconWrapper>
-                  <CloseIcon closeAction={toggleAction} />
-                </CloseIconWrapper>
-              </Head>
-              {children}
-            </Content>
-          </ContentWrapper>
-        </FadeTransition>
-      </Wrapper>
-    )
-  }
-}
+const Modal = ({
+  toggleAction,
+  children,
+  headline,
+  context,
+}: Props): JSX.Element => (
+  <Wrapper data-testid="Modal">
+    <FadeTransition fullHeight>
+      <Offset
+        onClick={(event: React.MouseEvent<HTMLElement>): void =>
+          toggleAction(event)
+        }
+        data-testid="Modal-offset"
+      />
+      <ContentWrapper>
+        <Content context={context}>
+          <Head>
+            {headline && <H1>{headline}</H1>}
+            <CloseIconWrapper>
+              <CloseIcon closeAction={toggleAction} />
+            </CloseIconWrapper>
+          </Head>
+          {children}
+        </Content>
+      </ContentWrapper>
+    </FadeTransition>
+  </Wrapper>
+)
+
+export default Modal
