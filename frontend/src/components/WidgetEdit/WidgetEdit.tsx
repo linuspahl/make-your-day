@@ -1,11 +1,13 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 import gql from 'graphql-tag'
 // utils
 import { extractIdFromUrl, logError } from 'utils/utils'
+// contexts
+import AppContext from 'contexts/AppContext'
 // components
 import H1 from 'shared/H1/H1'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
@@ -50,78 +52,13 @@ interface PageQueryResult {
     getEvaluations: JSX.Element
   }
 }
-class WidgetEdit extends React.Component<Props> {
-  public constructor(props: Props) {
-    super(props)
 
-    this.handleCompleted = this.handleCompleted.bind(this)
-    this.handleError = this.handleError.bind(this)
-  }
-
-  public render(): JSX.Element {
-    const { match, rootPath } = this.props
-    const widgetId = extractIdFromUrl(match)
-
-    return (
-      <PageQueryHandler
-        dataTestId="WidgetEdit"
-        query={pageQuery}
-        queryNames={['getEvaluations', 'getWidget']}
-        errorMessages={{
-          getWidget: 'Widget konnte nicht geladen werden',
-          getEvaluations: 'Auswertungen konnten nicht geladen werden',
-        }}
-        variables={{ widgetId }}
-      >
-        {({
-          data: { getWidget: widget, getEvaluations: evaluations },
-          status: { getWidget: widgetQueryStatus },
-        }: PageQueryResult): JSX.Element => {
-          return (
-            <React.Fragment>
-              <H1 context="page">Widget bearbeiten</H1>
-              {widgetQueryStatus}
-              {!widgetQueryStatus && widget && (
-                <Mutation
-                  mutation={UpdateWidget}
-                  onCompleted={this.handleCompleted}
-                  onError={this.handleError}
-                >
-                  {(
-                    updateUser: ({
-                      variables,
-                    }: {
-                      variables: WidgetEditType
-                    }) => void
-                  ): JSX.Element => (
-                    <WidgetForm
-                      evaluations={evaluations}
-                      initialData={widget}
-                      rootPath={rootPath}
-                      submitAction={(variables: WidgetCreate): void =>
-                        updateUser({
-                          variables: {
-                            id: widget.id,
-                            evaluationId: variables.evaluationId,
-                            position: variables.position,
-                            title: variables.title,
-                          },
-                        })
-                      }
-                    />
-                  )}
-                </Mutation>
-              )}
-            </React.Fragment>
-          )
-        }}
-      </PageQueryHandler>
-    )
-  }
-
-  // Form submit function
-  private handleCompleted(data: { updateWidget: WidgetEditType }): void {
-    const { history, rootPath, createNotificationBanner } = this.props
+const handleCompleted = (
+  props: Props,
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((data: { updateWidget: WidgetEditType }) => void) => {
+  const { rootPath, history } = props
+  return (data): void => {
     const {
       updateWidget: { title },
     } = data
@@ -135,16 +72,81 @@ class WidgetEdit extends React.Component<Props> {
     // Go to the widgets overview
     history.push(rootPath)
   }
+}
 
-  // Form error function
-  private handleError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
+const handleError = (
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((error: ApolloError) => void) => {
+  return (error): void => {
     createNotificationBanner({
       type: 'error',
       message: 'Bearbeitung des Widgets fehlgeschlagen',
     })
     logError(error)
   }
+}
+
+const WidgetEdit = (props: Props): JSX.Element => {
+  const { match, rootPath, history } = props
+  const { createNotificationBanner } = useContext(AppContext)
+  const onCompleted = handleCompleted(props, createNotificationBanner)
+  const onError = handleError(createNotificationBanner)
+  const widgetId = extractIdFromUrl(match)
+  return (
+    <PageQueryHandler
+      dataTestId="WidgetEdit"
+      query={pageQuery}
+      queryNames={['getEvaluations', 'getWidget']}
+      errorMessages={{
+        getWidget: 'Widget konnte nicht geladen werden',
+        getEvaluations: 'Auswertungen konnten nicht geladen werden',
+      }}
+      variables={{ widgetId }}
+    >
+      {({
+        data: { getWidget: widget, getEvaluations: evaluations },
+        status: { getWidget: widgetQueryStatus },
+      }: PageQueryResult): JSX.Element => {
+        return (
+          <React.Fragment>
+            <H1 context="page">Widget bearbeiten</H1>
+            {widgetQueryStatus}
+            {!widgetQueryStatus && widget && (
+              <Mutation
+                mutation={UpdateWidget}
+                onCompleted={onCompleted}
+                onError={onError}
+              >
+                {(
+                  updateUser: ({
+                    variables,
+                  }: {
+                    variables: WidgetEditType
+                  }) => void
+                ): JSX.Element => (
+                  <WidgetForm
+                    evaluations={evaluations}
+                    initialData={widget}
+                    rootPath={rootPath}
+                    submitAction={(variables: WidgetCreate): void =>
+                      updateUser({
+                        variables: {
+                          id: widget.id,
+                          evaluationId: variables.evaluationId,
+                          position: variables.position,
+                          title: variables.title,
+                        },
+                      })
+                    }
+                  />
+                )}
+              </Mutation>
+            )}
+          </React.Fragment>
+        )
+      }}
+    </PageQueryHandler>
+  )
 }
 
 export default withRouter(WidgetEdit)
