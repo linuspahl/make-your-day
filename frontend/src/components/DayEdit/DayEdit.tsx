@@ -42,95 +42,93 @@ interface PageQueryResult {
   status: { getRecords: JSX.Element }
 }
 
-class DayEdit extends React.Component<Props> {
-  public render(): JSX.Element {
-    const {
-      match: {
-        params: { date },
-      },
-    } = this.props
-    return (
-      <PageQueryHandler
-        dataTestId="DayEdit"
-        errorMessages={{ getRecords: 'Einträge konnten nicht geladen werden' }}
-        queryNames={['getRecords']}
-        variables={{ createdAt: date }}
-        query={GetRecords}
-      >
-        {({
-          data: { getRecords: records },
-          status: { getRecords: recordsQueryStatus },
-        }: PageQueryResult): JSX.Element => {
-          const categories = this.prepareCategories(records)
-          return (
-            <React.Fragment>
-              <H1 context="page">{`Einträge ${date}`}</H1>
-              <NewRecordSection>
-                <H2>Neu erstellen</H2>
-                <CategoryIconOverview params={{ createdAt: date }} />
-              </NewRecordSection>
-              <H2>Bestehende bearbeiten</H2>
-              {recordsQueryStatus}
-              {!recordsQueryStatus && records && categories && (
-                <Records>
-                  {Object.values(categories).map(
-                    (category): JSX.Element => {
-                      return (
-                        <Category key={category.id}>
-                          <CategoryTitle>{category.title}</CategoryTitle>
-                          <CategoryRecords>
-                            {sortBy(category.records, 'category.id').map(
-                              (record: RecordType): JSX.Element => (
-                                <CategorySummary
-                                  amount={category.hasUnit ? record.amount : 1}
-                                  category={category}
-                                  displayTitle={record.category.title}
-                                  key={record.id}
-                                  to={`/categories/${category.id}/records/${record.id}/edit`}
-                                />
-                              )
-                            )}
-                          </CategoryRecords>
-                        </Category>
-                      )
-                    }
-                  )}
-                </Records>
-              )}
-              <ActionRow>
-                <Button to="/" context="secondary">
-                  Zum Dashboard
-                </Button>
-              </ActionRow>
-            </React.Fragment>
-          )
-        }}
-      </PageQueryHandler>
-    )
-  }
+const prepareCategories = (records: RecordType[] = []): CategoryEnry[] => {
+  const categories: { [key: string]: CategoryEnry } = {}
+  records.forEach((record): void => {
+    const category = record.category.parent || record.category
+    const categoryKey = `${category.id}`
+    let categoryEnry = categories[categoryKey]
 
-  private prepareCategories(records: RecordType[] = []): CategoryEnry[] {
-    const categories: { [key: string]: CategoryEnry } = {}
-    records.forEach((record): void => {
-      const category = record.category.parent || record.category
-      const categoryKey = `${category.id}`
-      let categoryEnry = categories[categoryKey]
-
-      if (categoryEnry) {
-        categoryEnry = {
-          ...category,
-          records: [...categoryEnry.records, record],
-        }
-      } else {
-        categoryEnry = {
-          ...category,
-          records: [record],
-        }
+    if (categoryEnry) {
+      categoryEnry = {
+        ...category,
+        records: [...categoryEnry.records, record],
       }
-      categories[categoryKey] = categoryEnry
-    })
-    return Object.values(categories)
-  }
+    } else {
+      categoryEnry = {
+        ...category,
+        records: [record],
+      }
+    }
+    categories[categoryKey] = categoryEnry
+  })
+  return Object.values(categories)
+}
+
+const DayEdit = (props: Props): JSX.Element => {
+  const {
+    match: {
+      params: { date },
+    },
+  } = props
+  return (
+    <PageQueryHandler
+      dataTestId="DayEdit"
+      errorMessages={{ getRecords: 'Einträge konnten nicht geladen werden' }}
+      queryNames={['getRecords']}
+      variables={{ createdAt: date }}
+      query={GetRecords}
+    >
+      {({
+        data: { getRecords: records },
+        status: { getRecords: recordsQueryStatus },
+      }: PageQueryResult): JSX.Element => {
+        const categories = prepareCategories(records)
+        return (
+          <React.Fragment>
+            <H1 context="page">{`Einträge ${date}`}</H1>
+            <NewRecordSection>
+              <H2>Neu erstellen</H2>
+              <CategoryIconOverview params={{ createdAt: date }} />
+            </NewRecordSection>
+            <H2>Bestehende bearbeiten</H2>
+            {recordsQueryStatus}
+            {!recordsQueryStatus && records && categories && (
+              <Records>
+                {Object.values(categories).map(
+                  (category): JSX.Element => {
+                    return (
+                      <Category key={category.id}>
+                        <CategoryTitle>{category.title}</CategoryTitle>
+                        <CategoryRecords>
+                          {sortBy(category.records, 'category.id').map(
+                            (record: RecordType): JSX.Element => (
+                              <CategorySummary
+                                amount={category.hasUnit ? record.amount : 1}
+                                category={category}
+                                displayTitle={record.category.title}
+                                key={record.id}
+                                to={`/categories/${category.id}/records/${record.id}/edit`}
+                              />
+                            )
+                          )}
+                        </CategoryRecords>
+                      </Category>
+                    )
+                  }
+                )}
+              </Records>
+            )}
+            <ActionRow>
+              <Button to="/" context="secondary">
+                Zum Dashboard
+              </Button>
+            </ActionRow>
+          </React.Fragment>
+        )
+      }}
+    </PageQueryHandler>
+  )
 }
 
 export default withRouter(DayEdit)
