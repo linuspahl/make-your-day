@@ -4,7 +4,6 @@ import { ApolloError, DocumentNode } from 'apollo-boost'
 import { Query } from 'react-apollo'
 // components
 import { Status } from './styles'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ContentBox from 'shared/ContentBox/ContentBox'
 import DefaultPageLayout from 'components/DefaultPageLayout/DefaultPageLayout'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'

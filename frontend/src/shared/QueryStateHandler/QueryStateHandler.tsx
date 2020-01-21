@@ -6,7 +6,6 @@ import { ApolloError, DocumentNode } from 'apollo-boost'
 import { Query } from 'react-apollo'
 // components
 import LoadingSpinner from 'shared/LoadingSpinner/LoadingSpinner'
-import CenteredSpinner from 'shared/CenteredSpinner/CenteredSpinner'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 import NoResult from 'shared/NoResult/NoResult'
 

@@ -1,5 +1,5 @@
 // libraries
-import React, { useMemo } from 'react'
+import React from 'react'
 import dayjs from 'dayjs'
 import { sortBy, fill } from 'lodash'
 // components

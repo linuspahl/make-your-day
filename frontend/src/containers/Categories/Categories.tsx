@@ -19,7 +19,7 @@ interface Props {
 }
 
 const Categories = (props: Props): JSX.Element => {
-  const { createNotificationBanner, rootPath } = props
+  const { rootPath } = props
   return (
     <React.Fragment>
       <Route

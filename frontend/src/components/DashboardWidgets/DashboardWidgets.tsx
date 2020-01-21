@@ -22,7 +22,6 @@ import {
   WidgetLayout,
 } from './styles'
 // interfaces
-import { NotificationCreate } from 'types/types'
 import { WidgetFull } from 'store/widget/type'
 
 const LoadingPlaceholder = (): JSX.Element => (
