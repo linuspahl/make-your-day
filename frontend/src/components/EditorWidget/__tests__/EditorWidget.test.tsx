@@ -29,15 +29,10 @@ describe('EditorWidget should', (): void => {
     void
   > => {
     const createNotificationBannerStub = jest.fn()
-    const { container } = renderWithAppRoot(
-      <EditorWidget
-        createNotificationBanner={createNotificationBannerStub}
-        widget={widget}
-      />,
-      {
-        mocks: [updateWidgetError],
-      }
-    )
+    const { container } = renderWithAppRoot(<EditorWidget widget={widget} />, {
+      context: { createNotificationBanner: createNotificationBannerStub },
+      mocks: [updateWidgetError],
+    })
 
     fireEvent.click(container.firstElementChild, leftClickOption)
     fireEvent.blur(container.firstElementChild)
@@ -49,29 +44,24 @@ describe('EditorWidget should', (): void => {
     void
   > => {
     const createNotificationBannerStub = jest.fn()
-    const { container } = renderWithAppRoot(
-      <EditorWidget
-        createNotificationBanner={createNotificationBannerStub}
-        widget={widget}
-      />,
-      {
-        mocks: [
-          adjustApiStub(updateWidgetSuccess, {
-            variables: {
-              id: widget.id,
-              value: 'Inhalt Notiz 1',
-            },
-            result: {
-              id: widget.id,
-              title: widget.title,
-              type: widget.type,
-              value: 'Inhalt Notiz 1',
-              position: widget.position,
-            },
-          }),
-        ],
-      }
-    )
+    const { container } = renderWithAppRoot(<EditorWidget widget={widget} />, {
+      context: { createNotificationBanner: createNotificationBannerStub },
+      mocks: [
+        adjustApiStub(updateWidgetSuccess, {
+          variables: {
+            id: widget.id,
+            value: 'Inhalt Notiz 1',
+          },
+          result: {
+            id: widget.id,
+            title: widget.title,
+            type: widget.type,
+            value: 'Inhalt Notiz 1',
+            position: widget.position,
+          },
+        }),
+      ],
+    })
     fireEvent.click(container.firstElementChild, leftClickOption)
     fireEvent.blur(container.firstElementChild)
     await wait()
