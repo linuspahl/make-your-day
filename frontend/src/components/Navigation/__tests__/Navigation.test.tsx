@@ -13,7 +13,8 @@ describe('Navigation should', (): void => {
     const { getByText } = renderWithAppRoot(
       <Navigation
         rootPath="/"
-        state={{ open: true, animateOnClose: true }}
+        animateOnClose
+        open
         toggleAction={(): void => {}}
       />
     )

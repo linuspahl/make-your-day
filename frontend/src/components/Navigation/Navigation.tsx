@@ -12,16 +12,17 @@ import { NavigationState } from 'types/types'
 
 interface Props {
   rootPath: string
-  state: NavigationState
+  animateOnClose: NavigationState['animateOnClose']
+  open: NavigationState['open']
   toggleAction: () => void
 }
 
 const Navigation = (props: Props): JSX.Element => {
-  const { toggleAction, rootPath, state } = props
+  const { toggleAction, rootPath, animateOnClose, open } = props
   return (
     <React.Fragment>
-      {state.open && <Offset onClick={(): void => toggleAction()} />}
-      <Wrapper state={state}>
+      {open && <Offset onClick={(): void => toggleAction()} />}
+      <Wrapper open={open} animateOnClose={animateOnClose}>
         <Head>
           <H1>Menü</H1>
           <CloseIconWrapper>
