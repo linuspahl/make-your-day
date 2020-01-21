@@ -81,13 +81,11 @@ const Dashboard = (props: Props): JSX.Element => (
           <React.Fragment>
             <DashboardWidgets
               delay={600}
-              createNotificationBanner={props.createNotificationBanner}
               loading={loading}
               widgets={widgetsDashboardTop}
             />
 
             <DashboardWidgets
-              createNotificationBanner={props.createNotificationBanner}
               loading={loading}
               widgets={widgetsDashboardBottom}
               delay={500}

@@ -34,7 +34,6 @@ const LoadingPlaceholder = (): JSX.Element => (
 )
 
 interface Props {
-  createNotificationBanner: (notification: NotificationCreate) => void
   loading: boolean
   widgets: WidgetFull[]
   delay?: number
