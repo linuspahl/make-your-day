@@ -29,78 +29,76 @@ interface PageQueryResult {
   status: { getCategory: JSX.Element }
 }
 
-class CategoryEdit extends React.Component<Props> {
-  public render(): JSX.Element {
-    const { rootPath, match } = this.props
-    const categoryId = extractIdFromUrl(match)
+const CategoryEdit = (props: Props): JSX.Element => {
+  const { rootPath, match } = props
+  const categoryId = extractIdFromUrl(match)
 
-    return (
-      <PageQueryHandler
-        dataTestId="SubcategoryOverview"
-        errorMessages={{
-          getCategory: 'Kategorie konnten nicht geladen werden',
-        }}
-        query={GetCategoryForListWithChildren}
-        queryNames={['getCategory']}
-        variables={{ id: categoryId }}
-      >
-        {({
-          data: { getCategory: category },
-          status: { getCategory: categoryQueryStatus },
-        }: PageQueryResult): JSX.Element => {
-          return (
-            <React.Fragment>
-              <H1 context="page">Subkategorien verwalten</H1>
-              {categoryQueryStatus}
-              {!categoryQueryStatus && category && category.subcategories && (
-                <ul>
-                  {category.subcategories.map(
-                    (subcategory: Subcategory): JSX.Element => (
-                      <ListItem key={subcategory.id} spaceBetween>
-                        {subcategory.title}
-                        <ActionIconWrapper>
-                          <ActionIcon
-                            ariaLabel={`Subkategorie ${subcategory.title} bearbeiten`}
-                            to={`${rootPath}/${categoryId}/subcategories/${subcategory.id}/edit`}
-                            icon="edit"
-                          />
-                          <DeleteIcon
-                            ariaLabel={`Subkategorie ${subcategory.title} löschen`}
-                            id={subcategory.id}
-                            mutation={DeleteCategory}
-                            onUpdate={(
-                              cache: DataProxy,
-                              data: FetchResult
-                            ): void =>
-                              deleteSubcategory(
-                                cache,
-                                data,
-                                { id: subcategory.id },
-                                category.id
-                              )
-                            }
-                            title={subcategory.title}
-                          />
-                        </ActionIconWrapper>
-                      </ListItem>
-                    )
-                  )}
-                </ul>
-              )}
-              <ActionRow>
-                <Button
-                  context="primary"
-                  to={`${rootPath}/${categoryId}/subcategories/create`}
-                >
-                  Subkategorie erstellen
-                </Button>
-              </ActionRow>
-            </React.Fragment>
-          )
-        }}
-      </PageQueryHandler>
-    )
-  }
+  return (
+    <PageQueryHandler
+      dataTestId="SubcategoryOverview"
+      errorMessages={{
+        getCategory: 'Kategorie konnten nicht geladen werden',
+      }}
+      query={GetCategoryForListWithChildren}
+      queryNames={['getCategory']}
+      variables={{ id: categoryId }}
+    >
+      {({
+        data: { getCategory: category },
+        status: { getCategory: categoryQueryStatus },
+      }: PageQueryResult): JSX.Element => {
+        return (
+          <React.Fragment>
+            <H1 context="page">Subkategorien verwalten</H1>
+            {categoryQueryStatus}
+            {!categoryQueryStatus && category && category.subcategories && (
+              <ul>
+                {category.subcategories.map(
+                  (subcategory: Subcategory): JSX.Element => (
+                    <ListItem key={subcategory.id} spaceBetween>
+                      {subcategory.title}
+                      <ActionIconWrapper>
+                        <ActionIcon
+                          ariaLabel={`Subkategorie ${subcategory.title} bearbeiten`}
+                          to={`${rootPath}/${categoryId}/subcategories/${subcategory.id}/edit`}
+                          icon="edit"
+                        />
+                        <DeleteIcon
+                          ariaLabel={`Subkategorie ${subcategory.title} löschen`}
+                          id={subcategory.id}
+                          mutation={DeleteCategory}
+                          onUpdate={(
+                            cache: DataProxy,
+                            data: FetchResult
+                          ): void =>
+                            deleteSubcategory(
+                              cache,
+                              data,
+                              { id: subcategory.id },
+                              category.id
+                            )
+                          }
+                          title={subcategory.title}
+                        />
+                      </ActionIconWrapper>
+                    </ListItem>
+                  )
+                )}
+              </ul>
+            )}
+            <ActionRow>
+              <Button
+                context="primary"
+                to={`${rootPath}/${categoryId}/subcategories/create`}
+              >
+                Subkategorie erstellen
+              </Button>
+            </ActionRow>
+          </React.Fragment>
+        )
+      }}
+    </PageQueryHandler>
+  )
 }
 
 export default withRouter(CategoryEdit)
