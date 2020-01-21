@@ -1,11 +1,13 @@
 // libraries
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { Mutation } from 'react-apollo'
 import { logError } from 'utils/utils'
 import { ApolloError } from 'apollo-boost'
 // components
 import Editor from 'components/Editor/Editor'
 import Modal from 'shared/Modal/Modal'
+// contexts
+import AppContext from 'contexts/AppContext'
 // interfaces
 import { Widget, WidgetEdit } from 'store/widget/type'
 import { NotificationCreate } from 'types/types'
@@ -13,7 +15,6 @@ import { NotificationCreate } from 'types/types'
 import { UpdateWidget } from 'store/widget/mutation'
 
 interface Props {
-  createNotificationBanner: (notification: NotificationCreate) => void
   widget: Widget
 }
 
@@ -22,51 +23,31 @@ interface State {
   isEditorFullScreen: boolean
 }
 
-class EditorWidget extends React.Component<Props, State> {
-  public constructor(props: Props) {
-    super(props)
+// Form error function
+const handleError = (
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((error: ApolloError) => void) => {
+  return (error): void => {
+    createNotificationBanner({
+      type: 'error',
+      message: 'Bearbeitung des Widgets fehlgeschlagen',
+    })
+    logError(error)
+  }
+}
 
-    this.state = {
-      value: props.widget.value,
-      isEditorFullScreen: false,
-    }
+const EditorWidget = (props: Props): JSX.Element => {
+  const { widget } = props
+  const [isFullScreen, setIsFullSreen] = useState(false)
+  const [value, setValue] = useState(widget.value)
+  const { createNotificationBanner } = useContext(AppContext)
+  const onError = handleError(createNotificationBanner)
 
-    this.handleError = this.handleError.bind(this)
-    this.toggleModal = this.toggleModal.bind(this)
+  const toggleModal = (): void => {
+    setIsFullSreen(!isFullScreen)
   }
 
-  public render(): JSX.Element {
-    const { widget } = this.props
-    const { isEditorFullScreen, value } = this.state
-
-    return (
-      <Mutation mutation={UpdateWidget} onError={this.handleError}>
-        {(
-          updateWidget: ({ variables }: { variables: WidgetEdit }) => void
-        ): JSX.Element => (
-          <React.Fragment>
-            {this.renderEditor(
-              widget,
-              value,
-              updateWidget,
-              false,
-              this.toggleModal
-            )}
-            {isEditorFullScreen && (
-              <Modal
-                headline={widget.title}
-                toggleAction={(): void => this.toggleModal()}
-              >
-                {this.renderEditor(widget, value, updateWidget, true)}
-              </Modal>
-            )}
-          </React.Fragment>
-        )}
-      </Mutation>
-    )
-  }
-
-  private renderEditor = (
+  const renderEditor = (
     widget: Widget,
     value: Widget['value'],
     updateWidget: ({ variables }: { variables: WidgetEdit }) => void,
@@ -78,7 +59,7 @@ class EditorWidget extends React.Component<Props, State> {
         fullScreenType={fullScreenType}
         key={`${widget.id}-${fullScreenType ? 'fullscreen' : 'preview'}`}
         onClick={onClick}
-        onChange={(value: string): void => this.setState({ value })}
+        onChange={setValue}
         onBlur={(): void =>
           updateWidget({
             variables: {
@@ -92,20 +73,22 @@ class EditorWidget extends React.Component<Props, State> {
     )
   }
 
-  private toggleModal(): void {
-    const { isEditorFullScreen } = this.state
-    this.setState({ isEditorFullScreen: !isEditorFullScreen })
-  }
-
-  // Form error function
-  private handleError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
-    createNotificationBanner({
-      type: 'error',
-      message: 'Bearbeitung des Widgets fehlgeschlagen',
-    })
-    logError(error)
-  }
+  return (
+    <Mutation mutation={UpdateWidget} onError={onError}>
+      {(
+        updateWidget: ({ variables }: { variables: WidgetEdit }) => void
+      ): JSX.Element => (
+        <React.Fragment>
+          {renderEditor(widget, value, updateWidget, false, toggleModal)}
+          {isFullScreen && (
+            <Modal headline={widget.title} toggleAction={toggleModal}>
+              {renderEditor(widget, value, updateWidget, true)}
+            </Modal>
+          )}
+        </React.Fragment>
+      )}
+    </Mutation>
+  )
 }
 
 export default EditorWidget
