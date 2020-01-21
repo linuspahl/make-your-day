@@ -38,16 +38,12 @@ interface Props {
   evaluation: Evaluation
 }
 
-export default class EvaluationWidget extends React.Component<Props> {
-  public render(): JSX.Element {
-    const { evaluation } = this.props
+const EvaluationWidget = ({ evaluation }: Props): JSX.Element => (
+  <Outer>
+    <Layout>
+      <EvaluationChart evaluation={evaluation} />
+    </Layout>
+  </Outer>
+)
 
-    return (
-      <Outer>
-        <Layout>
-          <EvaluationChart evaluation={evaluation} />
-        </Layout>
-      </Outer>
-    )
-  }
-}
+export default EvaluationWidget
