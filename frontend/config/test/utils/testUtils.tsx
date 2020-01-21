@@ -19,8 +19,9 @@ import {
 } from '@testing-library/react'
 // utils
 import colorTheme from 'theme'
+import AppContext from 'contexts/AppContext'
 // interfaces
-import { ApiStub } from 'types/types'
+import { ApiStub, AppContext as AppContextType } from 'types/types'
 
 interface WrappedComponent extends RenderResult {
   history: MemoryHistory
@@ -60,6 +61,7 @@ function renderWithRoute(
 function renderWithAppRoot(
   component: JSX.Element,
   {
+    context = undefined,
     route = '/',
     themeProps = {},
     mocks = [],
@@ -67,6 +69,12 @@ function renderWithAppRoot(
     routePath = null,
     ...renderOptions
   }: {
+    context?: {
+      createNotificationBanner?: AppContextType['createNotificationBanner']
+      clearBrowserStorage?: AppContextType['clearBrowserStorage']
+      userSession?: AppContextType['userSession']
+      userSettings?: AppContextType['userSettings']
+    }
     // Is your component using a <Route> component and you want to
     // test something inside this route?
     // use the route prop with e.g. `/widgets/create`
@@ -80,13 +88,31 @@ function renderWithAppRoot(
     mocks?: readonly MockedResponse[]
   } = {}
 ): WrappedComponent {
+  const appContext = {
+    createNotificationBanner: (): void => {},
+    clearBrowserStorage: (): void => {},
+    userSession: {
+      expiresAt: 1234,
+      id: 'session-id',
+      token: 'auth-token',
+      userId: 'user-id',
+    },
+    userSettings: {
+      nightMode: false,
+      leftHandMode: false,
+      showAppBgImage: false,
+    },
+    ...context,
+  }
   const history = createMemoryHistory({ initialEntries: [route] })
   const utils = renderWithApolloProvier(
-    <ThemeProvider theme={colorTheme(themeProps)}>
-      <Router history={history}>
-        {renderWithRoute(component, mockWrappingRoute, routePath)}
-      </Router>
-    </ThemeProvider>,
+    <AppContext.Provider value={appContext}>
+      <ThemeProvider theme={colorTheme(themeProps)}>
+        <Router history={history}>
+          {renderWithRoute(component, mockWrappingRoute, routePath)}
+        </Router>
+      </ThemeProvider>
+    </AppContext.Provider>,
     { ...renderOptions, mocks }
   )
 

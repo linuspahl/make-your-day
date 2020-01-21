@@ -1,5 +1,7 @@
 // libraries
 import { DocumentNode } from 'graphql'
+// interfaces
+import { UserSession } from 'store/userSession/type'
 
 // App types
 export interface Theme {
@@ -90,6 +92,17 @@ export interface LocalStorageCreate {
 export interface NavigationState {
   open: boolean
   animateOnClose: boolean
+}
+
+export interface AppContext {
+  createNotificationBanner: (notification: NotificationCreate) => void
+  clearBrowserStorage: () => void
+  userSession: UserSession
+  userSettings: {
+    nightMode: boolean
+    leftHandMode: boolean
+    showAppBgImage: boolean
+  }
 }
 
 // Form types

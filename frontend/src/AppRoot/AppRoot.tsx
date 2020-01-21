@@ -17,7 +17,11 @@ import { AppWrapper } from './styles'
 import Routes from './Routes/Routes'
 import NotificationBanner from './NotificationBanner/NotificationBanner'
 // interfaces
-import { LocalStorage, NotificationCreate } from 'types/types'
+import {
+  LocalStorage,
+  NotificationCreate,
+  AppContext as AppContextType,
+} from 'types/types'
 import { UserSession } from 'store/userSession/type'
 
 const useBrowserStorage = (): [
@@ -42,7 +46,7 @@ const useBrowserStorage = (): [
 }
 
 const AppRoot = (): JSX.Element => {
-  const notificationBanner: React.RefObject<NotificationBanner> = useRef(null)
+  const notificationBanner = useRef<NotificationBanner>(null)
   const [browserStorage, setBrowserStorage] = useBrowserStorage()
   const clearBrowserStorage = (): void =>
     LocalStorageProvider.clear(setBrowserStorage)
@@ -73,8 +77,7 @@ const AppRoot = (): JSX.Element => {
     clearBrowserStorage,
     createNotificationBanner
   )
-
-  const appContext = {
+  const appContext: AppContextType = {
     createNotificationBanner,
     clearBrowserStorage,
     userSession,
