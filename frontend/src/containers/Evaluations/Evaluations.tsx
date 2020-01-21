@@ -28,23 +28,13 @@ const Evaluations = (props: Props): JSX.Element => {
         exact
         path={`${rootPath}/create`}
         public
-        render={(): JSX.Element => (
-          <EvaluationCreate
-            createNotificationBanner={createNotificationBanner}
-            rootPath={rootPath}
-          />
-        )}
+        render={(): JSX.Element => <EvaluationCreate rootPath={rootPath} />}
       />
       <Route
         exact
         path={`${rootPath}/edit/:id`}
         public
-        render={(): JSX.Element => (
-          <EvaluationEdit
-            createNotificationBanner={createNotificationBanner}
-            rootPath={rootPath}
-          />
-        )}
+        render={(): JSX.Element => <EvaluationEdit rootPath={rootPath} />}
       />
       <Route
         exact

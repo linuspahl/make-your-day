@@ -31,11 +31,9 @@ describe('EvaluationCreate should', (): void => {
   > => {
     const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <EvaluationCreate
-        {...propsFixture}
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <EvaluationCreate {...propsFixture} />,
       {
+        context: { createNotificationBanner: createNotificationBannerStub },
         mocks: [
           createEvaluationSuccess,
           getCategoriesForListWithChildrenSuccess,
@@ -58,11 +56,9 @@ describe('EvaluationCreate should', (): void => {
   > => {
     const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <EvaluationCreate
-        {...propsFixture}
-        createNotificationBanner={createNotificationBannerStub}
-      />,
+      <EvaluationCreate {...propsFixture} />,
       {
+        context: { createNotificationBanner: createNotificationBannerStub },
         mocks: [createEvaluationError, getCategoriesForListWithChildrenSuccess],
       }
     )

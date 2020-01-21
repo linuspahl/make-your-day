@@ -49,20 +49,20 @@ describe('EvaluationEdit should', (): void => {
   }
   const propsFixture = {
     rootPath: '/evaluations',
-    createNotificationBanner: jest.fn(),
   }
   afterEach((): void => {
     cleanup()
-    propsFixture.createNotificationBanner = jest.fn()
   })
 
   test('show notification banner on successful create ', async (): Promise<
     void
   > => {
+    const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
       <EvaluationEdit {...propsFixture} />,
       {
         ...renderUtilsProps,
+        context: { createNotificationBanner: createNotificationBannerStub },
         mocks: [updateEvaluationSuccess, pageQuerySuccess],
       }
     )
@@ -73,8 +73,8 @@ describe('EvaluationEdit should', (): void => {
     })
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
     await wait()
-    expect(propsFixture.createNotificationBanner).toBeCalledTimes(1)
-    expect(propsFixture.createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: 'Auswertung New Title erfolgreich bearbeitet',
       type: 'success',
     })
@@ -83,10 +83,12 @@ describe('EvaluationEdit should', (): void => {
   test('show notification banner on unsuccessful create', async (): Promise<
     void
   > => {
+    const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
       <EvaluationEdit {...propsFixture} />,
       {
         ...renderUtilsProps,
+        context: { createNotificationBanner: createNotificationBannerStub },
         mocks: [updateEvaluationError, pageQuerySuccess],
       }
     )
@@ -98,8 +100,8 @@ describe('EvaluationEdit should', (): void => {
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
     // Wait for updateEvaluation
     await wait()
-    expect(propsFixture.createNotificationBanner).toBeCalledTimes(1)
-    expect(propsFixture.createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: 'Bearbeitung der Auswertung fehlgeschlagen',
       type: 'error',
     })

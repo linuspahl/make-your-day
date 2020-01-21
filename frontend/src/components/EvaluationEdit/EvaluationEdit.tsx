@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 import { ApolloError, gql } from 'apollo-boost'
 import { Mutation } from 'react-apollo'
@@ -9,6 +9,8 @@ import { extractIdFromUrl, logError } from 'utils/utils'
 import EvaluationForm from 'components/EvaluationForm/EvaluationForm'
 import H1 from 'shared/H1/H1'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
+// contexts
+import AppContext from 'contexts/AppContext'
 // graphql
 import { UpdateEvaluation } from 'store/evaluation/mutation'
 // interfaces
@@ -40,7 +42,6 @@ export const pageQuery = gql`
 `
 
 interface Props extends RouteComponentProps {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
@@ -52,71 +53,13 @@ interface PageQueryResult {
   status?: { getCategories: JSX.Element; getEvaluation: JSX.Element }
 }
 
-class EvaluationEdit extends React.Component<Props> {
-  public constructor(props: Props) {
-    super(props)
-
-    this.handleCompleted = this.handleCompleted.bind(this)
-    this.handleError = this.handleError.bind(this)
-  }
-
-  public render(): JSX.Element {
-    const { match, rootPath } = this.props
-    const evaluationId = extractIdFromUrl(match)
-
-    return (
-      <PageQueryHandler
-        dataTestId="EvaluationEdit"
-        query={pageQuery}
-        variables={{ evaluationId }}
-        queryNames={['getCategories', 'getEvaluation']}
-        errorMessages={{
-          getCategories: 'Kategorien konnten nicht geladen werden',
-          getEvaluation: 'Auswertung konnten nicht geladen werden',
-        }}
-      >
-        {({
-          data: { getCategories: categories, getEvaluation: evaluation },
-          status: { getEvaluation: evaluationQueryStatus },
-        }: PageQueryResult): JSX.Element => (
-          <React.Fragment>
-            <H1 context="page">Auswertung bearbeiten</H1>
-            {evaluationQueryStatus}
-            {!evaluationQueryStatus && evaluation && (
-              <Mutation
-                mutation={UpdateEvaluation}
-                onCompleted={this.handleCompleted}
-                onError={this.handleError}
-              >
-                {(
-                  updateEvaluation: ({
-                    variables,
-                  }: {
-                    variables: EvaluationEditType
-                  }) => void
-                ): JSX.Element => (
-                  <EvaluationForm
-                    categories={categories}
-                    initialData={evaluation}
-                    rootPath={rootPath}
-                    submitAction={(variables: EvaluationEditType): void => {
-                      updateEvaluation({ variables })
-                    }}
-                  />
-                )}
-              </Mutation>
-            )}
-          </React.Fragment>
-        )}
-      </PageQueryHandler>
-    )
-  }
-
-  // Form submit function
-  private handleCompleted(data: {
-    updateEvaluation: EvaluationEditType
-  }): void {
-    const { history, rootPath, createNotificationBanner } = this.props
+// Form submit function
+const handleCompleted = (
+  props: Props,
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((data: { updateEvaluation: EvaluationEditType }) => void) => {
+  const { history, rootPath } = props
+  return (data): void => {
     const {
       updateEvaluation: { title },
     } = data
@@ -130,16 +73,73 @@ class EvaluationEdit extends React.Component<Props> {
     // Go to the categories overview
     history.push(rootPath)
   }
+}
 
-  // Form error function
-  private handleError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
+// Form error function
+const handleError = (
+  createNotificationBanner: (notification: NotificationCreate) => void
+): ((error: ApolloError) => void) => {
+  return (error): void => {
     createNotificationBanner({
       type: 'error',
       message: 'Bearbeitung der Auswertung fehlgeschlagen',
     })
     logError(error)
   }
+}
+
+const EvaluationEdit = (props: Props): JSX.Element => {
+  const { match, rootPath } = props
+  const { createNotificationBanner } = useContext(AppContext)
+  const onCompleted = handleCompleted(props, createNotificationBanner)
+  const onError = handleError(createNotificationBanner)
+  const evaluationId = extractIdFromUrl(match)
+  return (
+    <PageQueryHandler
+      dataTestId="EvaluationEdit"
+      query={pageQuery}
+      variables={{ evaluationId }}
+      queryNames={['getCategories', 'getEvaluation']}
+      errorMessages={{
+        getCategories: 'Kategorien konnten nicht geladen werden',
+        getEvaluation: 'Auswertung konnten nicht geladen werden',
+      }}
+    >
+      {({
+        data: { getCategories: categories, getEvaluation: evaluation },
+        status: { getEvaluation: evaluationQueryStatus },
+      }: PageQueryResult): JSX.Element => (
+        <React.Fragment>
+          <H1 context="page">Auswertung bearbeiten</H1>
+          {evaluationQueryStatus}
+          {!evaluationQueryStatus && evaluation && (
+            <Mutation
+              mutation={UpdateEvaluation}
+              onCompleted={onCompleted}
+              onError={onError}
+            >
+              {(
+                updateEvaluation: ({
+                  variables,
+                }: {
+                  variables: EvaluationEditType
+                }) => void
+              ): JSX.Element => (
+                <EvaluationForm
+                  categories={categories}
+                  initialData={evaluation}
+                  rootPath={rootPath}
+                  submitAction={(variables: EvaluationEditType): void => {
+                    updateEvaluation({ variables })
+                  }}
+                />
+              )}
+            </Mutation>
+          )}
+        </React.Fragment>
+      )}
+    </PageQueryHandler>
+  )
 }
 
 export default withRouter(EvaluationEdit)
