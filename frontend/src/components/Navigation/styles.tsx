@@ -6,7 +6,8 @@ import { NavigationState } from 'types/types'
 // We need o use a wrapping div for the Modal component
 // To show the navigation above other currently open modals
 interface WrapperProps {
-  state: NavigationState
+  open: NavigationState['open']
+  animateOnClose: NavigationState['animateOnClose']
 }
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -19,6 +20,8 @@ export const Wrapper = styled.div<WrapperProps>`
         layerIndex: { navigation: navigationIndex },
         mediaQuery: { tablet },
       },
+      animateOnClose,
+      open,
     } = props
     return `
       width: 100vw;
@@ -42,14 +45,12 @@ export const Wrapper = styled.div<WrapperProps>`
       z-index: ${navigationIndex};
 
       ${
-        props.state.open
+        open
           ? `
             transform: none;
             transition: transform 300ms linear;`
           : `
-            transition: ${
-              props.state.animateOnClose ? 'transform 300ms linear' : ''
-            };
+            transition: ${animateOnClose ? 'transform 300ms linear' : ''};
             transform: translateX(-100vw);
           `
       }
@@ -62,7 +63,7 @@ export const Wrapper = styled.div<WrapperProps>`
         transform: translateX(-18re);
 
         ${
-          props.state.open
+          open
             ? `
           transform: none;
           transition: transform 300ms linear;
