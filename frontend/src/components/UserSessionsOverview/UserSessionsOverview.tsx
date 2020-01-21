@@ -101,7 +101,6 @@ const ListItem = (props: {
             <LogoutIcon
               userSessionId={userSession.id}
               clearLocalStorage={props.clearLocalStorage}
-              createNotificationBanner={props.createNotificationBanner}
             />
           )}
           {!isCurrentSession && (

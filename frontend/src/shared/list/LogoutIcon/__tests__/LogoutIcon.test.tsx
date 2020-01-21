@@ -26,9 +26,10 @@ describe('LogoutIcon should', (): void => {
       <LogoutIcon
         userSessionId={userSessionId}
         clearLocalStorage={(): void => {}}
-        createNotificationBanner={(): void => {}}
       />,
-      { mocks: [deleteUserSessionSuccess] }
+      {
+        mocks: [deleteUserSessionSuccess],
+      }
     )
     expect(getByTestId('Icon')).toBeInTheDocument()
   })
@@ -38,21 +39,23 @@ describe('LogoutIcon should', (): void => {
   > => {
     window.confirm = (): boolean => true
 
-    const createNotificationBannerEvent = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const clearLocalStorageEvent = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <LogoutIcon
         userSessionId={userSessionId}
         clearLocalStorage={clearLocalStorageEvent}
-        createNotificationBanner={createNotificationBannerEvent}
       />,
-      { mocks: [deleteUserSessionSuccess] }
+      {
+        context: { createNotificationBanner: createNotificationBannerStub },
+        mocks: [deleteUserSessionSuccess],
+      }
     )
     fireEvent.click(getByTestId('Icon'), leftClickOption)
     // Wait for the Mutation component
     await wait()
-    expect(createNotificationBannerEvent).toBeCalledTimes(1)
-    expect(createNotificationBannerEvent).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       type: 'success',
       message: `Erfolgreich abgemeldet`,
     })
@@ -64,21 +67,20 @@ describe('LogoutIcon should', (): void => {
   > => {
     window.confirm = (): boolean => true
 
-    const createNotificationBannerEvent = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const clearLocalStorageEvent = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <LogoutIcon
         userSessionId={userSessionId}
         clearLocalStorage={clearLocalStorageEvent}
-        createNotificationBanner={createNotificationBannerEvent}
       />,
       { mocks: [deleteUserSessionError] }
     )
     fireEvent.click(getByTestId('Icon'), leftClickOption)
     // Wait for the Mutation component
     await wait()
-    expect(createNotificationBannerEvent).toBeCalledTimes(1)
-    expect(createNotificationBannerEvent).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       type: 'error',
       message: 'Sitzung konnte auf dem Server nicht gelöscht werden',
     })
@@ -90,20 +92,19 @@ describe('LogoutIcon should', (): void => {
   > => {
     window.confirm = (): boolean => false
 
-    const createNotificationBannerEvent = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const clearLocalStorageEvent = jest.fn()
     const { getByTestId } = renderWithAppRoot(
       <LogoutIcon
         userSessionId={userSessionId}
         clearLocalStorage={clearLocalStorageEvent}
-        createNotificationBanner={createNotificationBannerEvent}
       />,
       { mocks: [deleteUserSessionError] }
     )
     fireEvent.click(getByTestId('Icon'), leftClickOption)
     // Wait for the Mutation component
     await wait()
-    expect(createNotificationBannerEvent).not.toBeCalled()
+    expect(createNotificationBannerStub).not.toBeCalled()
     expect(clearLocalStorageEvent).not.toBeCalled()
   })
 })

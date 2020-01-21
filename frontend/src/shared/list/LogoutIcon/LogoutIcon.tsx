@@ -1,9 +1,11 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 // components
 import { Wrapper } from './styles'
 import Icon from 'shared/Icon/Icon'
+// contexts
+import AppContext from 'contexts/AppContext'
 // graphql
 import { DeleteUserSession } from 'store/userSession/mutation'
 // interfaces
@@ -41,12 +43,12 @@ const handleError = (
 
 interface Props {
   clearLocalStorage: () => void
-  createNotificationBanner: (notification: NotificationCreate) => void
   userSessionId: string
 }
 
 const LogoutIcon = (props: Props): JSX.Element => {
-  const { userSessionId, clearLocalStorage, createNotificationBanner } = props
+  const { userSessionId, clearLocalStorage } = props
+  const { createNotificationBanner } = useContext(AppContext)
   const variables = { id: userSessionId }
 
   return (
