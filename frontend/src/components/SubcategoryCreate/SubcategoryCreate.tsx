@@ -96,7 +96,7 @@ const SubcategoryCreate = (props: Props): JSX.Element => {
         data: { getCategory: parentCategory },
         status: { getCategory: getCategoryStatus },
       }: PageQueryResult): JSX.Element => (
-        <React.Fragment>
+        <>
           <H1 context="page">Subkategorie erstellen</H1>
           {getCategoryStatus}
           {!getCategoryStatus && parentCategory && (
@@ -126,7 +126,7 @@ const SubcategoryCreate = (props: Props): JSX.Element => {
               )}
             </Mutation>
           )}
-        </React.Fragment>
+        </>
       )}
     </PageQueryHandler>
   )

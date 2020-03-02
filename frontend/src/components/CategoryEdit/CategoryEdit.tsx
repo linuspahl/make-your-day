@@ -82,7 +82,7 @@ const CategoryEdit = (props: Props): JSX.Element => {
         status: { getCategory: categoryQueryStatus },
       }: PageQueryResult): JSX.Element => {
         return (
-          <React.Fragment>
+          <>
             <H1 context="page">Kategorie bearbeiten</H1>
             {categoryQueryStatus}
             {!categoryQueryStatus && category && (
@@ -126,7 +126,7 @@ const CategoryEdit = (props: Props): JSX.Element => {
                 )}
               </Mutation>
             )}
-          </React.Fragment>
+          </>
         )
       }}
     </PageQueryHandler>

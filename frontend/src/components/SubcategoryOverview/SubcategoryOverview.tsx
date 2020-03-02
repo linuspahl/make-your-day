@@ -48,7 +48,7 @@ const CategoryEdit = (props: Props): JSX.Element => {
         status: { getCategory: categoryQueryStatus },
       }: PageQueryResult): JSX.Element => {
         return (
-          <React.Fragment>
+          <>
             <H1 context="page">Subkategorien verwalten</H1>
             {categoryQueryStatus}
             {!categoryQueryStatus && category && category.subcategories && (
@@ -94,7 +94,7 @@ const CategoryEdit = (props: Props): JSX.Element => {
                 Subkategorie erstellen
               </Button>
             </ActionRow>
-          </React.Fragment>
+          </>
         )
       }}
     </PageQueryHandler>

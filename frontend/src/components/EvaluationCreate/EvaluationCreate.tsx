@@ -81,7 +81,7 @@ const EvaluationCreate = (props: Props): JSX.Element => {
       }: {
         data: { getCategories: CategoryForListWithChildren[] }
       }): JSX.Element => (
-        <React.Fragment>
+        <>
           <H1 context="page">Auswertung erstellen</H1>
           <Mutation
             mutation={CreateEvaluation}
@@ -106,7 +106,7 @@ const EvaluationCreate = (props: Props): JSX.Element => {
               />
             )}
           </Mutation>
-        </React.Fragment>
+        </>
       )}
     </PageQueryHandler>
   )

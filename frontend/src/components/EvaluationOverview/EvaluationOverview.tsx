@@ -40,7 +40,7 @@ const EvaluationOverview = (props: Props): JSX.Element => {
         status?: { getEvaluations: JSX.Element }
       }): JSX.Element => {
         return (
-          <React.Fragment>
+          <>
             <H1 context="page">Auswertungen verwalten</H1>
             {evaluationsQueryStatus}
             {!evaluationsQueryStatus && evaluations && (
@@ -61,7 +61,7 @@ const EvaluationOverview = (props: Props): JSX.Element => {
                 Auswertung erstellen
               </Button>
             </ActionRow>
-          </React.Fragment>
+          </>
         )
       }}
     </PageQueryHandler>

@@ -20,7 +20,7 @@ interface Props {
 const Navigation = (props: Props): JSX.Element => {
   const { toggleAction, rootPath, animateOnClose, open } = props
   return (
-    <React.Fragment>
+    <>
       {open && <Offset onClick={(): void => toggleAction()} />}
       <Wrapper open={open} animateOnClose={animateOnClose}>
         <Head>
@@ -41,7 +41,7 @@ const Navigation = (props: Props): JSX.Element => {
           )}
         </ul>
       </Wrapper>
-    </React.Fragment>
+    </>
   )
 }
 

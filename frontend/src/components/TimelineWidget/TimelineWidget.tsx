@@ -103,7 +103,7 @@ const TimelineWidget = (): JSX.Element => {
           {(records: Record[]): JSX.Element => {
             const timeline = prepareTimeline(records)
             return (
-              <React.Fragment>
+              <>
                 {sortBy(Object.values(timeline), 'date').map(
                   (day: DayEntry): JSX.Element => (
                     <TimelineWidgetDay
@@ -113,7 +113,7 @@ const TimelineWidget = (): JSX.Element => {
                     />
                   )
                 )}
-              </React.Fragment>
+              </>
             )
           }}
         </QueryStateHandler>

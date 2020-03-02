@@ -109,7 +109,7 @@ const EvaluationEdit = (props: Props): JSX.Element => {
         data: { getCategories: categories, getEvaluation: evaluation },
         status: { getEvaluation: evaluationQueryStatus },
       }: PageQueryResult): JSX.Element => (
-        <React.Fragment>
+        <>
           <H1 context="page">Auswertung bearbeiten</H1>
           {evaluationQueryStatus}
           {!evaluationQueryStatus && evaluation && (
@@ -136,7 +136,7 @@ const EvaluationEdit = (props: Props): JSX.Element => {
               )}
             </Mutation>
           )}
-        </React.Fragment>
+        </>
       )}
     </PageQueryHandler>
   )

@@ -120,12 +120,12 @@ const RecordEdit = (props: RouteComponentProps): JSX.Element => {
           getRecord: recordQueryStatus,
         },
       }: PageQueryResult): JSX.Element => (
-        <React.Fragment>
+        <>
           <H1>Eintrag bearbeiten</H1>
           {recordQueryStatus}
           {categoryQueryStatus}
           {!recordQueryStatus && !categoryQueryStatus && category && record && (
-            <React.Fragment>
+            <>
               <Mutation
                 mutation={UpdateRecord}
                 onCompleted={onCompleted}
@@ -165,9 +165,9 @@ const RecordEdit = (props: RouteComponentProps): JSX.Element => {
                   onDelete={(): void => history.push('/')}
                 />
               </ActionRow>
-            </React.Fragment>
+            </>
           )}
-        </React.Fragment>
+        </>
       )}
     </PageQueryHandler>
   )

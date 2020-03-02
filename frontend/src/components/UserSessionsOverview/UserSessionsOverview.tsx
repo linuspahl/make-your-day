@@ -45,7 +45,7 @@ const UserSessionOverview = (props: Props): JSX.Element => (
       status: { getUserSessions: userSessionsQueryStatus },
     }: PageQueryResult): JSX.Element => {
       return (
-        <React.Fragment>
+        <>
           <H1 context="page">Angemeldete Geräte</H1>
           {userSessionsQueryStatus}
           {!userSessionsQueryStatus && userSessions && (
@@ -77,7 +77,7 @@ const UserSessionOverview = (props: Props): JSX.Element => (
               </GridBody>
             </Grid>
           )}
-        </React.Fragment>
+        </>
       )
     }}
   </PageQueryHandler>
@@ -92,7 +92,7 @@ const ListItem = (props: {
   const { userSession, isCurrentSession } = props
   const expiresAtDate = dayjs(userSession.expiresAt).format('YYYY-MM-DD')
   return (
-    <React.Fragment>
+    <>
       <div>{userSession.device}</div>
       <div>{expiresAtDate}</div>
       <GridCell justify="flex-end">
@@ -114,7 +114,7 @@ const ListItem = (props: {
           )}
         </ActionIconWrapper>
       </GridCell>
-    </React.Fragment>
+    </>
   )
 }
 

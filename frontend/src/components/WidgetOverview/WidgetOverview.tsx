@@ -66,7 +66,7 @@ const WidgetOverview = (props: Props): JSX.Element => {
       }: PageQueryResult): JSX.Element => {
         const widgetsByPosition = sortWidgetsByPosition(widgets)
         return (
-          <React.Fragment>
+          <>
             <H1 context="page">Widgets verwalten</H1>
             {widgetsQueryStatus}
             {!widgetsQueryStatus &&
@@ -102,7 +102,7 @@ const WidgetOverview = (props: Props): JSX.Element => {
                 Widget erstellen
               </Button>
             </ActionRow>
-          </React.Fragment>
+          </>
         )
       }}
     </PageQueryHandler>

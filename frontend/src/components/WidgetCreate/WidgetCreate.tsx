@@ -51,7 +51,7 @@ class WidgetCreate extends React.Component<Props> {
           data: { getEvaluations: evaluations },
         }: PageQueryResult): JSX.Element => {
           return (
-            <React.Fragment>
+            <>
               <H1 context="page">Widget erstellen</H1>
 
               <Mutation
@@ -77,7 +77,7 @@ class WidgetCreate extends React.Component<Props> {
                   />
                 )}
               </Mutation>
-            </React.Fragment>
+            </>
           )
         }}
       </PageQueryHandler>

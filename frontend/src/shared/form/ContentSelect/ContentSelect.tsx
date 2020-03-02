@@ -140,12 +140,12 @@ export default class ContentSelect extends React.Component<Props, State> {
                         event: React.MouseEvent<HTMLElement>
                       ): void => this.onOptionClick(event, option.value)}
                     >
-                      <React.Fragment>
+                      <>
                         {hasPreview && (
                           <OptionPreview>{renderPreview(option)}</OptionPreview>
                         )}
                         <span>{option.title}</span>
-                      </React.Fragment>
+                      </>
                     </Option>
                   )
                 }

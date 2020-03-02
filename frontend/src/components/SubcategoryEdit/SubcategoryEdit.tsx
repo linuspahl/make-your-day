@@ -85,7 +85,7 @@ const SubcategoryEdit = (props: Props): JSX.Element => {
         data: { getCategory: subcategory },
         status: { getCategory: getCategoryStatus },
       }: PageQueryResult): JSX.Element => (
-        <React.Fragment>
+        <>
           <H1 context="page">Subkategorie bearbeiten</H1>
           {getCategoryStatus}
           {!getCategoryStatus && subcategory && (
@@ -121,7 +121,7 @@ const SubcategoryEdit = (props: Props): JSX.Element => {
               )}
             </Mutation>
           )}
-        </React.Fragment>
+        </>
       )}
     </PageQueryHandler>
   )

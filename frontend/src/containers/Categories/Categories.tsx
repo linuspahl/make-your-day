@@ -21,7 +21,7 @@ interface Props {
 const Categories = (props: Props): JSX.Element => {
   const { rootPath } = props
   return (
-    <React.Fragment>
+    <>
       <Route
         exact
         path={rootPath}
@@ -62,7 +62,7 @@ const Categories = (props: Props): JSX.Element => {
         path={`${rootPath}/:categoryId/subcategories/:id/edit`}
         render={(): JSX.Element => <SubcategoryEdit rootPath={rootPath} />}
       />
-    </React.Fragment>
+    </>
   )
 }
 

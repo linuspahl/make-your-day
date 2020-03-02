@@ -92,7 +92,7 @@ const RecordCreate = (props: RouteComponentProps): JSX.Element => {
         data: { getCategory: category },
         status: { getCategory: categoryQueryResult },
       }: PageQueryResult): JSX.Element => (
-        <React.Fragment>
+        <>
           <H1>Eintrag erstellen</H1>
           {categoryQueryResult}
           {!categoryQueryResult && category && (
@@ -124,7 +124,7 @@ const RecordCreate = (props: RouteComponentProps): JSX.Element => {
               )}
             </Mutation>
           )}
-        </React.Fragment>
+        </>
       )}
     </PageQueryHandler>
   )

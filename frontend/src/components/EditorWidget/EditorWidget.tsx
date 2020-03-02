@@ -78,14 +78,14 @@ const EditorWidget = (props: Props): JSX.Element => {
       {(
         updateWidget: ({ variables }: { variables: WidgetEdit }) => void
       ): JSX.Element => (
-        <React.Fragment>
+        <>
           {renderEditor(widget, value, updateWidget, false, toggleModal)}
           {isFullScreen && (
             <Modal headline={widget.title} toggleAction={toggleModal}>
               {renderEditor(widget, value, updateWidget, true)}
             </Modal>
           )}
-        </React.Fragment>
+        </>
       )}
     </Mutation>
   )

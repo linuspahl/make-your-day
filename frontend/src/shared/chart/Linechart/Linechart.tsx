@@ -22,7 +22,7 @@ const Linechart = (props: Props): JSX.Element => {
   }
 
   return (
-    <React.Fragment>
+    <>
       {chartLegend}
       <ChartistGraph
         data={{
@@ -37,7 +37,7 @@ const Linechart = (props: Props): JSX.Element => {
         type="Line"
       />
       {description}
-    </React.Fragment>
+    </>
   )
 }
 

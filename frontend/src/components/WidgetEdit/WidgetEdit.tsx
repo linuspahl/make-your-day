@@ -108,7 +108,7 @@ const WidgetEdit = (props: Props): JSX.Element => {
         status: { getWidget: widgetQueryStatus },
       }: PageQueryResult): JSX.Element => {
         return (
-          <React.Fragment>
+          <>
             <H1 context="page">Widget bearbeiten</H1>
             {widgetQueryStatus}
             {!widgetQueryStatus && widget && (
@@ -142,7 +142,7 @@ const WidgetEdit = (props: Props): JSX.Element => {
                 )}
               </Mutation>
             )}
-          </React.Fragment>
+          </>
         )
       }}
     </PageQueryHandler>

@@ -42,7 +42,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
         status: { getCategories: categoriesQueryStatus },
       }: PageQueryResult): JSX.Element => {
         return (
-          <React.Fragment>
+          <>
             <H1 context="page">Kategorien verwalten</H1>
             {categoriesQueryStatus}
             {!categoriesQueryStatus && categories && (
@@ -63,7 +63,7 @@ const CategoryOverview = (props: Props): JSX.Element => {
                 Kategorie erstellen
               </Button>
             </ActionRow>
-          </React.Fragment>
+          </>
         )
       }}
     </PageQueryHandler>

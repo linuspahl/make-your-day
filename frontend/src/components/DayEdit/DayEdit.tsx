@@ -85,7 +85,7 @@ const DayEdit = (props: Props): JSX.Element => {
       }: PageQueryResult): JSX.Element => {
         const categories = prepareCategories(records)
         return (
-          <React.Fragment>
+          <>
             <H1 context="page">{`Einträge ${date}`}</H1>
             <NewRecordSection>
               <H2>Neu erstellen</H2>
@@ -124,7 +124,7 @@ const DayEdit = (props: Props): JSX.Element => {
                 Zum Dashboard
               </Button>
             </ActionRow>
-          </React.Fragment>
+          </>
         )
       }}
     </PageQueryHandler>

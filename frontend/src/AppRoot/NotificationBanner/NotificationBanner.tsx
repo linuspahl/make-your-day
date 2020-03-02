@@ -43,7 +43,7 @@ export default class NotificationBanner extends React.Component<{}, State> {
   public render(): JSX.Element {
     const { notification } = this.state
     return (
-      <React.Fragment>
+      <>
         {notification && (
           <Alert
             role={notification.type}
@@ -56,7 +56,7 @@ export default class NotificationBanner extends React.Component<{}, State> {
             </CircleTimer>
           </Alert>
         )}
-      </React.Fragment>
+      </>
     )
   }
 

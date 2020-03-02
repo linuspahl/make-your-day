@@ -42,7 +42,7 @@ const Barchart = (props: Props): JSX.Element => {
   }
 
   return (
-    <React.Fragment>
+    <>
       {chartLegend}
       <ChartistGraph
         data={{
@@ -52,7 +52,7 @@ const Barchart = (props: Props): JSX.Element => {
         type="Bar"
       />
       {description}
-    </React.Fragment>
+    </>
   )
 }
 

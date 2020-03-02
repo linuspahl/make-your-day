@@ -56,7 +56,7 @@ class UserSettingsOverview extends React.Component<Props> {
           status: { getSettings: settingsQueryStatus },
         }: PageQueryHandler): JSX.Element => {
           return (
-            <React.Fragment>
+            <>
               <H1 context="page">Einstellungen</H1>
               {settingsQueryStatus}
               {!settingsQueryStatus &&
@@ -94,7 +94,7 @@ class UserSettingsOverview extends React.Component<Props> {
                   userSessionId={userSession.id}
                 />
               </ActionRow>
-            </React.Fragment>
+            </>
           )
         }}
       </PageQueryHandler>

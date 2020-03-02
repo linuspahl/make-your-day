@@ -72,7 +72,7 @@ const Dashboard = (): JSX.Element => (
         )
 
         return (
-          <React.Fragment>
+          <>
             <DashboardWidgets
               delay={600}
               loading={loading}
@@ -84,7 +84,7 @@ const Dashboard = (): JSX.Element => (
               widgets={widgetsDashboardBottom}
               delay={500}
             />
-          </React.Fragment>
+          </>
         )
       }}
     </Query>

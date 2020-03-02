@@ -110,7 +110,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
     // we'll show an info instead of the form
     if (hasSubcategories && subcategoryOptions.length === 0) {
       return (
-        <React.Fragment>
+        <>
           <Row>
             Für die Kategorie {categoryTitle} muss mindestens eine
             Unterkategorie angelegt werden.
@@ -123,7 +123,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
               Untekategorie anlegen
             </Button>
           </ActionRow>
-        </React.Fragment>
+        </>
       )
     }
 
@@ -150,7 +150,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
         )}
         {hasSubcategories && (
           <Row htmlFor="categoryId">
-            <React.Fragment>
+            <>
               <ContentSelect
                 id="categoryId"
                 label="Unterkategorie"
@@ -168,7 +168,7 @@ export default class RecordForm extends React.Component<Props, RecordCreate> {
                   </Link>
                 )}
               />
-            </React.Fragment>
+            </>
           </Row>
         )}
         {hasDescription && (

@@ -9,7 +9,7 @@ import FadeTransition from 'shared/FadeTransition/FadeTransition'
 import H1 from 'shared/H1/H1'
 
 const PageNotFound = (): JSX.Element => (
-  <React.Fragment>
+  <>
     <FadeTransition fullWidth>
       <ContentBox role="main">
         <H1 context="page">Seite nicht gefunden</H1>
@@ -24,7 +24,7 @@ const PageNotFound = (): JSX.Element => (
         </ActionRow>
       </ContentBox>
     </FadeTransition>
-  </React.Fragment>
+  </>
 )
 
 export default PageNotFound

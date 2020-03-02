@@ -36,7 +36,7 @@ const Piechart = (props: Props): JSX.Element => {
   }
 
   return (
-    <React.Fragment>
+    <>
       {chartLegend}
       <ChartistGraph
         data={{
@@ -45,7 +45,7 @@ const Piechart = (props: Props): JSX.Element => {
         type="Pie"
       />
       {description}
-    </React.Fragment>
+    </>
   )
 }
 

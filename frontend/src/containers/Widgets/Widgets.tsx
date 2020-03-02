@@ -16,7 +16,7 @@ interface Props {
 const Widgets = (props: Props): JSX.Element => {
   const { createNotificationBanner, rootPath } = props
   return (
-    <React.Fragment>
+    <>
       <Route
         exact
         path={rootPath}
@@ -42,7 +42,7 @@ const Widgets = (props: Props): JSX.Element => {
           />
         )}
       />
-    </React.Fragment>
+    </>
   )
 }
 

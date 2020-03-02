@@ -17,7 +17,7 @@ interface Props {
 const Evaluations = (props: Props): JSX.Element => {
   const { rootPath } = props
   return (
-    <React.Fragment>
+    <>
       <Route
         exact
         path={rootPath}
@@ -42,7 +42,7 @@ const Evaluations = (props: Props): JSX.Element => {
         public
         render={(): JSX.Element => <EvaluationResult rootPath={rootPath} />}
       />
-    </React.Fragment>
+    </>
   )
 }
 

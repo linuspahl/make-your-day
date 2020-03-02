@@ -35,13 +35,13 @@ const EvaluationResult = (props: Props): JSX.Element => {
         data: { getEvaluation?: Evaluation }
         status: { getEvaluation: JSX.Element }
       }): JSX.Element => (
-        <React.Fragment>
+        <>
           <H1 context="page">Ergebnis Auswertung</H1>
           {evaluationQueryStatus}
           {!evaluationQueryStatus && evaluation && (
             <EvaluationChart evaluation={evaluation} />
           )}
-        </React.Fragment>
+        </>
       )}
     </PageQueryHandler>
   )

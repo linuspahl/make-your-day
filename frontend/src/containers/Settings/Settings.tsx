@@ -20,7 +20,7 @@ interface Props {
 
 const Settings = (props: Props): JSX.Element => {
   return (
-    <React.Fragment>
+    <>
       <Route
         exact
         path={props.rootPath}
@@ -46,7 +46,7 @@ const Settings = (props: Props): JSX.Element => {
           />
         )}
       />
-    </React.Fragment>
+    </>
   )
 }
 
