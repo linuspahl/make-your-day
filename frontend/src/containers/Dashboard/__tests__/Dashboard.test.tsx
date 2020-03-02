@@ -5,7 +5,6 @@ import { renderWithAppRoot, wait, cleanup, mockDocument } from 'testUtils'
 // components
 import Dashboard from 'containers/Dashboard/Dashboard'
 // fixtures
-import { userSession } from 'store/userSession/fixtures'
 import {
   getWidgetsWithEvaluationError,
   getWidgetsWithEvaluationSuccess,
@@ -13,16 +12,11 @@ import {
 } from 'store/widget/fixtures'
 
 describe('Dashboard should', (): void => {
-  const propsFixture = {
-    createNotificationBanner: (): void => {},
-    rootPath: '/dashboard',
-    userSession,
-  }
   mockDocument()
   afterEach(cleanup)
 
   test('render dashboard and fetch widgets', async (): Promise<void> => {
-    const { getByText } = renderWithAppRoot(<Dashboard {...propsFixture} />, {
+    const { getByText } = renderWithAppRoot(<Dashboard />, {
       route: '/dashboard',
       mocks: [getWidgetsWithEvaluationSuccess],
     })
@@ -33,7 +27,7 @@ describe('Dashboard should', (): void => {
   test('render dashboard and show error message on widgets fetch error', async (): Promise<
     void
   > => {
-    const { getByText } = renderWithAppRoot(<Dashboard {...propsFixture} />, {
+    const { getByText } = renderWithAppRoot(<Dashboard />, {
       route: '/dashboard',
       mocks: [getWidgetsWithEvaluationError],
     })

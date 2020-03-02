@@ -7,7 +7,6 @@ import { ApolloError } from 'apollo-boost'
 import DashboardWidgets from 'components/DashboardWidgets/DashboardWidgets'
 import ErrorMessage from 'shared/ErrorMessage/ErrorMessage'
 // interfaces
-import { NotificationCreate } from 'types/types'
 import { WidgetFull } from 'store/widget/type'
 // graphql
 import { GetWidgetsWithEvaluation } from 'store/widget/query'
@@ -44,12 +43,7 @@ export const Layout = styled.div`
   }}
 `
 
-interface Props {
-  createNotificationBanner: (notification: NotificationCreate) => void
-  rootPath: string
-}
-
-const Dashboard = (props: Props): JSX.Element => (
+const Dashboard = (): JSX.Element => (
   <Layout role="main">
     <Query query={GetWidgetsWithEvaluation}>
       {({
