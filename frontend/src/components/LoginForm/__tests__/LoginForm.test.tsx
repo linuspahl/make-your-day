@@ -45,13 +45,9 @@ describe('LoginForm should', (): void => {
   afterEach(cleanup)
 
   test('render without crashing', (): void => {
-    const { getByText } = renderWithAppRoot(
-      <LoginForm
-        createNotificationBanner={(): void => {}}
-        updateLocalStorage={(): void => {}}
-      />,
-      { mocks: [loginUserSuccess] }
-    )
+    const { getByText } = renderWithAppRoot(<LoginForm />, {
+      mocks: [loginUserSuccess],
+    })
 
     // Submit form
     expect(getByText('Anmelden')).toBeInTheDocument()
@@ -59,13 +55,10 @@ describe('LoginForm should', (): void => {
 
   test('update localstorage on successful logout', async (): Promise<void> => {
     const updateLocalStorageStub = jest.fn()
-    const { getByText, getByLabelText } = renderWithAppRoot(
-      <LoginForm
-        createNotificationBanner={(): void => {}}
-        updateLocalStorage={updateLocalStorageStub}
-      />,
-      { mocks: [loginUserSuccess] }
-    )
+    const { getByText, getByLabelText } = renderWithAppRoot(<LoginForm />, {
+      mocks: [loginUserSuccess],
+      context: { updateLocalStorage: updateLocalStorageStub },
+    })
     initLoginForm(getByLabelText)
     // Submit form
     fireEvent.click(getByText('Anmelden'), leftClickOption)
@@ -85,13 +78,10 @@ describe('LoginForm should', (): void => {
     void
   > => {
     const createNotificationBannerStub = jest.fn()
-    const { getByText, getByLabelText } = renderWithAppRoot(
-      <LoginForm
-        createNotificationBanner={createNotificationBannerStub}
-        updateLocalStorage={(): void => {}}
-      />,
-      { mocks: [loginUserError] }
-    )
+    const { getByText, getByLabelText } = renderWithAppRoot(<LoginForm />, {
+      mocks: [loginUserError],
+      context: { createNotificationBanner: createNotificationBannerStub },
+    })
     initLoginForm(getByLabelText)
     // Submit form
     fireEvent.click(getByText('Anmelden'), leftClickOption)

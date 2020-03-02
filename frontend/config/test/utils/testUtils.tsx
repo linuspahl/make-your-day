@@ -72,6 +72,7 @@ function renderWithAppRoot(
     context?: {
       createNotificationBanner?: AppContextType['createNotificationBanner']
       clearBrowserStorage?: AppContextType['clearBrowserStorage']
+      updateLocalStorage?: AppContextType['updateLocalStorage']
       userSession?: AppContextType['userSession']
       userSettings?: AppContextType['userSettings']
     }

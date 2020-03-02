@@ -22,10 +22,7 @@ const Layout = (props: Props): JSX.Element => (
     <Wrapper>
       <ContentBox role="main" context="page">
         <H1 context="page">Anmeldung</H1>
-        <LoginForm
-          updateLocalStorage={props.updateLocalStorage}
-          createNotificationBanner={props.createNotificationBanner}
-        />
+        <LoginForm />
       </ContentBox>
     </Wrapper>
   </FadeTransition>

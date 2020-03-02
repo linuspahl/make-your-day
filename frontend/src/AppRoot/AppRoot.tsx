@@ -21,6 +21,7 @@ import {
   LocalStorage,
   NotificationCreate,
   AppContext as AppContextType,
+  LocalStorageCreate,
 } from 'types/types'
 import { UserSession } from 'store/userSession/type'
 
@@ -73,6 +74,8 @@ const AppRoot = (): JSX.Element => {
   const createNotificationBanner = (notification: NotificationCreate): void => {
     notificationBanner.current.addNotification(notification)
   }
+  const updateLocalStorage = (nextStore: LocalStorageCreate): void =>
+    LocalStorageProvider.update(nextStore, setBrowserStorage)
   const apolloClient = createApolloClient(
     clearBrowserStorage,
     createNotificationBanner
@@ -80,6 +83,7 @@ const AppRoot = (): JSX.Element => {
   const appContext: AppContextType = {
     createNotificationBanner,
     clearBrowserStorage,
+    updateLocalStorage,
     userSession,
     userSettings,
   }
@@ -95,12 +99,10 @@ const AppRoot = (): JSX.Element => {
             */}
             <NotificationBanner ref={notificationBanner} />
             <Routes
-              clearLocalStorage={clearBrowserStorage}
               createNotificationBanner={createNotificationBanner}
+              clearLocalStorage={clearBrowserStorage}
               userSession={userSession}
-              updateLocalStorage={(nextStore): void =>
-                LocalStorageProvider.update(nextStore, setBrowserStorage)
-              }
+              updateLocalStorage={updateLocalStorage}
               userSettings={userSettings}
             />
           </AppWrapper>

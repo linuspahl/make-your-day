@@ -97,6 +97,7 @@ export interface NavigationState {
 export interface AppContext {
   createNotificationBanner: (notification: NotificationCreate) => void
   clearBrowserStorage: () => void
+  updateLocalStorage: (nextStore: LocalStorageCreate) => void
   userSession: UserSession
   userSettings: {
     nightMode: boolean

@@ -1,12 +1,13 @@
 // libraries
 import React from 'react'
 // interfaces
-import { NotificationCreate } from 'types/types'
+import { NotificationCreate, LocalStorageCreate } from 'types/types'
 import { UserSession } from 'store/userSession/type'
 
 interface AppContextType {
   createNotificationBanner?: (notification: NotificationCreate) => void
   clearBrowserStorage?: () => void
+  updateLocalStorage?: (nextStore: LocalStorageCreate) => void
   userSession?: UserSession
   userSettings?: {
     nightMode: boolean
