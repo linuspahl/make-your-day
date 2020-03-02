@@ -26,49 +26,53 @@ interface Props extends RouteComponentProps {
   rootPath: string
 }
 
+interface SubmitResult {
+  updateCategory: Category
+}
 interface PageQueryResult {
   data: { getCategory: Category }
   status: { getCategory: JSX.Element }
 }
-const handleCompleted = (
-  props: Props,
+const onSubmitComplete = (
+  data: SubmitResult,
+  rootPath: Props['rootPath'],
+  history: Props['history'],
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((data: { updateCategory: Category }) => void) => {
-  const { rootPath, history } = props
-  return (data): void => {
-    const {
-      updateCategory: { title },
-    } = data
+): void => {
+  const {
+    updateCategory: { title },
+  } = data
 
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Kategorie ${title} erfolgreich bearbeitet`,
-    })
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Kategorie ${title} erfolgreich bearbeitet`,
+  })
 
-    // Go to the categories overview
-    history.push(rootPath)
-  }
+  // Go to the categories overview
+  history.push(rootPath)
 }
 
 // Form error function
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Bearbeitung der Kategorie fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Bearbeitung der Kategorie fehlgeschlagen',
+  })
+  logError(error)
 }
+
 const CategoryEdit = (props: Props): JSX.Element => {
-  const { match, rootPath } = props
+  const { match, rootPath, history } = props
   const { createNotificationBanner } = useContext(AppContext)
-  const onCompleted = handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
   const categoryId = extractIdFromUrl(match)
+  const handleCompleted = (data: SubmitResult): void =>
+    onSubmitComplete(data, rootPath, history, createNotificationBanner)
+  const handleError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
   return (
     <PageQueryHandler
       dataTestId="CategoryEdit"
@@ -88,8 +92,8 @@ const CategoryEdit = (props: Props): JSX.Element => {
             {!categoryQueryStatus && category && (
               <Mutation
                 mutation={UpdateCategory}
-                onCompleted={onCompleted}
-                onError={onError}
+                onCompleted={handleCompleted}
+                onError={handleError}
               >
                 {(
                   updateCategory: ({
