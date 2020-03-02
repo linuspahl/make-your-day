@@ -27,48 +27,52 @@ interface Props extends RouteComponentProps {
   rootPath: string
 }
 
-const handleCompleted = (
-  props: Props,
+interface SubmitResult {
+  createCategory: Category
+}
+
+const onSubmitComplete = (
+  rootPath: Props['rootPath'],
+  history: Props['history'],
+  data: SubmitResult,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((data: { createCategory: Category }) => void) => {
-  const { rootPath, history } = props
-  return (data): void => {
-    const {
-      createCategory: { id, title, hasSubcategories },
-    } = data
+): void => {
+  const {
+    createCategory: { id, title, hasSubcategories },
+  } = data
 
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Kategorie ${title} erfolgreich erstellt`,
-    })
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Kategorie ${title} erfolgreich erstellt`,
+  })
 
-    // Go to the categories overview
-    if (hasSubcategories) {
-      history.push(`${rootPath}/${id}/subcategories/create`)
-    } else {
-      history.push(rootPath)
-    }
+  // Go to the categories overview
+  if (hasSubcategories) {
+    history.push(`${rootPath}/${id}/subcategories/create`)
+  } else {
+    history.push(rootPath)
   }
 }
 
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Erstellung der Kategorie fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Erstellung der Kategorie fehlgeschlagen',
+  })
+  logError(error)
 }
 
 export const CategoryCreate = (props: Props): JSX.Element => {
-  const { rootPath } = props
+  const { rootPath, history } = props
   const { createNotificationBanner } = useContext(AppContext)
-  const onCompleted = handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
+  const handleSubmitComplete = (submitResult: SubmitResult): void =>
+    onSubmitComplete(rootPath, history, submitResult, createNotificationBanner)
+  const handleError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
   return (
     <FadeTransition fullWidth fullHeight>
       <DefaultPageLayout>
@@ -76,8 +80,8 @@ export const CategoryCreate = (props: Props): JSX.Element => {
           <H1 context="page">Kategorie erstellen</H1>
           <Mutation
             mutation={CreateCategory}
-            onCompleted={onCompleted}
-            onError={onError}
+            onCompleted={handleSubmitComplete}
+            onError={handleError}
             update={addCategory}
           >
             {(
