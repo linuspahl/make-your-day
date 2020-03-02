@@ -1,8 +1,9 @@
 // libraries
 import React, { useState, useContext } from 'react'
 import { Mutation } from 'react-apollo'
-import { handleInputChange, logError } from 'utils/utils'
 import { ApolloError } from 'apollo-boost'
+// utils
+import { logError } from 'utils/utils'
 // components
 import ActionRow from 'shared/form/ActionRow/ActionRow'
 import Button from 'shared/Button/Button'

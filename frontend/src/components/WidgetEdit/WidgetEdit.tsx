@@ -87,7 +87,7 @@ const handleError = (
 }
 
 const WidgetEdit = (props: Props): JSX.Element => {
-  const { match, rootPath, history } = props
+  const { match, rootPath } = props
   const { createNotificationBanner } = useContext(AppContext)
   const onCompleted = handleCompleted(props, createNotificationBanner)
   const onError = handleError(createNotificationBanner)
