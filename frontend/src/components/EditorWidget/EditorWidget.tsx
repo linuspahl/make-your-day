@@ -18,22 +18,16 @@ interface Props {
   widget: Widget
 }
 
-interface State {
-  value: Widget['value']
-  isEditorFullScreen: boolean
-}
-
 // Form error function
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Bearbeitung des Widgets fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Bearbeitung des Widgets fehlgeschlagen',
+  })
+  logError(error)
 }
 
 const EditorWidget = (props: Props): JSX.Element => {
@@ -41,8 +35,8 @@ const EditorWidget = (props: Props): JSX.Element => {
   const [isFullScreen, setIsFullSreen] = useState(false)
   const [value, setValue] = useState(widget.value)
   const { createNotificationBanner } = useContext(AppContext)
-  const onError = handleError(createNotificationBanner)
-
+  const handleError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
   const toggleModal = (): void => {
     setIsFullSreen(!isFullScreen)
   }
@@ -74,7 +68,7 @@ const EditorWidget = (props: Props): JSX.Element => {
   }
 
   return (
-    <Mutation mutation={UpdateWidget} onError={onError}>
+    <Mutation mutation={UpdateWidget} onError={handleError}>
       {(
         updateWidget: ({ variables }: { variables: WidgetEdit }) => void
       ): JSX.Element => (
