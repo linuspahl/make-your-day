@@ -21,61 +21,61 @@ import { deleteUserSession } from 'store/userSession/update'
 import { UserSession } from 'store/userSession/type'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 
-interface Props {
-  currentUserSession: UserSession
-}
-
 interface PageQueryResult {
   data: { getUserSessions: UserSession[] }
   status: { getUserSessions: JSX.Element }
 }
 
-const UserSessionOverview = ({ currentUserSession }: Props): JSX.Element => (
-  <PageQueryHandler
-    dataTestId="UserSessionsOverview"
-    errorMessages={{
-      getUserSessions: 'Andere Sitzungen konnten nicht geladen werden',
-    }}
-    query={GetUserSessions}
-    queryNames={['getUserSessions']}
-  >
-    {({
-      data: { getUserSessions: userSessions },
-      status: { getUserSessions: userSessionsQueryStatus },
-    }: PageQueryResult): JSX.Element => {
-      return (
-        <>
-          <H1 context="page">Angemeldete Geräte</H1>
-          {userSessionsQueryStatus}
-          {!userSessionsQueryStatus && userSessions && (
-            <Grid>
-              <GridHead>
-                <GridCell>Gerät</GridCell>
-                <GridCell>Gültig bis</GridCell>
-                <GridCell />
-              </GridHead>
-              <GridBody columnAmount={3}>
-                {userSessions.map(
-                  (userSession: UserSession): JSX.Element => {
-                    return (
-                      <ListItem
-                        isCurrentSession={
-                          userSession.expiresAt === currentUserSession.expiresAt
-                        }
-                        key={userSession.id}
-                        userSession={userSession}
-                      />
-                    )
-                  }
-                )}
-              </GridBody>
-            </Grid>
-          )}
-        </>
-      )
-    }}
-  </PageQueryHandler>
-)
+const UserSessionOverview = (): JSX.Element => {
+  const { userSession: currentUserSession } = useContext(AppContext)
+  return (
+    <PageQueryHandler
+      dataTestId="UserSessionsOverview"
+      errorMessages={{
+        getUserSessions: 'Andere Sitzungen konnten nicht geladen werden',
+      }}
+      query={GetUserSessions}
+      queryNames={['getUserSessions']}
+    >
+      {({
+        data: { getUserSessions: userSessions },
+        status: { getUserSessions: userSessionsQueryStatus },
+      }: PageQueryResult): JSX.Element => {
+        return (
+          <>
+            <H1 context="page">Angemeldete Geräte</H1>
+            {userSessionsQueryStatus}
+            {!userSessionsQueryStatus && userSessions && (
+              <Grid>
+                <GridHead>
+                  <GridCell>Gerät</GridCell>
+                  <GridCell>Gültig bis</GridCell>
+                  <GridCell />
+                </GridHead>
+                <GridBody columnAmount={3}>
+                  {userSessions.map(
+                    (userSession: UserSession): JSX.Element => {
+                      return (
+                        <ListItem
+                          isCurrentSession={
+                            userSession.expiresAt ===
+                            currentUserSession.expiresAt
+                          }
+                          key={userSession.id}
+                          userSession={userSession}
+                        />
+                      )
+                    }
+                  )}
+                </GridBody>
+              </Grid>
+            )}
+          </>
+        )
+      }}
+    </PageQueryHandler>
+  )
+}
 
 interface ListItemProps {
   isCurrentSession: boolean

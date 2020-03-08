@@ -1,5 +1,5 @@
 // libraries
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { withRouter, RouteComponentProps } from 'react-router-dom'
 // utils
 import { getRootPath } from 'utils/utils'
@@ -8,13 +8,13 @@ import { Layout, ChildrenWrapper } from './styles'
 import Navigation from 'components/Navigation/Navigation'
 import BottomNavigation from 'shared/BottomNavigation/BottomNavigation'
 import CategoryIconOverview from 'components/CategoryIconOverview/CategoryIconOverview'
+// contexts
+import AppContext from 'contexts/AppContext'
 // interfaces
 import { NavigationState } from 'types/types'
-import { UserSession } from 'store/userSession/type'
 
 interface Props extends RouteComponentProps {
   children: React.ReactNode
-  userSession?: UserSession
 }
 
 interface State {
@@ -22,10 +22,10 @@ interface State {
 }
 
 const InAppLayout = ({
-  userSession,
   children,
   location: { pathname },
 }: Props): JSX.Element => {
+  const { userSession } = useContext(AppContext)
   const [navigationOpen, setNavigationOpen] = useState(false)
   const [animateNavOnClose, setAnimateNavOnClose] = useState(false)
 

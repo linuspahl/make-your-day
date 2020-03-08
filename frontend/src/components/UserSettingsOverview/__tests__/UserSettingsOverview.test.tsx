@@ -15,7 +15,6 @@ import {
   createUserSettingSuccess,
   deleteUserSettingSuccess,
 } from 'store/userSetting/fixtures'
-import { userSession } from 'store/userSession/fixtures'
 import { userSetting } from 'store/userSetting/fixtures'
 
 describe('UserSettingsOverview should', (): void => {
@@ -23,13 +22,10 @@ describe('UserSettingsOverview should', (): void => {
 
   test('list fetched settings', async (): Promise<void> => {
     const { getByText } = renderWithAppRoot(
-      <UserSettingsOverview
-        rootPath="/settings"
-        updateLocalStorage={(): void => {}}
-        userSession={userSession}
-        userSettings={{ [userSetting.value]: userSetting }}
-      />,
-      { mocks: [getSettingsSuccess] }
+      <UserSettingsOverview rootPath="/settings" />,
+      {
+        mocks: [getSettingsSuccess],
+      }
     )
     // Wait for the Query component
     await wait()
@@ -41,14 +37,10 @@ describe('UserSettingsOverview should', (): void => {
   > => {
     const updateLocalStorageStub = jest.fn()
     const { getByLabelText } = renderWithAppRoot(
-      <UserSettingsOverview
-        rootPath="/settings"
-        updateLocalStorage={updateLocalStorageStub}
-        userSession={userSession}
-        userSettings={{}}
-      />,
+      <UserSettingsOverview rootPath="/settings" />,
       {
         mocks: [getSettingsSuccess, createUserSettingSuccess],
+        context: { updateLocalStorage: updateLocalStorageStub },
       }
     )
     // Wait for the Query component
@@ -65,14 +57,17 @@ describe('UserSettingsOverview should', (): void => {
   > => {
     const updateLocalStorageStub = jest.fn()
     const { getByLabelText } = renderWithAppRoot(
-      <UserSettingsOverview
-        rootPath="/settings"
-        updateLocalStorage={updateLocalStorageStub}
-        userSession={userSession}
-        userSettings={{ [userSetting.setting.type]: userSetting }}
-      />,
+      <UserSettingsOverview rootPath="/settings" />,
       {
         mocks: [getSettingsSuccess, deleteUserSettingSuccess],
+        context: {
+          updateLocalStorage: updateLocalStorageStub,
+          userSettings: {
+            nightMode: true,
+            leftHandMode: true,
+            showAppBgImage: true,
+          },
+        },
       }
     )
     // Wait for the Query component
@@ -80,7 +75,7 @@ describe('UserSettingsOverview should', (): void => {
     fireEvent.click(getByLabelText(setting.title), leftClickOption)
     await wait()
     expect(updateLocalStorageStub).toBeCalledWith({
-      [userSetting.setting.type]: false,
+      [userSetting.setting.type]: 'false',
     })
   })
 })

@@ -59,7 +59,7 @@ const formSubmitCompleted = (
     loginUser: { userSession, id: userId, userSettings = [] },
   } = data
   const settings = formatUserSettings(userSettings)
-  // Update local storage / app state reset  with received user data
+  // Update local storage / app state reset with received user data
   // App will redirect when authToken and userId is defined in app state
   if (userSession && userSession.token) {
     updateLocalStorage({

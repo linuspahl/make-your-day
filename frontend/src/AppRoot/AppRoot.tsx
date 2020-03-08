@@ -98,11 +98,7 @@ const AppRoot = (): JSX.Element => {
               this way the notifications won't unmount on route changes
             */}
             <NotificationBanner ref={notificationBanner} />
-            <Routes
-              userSession={userSession}
-              updateLocalStorage={updateLocalStorage}
-              userSettings={userSettings}
-            />
+            <Routes />
           </AppWrapper>
         </ThemeProvider>
       </ApolloProvider>

@@ -8,19 +8,12 @@ import UserSessionsOverview from 'components/UserSessionsOverview/UserSessionsOv
 import { userSession, getUserSessionsSuccess } from 'store/userSession/fixtures'
 
 describe('UserSessionsOverview should', (): void => {
-  const propsFixture = {
-    createNotificationBanner: (): void => {},
-    currentUserSession: userSession,
-  }
   afterEach(cleanup)
 
   test('list fetched userSessions', async (): Promise<void> => {
-    const { getAllByText } = renderWithAppRoot(
-      <UserSessionsOverview {...propsFixture} />,
-      {
-        mocks: [getUserSessionsSuccess],
-      }
-    )
+    const { getAllByText } = renderWithAppRoot(<UserSessionsOverview />, {
+      mocks: [getUserSessionsSuccess],
+    })
     // Wait for the Query component
     await wait()
     expect(getAllByText(userSession.device)).toHaveLength(2)

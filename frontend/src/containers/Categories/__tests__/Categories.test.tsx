@@ -7,13 +7,10 @@ import Categories from 'containers/Categories/Categories'
 // fixtures
 import { category } from 'store/category/fixtures'
 import { record } from 'store/record/fixtures'
-import { userSession } from 'store/userSession/fixtures'
 
 describe('Categories should', (): void => {
   const propsFixture = {
-    createNotificationBanner: (): void => {},
     rootPath: '/categories',
-    userSession: userSession,
   }
   afterEach(cleanup)
 

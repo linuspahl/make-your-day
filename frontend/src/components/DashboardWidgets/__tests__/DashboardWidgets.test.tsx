@@ -17,7 +17,6 @@ import { getRecordsSuccess } from 'store/record/fixtures'
 
 describe('DashboardWidgets should', (): void => {
   const propFixtures = {
-    createNotificationBanner: (): void => {},
     loading: false,
     widgets: [widget],
   }

@@ -6,13 +6,10 @@ import { renderWithAppRoot, cleanup } from 'testUtils'
 import Widgets from 'containers/Widgets/Widgets'
 // fixtures
 import { widget } from 'store/widget/fixtures'
-import { userSession } from 'store/userSession/fixtures'
 
 describe('Widgets should', (): void => {
   const propsFixture = {
-    createNotificationBanner: (): void => {},
     rootPath: '/widgets',
-    userSession,
   }
   afterEach(cleanup)
 

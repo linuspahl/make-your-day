@@ -9,10 +9,7 @@ import { setting } from 'store/setting/fixtures'
 describe('UserSettingCreate should', (): void => {
   test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
-      <UserSettingCreate
-        updateLocalStorage={(): void => {}}
-        setting={setting}
-      />
+      <UserSettingCreate setting={setting} />
     )
   })
 })

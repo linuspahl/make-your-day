@@ -1,26 +1,23 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-// interfaces
-import { UserSession } from 'store/userSession/type'
-import { LocalStorageCreate } from 'types/types'
+// contexts
+import AppContext from 'contexts/AppContext'
 
 interface Props {
   component: React.ReactType
   exact?: boolean
   path: string
-  updateLocalStorage?: (localStorage: LocalStorageCreate) => void
-  userSession: UserSession
-  userSettings?: { [key: string]: boolean }
 }
 
 const PrivateRoute = ({
   component: Component,
   exact,
   path,
-  userSession,
   ...rest
 }: Props): JSX.Element => {
+  const { userSession } = useContext(AppContext)
+  console.log('userSession', userSession)
   // If user is not logged in and tries to access a private route,
   // we will redirect him to the login page
   if (!userSession || !userSession.token) return <Redirect to="/login" />
@@ -28,9 +25,7 @@ const PrivateRoute = ({
     <Route
       path={path}
       exact={exact}
-      render={(): JSX.Element => (
-        <Component userSession={userSession} rootPath={path} {...rest} />
-      )}
+      render={(): JSX.Element => <Component rootPath={path} {...rest} />}
     />
   )
 }

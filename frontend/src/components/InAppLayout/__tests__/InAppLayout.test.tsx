@@ -4,14 +4,11 @@ import React from 'react'
 import { renderWithAppRoot, cleanup, fireEvent } from 'testUtils'
 // components
 import InAppLyout from 'components/InAppLayout/InAppLayout'
-// fixtures
-import { userSession } from 'store/userSession/fixtures'
 
 describe('InAppLyout should', (): void => {
   const children = 'My special page content;'
   const propsFixture = {
     rootPath: '/',
-    userSession,
   }
   afterEach(cleanup)
 

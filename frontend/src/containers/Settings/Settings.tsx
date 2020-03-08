@@ -4,44 +4,22 @@ import { Route } from 'react-router-dom'
 // components
 import UserSettingsOverview from 'components/UserSettingsOverview/UserSettingsOverview'
 import UserSessionsOverview from 'components/UserSessionsOverview/UserSessionsOverview'
-// interfaces
-import { UserSession } from 'store/userSession/type'
-import { NotificationCreate, LocalStorage } from 'types/types'
-import { UserSettings } from 'store/userSetting/type'
 
 interface Props {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
-  updateLocalStorage: (localStorage: LocalStorage) => void
-  userSession: UserSession
-  userSettings: UserSettings
 }
 
-const Settings = ({
-  rootPath,
-  updateLocalStorage,
-  userSession,
-  userSettings,
-}: Props): JSX.Element => (
+const Settings = ({ rootPath }: Props): JSX.Element => (
   <>
     <Route
       exact
       path={rootPath}
-      render={(): JSX.Element => (
-        <UserSettingsOverview
-          rootPath={rootPath}
-          updateLocalStorage={updateLocalStorage}
-          userSession={userSession}
-          userSettings={userSettings}
-        />
-      )}
+      render={(): JSX.Element => <UserSettingsOverview rootPath={rootPath} />}
     />
     <Route
       exact
       path={`${rootPath}/sessions`}
-      render={(): JSX.Element => (
-        <UserSessionsOverview currentUserSession={userSession} />
-      )}
+      render={(): JSX.Element => <UserSessionsOverview />}
     />
   </>
 )

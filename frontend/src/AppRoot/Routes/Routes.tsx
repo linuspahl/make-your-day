@@ -17,21 +17,8 @@ import InAppLayout from 'components/InAppLayout/InAppLayout'
 import LoadableCenteredSpinner from 'shared/CenteredSpinner/LoadableCenteredSpinner'
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import PublicRoute from '../PublicRoute/PublicRoute'
-// interfaces
-import { LocalStorageCreate } from 'types/types'
-import { UserSession } from 'store/userSession/type'
 
-interface Props {
-  updateLocalStorage: (localStorage: LocalStorageCreate) => void
-  userSession: UserSession
-  userSettings: { [key: string]: boolean }
-}
-
-const Routes = ({
-  updateLocalStorage,
-  userSession,
-  userSettings,
-}: Props): JSX.Element => (
+const Routes = (): JSX.Element => (
   <Router>
     <Switch>
       <PublicRoute
@@ -40,11 +27,9 @@ const Routes = ({
             import(/* webpackChunkName: "Login" */ 'containers/Login/Login'),
           loading: LoadableCenteredSpinner,
         })}
-        userSession={userSession}
         path="/login"
-        updateLocalStorage={updateLocalStorage}
       />
-      <InAppLayout userSession={userSession}>
+      <InAppLayout>
         <PrivateRoute
           component={Loadable({
             loader: (): Promise<any> =>
@@ -54,7 +39,6 @@ const Routes = ({
             loading: LoadableCenteredSpinner,
           })}
           exact
-          userSession={userSession}
           path="/"
         />
 
@@ -66,10 +50,7 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          userSession={userSession}
           path="/settings"
-          updateLocalStorage={updateLocalStorage}
-          userSettings={userSettings}
         />
         <PrivateRoute
           component={Loadable({
@@ -79,7 +60,6 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          userSession={userSession}
           path="/categories"
         />
         <PrivateRoute
@@ -90,7 +70,6 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          userSession={userSession}
           path="/widgets"
         />
         <PrivateRoute
@@ -101,7 +80,6 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          userSession={userSession}
           path="/evaluations"
         />
         <PrivateRoute
@@ -112,7 +90,6 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          userSession={userSession}
           path="/timeline"
         />
       </InAppLayout>
