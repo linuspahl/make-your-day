@@ -5,45 +5,29 @@ import { Route } from 'react-router-dom'
 import WidgetCreate from 'components/WidgetCreate/WidgetCreate'
 import WidgetEdit from 'components/WidgetEdit/WidgetEdit'
 import WidgetOverview from 'components/WidgetOverview/WidgetOverview'
-// interfaces
-import { NotificationCreate } from 'types/types'
 
 interface Props {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
-const Widgets = (props: Props): JSX.Element => {
-  const { createNotificationBanner, rootPath } = props
-  return (
-    <>
-      <Route
-        exact
-        path={rootPath}
-        render={(): JSX.Element => <WidgetOverview rootPath={rootPath} />}
-      />
-      <Route
-        exact
-        path={`${rootPath}/create`}
-        render={(): JSX.Element => (
-          <WidgetCreate
-            createNotificationBanner={createNotificationBanner}
-            rootPath={rootPath}
-          />
-        )}
-      />
-      <Route
-        exact
-        path={`${rootPath}/edit/:id`}
-        render={(): JSX.Element => (
-          <WidgetEdit
-            createNotificationBanner={createNotificationBanner}
-            rootPath={rootPath}
-          />
-        )}
-      />
-    </>
-  )
-}
+const Widgets = ({ rootPath }: Props): JSX.Element => (
+  <>
+    <Route
+      exact
+      path={rootPath}
+      render={(): JSX.Element => <WidgetOverview rootPath={rootPath} />}
+    />
+    <Route
+      exact
+      path={`${rootPath}/create`}
+      render={(): JSX.Element => <WidgetCreate rootPath={rootPath} />}
+    />
+    <Route
+      exact
+      path={`${rootPath}/edit/:id`}
+      render={(): JSX.Element => <WidgetEdit rootPath={rootPath} />}
+    />
+  </>
+)
 
 export default Widgets

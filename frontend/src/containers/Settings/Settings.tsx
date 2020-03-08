@@ -18,36 +18,41 @@ interface Props {
   userSettings: UserSettings
 }
 
-const Settings = (props: Props): JSX.Element => {
-  return (
-    <>
-      <Route
-        exact
-        path={props.rootPath}
-        render={(): JSX.Element => (
-          <UserSettingsOverview
-            clearLocalStorage={props.clearLocalStorage}
-            createNotificationBanner={props.createNotificationBanner}
-            rootPath={props.rootPath}
-            updateLocalStorage={props.updateLocalStorage}
-            userSession={props.userSession}
-            userSettings={props.userSettings}
-          />
-        )}
-      />
-      <Route
-        exact
-        path={`${props.rootPath}/sessions`}
-        render={(): JSX.Element => (
-          <UserSessionsOverview
-            clearLocalStorage={props.clearLocalStorage}
-            createNotificationBanner={props.createNotificationBanner}
-            currentUserSession={props.userSession}
-          />
-        )}
-      />
-    </>
-  )
-}
+const Settings = ({
+  clearLocalStorage,
+  createNotificationBanner,
+  rootPath,
+  updateLocalStorage,
+  userSession,
+  userSettings,
+}: Props): JSX.Element => (
+  <>
+    <Route
+      exact
+      path={rootPath}
+      render={(): JSX.Element => (
+        <UserSettingsOverview
+          clearLocalStorage={clearLocalStorage}
+          createNotificationBanner={createNotificationBanner}
+          rootPath={rootPath}
+          updateLocalStorage={updateLocalStorage}
+          userSession={userSession}
+          userSettings={userSettings}
+        />
+      )}
+    />
+    <Route
+      exact
+      path={`${rootPath}/sessions`}
+      render={(): JSX.Element => (
+        <UserSessionsOverview
+          clearLocalStorage={clearLocalStorage}
+          createNotificationBanner={createNotificationBanner}
+          currentUserSession={userSession}
+        />
+      )}
+    />
+  </>
+)
 
 export default Settings

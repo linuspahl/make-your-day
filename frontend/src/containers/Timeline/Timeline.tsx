@@ -8,15 +8,12 @@ interface Props {
   rootPath: string
 }
 
-const Timeline = (props: Props): JSX.Element => {
-  const { rootPath } = props
-  return (
-    <Route
-      exact
-      path={`${rootPath}/:date`}
-      render={(): JSX.Element => <DayEdit />}
-    />
-  )
-}
+const Timeline = ({ rootPath }: Props): JSX.Element => (
+  <Route
+    exact
+    path={`${rootPath}/:date`}
+    render={(): JSX.Element => <DayEdit />}
+  />
+)
 
 export default Timeline

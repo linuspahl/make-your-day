@@ -6,44 +6,38 @@ import EvaluationOverview from 'components/EvaluationOverview/EvaluationOverview
 import EvaluationEdit from 'components/EvaluationEdit/EvaluationEdit'
 import EvaluationResult from 'components/EvaluationResult/EvaluationResult'
 import EvaluationCreate from 'components/EvaluationCreate/EvaluationCreate'
-// interfaces
-import { NotificationCreate } from 'types/types'
 
 interface Props {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
-const Evaluations = (props: Props): JSX.Element => {
-  const { rootPath } = props
-  return (
-    <>
-      <Route
-        exact
-        path={rootPath}
-        public
-        render={(): JSX.Element => <EvaluationOverview rootPath={rootPath} />}
-      />
-      <Route
-        exact
-        path={`${rootPath}/create`}
-        public
-        render={(): JSX.Element => <EvaluationCreate rootPath={rootPath} />}
-      />
-      <Route
-        exact
-        path={`${rootPath}/edit/:id`}
-        public
-        render={(): JSX.Element => <EvaluationEdit rootPath={rootPath} />}
-      />
-      <Route
-        exact
-        path={`${rootPath}/view/:id`}
-        public
-        render={(): JSX.Element => <EvaluationResult rootPath={rootPath} />}
-      />
-    </>
-  )
-}
+const Evaluations = ({ rootPath }: Props): JSX.Element => (
+  <>
+    <Route
+      exact
+      path={rootPath}
+      public
+      render={(): JSX.Element => <EvaluationOverview rootPath={rootPath} />}
+    />
+    <Route
+      exact
+      path={`${rootPath}/create`}
+      public
+      render={(): JSX.Element => <EvaluationCreate rootPath={rootPath} />}
+    />
+    <Route
+      exact
+      path={`${rootPath}/edit/:id`}
+      public
+      render={(): JSX.Element => <EvaluationEdit rootPath={rootPath} />}
+    />
+    <Route
+      exact
+      path={`${rootPath}/view/:id`}
+      public
+      render={(): JSX.Element => <EvaluationResult rootPath={rootPath} />}
+    />
+  </>
+)
 
 export default Evaluations
