@@ -31,57 +31,64 @@ interface PageQueryResult {
   status: { getCategory: JSX.Element }
 }
 
-const handleCompleted = (
-  props: Props,
+interface SubmitResult {
+  createSubcategory: Category
+}
+
+const onSubmitCompleted = (
+  { createSubcategory: { id, title, parentId } }: SubmitResult,
+  rootPath: Props['rootPath'],
+  history: Props['history'],
+  { search }: Props['location'],
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((data: { createSubcategory: Category }) => void) => {
-  return (data): void => {
-    const {
-      history,
-      location: { search },
-      rootPath,
-    } = props
-    const queryParams: { source?: string } = parseQueryParams(search)
-    const { source } = queryParams
-    const {
-      createSubcategory: { id, title, parentId },
-    } = data
+): void => {
+  const queryParams: { source?: string } = parseQueryParams(search)
+  const { source } = queryParams
 
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Subkategorie ${title} erfolgreich erstellt`,
-    })
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Subkategorie ${title} erfolgreich erstellt`,
+  })
 
-    if (source === 'createRecord') {
-      // Go to the subcategories overview
-      history.push(`${rootPath}/${parentId}/records/create?subCategoryId=${id}`)
-    } else {
-      // By default Go to the subcategories overview
-      history.push(`${rootPath}/${parentId}/subcategories`)
-    }
+  if (source === 'createRecord') {
+    // Go to the subcategories overview
+    history.push(`${rootPath}/${parentId}/records/create?subCategoryId=${id}`)
+  } else {
+    // By default Go to the subcategories overview
+    history.push(`${rootPath}/${parentId}/subcategories`)
   }
 }
 
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Erstellung der Subkategorie fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Erstellung der Subkategorie fehlgeschlagen',
+  })
+  logError(error)
 }
 
 const SubcategoryCreate = (props: Props): JSX.Element => {
-  const { match, rootPath } = props
+  const { match, rootPath, location, history } = props
   const { createNotificationBanner } = useContext(AppContext)
+
   const categoryId = extractIdFromUrl(match)
   const parentCategoryId = extractIdFromUrl(match, 'categoryId')
-  const onCompleted = handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
+
+  const onCompleted = (data: SubmitResult): void =>
+    onSubmitCompleted(
+      data,
+      rootPath,
+      history,
+      location,
+      createNotificationBanner
+    )
+  const onError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
+
   return (
     <PageQueryHandler
       dataTestId="SubcategoryCreate"
