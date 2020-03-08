@@ -12,8 +12,8 @@ interface Props {
   increasedHeight?: number
 }
 
-const Spacer = (props: Props): JSX.Element => (
-  <Element increasedHeight={props.increasedHeight || 1} />
+const Spacer = ({ increasedHeight }: Props): JSX.Element => (
+  <Element increasedHeight={increasedHeight || 1} />
 )
 
 export default Spacer

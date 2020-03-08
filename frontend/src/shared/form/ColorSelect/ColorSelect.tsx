@@ -32,8 +32,14 @@ interface Props {
   value: string
 }
 
-const ColorSelect = (props: Props): JSX.Element => {
-  const { value, onChange, name, tabIndex, id, required } = props
+const ColorSelect = ({
+  id,
+  name,
+  onChange,
+  required,
+  tabIndex,
+  value,
+}: Props): JSX.Element => {
   const colors = prepareOptions() // will return an empty array, if there should be no colors
   return (
     <ContentSelect

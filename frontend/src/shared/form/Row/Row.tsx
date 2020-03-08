@@ -11,16 +11,22 @@ export interface Props {
   onClick?: () => void
 }
 
-const Row = (props: Props): JSX.Element => (
+const Row = ({
+  children,
+  className,
+  disabled,
+  htmlFor,
+  onClick,
+}: Props): JSX.Element => (
   <Layout
-    className={props.className}
+    className={className}
     data-testid="Row"
-    disabled={props.disabled}
-    htmlFor={props.htmlFor}
-    onClick={props.onClick}
-    as={props.htmlFor ? 'label' : 'div'}
+    disabled={disabled}
+    htmlFor={htmlFor}
+    onClick={onClick}
+    as={htmlFor ? 'label' : 'div'}
   >
-    {props.children}
+    {children}
   </Layout>
 )
 

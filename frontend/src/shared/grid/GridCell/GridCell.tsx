@@ -8,8 +8,8 @@ interface Props {
   justify?: string
 }
 
-const GridCell = (props: Props): JSX.Element => (
-  <Element justify={props.justify}>{props.children}</Element>
+const GridCell = ({ justify, children }: Props): JSX.Element => (
+  <Element justify={justify}>{children}</Element>
 )
 
 export default GridCell

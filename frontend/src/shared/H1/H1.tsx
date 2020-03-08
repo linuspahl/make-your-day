@@ -7,9 +7,9 @@ interface Props {
   children: React.ReactNode
 }
 
-const H1 = (props: Props): JSX.Element => (
-  <Element context={props.context} as="h1">
-    {props.children}
+const H1 = ({ context, children }: Props): JSX.Element => (
+  <Element context={context} as="h1">
+    {children}
   </Element>
 )
 

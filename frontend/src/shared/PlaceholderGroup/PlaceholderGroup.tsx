@@ -44,8 +44,8 @@ interface Props {
   verticalCenter?: boolean
 }
 
-const PlaceholderGroup = (props: Props): JSX.Element => (
-  <Element verticalCenter={props.verticalCenter}>{props.children}</Element>
+const PlaceholderGroup = ({ verticalCenter, children }: Props): JSX.Element => (
+  <Element verticalCenter={verticalCenter}>{children}</Element>
 )
 
 export default PlaceholderGroup

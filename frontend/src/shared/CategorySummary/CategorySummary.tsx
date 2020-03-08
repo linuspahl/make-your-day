@@ -14,13 +14,12 @@ interface Props {
   to?: string
 }
 
-const CategorySummary = (props: Props): JSX.Element => {
-  const {
-    category: { color, icon, hasUnit, unit, title },
-    displayTitle,
-    amount,
-    to,
-  } = props
+const CategorySummary = ({
+  amount,
+  category: { color, icon, hasUnit, unit, title },
+  displayTitle,
+  to,
+}: Props): JSX.Element => {
   const isLink = Boolean(to)
   return (
     <Category

@@ -49,8 +49,10 @@ interface Props {
   userSessionId: string
 }
 
-const LogoutIcon = (props: Props): JSX.Element => {
-  const { userSessionId, clearLocalStorage } = props
+const LogoutIcon = ({
+  userSessionId,
+  clearLocalStorage,
+}: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const variables = { id: userSessionId }
 

@@ -10,14 +10,18 @@ interface Props {
   retry?: () => void
 }
 
-const LoadableCenteredSpinner = (props: Props): JSX.Element => {
-  if (props.error) {
+const LoadableCenteredSpinner = ({
+  error,
+  pastDelay,
+  retry,
+}: Props): JSX.Element => {
+  if (error) {
     return (
       <div>
-        Error! <button onClick={props.retry}>Retry</button>
+        Error! <button onClick={retry}>Retry</button>
       </div>
     )
-  } else if (props.pastDelay) {
+  } else if (pastDelay) {
     return <CenteredSpinner />
   }
   return null

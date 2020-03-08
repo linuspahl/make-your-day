@@ -10,9 +10,9 @@ interface Props {
   to: string
 }
 
-const ActionIcon = (props: Props): JSX.Element => (
-  <Wrapper to={props.to} aria-label={props.ariaLabel} data-testid="ActionIcon">
-    <Icon title={props.icon} />
+const ActionIcon = ({ ariaLabel, to, icon }: Props): JSX.Element => (
+  <Wrapper to={to} aria-label={ariaLabel} data-testid="ActionIcon">
+    <Icon title={icon} />
   </Wrapper>
 )
 

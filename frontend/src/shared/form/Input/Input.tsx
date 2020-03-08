@@ -26,51 +26,48 @@ export interface Props {
   value: string | number
 }
 
-const Input = (props: Props): JSX.Element => {
-  const {
-    autocomplete,
-    className,
-    dataTestid,
-    disabled,
-    id,
-    initRef,
-    label,
-    name,
-    onBlur,
-    onChange,
-    onClick,
-    onFocus,
-    onMouseDown,
-    required,
-    step,
-    tabIndex,
-    type,
-    value,
-  } = props
-  return (
-    <Wrapper>
-      <InputElement
-        autoComplete={autocomplete}
-        data-testid={dataTestid || 'Input'}
-        disabled={disabled}
-        id={id}
-        name={name}
-        onBlur={onBlur}
-        onChange={onChange}
-        onClick={onClick}
-        onFocus={onFocus}
-        required={required}
-        step={step}
-        tabIndex={tabIndex}
-        type={type || 'text'}
-        value={value || ''}
-        ref={initRef}
-        onMouseDown={onMouseDown}
-        className={className}
-      />
-      {label && <InputLabel>{label}</InputLabel>}
-    </Wrapper>
-  )
-}
+const Input = ({
+  autocomplete,
+  className,
+  dataTestid,
+  disabled,
+  id,
+  initRef,
+  label,
+  name,
+  onBlur,
+  onChange,
+  onClick,
+  onFocus,
+  onMouseDown,
+  required,
+  step,
+  tabIndex,
+  type,
+  value,
+}: Props): JSX.Element => (
+  <Wrapper>
+    <InputElement
+      autoComplete={autocomplete}
+      data-testid={dataTestid || 'Input'}
+      disabled={disabled}
+      id={id}
+      name={name}
+      onBlur={onBlur}
+      onChange={onChange}
+      onClick={onClick}
+      onFocus={onFocus}
+      required={required}
+      step={step}
+      tabIndex={tabIndex}
+      type={type || 'text'}
+      value={value || ''}
+      ref={initRef}
+      onMouseDown={onMouseDown}
+      className={className}
+    />
+    {label && <InputLabel>{label}</InputLabel>}
+  </Wrapper>
+)
 
 export default Input

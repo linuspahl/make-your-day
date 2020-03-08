@@ -13,9 +13,12 @@ interface Props {
   xAxisLabels: string[]
 }
 
-const Linechart = (props: Props): JSX.Element => {
-  const { series, description, chartLegend, xAxisLabels } = props
-
+const Linechart = ({
+  chartLegend,
+  description,
+  series,
+  xAxisLabels,
+}: Props): JSX.Element => {
   // check if there is really a result
   if (!series || series.length === 0) {
     return <NoResult message="Bisher kein Ergebnis" />

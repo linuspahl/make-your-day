@@ -14,8 +14,14 @@ interface Props {
   to?: string
 }
 
-const CategoryIcon = (props: Props): JSX.Element => {
-  const { ariaLabel, icon, color, title, to, size } = props
+const CategoryIcon = ({
+  ariaLabel,
+  color,
+  icon,
+  size,
+  title,
+  to,
+}: Props): JSX.Element => {
   const isLink = Boolean(to)
   return (
     <Circle

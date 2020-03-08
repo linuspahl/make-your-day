@@ -7,8 +7,8 @@ interface Props {
   to: string
 }
 
-const Link = (props: Props): JSX.Element => (
-  <Element to={props.to}>{props.children}</Element>
+const Link = ({ to, children }: Props): JSX.Element => (
+  <Element to={to}>{children}</Element>
 )
 
 export default Link

@@ -18,26 +18,30 @@ interface Props {
   value: string
 }
 
-const IconSelect = (props: Props): JSX.Element => {
-  const { value, onChange, name, tabIndex, disabled, id, required } = props
-
-  return (
-    <ContentSelect
-      allowEmpty
-      disabled={disabled}
-      id={id}
-      label="Icon"
-      name={name}
-      onChange={onChange}
-      options={categoryIcons}
-      renderPreview={(option): JSX.Element => (
-        <Icon title={String(option.value)} />
-      )}
-      required={required}
-      tabIndex={tabIndex}
-      value={value}
-    />
-  )
-}
+const IconSelect = ({
+  disabled,
+  id,
+  name,
+  onChange,
+  required,
+  tabIndex,
+  value,
+}: Props): JSX.Element => (
+  <ContentSelect
+    allowEmpty
+    disabled={disabled}
+    id={id}
+    label="Icon"
+    name={name}
+    onChange={onChange}
+    options={categoryIcons}
+    renderPreview={(option): JSX.Element => (
+      <Icon title={String(option.value)} />
+    )}
+    required={required}
+    tabIndex={tabIndex}
+    value={value}
+  />
+)
 
 export default IconSelect

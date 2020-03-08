@@ -12,20 +12,24 @@ export interface Props {
   tabIndex?: number
 }
 
-const ListItem = (props: Props): JSX.Element => {
-  const clickable = typeof props.clickAction === 'function'
-  return (
-    <Element
-      className={props.className}
-      clickable={clickable}
-      onClick={props.clickAction}
-      onFocus={props.onFocus}
-      spaceBetween={props.spaceBetween}
-      tabIndex={props.tabIndex}
-    >
-      {props.children}
-    </Element>
-  )
-}
+const ListItem = ({
+  children,
+  className,
+  clickAction,
+  onFocus,
+  spaceBetween,
+  tabIndex,
+}: Props): JSX.Element => (
+  <Element
+    className={className}
+    clickable={typeof clickAction === 'function'}
+    onClick={clickAction}
+    onFocus={onFocus}
+    spaceBetween={spaceBetween}
+    tabIndex={tabIndex}
+  >
+    {children}
+  </Element>
+)
 
 export default ListItem

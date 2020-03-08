@@ -32,9 +32,12 @@ interface Props {
   xAxisLabels: string[]
 }
 
-const Barchart = (props: Props): JSX.Element => {
-  const { series, description, chartLegend, xAxisLabels } = props
-
+const Barchart = ({
+  chartLegend,
+  description,
+  series,
+  xAxisLabels,
+}: Props): JSX.Element => {
   // check if there is really a result
   const flatSeries = flattenSeries(series)
   if (!flatSeries || flatSeries.length === 0) {

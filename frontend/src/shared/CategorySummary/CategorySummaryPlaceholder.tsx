@@ -13,8 +13,8 @@ const CategoryLoading = styled(Category)<Props>`
   min-height: 1.875rem;
 `
 
-const CategorySummaryPlaceholder = (props: Props): JSX.Element => (
-  <CategoryLoading size={props.size} data-testid="CategorySummaryPlaceholder" />
+const CategorySummaryPlaceholder = ({ size }: Props): JSX.Element => (
+  <CategoryLoading size={size} data-testid="CategorySummaryPlaceholder" />
 )
 
 export default CategorySummaryPlaceholder

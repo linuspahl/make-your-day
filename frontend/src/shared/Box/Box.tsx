@@ -9,9 +9,9 @@ export interface Props {
   role?: string
 }
 
-const Box = (props: Props): JSX.Element => (
-  <Element className={props.className} role={props.role}>
-    {props.children}
+const Box = ({ className, role, children }: Props): JSX.Element => (
+  <Element className={className} role={role}>
+    {children}
   </Element>
 )
 

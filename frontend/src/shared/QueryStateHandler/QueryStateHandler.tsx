@@ -24,43 +24,40 @@ interface Props {
   ignoreEmptyResult?: boolean
 }
 
-const QueryStateHandler = (props: Props): JSX.Element => {
-  const {
-    children,
-    errorMessage,
-    ignoreEmptyResult,
-    loadingPlaceholder,
-    query,
-    queryName,
-    variables,
-  } = props
+const QueryStateHandler = ({
+  children,
+  errorMessage,
+  ignoreEmptyResult,
+  loadingPlaceholder,
+  query,
+  queryName,
+  variables,
+}: Props): JSX.Element => (
+  <Query query={query} variables={variables}>
+    {({
+      loading,
+      error,
+      data,
+    }: {
+      loading: boolean
+      error?: ApolloError
+      data: { [key: string]: object[] }
+    }): JSX.Element => {
+      if (loading) {
+        return loadingPlaceholder ? loadingPlaceholder : <LoadingSpinner />
+      }
+      if (error) {
+        return <ErrorMessage error={error} message={errorMessage} />
+      }
+      if (
+        (!ignoreEmptyResult && !data[queryName]) ||
+        data[queryName].length === 0
+      ) {
+        return <NoResult />
+      }
+      return children(data[queryName])
+    }}
+  </Query>
+)
 
-  return (
-    <Query query={query} variables={variables}>
-      {({
-        loading,
-        error,
-        data,
-      }: {
-        loading: boolean
-        error?: ApolloError
-        data: { [key: string]: object[] }
-      }): JSX.Element => {
-        if (loading) {
-          return loadingPlaceholder ? loadingPlaceholder : <LoadingSpinner />
-        }
-        if (error) {
-          return <ErrorMessage error={error} message={errorMessage} />
-        }
-        if (
-          (!ignoreEmptyResult && !data[queryName]) ||
-          data[queryName].length === 0
-        ) {
-          return <NoResult />
-        }
-        return children(data[queryName])
-      }}
-    </Query>
-  )
-}
 export default QueryStateHandler

@@ -11,21 +11,25 @@ interface Props {
   delay?: number
 }
 
-const FadeTransition = (props: Props): JSX.Element => {
+const FadeTransition = ({
+  children,
+  fullHeight,
+  fullWidth,
+  delay = 0,
+}: Props): JSX.Element => {
   const duration = 500
-  const delay = props.delay || 0
   return (
     <Transition in appear timeout={0} className="fadeTransition">
       {(state: 'entering' | 'entered' | 'exiting' | 'exited'): JSX.Element => {
         return (
           <Wrapper
-            fullHeight={props.fullHeight}
-            fullWidth={props.fullWidth}
+            fullHeight={fullHeight}
+            fullWidth={fullWidth}
             state={state}
             duration={duration}
             delay={delay}
           >
-            {props.children}
+            {children}
           </Wrapper>
         )
       }}

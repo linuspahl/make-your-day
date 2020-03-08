@@ -11,12 +11,12 @@ interface Props {
   closeAction?: (event: React.MouseEvent<HTMLElement>) => void
 }
 
-const CloseIcon = (props: Props): JSX.Element => {
-  const hasClickAction = typeof props.closeAction === 'function'
+const CloseIcon = ({ closeAction }: Props): JSX.Element => {
+  const hasClickAction = typeof closeAction === 'function'
   return (
     <Element
       onClick={(event: React.MouseEvent<HTMLElement>): void =>
-        hasClickAction && props.closeAction(event)
+        hasClickAction && closeAction(event)
       }
       data-testid="CloseIcon"
     >

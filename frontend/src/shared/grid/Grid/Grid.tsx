@@ -5,6 +5,6 @@ interface Props {
   children: React.ReactNode
 }
 
-const Grid = (props: Props): JSX.Element => <div>{props.children}</div>
+const Grid = ({ children }: Props): JSX.Element => <div>{children}</div>
 
 export default Grid

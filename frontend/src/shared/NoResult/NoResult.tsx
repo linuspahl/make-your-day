@@ -16,8 +16,8 @@ interface Props {
   message?: string
 }
 
-const NoResult = (props: Props): JSX.Element => (
-  <Element>{props.message || 'Kein Eintrag vorhanden'}</Element>
+const NoResult = ({ message }: Props): JSX.Element => (
+  <Element>{message || 'Kein Eintrag vorhanden'}</Element>
 )
 
 export default NoResult

@@ -12,8 +12,8 @@ const Wrapper = styled(TextBig)`
 interface Props {
   children: React.ReactNode | React.ReactNodeArray
 }
-const ActionIconWrapper = (props: Props): JSX.Element => (
-  <Wrapper>{props.children}</Wrapper>
+const ActionIconWrapper = ({ children }: Props): JSX.Element => (
+  <Wrapper>{children}</Wrapper>
 )
 
 export default ActionIconWrapper

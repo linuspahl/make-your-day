@@ -11,36 +11,37 @@ interface Props {
   isNavVisible: boolean
 }
 
-const BottomNavigation = (props: Props): JSX.Element => {
-  const { isNavVisible } = props
-  return (
-    <FadeTransition fullWidth delay={200}>
-      <Wrapper>
-        {isNavVisible ? (
-          <FadeTransition key="home">
-            <Link to="/">
-              <NavigationToggle
-                data-testid="NavigationToggle"
-                onClick={(): void => props.toggleNavigation()}
-              >
-                <i className="la la-home"></i>
-              </NavigationToggle>
-            </Link>
-          </FadeTransition>
-        ) : (
-          <FadeTransition key="bars">
+const BottomNavigation = ({
+  children,
+  isNavVisible,
+  toggleNavigation,
+}: Props): JSX.Element => (
+  <FadeTransition fullWidth delay={200}>
+    <Wrapper>
+      {isNavVisible ? (
+        <FadeTransition key="home">
+          <Link to="/">
             <NavigationToggle
               data-testid="NavigationToggle"
-              onClick={(): void => props.toggleNavigation()}
+              onClick={(): void => toggleNavigation()}
             >
-              <i className="la la-bars"></i>
+              <i className="la la-home"></i>
             </NavigationToggle>
-          </FadeTransition>
-        )}
-        {props.children}
-      </Wrapper>
-    </FadeTransition>
-  )
-}
+          </Link>
+        </FadeTransition>
+      ) : (
+        <FadeTransition key="bars">
+          <NavigationToggle
+            data-testid="NavigationToggle"
+            onClick={(): void => toggleNavigation()}
+          >
+            <i className="la la-bars"></i>
+          </NavigationToggle>
+        </FadeTransition>
+      )}
+      {children}
+    </Wrapper>
+  </FadeTransition>
+)
 
 export default BottomNavigation

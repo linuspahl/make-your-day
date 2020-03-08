@@ -26,9 +26,7 @@ interface Props {
   series: EvaluationResult['series']
 }
 
-const Piechart = (props: Props): JSX.Element => {
-  const { series, chartLegend, description } = props
-
+const Piechart = ({ series, chartLegend, description }: Props): JSX.Element => {
   // check if there is really a result
   const flatSeries = flattenSeries(series)
   if (!flatSeries || flatSeries.length === 0) {

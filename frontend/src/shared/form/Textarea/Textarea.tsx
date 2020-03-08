@@ -19,34 +19,31 @@ interface Props {
   value: string
 }
 
-const Textarea = (props: Props): JSX.Element => {
-  const {
-    className,
-    disabled,
-    id,
-    name,
-    onBlur,
-    onChange,
-    placeholder,
-    required,
-    type,
-    value,
-  } = props
-  return (
-    <Element
-      className={className}
-      data-testid="Textarea"
-      disabled={disabled}
-      id={id}
-      name={name}
-      onBlur={onBlur}
-      onChange={onChange}
-      placeholder={placeholder}
-      required={required}
-      type={type || 'text'}
-      value={value || ''}
-    />
-  )
-}
+const Textarea = ({
+  className,
+  disabled,
+  id,
+  name,
+  onBlur,
+  onChange,
+  placeholder,
+  required,
+  type,
+  value,
+}: Props): JSX.Element => (
+  <Element
+    className={className}
+    data-testid="Textarea"
+    disabled={disabled}
+    id={id}
+    name={name}
+    onBlur={onBlur}
+    onChange={onChange}
+    placeholder={placeholder}
+    required={required}
+    type={type || 'text'}
+    value={value || ''}
+  />
+)
 
 export default Textarea

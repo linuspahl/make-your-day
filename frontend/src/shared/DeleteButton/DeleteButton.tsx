@@ -29,10 +29,14 @@ interface Props {
   title: string
 }
 
-const DeleteButton = (props: Props): JSX.Element => {
-  const { id, mutation, onUpdate, title, onDelete } = props
+const DeleteButton = ({
+  id,
+  mutation,
+  onUpdate,
+  title,
+  onDelete,
+}: Props): JSX.Element => {
   const variables = { id }
-
   return (
     <Mutation
       mutation={mutation}
