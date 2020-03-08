@@ -69,9 +69,9 @@ const CategoryEdit = (props: Props): JSX.Element => {
   const { match, rootPath, history } = props
   const { createNotificationBanner } = useContext(AppContext)
   const categoryId = extractIdFromUrl(match)
-  const handleCompleted = (data: SubmitResult): void =>
+  const handleSubmitComplete = (data: SubmitResult): void =>
     onSubmitComplete(data, rootPath, history, createNotificationBanner)
-  const handleError = (error: ApolloError): void =>
+  const handleSubmitError = (error: ApolloError): void =>
     onSubmitError(error, createNotificationBanner)
   return (
     <PageQueryHandler
@@ -92,8 +92,8 @@ const CategoryEdit = (props: Props): JSX.Element => {
             {!categoryQueryStatus && category && (
               <Mutation
                 mutation={UpdateCategory}
-                onCompleted={handleCompleted}
-                onError={handleError}
+                onCompleted={handleSubmitComplete}
+                onError={handleSubmitError}
               >
                 {(
                   updateCategory: ({
