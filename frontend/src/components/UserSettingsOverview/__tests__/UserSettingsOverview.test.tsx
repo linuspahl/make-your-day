@@ -26,7 +26,6 @@ describe('UserSettingsOverview should', (): void => {
       <UserSettingsOverview
         rootPath="/settings"
         clearLocalStorage={(): void => {}}
-        createNotificationBanner={(): void => {}}
         updateLocalStorage={(): void => {}}
         userSession={userSession}
         userSettings={{ [userSetting.value]: userSetting }}
@@ -46,7 +45,6 @@ describe('UserSettingsOverview should', (): void => {
       <UserSettingsOverview
         rootPath="/settings"
         clearLocalStorage={(): void => {}}
-        createNotificationBanner={(): void => {}}
         updateLocalStorage={updateLocalStorageStub}
         userSession={userSession}
         userSettings={{}}
@@ -72,7 +70,6 @@ describe('UserSettingsOverview should', (): void => {
       <UserSettingsOverview
         rootPath="/settings"
         clearLocalStorage={(): void => {}}
-        createNotificationBanner={(): void => {}}
         updateLocalStorage={updateLocalStorageStub}
         userSession={userSession}
         userSettings={{ [userSetting.setting.type]: userSetting }}

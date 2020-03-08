@@ -20,7 +20,6 @@ interface Props {
 
 const Settings = ({
   clearLocalStorage,
-  createNotificationBanner,
   rootPath,
   updateLocalStorage,
   userSession,
@@ -33,7 +32,6 @@ const Settings = ({
       render={(): JSX.Element => (
         <UserSettingsOverview
           clearLocalStorage={clearLocalStorage}
-          createNotificationBanner={createNotificationBanner}
           rootPath={rootPath}
           updateLocalStorage={updateLocalStorage}
           userSession={userSession}
@@ -47,7 +45,6 @@ const Settings = ({
       render={(): JSX.Element => (
         <UserSessionsOverview
           clearLocalStorage={clearLocalStorage}
-          createNotificationBanner={createNotificationBanner}
           currentUserSession={userSession}
         />
       )}

@@ -16,7 +16,6 @@ describe('PublicRoute should', (): void => {
       <Switch>
         <PublicRoute
           component={(): JSX.Element => <div>{children}</div>}
-          createNotificationBanner={(): void => {}}
           path="/"
           userSession={null}
         />
@@ -30,7 +29,6 @@ describe('PublicRoute should', (): void => {
       <Switch>
         <PublicRoute
           component={(): JSX.Element => <div>{children}</div>}
-          createNotificationBanner={(): void => {}}
           path="/dashboard"
           userSession={userSession}
         />

@@ -17,12 +17,10 @@ import { DeleteUserSession } from 'store/userSession/mutation'
 import { deleteUserSession } from 'store/userSession/update'
 // interface
 import { UserSession } from 'store/userSession/type'
-import { NotificationCreate } from 'types/types'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 
 interface Props {
   clearLocalStorage: () => void
-  createNotificationBanner: (notification: NotificationCreate) => void
   currentUserSession: UserSession
 }
 
@@ -33,7 +31,6 @@ interface PageQueryResult {
 
 const UserSessionOverview = ({
   clearLocalStorage,
-  createNotificationBanner,
   currentUserSession,
 }: Props): JSX.Element => (
   <PageQueryHandler
@@ -65,7 +62,6 @@ const UserSessionOverview = ({
                     return (
                       <ListItem
                         clearLocalStorage={clearLocalStorage}
-                        createNotificationBanner={createNotificationBanner}
                         isCurrentSession={
                           userSession.expiresAt === currentUserSession.expiresAt
                         }

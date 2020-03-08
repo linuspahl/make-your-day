@@ -17,7 +17,6 @@ describe('PrivateRoute should', (): void => {
         <PrivateRoute
           clearLocalStorage={(): void => {}}
           component={(): JSX.Element => <div>{children}</div>}
-          createNotificationBanner={(): void => {}}
           path="/dashboard"
           userSession={userSession}
         />
@@ -33,7 +32,6 @@ describe('PrivateRoute should', (): void => {
         <PrivateRoute
           clearLocalStorage={(): void => {}}
           component={(): JSX.Element => <div>{children}</div>}
-          createNotificationBanner={(): void => {}}
           path="/dashboard"
           userSession={null}
         />

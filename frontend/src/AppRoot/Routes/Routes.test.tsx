@@ -9,7 +9,6 @@ describe('Routes should', (): void => {
   test('render without crashing', (): void => {
     ShallowRenderer.createRenderer().render(
       <Routes
-        createNotificationBanner={(): void => {}}
         clearLocalStorage={(): void => {}}
         updateLocalStorage={(): void => {}}
         userSession={userSession}

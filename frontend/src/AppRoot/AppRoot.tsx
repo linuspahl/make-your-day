@@ -99,7 +99,6 @@ const AppRoot = (): JSX.Element => {
             */}
             <NotificationBanner ref={notificationBanner} />
             <Routes
-              createNotificationBanner={createNotificationBanner}
               clearLocalStorage={clearBrowserStorage}
               userSession={userSession}
               updateLocalStorage={updateLocalStorage}

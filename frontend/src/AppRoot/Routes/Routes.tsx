@@ -18,12 +18,11 @@ import LoadableCenteredSpinner from 'shared/CenteredSpinner/LoadableCenteredSpin
 import PrivateRoute from '../PrivateRoute/PrivateRoute'
 import PublicRoute from '../PublicRoute/PublicRoute'
 // interfaces
-import { NotificationCreate, LocalStorageCreate } from 'types/types'
+import { LocalStorageCreate } from 'types/types'
 import { UserSession } from 'store/userSession/type'
 
 interface Props {
   clearLocalStorage: () => void
-  createNotificationBanner: (notification: NotificationCreate) => void
   updateLocalStorage: (localStorage: LocalStorageCreate) => void
   userSession: UserSession
   userSettings: { [key: string]: boolean }
@@ -31,7 +30,6 @@ interface Props {
 
 const Routes = ({
   clearLocalStorage,
-  createNotificationBanner,
   updateLocalStorage,
   userSession,
   userSettings,
@@ -44,7 +42,6 @@ const Routes = ({
             import(/* webpackChunkName: "Login" */ 'containers/Login/Login'),
           loading: LoadableCenteredSpinner,
         })}
-        createNotificationBanner={createNotificationBanner}
         userSession={userSession}
         path="/login"
         updateLocalStorage={updateLocalStorage}
@@ -58,7 +55,6 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          createNotificationBanner={createNotificationBanner}
           exact
           userSession={userSession}
           path="/"
@@ -66,7 +62,6 @@ const Routes = ({
 
         <PrivateRoute
           clearLocalStorage={clearLocalStorage}
-          createNotificationBanner={createNotificationBanner}
           component={Loadable({
             loader: (): Promise<any> =>
               import(
@@ -87,7 +82,6 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          createNotificationBanner={createNotificationBanner}
           userSession={userSession}
           path="/categories"
         />
@@ -99,7 +93,6 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          createNotificationBanner={createNotificationBanner}
           userSession={userSession}
           path="/widgets"
         />
@@ -111,7 +104,6 @@ const Routes = ({
               ),
             loading: LoadableCenteredSpinner,
           })}
-          createNotificationBanner={createNotificationBanner}
           userSession={userSession}
           path="/evaluations"
         />

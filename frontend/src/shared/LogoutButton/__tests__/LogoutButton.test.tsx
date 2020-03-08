@@ -27,7 +27,6 @@ describe('LogoutButton should', (): void => {
       <LogoutButton
         userSessionId={userSessionId}
         clearLocalStorage={(): void => {}}
-        createNotificationBanner={(): void => {}}
       />,
       { mocks: [deleteUserSessionSuccess] }
     )
@@ -43,9 +42,11 @@ describe('LogoutButton should', (): void => {
       <LogoutButton
         userSessionId={userSessionId}
         clearLocalStorage={clearLocalStorageStub}
-        createNotificationBanner={createNotificationBannerStub}
       />,
-      { mocks: [deleteUserSessionSuccess] }
+      {
+        mocks: [deleteUserSessionSuccess],
+        context: { createNotificationBanner: createNotificationBannerStub },
+      }
     )
     fireEvent.click(getByText('Abmelden'), leftClickOption)
     // Wait for the Mutation component
@@ -67,9 +68,11 @@ describe('LogoutButton should', (): void => {
       <LogoutButton
         userSessionId={userSessionId}
         clearLocalStorage={clearLocalStorageStub}
-        createNotificationBanner={createNotificationBannerStub}
       />,
-      { mocks: [deleteUserSessionError] }
+      {
+        mocks: [deleteUserSessionError],
+        context: { createNotificationBanner: createNotificationBannerStub },
+      }
     )
     fireEvent.click(getByText('Abmelden'), leftClickOption)
     // Wait for the Mutation component

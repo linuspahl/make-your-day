@@ -16,11 +16,10 @@ import { GetSettings } from 'store/setting/query'
 import { Setting } from 'store/setting/type'
 import { UserSession } from 'store/userSession/type'
 import { UserSettings } from 'store/userSetting/type'
-import { NotificationCreate, LocalStorage } from 'types/types'
+import { LocalStorage } from 'types/types'
 
 interface Props {
   clearLocalStorage: () => void
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
   updateLocalStorage: (localStorage: LocalStorage) => void
   userSession: UserSession
@@ -36,7 +35,6 @@ class UserSettingsOverview extends React.Component<Props> {
   public render(): JSX.Element {
     const {
       clearLocalStorage,
-      createNotificationBanner,
       rootPath,
       updateLocalStorage,
       userSession,
@@ -90,7 +88,6 @@ class UserSettingsOverview extends React.Component<Props> {
               <ActionRow>
                 <LogoutButton
                   clearLocalStorage={clearLocalStorage}
-                  createNotificationBanner={createNotificationBanner}
                   userSessionId={userSession.id}
                 />
               </ActionRow>

@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
 // utils
@@ -8,10 +8,12 @@ import { logError } from 'utils/utils'
 import { IconWrapper } from './styles'
 import Button from 'shared/Button/Button'
 import Icon from 'shared/Icon/Icon'
+// contexts
+import AppContext from 'contexts/AppContext'
 // graphql
 import { DeleteUserSession } from 'store/userSession/mutation'
 // interfaces
-import { Notification, NotificationCreate } from 'types/types'
+import { NotificationCreate } from 'types/types'
 
 const handleClick = (action: () => void): void => {
   if (confirm(`Wirklich abmelden?`)) {
@@ -50,16 +52,14 @@ const onLogoutError = (
 interface Props {
   userSessionId: string
   clearLocalStorage: () => void
-  createNotificationBanner: (notification: Notification) => void
 }
 
 const LogoutButton = ({
   userSessionId,
   clearLocalStorage,
-  createNotificationBanner,
 }: Props): JSX.Element => {
+  const { createNotificationBanner } = useContext(AppContext)
   const variables = { id: userSessionId }
-
   const handleLogoutComplete = (data: { deleteUserSession: boolean }): void =>
     onLogoutComplete(data, createNotificationBanner, clearLocalStorage)
   const handleLogoutError = (error: ApolloError): void =>
