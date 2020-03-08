@@ -71,7 +71,7 @@ export const CategoryCreate = (props: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const handleSubmitComplete = (submitResult: SubmitResult): void =>
     onSubmitComplete(rootPath, history, submitResult, createNotificationBanner)
-  const handleError = (error: ApolloError): void =>
+  const handleSubmitError = (error: ApolloError): void =>
     onSubmitError(error, createNotificationBanner)
   return (
     <FadeTransition fullWidth fullHeight>
@@ -81,7 +81,7 @@ export const CategoryCreate = (props: Props): JSX.Element => {
           <Mutation
             mutation={CreateCategory}
             onCompleted={handleSubmitComplete}
-            onError={handleError}
+            onError={handleSubmitError}
             update={addCategory}
           >
             {(
