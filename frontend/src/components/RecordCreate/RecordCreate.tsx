@@ -26,12 +26,10 @@ interface PageQueryResult {
 }
 
 // Form submit function
-const handleCompleted = (
-  props: RouteComponentProps,
+const onSubmitComplete = (
+  history: RouteComponentProps['history'],
   createNotificationBanner: (notification: NotificationCreate) => void
 ): void => {
-  const { history } = props
-
   // Inform user about success
   createNotificationBanner({
     type: 'success',
@@ -43,27 +41,28 @@ const handleCompleted = (
 }
 
 // Form error function
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Erstellung des Eintrags fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Erstellung des Eintrags fehlgeschlagen',
+  })
+  logError(error)
 }
 
 const RecordCreate = (props: RouteComponentProps): JSX.Element => {
   const {
-    match,
+    history,
     location: { search },
+    match,
   } = props
   const { createNotificationBanner } = useContext(AppContext)
-  const onCompleted = (): void =>
-    handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
+  const handleSubmitComplete = (): void =>
+    onSubmitComplete(history, createNotificationBanner)
+  const handleSubmitError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
   // get id of parent category, to fetch all possible subcategorories
   const categoryId = extractIdFromUrl(match, 'categoryId')
   // extract query parameters.
@@ -98,8 +97,8 @@ const RecordCreate = (props: RouteComponentProps): JSX.Element => {
           {!categoryQueryResult && category && (
             <Mutation
               mutation={CreateRecord}
-              onCompleted={onCompleted}
-              onError={onError}
+              onCompleted={handleSubmitComplete}
+              onError={handleSubmitError}
               update={addRecord}
             >
               {(
