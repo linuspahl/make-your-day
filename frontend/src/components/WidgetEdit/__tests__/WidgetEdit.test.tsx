@@ -60,17 +60,18 @@ describe('WidgetEdit should', (): void => {
 
   afterEach((): void => {
     cleanup()
-    propsFixtures.createNotificationBanner = jest.fn()
   })
 
   test('show notification banner on successful edit ', async (): Promise<
     void
   > => {
+    const createNotificationBannerStub = jest.fn()
     const { getByText, getByLabelText } = renderWithAppRoot(
       <WidgetEdit {...propsFixtures} />,
       {
         ...renderUtilsProps,
         mocks: [pageQuerySuccess, updateWidgetSuccess],
+        context: { createNotificationBanner: createNotificationBannerStub },
       }
     )
     // Wait for pageQuery
@@ -81,8 +82,8 @@ describe('WidgetEdit should', (): void => {
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
     // Wait for updateWidget
     await wait()
-    expect(propsFixtures.createNotificationBanner).toBeCalledTimes(1)
-    expect(propsFixtures.createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: 'Widget New Name erfolgreich bearbeitet',
       type: 'success',
     })
@@ -91,11 +92,13 @@ describe('WidgetEdit should', (): void => {
   test('show notification banner on unsuccessful edit', async (): Promise<
     void
   > => {
+    const createNotificationBannerStub = jest.fn()
     const { getByText, getByLabelText } = renderWithAppRoot(
       <WidgetEdit {...propsFixtures} />,
       {
         ...renderUtilsProps,
         mocks: [pageQuerySuccess, updateWidgetError],
+        context: { createNotificationBanner: createNotificationBannerStub },
       }
     )
     // Wait for pageQuery
@@ -106,8 +109,8 @@ describe('WidgetEdit should', (): void => {
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
     // Wait for updateWidget
     await wait()
-    expect(propsFixtures.createNotificationBanner).toBeCalledTimes(1)
-    expect(propsFixtures.createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: 'Bearbeitung des Widgets fehlgeschlagen',
       type: 'error',
     })
