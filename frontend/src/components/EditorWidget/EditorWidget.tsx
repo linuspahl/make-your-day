@@ -35,7 +35,7 @@ const EditorWidget = (props: Props): JSX.Element => {
   const [isFullScreen, setIsFullSreen] = useState(false)
   const [value, setValue] = useState(widget.value)
   const { createNotificationBanner } = useContext(AppContext)
-  const handleError = (error: ApolloError): void =>
+  const handleSubmitError = (error: ApolloError): void =>
     onSubmitError(error, createNotificationBanner)
   const toggleModal = (): void => {
     setIsFullSreen(!isFullScreen)
@@ -68,7 +68,7 @@ const EditorWidget = (props: Props): JSX.Element => {
   }
 
   return (
-    <Mutation mutation={UpdateWidget} onError={handleError}>
+    <Mutation mutation={UpdateWidget} onError={handleSubmitError}>
       {(
         updateWidget: ({ variables }: { variables: WidgetEdit }) => void
       ): JSX.Element => (
