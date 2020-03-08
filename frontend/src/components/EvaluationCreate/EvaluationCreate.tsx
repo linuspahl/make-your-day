@@ -27,46 +27,50 @@ interface Props extends RouteComponentProps {
   rootPath: string
 }
 
+interface SubmitResponse {
+  createEvaluation: EvaluationEdit
+}
+
 // Form submit function
-const handleCompleted = (
-  props: Props,
+const onSubmitComplete = (
+  data: SubmitResponse,
+  rootPath: Props['rootPath'],
+  history: Props['history'],
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((data: { createEvaluation: EvaluationEdit }) => void) => {
-  const { rootPath, history } = props
-  return (data): void => {
-    const {
-      createEvaluation: { title },
-    } = data
+): void => {
+  const {
+    createEvaluation: { title },
+  } = data
 
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Auswertung ${title} erfolgreich erstellt`,
-    })
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Auswertung ${title} erfolgreich erstellt`,
+  })
 
-    // Go to the evaluations overview
-    history.push(rootPath)
-  }
+  // Go to the evaluations overview
+  history.push(rootPath)
 }
 
 // Form error function
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Erstellung der Auswertung fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Erstellung der Auswertung fehlgeschlagen',
+  })
+  logError(error)
 }
 
 const EvaluationCreate = (props: Props): JSX.Element => {
-  const { rootPath } = props
+  const { rootPath, history } = props
   const { createNotificationBanner } = useContext(AppContext)
-  const onCompleted = handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
+  const handleSubmitCompleted = (data: SubmitResponse): void =>
+    onSubmitComplete(data, rootPath, history, createNotificationBanner)
+  const handleSubmitError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
   return (
     <PageQueryHandler
       dataTestId="EvaluationCreate"
@@ -85,8 +89,8 @@ const EvaluationCreate = (props: Props): JSX.Element => {
           <H1 context="page">Auswertung erstellen</H1>
           <Mutation
             mutation={CreateEvaluation}
-            onCompleted={onCompleted}
-            onError={onError}
+            onCompleted={handleSubmitCompleted}
+            onError={handleSubmitError}
             update={addEvaluation}
           >
             {(
