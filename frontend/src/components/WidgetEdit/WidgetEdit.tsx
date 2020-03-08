@@ -45,6 +45,10 @@ interface Props extends RouteComponentProps {
   rootPath: string
 }
 
+interface SubmitResult {
+  updateWidget: WidgetEditType
+}
+
 interface PageQueryResult {
   data: { getWidget: Widget; getEvaluations: Evaluation[] }
   status?: {
@@ -53,45 +57,42 @@ interface PageQueryResult {
   }
 }
 
-const handleCompleted = (
-  props: Props,
+const onSubmitCompleted = (
+  { updateWidget: { title } }: SubmitResult,
+  rootPath: Props['rootPath'],
+  history: Props['history'],
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((data: { updateWidget: WidgetEditType }) => void) => {
-  const { rootPath, history } = props
-  return (data): void => {
-    const {
-      updateWidget: { title },
-    } = data
+): void => {
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Widget ${title} erfolgreich bearbeitet`,
+  })
 
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Widget ${title} erfolgreich bearbeitet`,
-    })
-
-    // Go to the widgets overview
-    history.push(rootPath)
-  }
+  // Go to the widgets overview
+  history.push(rootPath)
 }
 
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Bearbeitung des Widgets fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Bearbeitung des Widgets fehlgeschlagen',
+  })
+  logError(error)
 }
 
 const WidgetEdit = (props: Props): JSX.Element => {
-  const { match, rootPath } = props
+  const { match, rootPath, history } = props
   const { createNotificationBanner } = useContext(AppContext)
-  const onCompleted = handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
   const widgetId = extractIdFromUrl(match)
+  const handleSubmitComplete = (data: SubmitResult): void =>
+    onSubmitCompleted(data, rootPath, history, createNotificationBanner)
+  const handleSubmitError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
+
   return (
     <PageQueryHandler
       dataTestId="WidgetEdit"
@@ -114,8 +115,8 @@ const WidgetEdit = (props: Props): JSX.Element => {
             {!widgetQueryStatus && widget && (
               <Mutation
                 mutation={UpdateWidget}
-                onCompleted={onCompleted}
-                onError={onError}
+                onCompleted={handleSubmitComplete}
+                onError={handleSubmitError}
               >
                 {(
                   updateUser: ({
