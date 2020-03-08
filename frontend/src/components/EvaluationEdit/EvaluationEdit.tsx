@@ -89,9 +89,9 @@ const onSubmitError = (
 const EvaluationEdit = (props: Props): JSX.Element => {
   const { match, history, rootPath } = props
   const { createNotificationBanner } = useContext(AppContext)
-  const handleCompleted = (data: SubmitResult): void =>
+  const handleSubmitComplete = (data: SubmitResult): void =>
     onSubmitCompolete(data, history, rootPath, createNotificationBanner)
-  const handleError = (error: ApolloError): void =>
+  const handleSubmitError = (error: ApolloError): void =>
     onSubmitError(error, createNotificationBanner)
   const evaluationId = extractIdFromUrl(match)
   return (
@@ -115,8 +115,8 @@ const EvaluationEdit = (props: Props): JSX.Element => {
           {!evaluationQueryStatus && evaluation && (
             <Mutation
               mutation={UpdateEvaluation}
-              onCompleted={handleCompleted}
-              onError={handleError}
+              onCompleted={handleSubmitComplete}
+              onError={handleSubmitError}
             >
               {(
                 updateEvaluation: ({
