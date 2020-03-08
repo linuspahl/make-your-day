@@ -29,7 +29,13 @@ interface Props {
   userSettings: { [key: string]: boolean }
 }
 
-const Routes = (props: Props): JSX.Element => (
+const Routes = ({
+  clearLocalStorage,
+  createNotificationBanner,
+  updateLocalStorage,
+  userSession,
+  userSettings,
+}: Props): JSX.Element => (
   <Router>
     <Switch>
       <PublicRoute
@@ -38,12 +44,12 @@ const Routes = (props: Props): JSX.Element => (
             import(/* webpackChunkName: "Login" */ 'containers/Login/Login'),
           loading: LoadableCenteredSpinner,
         })}
-        createNotificationBanner={props.createNotificationBanner}
-        userSession={props.userSession}
+        createNotificationBanner={createNotificationBanner}
+        userSession={userSession}
         path="/login"
-        updateLocalStorage={props.updateLocalStorage}
+        updateLocalStorage={updateLocalStorage}
       />
-      <InAppLayout userSession={props.userSession}>
+      <InAppLayout userSession={userSession}>
         <PrivateRoute
           component={Loadable({
             loader: (): Promise<any> =>
@@ -52,15 +58,15 @@ const Routes = (props: Props): JSX.Element => (
               ),
             loading: LoadableCenteredSpinner,
           })}
-          createNotificationBanner={props.createNotificationBanner}
+          createNotificationBanner={createNotificationBanner}
           exact
-          userSession={props.userSession}
+          userSession={userSession}
           path="/"
         />
 
         <PrivateRoute
-          clearLocalStorage={props.clearLocalStorage}
-          createNotificationBanner={props.createNotificationBanner}
+          clearLocalStorage={clearLocalStorage}
+          createNotificationBanner={createNotificationBanner}
           component={Loadable({
             loader: (): Promise<any> =>
               import(
@@ -68,10 +74,10 @@ const Routes = (props: Props): JSX.Element => (
               ),
             loading: LoadableCenteredSpinner,
           })}
-          userSession={props.userSession}
+          userSession={userSession}
           path="/settings"
-          updateLocalStorage={props.updateLocalStorage}
-          userSettings={props.userSettings}
+          updateLocalStorage={updateLocalStorage}
+          userSettings={userSettings}
         />
         <PrivateRoute
           component={Loadable({
@@ -81,8 +87,8 @@ const Routes = (props: Props): JSX.Element => (
               ),
             loading: LoadableCenteredSpinner,
           })}
-          createNotificationBanner={props.createNotificationBanner}
-          userSession={props.userSession}
+          createNotificationBanner={createNotificationBanner}
+          userSession={userSession}
           path="/categories"
         />
         <PrivateRoute
@@ -93,8 +99,8 @@ const Routes = (props: Props): JSX.Element => (
               ),
             loading: LoadableCenteredSpinner,
           })}
-          createNotificationBanner={props.createNotificationBanner}
-          userSession={props.userSession}
+          createNotificationBanner={createNotificationBanner}
+          userSession={userSession}
           path="/widgets"
         />
         <PrivateRoute
@@ -105,8 +111,8 @@ const Routes = (props: Props): JSX.Element => (
               ),
             loading: LoadableCenteredSpinner,
           })}
-          createNotificationBanner={props.createNotificationBanner}
-          userSession={props.userSession}
+          createNotificationBanner={createNotificationBanner}
+          userSession={userSession}
           path="/evaluations"
         />
         <PrivateRoute
@@ -117,7 +123,7 @@ const Routes = (props: Props): JSX.Element => (
               ),
             loading: LoadableCenteredSpinner,
           })}
-          userSession={props.userSession}
+          userSession={userSession}
           path="/timeline"
         />
       </InAppLayout>
