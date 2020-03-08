@@ -69,7 +69,7 @@ describe('LoginForm should', (): void => {
       authToken: userSession.token,
       userId: userSession.userId,
       userSessionId: userSession.id,
-      expiresAt: userSession.expiresAt,
+      expiresAt: String(userSession.expiresAt),
       nightmode: true,
     })
   })
