@@ -86,15 +86,14 @@ const UserSessionOverview = ({
 
 interface ListItemProps {
   clearLocalStorage: () => void
-  createNotificationBanner: (notification: NotificationCreate) => void
   isCurrentSession: boolean
   userSession: UserSession
 }
 
 const ListItem = ({
-  userSession,
-  isCurrentSession,
   clearLocalStorage,
+  isCurrentSession,
+  userSession,
 }: ListItemProps): JSX.Element => {
   const expiresAtDate = dayjs(userSession.expiresAt).format('YYYY-MM-DD')
   return (
