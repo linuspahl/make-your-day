@@ -53,46 +53,46 @@ interface PageQueryResult {
   status?: { getCategories: JSX.Element; getEvaluation: JSX.Element }
 }
 
+interface SubmitResult {
+  updateEvaluation: EvaluationEditType
+}
+
 // Form submit function
-const handleCompleted = (
-  props: Props,
+const onSubmitCompolete = (
+  { updateEvaluation: { title } }: SubmitResult,
+  history: Props['history'],
+  rootPath: Props['rootPath'],
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((data: { updateEvaluation: EvaluationEditType }) => void) => {
-  const { history, rootPath } = props
-  return (data): void => {
-    const {
-      updateEvaluation: { title },
-    } = data
+): void => {
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Auswertung ${title} erfolgreich bearbeitet`,
+  })
 
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Auswertung ${title} erfolgreich bearbeitet`,
-    })
-
-    // Go to the categories overview
-    history.push(rootPath)
-  }
+  // Go to the categories overview
+  history.push(rootPath)
 }
 
 // Form error function
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Bearbeitung der Auswertung fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Bearbeitung der Auswertung fehlgeschlagen',
+  })
+  logError(error)
 }
 
 const EvaluationEdit = (props: Props): JSX.Element => {
-  const { match, rootPath } = props
+  const { match, history, rootPath } = props
   const { createNotificationBanner } = useContext(AppContext)
-  const onCompleted = handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
+  const handleCompleted = (data: SubmitResult): void =>
+    onSubmitCompolete(data, history, rootPath, createNotificationBanner)
+  const handleError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
   const evaluationId = extractIdFromUrl(match)
   return (
     <PageQueryHandler
@@ -115,8 +115,8 @@ const EvaluationEdit = (props: Props): JSX.Element => {
           {!evaluationQueryStatus && evaluation && (
             <Mutation
               mutation={UpdateEvaluation}
-              onCompleted={onCompleted}
-              onError={onError}
+              onCompleted={handleCompleted}
+              onError={handleError}
             >
               {(
                 updateEvaluation: ({
