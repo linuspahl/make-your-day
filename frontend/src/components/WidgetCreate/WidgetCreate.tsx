@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Mutation } from 'react-apollo'
 import { ApolloError } from 'apollo-boost'
@@ -9,6 +9,8 @@ import { logError } from 'utils/utils'
 import H1 from 'shared/H1/H1'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
 import WidgetForm from 'components/WidgetForm/WidgetForm'
+// contexts
+import AppContext from 'contexts/AppContext'
 // graphql
 import { addWidget } from 'store/widget/update'
 import { CreateWidget } from 'store/widget/mutation'
@@ -19,7 +21,6 @@ import { WidgetCreate as WidgetCreateType, Widget } from 'store/widget/type'
 import { EvaluationForList } from 'store/evaluation/type'
 
 interface Props extends RouteComponentProps {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
@@ -28,88 +29,92 @@ interface PageQueryResult {
   status?: { getEvaluations: JSX.Element }
 }
 
-class WidgetCreate extends React.Component<Props> {
-  public constructor(props: Props) {
-    super(props)
+interface SubmitResult {
+  createWidget: Widget
+}
 
-    this.handleCompleted = this.handleCompleted.bind(this)
-    this.hanldeError = this.hanldeError.bind(this)
-  }
+// Form submit function
+const onSubmitComplete = (
+  { createWidget: { title } }: SubmitResult,
+  rootPath: Props['rootPath'],
+  history: Props['history'],
+  createNotificationBanner: (notification: NotificationCreate) => void
+): void => {
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Widget ${title} erfolgreich erstellt`,
+  })
 
-  public render(): JSX.Element {
-    const { rootPath } = this.props
-    return (
-      <PageQueryHandler
-        dataTestId="WidgetCreate"
-        errorMessages={{
-          getEvaluations: 'Kategorien konnten nicht geladen werden',
-        }}
-        query={GetEvaluationsForList}
-        queryNames={['getEvaluations']}
-      >
-        {({
-          data: { getEvaluations: evaluations },
-        }: PageQueryResult): JSX.Element => {
-          return (
-            <>
-              <H1 context="page">Widget erstellen</H1>
+  // Go to the widgets overview
+  history.push(rootPath)
+}
 
-              <Mutation
-                mutation={CreateWidget}
-                onCompleted={this.handleCompleted}
-                onError={this.hanldeError}
-                update={addWidget}
-              >
-                {(
-                  createWidget: ({
-                    variables,
-                  }: {
-                    variables: WidgetCreateType
-                  }) => void
-                ): JSX.Element => (
-                  <WidgetForm
-                    mode="create"
-                    evaluations={evaluations}
-                    rootPath={rootPath}
-                    submitAction={(variables: WidgetCreateType): void =>
-                      createWidget({ variables })
-                    }
-                  />
-                )}
-              </Mutation>
-            </>
-          )
-        }}
-      </PageQueryHandler>
-    )
-  }
+// Form error function
+const onSubmitError = (
+  error: ApolloError,
+  createNotificationBanner: (notification: NotificationCreate) => void
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Erstellung des Widgets fehlgeschlagen',
+  })
+  logError(error)
+}
 
-  // Form submit function
-  private handleCompleted(data: { createWidget: Widget }): void {
-    const { history, rootPath, createNotificationBanner } = this.props
-    const {
-      createWidget: { title },
-    } = data
+const WidgetCreate = (props: Props): JSX.Element => {
+  const { rootPath, history } = props
+  const { createNotificationBanner } = useContext(AppContext)
 
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Widget ${title} erfolgreich erstellt`,
-    })
+  const handleSubmitComplete = (data: SubmitResult): void =>
+    onSubmitComplete(data, rootPath, history, createNotificationBanner)
+  const handleSubmitError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
 
-    // Go to the widgets overview
-    history.push(rootPath)
-  }
+  return (
+    <PageQueryHandler
+      dataTestId="WidgetCreate"
+      errorMessages={{
+        getEvaluations: 'Kategorien konnten nicht geladen werden',
+      }}
+      query={GetEvaluationsForList}
+      queryNames={['getEvaluations']}
+    >
+      {({
+        data: { getEvaluations: evaluations },
+      }: PageQueryResult): JSX.Element => {
+        return (
+          <>
+            <H1 context="page">Widget erstellen</H1>
 
-  // Form error function
-  private hanldeError(error: ApolloError): void {
-    const { createNotificationBanner } = this.props
-    createNotificationBanner({
-      type: 'error',
-      message: 'Erstellung des Widgets fehlgeschlagen',
-    })
-    logError(error)
-  }
+            <Mutation
+              mutation={CreateWidget}
+              onCompleted={handleSubmitComplete}
+              onError={handleSubmitError}
+              update={addWidget}
+            >
+              {(
+                createWidget: ({
+                  variables,
+                }: {
+                  variables: WidgetCreateType
+                }) => void
+              ): JSX.Element => (
+                <WidgetForm
+                  mode="create"
+                  evaluations={evaluations}
+                  rootPath={rootPath}
+                  submitAction={(variables: WidgetCreateType): void =>
+                    createWidget({ variables })
+                  }
+                />
+              )}
+            </Mutation>
+          </>
+        )
+      }}
+    </PageQueryHandler>
+  )
 }
 
 export default withRouter(WidgetCreate)
