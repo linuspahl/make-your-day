@@ -25,7 +25,6 @@ describe('UserSettingsOverview should', (): void => {
     const { getByText } = renderWithAppRoot(
       <UserSettingsOverview
         rootPath="/settings"
-        clearLocalStorage={(): void => {}}
         updateLocalStorage={(): void => {}}
         userSession={userSession}
         userSettings={{ [userSetting.value]: userSetting }}
@@ -44,7 +43,6 @@ describe('UserSettingsOverview should', (): void => {
     const { getByLabelText } = renderWithAppRoot(
       <UserSettingsOverview
         rootPath="/settings"
-        clearLocalStorage={(): void => {}}
         updateLocalStorage={updateLocalStorageStub}
         userSession={userSession}
         userSettings={{}}
@@ -69,7 +67,6 @@ describe('UserSettingsOverview should', (): void => {
     const { getByLabelText } = renderWithAppRoot(
       <UserSettingsOverview
         rootPath="/settings"
-        clearLocalStorage={(): void => {}}
         updateLocalStorage={updateLocalStorageStub}
         userSession={userSession}
         userSettings={{ [userSetting.setting.type]: userSetting }}

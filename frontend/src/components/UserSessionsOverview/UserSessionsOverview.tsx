@@ -1,5 +1,5 @@
 // libraries
-import React from 'react'
+import React, { useContext } from 'react'
 // utils
 import dayjs from 'dayjs'
 // components
@@ -11,6 +11,8 @@ import GridHead from 'shared/grid/GridHead/GridHead'
 import GridBody from 'shared/grid/GridBody/GridBody'
 import GridCell from 'shared/grid/GridCell/GridCell'
 import PageQueryHandler from 'shared/PageQueryHandler/PageQueryHandler'
+// contexts
+import AppContext from 'contexts/AppContext'
 // qraphql
 import { GetUserSessions } from 'store/userSession/query'
 import { DeleteUserSession } from 'store/userSession/mutation'
@@ -20,7 +22,6 @@ import { UserSession } from 'store/userSession/type'
 import ActionIconWrapper from 'shared/list/ActionIconWrapper/ActionIconWrapper'
 
 interface Props {
-  clearLocalStorage: () => void
   currentUserSession: UserSession
 }
 
@@ -29,10 +30,7 @@ interface PageQueryResult {
   status: { getUserSessions: JSX.Element }
 }
 
-const UserSessionOverview = ({
-  clearLocalStorage,
-  currentUserSession,
-}: Props): JSX.Element => (
+const UserSessionOverview = ({ currentUserSession }: Props): JSX.Element => (
   <PageQueryHandler
     dataTestId="UserSessionsOverview"
     errorMessages={{
@@ -61,7 +59,6 @@ const UserSessionOverview = ({
                   (userSession: UserSession): JSX.Element => {
                     return (
                       <ListItem
-                        clearLocalStorage={clearLocalStorage}
                         isCurrentSession={
                           userSession.expiresAt === currentUserSession.expiresAt
                         }
@@ -81,13 +78,11 @@ const UserSessionOverview = ({
 )
 
 interface ListItemProps {
-  clearLocalStorage: () => void
   isCurrentSession: boolean
   userSession: UserSession
 }
 
 const ListItem = ({
-  clearLocalStorage,
   isCurrentSession,
   userSession,
 }: ListItemProps): JSX.Element => {
@@ -98,12 +93,7 @@ const ListItem = ({
       <div>{expiresAtDate}</div>
       <GridCell justify="flex-end">
         <ActionIconWrapper>
-          {isCurrentSession && (
-            <LogoutIcon
-              userSessionId={userSession.id}
-              clearLocalStorage={clearLocalStorage}
-            />
-          )}
+          {isCurrentSession && <LogoutIcon userSessionId={userSession.id} />}
           {!isCurrentSession && (
             <DeleteIcon
               ariaLabel={`Sitzung von ${userSession.device} entfernen`}

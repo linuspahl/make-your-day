@@ -11,7 +11,6 @@ import { userSetting } from 'store/userSetting/fixtures'
 describe('Settings should', (): void => {
   const propsFixture = {
     rootPath: '/settings',
-    clearLocalStorage: (): void => {},
     createNotificationBanner: (): void => {},
     updateLocalStorage: (): void => {},
     userSettings: { nightMode: userSetting },

@@ -23,10 +23,7 @@ describe('LogoutIcon should', (): void => {
 
   test('render without crashing', (): void => {
     const { getByTestId } = renderWithAppRoot(
-      <LogoutIcon
-        userSessionId={userSessionId}
-        clearLocalStorage={(): void => {}}
-      />,
+      <LogoutIcon userSessionId={userSessionId} />,
       {
         mocks: [deleteUserSessionSuccess],
       }
@@ -40,14 +37,14 @@ describe('LogoutIcon should', (): void => {
     window.confirm = (): boolean => true
 
     const createNotificationBannerStub = jest.fn()
-    const clearLocalStorageEvent = jest.fn()
+    const clearLocalStorageStub = jest.fn()
     const { getByTestId } = renderWithAppRoot(
-      <LogoutIcon
-        userSessionId={userSessionId}
-        clearLocalStorage={clearLocalStorageEvent}
-      />,
+      <LogoutIcon userSessionId={userSessionId} />,
       {
-        context: { createNotificationBanner: createNotificationBannerStub },
+        context: {
+          createNotificationBanner: createNotificationBannerStub,
+          clearLocalStorage: clearLocalStorageStub,
+        },
         mocks: [deleteUserSessionSuccess],
       }
     )
@@ -59,7 +56,7 @@ describe('LogoutIcon should', (): void => {
       type: 'success',
       message: `Erfolgreich abgemeldet`,
     })
-    expect(clearLocalStorageEvent).toBeCalledTimes(1)
+    expect(clearLocalStorageStub).toBeCalledTimes(1)
   })
 
   test('show error notification and clear localstorage on unsuccessful logout', async (): Promise<
@@ -68,14 +65,14 @@ describe('LogoutIcon should', (): void => {
     window.confirm = (): boolean => true
 
     const createNotificationBannerStub = jest.fn()
-    const clearLocalStorageEvent = jest.fn()
+    const clearLocalStorageStub = jest.fn()
     const { getByTestId } = renderWithAppRoot(
-      <LogoutIcon
-        userSessionId={userSessionId}
-        clearLocalStorage={clearLocalStorageEvent}
-      />,
+      <LogoutIcon userSessionId={userSessionId} />,
       {
-        context: { createNotificationBanner: createNotificationBannerStub },
+        context: {
+          createNotificationBanner: createNotificationBannerStub,
+          clearLocalStorage: clearLocalStorageStub,
+        },
         mocks: [deleteUserSessionError],
       }
     )
@@ -87,7 +84,7 @@ describe('LogoutIcon should', (): void => {
       type: 'error',
       message: 'Sitzung konnte auf dem Server nicht gelöscht werden',
     })
-    expect(clearLocalStorageEvent).toBeCalledTimes(1)
+    expect(clearLocalStorageStub).toBeCalledTimes(1)
   })
 
   test('not logout, when user does not confirm logout', async (): Promise<
@@ -96,14 +93,14 @@ describe('LogoutIcon should', (): void => {
     window.confirm = (): boolean => false
 
     const createNotificationBannerStub = jest.fn()
-    const clearLocalStorageEvent = jest.fn()
+    const clearLocalStorageStub = jest.fn()
     const { getByTestId } = renderWithAppRoot(
-      <LogoutIcon
-        userSessionId={userSessionId}
-        clearLocalStorage={clearLocalStorageEvent}
-      />,
+      <LogoutIcon userSessionId={userSessionId} />,
       {
-        context: { createNotificationBanner: createNotificationBannerStub },
+        context: {
+          createNotificationBanner: createNotificationBannerStub,
+          clearLocalStorage: clearLocalStorageStub,
+        },
         mocks: [deleteUserSessionError],
       }
     )
@@ -111,6 +108,6 @@ describe('LogoutIcon should', (): void => {
     // Wait for the Mutation component
     await wait()
     expect(createNotificationBannerStub).not.toBeCalled()
-    expect(clearLocalStorageEvent).not.toBeCalled()
+    expect(clearLocalStorageStub).not.toBeCalled()
   })
 })

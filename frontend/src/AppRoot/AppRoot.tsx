@@ -49,7 +49,7 @@ const useBrowserStorage = (): [
 const AppRoot = (): JSX.Element => {
   const notificationBanner = useRef<NotificationBanner>(null)
   const [browserStorage, setBrowserStorage] = useBrowserStorage()
-  const clearBrowserStorage = (): void =>
+  const clearLocalStorage = (): void =>
     LocalStorageProvider.clear(setBrowserStorage)
   const {
     authToken,
@@ -77,12 +77,12 @@ const AppRoot = (): JSX.Element => {
   const updateLocalStorage = (nextStore: LocalStorageCreate): void =>
     LocalStorageProvider.update(nextStore, setBrowserStorage)
   const apolloClient = createApolloClient(
-    clearBrowserStorage,
+    clearLocalStorage,
     createNotificationBanner
   )
   const appContext: AppContextType = {
     createNotificationBanner,
-    clearBrowserStorage,
+    clearLocalStorage,
     updateLocalStorage,
     userSession,
     userSettings,
@@ -99,7 +99,6 @@ const AppRoot = (): JSX.Element => {
             */}
             <NotificationBanner ref={notificationBanner} />
             <Routes
-              clearLocalStorage={clearBrowserStorage}
               userSession={userSession}
               updateLocalStorage={updateLocalStorage}
               userSettings={userSettings}

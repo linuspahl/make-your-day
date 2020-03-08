@@ -96,7 +96,7 @@ export interface NavigationState {
 
 export interface AppContext {
   createNotificationBanner: (notification: NotificationCreate) => void
-  clearBrowserStorage: () => void
+  clearLocalStorage: () => void
   updateLocalStorage: (nextStore: LocalStorageCreate) => void
   userSession: UserSession
   userSettings: {

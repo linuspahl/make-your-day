@@ -6,7 +6,6 @@ import { UserSession } from 'store/userSession/type'
 import { LocalStorageCreate } from 'types/types'
 
 interface Props {
-  clearLocalStorage?: () => void
   component: React.ReactType
   exact?: boolean
   path: string

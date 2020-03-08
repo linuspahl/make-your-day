@@ -24,10 +24,7 @@ describe('LogoutButton should', (): void => {
 
   test('render without crashing', (): void => {
     const { getByText } = renderWithAppRoot(
-      <LogoutButton
-        userSessionId={userSessionId}
-        clearLocalStorage={(): void => {}}
-      />,
+      <LogoutButton userSessionId={userSessionId} />,
       { mocks: [deleteUserSessionSuccess] }
     )
     expect(getByText('Abmelden')).toBeInTheDocument()
@@ -39,13 +36,13 @@ describe('LogoutButton should', (): void => {
     const createNotificationBannerStub = jest.fn()
     const clearLocalStorageStub = jest.fn()
     const { getByText } = renderWithAppRoot(
-      <LogoutButton
-        userSessionId={userSessionId}
-        clearLocalStorage={clearLocalStorageStub}
-      />,
+      <LogoutButton userSessionId={userSessionId} />,
       {
         mocks: [deleteUserSessionSuccess],
-        context: { createNotificationBanner: createNotificationBannerStub },
+        context: {
+          createNotificationBanner: createNotificationBannerStub,
+          clearLocalStorage: clearLocalStorageStub,
+        },
       }
     )
     fireEvent.click(getByText('Abmelden'), leftClickOption)
@@ -65,13 +62,13 @@ describe('LogoutButton should', (): void => {
     const createNotificationBannerStub = jest.fn()
     const clearLocalStorageStub = jest.fn()
     const { getByText } = renderWithAppRoot(
-      <LogoutButton
-        userSessionId={userSessionId}
-        clearLocalStorage={clearLocalStorageStub}
-      />,
+      <LogoutButton userSessionId={userSessionId} />,
       {
         mocks: [deleteUserSessionError],
-        context: { createNotificationBanner: createNotificationBannerStub },
+        context: {
+          createNotificationBanner: createNotificationBannerStub,
+          clearLocalStorage: clearLocalStorageStub,
+        },
       }
     )
     fireEvent.click(getByText('Abmelden'), leftClickOption)

@@ -19,7 +19,6 @@ import { UserSettings } from 'store/userSetting/type'
 import { LocalStorage } from 'types/types'
 
 interface Props {
-  clearLocalStorage: () => void
   rootPath: string
   updateLocalStorage: (localStorage: LocalStorage) => void
   userSession: UserSession
@@ -31,72 +30,61 @@ interface PageQueryHandler {
   status: { getSettings: JSX.Element }
 }
 
-class UserSettingsOverview extends React.Component<Props> {
-  public render(): JSX.Element {
-    const {
-      clearLocalStorage,
-      rootPath,
-      updateLocalStorage,
-      userSession,
-      userSettings,
-    } = this.props
-    return (
-      <PageQueryHandler
-        dataTestId="UserSettingsOverview"
-        errorMessages={{
-          getSettings: 'Angemeldete Geräte konnten nicht geladen werden',
-        }}
-        query={GetSettings}
-        queryNames={['getSettings']}
-      >
-        {({
-          data: { getSettings: settings },
-          status: { getSettings: settingsQueryStatus },
-        }: PageQueryHandler): JSX.Element => {
-          return (
-            <>
-              <H1 context="page">Einstellungen</H1>
-              {settingsQueryStatus}
-              {!settingsQueryStatus &&
-                settings &&
-                settings.map(
-                  (setting: Setting): JSX.Element => {
-                    const isSelected = userSettings[setting.type]
-                    return (
-                      <Row key={setting.id} htmlFor={setting.type}>
-                        {isSelected ? (
-                          <UserSettingDelete
-                            setting={setting}
-                            updateLocalStorage={updateLocalStorage}
-                          />
-                        ) : (
-                          <UserSettingCreate
-                            setting={setting}
-                            updateLocalStorage={updateLocalStorage}
-                          />
-                        )}
-                      </Row>
-                    )
-                  }
-                )}
-              <Spacer />
-              <Row>
-                <Link to={`${rootPath}/sessions`}>
-                  Angmeldete Geräte verwalten
-                </Link>
-              </Row>
-              <ActionRow>
-                <LogoutButton
-                  clearLocalStorage={clearLocalStorage}
-                  userSessionId={userSession.id}
-                />
-              </ActionRow>
-            </>
-          )
-        }}
-      </PageQueryHandler>
-    )
-  }
-}
+const UserSettingsOverview = ({
+  rootPath,
+  updateLocalStorage,
+  userSession,
+  userSettings,
+}: Props): JSX.Element => (
+  <PageQueryHandler
+    dataTestId="UserSettingsOverview"
+    errorMessages={{
+      getSettings: 'Angemeldete Geräte konnten nicht geladen werden',
+    }}
+    query={GetSettings}
+    queryNames={['getSettings']}
+  >
+    {({
+      data: { getSettings: settings },
+      status: { getSettings: settingsQueryStatus },
+    }: PageQueryHandler): JSX.Element => {
+      return (
+        <>
+          <H1 context="page">Einstellungen</H1>
+          {settingsQueryStatus}
+          {!settingsQueryStatus &&
+            settings &&
+            settings.map(
+              (setting: Setting): JSX.Element => {
+                const isSelected = userSettings[setting.type]
+                return (
+                  <Row key={setting.id} htmlFor={setting.type}>
+                    {isSelected ? (
+                      <UserSettingDelete
+                        setting={setting}
+                        updateLocalStorage={updateLocalStorage}
+                      />
+                    ) : (
+                      <UserSettingCreate
+                        setting={setting}
+                        updateLocalStorage={updateLocalStorage}
+                      />
+                    )}
+                  </Row>
+                )
+              }
+            )}
+          <Spacer />
+          <Row>
+            <Link to={`${rootPath}/sessions`}>Angmeldete Geräte verwalten</Link>
+          </Row>
+          <ActionRow>
+            <LogoutButton userSessionId={userSession.id} />
+          </ActionRow>
+        </>
+      )
+    }}
+  </PageQueryHandler>
+)
 
 export default UserSettingsOverview

@@ -71,7 +71,7 @@ function renderWithAppRoot(
   }: {
     context?: {
       createNotificationBanner?: AppContextType['createNotificationBanner']
-      clearBrowserStorage?: AppContextType['clearBrowserStorage']
+      clearLocalStorage?: AppContextType['clearLocalStorage']
       updateLocalStorage?: AppContextType['updateLocalStorage']
       userSession?: AppContextType['userSession']
       userSettings?: AppContextType['userSettings']
@@ -91,7 +91,7 @@ function renderWithAppRoot(
 ): WrappedComponent {
   const appContext = {
     createNotificationBanner: (): void => {},
-    clearBrowserStorage: (): void => {},
+    clearLocalStorage: (): void => {},
     userSession: {
       expiresAt: 1234,
       id: 'session-id',

@@ -15,7 +15,6 @@ describe('PrivateRoute should', (): void => {
     const { getByText } = renderWithAppRoot(
       <Switch>
         <PrivateRoute
-          clearLocalStorage={(): void => {}}
           component={(): JSX.Element => <div>{children}</div>}
           path="/dashboard"
           userSession={userSession}
@@ -30,7 +29,6 @@ describe('PrivateRoute should', (): void => {
     const { queryByText } = renderWithAppRoot(
       <Switch>
         <PrivateRoute
-          clearLocalStorage={(): void => {}}
           component={(): JSX.Element => <div>{children}</div>}
           path="/dashboard"
           userSession={null}

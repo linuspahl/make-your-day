@@ -51,14 +51,10 @@ const onLogoutError = (
 
 interface Props {
   userSessionId: string
-  clearLocalStorage: () => void
 }
 
-const LogoutButton = ({
-  userSessionId,
-  clearLocalStorage,
-}: Props): JSX.Element => {
-  const { createNotificationBanner } = useContext(AppContext)
+const LogoutButton = ({ userSessionId }: Props): JSX.Element => {
+  const { createNotificationBanner, clearLocalStorage } = useContext(AppContext)
   const variables = { id: userSessionId }
   const handleLogoutComplete = (data: { deleteUserSession: boolean }): void =>
     onLogoutComplete(data, createNotificationBanner, clearLocalStorage)

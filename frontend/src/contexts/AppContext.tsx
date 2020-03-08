@@ -6,7 +6,7 @@ import { UserSession } from 'store/userSession/type'
 
 interface AppContextType {
   createNotificationBanner?: (notification: NotificationCreate) => void
-  clearBrowserStorage?: () => void
+  clearLocalStorage?: () => void
   updateLocalStorage?: (nextStore: LocalStorageCreate) => void
   userSession?: UserSession
   userSettings?: {

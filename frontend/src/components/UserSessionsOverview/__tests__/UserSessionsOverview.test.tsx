@@ -9,7 +9,6 @@ import { userSession, getUserSessionsSuccess } from 'store/userSession/fixtures'
 
 describe('UserSessionsOverview should', (): void => {
   const propsFixture = {
-    clearLocalStorage: (): void => {},
     createNotificationBanner: (): void => {},
     currentUserSession: userSession,
   }

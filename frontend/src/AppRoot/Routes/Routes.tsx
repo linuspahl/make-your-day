@@ -22,14 +22,12 @@ import { LocalStorageCreate } from 'types/types'
 import { UserSession } from 'store/userSession/type'
 
 interface Props {
-  clearLocalStorage: () => void
   updateLocalStorage: (localStorage: LocalStorageCreate) => void
   userSession: UserSession
   userSettings: { [key: string]: boolean }
 }
 
 const Routes = ({
-  clearLocalStorage,
   updateLocalStorage,
   userSession,
   userSettings,
@@ -61,7 +59,6 @@ const Routes = ({
         />
 
         <PrivateRoute
-          clearLocalStorage={clearLocalStorage}
           component={Loadable({
             loader: (): Promise<any> =>
               import(

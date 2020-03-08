@@ -10,7 +10,6 @@ import { NotificationCreate, LocalStorage } from 'types/types'
 import { UserSettings } from 'store/userSetting/type'
 
 interface Props {
-  clearLocalStorage: () => void
   createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
   updateLocalStorage: (localStorage: LocalStorage) => void
@@ -19,7 +18,6 @@ interface Props {
 }
 
 const Settings = ({
-  clearLocalStorage,
   rootPath,
   updateLocalStorage,
   userSession,
@@ -31,7 +29,6 @@ const Settings = ({
       path={rootPath}
       render={(): JSX.Element => (
         <UserSettingsOverview
-          clearLocalStorage={clearLocalStorage}
           rootPath={rootPath}
           updateLocalStorage={updateLocalStorage}
           userSession={userSession}
@@ -43,10 +40,7 @@ const Settings = ({
       exact
       path={`${rootPath}/sessions`}
       render={(): JSX.Element => (
-        <UserSessionsOverview
-          clearLocalStorage={clearLocalStorage}
-          currentUserSession={userSession}
-        />
+        <UserSessionsOverview currentUserSession={userSession} />
       )}
     />
   </>
