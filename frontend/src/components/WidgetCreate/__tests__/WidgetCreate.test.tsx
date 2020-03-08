@@ -23,11 +23,11 @@ describe('WidgetCreate should', (): void => {
   > => {
     const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <WidgetCreate
-        rootPath="/widget/create"
-        createNotificationBanner={createNotificationBannerStub}
-      />,
-      { mocks: [getEvaluationsForListSuccess, createWidgetSuccess] }
+      <WidgetCreate rootPath="/widget/create" />,
+      {
+        mocks: [getEvaluationsForListSuccess, createWidgetSuccess],
+        context: { createNotificationBanner: createNotificationBannerStub },
+      }
     )
     await wait()
     initWidgetForm(getByLabelText, getByText)
@@ -45,11 +45,11 @@ describe('WidgetCreate should', (): void => {
   > => {
     const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <WidgetCreate
-        rootPath="/widget/create"
-        createNotificationBanner={createNotificationBannerStub}
-      />,
-      { mocks: [getEvaluationsForListSuccess, createWidgetError] }
+      <WidgetCreate rootPath="/widget/create" />,
+      {
+        mocks: [getEvaluationsForListSuccess, createWidgetError],
+        context: { createNotificationBanner: createNotificationBannerStub },
+      }
     )
     await wait()
     initWidgetForm(getByLabelText, getByText)
