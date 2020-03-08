@@ -1,6 +1,9 @@
 // libraries
 import React from 'react'
 import { Mutation } from 'react-apollo'
+import { ApolloError } from 'apollo-boost'
+// utils
+import { logError } from 'utils/utils'
 // compoents
 import { IconWrapper } from './styles'
 import Button from 'shared/Button/Button'
@@ -16,7 +19,7 @@ const handleClick = (action: () => void): void => {
   }
 }
 
-const handleCompleted = (
+const onLogoutComplete = (
   data: { deleteUserSession: boolean },
   createNotificationBanner: (notification: NotificationCreate) => void,
   clearLocalStorage: () => void
@@ -31,7 +34,8 @@ const handleCompleted = (
   }
 }
 
-const handleError = (
+const onLogoutError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void,
   clearLocalStorage: () => void
 ): void => {
@@ -40,6 +44,7 @@ const handleError = (
     type: 'error',
     message: 'Sitzung konnte auf dem Server nicht gelöscht werden',
   })
+  logError(error)
 }
 
 interface Props {
@@ -52,16 +57,17 @@ const LogoutButton = (props: Props): JSX.Element => {
   const { userSessionId, clearLocalStorage, createNotificationBanner } = props
   const variables = { id: userSessionId }
 
+  const handleLogoutComplete = (data: { deleteUserSession: boolean }): void =>
+    onLogoutComplete(data, createNotificationBanner, clearLocalStorage)
+  const handleLogoutError = (error: ApolloError): void =>
+    onLogoutError(error, createNotificationBanner, clearLocalStorage)
+
   return (
     <Mutation
       mutation={DeleteUserSession}
       variables={variables}
-      onCompleted={(data: { deleteUserSession: boolean }): void =>
-        handleCompleted(data, createNotificationBanner, clearLocalStorage)
-      }
-      onError={(): void =>
-        handleError(createNotificationBanner, clearLocalStorage)
-      }
+      onCompleted={handleLogoutComplete}
+      onError={handleLogoutError}
     >
       {(perfomMutation: () => void): JSX.Element => (
         <Button
