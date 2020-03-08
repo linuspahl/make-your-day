@@ -1,6 +1,7 @@
 // libraries
 import React, { useContext } from 'react'
 import { Mutation } from 'react-apollo'
+import { ApolloError } from 'apollo-boost'
 // components
 import { Wrapper } from './styles'
 import Icon from 'shared/Icon/Icon'
@@ -10,6 +11,7 @@ import AppContext from 'contexts/AppContext'
 import { DeleteUserSession } from 'store/userSession/mutation'
 // interfaces
 import { NotificationCreate } from 'types/types'
+import { logError } from 'utils/utils'
 
 const handleClick = (action: () => void): void => {
   if (confirm(`Wirklich abmelden?`)) {
@@ -17,8 +19,7 @@ const handleClick = (action: () => void): void => {
   }
 }
 
-const handleCompleted = (
-  data: { deleteUserSession: boolean },
+const handleLogoutComplete = (
   createNotificationBanner: (notification: NotificationCreate) => void,
   clearLocalStorage: () => void
 ): void => {
@@ -30,7 +31,8 @@ const handleCompleted = (
   })
 }
 
-const handleError = (
+const handleLogoutError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void,
   clearLocalStorage: () => void
 ): void => {
@@ -39,6 +41,7 @@ const handleError = (
     type: 'error',
     message: 'Sitzung konnte auf dem Server nicht gelöscht werden',
   })
+  logError(error)
 }
 
 interface Props {
@@ -51,16 +54,17 @@ const LogoutIcon = (props: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const variables = { id: userSessionId }
 
+  const onLogoutComplete = (): void =>
+    handleLogoutComplete(createNotificationBanner, clearLocalStorage)
+  const onLogoutError = (error: ApolloError): void =>
+    handleLogoutError(error, createNotificationBanner, clearLocalStorage)
+
   return (
     <Mutation
       mutation={DeleteUserSession}
       variables={variables}
-      onCompleted={(data: { deleteUserSession: boolean }): void =>
-        handleCompleted(data, createNotificationBanner, clearLocalStorage)
-      }
-      onError={(): void =>
-        handleError(createNotificationBanner, clearLocalStorage)
-      }
+      onCompleted={onLogoutComplete}
+      onError={onLogoutError}
     >
       {(perfomMutation: () => void): JSX.Element => (
         <Wrapper onClick={(): void => handleClick(perfomMutation)}>
