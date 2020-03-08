@@ -74,7 +74,10 @@ describe('LogoutIcon should', (): void => {
         userSessionId={userSessionId}
         clearLocalStorage={clearLocalStorageEvent}
       />,
-      { mocks: [deleteUserSessionError] }
+      {
+        context: { createNotificationBanner: createNotificationBannerStub },
+        mocks: [deleteUserSessionError],
+      }
     )
     fireEvent.click(getByTestId('Icon'), leftClickOption)
     // Wait for the Mutation component
@@ -99,7 +102,10 @@ describe('LogoutIcon should', (): void => {
         userSessionId={userSessionId}
         clearLocalStorage={clearLocalStorageEvent}
       />,
-      { mocks: [deleteUserSessionError] }
+      {
+        context: { createNotificationBanner: createNotificationBannerStub },
+        mocks: [deleteUserSessionError],
+      }
     )
     fireEvent.click(getByTestId('Icon'), leftClickOption)
     // Wait for the Mutation component
