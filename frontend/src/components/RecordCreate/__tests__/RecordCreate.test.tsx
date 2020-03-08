@@ -11,8 +11,6 @@ import {
 } from 'testUtils'
 // components
 import RecordCreate from 'components/RecordCreate/RecordCreate'
-// contexts
-import AppContext from 'contexts/AppContext'
 // fixtures
 import {
   createRecordSuccess,
@@ -31,24 +29,23 @@ describe('RecordCreate should', (): void => {
   test('show notification banner on successful create ', async (): Promise<
     void
   > => {
-    const createNotificationBanner = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const { queryByLabelText, getByText } = renderWithAppRoot(
-      <AppContext.Provider value={{ createNotificationBanner }}>
-        <RecordCreate {...propsFixture} />
-      </AppContext.Provider>,
+      <RecordCreate {...propsFixture} />,
       {
         mocks: [createRecordSuccess, getCategoryWithChildrenSuccess],
         route: `/categories/${record.categoryId}/records/create`,
         routePath: '/categories/:categoryId/records/create',
         mockWrappingRoute: true,
+        context: { createNotificationBanner: createNotificationBannerStub },
       }
     )
     await wait()
     initRecordForm(queryByLabelText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
-    expect(createNotificationBanner).toBeCalledTimes(1)
-    expect(createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: 'Eintrag erfolgreich erstellt',
       type: 'success',
     })
@@ -57,24 +54,23 @@ describe('RecordCreate should', (): void => {
   test('show notification banner on unsuccessful create', async (): Promise<
     void
   > => {
-    const createNotificationBanner = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const { queryByLabelText, getByText } = renderWithAppRoot(
-      <AppContext.Provider value={{ createNotificationBanner }}>
-        <RecordCreate {...propsFixture} />
-      </AppContext.Provider>,
+      <RecordCreate {...propsFixture} />,
       {
         route: `/categories/${record.categoryId}/records/create`,
         routePath: '/categories/:categoryId/records/create',
         mockWrappingRoute: true,
         mocks: [createRecordError, getCategoryWithChildrenSuccess],
+        context: { createNotificationBanner: createNotificationBannerStub },
       }
     )
     await wait()
     initRecordForm(queryByLabelText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
-    expect(createNotificationBanner).toBeCalledTimes(1)
-    expect(createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: 'Erstellung des Eintrags fehlgeschlagen',
       type: 'error',
     })

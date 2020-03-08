@@ -11,8 +11,6 @@ import {
 } from 'testUtils'
 // components
 import CategoryCreate from 'components/CategoryCreate/CategoryCreate'
-// contexts
-import AppContext from 'contexts/AppContext'
 // fixtures
 import {
   createCategorySuccess,
@@ -29,18 +27,19 @@ describe('CategoryCreate should', (): void => {
   test('show notification banner on successful create ', async (): Promise<
     void
   > => {
-    const createNotificationBanner = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <AppContext.Provider value={{ createNotificationBanner }}>
-        <CategoryCreate {...propsFixture} />
-      </AppContext.Provider>,
-      { mocks: [createCategorySuccess] }
+      <CategoryCreate {...propsFixture} />,
+      {
+        mocks: [createCategorySuccess],
+        context: { createNotificationBanner: createNotificationBannerStub },
+      }
     )
     initCategoryForm(getByLabelText, getByText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
-    expect(createNotificationBanner).toBeCalledTimes(1)
-    expect(createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: `Kategorie ${category.title} erfolgreich erstellt`,
       type: 'success',
     })
@@ -49,11 +48,9 @@ describe('CategoryCreate should', (): void => {
   test('redirect to categories overview, if created category hasSubcategories prop is false ', async (): Promise<
     void
   > => {
-    const createNotificationBanner = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <AppContext.Provider value={{ createNotificationBanner }}>
-        <CategoryCreate {...propsFixture} />
-      </AppContext.Provider>,
+      <CategoryCreate {...propsFixture} />,
       {
         mocks: [
           {
@@ -68,6 +65,7 @@ describe('CategoryCreate should', (): void => {
             },
           },
         ],
+        context: { createNotificationBanner: createNotificationBannerStub },
       }
     )
     initCategoryForm(getByLabelText, getByText)
@@ -79,18 +77,19 @@ describe('CategoryCreate should', (): void => {
   test('show notification banner on unsuccessful create', async (): Promise<
     void
   > => {
-    const createNotificationBanner = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const { getByLabelText, getByText } = renderWithAppRoot(
-      <AppContext.Provider value={{ createNotificationBanner }}>
-        <CategoryCreate {...propsFixture} />
-      </AppContext.Provider>,
-      { mocks: [createCategoryError] }
+      <CategoryCreate {...propsFixture} />,
+      {
+        mocks: [createCategoryError],
+        context: { createNotificationBanner: createNotificationBannerStub },
+      }
     )
     initCategoryForm(getByLabelText, getByText)
     fireEvent.click(getByText('Erstellen'), leftClickOption)
     await wait()
-    expect(createNotificationBanner).toBeCalledTimes(1)
-    expect(createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: 'Erstellung der Kategorie fehlgeschlagen',
       type: 'error',
     })

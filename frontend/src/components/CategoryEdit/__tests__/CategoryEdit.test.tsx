@@ -10,8 +10,6 @@ import {
 } from 'testUtils'
 // components
 import CategoryEdit from 'components/CategoryEdit/CategoryEdit'
-// contexts
-import AppContext from 'contexts/AppContext'
 // fixtures
 import {
   updateCategorySuccess,
@@ -35,20 +33,21 @@ describe('CategoryEdit should', (): void => {
   test('show notification banner on successful edit ', async (): Promise<
     void
   > => {
-    const createNotificationBanner = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const { getByText } = renderWithAppRoot(
-      <AppContext.Provider value={{ createNotificationBanner }}>
-        <CategoryEdit {...propsFixture} />
-      </AppContext.Provider>,
-      renderUtilsProps
+      <CategoryEdit {...propsFixture} />,
+      {
+        ...renderUtilsProps,
+        context: { createNotificationBanner: createNotificationBannerStub },
+      }
     )
     // Wait for getCategory
     await wait()
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
     // Wait for updateCategory
     await wait()
-    expect(createNotificationBanner).toBeCalledTimes(1)
-    expect(createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: `Kategorie ${category.title} erfolgreich bearbeitet`,
       type: 'success',
     })
@@ -57,14 +56,13 @@ describe('CategoryEdit should', (): void => {
   test('show notification banner on unsuccessful edit ', async (): Promise<
     void
   > => {
-    const createNotificationBanner = jest.fn()
+    const createNotificationBannerStub = jest.fn()
     const { getByText } = renderWithAppRoot(
-      <AppContext.Provider value={{ createNotificationBanner }}>
-        <CategoryEdit {...propsFixture} />
-      </AppContext.Provider>,
+      <CategoryEdit {...propsFixture} />,
       {
         ...renderUtilsProps,
         mocks: [getCategorySuccess, updateCategoryError],
+        context: { createNotificationBanner: createNotificationBannerStub },
       }
     )
     // Wait for getCategory
@@ -72,8 +70,8 @@ describe('CategoryEdit should', (): void => {
     fireEvent.click(getByText('Bearbeiten'), leftClickOption)
     // Wait for updateCategory
     await wait()
-    expect(createNotificationBanner).toBeCalledTimes(1)
-    expect(createNotificationBanner).toBeCalledWith({
+    expect(createNotificationBannerStub).toBeCalledTimes(1)
+    expect(createNotificationBannerStub).toBeCalledWith({
       message: 'Bearbeitung der Kategorie fehlgeschlagen',
       type: 'error',
     })
