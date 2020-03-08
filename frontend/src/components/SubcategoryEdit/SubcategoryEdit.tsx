@@ -26,51 +26,54 @@ interface Props extends RouteComponentProps {
   rootPath: string
 }
 
+interface SubmitResult {
+  updateCategory: Category
+}
+
 interface PageQueryResult {
   data: { getCategory: Category }
   status: { getCategory: JSX.Element }
 }
 
-const handleCompleted = (
-  props: Props,
+const onSubmitCompleted = (
+  { updateCategory: { parentId, title } }: SubmitResult,
+  rootPath: Props['rootPath'],
+  history: Props['history'],
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((data: { updateCategory: Category }) => void) => {
-  const { rootPath, history } = props
-  return (data): void => {
-    const {
-      updateCategory: { parentId, title },
-    } = data
+): void => {
+  // Inform user about success
+  createNotificationBanner({
+    type: 'success',
+    message: `Subkategorie ${title} erfolgreich bearbeitet`,
+  })
 
-    // Inform user about success
-    createNotificationBanner({
-      type: 'success',
-      message: `Subkategorie ${title} erfolgreich bearbeitet`,
-    })
-
-    // Go to the subcategories overview
-    history.push(`${rootPath}/${parentId}/subcategories`)
-  }
+  // Go to the subcategories overview
+  history.push(`${rootPath}/${parentId}/subcategories`)
 }
 
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Bearbeitung der Subkategorie fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Bearbeitung der Subkategorie fehlgeschlagen',
+  })
+  logError(error)
 }
 
 const SubcategoryEdit = (props: Props): JSX.Element => {
-  const { match, rootPath } = props
+  const { match, rootPath, history } = props
   const { createNotificationBanner } = useContext(AppContext)
+
   const categoryId = extractIdFromUrl(match)
   const parentCategoryId = extractIdFromUrl(match, 'categoryId')
-  const onCompleted = handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
+
+  const handleSubmitCompleted = (data: SubmitResult): void =>
+    onSubmitCompleted(data, rootPath, history, createNotificationBanner)
+  const handleSubmitError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
+
   return (
     <PageQueryHandler
       dataTestId="SubcategoryEdit"
@@ -91,8 +94,8 @@ const SubcategoryEdit = (props: Props): JSX.Element => {
           {!getCategoryStatus && subcategory && (
             <Mutation
               mutation={UpdateSubcategory}
-              onCompleted={onCompleted}
-              onError={onError}
+              onCompleted={handleSubmitCompleted}
+              onError={handleSubmitError}
             >
               {(
                 updateCategory: ({
