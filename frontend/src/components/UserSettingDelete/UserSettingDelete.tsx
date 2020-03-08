@@ -14,30 +14,30 @@ interface Props {
   updateLocalStorage: (localStorage: LocalStorage) => void
 }
 
-const UserSettingDelete = (props: Props): JSX.Element => {
-  const { setting, updateLocalStorage } = props
-  return (
-    <Mutation
-      mutation={DeleteUserSetting}
-      variables={{ settingId: setting.id }}
-      onCompleted={(): void =>
-        updateLocalStorage({
-          [setting.type]: false,
-        })
-      }
-    >
-      {(perfomMutation: () => void): JSX.Element => (
-        <Checkbox
-          id={setting.type}
-          label={props.setting.title}
-          name={setting.title}
-          onChange={perfomMutation}
-          tabIndex={1}
-          value={true}
-        />
-      )}
-    </Mutation>
-  )
-}
+const UserSettingDelete = ({
+  setting,
+  updateLocalStorage,
+}: Props): JSX.Element => (
+  <Mutation
+    mutation={DeleteUserSetting}
+    variables={{ settingId: setting.id }}
+    onCompleted={(): void =>
+      updateLocalStorage({
+        [setting.type]: false,
+      })
+    }
+  >
+    {(perfomMutation: () => void): JSX.Element => (
+      <Checkbox
+        id={setting.type}
+        label={setting.title}
+        name={setting.title}
+        onChange={perfomMutation}
+        tabIndex={1}
+        value={true}
+      />
+    )}
+  </Mutation>
+)
 
 export default UserSettingDelete

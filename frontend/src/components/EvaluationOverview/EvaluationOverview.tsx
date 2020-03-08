@@ -20,86 +20,81 @@ interface Props {
   rootPath: string
 }
 
-const EvaluationOverview = (props: Props): JSX.Element => {
-  const { rootPath } = props
+const EvaluationOverview = ({ rootPath }: Props): JSX.Element => (
+  <PageQueryHandler
+    dataTestId="EvaluationOverview"
+    errorMessages={{
+      getEvaluations: 'Andere Sitzungen konnten nicht geladen werden',
+    }}
+    query={GetEvaluationsForList}
+    queryNames={['getEvaluations']}
+  >
+    {({
+      data: { getEvaluations: evaluations },
+      status: { getEvaluations: evaluationsQueryStatus },
+    }: {
+      data: { getEvaluations: EvaluationForList[] }
+      status?: { getEvaluations: JSX.Element }
+    }): JSX.Element => {
+      return (
+        <>
+          <H1 context="page">Auswertungen verwalten</H1>
+          {evaluationsQueryStatus}
+          {!evaluationsQueryStatus && evaluations && (
+            <ul>
+              {evaluations.map(
+                (evaluation: EvaluationForList): JSX.Element => (
+                  <EvaluationListItem
+                    key={evaluation.id}
+                    evaluation={evaluation}
+                    rootPath={rootPath}
+                  />
+                )
+              )}
+            </ul>
+          )}
+          <ActionRow>
+            <Button context="primary" to={`${rootPath}/create`}>
+              Auswertung erstellen
+            </Button>
+          </ActionRow>
+        </>
+      )
+    }}
+  </PageQueryHandler>
+)
 
-  return (
-    <PageQueryHandler
-      dataTestId="EvaluationOverview"
-      errorMessages={{
-        getEvaluations: 'Andere Sitzungen konnten nicht geladen werden',
-      }}
-      query={GetEvaluationsForList}
-      queryNames={['getEvaluations']}
-    >
-      {({
-        data: { getEvaluations: evaluations },
-        status: { getEvaluations: evaluationsQueryStatus },
-      }: {
-        data: { getEvaluations: EvaluationForList[] }
-        status?: { getEvaluations: JSX.Element }
-      }): JSX.Element => {
-        return (
-          <>
-            <H1 context="page">Auswertungen verwalten</H1>
-            {evaluationsQueryStatus}
-            {!evaluationsQueryStatus && evaluations && (
-              <ul>
-                {evaluations.map(
-                  (evaluation: EvaluationForList): JSX.Element => (
-                    <EvaluationListItem
-                      key={evaluation.id}
-                      evaluation={evaluation}
-                      rootPath={rootPath}
-                    />
-                  )
-                )}
-              </ul>
-            )}
-            <ActionRow>
-              <Button context="primary" to={`${rootPath}/create`}>
-                Auswertung erstellen
-              </Button>
-            </ActionRow>
-          </>
-        )
-      }}
-    </PageQueryHandler>
-  )
-}
-
-const EvaluationListItem = (props: {
+interface EvaluationListItemProps {
   evaluation: EvaluationForList
   rootPath: string
-}): JSX.Element => {
-  const {
-    evaluation: { id, title },
-    rootPath,
-  } = props
-  return (
-    <ListItem spaceBetween>
-      {title}
-      <ActionIconWrapper>
-        <ActionIcon
-          ariaLabel={`Auswertung ${title} anzeigen`}
-          to={`${rootPath}/view/${id}`}
-          icon="bar-chart"
-        />
-        <ActionIcon
-          ariaLabel={`Auswertung ${title} bearbeiten`}
-          to={`${rootPath}/edit/${id}`}
-          icon="edit"
-        />
-        <DeleteIcon
-          ariaLabel={`Auswertung ${title} löschen`}
-          id={id}
-          mutation={DeleteEvaluation}
-          onUpdate={deleteEvaluation}
-          title={title}
-        />
-      </ActionIconWrapper>
-    </ListItem>
-  )
 }
+
+const EvaluationListItem = ({
+  evaluation: { id, title },
+  rootPath,
+}: EvaluationListItemProps): JSX.Element => (
+  <ListItem spaceBetween>
+    {title}
+    <ActionIconWrapper>
+      <ActionIcon
+        ariaLabel={`Auswertung ${title} anzeigen`}
+        to={`${rootPath}/view/${id}`}
+        icon="bar-chart"
+      />
+      <ActionIcon
+        ariaLabel={`Auswertung ${title} bearbeiten`}
+        to={`${rootPath}/edit/${id}`}
+        icon="edit"
+      />
+      <DeleteIcon
+        ariaLabel={`Auswertung ${title} löschen`}
+        id={id}
+        mutation={DeleteEvaluation}
+        onUpdate={deleteEvaluation}
+        title={title}
+      />
+    </ActionIconWrapper>
+  </ListItem>
+)
 
 export default EvaluationOverview

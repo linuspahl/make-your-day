@@ -8,11 +8,10 @@ interface Props {
   route: { title: string; path: string }
 }
 
-const NavigationItem = (props: Props): JSX.Element => {
-  const {
-    route: { title, path },
-    rootPath,
-  } = props
+const NavigationItem = ({
+  route: { title, path },
+  rootPath,
+}: Props): JSX.Element => {
   // Check if current route is active.
   // rootPath allways represents the root part of a route.
   // In this case we also need to toggle the navigation manually

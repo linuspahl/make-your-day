@@ -29,10 +29,8 @@ interface PageQueryResult {
   status: { getCategory: JSX.Element }
 }
 
-const CategoryEdit = (props: Props): JSX.Element => {
-  const { rootPath, match } = props
+const CategoryEdit = ({ rootPath, match }: Props): JSX.Element => {
   const categoryId = extractIdFromUrl(match)
-
   return (
     <PageQueryHandler
       dataTestId="SubcategoryOverview"

@@ -25,84 +25,80 @@ interface PageQueryResult {
   status: { getCategories: JSX.Element }
 }
 
-const CategoryOverview = (props: Props): JSX.Element => {
-  const { rootPath } = props
+const CategoryOverview = ({ rootPath }: Props): JSX.Element => (
+  <PageQueryHandler
+    dataTestId="CategoryOverview"
+    errorMessages={{
+      getCategories: 'Kategorien konnten nicht geladen werden',
+    }}
+    query={GetCategoriesForList}
+    queryNames={['getCategories']}
+  >
+    {({
+      data: { getCategories: categories },
+      status: { getCategories: categoriesQueryStatus },
+    }: PageQueryResult): JSX.Element => {
+      return (
+        <>
+          <H1 context="page">Kategorien verwalten</H1>
+          {categoriesQueryStatus}
+          {!categoriesQueryStatus && categories && (
+            <ul>
+              {categories.map(
+                (category: CategoryForList): JSX.Element => (
+                  <CategoryListItem
+                    category={category}
+                    key={category.id}
+                    rootPath={rootPath}
+                  />
+                )
+              )}
+            </ul>
+          )}
+          <ActionRow>
+            <Button context="primary" to={`${rootPath}/create`}>
+              Kategorie erstellen
+            </Button>
+          </ActionRow>
+        </>
+      )
+    }}
+  </PageQueryHandler>
+)
 
-  return (
-    <PageQueryHandler
-      dataTestId="CategoryOverview"
-      errorMessages={{
-        getCategories: 'Kategorien konnten nicht geladen werden',
-      }}
-      query={GetCategoriesForList}
-      queryNames={['getCategories']}
-    >
-      {({
-        data: { getCategories: categories },
-        status: { getCategories: categoriesQueryStatus },
-      }: PageQueryResult): JSX.Element => {
-        return (
-          <>
-            <H1 context="page">Kategorien verwalten</H1>
-            {categoriesQueryStatus}
-            {!categoriesQueryStatus && categories && (
-              <ul>
-                {categories.map(
-                  (category: CategoryForList): JSX.Element => (
-                    <CategoryListItem
-                      category={category}
-                      key={category.id}
-                      rootPath={rootPath}
-                    />
-                  )
-                )}
-              </ul>
-            )}
-            <ActionRow>
-              <Button context="primary" to={`${rootPath}/create`}>
-                Kategorie erstellen
-              </Button>
-            </ActionRow>
-          </>
-        )
-      }}
-    </PageQueryHandler>
-  )
-}
-
-const CategoryListItem = (props: {
+interface CategoryListItemProps {
   category: CategoryForList
   rootPath: string
-}): JSX.Element => {
-  const {
-    category: { id, title, hasSubcategories },
-    rootPath,
-  } = props
-  return (
-    <ListItem spaceBetween>
-      {title}
-      <ActionIconWrapper>
-        {hasSubcategories && (
-          <ActionIcon
-            to={`${rootPath}/${id}/subcategories`}
-            icon="list-ul"
-            ariaLabel={`Kategorie ${title} Subkategorien bearbeiten`}
-          />
-        )}
-        <ActionIcon
-          to={`${rootPath}/edit/${id}`}
-          icon="edit"
-          ariaLabel={`Kategorie ${title} bearbeiten`}
-        />
-        <DeleteIcon
-          ariaLabel={`Kategorie ${title} löschen`}
-          id={id}
-          mutation={DeleteCategory}
-          onUpdate={deleteCategory}
-          title={title}
-        />
-      </ActionIconWrapper>
-    </ListItem>
-  )
 }
+
+const CategoryListItem = ({
+  category: { id, title, hasSubcategories },
+  rootPath,
+}: CategoryListItemProps): JSX.Element => (
+  <ListItem spaceBetween>
+    {title}
+    <ActionIconWrapper>
+      {hasSubcategories && (
+        <ActionIcon
+          to={`${rootPath}/${id}/subcategories`}
+          icon="list-ul"
+          ariaLabel={`Kategorie ${title} Subkategorien bearbeiten`}
+        />
+      )}
+      <ActionIcon
+        to={`${rootPath}/edit/${id}`}
+        icon="edit"
+        ariaLabel={`Kategorie ${title} bearbeiten`}
+      />
+      <DeleteIcon
+        ariaLabel={`Kategorie ${title} löschen`}
+        id={id}
+        mutation={DeleteCategory}
+        onUpdate={deleteCategory}
+        title={title}
+      />
+    </ActionIconWrapper>
+  </ListItem>
+)
+
 export default CategoryOverview

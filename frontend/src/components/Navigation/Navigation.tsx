@@ -17,32 +17,34 @@ interface Props {
   toggleAction: () => void
 }
 
-const Navigation = (props: Props): JSX.Element => {
-  const { toggleAction, rootPath, animateOnClose, open } = props
-  return (
-    <>
-      {open && <Offset onClick={(): void => toggleAction()} />}
-      <Wrapper open={open} animateOnClose={animateOnClose}>
-        <Head>
-          <H1>Menü</H1>
-          <CloseIconWrapper>
-            <CloseIcon closeAction={(): void => toggleAction()} />
-          </CloseIconWrapper>
-        </Head>
-        <ul>
-          {navigationItems.map(
-            (route): JSX.Element => (
-              <NavigationItem
-                key={route.path}
-                route={route}
-                rootPath={rootPath}
-              />
-            )
-          )}
-        </ul>
-      </Wrapper>
-    </>
-  )
-}
+const Navigation = ({
+  animateOnClose,
+  open,
+  rootPath,
+  toggleAction,
+}: Props): JSX.Element => (
+  <>
+    {open && <Offset onClick={(): void => toggleAction()} />}
+    <Wrapper open={open} animateOnClose={animateOnClose}>
+      <Head>
+        <H1>Menü</H1>
+        <CloseIconWrapper>
+          <CloseIcon closeAction={(): void => toggleAction()} />
+        </CloseIconWrapper>
+      </Head>
+      <ul>
+        {navigationItems.map(
+          (route): JSX.Element => (
+            <NavigationItem
+              key={route.path}
+              route={route}
+              rootPath={rootPath}
+            />
+          )
+        )}
+      </ul>
+    </Wrapper>
+  </>
+)
 
 export default Navigation

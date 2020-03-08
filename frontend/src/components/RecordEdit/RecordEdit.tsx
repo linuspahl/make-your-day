@@ -66,11 +66,9 @@ const pageQuery = gql`
 `
 // Form submit function
 const onSubmitComplete = (
-  props: RouteComponentProps,
+  history: RouteComponentProps['history'],
   createNotificationBanner: (notification: NotificationCreate) => void
 ): void => {
-  const { history } = props
-
   // Inform user about success
   createNotificationBanner({
     type: 'success',
@@ -93,13 +91,12 @@ const onSubmitError = (
   logError(error)
 }
 
-const RecordEdit = (props: RouteComponentProps): JSX.Element => {
-  const { match, history } = props
+const RecordEdit = ({ match, history }: RouteComponentProps): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const categoryId = extractIdFromUrl(match, 'categoryId')
   const recordId = extractIdFromUrl(match, 'id')
   const handleSubmitCompleted = (): void =>
-    onSubmitComplete(props, createNotificationBanner)
+    onSubmitComplete(history, createNotificationBanner)
   const handleSubmitError = (error: ApolloError): void =>
     onSubmitError(error, createNotificationBanner)
   return (

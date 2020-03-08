@@ -29,8 +29,8 @@ interface Props {
   children: React.ReactNode
 }
 
-const DefaultPageLayout = (props: Props): JSX.Element => {
-  return <Wrapper>{props.children}</Wrapper>
-}
+const DefaultPageLayout = ({ children }: Props): JSX.Element => (
+  <Wrapper>{children}</Wrapper>
+)
 
 export default DefaultPageLayout

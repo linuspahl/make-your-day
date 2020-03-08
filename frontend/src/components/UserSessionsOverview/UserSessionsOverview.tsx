@@ -31,7 +31,11 @@ interface PageQueryResult {
   status: { getUserSessions: JSX.Element }
 }
 
-const UserSessionOverview = (props: Props): JSX.Element => (
+const UserSessionOverview = ({
+  clearLocalStorage,
+  createNotificationBanner,
+  currentUserSession,
+}: Props): JSX.Element => (
   <PageQueryHandler
     dataTestId="UserSessionsOverview"
     errorMessages={{
@@ -60,13 +64,10 @@ const UserSessionOverview = (props: Props): JSX.Element => (
                   (userSession: UserSession): JSX.Element => {
                     return (
                       <ListItem
-                        clearLocalStorage={props.clearLocalStorage}
-                        createNotificationBanner={
-                          props.createNotificationBanner
-                        }
+                        clearLocalStorage={clearLocalStorage}
+                        createNotificationBanner={createNotificationBanner}
                         isCurrentSession={
-                          userSession.expiresAt ===
-                          props.currentUserSession.expiresAt
+                          userSession.expiresAt === currentUserSession.expiresAt
                         }
                         key={userSession.id}
                         userSession={userSession}
@@ -83,13 +84,18 @@ const UserSessionOverview = (props: Props): JSX.Element => (
   </PageQueryHandler>
 )
 
-const ListItem = (props: {
+interface ListItemProps {
   clearLocalStorage: () => void
   createNotificationBanner: (notification: NotificationCreate) => void
   isCurrentSession: boolean
   userSession: UserSession
-}): JSX.Element => {
-  const { userSession, isCurrentSession } = props
+}
+
+const ListItem = ({
+  userSession,
+  isCurrentSession,
+  clearLocalStorage,
+}: ListItemProps): JSX.Element => {
   const expiresAtDate = dayjs(userSession.expiresAt).format('YYYY-MM-DD')
   return (
     <>
@@ -100,7 +106,7 @@ const ListItem = (props: {
           {isCurrentSession && (
             <LogoutIcon
               userSessionId={userSession.id}
-              clearLocalStorage={props.clearLocalStorage}
+              clearLocalStorage={clearLocalStorage}
             />
           )}
           {!isCurrentSession && (

@@ -52,12 +52,11 @@ const onSubmitError = (
   logError(error)
 }
 
-const RecordCreate = (props: RouteComponentProps): JSX.Element => {
-  const {
-    history,
-    location: { search },
-    match,
-  } = props
+const RecordCreate = ({
+  history,
+  location: { search },
+  match,
+}: RouteComponentProps): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const handleSubmitComplete = (): void =>
     onSubmitComplete(history, createNotificationBanner)

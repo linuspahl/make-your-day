@@ -56,8 +56,7 @@ interface Props {
   evaluation: EvaluationFull
 }
 
-const EvaluationChart = (props: Props): JSX.Element => {
-  const { evaluation } = props
+const EvaluationChart = ({ evaluation }: Props): JSX.Element => {
   const {
     type,
     period,

@@ -71,8 +71,12 @@ const onSubmitError = (
   logError(error)
 }
 
-const SubcategoryCreate = (props: Props): JSX.Element => {
-  const { match, rootPath, location, history } = props
+const SubcategoryCreate = ({
+  history,
+  location,
+  match,
+  rootPath,
+}: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
 
   const categoryId = extractIdFromUrl(match)

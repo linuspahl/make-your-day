@@ -21,7 +21,11 @@ interface State {
   navigationState: NavigationState
 }
 
-const InAppLayout = (props: Props): JSX.Element => {
+const InAppLayout = ({
+  userSession,
+  children,
+  location: { pathname },
+}: Props): JSX.Element => {
   const [navigationOpen, setNavigationOpen] = useState(false)
   const [animateNavOnClose, setAnimateNavOnClose] = useState(false)
 
@@ -63,12 +67,8 @@ const InAppLayout = (props: Props): JSX.Element => {
     }
   }, [location.pathname])
 
-  const {
-    userSession,
-    children,
-    location: { pathname },
-  } = props
   const rootPath = getRootPath(pathname)
+
   return (
     <Layout>
       <ChildrenWrapper>{children}</ChildrenWrapper>

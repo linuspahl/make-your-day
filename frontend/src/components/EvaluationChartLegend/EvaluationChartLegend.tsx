@@ -14,13 +14,12 @@ interface EvaluationCategory {
   title: string
 }
 
-function getCategories(props: Props): object[] {
-  const {
-    evaluation: {
-      type,
-      result: { series },
-    },
-  } = props
+function getCategories({
+  evaluation: {
+    type,
+    result: { series },
+  },
+}: Props): object[] {
   const seriesColorsMix = series.map((ser): EvaluationCategory[] => {
     if (type === 'piechart' && ser.data && ser.data.length !== 0) {
       return ser.data.map(

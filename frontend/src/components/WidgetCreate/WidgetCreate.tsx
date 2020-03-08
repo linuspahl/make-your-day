@@ -62,8 +62,7 @@ const onSubmitError = (
   logError(error)
 }
 
-const WidgetCreate = (props: Props): JSX.Element => {
-  const { rootPath, history } = props
+const WidgetCreate = ({ rootPath, history }: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
 
   const handleSubmitComplete = (data: SubmitResult): void =>

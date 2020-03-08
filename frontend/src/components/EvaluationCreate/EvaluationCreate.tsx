@@ -64,8 +64,7 @@ const onSubmitError = (
   logError(error)
 }
 
-const EvaluationCreate = (props: Props): JSX.Element => {
-  const { rootPath, history } = props
+const EvaluationCreate = ({ rootPath, history }: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const handleSubmitCompleted = (data: SubmitResponse): void =>
     onSubmitComplete(data, rootPath, history, createNotificationBanner)

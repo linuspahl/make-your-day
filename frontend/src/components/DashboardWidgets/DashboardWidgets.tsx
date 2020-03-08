@@ -38,44 +38,45 @@ interface Props {
   delay?: number
 }
 
-const DashboardWidgets = (props: Props): JSX.Element => {
-  const { widgets = [], loading, delay } = props
-  return (
-    <FadeTransition delay={delay || 0} fullHeight fullWidth>
-      {loading && <LoadingPlaceholder />}
-      {!loading && (
-        <Layout>
-          {sortBy(widgets, 'id').map(
-            (widget): JSX.Element => (
-              <WidgetLayout key={widget.id}>
-                <WidgetHeader>
-                  <H2>{widget.title}</H2>
-                </WidgetHeader>
+const DashboardWidgets = ({
+  widgets = [],
+  loading,
+  delay,
+}: Props): JSX.Element => (
+  <FadeTransition delay={delay || 0} fullHeight fullWidth>
+    {loading && <LoadingPlaceholder />}
+    {!loading && (
+      <Layout>
+        {sortBy(widgets, 'id').map(
+          (widget): JSX.Element => (
+            <WidgetLayout key={widget.id}>
+              <WidgetHeader>
+                <H2>{widget.title}</H2>
+              </WidgetHeader>
 
-                {widget.type === 'timeline' && <TimelineWidget />}
-                {widget.type === 'evaluation' && (
-                  <EvaluationWidget evaluation={widget.evaluation} />
-                )}
-                {widget.type === 'textarea' && <EditorWidget widget={widget} />}
-              </WidgetLayout>
-            )
-          )}
-          {(!widgets || widgets.length == 0) && (
-            <NewWidgetWrapper>
-              <NewWidgetBox>
-                <NewWidgetLink to="/widgets/create">
-                  <CreateWidgetIcon>
-                    <Icon title="plus" />
-                  </CreateWidgetIcon>
-                  <NoResult message="Weiteres Widget erstellen" />
-                </NewWidgetLink>
-              </NewWidgetBox>
-            </NewWidgetWrapper>
-          )}
-        </Layout>
-      )}
-    </FadeTransition>
-  )
-}
+              {widget.type === 'timeline' && <TimelineWidget />}
+              {widget.type === 'evaluation' && (
+                <EvaluationWidget evaluation={widget.evaluation} />
+              )}
+              {widget.type === 'textarea' && <EditorWidget widget={widget} />}
+            </WidgetLayout>
+          )
+        )}
+        {(!widgets || widgets.length == 0) && (
+          <NewWidgetWrapper>
+            <NewWidgetBox>
+              <NewWidgetLink to="/widgets/create">
+                <CreateWidgetIcon>
+                  <Icon title="plus" />
+                </CreateWidgetIcon>
+                <NoResult message="Weiteres Widget erstellen" />
+              </NewWidgetLink>
+            </NewWidgetBox>
+          </NewWidgetWrapper>
+        )}
+      </Layout>
+    )}
+  </FadeTransition>
+)
 
 export default DashboardWidgets

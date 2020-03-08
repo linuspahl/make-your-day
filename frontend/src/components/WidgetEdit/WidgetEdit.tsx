@@ -41,7 +41,6 @@ export const pageQuery = gql`
 `
 
 interface Props extends RouteComponentProps {
-  createNotificationBanner: (notification: NotificationCreate) => void
   rootPath: string
 }
 
@@ -84,8 +83,7 @@ const onSubmitError = (
   logError(error)
 }
 
-const WidgetEdit = (props: Props): JSX.Element => {
-  const { match, rootPath, history } = props
+const WidgetEdit = ({ match, rootPath, history }: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const widgetId = extractIdFromUrl(match)
   const handleSubmitComplete = (data: SubmitResult): void =>

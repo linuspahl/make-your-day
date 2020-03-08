@@ -15,30 +15,30 @@ interface Props {
   updateLocalStorage: (localStorage: LocalStorage) => void
 }
 
-const UserSettingCreate = (props: Props): JSX.Element => {
-  const { setting, updateLocalStorage } = props
-  return (
-    <Mutation
-      mutation={CreateUserSetting}
-      variables={{ settingId: setting.id }}
-      onCompleted={(data: { createUserSetting: UserSetting }): void =>
-        updateLocalStorage({
-          [setting.type]: JSON.parse(data.createUserSetting.value),
-        })
-      }
-    >
-      {(perfomMutation: () => void): JSX.Element => (
-        <Checkbox
-          id={setting.type}
-          name={setting.type}
-          label={setting.title}
-          onChange={perfomMutation}
-          tabIndex={1}
-          value={false}
-        />
-      )}
-    </Mutation>
-  )
-}
+const UserSettingCreate = ({
+  setting,
+  updateLocalStorage,
+}: Props): JSX.Element => (
+  <Mutation
+    mutation={CreateUserSetting}
+    variables={{ settingId: setting.id }}
+    onCompleted={(data: { createUserSetting: UserSetting }): void =>
+      updateLocalStorage({
+        [setting.type]: JSON.parse(data.createUserSetting.value),
+      })
+    }
+  >
+    {(perfomMutation: () => void): JSX.Element => (
+      <Checkbox
+        id={setting.type}
+        name={setting.type}
+        label={setting.title}
+        onChange={perfomMutation}
+        tabIndex={1}
+        value={false}
+      />
+    )}
+  </Mutation>
+)
 
 export default UserSettingCreate

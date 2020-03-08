@@ -65,8 +65,7 @@ const onSubmitError = (
   logError(error)
 }
 
-const CategoryEdit = (props: Props): JSX.Element => {
-  const { match, rootPath, history } = props
+const CategoryEdit = ({ match, rootPath, history }: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const categoryId = extractIdFromUrl(match)
   const handleSubmitComplete = (data: SubmitResult): void =>

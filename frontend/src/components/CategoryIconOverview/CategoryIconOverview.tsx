@@ -23,11 +23,13 @@ interface LoadingPlaceholderProps {
   context?: 'horizontal-scroll'
 }
 
-const LoadingPlaceholder = (props: LoadingPlaceholderProps): JSX.Element => (
+const LoadingPlaceholder = ({
+  context,
+}: LoadingPlaceholderProps): JSX.Element => (
   <PlaceholderGroup verticalCenter>
     {fill(Array(3), null).map(
       (value, key): JSX.Element => (
-        <IconWrapper key={key} context={props.context}>
+        <IconWrapper key={key} context={context}>
           <CategoryIconPlaceholder />
         </IconWrapper>
       )
@@ -40,8 +42,7 @@ interface Props {
   params?: { [key: string]: string }
 }
 
-const CategoryIconOverview = (props: Props): JSX.Element => {
-  const { context, params } = props
+const CategoryIconOverview = ({ context, params }: Props): JSX.Element => {
   const wrapperRef = useRef<HTMLInputElement | null>(null)
   const scrollOverview = (event: WheelEvent): void => {
     if (event.deltaY > 0) wrapperRef.current.scrollLeft += 25
@@ -49,11 +50,11 @@ const CategoryIconOverview = (props: Props): JSX.Element => {
   }
 
   useEffect((): (() => void) => {
-    if (props.context === 'horizontal-scroll') {
+    if (context === 'horizontal-scroll') {
       wrapperRef.current.addEventListener('wheel', scrollOverview)
     }
     return (): void => {
-      if (props.context === 'horizontal-scroll') {
+      if (context === 'horizontal-scroll') {
         wrapperRef.current.removeEventListener('wheel', scrollOverview)
       }
     }

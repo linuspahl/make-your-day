@@ -30,8 +30,7 @@ const onSubmitError = (
   logError(error)
 }
 
-const EditorWidget = (props: Props): JSX.Element => {
-  const { widget } = props
+const EditorWidget = ({ widget }: Props): JSX.Element => {
   const [isFullScreen, setIsFullSreen] = useState(false)
   const [value, setValue] = useState(widget.value)
   const { createNotificationBanner } = useContext(AppContext)

@@ -66,8 +66,7 @@ const onSubmitError = (
   logError(error)
 }
 
-export const CategoryCreate = (props: Props): JSX.Element => {
-  const { rootPath, history } = props
+export const CategoryCreate = ({ rootPath, history }: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const handleSubmitComplete = (submitResult: SubmitResult): void =>
     onSubmitComplete(rootPath, history, submitResult, createNotificationBanner)

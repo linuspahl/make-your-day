@@ -17,24 +17,25 @@ interface Props extends RouteComponentProps {
   date: string
 }
 
-const TimelineWidgetDay = (props: Props): JSX.Element => {
-  const { categories = [], date, history } = props
-  return (
-    <Day key={date} onClick={(): void => history.push(`/timeline/${date}`)}>
-      <Shortcut>{dayjs(date).format('dd')}</Shortcut>
-      <Categories>
-        {categories.map(
-          (category): JSX.Element => (
-            <CategorySummary
-              amount={category.recordAmountSum}
-              category={category}
-              key={category.id}
-            />
-          )
-        )}
-      </Categories>
-    </Day>
-  )
-}
+const TimelineWidgetDay = ({
+  categories = [],
+  date,
+  history,
+}: Props): JSX.Element => (
+  <Day key={date} onClick={(): void => history.push(`/timeline/${date}`)}>
+    <Shortcut>{dayjs(date).format('dd')}</Shortcut>
+    <Categories>
+      {categories.map(
+        (category): JSX.Element => (
+          <CategorySummary
+            amount={category.recordAmountSum}
+            category={category}
+            key={category.id}
+          />
+        )
+      )}
+    </Categories>
+  </Day>
+)
 
 export default withRouter(TimelineWidgetDay)

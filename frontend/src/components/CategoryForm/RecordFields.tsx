@@ -28,18 +28,16 @@ interface Props {
   unit?: Category['unit']
 }
 
-const RecordFields = (props: Props): JSX.Element => {
-  const {
-    handleInputChange,
-    hasDescription,
-    hasSubcategories,
-    hasTitle,
-    hasUnit,
-    mode,
-    type,
-    unit,
-  } = props
-
+const RecordFields = ({
+  handleInputChange,
+  hasDescription,
+  hasSubcategories,
+  hasTitle,
+  hasUnit,
+  mode,
+  type,
+  unit,
+}: Props): JSX.Element => {
   // We need to disable some fields for some conditions
   // E.g. some fields can't be changed after the category creation
   const isUpdateMode = mode !== 'create'

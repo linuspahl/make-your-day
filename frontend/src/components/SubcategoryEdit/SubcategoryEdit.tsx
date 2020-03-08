@@ -62,13 +62,10 @@ const onSubmitError = (
   logError(error)
 }
 
-const SubcategoryEdit = (props: Props): JSX.Element => {
-  const { match, rootPath, history } = props
+const SubcategoryEdit = ({ match, rootPath, history }: Props): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
-
   const categoryId = extractIdFromUrl(match)
   const parentCategoryId = extractIdFromUrl(match, 'categoryId')
-
   const handleSubmitCompleted = (data: SubmitResult): void =>
     onSubmitCompleted(data, rootPath, history, createNotificationBanner)
   const handleSubmitError = (error: ApolloError): void =>

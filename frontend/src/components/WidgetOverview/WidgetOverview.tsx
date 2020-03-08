@@ -50,91 +50,87 @@ interface PageQueryResult {
   status?: { getWidgets: JSX.Element }
 }
 
-const WidgetOverview = (props: Props): JSX.Element => {
-  const { rootPath } = props
-
-  return (
-    <PageQueryHandler
-      dataTestId="WidgetOverview"
-      errorMessages={{ getWidgets: 'Widgets konnten nicht geladen werden' }}
-      query={GetWidgetsForList}
-      queryNames={['getWidgets']}
-    >
-      {({
-        data: { getWidgets: widgets },
-        status: { getWidgets: widgetsQueryStatus },
-      }: PageQueryResult): JSX.Element => {
-        const widgetsByPosition = sortWidgetsByPosition(widgets)
-        return (
-          <>
-            <H1 context="page">Widgets verwalten</H1>
-            {widgetsQueryStatus}
-            {!widgetsQueryStatus &&
-              widgets &&
-              Object.keys(widgetsByPosition).map(
-                (position, index): JSX.Element => {
-                  const positionOption = widgetPositionOptions.find(
-                    (option): boolean => option.value === position
-                  )
-                  return (
-                    <div key={position}>
-                      <H2>{positionOption.title}</H2>
-                      <ul>
-                        {widgetsByPosition[position].map(
-                          (widget): JSX.Element => (
-                            <WidgetListItem
-                              key={widget.id}
-                              rootPath={rootPath}
-                              widget={widget}
-                            />
-                          )
-                        )}
-                      </ul>
-                      {index < Object.keys(widgetsByPosition).length && (
-                        <Spacer />
+const WidgetOverview = ({ rootPath }: Props): JSX.Element => (
+  <PageQueryHandler
+    dataTestId="WidgetOverview"
+    errorMessages={{ getWidgets: 'Widgets konnten nicht geladen werden' }}
+    query={GetWidgetsForList}
+    queryNames={['getWidgets']}
+  >
+    {({
+      data: { getWidgets: widgets },
+      status: { getWidgets: widgetsQueryStatus },
+    }: PageQueryResult): JSX.Element => {
+      const widgetsByPosition = sortWidgetsByPosition(widgets)
+      return (
+        <>
+          <H1 context="page">Widgets verwalten</H1>
+          {widgetsQueryStatus}
+          {!widgetsQueryStatus &&
+            widgets &&
+            Object.keys(widgetsByPosition).map(
+              (position, index): JSX.Element => {
+                const positionOption = widgetPositionOptions.find(
+                  (option): boolean => option.value === position
+                )
+                return (
+                  <div key={position}>
+                    <H2>{positionOption.title}</H2>
+                    <ul>
+                      {widgetsByPosition[position].map(
+                        (widget): JSX.Element => (
+                          <WidgetListItem
+                            key={widget.id}
+                            rootPath={rootPath}
+                            widget={widget}
+                          />
+                        )
                       )}
-                    </div>
-                  )
-                }
-              )}
-            <ActionRow>
-              <Button context="primary" to={`${rootPath}/create`}>
-                Widget erstellen
-              </Button>
-            </ActionRow>
-          </>
-        )
-      }}
-    </PageQueryHandler>
-  )
-}
+                    </ul>
+                    {index < Object.keys(widgetsByPosition).length && (
+                      <Spacer />
+                    )}
+                  </div>
+                )
+              }
+            )}
+          <ActionRow>
+            <Button context="primary" to={`${rootPath}/create`}>
+              Widget erstellen
+            </Button>
+          </ActionRow>
+        </>
+      )
+    }}
+  </PageQueryHandler>
+)
 
-const WidgetListItem = (props: {
+interface WidgetListItemProps {
   widget: WidgetForList
   rootPath: string
-}): JSX.Element => {
-  const {
-    widget: { title, id },
-    rootPath,
-  } = props
-  return (
-    <ListItem spaceBetween>
-      {title}
-      <ActionIconWrapper>
-        <ActionIcon
-          ariaLabel={`Widget ${title} bearbeiten`}
-          to={`${rootPath}/edit/${id}`}
-          icon="edit"
-        />
-        <DeleteIcon
-          ariaLabel={`Widget ${title} löschen`}
-          id={id}
-          mutation={DeleteWidget}
-          onUpdate={deleteWidget}
-          title={title}
-        />
-      </ActionIconWrapper>
-    </ListItem>
-  )
 }
+
+const WidgetListItem = ({
+  widget: { title, id },
+  rootPath,
+}: WidgetListItemProps): JSX.Element => (
+  <ListItem spaceBetween>
+    {title}
+    <ActionIconWrapper>
+      <ActionIcon
+        ariaLabel={`Widget ${title} bearbeiten`}
+        to={`${rootPath}/edit/${id}`}
+        icon="edit"
+      />
+      <DeleteIcon
+        ariaLabel={`Widget ${title} löschen`}
+        id={id}
+        mutation={DeleteWidget}
+        onUpdate={deleteWidget}
+        title={title}
+      />
+    </ActionIconWrapper>
+  </ListItem>
+)
+
 export default WidgetOverview
