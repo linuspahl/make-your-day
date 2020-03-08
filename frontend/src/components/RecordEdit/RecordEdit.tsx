@@ -65,7 +65,7 @@ const pageQuery = gql`
   }
 `
 // Form submit function
-const handleCompleted = (
+const onSubmitComplete = (
   props: RouteComponentProps,
   createNotificationBanner: (notification: NotificationCreate) => void
 ): void => {
@@ -82,16 +82,15 @@ const handleCompleted = (
 }
 
 // Form error function
-const handleError = (
+const onSubmitError = (
+  error: ApolloError,
   createNotificationBanner: (notification: NotificationCreate) => void
-): ((error: ApolloError) => void) => {
-  return (error): void => {
-    createNotificationBanner({
-      type: 'error',
-      message: 'Bearbeitung des Eintrags fehlgeschlagen',
-    })
-    logError(error)
-  }
+): void => {
+  createNotificationBanner({
+    type: 'error',
+    message: 'Bearbeitung des Eintrags fehlgeschlagen',
+  })
+  logError(error)
 }
 
 const RecordEdit = (props: RouteComponentProps): JSX.Element => {
@@ -99,9 +98,10 @@ const RecordEdit = (props: RouteComponentProps): JSX.Element => {
   const { createNotificationBanner } = useContext(AppContext)
   const categoryId = extractIdFromUrl(match, 'categoryId')
   const recordId = extractIdFromUrl(match, 'id')
-  const onCompleted = (): void =>
-    handleCompleted(props, createNotificationBanner)
-  const onError = handleError(createNotificationBanner)
+  const handleSubmitCompleted = (): void =>
+    onSubmitComplete(props, createNotificationBanner)
+  const handleSubmitError = (error: ApolloError): void =>
+    onSubmitError(error, createNotificationBanner)
   return (
     <PageQueryHandler
       dataTestId="RecordEdit"
@@ -128,8 +128,8 @@ const RecordEdit = (props: RouteComponentProps): JSX.Element => {
             <>
               <Mutation
                 mutation={UpdateRecord}
-                onCompleted={onCompleted}
-                onError={onError}
+                onCompleted={handleSubmitCompleted}
+                onError={handleSubmitError}
                 update={addRecord}
               >
                 {(
